@@ -1,8 +1,8 @@
 {
-  "name": "@gemeente-denhaag/nl-portal-app",
+  "name": "@Ritense/nl-portal-app",
   "private": true,
   "version": "1.0.0",
-  "author": "Municipality of The Hague",
+  "author": "Ritense",
   "license": "EUPL-1.2",
   "engines": {
     "node": ">=14 <17"

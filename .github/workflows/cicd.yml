@@ -130,9 +130,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
-          GIT_AUTHOR_NAME: "Municipality of The Hague"
+          GIT_AUTHOR_NAME: "Ritense"
           GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
-          GIT_COMMITTER_NAME: "Municipality of The Hague"
+          GIT_COMMITTER_NAME: "Ritense"
         run: |
           git push --set-upstream origin HEAD
           yarn run release -- --yes
