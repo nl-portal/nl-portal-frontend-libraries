@@ -10,7 +10,7 @@ on:
       - master
 
 env:
-  PUSH_AND_DEPLOY: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
+  PUSH_AND_DEPLOY: ${{ github.event_name != 'pull_request' && github.ref_name == 'feature/npmPublish' }}
   CR_REPO: zgw/nl-portal-libraries
 
 jobs:
