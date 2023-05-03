@@ -54,9 +54,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
-          GIT_AUTHOR_NAME: "Ritense"
+          GIT_AUTHOR_NAME: "nl-portal"
           GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
-          GIT_COMMITTER_NAME: "Ritense"
+          GIT_COMMITTER_NAME: "nl-portal"
         run: |
           git push --set-upstream origin HEAD
           yarn run release -- --yes
@@ -65,7 +65,7 @@ jobs:
         env:
           NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
         run: |
-          npm config set "//registry.npmjs.org/:_authToken=${NPM_ACCESS_TOKEN}"
+          npm config set "//registry.npmjs.org/:_authToken" "${NPM_ACCESS_TOKEN}"
           npm config set access public
           npm run publish -- --no-verify-access --yes
           npm config delete "//registry.npmjs.org/:_authToken"
