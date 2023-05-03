@@ -50,14 +50,16 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - run: echo "previous_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo '')" >> $GITHUB_ENV
-      - name: Create Tag
-        id: create_tag
-        uses: jaywcjlove/create-tag-action@main
-        if: env.previous_tag
-        with:
-          token: '${{ steps.github-access-token.outputs.token }}'
-          package-path: ./package.json
+      - name: lerna version
+        env:
+          GITHUB_TOKEN: ${{ steps.github-access-token.outputs.token }}
+          GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
+          GIT_AUTHOR_NAME: "nl-portal"
+          GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
+          GIT_COMMITTER_NAME: "nl-portal"
+        run: |
+          git push --set-upstream origin HEAD
+          yarn run release -- --yes
       
       - name: lerna publish
         env:
