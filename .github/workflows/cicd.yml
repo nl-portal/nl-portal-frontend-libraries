@@ -10,7 +10,7 @@ on:
       - master
 
 env:
-  PUSH_AND_DEPLOY: ${{ github.event_name != 'pull_request' && github.ref_name == 'feature/npmPublish' }}
+  PUSH_AND_DEPLOY: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
   CR_REPO: zgw/nl-portal-libraries
 
 jobs:
@@ -31,7 +31,7 @@ jobs:
 
   publish-npm:
     runs-on: ubuntu-latest
-    if: github.ref_name == 'feature/npmPublish'
+    if: github.ref_name == 'master'
 
     steps:
       - uses: actions/checkout@v2
