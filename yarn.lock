@@ -2091,6 +2091,68 @@
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.70"
     "@gemeente-denhaag/icons" "0.2.3-alpha.70"
 
+"@gemeente-denhaag/nl-portal-api@^1.0.1-alpha.0", "@gemeente-denhaag/nl-portal-api@^1.0.1-alpha.75":
+  version "1.0.1-alpha.75"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/nl-portal-api/-/nl-portal-api-1.0.1-alpha.75.tgz#677982dc48c0c720b30f38a0a29fa01fd311c55b"
+  integrity sha512-RK1ONI2gHoi5o09LX3nHNjw2S7Ox0o85eaTcqm6/Pi/X3j2k/gtecDEUvnTsTC60rKWgrPegyCng6JvlVjpOaw==
+  dependencies:
+    "@apollo/client" "^3.4.11"
+    "@gemeente-denhaag/nl-portal-authentication" "^1.0.1-alpha.75"
+    apollo-boost "^0.4.9"
+    graphql "^15.5.3"
+    graphql-tag "^2.12.5"
+    react-apollo "^3.1.5"
+    react-apollo-hooks "^0.5.0"
+
+"@gemeente-denhaag/nl-portal-authentication@^1.0.1-alpha.0", "@gemeente-denhaag/nl-portal-authentication@^1.0.1-alpha.75":
+  version "1.0.1-alpha.75"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/nl-portal-authentication/-/nl-portal-authentication-1.0.1-alpha.75.tgz#67b0217a2acfc058959fd78931b643e33d6a0044"
+  integrity sha512-m/j7u5Bgb63kxD+o4hv23r0KCxF33ypjw4crd5SBnEDXniMZbrs/eqxH+ic4OEMd0xMQEMOuOh52exivxRjDBA==
+  dependencies:
+    "@react-keycloak/web" "^3.4.0"
+    jwt-decode "^3.1.2"
+    keycloak-js "^15.0.1"
+
+"@gemeente-denhaag/nl-portal-localization@^1.0.1-alpha.0", "@gemeente-denhaag/nl-portal-localization@^1.0.1-alpha.75":
+  version "1.0.1-alpha.75"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/nl-portal-localization/-/nl-portal-localization-1.0.1-alpha.75.tgz#cbef7d6cded8426e7845f07f32688ceadcaf58cb"
+  integrity sha512-JG8MjveoT65a+OVmL2pNyZBkl90i4dwufnx8d+tXKAHAyqSVoltYu6dn0sfTvIQocFbEE1sGsNUOJMTpjXErmg==
+  dependencies:
+    deepmerge "^4.2.2"
+    react-intl "^5.20.10"
+
+"@gemeente-denhaag/nl-portal-user-interface@^1.0.1-alpha.0":
+  version "1.0.1-alpha.75"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/nl-portal-user-interface/-/nl-portal-user-interface-1.0.1-alpha.75.tgz#3e25e4e08044c714d37b0734fc16754141a1aa28"
+  integrity sha512-4Vk6FCGydtHMIswfzXT4xmY7YVtNrXo24Z0dGKjp7FbuNwP9+03E2hmtP66XPi6tsCegueTvJFazPdrTyelFfA==
+  dependencies:
+    "@formio/react" "^5.2.3"
+    "@gemeente-denhaag/alert" "0.1.1-alpha.274"
+    "@gemeente-denhaag/components-react" "0.1.1-alpha.8"
+    "@gemeente-denhaag/icons" "0.2.3-alpha.70"
+    "@gemeente-denhaag/nl-portal-api" "^1.0.1-alpha.75"
+    "@gemeente-denhaag/nl-portal-authentication" "^1.0.1-alpha.75"
+    "@gemeente-denhaag/nl-portal-localization" "^1.0.1-alpha.75"
+    "@gemeente-denhaag/process-steps" "0.1.0-alpha.5"
+    "@react-hook/size" "^2.1.2"
+    "@react-hook/window-scroll" "^1.3.0"
+    "@react-keycloak/web" "^3.4.0"
+    "@testing-library/react" "^11.1.0"
+    "@types/lodash" "^4.14.172"
+    "@types/react-helmet" "^6.1.2"
+    "@types/react-router-dom" "^5.1.8"
+    classnames "^2.3.1"
+    formiojs "^4.14.7"
+    lodash "^4.17.21"
+    pretty-bytes "^5.6.0"
+    react-dom "^17.0.2"
+    react-helmet "^6.1.0"
+    react-intl "^5.20.10"
+    react-loading-skeleton "^2.2.0"
+    react-router-dom "^5.2.1"
+    react-use-uuid "^2.0.0"
+    usehooks-ts "^1.0.1"
+
 "@gemeente-denhaag/pickers@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
   resolved "https://registry.npmjs.org/@gemeente-denhaag/pickers/-/pickers-0.2.3-alpha.70.tgz"

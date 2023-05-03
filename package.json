@@ -1,5 +1,5 @@
 {
-  "name": "nl-portal-libraries",
+  "name": "nl-portal-frontend-libraries",
   "private": true,
   "engines": {
     "node": ">=14 <17"
