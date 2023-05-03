@@ -1,4 +1,4 @@
-name: Build and push image and deploy to aks
+name: Build and Publish npm
 
 on:
   push:
@@ -16,9 +16,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    outputs:
-      tagToDeploy: ${{ steps.prep.outputs.DOCKERTAG }}
 
     steps:
       - uses: actions/checkout@v2
