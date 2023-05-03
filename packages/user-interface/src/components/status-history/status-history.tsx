@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement} from 'react';
 import {StatusType, ZaakStatus} from '@gemeente-denhaag/nl-portal-api';
-import {Paragraph, Step, Timeline} from '@gemeente-denhaag/components-react';
+import {Paragraph} from '@gemeente-denhaag/components-react';
+import {Status} from '@gemeente-denhaag/process-steps';
 import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
 import styles from './status-history.module.scss';
-import {stringToId} from '../../utils';
 
 interface StatusHistoryProps {
   caseId?: string;
@@ -17,27 +17,8 @@ interface StatusHistoryProps {
   background?: ReactElement;
 }
 
-const StatusHistory: FC<StatusHistoryProps> = ({
-  caseId,
-  statusHistory,
-  statuses,
-  status,
-  loading,
-  facet,
-  background,
-}) => {
+const StatusHistory: FC<StatusHistoryProps> = ({statusHistory, statuses = [], status, loading}) => {
   const intl = useIntl();
-  const currentStatusId = stringToId(status?.statustype?.omschrijving || '');
-  const statusIds = statuses?.map(statusType => stringToId(statusType.omschrijving || ''));
-  const currentStatusIndex = statusIds?.findIndex(statusId => statusId === currentStatusId);
-  const amountOfStatuses = statusHistory?.length;
-  let activeStep = 0;
-
-  if (currentStatusIndex && currentStatusIndex !== -1) {
-    activeStep = currentStatusIndex;
-  } else if (amountOfStatuses) {
-    activeStep = amountOfStatuses - 1;
-  }
 
   const getSkeletonStep = (key: number) => (
     <div
@@ -56,38 +37,39 @@ const StatusHistory: FC<StatusHistoryProps> = ({
     </div>
   );
 
+  const getStepStatus = (omschrijving?: string | null) => {
+    if (!omschrijving) {
+      return 'not-checked';
+    }
+
+    if (status?.statustype?.omschrijving === omschrijving) {
+      return 'current';
+    }
+
+    if (statusHistory?.find(h => h.statustype.omschrijving === omschrijving)) {
+      return 'checked';
+    }
+
+    return 'not-checked';
+  };
+
   return (
     <div className={styles['status-history-container']}>
-      {background && (
-        <div className={styles['background-container']}>
-          {React.cloneElement(background, {className: styles['background-image']})}
-        </div>
+      {!loading && statuses ? (
+        <Status
+          steps={statuses.map(({omschrijving}, index) => ({
+            title: omschrijving,
+            id: `step-${index + 1}`,
+            status: getStepStatus(omschrijving),
+            marker: index + 1,
+          }))}
+        />
+      ) : (
+        <Fragment>
+          {getSkeletonStep(0)}
+          {getSkeletonStep(1)}
+        </Fragment>
       )}
-      {facet && (
-        <div className={styles['facet-container']}>
-          {React.cloneElement(facet, {className: styles['facet-image']})}
-        </div>
-      )}
-      <div className={styles['status-history']}>
-        {!loading && statuses ? (
-          <Timeline activeStep={activeStep} className={styles['status-history__timeline']}>
-            {statuses?.map((statusType, index) => (
-              <Step
-                key={statusType.omschrijving}
-                label={intl.formatMessage({
-                  id: `case.${caseId}.status.${stringToId(`${statusType.omschrijving}`)}`,
-                })}
-                completed={index < activeStep}
-              />
-            ))}
-          </Timeline>
-        ) : (
-          <Fragment>
-            {getSkeletonStep(0)}
-            {getSkeletonStep(1)}
-          </Fragment>
-        )}
-      </div>
     </div>
   );
 };
