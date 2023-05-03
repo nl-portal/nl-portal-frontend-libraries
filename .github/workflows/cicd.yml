@@ -43,6 +43,13 @@ jobs:
       - name: build library
         run: yarn run build
 
+      - name: github access token
+        id: github-access-token
+        uses: getsentry/action-github-app-token@v2
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - name: lerna version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,6 +60,8 @@ jobs:
         run: |
           git push --set-upstream origin HEAD
           yarn run release -- --yes
+        with:
+          github-token: '${{ steps.github-access-token.outputs.token }}'
       
       - name: lerna publish
         env:
