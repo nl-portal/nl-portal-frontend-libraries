@@ -44,16 +44,16 @@ jobs:
       - name: build library
         run: yarn run build
 
-      - name: github access token
-        id: github-access-token
-        uses: getsentry/action-github-app-token@v2
+      - name: generate access token
+        id: generate_token
+        uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: lerna version
         env:
-          GITHUB_TOKEN: ${{ steps.github-access-token.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
           GIT_AUTHOR_NAME: "nl-portal"
           GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
