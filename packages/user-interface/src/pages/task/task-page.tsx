@@ -9,7 +9,7 @@ import _ from 'lodash';
 import {
   useSubmitTaskMutation,
   useGetFormDefinitionByIdLazyQuery,
-} from '@gemeente-denhaag/nl-portal-api';
+} from '@nl-portal/nl-portal-api';
 
 const TaskPage = () => {
   const location: any = useLocation();

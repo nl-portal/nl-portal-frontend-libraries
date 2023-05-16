@@ -4,8 +4,8 @@ import {DownloadIcon} from '@gemeente-denhaag/icons';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {Link} from '@gemeente-denhaag/components-react';
 import Skeleton from 'react-loading-skeleton';
-import {ApiContext} from '@gemeente-denhaag/nl-portal-api';
-import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
+import {ApiContext} from '@nl-portal/nl-portal-api';
+import {KeycloakContext} from '@nl-portal/nl-portal-authentication';
 
 interface DocumentDownloadProps {
   uuid?: string;

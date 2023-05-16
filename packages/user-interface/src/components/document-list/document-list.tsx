@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, Fragment} from 'react';
-import {Document as PortalDocument} from '@gemeente-denhaag/nl-portal-api';
+import {Document as PortalDocument} from '@nl-portal/nl-portal-api';
 import {Paragraph} from '@gemeente-denhaag/components-react';
 import {FormattedMessage} from 'react-intl';
 import styles from './document-list.module.scss';

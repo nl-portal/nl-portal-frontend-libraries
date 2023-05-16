@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useGetZaakQuery} from '@gemeente-denhaag/nl-portal-api';
+import {useGetZaakQuery} from '@nl-portal/nl-portal-api';
 import {FC, Fragment, ReactElement, useContext, useEffect} from 'react';
 import {Heading2, Heading3, Link, Paragraph} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -12,7 +12,7 @@ import {
   MegaphoneIcon,
 } from '@gemeente-denhaag/icons';
 import {Link as RouterLink} from 'react-router-dom';
-import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
+import {LocaleContext} from '@nl-portal/nl-portal-localization';
 import classNames from 'classnames';
 import {useMediaQuery, useQuery} from '../../hooks';
 import styles from './case-page.module.scss';

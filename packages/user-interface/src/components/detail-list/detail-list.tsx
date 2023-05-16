@@ -4,7 +4,7 @@ import {FormattedMessage} from 'react-intl';
 import {Link} from '@gemeente-denhaag/components-react';
 import {EditIcon} from '@gemeente-denhaag/icons';
 import Skeleton from 'react-loading-skeleton';
-import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
+import {LocaleContext} from '@nl-portal/nl-portal-localization';
 import {Link as RouterLink} from 'react-router-dom';
 import styles from './detail-list.module.scss';
 import {useMediaQuery} from '../../hooks';

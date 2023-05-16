@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement, useContext, useEffect, useState} from 'react';
 import {useIntl} from 'react-intl';
-import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
+import {LocaleContext} from '@nl-portal/nl-portal-localization';
 import {Link, useHistory} from 'react-router-dom';
 import classNames from 'classnames';
 import useSize from '@react-hook/size';

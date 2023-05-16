@@ -3,7 +3,7 @@ import {Fragment, useEffect} from 'react';
 import {Card, Heading2, Paragraph} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
-import {useGetTasksQuery} from '@gemeente-denhaag/nl-portal-api';
+import {useGetTasksQuery} from '@nl-portal/nl-portal-api';
 import {useHistory} from 'react-router-dom';
 import styles from './tasks-page.module.scss';
 

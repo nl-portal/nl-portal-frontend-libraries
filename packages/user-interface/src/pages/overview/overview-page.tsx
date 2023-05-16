@@ -4,7 +4,7 @@ import {Link, Paragraph} from '@gemeente-denhaag/components-react';
 import {Alert} from '@gemeente-denhaag/alert';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {FC, useContext} from 'react';
-import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
+import {LocaleContext} from '@nl-portal/nl-portal-localization';
 
 interface OverviewPageProps {
   openFormsFormId?: string;

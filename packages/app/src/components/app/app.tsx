@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react';
 import '@gemeente-denhaag/design-tokens-components';
-import '@gemeente-denhaag/nl-portal-user-interface/dist/index.css';
+import '@nl-portal/nl-portal-user-interface/dist/index.css';
 import '../../styles/nl-portal-design-tokens.css';
-import {KeycloakWrapper} from '@gemeente-denhaag/nl-portal-authentication';
-import {LocalizationProvider} from '@gemeente-denhaag/nl-portal-localization';
-import {ApiWrapper} from '@gemeente-denhaag/nl-portal-api';
+import {KeycloakWrapper} from '@nl-portal/nl-portal-authentication';
+import {LocalizationProvider} from '@nl-portal/nl-portal-localization';
+import {ApiWrapper} from '@nl-portal/nl-portal-api';
 import {Offline, Online} from 'react-detect-offline';
 import {
   AccountPage,
@@ -22,7 +22,7 @@ import {
   TasksPage,
   TaskPage,
   ThemesPage,
-} from '@gemeente-denhaag/nl-portal-user-interface';
+} from '@nl-portal/nl-portal-user-interface';
 import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon, UserIcon} from '@gemeente-denhaag/icons';
 import {CUSTOM_MESSAGES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
