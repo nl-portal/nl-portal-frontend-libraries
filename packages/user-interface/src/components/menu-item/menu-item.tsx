@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, useContext} from 'react';
-import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
+import {LocaleContext} from '@nl-portal/nl-portal-localization';
 import {Link, useLocation} from 'react-router-dom';
 import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';

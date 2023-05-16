@@ -4,7 +4,7 @@ import {FC, ReactElement, useContext} from 'react';
 import {Heading4, Link} from '@gemeente-denhaag/components-react';
 import {ExternalLinkIcon} from '@gemeente-denhaag/icons';
 import classNames from 'classnames';
-import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
+import {LocaleContext} from '@nl-portal/nl-portal-localization';
 import {PortalFooter} from '../../interfaces';
 import styles from './footer.module.scss';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useGetDocumentenQuery} from '@gemeente-denhaag/nl-portal-api';
+import {useGetDocumentenQuery} from '@nl-portal/nl-portal-api';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {Fragment, useEffect} from 'react';
 import {Heading2, Paragraph} from '@gemeente-denhaag/components-react';

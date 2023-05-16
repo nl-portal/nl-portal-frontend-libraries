@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Button} from '@gemeente-denhaag/components-react';
 import {FormattedMessage} from 'react-intl';
-import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
+import {LocaleContext} from '@nl-portal/nl-portal-localization';
 import {FC, useContext} from 'react';
 import {MobileMenuButton} from '../mobile-menu-button';
 

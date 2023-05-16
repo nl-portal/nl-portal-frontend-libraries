@@ -8,8 +8,8 @@ import {
   useGetPersoonLazyQuery,
   useGetBedrijfLazyQuery,
   useGetGemachtigdeLazyQuery,
-} from '@gemeente-denhaag/nl-portal-api';
-import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
+} from '@nl-portal/nl-portal-api';
+import {KeycloakContext} from '@nl-portal/nl-portal-authentication';
 import styles from './user-name.module.scss';
 import {getNameString} from '../../utils';
 

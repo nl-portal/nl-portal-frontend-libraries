@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, useContext, useEffect} from 'react';
 import {useScript} from 'usehooks-ts';
 import {Helmet} from 'react-helmet';
-import {formatUrlTrailingSlash} from '@gemeente-denhaag/nl-portal-authentication';
+import {formatUrlTrailingSlash} from '@nl-portal/nl-portal-authentication';
 import {useParams} from 'react-router-dom';
 import {LayoutContext} from '../../contexts';
 

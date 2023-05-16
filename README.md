@@ -11,7 +11,7 @@ the back-end systems with which the implementation communicates can be configure
 municipality with their own unique environment and data.
 
 All such configuration takes place in the implementation
-[@gemeente-denhaag/nl-portal-app](./packages/app).
+[@nl-portal/nl-portal-app](./packages/app).
 
 ## Development
 
@@ -80,9 +80,9 @@ root. For example: `lerna add jest`.
 
 To add a dependency to one or more specific packages use
 `lerna add <package-name> --scope=<package-name>`. For example, to add Jest as a dependency to
-[@gemeente-denhaag/nl-portal-app](./packages/app) and
-[@gemeente-denhaag/nl-portal-user-interface](./packages/user-interface), use:
-`lerna add jest --scope=@gemeente-denhaag/nl-portal-app --scope=@gemeente-denhaag/nl-portal-user-interface`.
+[@nl-portal/nl-portal-app](./packages/app) and
+[@nl-portal/nl-portal-user-interface](./packages/user-interface), use:
+`lerna add jest --scope=@nl-portal/nl-portal-app --scope=@nl-portal/nl-portal-user-interface`.
 
 If you must add a devDependency to the root project, use `yarn add <package-name> --dev -W` from the
 project root. For example: `yarn add jest --dev -W`.
@@ -93,10 +93,10 @@ Packages inside the [packages](./packages) folder may depend on each other, simp
 their respective `package.json` files and running `yarn run bootstrap` from the project root
 afterwards.
 
-For example, the `package.json` of [@gemeente-denhaag/nl-portal-app](./packages/app) might include
-`"@gemeente-denhaag/nl-portal-user-interface": "0.1.0"` in its list of dependencies. For this to
+For example, the `package.json` of [@nl-portal/nl-portal-app](./packages/app) might include
+`"@nl-portal/nl-portal-user-interface": "0.1.0"` in its list of dependencies. For this to
 work, the version number in the `package.json` of
-[@gemeente-denhaag/nl-portal-user-interface](./packages/user-interface) must also be `"0.1.0"`.
+[@nl-portal/nl-portal-user-interface](./packages/user-interface) must also be `"0.1.0"`.
 
 ### Tips and guidelines for development
 
@@ -115,12 +115,12 @@ The set-up of this project is a [Lerna monorepo](https://github.com/lerna/lerna)
 Individual packages are stored in the [packages](./packages) directory. Each package has its own
 `package.json` file, which includes dependencies and its own `build` and `start` scripts.
 
-The implementation package [@gemeente-denhaag/nl-portal-app](./packages/app) was generated with
+The implementation package [@nl-portal/nl-portal-app](./packages/app) was generated with
 [create-react-app](https://create-react-app.dev/docs/adding-typescript/) using the TypeScript
 preset. It uses other packages in this project as dependencies. Custom implementations can be based
 on this package.
 
-Other packages - such as [@gemeente-denhaag/nl-portal-user-interface](./packages/user-interface) -
+Other packages - such as [@nl-portal/nl-portal-user-interface](./packages/user-interface) -
 were generated with [create-react-library](https://www.npmjs.com/package/create-react-library). They
 serve as dependencies for the implementation, so that each future implementation can be kept
 up-to-date easily.
@@ -131,7 +131,7 @@ New packages can be created in their own directory, inside the [packages](./pack
 
 Although not obligatory, it is advised to generate them with
 [create-react-library](https://www.npmjs.com/package/create-react-library), or follow the example of
-packages like [@gemeente-denhaag/nl-portal-user-interface](./packages/user-interface), which were
+packages like [@nl-portal/nl-portal-user-interface](./packages/user-interface), which were
 generated with this command. This has the advantage of providing you with out-of-the-box TypeScript
 support and `build` and `start` scripts.
 
@@ -176,7 +176,7 @@ file.
 ### Configuration
 
 Environment variables are loaded from the implementation
-[@gemeente-denhaag/nl-portal-app](./packages/app) by default. Possible configuration values are
+[@nl-portal/nl-portal-app](./packages/app) by default. Possible configuration values are
 specified in the [Config interface](./packages/app/src/interfaces/config.ts).
 
 These values are set to the window object by [config.js](./packages/app/public/config.js), which
@@ -190,9 +190,9 @@ docker run --name test -e KEYCLOAK_URL=thekeycloakurl -e KEYCLOAK_REALM=therealr
 
 ### GraphQL
 
-The implementation [@gemeente-denhaag/nl-portal-app](./packages/app) uses
+The implementation [@nl-portal/nl-portal-app](./packages/app) uses
 [Apollo Client](https://www.apollographql.com/docs/react/) through the package
-[@gemeente-denhaag/nl-portal-api](./packages/api) to communicate with the GraphQL back-end.
+[@nl-portal/nl-portal-api](./packages/api) to communicate with the GraphQL back-end.
 
 New queries can be added as exported JavaScript variables from separate files
 [in the queries folder](./packages/api/src/queries).
@@ -202,12 +202,12 @@ query files. For this to succeed, the GraphQL API endpoint specified in
 [codegen.yml](./packages/api/codegen.yml) must be available.
 
 Once the codegen completes, the queries are exported as hooks from
-[@gemeente-denhaag/nl-portal-api](./packages/api) and can be imported and used inside a functional
+[@nl-portal/nl-portal-api](./packages/api) and can be imported and used inside a functional
 component:
 
 ```
 ...
-import {useGetZakenQuery} from '@gemeente-denhaag/nl-portal-api';
+import {useGetZakenQuery} from '@nl-portal/nl-portal-api';
 
 const CasesPage = () => {
   const {data, loading, error, refetch} = useGetZakenQuery();

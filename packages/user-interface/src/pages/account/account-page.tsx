@@ -6,7 +6,7 @@ import {
   useGetBewonersAantalQuery,
   useGetBurgerProfielQuery,
   useGetPersoonDataQuery,
-} from '@gemeente-denhaag/nl-portal-api';
+} from '@nl-portal/nl-portal-api';
 import styles from './account-page.module.scss';
 import {DetailList} from '../../components/detail-list';
 import {

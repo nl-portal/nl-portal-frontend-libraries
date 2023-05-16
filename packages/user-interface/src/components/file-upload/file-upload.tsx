@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Fragment, FC, useState, useEffect} from 'react';
-import {TOKEN_OBJECT, TOKEN_KEY} from '@gemeente-denhaag/nl-portal-api';
+import {TOKEN_OBJECT, TOKEN_KEY} from '@nl-portal/nl-portal-api';
 
 interface UploadedFile {
   url: string;

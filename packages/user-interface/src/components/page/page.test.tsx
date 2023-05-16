@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import {mockIntlWrapper} from '@gemeente-denhaag/nl-portal-localization';
+import {mockIntlWrapper} from '@nl-portal/nl-portal-localization';
 import {unmountComponentAtNode} from 'react-dom';
 import {Page} from './page';
 import {LayoutProvider} from '../../providers';

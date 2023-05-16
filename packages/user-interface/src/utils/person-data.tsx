@@ -2,7 +2,7 @@ import {
   PersoonGeboorteDatum,
   PersoonNaam,
   PersoonNationaliteiten,
-} from '@gemeente-denhaag/nl-portal-api';
+} from '@nl-portal/nl-portal-api';
 import {ReactElement} from 'react';
 import * as React from 'react';
 import {LocaleDate} from '../components/locale-date';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement} from 'react';
-import {StatusType, ZaakStatus} from '@gemeente-denhaag/nl-portal-api';
+import {StatusType, ZaakStatus} from '@nl-portal/nl-portal-api';
 import {Paragraph} from '@gemeente-denhaag/components-react';
 import {Status} from '@gemeente-denhaag/process-steps';
 import Skeleton from 'react-loading-skeleton';

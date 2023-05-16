@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useContext, useEffect, useState} from 'react';
 import {ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache} from '@apollo/client';
-import {KeycloakContext, formatUrlTrailingSlash} from '@gemeente-denhaag/nl-portal-authentication';
+import {KeycloakContext, formatUrlTrailingSlash} from '@nl-portal/nl-portal-authentication';
 import {ApiContext} from '../../contexts';
 import {TOKEN_KEY, TOKEN_OBJECT} from '../../constants';
 
