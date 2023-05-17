@@ -8,6 +8,7 @@ import useSize from '@react-hook/size';
 import useScrollPosition from '@react-hook/window-scroll';
 import {Heading3, Heading4, IconButton} from '@gemeente-denhaag/components-react';
 import {CloseIcon} from '@gemeente-denhaag/icons';
+import ResponsiveContent from '@gemeente-denhaag/responsive-content';
 import Skeleton from 'react-loading-skeleton';
 import styles from './header.module.scss';
 import {LanguageSwitcher} from '../language-switcher';
@@ -124,7 +125,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline, logoSmall}) =>
         <header
           className={classNames(styles.header, {[styles['header--fullscreen']]: fullscreenForm})}
         >
-          <div className={styles.header__inner}>
+          <ResponsiveContent className={styles.header__inner}>
             <div
               className={classNames(styles['header__logo-container'], {
                 [styles['header__logo-container--fullscreen']]: fullscreenForm,
@@ -181,7 +182,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline, logoSmall}) =>
                 )}
               </div>
             )}
-          </div>
+          </ResponsiveContent>
         </header>
         {!fullscreenForm && (
           <div

@@ -44,6 +44,12 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
     isHome: true,
   };
 
+  const legacy = customHeader === undefined && customFooter === undefined;
+  let pageHeaderClassnames = '';
+  if (legacy) {
+    pageHeaderClassnames = classNames(styles['header-wrapper--legacy']);
+  }
+
   useEffect(() => {
     FormIoUploader.register();
   }, []);
@@ -51,7 +57,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   return (
     <Router>
       <PageWrapper>
-        <PageHeader>
+        <PageHeader className={pageHeaderClassnames}>
           {customHeader ? (
             customHeader
           ) : (
@@ -65,7 +71,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
           )}
         </PageHeader>
         <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
-          <Menu items={pages} />
+          <Menu items={pages} legacy={legacy} />
           <div className="denhaag-page-content__main">
             {online && (
               <Switch>

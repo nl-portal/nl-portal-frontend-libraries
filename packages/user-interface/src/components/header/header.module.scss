@@ -35,8 +35,6 @@
   justify-content: center;
   width: auto;
   height: var(--nlportal-header-height, 72px);
-  margin-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
-  margin-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
 
   @include breakpoint(tablet) {
     height: var(--nlportal-header-height-large, 85px);

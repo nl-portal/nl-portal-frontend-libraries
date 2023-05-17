@@ -50,3 +50,11 @@
 .page-container__page--fullscreen {
   margin-left: 0;
 }
+
+.header-wrapper--legacy {
+  height: var(--nlportal-header-legacy-height-tablet);
+
+  @include breakpoint(tablet) {
+    height: var(--nlportal-header-legacy-height);
+  }
+}
