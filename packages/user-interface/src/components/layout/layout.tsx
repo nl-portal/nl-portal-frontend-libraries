@@ -1,30 +1,34 @@
-import * as React from 'react';
-import {StylesProvider} from '@gemeente-denhaag/components-react';
-import {FC, Fragment, ReactElement, useContext, useEffect} from 'react';
+import React, {FC, Fragment, ReactElement, useEffect} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import {StylesProvider} from '@gemeente-denhaag/components-react';
+import {Page as PageWrapper, PageHeader, PageFooter} from '@gemeente-denhaag/page';
+import ResponsiveContent from '@gemeente-denhaag/responsive-content';
 import classNames from 'classnames';
 import {Header} from '../header';
 import {Menu} from '../menu';
 import {PortalFooter, PortalPage} from '../../interfaces';
-import styles from './layout.module.scss';
 import {Page} from '../page';
 import {Footer} from '../footer';
 import {LayoutProvider, UserInformationProvider} from '../../providers';
-import {LayoutContext} from '../../contexts';
 import {LinkToParent} from '../link-to-parent';
 import {OfflinePage} from '../../pages';
 import {FormIoUploader} from '../form-io-uploader';
+import styles from './layout.module.scss';
 
 interface LayoutComponentProps {
   pages: Array<PortalPage>;
+  customHeader?: ReactElement;
+  customFooter?: ReactElement;
   headerLogo: ReactElement;
   headerLogoSmall: ReactElement;
   facet?: ReactElement;
-  footer: PortalFooter;
+  footer?: PortalFooter;
   offline?: boolean;
 }
 
 const LayoutComponent: FC<LayoutComponentProps> = ({
+  customHeader,
+  customFooter,
   headerLogo,
   facet,
   pages,
@@ -32,7 +36,6 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   offline,
   headerLogoSmall,
 }) => {
-  const {headerHeight, fullscreenForm} = useContext(LayoutContext);
   const online = !offline;
   const offlinePage = {
     path: '/',
@@ -47,72 +50,72 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
 
   return (
     <Router>
-      <Header
-        logo={headerLogo}
-        logoSmall={headerLogoSmall}
-        facet={facet}
-        homePage={pages.find(page => page.isHome)}
-        offline={offline}
-      />
-      <div className={styles['page-container']} style={{paddingBlockStart: headerHeight}}>
-        <div className={styles['page-container__inner']}>
-          {online && (
-            <Fragment>
-              {!fullscreenForm && (
-                <div className={styles['page-container__menu']}>
-                  <Menu items={pages} />
-                </div>
-              )}
-              <div
-                className={classNames(styles['page-container__page'], {
-                  [styles['page-container__page--fullscreen']]: fullscreenForm,
-                })}
-              >
-                <Switch>
-                  {pages.reduce(
-                    (accumulator, page) => [
-                      ...accumulator,
-                      <Route exact key={page.path} path={page.path}>
-                        <Page page={page}>{page.pageComponent}</Page>
-                      </Route>,
-                      ...(page.children
-                        ? page.children.map(childPage => (
-                            <Route key={childPage.path} path={`${page.path}${childPage.path}`}>
-                              <Page page={childPage}>
-                                <Fragment>
-                                  {childPage.showLinkToParent && <LinkToParent parentPage={page} />}
-                                  {childPage.pageComponent}
-                                </Fragment>
-                              </Page>
-                            </Route>
-                          ))
-                        : []),
-                    ],
-                    []
-                  )}
-                  <Route
-                    render={() => <Redirect to={sessionStorage.getItem('entryUrl') || '/'} />}
-                  />
-                </Switch>
-              </div>
-            </Fragment>
+      <PageWrapper>
+        <PageHeader>
+          {customHeader ? (
+            customHeader
+          ) : (
+            <Header
+              logo={headerLogo}
+              logoSmall={headerLogoSmall}
+              facet={facet}
+              homePage={pages.find(page => page.isHome)}
+              offline={offline}
+            />
           )}
-          {offline && (
-            <Switch>
-              <Route exact key={0} path={offlinePage.path}>
-                <Page page={offlinePage}>{offlinePage.pageComponent}</Page>
-              </Route>
-              <Route key={1} render={() => <Redirect to={offlinePage.path} />} />
-            </Switch>
-          )}
-        </div>
-      </div>
-      {online && <Footer footer={footer} facet={facet} />}
+        </PageHeader>
+        <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
+          <Menu items={pages} />
+          <div className="denhaag-page-content__main">
+            {online && (
+              <Switch>
+                {pages.reduce(
+                  (accumulator, page) => [
+                    ...accumulator,
+                    <Route exact key={page.path} path={page.path}>
+                      <Page page={page}>{page.pageComponent}</Page>
+                    </Route>,
+                    ...(page.children
+                      ? page.children.map(childPage => (
+                          <Route key={childPage.path} path={`${page.path}${childPage.path}`}>
+                            <Page page={childPage}>
+                              <Fragment>
+                                {childPage.showLinkToParent && <LinkToParent parentPage={page} />}
+                                {childPage.pageComponent}
+                              </Fragment>
+                            </Page>
+                          </Route>
+                        ))
+                      : []),
+                  ],
+                  []
+                )}
+                <Route render={() => <Redirect to={sessionStorage.getItem('entryUrl') || '/'} />} />
+              </Switch>
+            )}
+            {offline && (
+              <Switch>
+                <Route exact key={0} path={offlinePage.path}>
+                  <Page page={offlinePage}>{offlinePage.pageComponent}</Page>
+                </Route>
+                <Route key={1} render={() => <Redirect to={offlinePage.path} />} />
+              </Switch>
+            )}
+          </div>
+        </ResponsiveContent>
+        {online && (
+          <PageFooter>
+            {customFooter ? customFooter : footer && <Footer footer={footer} facet={facet} />}
+          </PageFooter>
+        )}
+      </PageWrapper>
     </Router>
   );
 };
 
 const Layout: FC<LayoutComponentProps> = ({
+  customHeader,
+  customFooter,
   headerLogo,
   facet,
   pages,
@@ -125,9 +128,11 @@ const Layout: FC<LayoutComponentProps> = ({
       <UserInformationProvider>
         <LayoutComponent
           pages={pages}
+          customHeader={customHeader}
           headerLogo={headerLogo}
           headerLogoSmall={headerLogoSmall}
           footer={footer}
+          customFooter={customFooter}
           facet={facet}
           offline={offline}
         />
