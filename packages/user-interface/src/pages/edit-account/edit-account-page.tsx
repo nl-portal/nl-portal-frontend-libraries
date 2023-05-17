@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Button, Heading2, TextField} from '@gemeente-denhaag/components-react';
+import {Button, Heading2} from '@gemeente-denhaag/components-react';
+import {TextField} from '@gemeente-denhaag/textfield';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useContext, useEffect, useState} from 'react';
 import {LocaleContext} from '@nl-portal/nl-portal-localization';
