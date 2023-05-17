@@ -12,6 +12,7 @@
   padding-block-end: var(--nlportal-space-block-2xl, 2rem);
   padding-inline-start: var(--nlportal-space-inline-2xl, 2rem);
   padding-inline-end: var(--nlportal-space-inline-2xl, 2rem);
+  z-index: 10;
 
   @include breakpoint(tablet) {
     position: relative;
@@ -29,6 +30,7 @@
 
   @include breakpoint(tablet) {
     display: block;
+    min-width: var(--denhaag-sidenav-min-width);
   }
 }
 
