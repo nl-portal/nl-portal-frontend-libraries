@@ -203,7 +203,7 @@ const footer: PortalFooter = [
 ];
 
 const App = () => (
-  <Fragment>
+  <div className={config.THEME_CLASS}>
     <Online>
       <KeycloakWrapper
         clientId={config.KEYCLOAK_CLIENT_ID}
@@ -236,7 +236,7 @@ const App = () => (
         />
       </LocalizationProvider>
     </Offline>
-  </Fragment>
+  </div>
 );
 
 export {App};

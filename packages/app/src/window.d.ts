@@ -19,5 +19,6 @@ export declare global {
     OVERVIEW_SHOW_INTRO: string;
     OVERVIEW_SHOW_FORMS_LINK: string;
     OVERVIEW_SHOW_MAINTENANCE_ALERT: string;
+    THEME_CLASS: string;
   }
 }
