@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement, useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {Link} from '@gemeente-denhaag/components-react';
+import {Link} from '@gemeente-denhaag/link';
 import {EditIcon} from '@gemeente-denhaag/icons';
 import Skeleton from 'react-loading-skeleton';
 import {LocaleContext} from '@nl-portal/nl-portal-localization';
