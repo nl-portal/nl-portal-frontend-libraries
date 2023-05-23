@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
-import {Link, Paragraph} from '@gemeente-denhaag/components-react';
+import {Paragraph} from '@gemeente-denhaag/components-react';
+import {Link} from '@gemeente-denhaag/link';
 import {Alert} from '@gemeente-denhaag/alert';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {FC, useContext} from 'react';
