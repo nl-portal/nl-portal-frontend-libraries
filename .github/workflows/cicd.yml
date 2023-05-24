@@ -14,20 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
-      - run: npm install
-      #- run: npm test
-
-
-  publish-npm:
-    runs-on: ubuntu-latest
-    if: github.ref_name == 'master'
-
-    steps:
       - name: generate access token
         id: generate_token
         uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92
@@ -53,6 +39,98 @@ jobs:
 
       - name: build library
         run: yarn run build
+
+      - name: "Retain build artifact: api"
+        uses: actions/upload-artifact@v3
+        with:
+          name: nl-portal-api
+          path: packages/api/dist/
+          retention-days: 1
+
+      - name: "Retain build artifact: app"
+        uses: actions/upload-artifact@v3
+        with:
+          name: nl-portal-app
+          path: packages/app/dist/
+          retention-days: 1
+
+      - name: "Retain build artifact: authentication"
+        uses: actions/upload-artifact@v3
+        with:
+          name: nl-portal-authentication
+          path: packages/authentication/dist/
+          retention-days: 1
+
+      - name: "Retain build artifact: localization"
+        uses: actions/upload-artifact@v3
+        with:
+          name: nl-portal-localization
+          path: packages/localization/dist/
+          retention-days: 1
+
+      - name: "Retain build artifact: user interface"
+        uses: actions/upload-artifact@v3
+        with:
+          name: nl-portal-user-interface
+          path: packages/user-interface/dist/
+          retention-days: 1
+
+  publish-npm:
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'master'
+
+    steps:
+      - name: generate access token
+        id: generate_token
+        uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: repo checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+
+      - name: install yarn + lerna
+        run: |
+          npm install -g yarn
+          npm install -g lerna
+
+      - name: "Restore build artifact: api"
+        uses: actions/download-artifact@v3
+        with:
+          name: nl-portal-api
+          path: packages/api/dist/
+
+      - name: "Restore build artifact: app"
+        uses: actions/download-artifact@v3
+        with:
+          name: nl-portal-app
+          path: packages/app/dist/
+
+      - name: "Restore build artifact: authentication"
+        uses: actions/download-artifact@v3
+        with:
+          name: nl-portal-authentication
+          path: packages/authentication/dist/
+
+      - name: "Restore build artifact: localization"
+        uses: actions/download-artifact@v3
+        with:
+          name: nl-portal-localization
+          path: packages/localization/dist/
+
+      - name: "Restore build artifact: user interface"
+        uses: actions/download-artifact@v3
+        with:
+          name: nl-portal-user-interface
+          path: packages/user-interface/dist/
 
       - name: lerna version
         env:
