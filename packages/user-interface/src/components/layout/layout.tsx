@@ -19,8 +19,8 @@ interface LayoutComponentProps {
   pages: Array<PortalPage>;
   customHeader?: ReactElement;
   customFooter?: ReactElement;
-  headerLogo: ReactElement;
-  headerLogoSmall: ReactElement;
+  headerLogo?: ReactElement;
+  headerLogoSmall?: ReactElement;
   facet?: ReactElement;
   footer?: PortalFooter;
   offline?: boolean;
@@ -60,7 +60,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
         <PageHeader className={pageHeaderClassnames}>
           {customHeader ? (
             customHeader
-          ) : (
+          ) : headerLogo && headerLogoSmall ? (
             <Header
               logo={headerLogo}
               logoSmall={headerLogoSmall}
@@ -68,6 +68,8 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
               homePage={pages.find(page => page.isHome)}
               offline={offline}
             />
+          ) : (
+            ''
           )}
         </PageHeader>
         <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
