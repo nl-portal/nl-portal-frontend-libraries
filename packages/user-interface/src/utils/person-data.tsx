@@ -1,8 +1,4 @@
-import {
-  PersoonGeboorteDatum,
-  PersoonNaam,
-  PersoonNationaliteiten,
-} from '@nl-portal/nl-portal-api';
+import {PersoonGeboorteDatum, PersoonNaam, PersoonNationaliteiten} from '@nl-portal/nl-portal-api';
 import {ReactElement} from 'react';
 import * as React from 'react';
 import {LocaleDate} from '../components/locale-date';
