@@ -1,4 +1,4 @@
-window.KEYCLOAK_URL = 'http://localhost:8093/auth';
+window.KEYCLOAK_URL = 'http://localhost:8082/auth';
 window.KEYCLOAK_REALM = 'master';
 window.KEYCLOAK_CLIENT_ID = 'gzac-portal';
 window.KEYCLOAK_REDIRECT_URI = 'http://localhost:3000/keycloak/callback';
