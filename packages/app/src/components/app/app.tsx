@@ -5,7 +5,6 @@ import '../../styles/nl-portal-design-tokens.css';
 import {KeycloakWrapper} from '@nl-portal/nl-portal-authentication';
 import {LocalizationProvider} from '@nl-portal/nl-portal-localization';
 import {ApiWrapper} from '@nl-portal/nl-portal-api';
-import {Offline, Online} from 'react-detect-offline';
 import {
   AccountPage,
   CasePage,
@@ -204,38 +203,24 @@ const footer: PortalFooter = [
 
 const App = () => (
   <div className={config.THEME_CLASS}>
-    <Online>
-      <KeycloakWrapper
-        clientId={config.KEYCLOAK_CLIENT_ID}
-        realm={config.KEYCLOAK_REALM}
-        url={config.KEYCLOAK_URL}
-        redirectUri={config.KEYCLOAK_REDIRECT_URI}
-      >
-        <ApiWrapper graphqlUri={config.GRAPHQL_URI} restUri={config.REST_URI}>
-          <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-            <Layout
-              pages={pages}
-              headerLogo={<HeaderLogo />}
-              headerLogoSmall={<HeaderLogoSmall />}
-              facet={<img src={Facet} alt="" />}
-              footer={footer}
-            />
-          </LocalizationProvider>
-        </ApiWrapper>
-      </KeycloakWrapper>
-    </Online>
-    <Offline>
-      <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-        <Layout
-          pages={pages}
-          headerLogo={<HeaderLogo />}
-          headerLogoSmall={<HeaderLogoSmall />}
-          facet={<img src={Facet} alt="" />}
-          footer={footer}
-          offline
-        />
-      </LocalizationProvider>
-    </Offline>
+    <KeycloakWrapper
+      clientId={config.KEYCLOAK_CLIENT_ID}
+      realm={config.KEYCLOAK_REALM}
+      url={config.KEYCLOAK_URL}
+      redirectUri={config.KEYCLOAK_REDIRECT_URI}
+    >
+      <ApiWrapper graphqlUri={config.GRAPHQL_URI} restUri={config.REST_URI}>
+        <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
+          <Layout
+            pages={pages}
+            headerLogo={<HeaderLogo />}
+            headerLogoSmall={<HeaderLogoSmall />}
+            facet={<img src={Facet} alt="" />}
+            footer={footer}
+          />
+        </LocalizationProvider>
+      </ApiWrapper>
+    </KeycloakWrapper>
   </div>
 );
 
