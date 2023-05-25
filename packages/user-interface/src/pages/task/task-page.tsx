@@ -6,10 +6,7 @@ import {Form} from '@formio/react';
 import {Helmet} from 'react-helmet';
 import './task-page.css';
 import _ from 'lodash';
-import {
-  useSubmitTaskMutation,
-  useGetFormDefinitionByIdLazyQuery,
-} from '@nl-portal/nl-portal-api';
+import {useSubmitTaskMutation, useGetFormDefinitionByIdLazyQuery} from '@nl-portal/nl-portal-api';
 
 const TaskPage = () => {
   const location: any = useLocation();
