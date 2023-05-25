@@ -47,13 +47,6 @@ jobs:
           path: packages/api/dist/
           retention-days: 1
 
-      - name: "Retain build artifact: app"
-        uses: actions/upload-artifact@v3
-        with:
-          name: nl-portal-app
-          path: packages/app/dist/
-          retention-days: 1
-
       - name: "Retain build artifact: authentication"
         uses: actions/upload-artifact@v3
         with:
@@ -108,12 +101,6 @@ jobs:
         with:
           name: nl-portal-api
           path: packages/api/dist/
-
-      - name: "Restore build artifact: app"
-        uses: actions/download-artifact@v3
-        with:
-          name: nl-portal-app
-          path: packages/app/dist/
 
       - name: "Restore build artifact: authentication"
         uses: actions/download-artifact@v3
