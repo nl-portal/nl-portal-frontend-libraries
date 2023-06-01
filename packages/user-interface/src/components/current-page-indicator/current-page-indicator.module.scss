@@ -39,7 +39,8 @@
   align-items: center;
 }
 
-.current-page-indicator__heading {
+h5.current-page-indicator__heading {
+  --utrecht-space-around: 0;
   color: var(--nlportal-heading-5-color, hsl(207 80% 35%)) !important;
 }
 
