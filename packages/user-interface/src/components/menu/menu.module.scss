@@ -31,6 +31,7 @@
   @include breakpoint(tablet) {
     display: block;
     min-width: var(--denhaag-sidenav-min-width);
+    background-color: transparent;
   }
 }
 
@@ -38,6 +39,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: fixed;
 }
 
 .menu__header {
