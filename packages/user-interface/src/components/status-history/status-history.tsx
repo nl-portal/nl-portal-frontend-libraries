@@ -5,6 +5,7 @@ import {Paragraph} from '@gemeente-denhaag/components-react';
 import {Status} from '@gemeente-denhaag/process-steps';
 import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
+import {stringToId} from '../../utils';
 import styles from './status-history.module.scss';
 
 interface StatusHistoryProps {
@@ -17,7 +18,13 @@ interface StatusHistoryProps {
   background?: ReactElement;
 }
 
-const StatusHistory: FC<StatusHistoryProps> = ({statusHistory, statuses = [], status, loading}) => {
+const StatusHistory: FC<StatusHistoryProps> = ({
+  statusHistory,
+  statuses = [],
+  status,
+  loading,
+  caseId,
+}) => {
   const intl = useIntl();
 
   const getSkeletonStep = (key: number) => (
@@ -57,12 +64,17 @@ const StatusHistory: FC<StatusHistoryProps> = ({statusHistory, statuses = [], st
     <div className={styles['status-history-container']}>
       {!loading && statuses ? (
         <Status
-          steps={statuses.map(({omschrijving}, index) => ({
-            title: omschrijving,
-            id: `step-${index + 1}`,
-            status: getStepStatus(omschrijving),
-            marker: index + 1,
-          }))}
+          steps={statuses.map(({omschrijving}, index) => {
+            const omschrijvingLabel = intl.formatMessage({
+              id: `case.${caseId}.status.${stringToId(`${omschrijving}`)}`,
+            });
+            return {
+              title: omschrijvingLabel,
+              id: `step-${index + 1}`,
+              status: getStepStatus(omschrijving),
+              marker: index + 1,
+            };
+          })}
         />
       ) : (
         <Fragment>
