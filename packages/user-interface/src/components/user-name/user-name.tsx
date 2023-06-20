@@ -5,7 +5,7 @@ import {useIntl} from 'react-intl';
 import classNames from 'classnames';
 import Skeleton from 'react-loading-skeleton';
 import styles from './user-name.module.scss';
-import useUserInfo from '../../utils/use-user-info';
+import {useUserInfo} from '../../utils/use-user-info';
 
 interface UserNameProps {
   mobileMenu?: boolean;
