@@ -34,7 +34,7 @@ jobs:
       - name: lerna bootstrap
         run: |
           npm install -g yarn
-          npm install -g lerna
+          npm install -g lerna@6.6.2
           yarn run bootstrap
 
       - name: build library
@@ -94,7 +94,7 @@ jobs:
       - name: install yarn + lerna
         run: |
           npm install -g yarn
-          npm install -g lerna
+          npm install -g lerna@6.6.2
 
       - name: "Restore build artifact: api"
         uses: actions/download-artifact@v3
