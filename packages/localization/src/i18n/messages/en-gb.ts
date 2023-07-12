@@ -26,6 +26,8 @@ export const EN_GB_MESSAGES: Messages = {
     'titles.currentCases': 'Current cases',
     'titles.completedCases': 'Closed cases',
     'overview.defaultFormTitle': 'Lodge an objection',
+    'overview.showAllCases': 'View all cases',
+    'overview.currentCases': 'My current cases',
     'cases.noOpenCases': 'There are no current cases.',
     'cases.noClosedCases': 'There are no closed cases.',
     'cases.fetchError': 'There was an error, try again later.',
