@@ -19,24 +19,6 @@
   }
 }
 
-.cases__cards {
-  display: flex;
-  flex-direction: column;
-
-  @include breakpoint(desktop) {
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
-}
-
-.cases__card {
-  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
-
-  @include breakpoint(desktop) {
-    width: calc(50% - var(--nlportal-space-inline-md, 1rem));
-  }
-}
-
 .cases__no-data-message {
   width: 100%;
   text-align: center;

@@ -8,6 +8,7 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import {FC, useContext} from 'react';
 import {LocaleContext} from '@nl-portal/nl-portal-localization';
 import {useUserInfo} from '../../utils/use-user-info';
+import {CasesList} from '../../components/cases-list';
 
 interface OverviewPageProps {
   openFormsFormId?: string;
@@ -16,6 +17,8 @@ interface OverviewPageProps {
   personalizeIntro?: string;
   showAlert?: string;
   alertType?: 'error' | 'info' | 'success' | 'warning';
+  showCasesPreview?: boolean;
+  casesPreviewLength?: number;
 }
 
 const OverviewPage: FC<OverviewPageProps> = ({
@@ -25,6 +28,8 @@ const OverviewPage: FC<OverviewPageProps> = ({
   personalizeIntro = 'false',
   showAlert = 'false',
   alertType = 'warning',
+  showCasesPreview = false,
+  casesPreviewLength = 6,
 }) => {
   const {hrefLang} = useContext(LocaleContext);
   const intl = useIntl();
@@ -75,6 +80,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
           <FormattedMessage id="overview.defaultFormTitle" />
         </Link>
       )}
+      {showCasesPreview && <CasesList showHeader numElements={casesPreviewLength} />}
     </section>
   );
 };

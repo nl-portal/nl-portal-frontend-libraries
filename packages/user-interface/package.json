@@ -51,7 +51,8 @@
   "dependencies": {
     "@formio/react": "^5.2.3",
     "@gemeente-denhaag/alert": "0.1.1-alpha.278",
-    "@gemeente-denhaag/components-react": "0.1.1-alpha.246",
+    "@gemeente-denhaag/card": "0.2.3-alpha.321",
+    "@gemeente-denhaag/components-react": "0.1.1-alpha.259",
     "@gemeente-denhaag/icons": "0.2.3-alpha.308",
     "@gemeente-denhaag/link": "0.2.3-alpha.70",
     "@gemeente-denhaag/page": "0.1.1-alpha.168",

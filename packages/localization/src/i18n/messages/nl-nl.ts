@@ -26,6 +26,8 @@ export const NL_NL_MESSAGES: Messages = {
     'titles.currentCases': 'Lopende zaken',
     'titles.completedCases': 'Afgeronde zaken',
     'overview.defaultFormTitle': 'Bezwaar maken',
+    'overview.showAllCases': 'Bekijk alle zaken',
+    'overview.currentCases': 'Mijn lopende zaken',
     'cases.noOpenCases': 'Er zijn geen lopende zaken.',
     'cases.noClosedCases': 'Er zijn geen afgeronde zaken.',
     'cases.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',

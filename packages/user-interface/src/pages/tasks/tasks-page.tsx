@@ -1,33 +1,27 @@
 import * as React from 'react';
 import {Fragment, useEffect} from 'react';
-import {Card, Heading2, Paragraph} from '@gemeente-denhaag/components-react';
+import {Heading2, Paragraph} from '@gemeente-denhaag/components-react';
+import {SubjectCard} from '@gemeente-denhaag/card';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
 import {useGetTasksQuery} from '@nl-portal/nl-portal-api';
-import {useHistory} from 'react-router-dom';
 import styles from './tasks-page.module.scss';
+import {PortalLink} from '../../utils';
 
 const TasksPage = () => {
   const intl = useIntl();
   const {data, loading, error, refetch} = useGetTasksQuery();
-  const history = useHistory();
   const getTaskUrl = (formulierId: string, verwerkerTaakId: string) =>
-    `?formulier=${formulierId}&id=${verwerkerTaakId}`;
+    `/taken/taak?formulier=${formulierId}&id=${verwerkerTaakId}`;
 
   const getTaskCards = () =>
     data?.getTasks?.content?.map(task => (
       <div className={styles.tasks__card} key={task.id}>
-        <Card
-          variant="basic"
+        <SubjectCard
           title={task.title}
           date={new Date(task.date)}
-          onClick={() =>
-            history.push({
-              pathname: '/taken/taak',
-              search: getTaskUrl(task.formId, task.id),
-              state: task,
-            })
-          }
+          href={getTaskUrl(task.formId, task.id)}
+          Link={PortalLink}
         />
       </div>
     )) || [];
