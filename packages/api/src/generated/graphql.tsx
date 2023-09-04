@@ -45,7 +45,6 @@ export type Form = {
 export type FormDefinition = {
   __typename?: 'FormDefinition';
   formDefinition: Scalars['JSON'];
-  name: Scalars['String'];
 };
 
 export type Gemachtigde = {
@@ -73,9 +72,17 @@ export type MaatschappelijkeActiviteit = {
 export type Mutation = {
   __typename?: 'Mutation';
   /** Submit a task */
-  submitTask: Task;
+  submitTaak: Taak;
+  /** Submit a task */
+  submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
+};
+
+
+export type MutationSubmitTaakArgs = {
+  id: Scalars['UUID'];
+  submission: Scalars['JSON'];
 };
 
 
@@ -151,7 +158,10 @@ export type PersoonVerblijfplaats = {
 
 export type Query = {
   __typename?: 'Query';
-  /** find all form definitions from repository or Objects API */
+  /**
+   * find all form definitions from repository
+   * @deprecated Deprecated
+   */
   allFormDefinitions: Array<FormDefinition>;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
@@ -161,10 +171,15 @@ export type Query = {
   getBurgerProfiel?: Maybe<Klant>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
-  /** find single form definition from repository */
-  getFormDefinition?: Maybe<FormDefinition>;
-  /** find single form definition by ID from repository or ObjectsAPI */
+  /**
+   * find single form definition from repository or Objecten API
+   * @deprecated Replaced by getFormDefinitionByName and getFormDefinitionByObjectenApiUrl, replace with getFormDefinitionByName or getFormDefinitionByObjectenApiUrl
+   */
   getFormDefinitionById?: Maybe<FormDefinition>;
+  /** find single form definition from repository */
+  getFormDefinitionByName?: Maybe<FormDefinition>;
+  /** find single form definition from the Objecten API */
+  getFormDefinitionByObjectenApiUrl?: Maybe<FormDefinition>;
   /** Gets the forms available to the user */
   getFormList: Array<Form>;
   /** Gets the data of the gemachtigde */
@@ -172,9 +187,14 @@ export type Query = {
   /** Gets the persoon data */
   getPersoon?: Maybe<Persoon>;
   /** Get task by id */
-  getTaskById: Task;
+  getTaakById: Taak;
   /** Get a list of tasks */
-  getTasks: TaskPage;
+  getTaken: TaakPage;
+  /**
+   * Get a list of tasks
+   * @deprecated Replaced by getTaken
+   */
+  getTasks: TaakPage;
   /** Gets a zaak by id */
   getZaak: Zaak;
   /** Gets all zaken for the user */
@@ -187,18 +207,29 @@ export type QueryGetDocumentContentArgs = {
 };
 
 
-export type QueryGetFormDefinitionArgs = {
-  name: Scalars['String'];
-};
-
-
 export type QueryGetFormDefinitionByIdArgs = {
   id: Scalars['String'];
 };
 
 
-export type QueryGetTaskByIdArgs = {
+export type QueryGetFormDefinitionByNameArgs = {
+  name: Scalars['String'];
+};
+
+
+export type QueryGetFormDefinitionByObjectenApiUrlArgs = {
+  url: Scalars['String'];
+};
+
+
+export type QueryGetTaakByIdArgs = {
   id: Scalars['UUID'];
+};
+
+
+export type QueryGetTakenArgs = {
+  pageNumber?: Maybe<Scalars['Int']>;
+  pageSize?: Maybe<Scalars['Int']>;
 };
 
 
@@ -223,30 +254,45 @@ export type StatusType = {
   omschrijving?: Maybe<Scalars['String']>;
 };
 
-export type Task = {
-  __typename?: 'Task';
+export type Taak = {
+  __typename?: 'Taak';
   data: Scalars['JSON'];
   date: Scalars['String'];
   formId: Scalars['String'];
+  formulier: TaakFormulier;
   id: Scalars['UUID'];
+  identificatie: TaakIdentificatie;
   objectId: Scalars['UUID'];
-  status: TaskStatus;
+  status: TaakStatus;
   title: Scalars['String'];
 };
 
-export type TaskPage = {
-  __typename?: 'TaskPage';
-  content: Array<Task>;
+export type TaakFormulier = {
+  __typename?: 'TaakFormulier';
+  type: Scalars['String'];
+  value: Scalars['String'];
+};
+
+export type TaakIdentificatie = {
+  __typename?: 'TaakIdentificatie';
+  type: Scalars['String'];
+  value: Scalars['String'];
+};
+
+export type TaakPage = {
+  __typename?: 'TaakPage';
+  content: Array<Taak>;
   number: Scalars['Int'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int'];
+  results: Array<Taak>;
   size: Scalars['Int'];
   totalElements: Scalars['Int'];
   /** The total number of available pages */
   totalPages: Scalars['Int'];
 };
 
-export enum TaskStatus {
+export enum TaakStatus {
   Gesloten = 'GESLOTEN',
   Ingediend = 'INGEDIEND',
   Open = 'OPEN',
@@ -291,7 +337,7 @@ export type SubmitTaskMutationVariables = Exact<{
 }>;
 
 
-export type SubmitTaskMutation = { __typename?: 'Mutation', submitTask: { __typename?: 'Task', id: any, objectId: any, formId: string, title: string, status: TaskStatus, date: string } };
+export type SubmitTaskMutation = { __typename?: 'Mutation', submitTask: { __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string } };
 
 export type UpdateBurgerProfielMutationVariables = Exact<{
   klant: KlantUpdateInput;
@@ -334,7 +380,7 @@ export type GetFormDefinitionByNameQueryVariables = Exact<{
 }>;
 
 
-export type GetFormDefinitionByNameQuery = { __typename?: 'Query', getFormDefinition?: Maybe<{ __typename?: 'FormDefinition', formDefinition: any }> };
+export type GetFormDefinitionByNameQuery = { __typename?: 'Query', getFormDefinitionByName?: Maybe<{ __typename?: 'FormDefinition', formDefinition: any }> };
 
 export type GetFormsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -359,7 +405,14 @@ export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typ
 export type GetTasksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaskPage', content: Array<{ __typename?: 'Task', id: any, objectId: any, formId: string, title: string, status: TaskStatus, date: string, data: any }> } };
+export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any }> } };
+
+export type GetTaskByIdQueryVariables = Exact<{
+  id: Scalars['UUID'];
+}>;
+
+
+export type GetTaskByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -631,7 +684,7 @@ export type GetFormDefinitionByIdLazyQueryHookResult = ReturnType<typeof useGetF
 export type GetFormDefinitionByIdQueryResult = Apollo.QueryResult<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>;
 export const GetFormDefinitionByNameDocument = gql`
     query GetFormDefinitionByName($name: String!) {
-  getFormDefinition(name: $name) {
+  getFormDefinitionByName(name: $name) {
     formDefinition
   }
 }
@@ -890,6 +943,45 @@ export function useGetTasksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetTasksQueryHookResult = ReturnType<typeof useGetTasksQuery>;
 export type GetTasksLazyQueryHookResult = ReturnType<typeof useGetTasksLazyQuery>;
 export type GetTasksQueryResult = Apollo.QueryResult<GetTasksQuery, GetTasksQueryVariables>;
+export const GetTaskByIdDocument = gql`
+    query GetTaskById($id: UUID!) {
+  getTaakById(id: $id) {
+    id
+    formId
+    status
+    date
+    data
+  }
+}
+    `;
+
+/**
+ * __useGetTaskByIdQuery__
+ *
+ * To run a query within a React component, call `useGetTaskByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTaskByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTaskByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetTaskByIdQuery(baseOptions: Apollo.QueryHookOptions<GetTaskByIdQuery, GetTaskByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTaskByIdQuery, GetTaskByIdQueryVariables>(GetTaskByIdDocument, options);
+      }
+export function useGetTaskByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTaskByIdQuery, GetTaskByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTaskByIdQuery, GetTaskByIdQueryVariables>(GetTaskByIdDocument, options);
+        }
+export type GetTaskByIdQueryHookResult = ReturnType<typeof useGetTaskByIdQuery>;
+export type GetTaskByIdLazyQueryHookResult = ReturnType<typeof useGetTaskByIdLazyQuery>;
+export type GetTaskByIdQueryResult = Apollo.QueryResult<GetTaskByIdQuery, GetTaskByIdQueryVariables>;
 export const GetZaakDocument = gql`
     query GetZaak($id: UUID!) {
   getZaak(id: $id) {
