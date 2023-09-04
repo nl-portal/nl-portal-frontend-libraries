@@ -4,6 +4,7 @@ import '@nl-portal/nl-portal-user-interface/dist/index.css';
 import '../../styles/nl-portal-design-tokens.css';
 import {KeycloakWrapper} from '@nl-portal/nl-portal-authentication';
 import {LocalizationProvider} from '@nl-portal/nl-portal-localization';
+import {HelmetProvider} from 'react-helmet-async';
 import {ApiWrapper} from '@nl-portal/nl-portal-api';
 import {
   AccountPage,
@@ -211,13 +212,15 @@ const App = () => (
     >
       <ApiWrapper graphqlUri={config.GRAPHQL_URI} restUri={config.REST_URI}>
         <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-          <Layout
-            pages={pages}
-            headerLogo={<HeaderLogo />}
-            headerLogoSmall={<HeaderLogoSmall />}
-            facet={<img src={Facet} alt="" />}
-            footer={footer}
-          />
+          <HelmetProvider>
+            <Layout
+              pages={pages}
+              headerLogo={<HeaderLogo />}
+              headerLogoSmall={<HeaderLogoSmall />}
+              facet={<img src={Facet} alt="" />}
+              footer={footer}
+            />
+          </HelmetProvider>
         </LocalizationProvider>
       </ApiWrapper>
     </KeycloakWrapper>
