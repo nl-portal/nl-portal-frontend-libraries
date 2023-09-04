@@ -3,7 +3,7 @@ import {Link, useHistory} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 // @ts-ignore
 import {Form} from '@formio/react';
-import {Helmet} from 'react-helmet';
+import {Helmet} from 'react-helmet-async';
 import {useQuery} from '../../hooks';
 import './task-page.css';
 import _ from 'lodash';
