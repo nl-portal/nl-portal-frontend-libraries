@@ -1,17 +1,23 @@
 import * as React from 'react';
-import {Link, useHistory, useLocation} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 // @ts-ignore
 import {Form} from '@formio/react';
 import {Helmet} from 'react-helmet';
+import {useQuery} from '../../hooks';
 import './task-page.css';
 import _ from 'lodash';
-import {useSubmitTaskMutation, useGetFormDefinitionByIdLazyQuery} from '@nl-portal/nl-portal-api';
+import {
+  useSubmitTaskMutation,
+  useGetFormDefinitionByIdLazyQuery,
+  useGetTaskByIdQuery,
+} from '@nl-portal/nl-portal-api';
 
 const TaskPage = () => {
-  const location: any = useLocation();
-  const [formId, setFormId] = useState('');
-  const [taskId, setTaskId] = useState('');
+  const query = useQuery();
+  const taskId = query.get('id')!;
+  const formId = query.get('formulier')!;
+
   const [submission, setSubmission] = useState({
     data: {},
   });
@@ -23,6 +29,8 @@ const TaskPage = () => {
   const [loadFormById, {loading, data}] = useGetFormDefinitionByIdLazyQuery({
     variables: {id: formId},
   });
+
+  const {data: taskData} = useGetTaskByIdQuery({variables: {id: taskId}});
 
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
     const keys = Object.keys(submissionData);
@@ -51,21 +59,9 @@ const TaskPage = () => {
   };
 
   const getTaskData = () => {
-    if (location.state != null && Object.keys(location.state).length > 0) {
-      localStorage.setItem(location.state.id, JSON.stringify(location.state));
-    } else {
-      const storage: any = localStorage.getItem(
-        location?.search.substring(location?.search.lastIndexOf('=') + 1)
-      );
-      const savedStated = storage != null ? JSON.parse(storage) : null;
-
-      if (savedStated?.data != null) {
-        location.state = savedStated;
-      }
+    if (taskData) {
+      transformPrefilledDataToFormioSubmission(taskData);
     }
-    setFormId(location.state.formId);
-    setTaskId(location.state.id);
-    transformPrefilledDataToFormioSubmission(location.state.data);
   };
 
   const navigateToTasksPage = (): void => {
