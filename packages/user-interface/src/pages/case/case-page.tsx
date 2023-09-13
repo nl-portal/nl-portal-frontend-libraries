@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {useGetZaakQuery} from '@nl-portal/nl-portal-api';
-import {FC, Fragment, ReactElement, useContext, useEffect} from 'react';
+import {FC, Fragment, ReactElement, useContext} from 'react';
 import {Heading2, Heading3, Paragraph} from '@gemeente-denhaag/components-react';
+import {DescriptionList} from '@gemeente-denhaag/descriptionlist';
+import {Table} from '@gemeente-denhaag/table';
 import {Link} from '@gemeente-denhaag/link';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
@@ -23,6 +25,7 @@ import {StatusHistory} from '../../components/status-history';
 import {BREAKPOINTS} from '../../constants';
 import {stringToId} from '../../utils';
 import {LocaleDate} from '../../components/locale-date';
+import mock from './mock';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -39,7 +42,7 @@ const CasePage: FC<CasePageProps> = ({
   const query = useQuery();
   const {hrefLang} = useContext(LocaleContext);
   const id = query.get('id');
-  const {data, loading, error, refetch} = useGetZaakQuery({
+  const {data, loading, error} = useGetZaakQuery({
     variables: {id},
   });
   const isMobile = useMediaQuery(BREAKPOINTS.MOBILE);
@@ -62,9 +65,7 @@ const CasePage: FC<CasePageProps> = ({
     return intl.formatMessage({id: 'case.statusUnknown'});
   };
 
-  useEffect(() => {
-    refetch();
-  }, []);
+  console.log(mock);
 
   return (
     <section className={styles.case}>
@@ -130,6 +131,26 @@ const CasePage: FC<CasePageProps> = ({
               background={statusHistoryBackground}
             />
           </div>
+          {mock.data.map(section => {
+            if (section.type === 'table' || !Array.isArray(section.value))
+              return (
+                <div className={styles.case__status} key={section.heading}>
+                  <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
+                </div>
+              );
+
+            return (
+              <div className={styles.case__status} key={section.heading}>
+                <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
+                <DescriptionList
+                  items={section.value.map(item => ({
+                    title: item.key,
+                    detail: item.value,
+                  }))}
+                />
+              </div>
+            );
+          })}
           <div className={styles.case__documents}>
             <div
               className={classNames(styles['case__documents-header'], {
@@ -171,4 +192,5 @@ const CasePage: FC<CasePageProps> = ({
     </section>
   );
 };
+
 export {CasePage};

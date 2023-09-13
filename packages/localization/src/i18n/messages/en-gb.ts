@@ -36,6 +36,7 @@ export const EN_GB_MESSAGES: Messages = {
     'case.status': 'status',
     'case.documents': 'documents',
     'case.statusHeader': 'Status',
+    'case.detailsHeader': 'Details',
     'case.showAllDocuments': 'Show all documents',
     'case.fetchError': 'There was an error, try again later.',
     'case.statusUnknown': 'not available',
