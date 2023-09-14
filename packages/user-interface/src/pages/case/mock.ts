@@ -117,6 +117,18 @@ export default {
                 'Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.',
               value: '',
             },
+            {
+              key: 'periode',
+              description:
+                'Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.',
+              value: '',
+            },
+            {
+              key: 'periode',
+              description:
+                'Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.',
+              value: '',
+            },
           ],
           [
             {
