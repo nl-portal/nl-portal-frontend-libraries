@@ -10,7 +10,7 @@ import _ from 'lodash';
 import {
   useSubmitTaskMutation,
   useGetFormDefinitionByIdLazyQuery,
-  useGetTaskByIdQuery,
+  useGetTaakByIdQuery,
 } from '@nl-portal/nl-portal-api';
 
 const TaskPage = () => {
@@ -30,7 +30,7 @@ const TaskPage = () => {
     variables: {id: formId},
   });
 
-  const {data: taskData} = useGetTaskByIdQuery({variables: {id: taskId}});
+  const {data: taskData} = useGetTaakByIdQuery({variables: {id: taskId}});
 
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
     const keys = Object.keys(submissionData);
