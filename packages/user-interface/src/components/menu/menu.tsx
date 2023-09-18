@@ -63,13 +63,13 @@ const Menu: FC<MenuProps> = ({items, legacy}) => {
       <SidenavList>
         {items
           .filter(item => item.showInMenu)
-          .map((item, id) => {
+          .map(item => {
             const current = getBasePath(location.pathname) === getBasePath(item.path);
             const className = `denhaag-sidenav__link ${
               current && 'denhaag-sidenav__link--current'
             }`;
             return (
-              <SidenavItem key={id}>
+              <SidenavItem key={item.path}>
                 <Link className={className} hrefLang={hrefLang} to={item.path}>
                   {item.icon}
                   <FormattedMessage id={`pageTitles.${item.titleTranslationKey}`} />
