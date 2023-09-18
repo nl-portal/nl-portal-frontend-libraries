@@ -63,28 +63,25 @@ const CasesList: FC<CasesListProps> = ({
     refetch();
   }, []);
 
-  const getCaseCards = (): JSX.Element[] => {
-    return (
-      data?.getZaken
-        .filter(zaak => {
-          const isEndStatus = zaak?.status?.statustype.isEindstatus;
-          return completed ? isEndStatus : !isEndStatus;
-        })
-        .slice(0, numElements)
-        .map(zaak => (
-          <div className={styles.cases__card} key={zaak.uuid}>
-            <CaseCard
-              active={!completed}
-              title={intl.formatMessage({id: `case.${zaak.zaaktype.identificatie}.title`})}
-              subTitle={showCaseIdentification ? zaak.identificatie : zaak.omschrijving}
-              date={new Date(zaak.startdatum)}
-              href={getCaseUrl(zaak.uuid)}
-              Link={PortalLink}
-            />
-          </div>
-        )) || []
-    );
-  };
+  const getCaseCards = (): JSX.Element[] =>
+    data?.getZaken
+      .filter(zaak => {
+        const isEndStatus = zaak?.status?.statustype.isEindstatus;
+        return completed ? isEndStatus : !isEndStatus;
+      })
+      .slice(0, numElements)
+      .map(zaak => (
+        <div className={styles.cases__card} key={zaak.uuid}>
+          <CaseCard
+            active={!completed}
+            title={intl.formatMessage({id: `case.${zaak.zaaktype.identificatie}.title`})}
+            subTitle={showCaseIdentification ? zaak.identificatie : zaak.omschrijving}
+            date={new Date(zaak.startdatum)}
+            href={getCaseUrl(zaak.uuid)}
+            Link={PortalLink}
+          />
+        </div>
+      )) || [];
 
   const getNoDataMessage = () => (
     <Paragraph>
