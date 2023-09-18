@@ -58,19 +58,18 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
     <Router>
       <PageWrapper>
         <PageHeader className={pageHeaderClassnames}>
-          {customHeader ? (
-            customHeader
-          ) : headerLogo && headerLogoSmall ? (
-            <Header
-              logo={headerLogo}
-              logoSmall={headerLogoSmall}
-              facet={facet}
-              homePage={pages.find(page => page.isHome)}
-              offline={offline}
-            />
-          ) : (
-            ''
-          )}
+          {customHeader ||
+            (headerLogo && headerLogoSmall ? (
+              <Header
+                logo={headerLogo}
+                logoSmall={headerLogoSmall}
+                facet={facet}
+                homePage={pages.find(page => page.isHome)}
+                offline={offline}
+              />
+            ) : (
+              ''
+            ))}
         </PageHeader>
         <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
           <Menu items={pages} legacy={legacy} />
@@ -113,7 +112,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
         </ResponsiveContent>
         {online && (
           <PageFooter>
-            {customFooter ? customFooter : footer && <Footer footer={footer} facet={facet} />}
+            {customFooter || (footer && <Footer footer={footer} facet={facet} />)}
           </PageFooter>
         )}
       </PageWrapper>
