@@ -26,6 +26,7 @@
     "react": "^17.0.2"
   },
   "devDependencies": {
+    "@apollo/client": "^3.8.3",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/user-event": "^12.1.10",
@@ -49,6 +50,7 @@
     "dist"
   ],
   "dependencies": {
+    "@apollo/client": "^3.8.3",
     "@formio/react": "^5.2.3",
     "@gemeente-denhaag/alert": "0.1.1-alpha.278",
     "@gemeente-denhaag/card": "0.2.3-alpha.321",
