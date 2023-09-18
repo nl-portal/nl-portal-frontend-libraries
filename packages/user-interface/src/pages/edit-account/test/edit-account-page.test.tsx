@@ -1,21 +1,21 @@
 import React, {ReactElement} from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
-import {CUSTOM_MESSAGES} from '../../../../app/src/i18n';
 import {MemoryRouter} from 'react-router-dom';
 import {MockedProvider} from '@apollo/client/testing';
 import {gql} from '@apollo/client';
 import {LocalizationProvider} from '@nl-portal/nl-portal-localization';
-import {UserInformationProvider} from '../../providers';
-import {EditAccountPage} from './edit-account-page';
+import {CUSTOM_MESSAGES} from '../../../../../app/src/i18n';
+import {UserInformationProvider} from '../../../providers';
+import {EditAccountPage} from '../edit-account-page';
 
 describe('EditAccountPage', () => {
   const errorText = 'a valid phone number consists of 10 digits';
-  let inputField = () => screen.getByRole('textbox');
-  let errorTextP = () => screen.queryByText(errorText);
-  let saveButton = () => screen.getByText('Save');
+  const inputField = () => screen.getByRole('textbox');
+  const errorTextP = () => screen.queryByText(errorText);
+  const saveButton = () => screen.getByText('Save');
 
   beforeEach(() => {
-    render(editAccountRender());
+    render(MockEditAccountPage());
   });
 
   it('should have a disabled save button if nothing is entered', () => {
@@ -68,8 +68,38 @@ describe('EditAccountPage', () => {
   });
 });
 
-const editAccountRender = (): ReactElement => {
+const MockEditAccountPage = (): ReactElement => {
   const route = '/account/aanpassen?prop=telefoonnummer';
+
+  const EXAMPLE_QUERY = gql`
+    mutation SubmitTask($id: UUID!, $submission: JSON!) {
+      submitTask(id: $id, submission: $submission) {
+        id
+        objectId
+        formId
+        title
+        status
+        date
+      }
+    }
+  `;
+
+  const mocks = [
+    {
+      request: {
+        query: EXAMPLE_QUERY,
+        variables: {
+          name: 'Test',
+        },
+      },
+      result: {
+        data: {
+          task: {id: '1', name: 'Informatie aanvraag', zaakId: '23jfdi45-2345-2345-jf45k323oi12'},
+        },
+      },
+    },
+  ];
+
   return (
     <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
       <UserInformationProvider>
@@ -82,32 +112,3 @@ const editAccountRender = (): ReactElement => {
     </LocalizationProvider>
   );
 };
-
-const EXAMPLE_QUERY = gql`
-  mutation SubmitTask($id: UUID!, $submission: JSON!) {
-    submitTask(id: $id, submission: $submission) {
-      id
-      objectId
-      formId
-      title
-      status
-      date
-    }
-  }
-`;
-
-const mocks = [
-  {
-    request: {
-      query: EXAMPLE_QUERY,
-      variables: {
-        name: 'Test',
-      },
-    },
-    result: {
-      data: {
-        task: {id: '1', name: 'Informatie aanvraag', zaakId: '23jfdi45-2345-2345-jf45k323oi12'},
-      },
-    },
-  },
-];
