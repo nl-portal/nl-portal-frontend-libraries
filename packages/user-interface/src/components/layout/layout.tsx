@@ -14,6 +14,7 @@ import {LinkToParent} from '../link-to-parent';
 import {OfflinePage} from '../../pages';
 import {FormIoUploader} from '../form-io-uploader';
 import styles from './layout.module.scss';
+import {HelmetProvider} from 'react-helmet-async';
 
 interface LayoutComponentProps {
   pages: Array<PortalPage>;
@@ -134,16 +135,18 @@ const Layout: FC<LayoutComponentProps> = ({
   <StylesProvider>
     <LayoutProvider initialPage={pages[0]}>
       <UserInformationProvider>
-        <LayoutComponent
-          pages={pages}
-          customHeader={customHeader}
-          headerLogo={headerLogo}
-          headerLogoSmall={headerLogoSmall}
-          footer={footer}
-          customFooter={customFooter}
-          facet={facet}
-          offline={offline}
-        />
+        <HelmetProvider>
+          <LayoutComponent
+            pages={pages}
+            customHeader={customHeader}
+            headerLogo={headerLogo}
+            headerLogoSmall={headerLogoSmall}
+            footer={footer}
+            customFooter={customFooter}
+            facet={facet}
+            offline={offline}
+          />
+        </HelmetProvider>
       </UserInformationProvider>
     </LayoutProvider>
   </StylesProvider>
