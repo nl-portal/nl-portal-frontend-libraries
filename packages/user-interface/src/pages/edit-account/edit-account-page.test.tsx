@@ -8,9 +8,8 @@ import {LocalizationProvider} from '@nl-portal/nl-portal-localization';
 import {UserInformationProvider} from '../../providers';
 import {EditAccountPage} from './edit-account-page';
 
-const errorText = 'a valid phone number consists of 10 digits';
-
 describe('EditAccountPage', () => {
+  const errorText = 'a valid phone number consists of 10 digits';
   let inputField = () => screen.getByRole('textbox');
   let errorTextP = () => screen.queryByText(errorText);
   let saveButton = () => screen.getByText('Save');
@@ -27,7 +26,7 @@ describe('EditAccountPage', () => {
     expect(errorTextP()).toBeNull();
 
     expect(inputField()).not.toBeNull();
-    
+
     fireEvent.change(inputField(), {target: {value: 'hoiDitIsNietGeldig'}});
 
     expect(errorTextP()).toBeVisible();
@@ -38,9 +37,9 @@ describe('EditAccountPage', () => {
     expect(errorTextP()).toBeNull();
 
     expect(inputField()).not.toBeNull();
-    
+
     fireEvent.change(inputField(), {target: {value: '12345678910'}});
-    
+
     expect(errorTextP()).not.toBeNull();
     expect(errorTextP()?.tagName).toEqual('P');
     expect(saveButton().closest('button')).toBeDisabled();
@@ -50,9 +49,9 @@ describe('EditAccountPage', () => {
     expect(errorTextP()).toBeNull();
 
     expect(inputField()).not.toBeNull();
-    
+
     fireEvent.change(inputField(), {target: {value: '0123456789'}});
-    
+
     expect(errorTextP()).toBeNull();
     expect(saveButton().closest('button')).toBeEnabled();
   });
