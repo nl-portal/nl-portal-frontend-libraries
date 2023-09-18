@@ -4,8 +4,8 @@ import {
   useGetBedrijfLazyQuery,
   useGetGemachtigdeLazyQuery,
 } from '@nl-portal/nl-portal-api';
-import {getNameString} from './person-data';
 import {KeycloakContext} from '@nl-portal/nl-portal-authentication';
+import {getNameString} from './person-data';
 
 export const useUserInfo = () => {
   const [isPerson, setIsPerson] = useState(false);
