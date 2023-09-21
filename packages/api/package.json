@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-api",
-  "version": "0.1.1-alpha.17",
+  "version": "0.1.1-alpha.18",
   "description": "Made with create-react-library",
   "author": "Ritense",
   "license": "EUPL-1.2",
@@ -55,7 +55,7 @@
   ],
   "dependencies": {
     "@apollo/client": "^3.4.11",
-    "@nl-portal/nl-portal-authentication": "^0.1.1-alpha.17",
+    "@nl-portal/nl-portal-authentication": "^0.1.1-alpha.18",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.5.3",
     "graphql-tag": "^2.12.5",
