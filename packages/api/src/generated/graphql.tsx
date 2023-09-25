@@ -160,7 +160,7 @@ export type Query = {
   __typename?: 'Query';
   /**
    * find all form definitions from repository
-   * @deprecated Deprecated
+   * @deprecated This method is not used by the NL Portal frontend and is not being replaced.
    */
   allFormDefinitions: Array<FormDefinition>;
   /** Gets the bedrijf data */
@@ -402,17 +402,17 @@ export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typename?: 'Persoon', naam?: Maybe<{ __typename?: 'PersoonNaam', voornamen?: Maybe<string>, voorvoegsel?: Maybe<string>, geslachtsnaam?: Maybe<string> }> }> };
 
-export type GetTasksQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any }> } };
-
-export type GetTaskByIdQueryVariables = Exact<{
+export type GetTaakByIdQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
 
 
-export type GetTaskByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any } };
+export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', type: string, value: string } } };
+
+export type GetTakenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', type: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -901,12 +901,59 @@ export function useGetPersoonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetPersoonQueryHookResult = ReturnType<typeof useGetPersoonQuery>;
 export type GetPersoonLazyQueryHookResult = ReturnType<typeof useGetPersoonLazyQuery>;
 export type GetPersoonQueryResult = Apollo.QueryResult<GetPersoonQuery, GetPersoonQueryVariables>;
-export const GetTasksDocument = gql`
-    query GetTasks {
-  getTasks {
+export const GetTaakByIdDocument = gql`
+    query GetTaakById($id: UUID!) {
+  getTaakById(id: $id) {
+    id
+    formulier {
+      type
+      value
+    }
+    formId
+    status
+    date
+    data
+  }
+}
+    `;
+
+/**
+ * __useGetTaakByIdQuery__
+ *
+ * To run a query within a React component, call `useGetTaakByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTaakByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTaakByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetTaakByIdQuery(baseOptions: Apollo.QueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
+      }
+export function useGetTaakByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
+        }
+export type GetTaakByIdQueryHookResult = ReturnType<typeof useGetTaakByIdQuery>;
+export type GetTaakByIdLazyQueryHookResult = ReturnType<typeof useGetTaakByIdLazyQuery>;
+export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaakByIdQueryVariables>;
+export const GetTakenDocument = gql`
+    query GetTaken {
+  getTaken {
     content {
       id
       objectId
+      formulier {
+        type
+        value
+      }
       formId
       title
       status
@@ -918,70 +965,31 @@ export const GetTasksDocument = gql`
     `;
 
 /**
- * __useGetTasksQuery__
+ * __useGetTakenQuery__
  *
- * To run a query within a React component, call `useGetTasksQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetTasksQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetTakenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTakenQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetTasksQuery({
+ * const { data, loading, error } = useGetTakenQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetTasksQuery(baseOptions?: Apollo.QueryHookOptions<GetTasksQuery, GetTasksQueryVariables>) {
+export function useGetTakenQuery(baseOptions?: Apollo.QueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetTasksQuery, GetTasksQueryVariables>(GetTasksDocument, options);
+        return Apollo.useQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
       }
-export function useGetTasksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTasksQuery, GetTasksQueryVariables>) {
+export function useGetTakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetTasksQuery, GetTasksQueryVariables>(GetTasksDocument, options);
+          return Apollo.useLazyQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
         }
-export type GetTasksQueryHookResult = ReturnType<typeof useGetTasksQuery>;
-export type GetTasksLazyQueryHookResult = ReturnType<typeof useGetTasksLazyQuery>;
-export type GetTasksQueryResult = Apollo.QueryResult<GetTasksQuery, GetTasksQueryVariables>;
-export const GetTaskByIdDocument = gql`
-    query GetTaskById($id: UUID!) {
-  getTaakById(id: $id) {
-    id
-    formId
-    status
-    date
-    data
-  }
-}
-    `;
-
-/**
- * __useGetTaskByIdQuery__
- *
- * To run a query within a React component, call `useGetTaskByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetTaskByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetTaskByIdQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useGetTaskByIdQuery(baseOptions: Apollo.QueryHookOptions<GetTaskByIdQuery, GetTaskByIdQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetTaskByIdQuery, GetTaskByIdQueryVariables>(GetTaskByIdDocument, options);
-      }
-export function useGetTaskByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTaskByIdQuery, GetTaskByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetTaskByIdQuery, GetTaskByIdQueryVariables>(GetTaskByIdDocument, options);
-        }
-export type GetTaskByIdQueryHookResult = ReturnType<typeof useGetTaskByIdQuery>;
-export type GetTaskByIdLazyQueryHookResult = ReturnType<typeof useGetTaskByIdLazyQuery>;
-export type GetTaskByIdQueryResult = Apollo.QueryResult<GetTaskByIdQuery, GetTaskByIdQueryVariables>;
+export type GetTakenQueryHookResult = ReturnType<typeof useGetTakenQuery>;
+export type GetTakenLazyQueryHookResult = ReturnType<typeof useGetTakenLazyQuery>;
+export type GetTakenQueryResult = Apollo.QueryResult<GetTakenQuery, GetTakenQueryVariables>;
 export const GetZaakDocument = gql`
     query GetZaak($id: UUID!) {
   getZaak(id: $id) {

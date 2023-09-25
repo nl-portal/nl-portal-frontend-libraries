@@ -20,6 +20,7 @@
 .cases__cards {
   display: flex;
   flex-direction: column;
+  --denhaag-card-width: 100%;
 
   @include breakpoint(desktop) {
     flex-flow: row wrap;

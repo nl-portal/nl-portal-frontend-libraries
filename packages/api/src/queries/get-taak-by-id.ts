@@ -1,9 +1,13 @@
 import {gql} from '@apollo/client';
 
-export const QUERY_GET_TASK_BY_ID = gql`
-  query GetTaskById($id: UUID!) {
+export const QUERY_GET_TAAK_BY_ID = gql`
+  query GetTaakById($id: UUID!) {
     getTaakById(id: $id) {
       id
+      formulier {
+        type
+        value
+      }
       formId
       status
       date
