@@ -3,6 +3,14 @@ import {useGetZaakQuery} from '@nl-portal/nl-portal-api';
 import {FC, Fragment, ReactElement, useContext} from 'react';
 import {Heading2, Heading3, Paragraph} from '@gemeente-denhaag/components-react';
 import {DescriptionList} from '@gemeente-denhaag/descriptionlist';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@gemeente-denhaag/table';
 import {Link} from '@gemeente-denhaag/link';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
@@ -15,6 +23,7 @@ import styles from './case-page.module.scss';
 import {DocumentList} from '../../components/document-list';
 import {StatusHistory} from '../../components/status-history';
 import {BREAKPOINTS} from '../../constants';
+import mock from './mock';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -105,6 +114,61 @@ const CasePage: FC<CasePageProps> = ({
               <DescriptionList items={details} />
             </div>
           )}
+          {mock.data.map(section => {
+            if (section.type === 'table' || !Array.isArray(section.value)) {
+              return (
+                <div className={styles.case__status} key={section.heading}>
+                  <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
+                  <Table>
+                    {
+                      // @ts-ignore
+                      section.value.headers.length > 0 && (
+                        <TableHead>
+                          <TableRow>
+                            {
+                              // @ts-ignore
+                              section.value.headers?.map(header => (
+                                <TableHeader>{header.value}</TableHeader>
+                              ))
+                            }
+                          </TableRow>
+                        </TableHead>
+                      )
+                    }
+                    {
+                      // @ts-ignore
+                      section.value.rows.length > 0 && (
+                        <TableBody>
+                          {
+                            // @ts-ignore
+                            section.value.rows.map(cells => (
+                              <TableRow>
+                                {cells.map((cell: {value: string}) => (
+                                  <TableCell>{cell.value}</TableCell>
+                                ))}
+                              </TableRow>
+                            ))
+                          }
+                        </TableBody>
+                      )
+                    }
+                  </Table>
+                </div>
+              );
+            }
+
+            return (
+              <div className={styles.case__status} key={section.heading}>
+                <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
+                <DescriptionList
+                  items={section.value.map(item => ({
+                    title: item.key,
+                    detail: item.value,
+                  }))}
+                />
+              </div>
+            );
+          })}
           <div className={styles.case__documents}>
             <div
               className={classNames(styles['case__documents-header'], {
