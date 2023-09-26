@@ -2310,11 +2310,6 @@
   dependencies:
     uuid "9.0.0"
 
-"@gemeente-denhaag/table@0.1.1-alpha.228":
-  version "0.1.1-alpha.228"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/table/-/table-0.1.1-alpha.228.tgz#ab2a05f985ac45ee476ae57927b47a7404b43d0f"
-  integrity sha512-Xf8Xvok6+Q5iVBnPe3UvUAu6BHVF+sx6T4m+beMFoc1b8LzhSLJWgWi9eGEN5LwCWg/sBmDBF3mKtLvC6z792g==
-
 "@gemeente-denhaag/textfield@0.2.3-alpha.321":
   version "0.2.3-alpha.321"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/textfield/-/textfield-0.2.3-alpha.321.tgz#f4e85cc7fcef4b5e79f825c2e272b8c41ff51226"
