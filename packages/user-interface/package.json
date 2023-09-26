@@ -62,7 +62,6 @@
     "@gemeente-denhaag/tab": "0.2.3-alpha.332",
     "@gemeente-denhaag/textfield": "0.2.3-alpha.70",
     "@gemeente-denhaag/descriptionlist": "0.1.1-alpha.226",
-    "@gemeente-denhaag/table": "0.1.1-alpha.228",
     "@nl-portal/nl-portal-api": "^0.1.1-alpha.18",
     "@nl-portal/nl-portal-authentication": "^0.1.1-alpha.18",
     "@nl-portal/nl-portal-localization": "^0.1.1-alpha.18",
