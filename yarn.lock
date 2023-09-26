@@ -2019,10 +2019,10 @@
     "@gemeente-denhaag/icons" "0.2.3-alpha.321"
     date-fns "2.30.0"
 
-"@gemeente-denhaag/descriptionlist@0.1.1-alpha.226":
-  version "0.1.1-alpha.226"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/descriptionlist/-/descriptionlist-0.1.1-alpha.226.tgz#ff334a9e7ce7edae69efe5fb4ac76638a6a702b2"
-  integrity sha512-aDs6c+bqCuGCRlcb7DIUKvcJBpAkRNPGkPJ9ncm7hPRAdYcReJDmmXTIhiJ2S4RImq31DwCJZl2MSIpgPFEDWw==
+"@gemeente-denhaag/descriptionlist@^0.1.1-alpha.234":
+  version "0.1.1-alpha.234"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/descriptionlist/-/descriptionlist-0.1.1-alpha.234.tgz#044037906969758a195b760e5a493a0cc036f92a"
+  integrity sha512-0ZkskJrPfjf9DklZrEO0uwhzQpwA9prgqRc3iJBIT/s68OhLOg7XNpEcw93wxnftAkXTNZzCIuDi0+qI9Bj+Fw==
 
 "@gemeente-denhaag/design-tokens-components@0.2.3-alpha.321":
   version "0.2.3-alpha.321"
