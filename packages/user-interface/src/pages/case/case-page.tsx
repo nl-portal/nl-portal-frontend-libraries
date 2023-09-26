@@ -3,14 +3,6 @@ import {useGetZaakQuery} from '@nl-portal/nl-portal-api';
 import {FC, Fragment, ReactElement, useContext} from 'react';
 import {Heading2, Heading3, Paragraph} from '@gemeente-denhaag/components-react';
 import {DescriptionList} from '@gemeente-denhaag/descriptionlist';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@gemeente-denhaag/table';
 import {Link} from '@gemeente-denhaag/link';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
@@ -23,7 +15,6 @@ import styles from './case-page.module.scss';
 import {DocumentList} from '../../components/document-list';
 import {StatusHistory} from '../../components/status-history';
 import {BREAKPOINTS} from '../../constants';
-import mock from './mock';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -40,36 +31,38 @@ const CasePage: FC<CasePageProps> = ({
   const query = useQuery();
   const {hrefLang} = useContext(LocaleContext);
   const id = query.get('id');
-  const {data, loading, error} = useGetZaakQuery({
+  const {
+    data: zaak,
+    loading,
+    error,
+  } = useGetZaakQuery({
     variables: {id},
   });
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const getDocumentsUrl = (caseId: string) => `/zaken/zaak/documenten?id=${caseId}`;
 
   const details = React.useMemo(() => {
-    if (!data?.getZaak) return [];
+    if (!zaak?.getZaak) return [];
 
     const array = [
       {
         title: intl.formatMessage({id: 'case.creationDate'}),
-        detail: new Date(data?.getZaak.startdatum).toLocaleDateString(),
+        detail: new Date(zaak?.getZaak.startdatum).toLocaleDateString(),
       },
       {
         title: intl.formatMessage({id: 'case.caseNumber'}),
-        detail: data?.getZaak.identificatie || '',
+        detail: zaak?.getZaak.identificatie || '',
       },
     ];
 
-    if (data?.getZaak.omschrijving)
+    if (zaak?.getZaak.omschrijving)
       array.push({
         title: intl.formatMessage({id: 'case.description'}),
-        detail: data?.getZaak.omschrijving || '',
+        detail: zaak?.getZaak.omschrijving || '',
       });
 
     return array;
-  }, [data]);
-
-  console.log(data?.getZaak, details);
+  }, [zaak]);
 
   return (
     <section className={styles.case}>
@@ -86,7 +79,7 @@ const CasePage: FC<CasePageProps> = ({
                   <Skeleton width={250} />
                 </div>
               ) : (
-                <FormattedMessage id={`case.${data?.getZaak.zaaktype.identificatie}.title`} />
+                <FormattedMessage id={`case.${zaak?.getZaak.zaaktype.identificatie}.title`} />
               )}
             </Heading2>
           </header>
@@ -95,10 +88,10 @@ const CasePage: FC<CasePageProps> = ({
               <FormattedMessage id="case.statusHeader" />
             </Heading3>
             <StatusHistory
-              caseId={data?.getZaak.zaaktype.identificatie}
-              statusHistory={data?.getZaak.statusGeschiedenis}
-              statuses={data?.getZaak.statussen}
-              status={data?.getZaak.status}
+              caseId={zaak?.getZaak.zaaktype.identificatie}
+              statusHistory={zaak?.getZaak.statusGeschiedenis}
+              statuses={zaak?.getZaak.statussen}
+              status={zaak?.getZaak.status}
               loading={loading}
               facet={statusHistoryFacet}
               background={statusHistoryBackground}
@@ -112,61 +105,6 @@ const CasePage: FC<CasePageProps> = ({
               <DescriptionList items={details} />
             </div>
           )}
-          {mock.data.map(section => {
-            if (section.type === 'table' || !Array.isArray(section.value)) {
-              return (
-                <div className={styles.case__status} key={section.heading}>
-                  <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
-                  <Table>
-                    {
-                      // @ts-ignore
-                      section.value.headers.length > 0 && (
-                        <TableHead>
-                          <TableRow>
-                            {
-                              // @ts-ignore
-                              section.value.headers?.map(header => (
-                                <TableHeader>{header.value}</TableHeader>
-                              ))
-                            }
-                          </TableRow>
-                        </TableHead>
-                      )
-                    }
-                    {
-                      // @ts-ignore
-                      section.value.rows.length > 0 && (
-                        <TableBody>
-                          {
-                            // @ts-ignore
-                            section.value.rows.map(cells => (
-                              <TableRow>
-                                {cells.map((cell: {value: string}) => (
-                                  <TableCell>{cell.value}</TableCell>
-                                ))}
-                              </TableRow>
-                            ))
-                          }
-                        </TableBody>
-                      )
-                    }
-                  </Table>
-                </div>
-              );
-            }
-
-            return (
-              <div className={styles.case__status} key={section.heading}>
-                <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
-                <DescriptionList
-                  items={section.value.map(item => ({
-                    title: item.key,
-                    detail: item.value,
-                  }))}
-                />
-              </div>
-            );
-          })}
           <div className={styles.case__documents}>
             <div
               className={classNames(styles['case__documents-header'], {
@@ -178,8 +116,8 @@ const CasePage: FC<CasePageProps> = ({
               </Heading3>
               {showDocumentsListLink &&
                 !loading &&
-                data?.getZaak?.documenten &&
-                data?.getZaak?.documenten.length > 0 && (
+                zaak?.getZaak?.documenten &&
+                zaak?.getZaak?.documenten.length > 0 && (
                   <div
                     className={classNames(styles['case__documents-link'], {
                       [styles['case__documents-link--tablet']]: isTablet,
@@ -197,7 +135,7 @@ const CasePage: FC<CasePageProps> = ({
                   </div>
                 )}
             </div>
-            <DocumentList documents={loading ? undefined : data?.getZaak.documenten} />
+            <DocumentList documents={loading ? undefined : zaak?.getZaak.documenten} />
           </div>
         </Fragment>
       ) : (
