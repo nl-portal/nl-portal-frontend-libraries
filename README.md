@@ -10,8 +10,7 @@ The look and feel of these components can be customized through the use of desig
 the back-end systems with which the implementation communicates can be configured, providing each
 municipality with their own unique environment and data.
 
-All such configuration takes place in the implementation
-[@nl-portal/nl-portal-app](./packages/app).
+All such configuration takes place in the implementation [@nl-portal/nl-portal-app](./packages/app).
 
 ## Development
 
@@ -94,8 +93,8 @@ their respective `package.json` files and running `yarn run bootstrap` from the 
 afterwards.
 
 For example, the `package.json` of [@nl-portal/nl-portal-app](./packages/app) might include
-`"@nl-portal/nl-portal-user-interface": "0.1.0"` in its list of dependencies. For this to
-work, the version number in the `package.json` of
+`"@nl-portal/nl-portal-user-interface": "0.1.0"` in its list of dependencies. For this to work, the
+version number in the `package.json` of
 [@nl-portal/nl-portal-user-interface](./packages/user-interface) must also be `"0.1.0"`.
 
 ### Tips and guidelines for development
@@ -120,8 +119,8 @@ The implementation package [@nl-portal/nl-portal-app](./packages/app) was genera
 preset. It uses other packages in this project as dependencies. Custom implementations can be based
 on this package.
 
-Other packages - such as [@nl-portal/nl-portal-user-interface](./packages/user-interface) -
-were generated with [create-react-library](https://www.npmjs.com/package/create-react-library). They
+Other packages - such as [@nl-portal/nl-portal-user-interface](./packages/user-interface) - were
+generated with [create-react-library](https://www.npmjs.com/package/create-react-library). They
 serve as dependencies for the implementation, so that each future implementation can be kept
 up-to-date easily.
 
@@ -131,9 +130,9 @@ New packages can be created in their own directory, inside the [packages](./pack
 
 Although not obligatory, it is advised to generate them with
 [create-react-library](https://www.npmjs.com/package/create-react-library), or follow the example of
-packages like [@nl-portal/nl-portal-user-interface](./packages/user-interface), which were
-generated with this command. This has the advantage of providing you with out-of-the-box TypeScript
-support and `build` and `start` scripts.
+packages like [@nl-portal/nl-portal-user-interface](./packages/user-interface), which were generated
+with this command. This has the advantage of providing you with out-of-the-box TypeScript support
+and `build` and `start` scripts.
 
 Please prefix your package name with `@nl-portal/*` and include the following in its `package.json`:
 
@@ -175,9 +174,9 @@ file.
 
 ### Configuration
 
-Environment variables are loaded from the implementation
-[@nl-portal/nl-portal-app](./packages/app) by default. Possible configuration values are
-specified in the [Config interface](./packages/app/src/interfaces/config.ts).
+Environment variables are loaded from the implementation [@nl-portal/nl-portal-app](./packages/app)
+by default. Possible configuration values are specified in the
+[Config interface](./packages/app/src/interfaces/config.ts).
 
 These values are set to the window object by [config.js](./packages/app/public/config.js), which
 also contains the default values for local development.

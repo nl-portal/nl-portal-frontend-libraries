@@ -1,28 +1,20 @@
 import * as React from 'react';
 import {useGetZaakQuery} from '@nl-portal/nl-portal-api';
-import {FC, Fragment, ReactElement, useContext, useEffect} from 'react';
+import {FC, Fragment, ReactElement, useContext} from 'react';
 import {Heading2, Heading3, Paragraph} from '@gemeente-denhaag/components-react';
+import {DescriptionList} from '@gemeente-denhaag/descriptionlist';
 import {Link} from '@gemeente-denhaag/link';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
-import {
-  ArchiveIcon,
-  ArrowRightIcon,
-  CalendarIcon,
-  DocumentIcon,
-  MegaphoneIcon,
-} from '@gemeente-denhaag/icons';
+import {ArrowRightIcon} from '@gemeente-denhaag/icons';
 import {Link as RouterLink} from 'react-router-dom';
 import {LocaleContext} from '@nl-portal/nl-portal-localization';
 import classNames from 'classnames';
 import {useMediaQuery, useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
 import {DocumentList} from '../../components/document-list';
-import {MetaIcon} from '../../components/meta-icon';
 import {StatusHistory} from '../../components/status-history';
 import {BREAKPOINTS} from '../../constants';
-import {stringToId} from '../../utils';
-import {LocaleDate} from '../../components/locale-date';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -39,32 +31,38 @@ const CasePage: FC<CasePageProps> = ({
   const query = useQuery();
   const {hrefLang} = useContext(LocaleContext);
   const id = query.get('id');
-  const {data, loading, error, refetch} = useGetZaakQuery({
+  const {
+    data: zaak,
+    loading,
+    error,
+  } = useGetZaakQuery({
     variables: {id},
   });
-  const isMobile = useMediaQuery(BREAKPOINTS.MOBILE);
-  const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const getDocumentsUrl = (caseId: string) => `/zaken/zaak/documenten?id=${caseId}`;
 
-  const getCurrentStatus = (): string => {
-    const description = data?.getZaak.status?.statustype.omschrijving;
-    const identification = data?.getZaak.zaaktype.identificatie;
+  const details = React.useMemo(() => {
+    if (!zaak?.getZaak) return [];
 
-    if (description && identification) {
-      return intl
-        .formatMessage({
-          id: `case.${identification}.status.${stringToId(description)}`,
-        })
-        .toLowerCase();
-    }
+    const array = [
+      {
+        title: intl.formatMessage({id: 'case.creationDate'}),
+        detail: new Date(zaak?.getZaak.startdatum).toLocaleDateString(),
+      },
+      {
+        title: intl.formatMessage({id: 'case.caseNumber'}),
+        detail: zaak?.getZaak.identificatie || '',
+      },
+    ];
 
-    return intl.formatMessage({id: 'case.statusUnknown'});
-  };
+    if (zaak?.getZaak.omschrijving)
+      array.push({
+        title: intl.formatMessage({id: 'case.description'}),
+        detail: zaak?.getZaak.omschrijving || '',
+      });
 
-  useEffect(() => {
-    refetch();
-  }, []);
+    return array;
+  }, [zaak]);
 
   return (
     <section className={styles.case}>
@@ -81,55 +79,32 @@ const CasePage: FC<CasePageProps> = ({
                   <Skeleton width={250} />
                 </div>
               ) : (
-                <FormattedMessage id={`case.${data?.getZaak.zaaktype.identificatie}.title`} />
+                <FormattedMessage id={`case.${zaak?.getZaak.zaaktype.identificatie}.title`} />
               )}
             </Heading2>
           </header>
-          <div className={styles['case__meta-icons']}>
-            <MetaIcon
-              title={intl.formatMessage({id: 'case.caseNumber'})}
-              subtitle={(!loading && data?.getZaak.identificatie) || ''}
-              icon={<ArchiveIcon />}
-              showRightBorder={isMobile || isDesktop}
-            />
-            <MetaIcon
-              title={intl.formatMessage({id: 'case.creationDate'})}
-              subtitle={
-                !loading && data?.getZaak.startdatum ? (
-                  <LocaleDate date={new Date(data?.getZaak.startdatum)} />
-                ) : (
-                  ''
-                )
-              }
-              icon={<CalendarIcon />}
-              showRightBorder={isDesktop}
-            />
-            <MetaIcon
-              title={intl.formatMessage({id: 'case.status'})}
-              subtitle={!loading ? getCurrentStatus() : ''}
-              icon={<MegaphoneIcon />}
-              showRightBorder={isMobile || isDesktop}
-            />
-            <MetaIcon
-              title={intl.formatMessage({id: 'case.documents'})}
-              subtitle={(!loading && `${data?.getZaak.documenten.length || 0}`) || ''}
-              icon={<DocumentIcon />}
-            />
-          </div>
           <div className={styles.case__status}>
             <Heading3 className={styles['case__sub-header']}>
               <FormattedMessage id="case.statusHeader" />
             </Heading3>
             <StatusHistory
-              caseId={data?.getZaak.zaaktype.identificatie}
-              statusHistory={data?.getZaak.statusGeschiedenis}
-              statuses={data?.getZaak.statussen}
-              status={data?.getZaak.status}
+              caseId={zaak?.getZaak.zaaktype.identificatie}
+              statusHistory={zaak?.getZaak.statusGeschiedenis}
+              statuses={zaak?.getZaak.statussen}
+              status={zaak?.getZaak.status}
               loading={loading}
               facet={statusHistoryFacet}
               background={statusHistoryBackground}
             />
           </div>
+          {details.length > 0 && (
+            <div className={styles.case__status}>
+              <Heading3 className={styles['case__sub-header']}>
+                <FormattedMessage id="case.detailsHeader" />
+              </Heading3>
+              <DescriptionList items={details} />
+            </div>
+          )}
           <div className={styles.case__documents}>
             <div
               className={classNames(styles['case__documents-header'], {
@@ -141,8 +116,8 @@ const CasePage: FC<CasePageProps> = ({
               </Heading3>
               {showDocumentsListLink &&
                 !loading &&
-                data?.getZaak?.documenten &&
-                data?.getZaak?.documenten.length > 0 && (
+                zaak?.getZaak?.documenten &&
+                zaak?.getZaak?.documenten.length > 0 && (
                   <div
                     className={classNames(styles['case__documents-link'], {
                       [styles['case__documents-link--tablet']]: isTablet,
@@ -160,7 +135,7 @@ const CasePage: FC<CasePageProps> = ({
                   </div>
                 )}
             </div>
-            <DocumentList documents={loading ? undefined : data?.getZaak.documenten} />
+            <DocumentList documents={loading ? undefined : zaak?.getZaak.documenten} />
           </div>
         </Fragment>
       ) : (
@@ -171,4 +146,5 @@ const CasePage: FC<CasePageProps> = ({
     </section>
   );
 };
+
 export {CasePage};
