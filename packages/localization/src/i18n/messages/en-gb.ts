@@ -42,6 +42,7 @@ export const EN_GB_MESSAGES: Messages = {
     'case.showAllDocuments': 'Show all documents',
     'case.fetchError': 'There was an error, try again later.',
     'case.statusUnknown': 'not available',
+    'case.contacttimeline.today': 'today',
     'documents.fetchError': 'There was an error, try again later.',
     'documents.noDocuments': 'There are no documents.',
     'offline.warning': 'In order to use {applicationName}, an internet connection is required.',

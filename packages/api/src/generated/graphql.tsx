@@ -406,7 +406,7 @@ export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: M
 export type GetKlantContactMomentenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetKlantContactMomentenQuery = { __typename?: 'Query', getKlantContactMomenten?: Maybe<{ __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string }> }> };
+export type GetKlantContactMomentenQuery = { __typename?: 'Query', getKlantContactMomenten?: Maybe<{ __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> }> };
 
 export type GetDocumentenQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -654,6 +654,7 @@ export const GetKlantContactMomentenDocument = gql`
     content {
       tekst
       kanaal
+      registratiedatum
     }
   }
 }
