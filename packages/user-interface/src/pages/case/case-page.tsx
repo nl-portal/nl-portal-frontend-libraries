@@ -13,17 +13,20 @@ import {useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
 import {DocumentList} from '../../components/document-list';
 import {StatusHistory} from '../../components/status-history';
+import ContactTimelineMobile from '@gemeente-denhaag/contact-timeline';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
   statusHistoryBackground?: ReactElement;
   showDocumentsListLink?: boolean;
+  showContactTimeline?: boolean;
 }
 
 const CasePage: FC<CasePageProps> = ({
   statusHistoryFacet,
   statusHistoryBackground,
   showDocumentsListLink = false,
+  showContactTimeline = false,
 }) => {
   const intl = useIntl();
   const query = useQuery();
@@ -61,6 +64,15 @@ const CasePage: FC<CasePageProps> = ({
 
     return array;
   }, [zaak]);
+
+  const items = contacten?.getKlantContactMomenten?.content.map((contact: any, index: number) => ({
+    id: index,
+    title: contact.tekst,
+    channel: contact.kanaal,
+    date: '',
+    isoDate: contact.registratiedatum,
+    todayLabel: intl.formatMessage({id: 'case.contacttimeline.today'}),
+  }));
 
   return (
     <section className={styles.case}>
@@ -123,16 +135,19 @@ const CasePage: FC<CasePageProps> = ({
               )}
             <DocumentList documents={loading ? undefined : zaak?.getZaak.documenten} />
           </div>
-          <div className={styles.case__article}>
-            <Heading3 className={styles['case__sub-header']}>
-              <FormattedMessage id="case.contactHeader" />
-            </Heading3>
-            {contacten?.getKlantContactMomenten?.content.map((contact: any) => (
-              <div>
-                {contact.kanaal} - {contact.tekst}
-              </div>
-            ))}
-          </div>
+          {showContactTimeline && (
+            <div className={styles.case__article}>
+              <Heading3 className={styles['case__sub-header']}>
+                <FormattedMessage id="case.contactHeader" />
+              </Heading3>
+              {items && (
+                <ContactTimelineMobile
+                  items={items}
+                  todayLabel={intl.formatMessage({id: 'case.contacttimeline.today'})}
+                />
+              )}
+            </div>
+          )}
         </Fragment>
       ) : (
         <Paragraph>
