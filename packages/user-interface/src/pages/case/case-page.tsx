@@ -72,8 +72,6 @@ const CasePage: FC<CasePageProps> = ({
   const {data: contacten} = useGetKlantContactMomentenQuery();
   const {data: taken} = useGetTakenQuery({variables: {zaakId: id}});
 
-  console.log(taken);
-
   const getDocumentsUrl = (caseId: string) => `/zaken/zaak/documenten?id=${caseId}`;
   const firstTask = taken?.getTaken?.content[0];
 
@@ -100,15 +98,18 @@ const CasePage: FC<CasePageProps> = ({
     return array;
   }, [zaak]);
 
-  // TODO: please useMemo
-  const items = contacten?.getKlantContactMomenten?.content.map((contact: any, index: number) => ({
-    id: index,
-    title: contact.tekst,
-    channel: contact.kanaal,
-    date: '',
-    isoDate: contact.registratiedatum,
-    todayLabel: intl.formatMessage({id: 'case.contacttimeline.today'}),
-  }));
+  const items = React.useMemo(
+    () =>
+      contacten?.getKlantContactMomenten?.content.map((contact: any, index: number) => ({
+        id: index,
+        title: contact.tekst,
+        channel: contact.kanaal,
+        date: '',
+        isoDate: contact.registratiedatum,
+        todayLabel: intl.formatMessage({id: 'case.contacttimeline.today'}),
+      })),
+    [contacten]
+  );
 
   return (
     <section className={styles.case}>
