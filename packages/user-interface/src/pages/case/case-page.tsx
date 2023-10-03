@@ -1,7 +1,12 @@
 import * as React from 'react';
-import {useGetZaakQuery, useGetKlantContactMomentenQuery} from '@nl-portal/nl-portal-api';
+import {
+  useGetZaakQuery,
+  useGetKlantContactMomentenQuery,
+  useGetTakenQuery,
+} from '@nl-portal/nl-portal-api';
 import {FC, Fragment, ReactElement, useContext} from 'react';
 import {Heading2, Heading3, Paragraph} from '@gemeente-denhaag/components-react';
+import {Action} from '@gemeente-denhaag/action';
 import {DescriptionList} from '@gemeente-denhaag/descriptionlist';
 import {Link} from '@gemeente-denhaag/link';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -9,11 +14,36 @@ import Skeleton from 'react-loading-skeleton';
 import {ArrowRightIcon} from '@gemeente-denhaag/icons';
 import {Link as RouterLink} from 'react-router-dom';
 import {LocaleContext} from '@nl-portal/nl-portal-localization';
+import ContactTimelineMobile from '@gemeente-denhaag/contact-timeline';
 import {useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
+import '@utrecht/component-library-css';
 import {DocumentList} from '../../components/document-list';
 import {StatusHistory} from '../../components/status-history';
-import ContactTimelineMobile from '@gemeente-denhaag/contact-timeline';
+import {getTaskUrl} from '../../utils';
+
+const Task = ({task}: {task: any}) => {
+  if (!task) return null;
+
+  return (
+    <div className={styles.case__article}>
+      <Action
+        actions={
+          <RouterLink
+            to={getTaskUrl(task.formulier.type, task.formulier.value, task.id)}
+            className="utrecht-button-link utrecht-button-link--html-a"
+          >
+            Ga naar taak
+          </RouterLink>
+        }
+        dateTime={task?.verloopdatum}
+        relativeDate
+      >
+        {task?.title}
+      </Action>
+    </div>
+  );
+};
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -40,7 +70,12 @@ const CasePage: FC<CasePageProps> = ({
     variables: {id},
   });
   const {data: contacten} = useGetKlantContactMomentenQuery();
+  const {data: taken} = useGetTakenQuery({variables: {zaakId: id}});
+
+  console.log(taken);
+
   const getDocumentsUrl = (caseId: string) => `/zaken/zaak/documenten?id=${caseId}`;
+  const firstTask = taken?.getTaken?.content[0];
 
   const details = React.useMemo(() => {
     if (!zaak?.getZaak) return [];
@@ -65,6 +100,7 @@ const CasePage: FC<CasePageProps> = ({
     return array;
   }, [zaak]);
 
+  // TODO: please useMemo
   const items = contacten?.getKlantContactMomenten?.content.map((contact: any, index: number) => ({
     id: index,
     title: contact.tekst,
@@ -93,6 +129,7 @@ const CasePage: FC<CasePageProps> = ({
               )}
             </Heading2>
           </header>
+          <Task task={firstTask} />
           <div className={styles.case__article}>
             <Heading3 className={styles['case__sub-header']}>
               <FormattedMessage id="case.statusHeader" />
@@ -148,6 +185,7 @@ const CasePage: FC<CasePageProps> = ({
               )}
             </div>
           )}
+          <Task task={firstTask} />
         </Fragment>
       ) : (
         <Paragraph>

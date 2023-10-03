@@ -63,6 +63,8 @@
     "@gemeente-denhaag/sidenav": "0.1.0-alpha.126",
     "@gemeente-denhaag/tab": "0.2.3-alpha.332",
     "@gemeente-denhaag/textfield": "0.2.3-alpha.70",
+    "@gemeente-denhaag/action": "0.1.1-alpha.11",
+    "@utrecht/component-library-css": "1.0.0-alpha.589",
     "@nl-portal/nl-portal-api": "^0.1.1-alpha.21",
     "@nl-portal/nl-portal-authentication": "^0.1.1-alpha.21",
     "@nl-portal/nl-portal-localization": "^0.1.1-alpha.21",
