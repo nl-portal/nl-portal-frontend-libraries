@@ -106,7 +106,7 @@ const CasePage: FC<CasePageProps> = ({
     return array;
   }, [zaak]);
 
-  const items = React.useMemo(
+  const contactItems = React.useMemo(
     () =>
       contacten?.getKlantContactMomenten?.content.map((contact: any, index: number) => ({
         id: index,
@@ -234,9 +234,9 @@ const CasePage: FC<CasePageProps> = ({
               <Heading3 className={styles['case__sub-header']}>
                 <FormattedMessage id="case.contactHeader" />
               </Heading3>
-              {items && (
+              {contactItems && (
                 <ContactTimelineMobile
-                  items={items}
+                  items={contactItems}
                   todayLabel={intl.formatMessage({id: 'case.contacttimeline.today'})}
                 />
               )}
