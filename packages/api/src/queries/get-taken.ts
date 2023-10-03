@@ -1,8 +1,8 @@
 import {gql} from '@apollo/client';
 
 export const QUERY_GET_TAKEN = gql`
-  query GetTaken {
-    getTaken {
+  query GetTaken($zaakId: UUID) {
+    getTaken(zaakUUID: $zaakId) {
       content {
         id
         objectId
@@ -15,6 +15,7 @@ export const QUERY_GET_TAKEN = gql`
         status
         date
         data
+        verloopdatum
       }
     }
   }

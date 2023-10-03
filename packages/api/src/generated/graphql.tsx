@@ -215,7 +215,7 @@ export type Query = {
   getPersoon?: Maybe<Persoon>;
   /** Get task by id */
   getTaakById: Taak;
-  /** Get a list of tasks */
+  /** Get a list of tasks. Optional filter for zaak */
   getTaken: TaakPage;
   /**
    * Get a list of tasks
@@ -262,6 +262,7 @@ export type QueryGetTaakByIdArgs = {
 export type QueryGetTakenArgs = {
   pageNumber?: Maybe<Scalars['Int']>;
   pageSize?: Maybe<Scalars['Int']>;
+  zaakUUID?: Maybe<Scalars['UUID']>;
 };
 
 
@@ -456,10 +457,12 @@ export type GetTaakByIdQueryVariables = Exact<{
 
 export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', type: string, value: string } } };
 
-export type GetTakenQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetTakenQueryVariables = Exact<{
+  zaakId?: Maybe<Scalars['UUID']>;
+}>;
 
 
-export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', type: string, value: string } }> } };
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, verloopdatum?: Maybe<any>, formulier: { __typename?: 'TaakFormulier', type: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -1030,8 +1033,8 @@ export type GetTaakByIdQueryHookResult = ReturnType<typeof useGetTaakByIdQuery>;
 export type GetTaakByIdLazyQueryHookResult = ReturnType<typeof useGetTaakByIdLazyQuery>;
 export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaakByIdQueryVariables>;
 export const GetTakenDocument = gql`
-    query GetTaken {
-  getTaken {
+    query GetTaken($zaakId: UUID) {
+  getTaken(zaakUUID: $zaakId) {
     content {
       id
       objectId
@@ -1044,6 +1047,7 @@ export const GetTakenDocument = gql`
       status
       date
       data
+      verloopdatum
     }
   }
 }
@@ -1061,6 +1065,7 @@ export const GetTakenDocument = gql`
  * @example
  * const { data, loading, error } = useGetTakenQuery({
  *   variables: {
+ *      zaakId: // value for 'zaakId'
  *   },
  * });
  */

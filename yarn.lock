@@ -1837,6 +1837,16 @@
   resolved "https://registry.yarnpkg.com/@formio/vanilla-text-mask/-/vanilla-text-mask-5.1.1.tgz#2bd690a34b0e191b7f23a589ff1c2497564307de"
   integrity sha512-7MhrbMypySPi7RLchg0ys7HnS3Wqddbq/btAijKB1nA94TE7AOOLhpZJWcNm3kOlX0Y3nHfoavj/HP7vsvF34Q==
 
+"@gemeente-denhaag/action@0.1.1-alpha.11":
+  version "0.1.1-alpha.11"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/action/-/action-0.1.1-alpha.11.tgz#785034d6bee0922a60d76d82dd29c80e01be21d0"
+  integrity sha512-TqoEgQaso6asYe42BaHb2JF3oUIbEbIappdnD1UAE5xrmWcQvpgZHJKjwqsogr+14T3wV6UqlaX3TuKRByOfEQ==
+  dependencies:
+    "@gemeente-denhaag/button" "0.2.3-alpha.345"
+    "@gemeente-denhaag/icons" "0.2.3-alpha.345"
+    "@gemeente-denhaag/link" "0.2.3-alpha.345"
+    date-fns "2.30.0"
+
 "@gemeente-denhaag/alert@0.1.1-alpha.278":
   version "0.1.1-alpha.278"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/alert/-/alert-0.1.1-alpha.278.tgz#925ac7f96600b2a3303e36156c5eb14e8801447c"
@@ -1934,6 +1944,11 @@
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.344.tgz#3e2ec3f054b3f1596303f990d55522ea65d15b4f"
   integrity sha512-Ap0fvIxF7BBQ93ZuKsFYgkfXhbLqWmcnQYGyPldMjvghPZdWMHKrhvOtnXOrkeeOpyQc0qh2fQWeEnSNh7ekwQ==
 
+"@gemeente-denhaag/baseprops@0.2.3-alpha.345":
+  version "0.2.3-alpha.345"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.345.tgz#90a9ed501be0ec275dcb472d1f75693b9e47da46"
+  integrity sha512-UihPV6rp0ntq/D3yWWsNrv9RAzDu3jNJIoin0BabB4cWaRxWVNfQxXqMDrqXWptBhFTPIOoSxbT1zNz0S/tr4Q==
+
 "@gemeente-denhaag/baseprops@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
   resolved "https://registry.npmjs.org/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.70.tgz"
@@ -1964,6 +1979,13 @@
   integrity sha512-H48y/ROl8sVkhCGDpsyCfbJK8yvOBV7u21WO4p7lJrCSUy08lcha56XLlhocAgrUg/gvz8dxmVvPAkkcm+hxng==
   dependencies:
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.321"
+
+"@gemeente-denhaag/button@0.2.3-alpha.345":
+  version "0.2.3-alpha.345"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/button/-/button-0.2.3-alpha.345.tgz#141bd79d984af6d13a3b90f99f087c955ca3fbba"
+  integrity sha512-oNmoRTJSDORzIyamFdQ4d/xbntOxCnbs+tELGiEkWr2WIwahveYyyzMBb8YsFByVvUiC+GE9UQSEvqrJGD9MOg==
+  dependencies:
+    "@gemeente-denhaag/baseprops" "0.2.3-alpha.345"
 
 "@gemeente-denhaag/card@0.2.3-alpha.321":
   version "0.2.3-alpha.321"
@@ -2157,6 +2179,11 @@
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.344.tgz#8bdb4bed2fbd4429d087211b49dda9cf087f900e"
   integrity sha512-1p0GaRVGBYVdObWPY1i/SmvnBXD3YPDaq0jOwqgmH6cqETe/r5wYBkEwjoyRms3pQiHHSxmI+CzkOofwTJqZ5w==
 
+"@gemeente-denhaag/icons@0.2.3-alpha.345":
+  version "0.2.3-alpha.345"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.345.tgz#0cf67c39f8f2c436e03bae94589184f10705289a"
+  integrity sha512-tMROUKCRMN8DTlyldRZYI5F5N8x7frL/pnlWauz6JMCgfTr+SnKPReC4C+SWYJkKbd1vQaVgLZ16afTxgAWzuQ==
+
 "@gemeente-denhaag/icons@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
   resolved "https://registry.npmjs.org/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.70.tgz"
@@ -2210,6 +2237,14 @@
   dependencies:
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.321"
     "@gemeente-denhaag/icons" "0.2.3-alpha.321"
+
+"@gemeente-denhaag/link@0.2.3-alpha.345":
+  version "0.2.3-alpha.345"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/link/-/link-0.2.3-alpha.345.tgz#f508359c9417385e12bcd3e69189b02497eca383"
+  integrity sha512-SWjdH+KRf8jjrW7LYM5BZnR+L2LN0mpBJAvCYTMxaCfCcto9rRycluNAytxMqG4+WXKTTnbdMexpulOef7uziw==
+  dependencies:
+    "@gemeente-denhaag/baseprops" "0.2.3-alpha.345"
+    "@gemeente-denhaag/icons" "0.2.3-alpha.345"
 
 "@gemeente-denhaag/link@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
@@ -5083,6 +5118,11 @@
   version "1.0.0-alpha.497"
   resolved "https://registry.yarnpkg.com/@utrecht/component-library-css/-/component-library-css-1.0.0-alpha.497.tgz#9eb3344834dbe1e41309a12a6948c1a77ee3c4e3"
   integrity sha512-tzm/LN5XktEm4k6cQWMoFnTkGoc2J6Ee7K/NFo+EoEl0JqsTqDVlg6f6p/dk/sn89z+v7nnZbKWUK2iOMG5R3A==
+
+"@utrecht/component-library-css@1.0.0-alpha.589":
+  version "1.0.0-alpha.589"
+  resolved "https://registry.yarnpkg.com/@utrecht/component-library-css/-/component-library-css-1.0.0-alpha.589.tgz#0f51478cc6f1586e2467e633c9cf7c2184a16574"
+  integrity sha512-/X7uYr+it/io3+w/K+E9BPMW9src6lrX8348JQl/6CD4mOiQm5KF9nyW6ZSb0oAIBOEzKKuWXpllAdtbS0760g==
 
 "@utrecht/component-library-react@1.0.0-alpha.307":
   version "1.0.0-alpha.307"

@@ -6,18 +6,11 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
 import {useGetTakenQuery} from '@nl-portal/nl-portal-api';
 import styles from './tasks-page.module.scss';
-import {PortalLink} from '../../utils';
+import {PortalLink, getTaskUrl} from '../../utils';
 
 const TasksPage = () => {
   const intl = useIntl();
   const {data, loading, error, refetch} = useGetTakenQuery();
-  const getTaskUrl = (formType: string, formValue: string, verwerkerTaakId: string) => {
-    if (formType === 'id') {
-      return `/taken/taak?formulier=${formValue}&id=${verwerkerTaakId}`;
-    } else {
-      return formValue;
-    }
-  };
 
   const getTaskCards = () =>
     data?.getTaken?.content?.map(task => (
