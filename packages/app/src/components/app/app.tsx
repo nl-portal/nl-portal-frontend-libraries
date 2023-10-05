@@ -14,7 +14,7 @@ import {
   FormPage,
   FormsPage,
   Layout,
-  NotificationsPage,
+  MessagesPage,
   OverviewPage,
   PortalFooter,
   PortalPage,
@@ -48,9 +48,9 @@ const pages: Array<PortalPage> = [
   {
     icon: <InboxIcon />,
 
-    pageComponent: <NotificationsPage />,
+    pageComponent: <MessagesPage />,
     path: '/berichten',
-    titleTranslationKey: 'notifications',
+    titleTranslationKey: 'messages',
     showInMenu: true,
     showMessagesCount: true,
   },

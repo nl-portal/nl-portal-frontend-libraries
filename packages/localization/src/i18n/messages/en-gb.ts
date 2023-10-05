@@ -8,7 +8,7 @@ export const EN_GB_MESSAGES: Messages = {
     'locales.nl-NL': 'Nederlands',
     'pageTitles.overview': 'Overview',
     'pageTitles.cases': 'Current cases',
-    'pageTitles.notifications': 'My messages',
+    'pageTitles.messages': 'My messages',
     'pageTitles.themes': 'Themes',
     'pageTitles.documents': 'Documents',
     'pageTitles.offline': 'No internet connection',

@@ -1,0 +1,23 @@
+@import '../../styles/mixins';
+
+.messages {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    --utrecht-heading-2-margin-block-end: 0;
+    margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+  }
+
+  &__table {
+    display: none;
+
+    @include breakpoint(tablet) {
+      display: table;
+    }
+  }
+
+  & &__tableHeader {
+    text-align: end;
+  }
+}

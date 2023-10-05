@@ -1,6 +1,6 @@
 export * from './overview';
 export * from './cases';
-export * from './notifications';
+export * from './messages';
 export * from './themes';
 export * from './case';
 export * from './form';
