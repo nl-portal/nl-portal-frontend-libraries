@@ -62,7 +62,7 @@
     "@gemeente-denhaag/process-steps": "^0.1.0-alpha.140",
     "@gemeente-denhaag/responsive-content": "0.1.1-alpha.168",
     "@gemeente-denhaag/sidenav": "0.1.0-alpha.126",
-    "@gemeente-denhaag/tab": "0.2.3-alpha.332",
+    "@gemeente-denhaag/tab": "0.2.3-alpha.346",
     "@gemeente-denhaag/table": "0.1.1-alpha.228",
     "@gemeente-denhaag/textfield": "0.2.3-alpha.70",
     "@nl-portal/nl-portal-api": "^0.1.1-alpha.22",
