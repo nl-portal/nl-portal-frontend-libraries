@@ -28,9 +28,7 @@ import styles from './case-page.module.scss';
 import '@utrecht/component-library-css';
 import {DocumentList} from '../../components/document-list';
 import {StatusHistory} from '../../components/status-history';
-import {BREAKPOINTS} from '../../constants';
 import {getTaskUrl} from '../../utils';
-import mock from './mock';
 
 const Task = ({task}: {task: any}) => {
   if (!task) return null;
@@ -163,58 +161,46 @@ const CasePage: FC<CasePageProps> = ({
               <DescriptionList items={details} />
             </div>
           )}
-          {mock.data.map(section => {
-            if (section.type === 'table' || !Array.isArray(section.value)) {
-              return (
-                <div className={styles.case__status} key={section.heading}>
-                  <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
-                  <Table>
-                    {
-                      // @ts-ignore
-                      section.value.headers.length > 0 && (
-                        <TableHead>
-                          <TableRow>
-                            {
-                              // @ts-ignore
-                              section.value.headers?.map(header => (
-                                <TableHeader>{header.value}</TableHeader>
-                              ))
-                            }
-                          </TableRow>
-                        </TableHead>
-                      )
-                    }
-                    {
-                      // @ts-ignore
-                      section.value.rows.length > 0 && (
-                        <TableBody>
-                          {
-                            // @ts-ignore
-                            section.value.rows.map(cells => (
-                              <TableRow>
-                                {cells.map((cell: {value: string}) => (
-                                  <TableCell>{cell.value}</TableCell>
-                                ))}
-                              </TableRow>
-                            ))
-                          }
-                        </TableBody>
-                      )
-                    }
-                  </Table>
-                </div>
-              );
-            }
+          {zaak?.getZaak.zaakdetails.data.map((section: any) => {
+            const listItems = section.waarde.filter((i: any) => i.type !== 'table');
+            const tables = section.waarde.filter((i: any) => i.type === 'table');
 
             return (
-              <div className={styles.case__status} key={section.heading}>
+              <div className={styles.case__article} key={section.heading}>
                 <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
-                <DescriptionList
-                  items={section.value.map(item => ({
-                    title: item.key,
-                    detail: item.value,
-                  }))}
-                />
+                {listItems.length > 0 && (
+                  <DescriptionList
+                    items={listItems.map((item: any) => ({
+                      title: item.omschrijving,
+                      detail: item.waarde,
+                    }))}
+                  />
+                )}
+                {tables.length > 0 &&
+                  tables.map((table: any) => (
+                    <Table>
+                      {table.waarde.headers.length > 0 && (
+                        <TableHead>
+                          <TableRow>
+                            {table.waarde.headers?.map((header: any) => (
+                              <TableHeader>{header.waarde}</TableHeader>
+                            ))}
+                          </TableRow>
+                        </TableHead>
+                      )}
+                      {table.waarde.rows.length > 0 && (
+                        <TableBody>
+                          {table.waarde.rows.map((row: any) => (
+                            <TableRow>
+                              {row.map((cell: {waarde: string}) => (
+                                <TableCell>{cell.waarde}</TableCell>
+                              ))}
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      )}
+                    </Table>
+                  ))}
               </div>
             );
           })}
