@@ -106,18 +106,18 @@ const CasePage: FC<CasePageProps> = ({
     return array;
   }, [zaak]);
 
-  const contactItems = React.useMemo(
-    () =>
-      contacten?.getKlantContactMomenten?.content.map((contact: any, index: number) => ({
-        id: index,
-        title: contact.tekst,
-        channel: contact.kanaal,
-        date: '',
-        isoDate: contact.registratiedatum,
-        todayLabel: intl.formatMessage({id: 'case.contacttimeline.today'}),
-      })),
-    [contacten]
-  );
+  const contactItems = React.useMemo(() => {
+    if (!contacten?.getKlantContactMomenten) return [];
+
+    return contacten?.getKlantContactMomenten?.content.map((contact: any, index: number) => ({
+      id: index,
+      title: contact.tekst,
+      channel: contact.kanaal,
+      date: '',
+      isoDate: contact.registratiedatum,
+      todayLabel: intl.formatMessage({id: 'case.contacttimeline.today'}),
+    }));
+  }, [contacten]);
 
   return (
     <section className={styles.case}>
