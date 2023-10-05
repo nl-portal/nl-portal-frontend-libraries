@@ -172,7 +172,7 @@ const CasePage: FC<CasePageProps> = ({
                     <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
                     <DescriptionList
                       items={listItems.map((item: any) => ({
-                        title: item.omschrijving,
+                        title: item.key,
                         detail: item.waarde,
                       }))}
                     />
