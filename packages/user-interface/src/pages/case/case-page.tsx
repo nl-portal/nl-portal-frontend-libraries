@@ -1,7 +1,12 @@
 import * as React from 'react';
-import {useGetZaakQuery} from '@nl-portal/nl-portal-api';
+import {
+  useGetZaakQuery,
+  useGetKlantContactMomentenQuery,
+  useGetTakenQuery,
+} from '@nl-portal/nl-portal-api';
 import {FC, Fragment, ReactElement, useContext} from 'react';
 import {Heading2, Heading3, Paragraph} from '@gemeente-denhaag/components-react';
+import {Action} from '@gemeente-denhaag/action';
 import {DescriptionList} from '@gemeente-denhaag/descriptionlist';
 import {
   Table,
@@ -17,24 +22,51 @@ import Skeleton from 'react-loading-skeleton';
 import {ArrowRightIcon} from '@gemeente-denhaag/icons';
 import {Link as RouterLink} from 'react-router-dom';
 import {LocaleContext} from '@nl-portal/nl-portal-localization';
-import classNames from 'classnames';
-import {useMediaQuery, useQuery} from '../../hooks';
+import ContactTimelineMobile from '@gemeente-denhaag/contact-timeline';
+import {useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
+import '@utrecht/component-library-css';
 import {DocumentList} from '../../components/document-list';
 import {StatusHistory} from '../../components/status-history';
 import {BREAKPOINTS} from '../../constants';
+import {getTaskUrl} from '../../utils';
 import mock from './mock';
+
+const Task = ({task}: {task: any}) => {
+  if (!task) return null;
+
+  return (
+    <div className={styles.case__article}>
+      <Action
+        actions={
+          <RouterLink
+            to={getTaskUrl(task.formulier.type, task.formulier.value, task.id)}
+            className="utrecht-button-link utrecht-button-link--html-a"
+          >
+            Ga naar taak
+          </RouterLink>
+        }
+        dateTime={task?.verloopdatum}
+        relativeDate
+      >
+        {task?.title}
+      </Action>
+    </div>
+  );
+};
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
   statusHistoryBackground?: ReactElement;
   showDocumentsListLink?: boolean;
+  showContactTimeline?: boolean;
 }
 
 const CasePage: FC<CasePageProps> = ({
   statusHistoryFacet,
   statusHistoryBackground,
   showDocumentsListLink = false,
+  showContactTimeline = false,
 }) => {
   const intl = useIntl();
   const query = useQuery();
@@ -47,8 +79,11 @@ const CasePage: FC<CasePageProps> = ({
   } = useGetZaakQuery({
     variables: {id},
   });
-  const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
+  const {data: contacten} = useGetKlantContactMomentenQuery();
+  const {data: taken} = useGetTakenQuery({variables: {zaakId: id}});
+
   const getDocumentsUrl = (caseId: string) => `/zaken/zaak/documenten?id=${caseId}`;
+  const firstTask = taken?.getTaken?.content[0];
 
   const details = React.useMemo(() => {
     if (!zaak?.getZaak) return [];
@@ -73,6 +108,19 @@ const CasePage: FC<CasePageProps> = ({
     return array;
   }, [zaak]);
 
+  const items = React.useMemo(
+    () =>
+      contacten?.getKlantContactMomenten?.content.map((contact: any, index: number) => ({
+        id: index,
+        title: contact.tekst,
+        channel: contact.kanaal,
+        date: '',
+        isoDate: contact.registratiedatum,
+        todayLabel: intl.formatMessage({id: 'case.contacttimeline.today'}),
+      })),
+    [contacten]
+  );
+
   return (
     <section className={styles.case}>
       {!error ? (
@@ -92,7 +140,8 @@ const CasePage: FC<CasePageProps> = ({
               )}
             </Heading2>
           </header>
-          <div className={styles.case__status}>
+          <Task task={firstTask} />
+          <div className={styles.case__article}>
             <Heading3 className={styles['case__sub-header']}>
               <FormattedMessage id="case.statusHeader" />
             </Heading3>
@@ -107,7 +156,7 @@ const CasePage: FC<CasePageProps> = ({
             />
           </div>
           {details.length > 0 && (
-            <div className={styles.case__status}>
+            <div className={styles.case__article}>
               <Heading3 className={styles['case__sub-header']}>
                 <FormattedMessage id="case.detailsHeader" />
               </Heading3>
@@ -169,38 +218,40 @@ const CasePage: FC<CasePageProps> = ({
               </div>
             );
           })}
-          <div className={styles.case__documents}>
-            <div
-              className={classNames(styles['case__documents-header'], {
-                [styles['case__documents-header--tablet']]: isTablet,
-              })}
-            >
-              <Heading3 className={classNames({[styles['case__sub-header']]: !isTablet})}>
-                <FormattedMessage id="pageTitles.documents" />
-              </Heading3>
-              {showDocumentsListLink &&
-                !loading &&
-                zaak?.getZaak?.documenten &&
-                zaak?.getZaak?.documenten.length > 0 && (
-                  <div
-                    className={classNames(styles['case__documents-link'], {
-                      [styles['case__documents-link--tablet']]: isTablet,
-                    })}
-                  >
-                    <Link
-                      component={RouterLink}
-                      to={getDocumentsUrl(id || '')}
-                      icon={<ArrowRightIcon />}
-                      iconAlign="end"
-                      hrefLang={hrefLang}
-                    >
-                      <FormattedMessage id="case.showAllDocuments" />
-                    </Link>
-                  </div>
-                )}
-            </div>
+          <div className={styles.case__article}>
+            <Heading3 className={styles['case__sub-header']}>
+              <FormattedMessage id="pageTitles.documents" />
+            </Heading3>
+            {showDocumentsListLink &&
+              !loading &&
+              zaak?.getZaak?.documenten &&
+              zaak?.getZaak?.documenten.length > 0 && (
+                <Link
+                  component={RouterLink}
+                  to={getDocumentsUrl(id || '')}
+                  icon={<ArrowRightIcon />}
+                  iconAlign="end"
+                  hrefLang={hrefLang}
+                >
+                  <FormattedMessage id="case.showAllDocuments" />
+                </Link>
+              )}
             <DocumentList documents={loading ? undefined : zaak?.getZaak.documenten} />
           </div>
+          {showContactTimeline && (
+            <div className={styles.case__article}>
+              <Heading3 className={styles['case__sub-header']}>
+                <FormattedMessage id="case.contactHeader" />
+              </Heading3>
+              {items && (
+                <ContactTimelineMobile
+                  items={items}
+                  todayLabel={intl.formatMessage({id: 'case.contacttimeline.today'})}
+                />
+              )}
+            </div>
+          )}
+          <Task task={firstTask} />
         </Fragment>
       ) : (
         <Paragraph>

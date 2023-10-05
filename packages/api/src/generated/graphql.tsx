@@ -16,8 +16,33 @@ export type Scalars = {
   Date: any;
   /** A type representing a formatted JSON */
   JSON: any;
+  /** A local date time */
+  LocalDateTime: any;
   /** A type representing a formatted java.util.UUID */
   UUID: any;
+};
+
+export type ContactMoment = {
+  __typename?: 'ContactMoment';
+  bronorganisatie?: Maybe<Scalars['String']>;
+  initiatiefnemer?: Maybe<Scalars['String']>;
+  kanaal: Scalars['String'];
+  medewerker?: Maybe<Scalars['String']>;
+  registratiedatum: Scalars['String'];
+  tekst: Scalars['String'];
+  volgendContactmoment?: Maybe<Scalars['String']>;
+  voorkeurskanaal?: Maybe<Scalars['String']>;
+  voorkeurstaal?: Maybe<Scalars['String']>;
+  vorigContactmoment?: Maybe<Scalars['String']>;
+};
+
+export type ContactMomentPage = {
+  __typename?: 'ContactMomentPage';
+  content: Array<ContactMoment>;
+  number: Scalars['Int'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int'];
+  totalElements: Scalars['Int'];
 };
 
 export type Document = {
@@ -184,11 +209,13 @@ export type Query = {
   getFormList: Array<Form>;
   /** Gets the data of the gemachtigde */
   getGemachtigde: Gemachtigde;
+  /** Gets the contactmomenten of a klant */
+  getKlantContactMomenten?: Maybe<ContactMomentPage>;
   /** Gets the persoon data */
   getPersoon?: Maybe<Persoon>;
   /** Get task by id */
   getTaakById: Taak;
-  /** Get a list of tasks */
+  /** Get a list of tasks. Optional filter for zaak */
   getTaken: TaakPage;
   /**
    * Get a list of tasks
@@ -222,6 +249,11 @@ export type QueryGetFormDefinitionByObjectenApiUrlArgs = {
 };
 
 
+export type QueryGetKlantContactMomentenArgs = {
+  pageNumber?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryGetTaakByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -230,6 +262,7 @@ export type QueryGetTaakByIdArgs = {
 export type QueryGetTakenArgs = {
   pageNumber?: Maybe<Scalars['Int']>;
   pageSize?: Maybe<Scalars['Int']>;
+  zaakUUID?: Maybe<Scalars['UUID']>;
 };
 
 
@@ -258,6 +291,7 @@ export type Taak = {
   __typename?: 'Taak';
   data: Scalars['JSON'];
   date: Scalars['String'];
+  /** @deprecated Use formulier type/value */
   formId: Scalars['String'];
   formulier: TaakFormulier;
   id: Scalars['UUID'];
@@ -265,6 +299,8 @@ export type Taak = {
   objectId: Scalars['UUID'];
   status: TaakStatus;
   title: Scalars['String'];
+  verloopdatum?: Maybe<Scalars['LocalDateTime']>;
+  zaak?: Maybe<Scalars['String']>;
 };
 
 export type TaakFormulier = {
@@ -310,7 +346,14 @@ export type Zaak = {
   statussen: Array<StatusType>;
   url: Scalars['String'];
   uuid: Scalars['UUID'];
+  zaakdetails: ZaakDetails;
   zaaktype: ZaakType;
+};
+
+export type ZaakDetails = {
+  __typename?: 'ZaakDetails';
+  data: Array<Scalars['JSON']>;
+  zaak: Scalars['String'];
 };
 
 export type ZaakStatus = {
@@ -361,6 +404,11 @@ export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: Maybe<{ __typename?: 'Klant', emailadres?: Maybe<string>, telefoonnummer?: Maybe<string> }> };
 
+export type GetKlantContactMomentenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetKlantContactMomentenQuery = { __typename?: 'Query', getKlantContactMomenten?: Maybe<{ __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> }> };
+
 export type GetDocumentenQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
@@ -409,10 +457,12 @@ export type GetTaakByIdQueryVariables = Exact<{
 
 export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', type: string, value: string } } };
 
-export type GetTakenQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetTakenQueryVariables = Exact<{
+  zaakId?: Maybe<Scalars['UUID']>;
+}>;
 
 
-export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', type: string, value: string } }> } };
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, verloopdatum?: Maybe<any>, formulier: { __typename?: 'TaakFormulier', type: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -601,6 +651,44 @@ export function useGetBurgerProfielLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProfielQuery>;
 export type GetBurgerProfielLazyQueryHookResult = ReturnType<typeof useGetBurgerProfielLazyQuery>;
 export type GetBurgerProfielQueryResult = Apollo.QueryResult<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>;
+export const GetKlantContactMomentenDocument = gql`
+    query GetKlantContactMomenten {
+  getKlantContactMomenten {
+    content {
+      tekst
+      kanaal
+      registratiedatum
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetKlantContactMomentenQuery__
+ *
+ * To run a query within a React component, call `useGetKlantContactMomentenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetKlantContactMomentenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetKlantContactMomentenQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetKlantContactMomentenQuery(baseOptions?: Apollo.QueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
+      }
+export function useGetKlantContactMomentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
+        }
+export type GetKlantContactMomentenQueryHookResult = ReturnType<typeof useGetKlantContactMomentenQuery>;
+export type GetKlantContactMomentenLazyQueryHookResult = ReturnType<typeof useGetKlantContactMomentenLazyQuery>;
+export type GetKlantContactMomentenQueryResult = Apollo.QueryResult<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>;
 export const GetDocumentenDocument = gql`
     query GetDocumenten($id: UUID!) {
   getZaak(id: $id) {
@@ -945,8 +1033,8 @@ export type GetTaakByIdQueryHookResult = ReturnType<typeof useGetTaakByIdQuery>;
 export type GetTaakByIdLazyQueryHookResult = ReturnType<typeof useGetTaakByIdLazyQuery>;
 export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaakByIdQueryVariables>;
 export const GetTakenDocument = gql`
-    query GetTaken {
-  getTaken {
+    query GetTaken($zaakId: UUID) {
+  getTaken(zaakUUID: $zaakId) {
     content {
       id
       objectId
@@ -959,6 +1047,7 @@ export const GetTakenDocument = gql`
       status
       date
       data
+      verloopdatum
     }
   }
 }
@@ -976,6 +1065,7 @@ export const GetTakenDocument = gql`
  * @example
  * const { data, loading, error } = useGetTakenQuery({
  *   variables: {
+ *      zaakId: // value for 'zaakId'
  *   },
  * });
  */
