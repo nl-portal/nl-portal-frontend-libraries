@@ -37,6 +37,10 @@ export const QUERY_GET_ZAKEN = gql`
         titel
         uuid
       }
+      zaakdetails {
+        data
+        zaak
+      }
     }
   }
 `;

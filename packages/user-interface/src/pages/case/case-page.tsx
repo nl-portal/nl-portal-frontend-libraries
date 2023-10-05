@@ -5,9 +5,17 @@ import {
   useGetTakenQuery,
 } from '@nl-portal/nl-portal-api';
 import {FC, Fragment, ReactElement, useContext} from 'react';
-import {Heading2, Heading3, Paragraph} from '@gemeente-denhaag/components-react';
+import {Heading2, Heading3, Heading4, Paragraph} from '@gemeente-denhaag/components-react';
 import {Action} from '@gemeente-denhaag/action';
 import {DescriptionList} from '@gemeente-denhaag/descriptionlist';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@gemeente-denhaag/table';
 import {Link} from '@gemeente-denhaag/link';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
@@ -153,6 +161,54 @@ const CasePage: FC<CasePageProps> = ({
               <DescriptionList items={details} />
             </div>
           )}
+          {zaak?.getZaak.zaakdetails.data.map((section: any) => {
+            const listItems = section.waarde.filter((i: any) => i.type !== 'table');
+            const tables = section.waarde.filter((i: any) => i.type === 'table');
+
+            return (
+              <React.Fragment>
+                {listItems.length > 0 && (
+                  <div className={styles.case__article} key={section.heading}>
+                    <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
+                    <DescriptionList
+                      items={listItems.map((item: any) => ({
+                        title: item.omschrijving,
+                        detail: item.waarde,
+                      }))}
+                    />
+                  </div>
+                )}
+                {tables.length > 0 &&
+                  tables.map((table: any) => (
+                    <div className={styles.case__article} key={section.heading}>
+                      <Heading4 className={styles['case__sub-header']}>{table.heading}</Heading4>
+                      <Table>
+                        {table.waarde.headers.length > 0 && (
+                          <TableHead>
+                            <TableRow>
+                              {table.waarde.headers?.map((header: any) => (
+                                <TableHeader>{header.waarde}</TableHeader>
+                              ))}
+                            </TableRow>
+                          </TableHead>
+                        )}
+                        {table.waarde.rows.length > 0 && (
+                          <TableBody>
+                            {table.waarde.rows.map((row: any) => (
+                              <TableRow>
+                                {row.map((cell: {waarde: string}) => (
+                                  <TableCell>{cell.waarde}</TableCell>
+                                ))}
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        )}
+                      </Table>
+                    </div>
+                  ))}
+              </React.Fragment>
+            );
+          })}
           <div className={styles.case__article}>
             <Heading3 className={styles['case__sub-header']}>
               <FormattedMessage id="pageTitles.documents" />
