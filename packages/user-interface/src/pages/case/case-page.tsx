@@ -229,17 +229,15 @@ const CasePage: FC<CasePageProps> = ({
               )}
             <DocumentList documents={loading ? undefined : zaak?.getZaak.documenten} />
           </div>
-          {showContactTimeline && (
+          {showContactTimeline && contactItems.length > 0 && (
             <div className={styles.case__article}>
               <Heading3 className={styles['case__sub-header']}>
                 <FormattedMessage id="case.contactHeader" />
               </Heading3>
-              {contactItems && (
-                <ContactTimelineMobile
-                  items={contactItems}
-                  todayLabel={intl.formatMessage({id: 'case.contacttimeline.today'})}
-                />
-              )}
+              <ContactTimelineMobile
+                items={contactItems}
+                todayLabel={intl.formatMessage({id: 'case.contacttimeline.today'})}
+              />
             </div>
           )}
           <Task task={firstTask} />
