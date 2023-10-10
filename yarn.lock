@@ -1912,6 +1912,13 @@
   dependencies:
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.347"
 
+"@gemeente-denhaag/basedatadisplayprops@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/basedatadisplayprops/-/basedatadisplayprops-0.2.3-alpha.348.tgz#56dfc1e954df878089eed92aa7a8ec0640effb8e"
+  integrity sha512-NCLkYURp8YRJF9k9Y8MyRoWDhYCzU6l2mI+WcmM0Xx9S00bTakjXz+xbIZGzvPxG8IUUjifFBH98FUoCYFNB8A==
+  dependencies:
+    "@gemeente-denhaag/baseprops" "0.2.3-alpha.348"
+
 "@gemeente-denhaag/baseprops@0.2.3-alpha.308":
   version "0.2.3-alpha.308"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.308.tgz#5b8b35a6cbc53807ad83791ddcf72c380add0f84"
@@ -1936,6 +1943,11 @@
   version "0.2.3-alpha.347"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.347.tgz#b30e29b98e73aa15d5ef383ec4e1ac92c672b111"
   integrity sha512-JcA9qf7uVhePFtf+8USU1nZI8a/TYlZ7sNOEJ9x9bg2uA+adlHuwLYsSU1NoLstbG4yf1TDfHq7AlEhqag1Wog==
+
+"@gemeente-denhaag/baseprops@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.348.tgz#8bf935873211816e3df68e5c6169df10f5285b98"
+  integrity sha512-OpEyUOJQgFRe6Dg2fjJOMAGMZGbYK460EkIEJNrfhDlrFKvk1mZSO4WK83XWA5JCIH5iubGBwljuUPjczalYMw==
 
 "@gemeente-denhaag/baseprops@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
@@ -1983,6 +1995,15 @@
     "@gemeente-denhaag/icons" "0.2.3-alpha.321"
     "@gemeente-denhaag/link" "0.2.3-alpha.321"
     "@gemeente-denhaag/typography" "0.2.3-alpha.321"
+
+"@gemeente-denhaag/card@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/card/-/card-0.2.3-alpha.348.tgz#281c1b9945ef143281c4f27d94fe4c0ab24c1b57"
+  integrity sha512-qCDHZlt5TdbqLuqTOiLnBND+v7+GK9ZtEbab+cYskg1bSAL/UakHXnllF7fTYf1to+xUquIjVcce49EIa5ZJgA==
+  dependencies:
+    "@gemeente-denhaag/icons" "0.2.3-alpha.348"
+    "@gemeente-denhaag/link" "0.2.3-alpha.348"
+    "@gemeente-denhaag/typography" "0.2.3-alpha.348"
 
 "@gemeente-denhaag/checkbox@0.2.3-alpha.321":
   version "0.2.3-alpha.321"
@@ -2057,10 +2078,10 @@
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/descriptionlist/-/descriptionlist-0.1.1-alpha.234.tgz#044037906969758a195b760e5a493a0cc036f92a"
   integrity sha512-0ZkskJrPfjf9DklZrEO0uwhzQpwA9prgqRc3iJBIT/s68OhLOg7XNpEcw93wxnftAkXTNZzCIuDi0+qI9Bj+Fw==
 
-"@gemeente-denhaag/design-tokens-components@0.2.3-alpha.347":
-  version "0.2.3-alpha.347"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/design-tokens-components/-/design-tokens-components-0.2.3-alpha.347.tgz#fe3e885368385a4baa4eca3ed89fc4971aba0ccd"
-  integrity sha512-PUB3nPgGbGFv4homYw/MvLH5BpK2EdsQ7F0tg8XPBkyb/BgnvnXFgi/i1cjNoQkNYjm3PmgtcHHpquzjq37Wyw==
+"@gemeente-denhaag/design-tokens-components@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/design-tokens-components/-/design-tokens-components-0.2.3-alpha.348.tgz#7fe0226a234b68fe6bf37f00453ae15312dafb03"
+  integrity sha512-3KramxwlbDRixMEggWmprcXeZ9NJMakXZTKXVUgzTLslUM8fWt5x0Hy1r93U3MxE2FUgMo244uX/19mwLkZz4A==
 
 "@gemeente-denhaag/divider@0.2.3-alpha.321":
   version "0.2.3-alpha.321"
@@ -2167,6 +2188,11 @@
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.347.tgz#ce88d7c4e432bf7bf1d222a838b7e1d671378f16"
   integrity sha512-DhuT2ITFncoWlS8RSDKIeQG5IIUALNnNcXrx2tWERaw6LEjogiBEfWTicevMB+ezCbj4aQ9dn2cef+Pcjzgykw==
 
+"@gemeente-denhaag/icons@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.348.tgz#a3dea92f0e3cd255e0a2fc26012ddbd0e04d52b4"
+  integrity sha512-XPFoQblXjPLZ+cbRdJQKK2djinPXlJBjXZdVtI7Jvnzsc0YJvXZ+A9PJinb+oup9b4lOqI/E0JSJN4T7O2MHVA==
+
 "@gemeente-denhaag/icons@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
   resolved "https://registry.npmjs.org/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.70.tgz"
@@ -2228,6 +2254,14 @@
   dependencies:
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.345"
     "@gemeente-denhaag/icons" "0.2.3-alpha.345"
+
+"@gemeente-denhaag/link@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/link/-/link-0.2.3-alpha.348.tgz#72a7b993cbb18014c1da4e8a902d106091b68b49"
+  integrity sha512-sExPQ6ks1PEJjr+nkKi3Xt+kFgJ/2xEjRQQw5XtwsKN9Hy+nA0k36PfnOjnQaL5FLdQ8spL4cJn9oOScGaBZGA==
+  dependencies:
+    "@gemeente-denhaag/baseprops" "0.2.3-alpha.348"
+    "@gemeente-denhaag/icons" "0.2.3-alpha.348"
 
 "@gemeente-denhaag/link@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
@@ -2349,10 +2383,10 @@
     "@material-ui/core" "4.12.4"
     "@material-ui/lab" "4.11.3-deprecations.1"
 
-"@gemeente-denhaag/tab@0.2.3-alpha.346":
-  version "0.2.3-alpha.346"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/tab/-/tab-0.2.3-alpha.346.tgz#98aa7badb4f25ee7dd4d88081de9bc0a9f8c25ed"
-  integrity sha512-FeASLdFgHeyaR36VhAaEJfFLBFMDMKaylklcByrHjXfZ7MTi+dlUqCoY4aCGfksRUBqPP8JdB8p3WjOOJsUFIQ==
+"@gemeente-denhaag/tab@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/tab/-/tab-0.2.3-alpha.348.tgz#8e6e68a670357eee13ed1d504d8e644b728bc6ed"
+  integrity sha512-/jzsq4W/41lIjNF8BMx69WDnk5W30DvfZUgG8khzk926CO4OroFDqr3+frSV/csp8MnFmx9/fBcBJYKRo/cbXg==
   dependencies:
     uuid "9.0.1"
 
@@ -2413,6 +2447,13 @@
   integrity sha512-Q+jbxyagvAx1uhAmRMMB+J9ihWVJUaVqefMiSLPnzOS+0x3Xmb9GllGwNib8m0Rfk/9Vtq3x1O42WbEY3eK/Ig==
   dependencies:
     "@gemeente-denhaag/basedatadisplayprops" "0.2.3-alpha.347"
+
+"@gemeente-denhaag/typography@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/typography/-/typography-0.2.3-alpha.348.tgz#379e36511b29687b172dc8fd19df04852fcbe048"
+  integrity sha512-ZuOjUtfL0M1Yl3ERgnE36jE9c3EB1VnELKI735pBOjWp7IakTKoNSSNIusNj1AyVsng3ZTxiZA1b0bedoTIiSg==
+  dependencies:
+    "@gemeente-denhaag/basedatadisplayprops" "0.2.3-alpha.348"
 
 "@graphql-codegen/cli@2.2.0":
   version "2.2.0"
