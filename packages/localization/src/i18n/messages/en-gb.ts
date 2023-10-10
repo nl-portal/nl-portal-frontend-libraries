@@ -81,5 +81,6 @@ export const EN_GB_MESSAGES: Messages = {
     'tasks.fetchError': 'There was an error, try again later.',
     'task.completed': 'Taak is afgerond',
     'task.returnMessage': 'Klik hier om terug te gaan naar je openstaande taken',
+    'task.unAuthorized': 'You are unauthorized for this task',
   },
 };

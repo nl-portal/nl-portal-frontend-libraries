@@ -12,6 +12,9 @@ import {
   useGetFormDefinitionByIdLazyQuery,
   useGetTaakByIdQuery,
 } from '@nl-portal/nl-portal-api';
+import {Paragraph} from "@gemeente-denhaag/components-react";
+import {FormattedMessage} from "react-intl";
+import styles from "../case/case-page.module.scss";
 
 const TaskPage = () => {
   const query = useQuery();
@@ -30,7 +33,7 @@ const TaskPage = () => {
     variables: {id: formId},
   });
 
-  const {data: taskData} = useGetTaakByIdQuery({variables: {id: taskId}});
+  const {data: taskData, error} = useGetTaakByIdQuery({variables: {id: taskId}});
 
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
     const keys = Object.keys(submissionData);
@@ -60,6 +63,8 @@ const TaskPage = () => {
 
   const getTaskData = () => {
     if (taskData) {
+      // only load form by id if task can be found
+      loadFormById();
       transformPrefilledDataToFormioSubmission(taskData);
     }
   };
@@ -70,7 +75,6 @@ const TaskPage = () => {
 
   useEffect(() => {
     getTaskData();
-    loadFormById();
   }, []);
 
   useEffect(() => {
@@ -130,31 +134,37 @@ const TaskPage = () => {
   );
 
   return (
-    <React.Fragment>
-      <Helmet>
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        />
-        <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.full.min.css" />
-        <script src="https://cdn.form.io/formiojs/formio.full.min.js" />
-      </Helmet>
-      {!loading ? (
-        <Form
-          form={data?.getFormDefinitionById?.formDefinition}
-          formReady={redrawForm}
-          submission={submission}
-          onChange={setFormSubmission}
-          onSubmit={onFormSubmit}
-        />
-      ) : (
-        getSubmittedMessage()
-      )}
-    </React.Fragment>
+      <section className={styles.case}>
+        {!error ? (
+          <React.Fragment>
+            <Helmet>
+              <link
+                rel="stylesheet"
+                href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+              />
+              <link
+                rel="stylesheet"
+                href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              />
+              <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.full.min.css" />
+              <script src="https://cdn.form.io/formiojs/formio.full.min.js" />
+            </Helmet>
+            {!loading ? (
+              <Form
+                form={data?.getFormDefinitionById?.formDefinition}
+                formReady={redrawForm}
+                submission={submission}
+                onChange={setFormSubmission}
+                onSubmit={onFormSubmit}
+              />
+            ) : (
+              getSubmittedMessage()
+            )}
+          </React.Fragment> ) : (<Paragraph>
+              <FormattedMessage id="task.unAuthorized" />
+            </Paragraph>
+          )}
+    </section>
   );
 };
 
