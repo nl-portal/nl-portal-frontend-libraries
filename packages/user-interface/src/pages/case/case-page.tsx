@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {
   useGetZaakQuery,
-  useGetKlantContactMomentenQuery,
   useGetTakenQuery,
+  useGetObjectContactMomentenLazyQuery,
 } from '@nl-portal/nl-portal-api';
 import {FC, Fragment, ReactElement, useContext} from 'react';
 import {Heading2, Heading3, Heading4, Paragraph} from '@gemeente-denhaag/components-react';
@@ -77,7 +77,7 @@ const CasePage: FC<CasePageProps> = ({
   } = useGetZaakQuery({
     variables: {id},
   });
-  const {data: contacten} = useGetKlantContactMomentenQuery();
+  const [getMomenten, {data: contacten}] = useGetObjectContactMomentenLazyQuery();
   const {data: taken} = useGetTakenQuery({variables: {zaakId: id}});
 
   const getDocumentsUrl = (caseId: string) => `/zaken/zaak/documenten?id=${caseId}`;
@@ -107,9 +107,9 @@ const CasePage: FC<CasePageProps> = ({
   }, [zaak]);
 
   const contactItems = React.useMemo(() => {
-    if (!contacten?.getKlantContactMomenten) return [];
+    if (!contacten?.getObjectContactMomenten) return [];
 
-    return contacten?.getKlantContactMomenten?.content.map((contact: any, index: number) => ({
+    return contacten?.getObjectContactMomenten?.content.map((contact: any, index: number) => ({
       id: index,
       title: contact.tekst,
       channel: contact.kanaal,
@@ -118,6 +118,11 @@ const CasePage: FC<CasePageProps> = ({
       todayLabel: intl.formatMessage({id: 'case.contacttimeline.today'}),
     }));
   }, [contacten]);
+
+  React.useEffect(() => {
+    if (!zaak) return;
+    getMomenten({variables: {objectUrl: zaak.getZaak.url}});
+  }, [zaak]);
 
   return (
     <section className={styles.case}>
