@@ -211,6 +211,8 @@ export type Query = {
   getGemachtigde: Gemachtigde;
   /** Gets the contactmomenten of a klant */
   getKlantContactMomenten?: Maybe<ContactMomentPage>;
+  /** Gets the contactmomenten of a object(zaak) */
+  getObjectContactMomenten?: Maybe<ContactMomentPage>;
   /** Gets the persoon data */
   getPersoon?: Maybe<Persoon>;
   /** Get task by id */
@@ -250,6 +252,12 @@ export type QueryGetFormDefinitionByObjectenApiUrlArgs = {
 
 
 export type QueryGetKlantContactMomentenArgs = {
+  pageNumber?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryGetObjectContactMomentenArgs = {
+  objectUrl: Scalars['String'];
   pageNumber?: Maybe<Scalars['Int']>;
 };
 
@@ -404,11 +412,6 @@ export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: Maybe<{ __typename?: 'Klant', emailadres?: Maybe<string>, telefoonnummer?: Maybe<string> }> };
 
-export type GetKlantContactMomentenQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetKlantContactMomentenQuery = { __typename?: 'Query', getKlantContactMomenten?: Maybe<{ __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> }> };
-
 export type GetDocumentenQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
@@ -440,6 +443,18 @@ export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetGemachtigdeQuery = { __typename?: 'Query', getGemachtigde: { __typename?: 'Gemachtigde', persoon?: Maybe<{ __typename?: 'PersoonNaam', aanhef?: Maybe<string>, voorletters?: Maybe<string>, voornamen?: Maybe<string>, voorvoegsel?: Maybe<string>, geslachtsnaam?: Maybe<string> }>, bedrijf?: Maybe<{ __typename?: 'MaatschappelijkeActiviteit', naam: string }> } };
 
+export type GetKlantContactMomentenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetKlantContactMomentenQuery = { __typename?: 'Query', getKlantContactMomenten?: Maybe<{ __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> }> };
+
+export type GetObjectContactMomentenQueryVariables = Exact<{
+  objectUrl: Scalars['String'];
+}>;
+
+
+export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectContactMomenten?: Maybe<{ __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> }> };
+
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -469,7 +484,7 @@ export type GetZaakQueryVariables = Exact<{
 }>;
 
 
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: Maybe<string> }>, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: Maybe<string> }>, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
 
 export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -651,44 +666,6 @@ export function useGetBurgerProfielLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProfielQuery>;
 export type GetBurgerProfielLazyQueryHookResult = ReturnType<typeof useGetBurgerProfielLazyQuery>;
 export type GetBurgerProfielQueryResult = Apollo.QueryResult<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>;
-export const GetKlantContactMomentenDocument = gql`
-    query GetKlantContactMomenten {
-  getKlantContactMomenten {
-    content {
-      tekst
-      kanaal
-      registratiedatum
-    }
-  }
-}
-    `;
-
-/**
- * __useGetKlantContactMomentenQuery__
- *
- * To run a query within a React component, call `useGetKlantContactMomentenQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetKlantContactMomentenQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetKlantContactMomentenQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetKlantContactMomentenQuery(baseOptions?: Apollo.QueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
-      }
-export function useGetKlantContactMomentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
-        }
-export type GetKlantContactMomentenQueryHookResult = ReturnType<typeof useGetKlantContactMomentenQuery>;
-export type GetKlantContactMomentenLazyQueryHookResult = ReturnType<typeof useGetKlantContactMomentenLazyQuery>;
-export type GetKlantContactMomentenQueryResult = Apollo.QueryResult<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>;
 export const GetDocumentenDocument = gql`
     query GetDocumenten($id: UUID!) {
   getZaak(id: $id) {
@@ -883,6 +860,83 @@ export function useGetGemachtigdeLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type GetGemachtigdeQueryHookResult = ReturnType<typeof useGetGemachtigdeQuery>;
 export type GetGemachtigdeLazyQueryHookResult = ReturnType<typeof useGetGemachtigdeLazyQuery>;
 export type GetGemachtigdeQueryResult = Apollo.QueryResult<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>;
+export const GetKlantContactMomentenDocument = gql`
+    query GetKlantContactMomenten {
+  getKlantContactMomenten {
+    content {
+      tekst
+      kanaal
+      registratiedatum
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetKlantContactMomentenQuery__
+ *
+ * To run a query within a React component, call `useGetKlantContactMomentenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetKlantContactMomentenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetKlantContactMomentenQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetKlantContactMomentenQuery(baseOptions?: Apollo.QueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
+      }
+export function useGetKlantContactMomentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
+        }
+export type GetKlantContactMomentenQueryHookResult = ReturnType<typeof useGetKlantContactMomentenQuery>;
+export type GetKlantContactMomentenLazyQueryHookResult = ReturnType<typeof useGetKlantContactMomentenLazyQuery>;
+export type GetKlantContactMomentenQueryResult = Apollo.QueryResult<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>;
+export const GetObjectContactMomentenDocument = gql`
+    query GetObjectContactMomenten($objectUrl: String!) {
+  getObjectContactMomenten(objectUrl: $objectUrl) {
+    content {
+      tekst
+      kanaal
+      registratiedatum
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetObjectContactMomentenQuery__
+ *
+ * To run a query within a React component, call `useGetObjectContactMomentenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetObjectContactMomentenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetObjectContactMomentenQuery({
+ *   variables: {
+ *      objectUrl: // value for 'objectUrl'
+ *   },
+ * });
+ */
+export function useGetObjectContactMomentenQuery(baseOptions: Apollo.QueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
+      }
+export function useGetObjectContactMomentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
+        }
+export type GetObjectContactMomentenQueryHookResult = ReturnType<typeof useGetObjectContactMomentenQuery>;
+export type GetObjectContactMomentenLazyQueryHookResult = ReturnType<typeof useGetObjectContactMomentenLazyQuery>;
+export type GetObjectContactMomentenQueryResult = Apollo.QueryResult<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>;
 export const GetPersoonDataDocument = gql`
     query GetPersoonData {
   getPersoon {
@@ -1084,6 +1138,7 @@ export const GetZaakDocument = gql`
     query GetZaak($id: UUID!) {
   getZaak(id: $id) {
     uuid
+    url
     omschrijving
     identificatie
     zaaktype {
