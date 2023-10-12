@@ -135,7 +135,7 @@ const TaskPage = () => {
 
   return (
       <section className={styles.case}>
-        {!error ? (
+        {!error? (
           <React.Fragment>
             <Helmet>
               <link
@@ -161,7 +161,7 @@ const TaskPage = () => {
               getSubmittedMessage()
             )}
           </React.Fragment> ) : (<Paragraph>
-              <FormattedMessage id="task.unAuthorized" />
+              <FormattedMessage id="tasks.fetchError" />
             </Paragraph>
           )}
     </section>
