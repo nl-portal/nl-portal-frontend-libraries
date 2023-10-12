@@ -4,7 +4,6 @@ export * from './notifications';
 export * from './themes';
 export * from './case';
 export * from './form';
-export * from './documents';
 export * from './offline';
 export * from './account';
 export * from './edit-account';

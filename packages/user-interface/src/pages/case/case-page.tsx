@@ -4,7 +4,7 @@ import {
   useGetTakenQuery,
   useGetObjectContactMomentenLazyQuery,
 } from '@nl-portal/nl-portal-api';
-import {FC, Fragment, ReactElement, useContext} from 'react';
+import {FC, Fragment, ReactElement} from 'react';
 import {Heading2, Heading3, Heading4, Paragraph} from '@gemeente-denhaag/components-react';
 import {Action} from '@gemeente-denhaag/action';
 import {DescriptionList} from '@gemeente-denhaag/descriptionlist';
@@ -16,12 +16,9 @@ import {
   TableHeader,
   TableRow,
 } from '@gemeente-denhaag/table';
-import {Link} from '@gemeente-denhaag/link';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
-import {ArrowRightIcon} from '@gemeente-denhaag/icons';
 import {Link as RouterLink} from 'react-router-dom';
-import {LocaleContext} from '@nl-portal/nl-portal-localization';
 import ContactTimelineMobile from '@gemeente-denhaag/contact-timeline';
 import {useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
@@ -56,19 +53,16 @@ const Task = ({task}: {task: any}) => {
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
   statusHistoryBackground?: ReactElement;
-  showDocumentsListLink?: boolean;
   showContactTimeline?: boolean;
 }
 
 const CasePage: FC<CasePageProps> = ({
   statusHistoryFacet,
   statusHistoryBackground,
-  showDocumentsListLink = false,
   showContactTimeline = false,
 }) => {
   const intl = useIntl();
   const query = useQuery();
-  const {hrefLang} = useContext(LocaleContext);
   const id = query.get('id');
   const {
     data: zaak,
@@ -80,9 +74,7 @@ const CasePage: FC<CasePageProps> = ({
   const [getMomenten, {data: contacten}] = useGetObjectContactMomentenLazyQuery();
   const {data: taken} = useGetTakenQuery({variables: {zaakId: id}});
 
-  const getDocumentsUrl = (caseId: string) => `/zaken/zaak/documenten?id=${caseId}`;
   const firstTask = taken?.getTaken?.content[0];
-
   const details = React.useMemo(() => {
     if (!zaak?.getZaak) return [];
 
@@ -218,20 +210,6 @@ const CasePage: FC<CasePageProps> = ({
             <Heading3 className={styles['case__sub-header']}>
               <FormattedMessage id="pageTitles.documents" />
             </Heading3>
-            {showDocumentsListLink &&
-              !loading &&
-              zaak?.getZaak?.documenten &&
-              zaak?.getZaak?.documenten.length > 0 && (
-                <Link
-                  component={RouterLink}
-                  to={getDocumentsUrl(id || '')}
-                  icon={<ArrowRightIcon />}
-                  iconAlign="end"
-                  hrefLang={hrefLang}
-                >
-                  <FormattedMessage id="case.showAllDocuments" />
-                </Link>
-              )}
             <DocumentList documents={loading ? undefined : zaak?.getZaak.documenten} />
           </div>
           {showContactTimeline && contactItems.length > 0 && (
