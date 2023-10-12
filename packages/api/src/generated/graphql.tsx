@@ -313,7 +313,7 @@ export type Taak = {
 
 export type TaakFormulier = {
   __typename?: 'TaakFormulier';
-  type: Scalars['String'];
+  formuliertype: Scalars['String'];
   value: Scalars['String'];
 };
 
@@ -381,6 +381,8 @@ export type ZaakType = {
   identificatie: Scalars['String'];
   omschrijving: Scalars['String'];
 };
+
+export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
 
 export type SubmitTaskMutationVariables = Exact<{
   id: Scalars['UUID'];
@@ -470,14 +472,14 @@ export type GetTaakByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', type: string, value: string } } };
+export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } } };
 
 export type GetTakenQueryVariables = Exact<{
   zaakId?: Maybe<Scalars['UUID']>;
 }>;
 
 
-export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, verloopdatum?: Maybe<any>, formulier: { __typename?: 'TaakFormulier', type: string, value: string } }> } };
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, verloopdatum?: Maybe<any>, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -491,7 +493,12 @@ export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
 
-
+export const FormulierFieldsFragmentDoc = gql`
+    fragment FormulierFields on TaakFormulier {
+  formuliertype
+  value
+}
+    `;
 export const SubmitTaskDocument = gql`
     mutation SubmitTask($id: UUID!, $submission: JSON!) {
   submitTask(id: $id, submission: $submission) {
@@ -1048,8 +1055,7 @@ export const GetTaakByIdDocument = gql`
   getTaakById(id: $id) {
     id
     formulier {
-      type
-      value
+      ...FormulierFields
     }
     formId
     status
@@ -1057,7 +1063,7 @@ export const GetTaakByIdDocument = gql`
     data
   }
 }
-    `;
+    ${FormulierFieldsFragmentDoc}`;
 
 /**
  * __useGetTaakByIdQuery__
@@ -1093,8 +1099,7 @@ export const GetTakenDocument = gql`
       id
       objectId
       formulier {
-        type
-        value
+        ...FormulierFields
       }
       formId
       title
@@ -1105,7 +1110,7 @@ export const GetTakenDocument = gql`
     }
   }
 }
-    `;
+    ${FormulierFieldsFragmentDoc}`;
 
 /**
  * __useGetTakenQuery__

@@ -18,7 +18,7 @@ const TasksPage = () => {
         <SubjectCard
           title={task.title}
           date={new Date(task.date)}
-          href={getTaskUrl(task.formulier.type, task.formulier.value, task.id)}
+          href={getTaskUrl(task.formulier.formuliertype, task.formulier.value, task.id)}
           Link={PortalLink}
         />
       </div>
