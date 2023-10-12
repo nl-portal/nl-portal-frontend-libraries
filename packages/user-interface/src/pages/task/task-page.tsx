@@ -150,6 +150,7 @@ const TaskPage = () => {
           submission={submission}
           onChange={setFormSubmission}
           onSubmit={onFormSubmit}
+          options={{noAlerts: true}}
         />
       ) : (
         getSubmittedMessage()
