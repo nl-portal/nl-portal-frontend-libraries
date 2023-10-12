@@ -313,8 +313,7 @@ export type Taak = {
 
 export type TaakFormulier = {
   __typename?: 'TaakFormulier';
-  /** @deprecated Formuliertype will be removed when underlying systems has been changed. Currently available for backwards compatibility */
-  formuliertype?: Maybe<Scalars['String']>;
+  formuliertype: Scalars['String'];
   value: Scalars['String'];
 };
 
@@ -383,7 +382,7 @@ export type ZaakType = {
   omschrijving: Scalars['String'];
 };
 
-export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype?: Maybe<string>, value: string };
+export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
 
 export type SubmitTaskMutationVariables = Exact<{
   id: Scalars['UUID'];
@@ -473,14 +472,14 @@ export type GetTaakByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', formuliertype?: Maybe<string>, value: string } } };
+export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } } };
 
 export type GetTakenQueryVariables = Exact<{
   zaakId?: Maybe<Scalars['UUID']>;
 }>;
 
 
-export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, verloopdatum?: Maybe<any>, formulier: { __typename?: 'TaakFormulier', formuliertype?: Maybe<string>, value: string } }> } };
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, verloopdatum?: Maybe<any>, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];

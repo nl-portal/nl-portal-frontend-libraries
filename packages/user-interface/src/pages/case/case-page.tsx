@@ -38,7 +38,7 @@ const Task = ({task}: {task: any}) => {
       <Action
         actions={
           <RouterLink
-            to={getTaskUrl(task.formulier.type, task.formulier.value, task.id)}
+            to={getTaskUrl(task.formulier.formuliertype, task.formulier.value, task.id)}
             className="utrecht-button-link utrecht-button-link--html-a"
           >
             Ga naar taak
