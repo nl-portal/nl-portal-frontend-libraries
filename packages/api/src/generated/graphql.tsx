@@ -16,8 +16,33 @@ export type Scalars = {
   Date: any;
   /** A type representing a formatted JSON */
   JSON: any;
+  /** A local date time */
+  LocalDateTime: any;
   /** A type representing a formatted java.util.UUID */
   UUID: any;
+};
+
+export type ContactMoment = {
+  __typename?: 'ContactMoment';
+  bronorganisatie?: Maybe<Scalars['String']>;
+  initiatiefnemer?: Maybe<Scalars['String']>;
+  kanaal: Scalars['String'];
+  medewerker?: Maybe<Scalars['String']>;
+  registratiedatum: Scalars['String'];
+  tekst: Scalars['String'];
+  volgendContactmoment?: Maybe<Scalars['String']>;
+  voorkeurskanaal?: Maybe<Scalars['String']>;
+  voorkeurstaal?: Maybe<Scalars['String']>;
+  vorigContactmoment?: Maybe<Scalars['String']>;
+};
+
+export type ContactMomentPage = {
+  __typename?: 'ContactMomentPage';
+  content: Array<ContactMoment>;
+  number: Scalars['Int'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int'];
+  totalElements: Scalars['Int'];
 };
 
 export type Document = {
@@ -45,7 +70,6 @@ export type Form = {
 export type FormDefinition = {
   __typename?: 'FormDefinition';
   formDefinition: Scalars['JSON'];
-  name: Scalars['String'];
 };
 
 export type Gemachtigde = {
@@ -73,9 +97,17 @@ export type MaatschappelijkeActiviteit = {
 export type Mutation = {
   __typename?: 'Mutation';
   /** Submit a task */
-  submitTask: Task;
+  submitTaak: Taak;
+  /** Submit a task */
+  submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
+};
+
+
+export type MutationSubmitTaakArgs = {
+  id: Scalars['UUID'];
+  submission: Scalars['JSON'];
 };
 
 
@@ -151,7 +183,10 @@ export type PersoonVerblijfplaats = {
 
 export type Query = {
   __typename?: 'Query';
-  /** find all form definitions from repository or Objects API */
+  /**
+   * find all form definitions from repository
+   * @deprecated This method is not used by the NL Portal frontend and is not being replaced.
+   */
   allFormDefinitions: Array<FormDefinition>;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
@@ -161,20 +196,34 @@ export type Query = {
   getBurgerProfiel?: Maybe<Klant>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
-  /** find single form definition from repository */
-  getFormDefinition?: Maybe<FormDefinition>;
-  /** find single form definition by ID from repository or ObjectsAPI */
+  /**
+   * find single form definition from repository or Objecten API
+   * @deprecated Replaced by getFormDefinitionByName and getFormDefinitionByObjectenApiUrl, replace with getFormDefinitionByName or getFormDefinitionByObjectenApiUrl
+   */
   getFormDefinitionById?: Maybe<FormDefinition>;
+  /** find single form definition from repository */
+  getFormDefinitionByName?: Maybe<FormDefinition>;
+  /** find single form definition from the Objecten API */
+  getFormDefinitionByObjectenApiUrl?: Maybe<FormDefinition>;
   /** Gets the forms available to the user */
   getFormList: Array<Form>;
   /** Gets the data of the gemachtigde */
   getGemachtigde: Gemachtigde;
+  /** Gets the contactmomenten of a klant */
+  getKlantContactMomenten?: Maybe<ContactMomentPage>;
+  /** Gets the contactmomenten of a object(zaak) */
+  getObjectContactMomenten?: Maybe<ContactMomentPage>;
   /** Gets the persoon data */
   getPersoon?: Maybe<Persoon>;
   /** Get task by id */
-  getTaskById: Task;
-  /** Get a list of tasks */
-  getTasks: TaskPage;
+  getTaakById: Taak;
+  /** Get a list of tasks. Optional filter for zaak */
+  getTaken: TaakPage;
+  /**
+   * Get a list of tasks
+   * @deprecated Replaced by getTaken
+   */
+  getTasks: TaakPage;
   /** Gets a zaak by id */
   getZaak: Zaak;
   /** Gets all zaken for the user */
@@ -187,18 +236,41 @@ export type QueryGetDocumentContentArgs = {
 };
 
 
-export type QueryGetFormDefinitionArgs = {
-  name: Scalars['String'];
-};
-
-
 export type QueryGetFormDefinitionByIdArgs = {
   id: Scalars['String'];
 };
 
 
-export type QueryGetTaskByIdArgs = {
+export type QueryGetFormDefinitionByNameArgs = {
+  name: Scalars['String'];
+};
+
+
+export type QueryGetFormDefinitionByObjectenApiUrlArgs = {
+  url: Scalars['String'];
+};
+
+
+export type QueryGetKlantContactMomentenArgs = {
+  pageNumber?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryGetObjectContactMomentenArgs = {
+  objectUrl: Scalars['String'];
+  pageNumber?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryGetTaakByIdArgs = {
   id: Scalars['UUID'];
+};
+
+
+export type QueryGetTakenArgs = {
+  pageNumber?: Maybe<Scalars['Int']>;
+  pageSize?: Maybe<Scalars['Int']>;
+  zaakUUID?: Maybe<Scalars['UUID']>;
 };
 
 
@@ -223,30 +295,48 @@ export type StatusType = {
   omschrijving?: Maybe<Scalars['String']>;
 };
 
-export type Task = {
-  __typename?: 'Task';
+export type Taak = {
+  __typename?: 'Taak';
   data: Scalars['JSON'];
   date: Scalars['String'];
+  /** @deprecated Use formulier type/value */
   formId: Scalars['String'];
+  formulier: TaakFormulier;
   id: Scalars['UUID'];
+  identificatie: TaakIdentificatie;
   objectId: Scalars['UUID'];
-  status: TaskStatus;
+  status: TaakStatus;
   title: Scalars['String'];
+  verloopdatum?: Maybe<Scalars['LocalDateTime']>;
+  zaak?: Maybe<Scalars['String']>;
 };
 
-export type TaskPage = {
-  __typename?: 'TaskPage';
-  content: Array<Task>;
+export type TaakFormulier = {
+  __typename?: 'TaakFormulier';
+  formuliertype: Scalars['String'];
+  value: Scalars['String'];
+};
+
+export type TaakIdentificatie = {
+  __typename?: 'TaakIdentificatie';
+  type: Scalars['String'];
+  value: Scalars['String'];
+};
+
+export type TaakPage = {
+  __typename?: 'TaakPage';
+  content: Array<Taak>;
   number: Scalars['Int'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int'];
+  results: Array<Taak>;
   size: Scalars['Int'];
   totalElements: Scalars['Int'];
   /** The total number of available pages */
   totalPages: Scalars['Int'];
 };
 
-export enum TaskStatus {
+export enum TaakStatus {
   Gesloten = 'GESLOTEN',
   Ingediend = 'INGEDIEND',
   Open = 'OPEN',
@@ -264,7 +354,14 @@ export type Zaak = {
   statussen: Array<StatusType>;
   url: Scalars['String'];
   uuid: Scalars['UUID'];
+  zaakdetails: ZaakDetails;
   zaaktype: ZaakType;
+};
+
+export type ZaakDetails = {
+  __typename?: 'ZaakDetails';
+  data: Array<Scalars['JSON']>;
+  zaak: Scalars['String'];
 };
 
 export type ZaakStatus = {
@@ -285,13 +382,15 @@ export type ZaakType = {
   omschrijving: Scalars['String'];
 };
 
+export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
+
 export type SubmitTaskMutationVariables = Exact<{
   id: Scalars['UUID'];
   submission: Scalars['JSON'];
 }>;
 
 
-export type SubmitTaskMutation = { __typename?: 'Mutation', submitTask: { __typename?: 'Task', id: any, objectId: any, formId: string, title: string, status: TaskStatus, date: string } };
+export type SubmitTaskMutation = { __typename?: 'Mutation', submitTask: { __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string } };
 
 export type UpdateBurgerProfielMutationVariables = Exact<{
   klant: KlantUpdateInput;
@@ -334,7 +433,7 @@ export type GetFormDefinitionByNameQueryVariables = Exact<{
 }>;
 
 
-export type GetFormDefinitionByNameQuery = { __typename?: 'Query', getFormDefinition?: Maybe<{ __typename?: 'FormDefinition', formDefinition: any }> };
+export type GetFormDefinitionByNameQuery = { __typename?: 'Query', getFormDefinitionByName?: Maybe<{ __typename?: 'FormDefinition', formDefinition: any }> };
 
 export type GetFormsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -346,6 +445,18 @@ export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetGemachtigdeQuery = { __typename?: 'Query', getGemachtigde: { __typename?: 'Gemachtigde', persoon?: Maybe<{ __typename?: 'PersoonNaam', aanhef?: Maybe<string>, voorletters?: Maybe<string>, voornamen?: Maybe<string>, voorvoegsel?: Maybe<string>, geslachtsnaam?: Maybe<string> }>, bedrijf?: Maybe<{ __typename?: 'MaatschappelijkeActiviteit', naam: string }> } };
 
+export type GetKlantContactMomentenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetKlantContactMomentenQuery = { __typename?: 'Query', getKlantContactMomenten?: Maybe<{ __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> }> };
+
+export type GetObjectContactMomentenQueryVariables = Exact<{
+  objectUrl: Scalars['String'];
+}>;
+
+
+export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectContactMomenten?: Maybe<{ __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> }> };
+
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -356,24 +467,38 @@ export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typename?: 'Persoon', naam?: Maybe<{ __typename?: 'PersoonNaam', voornamen?: Maybe<string>, voorvoegsel?: Maybe<string>, geslachtsnaam?: Maybe<string> }> }> };
 
-export type GetTasksQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetTaakByIdQueryVariables = Exact<{
+  id: Scalars['UUID'];
+}>;
 
 
-export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaskPage', content: Array<{ __typename?: 'Task', id: any, objectId: any, formId: string, title: string, status: TaskStatus, date: string, data: any }> } };
+export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } } };
+
+export type GetTakenQueryVariables = Exact<{
+  zaakId?: Maybe<Scalars['UUID']>;
+}>;
+
+
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, verloopdatum?: Maybe<any>, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
 
 
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: Maybe<string> }>, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid: any }> } };
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: Maybe<string> }>, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
 
 export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
 
-
+export const FormulierFieldsFragmentDoc = gql`
+    fragment FormulierFields on TaakFormulier {
+  formuliertype
+  value
+}
+    `;
 export const SubmitTaskDocument = gql`
     mutation SubmitTask($id: UUID!, $submission: JSON!) {
   submitTask(id: $id, submission: $submission) {
@@ -631,7 +756,7 @@ export type GetFormDefinitionByIdLazyQueryHookResult = ReturnType<typeof useGetF
 export type GetFormDefinitionByIdQueryResult = Apollo.QueryResult<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>;
 export const GetFormDefinitionByNameDocument = gql`
     query GetFormDefinitionByName($name: String!) {
-  getFormDefinition(name: $name) {
+  getFormDefinitionByName(name: $name) {
     formDefinition
   }
 }
@@ -742,6 +867,83 @@ export function useGetGemachtigdeLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type GetGemachtigdeQueryHookResult = ReturnType<typeof useGetGemachtigdeQuery>;
 export type GetGemachtigdeLazyQueryHookResult = ReturnType<typeof useGetGemachtigdeLazyQuery>;
 export type GetGemachtigdeQueryResult = Apollo.QueryResult<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>;
+export const GetKlantContactMomentenDocument = gql`
+    query GetKlantContactMomenten {
+  getKlantContactMomenten {
+    content {
+      tekst
+      kanaal
+      registratiedatum
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetKlantContactMomentenQuery__
+ *
+ * To run a query within a React component, call `useGetKlantContactMomentenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetKlantContactMomentenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetKlantContactMomentenQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetKlantContactMomentenQuery(baseOptions?: Apollo.QueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
+      }
+export function useGetKlantContactMomentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
+        }
+export type GetKlantContactMomentenQueryHookResult = ReturnType<typeof useGetKlantContactMomentenQuery>;
+export type GetKlantContactMomentenLazyQueryHookResult = ReturnType<typeof useGetKlantContactMomentenLazyQuery>;
+export type GetKlantContactMomentenQueryResult = Apollo.QueryResult<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>;
+export const GetObjectContactMomentenDocument = gql`
+    query GetObjectContactMomenten($objectUrl: String!) {
+  getObjectContactMomenten(objectUrl: $objectUrl) {
+    content {
+      tekst
+      kanaal
+      registratiedatum
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetObjectContactMomentenQuery__
+ *
+ * To run a query within a React component, call `useGetObjectContactMomentenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetObjectContactMomentenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetObjectContactMomentenQuery({
+ *   variables: {
+ *      objectUrl: // value for 'objectUrl'
+ *   },
+ * });
+ */
+export function useGetObjectContactMomentenQuery(baseOptions: Apollo.QueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
+      }
+export function useGetObjectContactMomentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
+        }
+export type GetObjectContactMomentenQueryHookResult = ReturnType<typeof useGetObjectContactMomentenQuery>;
+export type GetObjectContactMomentenLazyQueryHookResult = ReturnType<typeof useGetObjectContactMomentenLazyQuery>;
+export type GetObjectContactMomentenQueryResult = Apollo.QueryResult<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>;
 export const GetPersoonDataDocument = gql`
     query GetPersoonData {
   getPersoon {
@@ -848,52 +1050,100 @@ export function useGetPersoonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetPersoonQueryHookResult = ReturnType<typeof useGetPersoonQuery>;
 export type GetPersoonLazyQueryHookResult = ReturnType<typeof useGetPersoonLazyQuery>;
 export type GetPersoonQueryResult = Apollo.QueryResult<GetPersoonQuery, GetPersoonQueryVariables>;
-export const GetTasksDocument = gql`
-    query GetTasks {
-  getTasks {
-    content {
-      id
-      objectId
-      formId
-      title
-      status
-      date
-      data
+export const GetTaakByIdDocument = gql`
+    query GetTaakById($id: UUID!) {
+  getTaakById(id: $id) {
+    id
+    formulier {
+      ...FormulierFields
     }
+    formId
+    status
+    date
+    data
   }
 }
-    `;
+    ${FormulierFieldsFragmentDoc}`;
 
 /**
- * __useGetTasksQuery__
+ * __useGetTaakByIdQuery__
  *
- * To run a query within a React component, call `useGetTasksQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetTasksQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetTaakByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTaakByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetTasksQuery({
+ * const { data, loading, error } = useGetTaakByIdQuery({
  *   variables: {
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useGetTasksQuery(baseOptions?: Apollo.QueryHookOptions<GetTasksQuery, GetTasksQueryVariables>) {
+export function useGetTaakByIdQuery(baseOptions: Apollo.QueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetTasksQuery, GetTasksQueryVariables>(GetTasksDocument, options);
+        return Apollo.useQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
       }
-export function useGetTasksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTasksQuery, GetTasksQueryVariables>) {
+export function useGetTaakByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetTasksQuery, GetTasksQueryVariables>(GetTasksDocument, options);
+          return Apollo.useLazyQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
         }
-export type GetTasksQueryHookResult = ReturnType<typeof useGetTasksQuery>;
-export type GetTasksLazyQueryHookResult = ReturnType<typeof useGetTasksLazyQuery>;
-export type GetTasksQueryResult = Apollo.QueryResult<GetTasksQuery, GetTasksQueryVariables>;
+export type GetTaakByIdQueryHookResult = ReturnType<typeof useGetTaakByIdQuery>;
+export type GetTaakByIdLazyQueryHookResult = ReturnType<typeof useGetTaakByIdLazyQuery>;
+export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaakByIdQueryVariables>;
+export const GetTakenDocument = gql`
+    query GetTaken($zaakId: UUID) {
+  getTaken(zaakUUID: $zaakId) {
+    content {
+      id
+      objectId
+      formulier {
+        ...FormulierFields
+      }
+      formId
+      title
+      status
+      date
+      data
+      verloopdatum
+    }
+  }
+}
+    ${FormulierFieldsFragmentDoc}`;
+
+/**
+ * __useGetTakenQuery__
+ *
+ * To run a query within a React component, call `useGetTakenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTakenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTakenQuery({
+ *   variables: {
+ *      zaakId: // value for 'zaakId'
+ *   },
+ * });
+ */
+export function useGetTakenQuery(baseOptions?: Apollo.QueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
+      }
+export function useGetTakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
+        }
+export type GetTakenQueryHookResult = ReturnType<typeof useGetTakenQuery>;
+export type GetTakenLazyQueryHookResult = ReturnType<typeof useGetTakenLazyQuery>;
+export type GetTakenQueryResult = Apollo.QueryResult<GetTakenQuery, GetTakenQueryVariables>;
 export const GetZaakDocument = gql`
     query GetZaak($id: UUID!) {
   getZaak(id: $id) {
     uuid
+    url
     omschrijving
     identificatie
     zaaktype {
@@ -926,6 +1176,10 @@ export const GetZaakDocument = gql`
       identificatie
       titel
       uuid
+    }
+    zaakdetails {
+      data
+      zaak
     }
   }
 }

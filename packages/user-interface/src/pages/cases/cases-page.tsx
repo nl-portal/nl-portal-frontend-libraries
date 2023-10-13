@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
-import {Heading2, Tabs, Tab, TabContext, TabPanel} from '@gemeente-denhaag/components-react';
+import {Heading2} from '@gemeente-denhaag/components-react';
+import Tabs from '@gemeente-denhaag/tab';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useHistory, useLocation} from 'react-router-dom';
 import {CasesList} from '../../components/cases-list';
 import styles from './cases-page.module.scss';
-import {useMediaQuery, useQuery} from '../../hooks';
-import {BREAKPOINTS} from '../../constants';
+import {useQuery} from '../../hooks';
 
 interface CasesPageProps {
   showCaseIdentification?: boolean;
@@ -15,7 +15,6 @@ interface CasesPageProps {
 const CasesPage: FC<CasesPageProps> = ({showCaseIdentification}) => {
   const [tabNumber, setTabNumber] = useState(0);
   const intl = useIntl();
-  const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const TAB_QUERY_PARAM = 'tab';
   const location = useLocation();
   const history = useHistory();
@@ -34,6 +33,17 @@ const CasesPage: FC<CasesPageProps> = ({showCaseIdentification}) => {
     }
   }, [queryTab]);
 
+  const tabData = [
+    {
+      label: intl.formatMessage({id: 'titles.currentCases'}),
+      panelContent: <CasesList showCaseIdentification={showCaseIdentification} />,
+    },
+    {
+      label: intl.formatMessage({id: 'titles.completedCases'}),
+      panelContent: <CasesList completed showCaseIdentification={showCaseIdentification} />,
+    },
+  ];
+
   return (
     <section className={styles.cases}>
       <header className={styles.cases__header}>
@@ -41,24 +51,7 @@ const CasesPage: FC<CasesPageProps> = ({showCaseIdentification}) => {
           <FormattedMessage id="pageTitles.cases" />
         </Heading2>
       </header>
-      <TabContext value={tabNumber.toString()}>
-        <Tabs
-          variant={isTablet ? 'standard' : 'fullWidth'}
-          value={tabNumber}
-          onChange={(_event: React.ChangeEvent<unknown>, newValue: number) => {
-            setTabNumber(newValue);
-          }}
-        >
-          <Tab label={intl.formatMessage({id: 'titles.currentCases'})} value={0} />
-          <Tab label={intl.formatMessage({id: 'titles.completedCases'})} value={1} />
-        </Tabs>
-        <TabPanel value="0">
-          <CasesList showCaseIdentification={showCaseIdentification} />
-        </TabPanel>
-        <TabPanel value="1">
-          <CasesList completed showCaseIdentification={showCaseIdentification} />
-        </TabPanel>
-      </TabContext>
+      <Tabs tabData={tabData} />
     </section>
   );
 };

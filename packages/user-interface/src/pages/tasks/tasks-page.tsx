@@ -4,23 +4,21 @@ import {Heading2, Paragraph} from '@gemeente-denhaag/components-react';
 import {SubjectCard} from '@gemeente-denhaag/card';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
-import {useGetTasksQuery} from '@nl-portal/nl-portal-api';
+import {useGetTakenQuery} from '@nl-portal/nl-portal-api';
 import styles from './tasks-page.module.scss';
-import {PortalLink} from '../../utils';
+import {PortalLink, getTaskUrl} from '../../utils';
 
 const TasksPage = () => {
   const intl = useIntl();
-  const {data, loading, error, refetch} = useGetTasksQuery();
-  const getTaskUrl = (formulierId: string, verwerkerTaakId: string) =>
-    `/taken/taak?formulier=${formulierId}&id=${verwerkerTaakId}`;
+  const {data, loading, error, refetch} = useGetTakenQuery();
 
   const getTaskCards = () =>
-    data?.getTasks?.content?.map(task => (
+    data?.getTaken?.content?.map(task => (
       <div className={styles.tasks__card} key={task.id}>
         <SubjectCard
           title={task.title}
           date={new Date(task.date)}
-          href={getTaskUrl(task.formId, task.id)}
+          href={getTaskUrl(task.formulier.formuliertype, task.formulier.value, task.id)}
           Link={PortalLink}
         />
       </div>

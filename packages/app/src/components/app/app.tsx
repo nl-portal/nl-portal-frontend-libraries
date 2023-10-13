@@ -9,7 +9,6 @@ import {
   AccountPage,
   CasePage,
   CasesPage,
-  DocumentsPage,
   EditAccountPage,
   FormPage,
   FormsPage,
@@ -33,7 +32,13 @@ import StatusHistoryBackground from '../../assets/status-history-background.svg'
 const pages: Array<PortalPage> = [
   {
     icon: <GridIcon />,
-    pageComponent: <OverviewPage openFormsFormId={config.OPEN_FORMS_FORM_ID} />,
+    pageComponent: (
+      <OverviewPage
+        openFormsFormId={config.OPEN_FORMS_FORM_ID}
+        showCasesPreview
+        casesPreviewLength={6}
+      />
+    ),
     path: '/',
     titleTranslationKey: 'overview',
     showInMenu: true,
@@ -59,6 +64,7 @@ const pages: Array<PortalPage> = [
         icon: <ArchiveIcon />,
         pageComponent: (
           <CasePage
+            showContactTimeline
             statusHistoryFacet={<img src={Facet} alt="" />}
             statusHistoryBackground={<img src={StatusHistoryBackground} alt="" />}
           />
@@ -66,12 +72,6 @@ const pages: Array<PortalPage> = [
         path: '/zaak',
         titleTranslationKey: 'cases',
         showLinkToParent: true,
-      },
-      {
-        icon: <ArchiveIcon />,
-        pageComponent: <DocumentsPage />,
-        path: '/zaak/documenten',
-        titleTranslationKey: 'cases',
       },
     ],
   },

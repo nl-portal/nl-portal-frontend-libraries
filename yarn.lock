@@ -1856,6 +1856,16 @@
   resolved "https://registry.yarnpkg.com/@formio/vanilla-text-mask/-/vanilla-text-mask-5.1.1.tgz#2bd690a34b0e191b7f23a589ff1c2497564307de"
   integrity sha512-7MhrbMypySPi7RLchg0ys7HnS3Wqddbq/btAijKB1nA94TE7AOOLhpZJWcNm3kOlX0Y3nHfoavj/HP7vsvF34Q==
 
+"@gemeente-denhaag/action@0.1.1-alpha.11":
+  version "0.1.1-alpha.11"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/action/-/action-0.1.1-alpha.11.tgz#785034d6bee0922a60d76d82dd29c80e01be21d0"
+  integrity sha512-TqoEgQaso6asYe42BaHb2JF3oUIbEbIappdnD1UAE5xrmWcQvpgZHJKjwqsogr+14T3wV6UqlaX3TuKRByOfEQ==
+  dependencies:
+    "@gemeente-denhaag/button" "0.2.3-alpha.345"
+    "@gemeente-denhaag/icons" "0.2.3-alpha.345"
+    "@gemeente-denhaag/link" "0.2.3-alpha.345"
+    date-fns "2.30.0"
+
 "@gemeente-denhaag/alert@0.1.1-alpha.278":
   version "0.1.1-alpha.278"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/alert/-/alert-0.1.1-alpha.278.tgz#925ac7f96600b2a3303e36156c5eb14e8801447c"
@@ -1900,13 +1910,6 @@
   dependencies:
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.308"
 
-"@gemeente-denhaag/basedatadisplayprops@0.2.3-alpha.311":
-  version "0.2.3-alpha.311"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/basedatadisplayprops/-/basedatadisplayprops-0.2.3-alpha.311.tgz#7c7a0444ae395a4d01b68dcfeeaabf006cd4abcb"
-  integrity sha512-AzifY346FLQRMTCjknch/tF3oVafxMiwKmByaoNG2UgwExHbvmK541rJhCYWhB+wqh5YwHoyE7CpMxyqQL083Q==
-  dependencies:
-    "@gemeente-denhaag/baseprops" "0.2.3-alpha.311"
-
 "@gemeente-denhaag/basedatadisplayprops@0.2.3-alpha.312":
   version "0.2.3-alpha.312"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/basedatadisplayprops/-/basedatadisplayprops-0.2.3-alpha.312.tgz#a5f6290126263fcccef1b8f2f22181eb1477c59c"
@@ -1921,15 +1924,24 @@
   dependencies:
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.321"
 
+"@gemeente-denhaag/basedatadisplayprops@0.2.3-alpha.347":
+  version "0.2.3-alpha.347"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/basedatadisplayprops/-/basedatadisplayprops-0.2.3-alpha.347.tgz#89fe9c052b1ef3d5fc8c7fbbe08604fb7cd3fdf4"
+  integrity sha512-JJUd0St9zBjNmk0D1WuNf4wyTKXDFEhNiQcIcGkSaq8mxR7ADOeQuvR0STQFclJW7Is8B5TPfJ+LLVQJ0o9wDg==
+  dependencies:
+    "@gemeente-denhaag/baseprops" "0.2.3-alpha.347"
+
+"@gemeente-denhaag/basedatadisplayprops@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/basedatadisplayprops/-/basedatadisplayprops-0.2.3-alpha.348.tgz#56dfc1e954df878089eed92aa7a8ec0640effb8e"
+  integrity sha512-NCLkYURp8YRJF9k9Y8MyRoWDhYCzU6l2mI+WcmM0Xx9S00bTakjXz+xbIZGzvPxG8IUUjifFBH98FUoCYFNB8A==
+  dependencies:
+    "@gemeente-denhaag/baseprops" "0.2.3-alpha.348"
+
 "@gemeente-denhaag/baseprops@0.2.3-alpha.308":
   version "0.2.3-alpha.308"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.308.tgz#5b8b35a6cbc53807ad83791ddcf72c380add0f84"
   integrity sha512-PnONBQE4lkgO5HRsqrP5SKx/CsfxD5+W0VaBMcREDcDWginBdC9r8f4wOVbOZITYoQ0Hz4vCh6nhbky0U9SiSQ==
-
-"@gemeente-denhaag/baseprops@0.2.3-alpha.311":
-  version "0.2.3-alpha.311"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.311.tgz#2fdb847194259317b86906e08ce3c9cbc0784112"
-  integrity sha512-0a/t2jtRm3OFGsAnncCZbn7ASzNOd55y57Y+XdLramSW9A5LPHaMolz8h+IoO7rdfT9i9zQrJvLDkX5GbytPVA==
 
 "@gemeente-denhaag/baseprops@0.2.3-alpha.312":
   version "0.2.3-alpha.312"
@@ -1940,6 +1952,21 @@
   version "0.2.3-alpha.321"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.321.tgz#2fe809cd3b5873ba4490e588970763915f534557"
   integrity sha512-tbKg6iToPBhnVEwSSPq3V1I8YmknPXSkEcGOsHSsqbqN6my3kdgoZgamWbk/WA6IzoNaic+3T2pTmUcGfcCASA==
+
+"@gemeente-denhaag/baseprops@0.2.3-alpha.345":
+  version "0.2.3-alpha.345"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.345.tgz#90a9ed501be0ec275dcb472d1f75693b9e47da46"
+  integrity sha512-UihPV6rp0ntq/D3yWWsNrv9RAzDu3jNJIoin0BabB4cWaRxWVNfQxXqMDrqXWptBhFTPIOoSxbT1zNz0S/tr4Q==
+
+"@gemeente-denhaag/baseprops@0.2.3-alpha.347":
+  version "0.2.3-alpha.347"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.347.tgz#b30e29b98e73aa15d5ef383ec4e1ac92c672b111"
+  integrity sha512-JcA9qf7uVhePFtf+8USU1nZI8a/TYlZ7sNOEJ9x9bg2uA+adlHuwLYsSU1NoLstbG4yf1TDfHq7AlEhqag1Wog==
+
+"@gemeente-denhaag/baseprops@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/baseprops/-/baseprops-0.2.3-alpha.348.tgz#8bf935873211816e3df68e5c6169df10f5285b98"
+  integrity sha512-OpEyUOJQgFRe6Dg2fjJOMAGMZGbYK460EkIEJNrfhDlrFKvk1mZSO4WK83XWA5JCIH5iubGBwljuUPjczalYMw==
 
 "@gemeente-denhaag/baseprops@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
@@ -1972,6 +1999,13 @@
   dependencies:
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.321"
 
+"@gemeente-denhaag/button@0.2.3-alpha.345":
+  version "0.2.3-alpha.345"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/button/-/button-0.2.3-alpha.345.tgz#141bd79d984af6d13a3b90f99f087c955ca3fbba"
+  integrity sha512-oNmoRTJSDORzIyamFdQ4d/xbntOxCnbs+tELGiEkWr2WIwahveYyyzMBb8YsFByVvUiC+GE9UQSEvqrJGD9MOg==
+  dependencies:
+    "@gemeente-denhaag/baseprops" "0.2.3-alpha.345"
+
 "@gemeente-denhaag/card@0.2.3-alpha.321":
   version "0.2.3-alpha.321"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/card/-/card-0.2.3-alpha.321.tgz#a86d231ade27706b8b7cbe4c165e4005b2e85332"
@@ -1980,6 +2014,15 @@
     "@gemeente-denhaag/icons" "0.2.3-alpha.321"
     "@gemeente-denhaag/link" "0.2.3-alpha.321"
     "@gemeente-denhaag/typography" "0.2.3-alpha.321"
+
+"@gemeente-denhaag/card@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/card/-/card-0.2.3-alpha.348.tgz#281c1b9945ef143281c4f27d94fe4c0ab24c1b57"
+  integrity sha512-qCDHZlt5TdbqLuqTOiLnBND+v7+GK9ZtEbab+cYskg1bSAL/UakHXnllF7fTYf1to+xUquIjVcce49EIa5ZJgA==
+  dependencies:
+    "@gemeente-denhaag/icons" "0.2.3-alpha.348"
+    "@gemeente-denhaag/link" "0.2.3-alpha.348"
+    "@gemeente-denhaag/typography" "0.2.3-alpha.348"
 
 "@gemeente-denhaag/checkbox@0.2.3-alpha.321":
   version "0.2.3-alpha.321"
@@ -2030,6 +2073,17 @@
     "@gemeente-denhaag/timeline" "0.2.3-alpha.321"
     "@gemeente-denhaag/typography" "0.2.3-alpha.321"
 
+"@gemeente-denhaag/contact-timeline@0.1.1-alpha.5":
+  version "0.1.1-alpha.5"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/contact-timeline/-/contact-timeline-0.1.1-alpha.5.tgz#d05cbdec4c24c1749ef55dfe7a14cf2166a38a12"
+  integrity sha512-QWmWldRMr5Ym4v3OC8+jz1MbPs/lW3v0mPFJW69ccziD4Xii66Ik9FrLATmX8LRuE2r1k6MQN0cUb0Np5Q+PEg==
+  dependencies:
+    "@gemeente-denhaag/process-steps" "0.1.0-alpha.176"
+    "@gemeente-denhaag/step-marker" "0.0.1-alpha.48"
+    "@gemeente-denhaag/typography" "0.2.3-alpha.347"
+    clsx "2.0.0"
+    date-fns "2.30.0"
+
 "@gemeente-denhaag/datepicker@0.1.1-alpha.241":
   version "0.1.1-alpha.241"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/datepicker/-/datepicker-0.1.1-alpha.241.tgz#ea237dbd225349cdf7c1a201e2b8c8c107237bba"
@@ -2038,10 +2092,15 @@
     "@gemeente-denhaag/icons" "0.2.3-alpha.321"
     date-fns "2.30.0"
 
-"@gemeente-denhaag/design-tokens-components@0.2.3-alpha.321":
-  version "0.2.3-alpha.321"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/design-tokens-components/-/design-tokens-components-0.2.3-alpha.321.tgz#e210028fe25c69d6be697129a7548bbb079da72b"
-  integrity sha512-gaVYIW/deuxZQZpMaqv15gMl5VcT4tbt5jK/Ec1kuzBFzc6vYfEHHHxNnSzfvyRcGw3NxIkS7v3Fpzs0py56Ig==
+"@gemeente-denhaag/descriptionlist@0.1.1-alpha.234":
+  version "0.1.1-alpha.234"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/descriptionlist/-/descriptionlist-0.1.1-alpha.234.tgz#044037906969758a195b760e5a493a0cc036f92a"
+  integrity sha512-0ZkskJrPfjf9DklZrEO0uwhzQpwA9prgqRc3iJBIT/s68OhLOg7XNpEcw93wxnftAkXTNZzCIuDi0+qI9Bj+Fw==
+
+"@gemeente-denhaag/design-tokens-components@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/design-tokens-components/-/design-tokens-components-0.2.3-alpha.348.tgz#7fe0226a234b68fe6bf37f00453ae15312dafb03"
+  integrity sha512-3KramxwlbDRixMEggWmprcXeZ9NJMakXZTKXVUgzTLslUM8fWt5x0Hy1r93U3MxE2FUgMo244uX/19mwLkZz4A==
 
 "@gemeente-denhaag/divider@0.2.3-alpha.321":
   version "0.2.3-alpha.321"
@@ -2128,11 +2187,6 @@
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.308.tgz#3d85ae18c97cb6e8e9668ee47b69f776faed705d"
   integrity sha512-LOw3rVuUyM11mDqF3Lxqsapm4rjt8N8eMW1bV9Q9azqiEQpeB1Uf21eII8+AUyqG1nZlis6iyAZ6MUVTb4P+Tg==
 
-"@gemeente-denhaag/icons@0.2.3-alpha.311":
-  version "0.2.3-alpha.311"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.311.tgz#b7301f449fbe0792ac89ed9c5b4f0a99dcae0bb4"
-  integrity sha512-MnJig+JkzgwKchCTTaAxLzk1aQI9H2RMag0ZHdsYSIADq1XxCt4RjLqKUcQy+IBJT4NlwdlKS0HmUfAv6BNV7w==
-
 "@gemeente-denhaag/icons@0.2.3-alpha.312":
   version "0.2.3-alpha.312"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.312.tgz#1d9ea58413fe70a6acc1e2a711764153f72fb3f4"
@@ -2142,6 +2196,21 @@
   version "0.2.3-alpha.321"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.321.tgz#20ed80433c526bc168a60ede29f31782b3f547b7"
   integrity sha512-bjQDUm4S68cDl43Kjo5QCLIz+r6N6cz5S4YoWwheA6vHhtOIIiVXZHMcmNGXZVnH3tOpi16ma2OadX0fhYsl3A==
+
+"@gemeente-denhaag/icons@0.2.3-alpha.345":
+  version "0.2.3-alpha.345"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.345.tgz#0cf67c39f8f2c436e03bae94589184f10705289a"
+  integrity sha512-tMROUKCRMN8DTlyldRZYI5F5N8x7frL/pnlWauz6JMCgfTr+SnKPReC4C+SWYJkKbd1vQaVgLZ16afTxgAWzuQ==
+
+"@gemeente-denhaag/icons@0.2.3-alpha.347":
+  version "0.2.3-alpha.347"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.347.tgz#ce88d7c4e432bf7bf1d222a838b7e1d671378f16"
+  integrity sha512-DhuT2ITFncoWlS8RSDKIeQG5IIUALNnNcXrx2tWERaw6LEjogiBEfWTicevMB+ezCbj4aQ9dn2cef+Pcjzgykw==
+
+"@gemeente-denhaag/icons@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.348.tgz#a3dea92f0e3cd255e0a2fc26012ddbd0e04d52b4"
+  integrity sha512-XPFoQblXjPLZ+cbRdJQKK2djinPXlJBjXZdVtI7Jvnzsc0YJvXZ+A9PJinb+oup9b4lOqI/E0JSJN4T7O2MHVA==
 
 "@gemeente-denhaag/icons@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
@@ -2197,6 +2266,22 @@
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.321"
     "@gemeente-denhaag/icons" "0.2.3-alpha.321"
 
+"@gemeente-denhaag/link@0.2.3-alpha.345":
+  version "0.2.3-alpha.345"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/link/-/link-0.2.3-alpha.345.tgz#f508359c9417385e12bcd3e69189b02497eca383"
+  integrity sha512-SWjdH+KRf8jjrW7LYM5BZnR+L2LN0mpBJAvCYTMxaCfCcto9rRycluNAytxMqG4+WXKTTnbdMexpulOef7uziw==
+  dependencies:
+    "@gemeente-denhaag/baseprops" "0.2.3-alpha.345"
+    "@gemeente-denhaag/icons" "0.2.3-alpha.345"
+
+"@gemeente-denhaag/link@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/link/-/link-0.2.3-alpha.348.tgz#72a7b993cbb18014c1da4e8a902d106091b68b49"
+  integrity sha512-sExPQ6ks1PEJjr+nkKi3Xt+kFgJ/2xEjRQQw5XtwsKN9Hy+nA0k36PfnOjnQaL5FLdQ8spL4cJn9oOScGaBZGA==
+  dependencies:
+    "@gemeente-denhaag/baseprops" "0.2.3-alpha.348"
+    "@gemeente-denhaag/icons" "0.2.3-alpha.348"
+
 "@gemeente-denhaag/link@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/link/-/link-0.2.3-alpha.70.tgz#24c1f197fa89585ccb0f7e0979bca2e7a4277487"
@@ -2245,15 +2330,15 @@
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/page/-/page-0.1.1-alpha.172.tgz#cac81d74d79347cf5c7709964ae50f070d62d7ac"
   integrity sha512-+k8SyYWaIodNngKr3lgd3/+tirxL8x51mQtb3p5n+0bPChPLg6C0iH6P/NAASsGzZ0ViCk7vNZ1Lov+4ib2ypQ==
 
-"@gemeente-denhaag/process-steps@^0.1.0-alpha.140":
-  version "0.1.0-alpha.140"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/process-steps/-/process-steps-0.1.0-alpha.140.tgz#36cce7e55e1305b205c75034ff10327dc4598b0c"
-  integrity sha512-N+kpFlXunRYEG7DpCo5zUpUYMtcBGRATqOEZA1jYYKeguCOc6eI5eS8khJGm1LvkND7TN4P42lR0LQc3wq3kqQ==
+"@gemeente-denhaag/process-steps@0.1.0-alpha.176":
+  version "0.1.0-alpha.176"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/process-steps/-/process-steps-0.1.0-alpha.176.tgz#423acccb899eebd5cb9138593526a6eab27546f5"
+  integrity sha512-axIZ1rgnNXpwGux3U6rWWL4wbwqw7ZzsqIeRK4HS7RUzD9etOTLkCSz+nZ/9ai8SxAJAD8o0hUqNUTAFH6u+gg==
   dependencies:
-    "@gemeente-denhaag/baseprops" "0.2.3-alpha.311"
-    "@gemeente-denhaag/icons" "0.2.3-alpha.311"
-    "@gemeente-denhaag/step-marker" "0.0.1-alpha.12"
-    "@gemeente-denhaag/typography" "0.2.3-alpha.311"
+    "@gemeente-denhaag/baseprops" "0.2.3-alpha.347"
+    "@gemeente-denhaag/icons" "0.2.3-alpha.347"
+    "@gemeente-denhaag/step-marker" "0.0.1-alpha.48"
+    "@gemeente-denhaag/typography" "0.2.3-alpha.347"
 
 "@gemeente-denhaag/radio@0.2.3-alpha.321":
   version "0.2.3-alpha.321"
@@ -2288,10 +2373,10 @@
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/sidenav/-/sidenav-0.1.0-alpha.126.tgz#159146783f32085af096f6435ff0bf361f9201d0"
   integrity sha512-5HEv0ok0qTROOns2DqgfjKSy7cRMbdm4cRztOj6lm1l98VSTJXy6FSrbOu2gIzxAJfm80WSwv28og8RkRBesmA==
 
-"@gemeente-denhaag/step-marker@0.0.1-alpha.12":
-  version "0.0.1-alpha.12"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/step-marker/-/step-marker-0.0.1-alpha.12.tgz#52873cbc18b275d3eddb204c08b498759540c121"
-  integrity sha512-PbgfV9ToNdpzZqEFxMPYaeHjJ9WOfOPujdp48vo2/2DLxZadZVTKdZvU0m/OzM1ryIstzuvDGRRpSU+2Aq5BAw==
+"@gemeente-denhaag/step-marker@0.0.1-alpha.48":
+  version "0.0.1-alpha.48"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/step-marker/-/step-marker-0.0.1-alpha.48.tgz#4a8cff0a8e42b6b4557f6fb946291d18f44e7709"
+  integrity sha512-Oke9yu49+DKR9wsIIpqsiJf5JFXItDQniS/vZxezYPW6OC2csydRkgTlbX0MMKILMNsMKpASV56TVnML3d4Sww==
 
 "@gemeente-denhaag/stylesprovider@0.1.1-alpha.321":
   version "0.1.1-alpha.321"
@@ -2316,6 +2401,18 @@
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.321"
     "@material-ui/core" "4.12.4"
     "@material-ui/lab" "4.11.3-deprecations.1"
+
+"@gemeente-denhaag/tab@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/tab/-/tab-0.2.3-alpha.348.tgz#8e6e68a670357eee13ed1d504d8e644b728bc6ed"
+  integrity sha512-/jzsq4W/41lIjNF8BMx69WDnk5W30DvfZUgG8khzk926CO4OroFDqr3+frSV/csp8MnFmx9/fBcBJYKRo/cbXg==
+  dependencies:
+    uuid "9.0.1"
+
+"@gemeente-denhaag/table@0.1.1-alpha.228":
+  version "0.1.1-alpha.228"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/table/-/table-0.1.1-alpha.228.tgz#ab2a05f985ac45ee476ae57927b47a7404b43d0f"
+  integrity sha512-Xf8Xvok6+Q5iVBnPe3UvUAu6BHVF+sx6T4m+beMFoc1b8LzhSLJWgWi9eGEN5LwCWg/sBmDBF3mKtLvC6z792g==
 
 "@gemeente-denhaag/textfield@0.2.3-alpha.321":
   version "0.2.3-alpha.321"
@@ -2349,13 +2446,6 @@
   dependencies:
     "@gemeente-denhaag/basedatadisplayprops" "0.2.3-alpha.308"
 
-"@gemeente-denhaag/typography@0.2.3-alpha.311":
-  version "0.2.3-alpha.311"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/typography/-/typography-0.2.3-alpha.311.tgz#3ec5b10d2a19a0acfbbe8cbc90cc176e2598c0e1"
-  integrity sha512-IJDSQdlQXnbt8HPu8vwa1CMy8NAtQcYgUY78IQCxoy06py9qUZIRAg6DeL0z0HoCiHC2VAuSzm1rQu3hs6wo8Q==
-  dependencies:
-    "@gemeente-denhaag/basedatadisplayprops" "0.2.3-alpha.311"
-
 "@gemeente-denhaag/typography@0.2.3-alpha.312":
   version "0.2.3-alpha.312"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/typography/-/typography-0.2.3-alpha.312.tgz#ed38218bd31e79b190908c7d74d66517ef01f8f6"
@@ -2369,6 +2459,20 @@
   integrity sha512-RS09r8lGHvjZMDJSsfK1rCTkcl5vmalz/kDi6MU77uP5QBLq+5v7qLsO2qVwfcR25xE2kWYJYyfnzzdzjxIiSg==
   dependencies:
     "@gemeente-denhaag/basedatadisplayprops" "0.2.3-alpha.321"
+
+"@gemeente-denhaag/typography@0.2.3-alpha.347":
+  version "0.2.3-alpha.347"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/typography/-/typography-0.2.3-alpha.347.tgz#952d4a68001bbd2b6c54cc1fcf906fbd951d4b8c"
+  integrity sha512-Q+jbxyagvAx1uhAmRMMB+J9ihWVJUaVqefMiSLPnzOS+0x3Xmb9GllGwNib8m0Rfk/9Vtq3x1O42WbEY3eK/Ig==
+  dependencies:
+    "@gemeente-denhaag/basedatadisplayprops" "0.2.3-alpha.347"
+
+"@gemeente-denhaag/typography@0.2.3-alpha.348":
+  version "0.2.3-alpha.348"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/typography/-/typography-0.2.3-alpha.348.tgz#379e36511b29687b172dc8fd19df04852fcbe048"
+  integrity sha512-ZuOjUtfL0M1Yl3ERgnE36jE9c3EB1VnELKI735pBOjWp7IakTKoNSSNIusNj1AyVsng3ZTxiZA1b0bedoTIiSg==
+  dependencies:
+    "@gemeente-denhaag/basedatadisplayprops" "0.2.3-alpha.348"
 
 "@graphql-codegen/cli@2.2.0":
   version "2.2.0"
@@ -5046,6 +5150,11 @@
   resolved "https://registry.yarnpkg.com/@utrecht/component-library-css/-/component-library-css-1.0.0-alpha.497.tgz#9eb3344834dbe1e41309a12a6948c1a77ee3c4e3"
   integrity sha512-tzm/LN5XktEm4k6cQWMoFnTkGoc2J6Ee7K/NFo+EoEl0JqsTqDVlg6f6p/dk/sn89z+v7nnZbKWUK2iOMG5R3A==
 
+"@utrecht/component-library-css@1.0.0-alpha.589":
+  version "1.0.0-alpha.589"
+  resolved "https://registry.yarnpkg.com/@utrecht/component-library-css/-/component-library-css-1.0.0-alpha.589.tgz#0f51478cc6f1586e2467e633c9cf7c2184a16574"
+  integrity sha512-/X7uYr+it/io3+w/K+E9BPMW9src6lrX8348JQl/6CD4mOiQm5KF9nyW6ZSb0oAIBOEzKKuWXpllAdtbS0760g==
+
 "@utrecht/component-library-react@1.0.0-alpha.307":
   version "1.0.0-alpha.307"
   resolved "https://registry.yarnpkg.com/@utrecht/component-library-react/-/component-library-react-1.0.0-alpha.307.tgz#21e00cf7cdee85454187d29b8714ddec62549e1b"
@@ -7157,6 +7266,11 @@ clsx@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
   integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
+
+clsx@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-2.0.0.tgz#12658f3fd98fafe62075595a5c30e43d18f3d00b"
+  integrity sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==
 
 clsx@^1.0.4:
   version "1.1.1"
@@ -16388,20 +16502,21 @@ react-error-overlay@^6.0.9:
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
-react-fast-compare@^3.1.1, react-fast-compare@^3.2.0:
+react-fast-compare@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.0.tgz"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
-react-helmet@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-6.1.0.tgz#a750d5165cb13cf213e44747502652e794468726"
-  integrity sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==
+react-helmet-async@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-helmet-async/-/react-helmet-async-1.3.0.tgz#7bd5bf8c5c69ea9f02f6083f14ce33ef545c222e"
+  integrity sha512-9jZ57/dAn9t3q6hneQS0wukqC2ENOBgMNVEhb/ZG9ZSxUetzVIw4iAmEU38IaVg3QGYauQPhSeUTuIUtFglWpg==
   dependencies:
-    object-assign "^4.1.1"
+    "@babel/runtime" "^7.12.5"
+    invariant "^2.2.4"
     prop-types "^15.7.2"
-    react-fast-compare "^3.1.1"
-    react-side-effect "^2.1.0"
+    react-fast-compare "^3.2.0"
+    shallowequal "^1.1.0"
 
 react-intl@^5.20.10:
   version "5.20.10"
@@ -16535,11 +16650,6 @@ react-scripts@4.0.3:
     workbox-webpack-plugin "5.1.4"
   optionalDependencies:
     fsevents "^2.1.3"
-
-react-side-effect@^2.1.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-2.1.1.tgz#66c5701c3e7560ab4822a4ee2742dee215d72eb3"
-  integrity sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
 
 react-transition-group@^4.4.0:
   version "4.4.2"
@@ -17544,6 +17654,11 @@ shallow-clone@^3.0.0:
   integrity sha512-/6KqX+GVUdqPuPPd2LxDDxzX6CAbjJehAAOKlNpqqUpAqPM6HeL8f+o3a+JsyGjn2lv0WY8UsTgUJjU9Ok55NA==
   dependencies:
     kind-of "^6.0.2"
+
+shallowequal@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
+  integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
 shebang-command@^1.2.0:
   version "1.2.0"
@@ -19243,6 +19358,11 @@ uuid@8.3.2, uuid@^8.3.0, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+uuid@9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
+  integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
 uuid@^3.3.2, uuid@^3.3.3, uuid@^3.4.0:
   version "3.4.0"
