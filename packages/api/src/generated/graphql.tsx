@@ -428,6 +428,13 @@ export type GetFormDefinitionByIdQueryVariables = Exact<{
 
 export type GetFormDefinitionByIdQuery = { __typename?: 'Query', getFormDefinitionById?: Maybe<{ __typename?: 'FormDefinition', formDefinition: any }> };
 
+export type GetFormDefinitionByObjectenApiUrlQueryVariables = Exact<{
+  url: Scalars['String'];
+}>;
+
+
+export type GetFormDefinitionByObjectenApiUrlQuery = { __typename?: 'Query', getFormDefinitionByObjectenApiUrl?: Maybe<{ __typename?: 'FormDefinition', formDefinition: any }> };
+
 export type GetFormDefinitionByNameQueryVariables = Exact<{
   name: Scalars['String'];
 }>;
@@ -472,14 +479,14 @@ export type GetTaakByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, formId: string, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } } };
+export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } } };
 
 export type GetTakenQueryVariables = Exact<{
   zaakId?: Maybe<Scalars['UUID']>;
 }>;
 
 
-export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string, data: any, verloopdatum?: Maybe<any>, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, data: any, verloopdatum?: Maybe<any>, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -754,6 +761,41 @@ export function useGetFormDefinitionByIdLazyQuery(baseOptions?: Apollo.LazyQuery
 export type GetFormDefinitionByIdQueryHookResult = ReturnType<typeof useGetFormDefinitionByIdQuery>;
 export type GetFormDefinitionByIdLazyQueryHookResult = ReturnType<typeof useGetFormDefinitionByIdLazyQuery>;
 export type GetFormDefinitionByIdQueryResult = Apollo.QueryResult<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>;
+export const GetFormDefinitionByObjectenApiUrlDocument = gql`
+    query GetFormDefinitionByObjectenApiUrl($url: String!) {
+  getFormDefinitionByObjectenApiUrl(url: $url) {
+    formDefinition
+  }
+}
+    `;
+
+/**
+ * __useGetFormDefinitionByObjectenApiUrlQuery__
+ *
+ * To run a query within a React component, call `useGetFormDefinitionByObjectenApiUrlQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFormDefinitionByObjectenApiUrlQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFormDefinitionByObjectenApiUrlQuery({
+ *   variables: {
+ *      url: // value for 'url'
+ *   },
+ * });
+ */
+export function useGetFormDefinitionByObjectenApiUrlQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>(GetFormDefinitionByObjectenApiUrlDocument, options);
+      }
+export function useGetFormDefinitionByObjectenApiUrlLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>(GetFormDefinitionByObjectenApiUrlDocument, options);
+        }
+export type GetFormDefinitionByObjectenApiUrlQueryHookResult = ReturnType<typeof useGetFormDefinitionByObjectenApiUrlQuery>;
+export type GetFormDefinitionByObjectenApiUrlLazyQueryHookResult = ReturnType<typeof useGetFormDefinitionByObjectenApiUrlLazyQuery>;
+export type GetFormDefinitionByObjectenApiUrlQueryResult = Apollo.QueryResult<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>;
 export const GetFormDefinitionByNameDocument = gql`
     query GetFormDefinitionByName($name: String!) {
   getFormDefinitionByName(name: $name) {
@@ -1057,7 +1099,6 @@ export const GetTaakByIdDocument = gql`
     formulier {
       ...FormulierFields
     }
-    formId
     status
     date
     data
@@ -1101,7 +1142,6 @@ export const GetTakenDocument = gql`
       formulier {
         ...FormulierFields
       }
-      formId
       title
       status
       date

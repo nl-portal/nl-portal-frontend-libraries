@@ -8,24 +8,31 @@ import _ from 'lodash';
 import {
   useSubmitTaskMutation,
   useGetTaakByIdQuery,
-  useGetFormDefinitionByIdQuery,
+  useGetFormDefinitionByIdLazyQuery,
+  useGetFormDefinitionByObjectenApiUrlLazyQuery,
 } from '@nl-portal/nl-portal-api';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Alert} from '@gemeente-denhaag/components-react';
+import {useIntl} from 'react-intl';
 import {useQuery} from '../../hooks';
 
-const TaskPage = () => {
+export const TaskPage = () => {
   const query = useQuery();
-  const taskId = query.get('id')!;
-  const formId = query.get('formulier')!;
+  const intl = useIntl();
+  const taskId = query.get('id');
+  const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState({
     data: {},
   });
 
   const [submitTask] = useSubmitTaskMutation();
-  const {data: taskData, loading: loadingTask} = useGetTaakByIdQuery({variables: {id: taskId}});
-  const {data: formDefinition, loading: loadingFormDefinition} = useGetFormDefinitionByIdQuery({
-    variables: {id: formId},
+  const {data: task} = useGetTaakByIdQuery({variables: {id: taskId}});
+  const [getFormById, {data: formDefinitionId}] = useGetFormDefinitionByIdLazyQuery({
+    onCompleted: () => setLoading(false),
+  });
+  const [getFormByUrl, {data: formDefinitionUrl}] = useGetFormDefinitionByObjectenApiUrlLazyQuery({
+    onCompleted: () => setLoading(false),
   });
 
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
@@ -55,9 +62,21 @@ const TaskPage = () => {
   };
 
   useEffect(() => {
-    if (!taskData) return;
-    transformPrefilledDataToFormioSubmission(taskData);
-  }, [taskData]);
+    if (!task) return;
+    transformPrefilledDataToFormioSubmission(task);
+
+    if (task.getTaakById.formulier.formuliertype === 'portalid') {
+      getFormById({variables: {id: task.getTaakById.formulier.value}});
+      return;
+    }
+
+    if (task.getTaakById.formulier.formuliertype === 'objecturl') {
+      getFormByUrl({variables: {url: task.getTaakById.formulier.value}});
+      return;
+    }
+
+    setLoading(false);
+  }, [task]);
 
   const setFormSubmission = (formioSubmission: any) => {
     if (_.isEqual(formioSubmission.data, submission.data)) {
@@ -78,25 +97,38 @@ const TaskPage = () => {
     }
   };
 
-  if (loadingTask || loadingFormDefinition) {
+  if (loading) {
     return null;
   }
 
+  if (!formDefinitionId && !formDefinitionUrl) {
+    return <Alert variant="error" title={intl.formatMessage({id: 'task.fetchError'})} text="" />;
+  }
+
   if (submitted) {
-    <React.Fragment>Submit</React.Fragment>;
+    return (
+      <Alert
+        variant="success"
+        title={intl.formatMessage({id: 'task.completeTitle'})}
+        text={intl.formatMessage({id: 'task.completeDescription'})}
+      />
+    );
   }
 
   return (
     <React.Fragment>
       <Helmet>
-        {/* TODO: Do we still need this? */}
+        {/* https://docs-portal.valtimo.nl/form.io-related/missing-form.io-icons */}
         <link
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         />
       </Helmet>
       <Form
-        form={formDefinition?.getFormDefinitionById?.formDefinition}
+        form={
+          formDefinitionId?.getFormDefinitionById?.formDefinition ||
+          formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
+        }
         submission={submission}
         onChange={setFormSubmission}
         onSubmit={onFormSubmit}
@@ -106,5 +138,3 @@ const TaskPage = () => {
     </React.Fragment>
   );
 };
-
-export {TaskPage};
