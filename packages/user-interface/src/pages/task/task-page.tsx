@@ -1,36 +1,32 @@
 import * as React from 'react';
-import {Link, useHistory} from 'react-router-dom';
 import {useEffect, useState} from 'react';
-// @ts-ignore
+// @ts-ignore - Formio is not typed, fixed in version 5.3.*, RC now available
 import {Form} from '@formio/react';
 import {Helmet} from 'react-helmet-async';
-import {useQuery} from '../../hooks';
 import './task-page.css';
 import _ from 'lodash';
 import {
   useSubmitTaskMutation,
-  useGetFormDefinitionByIdLazyQuery,
   useGetTaakByIdQuery,
+  useGetFormDefinitionByIdQuery,
 } from '@nl-portal/nl-portal-api';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {useQuery} from '../../hooks';
 
 const TaskPage = () => {
   const query = useQuery();
   const taskId = query.get('id')!;
   const formId = query.get('formulier')!;
-
+  const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState({
     data: {},
   });
-  const [mutateFunction, {loading: loadingSubmitTask, error: errorSubmitTask}] =
-    useSubmitTaskMutation();
-  const [mutating, setMutationStatus] = useState(false);
-  const history = useHistory();
 
-  const [loadFormById, {loading, data}] = useGetFormDefinitionByIdLazyQuery({
+  const [submitTask] = useSubmitTaskMutation();
+  const {data: taskData, loading: loadingTask} = useGetTaakByIdQuery({variables: {id: taskId}});
+  const {data: formDefinition, loading: loadingFormDefinition} = useGetFormDefinitionByIdQuery({
     variables: {id: formId},
   });
-
-  const {data: taskData} = useGetTaakByIdQuery({variables: {id: taskId}});
 
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
     const keys = Object.keys(submissionData);
@@ -58,39 +54,10 @@ const TaskPage = () => {
     setSubmission(submission);
   };
 
-  const getTaskData = () => {
-    if (taskData) {
-      transformPrefilledDataToFormioSubmission(taskData);
-    }
-  };
-
-  const navigateToTasksPage = (): void => {
-    history.push(`/taken/`);
-  };
-
   useEffect(() => {
-    getTaskData();
-    loadFormById();
-  }, []);
-
-  useEffect(() => {
-    if (mutating && !loadingSubmitTask) {
-      if (!errorSubmitTask) {
-        navigateToTasksPage();
-      }
-      setMutationStatus(false);
-    }
-  }, [loadingSubmitTask]);
-
-  const completeTask = (submissionData: any) => {
-    setMutationStatus(true);
-    mutateFunction({
-      variables: {
-        id: `${taskId}`,
-        submission: submissionData,
-      },
-    });
-  };
+    if (!taskData) return;
+    transformPrefilledDataToFormioSubmission(taskData);
+  }, [taskData]);
 
   const setFormSubmission = (formioSubmission: any) => {
     if (_.isEqual(formioSubmission.data, submission.data)) {
@@ -100,61 +67,42 @@ const TaskPage = () => {
     }
   };
 
-  const onFormSubmit = (formioSubmission: any) => {
+  const onFormSubmit = async (formioSubmission: any) => {
     if (formioSubmission?.state === 'submitted') {
-      completeTask(formioSubmission.data);
+      await submitTask({
+        variables: {
+          id: `${taskId}`,
+          submission: formioSubmission.data,
+        },
+      });
     }
   };
 
-  const redrawForm = (form: any) => {
-    form.triggerRedraw();
-  };
+  if (loadingTask || loadingFormDefinition) {
+    return null;
+  }
 
-  const removeLocalStorage = () => {
-    localStorage.removeItem(formId);
-  };
-
-  const getSubmittedMessage = () => (
-    <React.Fragment>
-      <h2 className="utrecht-heading-2 utrecht-heading-2--distanced pb-1">Taak is afgerond</h2>
-      <Link
-        onClick={removeLocalStorage}
-        className="btn btn-primary"
-        role="button"
-        rel="noopener noreferrer"
-        to="/taken"
-      >
-        Klik hier om terug te gaan naar je openstaande taken
-      </Link>
-    </React.Fragment>
-  );
+  if (submitted) {
+    <React.Fragment>Submit</React.Fragment>;
+  }
 
   return (
     <React.Fragment>
       <Helmet>
+        {/* TODO: Do we still need this? */}
         <link
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         />
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        />
-        <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.full.min.css" />
-        <script src="https://cdn.form.io/formiojs/formio.full.min.js" />
       </Helmet>
-      {!loading ? (
-        <Form
-          form={data?.getFormDefinitionById?.formDefinition}
-          formReady={redrawForm}
-          submission={submission}
-          onChange={setFormSubmission}
-          onSubmit={onFormSubmit}
-          options={{noAlerts: true}}
-        />
-      ) : (
-        getSubmittedMessage()
-      )}
+      <Form
+        form={formDefinition?.getFormDefinitionById?.formDefinition}
+        submission={submission}
+        onChange={setFormSubmission}
+        onSubmit={onFormSubmit}
+        onSubmitDone={() => setSubmitted(true)}
+        options={{noAlerts: true}}
+      />
     </React.Fragment>
   );
 };
