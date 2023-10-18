@@ -79,7 +79,7 @@ export const EN_GB_MESSAGES: Messages = {
     'forms.listSubHeader': 'Available forms',
     'tasks.noOpenTasks': 'There are no open tasks.',
     'tasks.fetchError': 'There was an error, try again later.',
-    'task.completed': 'Taak is afgerond',
-    'task.returnMessage': 'Klik hier om terug te gaan naar je openstaande taken',
+    'task.completed': 'Task completed',
+    'task.returnMessage': 'The task is successfully completed.',
   },
 };

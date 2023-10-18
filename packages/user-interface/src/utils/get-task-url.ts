@@ -1,6 +1,4 @@
-export const getTaskUrl = (formType: string, formValue: string, verwerkerTaakId: string) => {
-  if (formType === 'id') {
-    return `/taken/taak?formulier=${formValue}&id=${verwerkerTaakId}`;
-  }
-  return formValue;
+export const getTaskUrl = (formType: string, formValue: string, taakId: string) => {
+  if (formType === 'externalurl') return formValue;
+  return `/taken/taak?id=${taakId}`;
 };

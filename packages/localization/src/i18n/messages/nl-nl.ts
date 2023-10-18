@@ -81,5 +81,8 @@ export const NL_NL_MESSAGES: Messages = {
     'forms.listSubHeader': 'Beschikbare formulieren',
     'tasks.noOpenTasks': 'Er zijn geen openstaande taken.',
     'tasks.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
+    'task.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
+    'task.completeTitle': 'Taak is afgerond',
+    'task.completeDescription': 'De taak is succesvol voltooid.',
   },
 };
