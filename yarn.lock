@@ -1837,11 +1837,6 @@
   resolved "https://registry.yarnpkg.com/@formio/vanilla-text-mask/-/vanilla-text-mask-5.1.1.tgz#2bd690a34b0e191b7f23a589ff1c2497564307de"
   integrity sha512-7MhrbMypySPi7RLchg0ys7HnS3Wqddbq/btAijKB1nA94TE7AOOLhpZJWcNm3kOlX0Y3nHfoavj/HP7vsvF34Q==
 
-"@fortawesome/fontawesome-free@4.7.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.1.0.tgz#f35f5ba91366b7a58b0b6a4f22ff0907fe002219"
-  integrity sha512-0XHj3cIq7OiG2v79UldqDHLFndLXxq0hbNTvsi7zDbLXiBtMkX+exuVUX466cajlSV8rkLiwa7GhTcMIKR1ajQ==
-
 "@gemeente-denhaag/action@0.1.1-alpha.11":
   version "0.1.1-alpha.11"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/action/-/action-0.1.1-alpha.11.tgz#785034d6bee0922a60d76d82dd29c80e01be21d0"
@@ -9831,6 +9826,11 @@ follow-redirects@^1.14.7:
   version "1.15.1"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"
   integrity sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==
+
+font-awesome@4.7:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
+  integrity sha512-U6kGnykA/6bFmg1M/oT9EkFeIYv7JlX3bozwQJWiiLz6L0w3F5vBVPxHlwyX/vtNq1ckcpRKOB9f2Qal/VtFpg==
 
 for-each@^0.3.3:
   version "0.3.3"

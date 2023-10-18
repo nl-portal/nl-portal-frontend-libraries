@@ -2,7 +2,6 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 // @ts-ignore - Formio is not typed, fixed in version 5.3.*, RC now available
 import {Form} from '@formio/react';
-import {Helmet} from 'react-helmet-async';
 import './task-page.css';
 import _ from 'lodash';
 import {
@@ -12,6 +11,8 @@ import {
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
 } from '@nl-portal/nl-portal-api';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// TODO: Formio need this old version (4.7) of awesome font
+import 'font-awesome/css/font-awesome.min.css';
 import {Alert} from '@gemeente-denhaag/components-react';
 import {useIntl} from 'react-intl';
 import {useQuery} from '../../hooks';
@@ -117,13 +118,6 @@ export const TaskPage = () => {
 
   return (
     <React.Fragment>
-      <Helmet>
-        {/* https://docs-portal.valtimo.nl/form.io-related/missing-form.io-icons */}
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-      </Helmet>
       <Form
         form={
           formDefinitionId?.getFormDefinitionById?.formDefinition ||
