@@ -30,6 +30,7 @@ export const QUERY_GET_ZAKEN = gql`
         omschrijving
       }
       documenten {
+        documentapi
         bestandsnaam
         bestandsomvang
         creatiedatum

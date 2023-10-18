@@ -3,4 +3,5 @@ export interface PortalDocument {
   extension: string;
   name: string;
   size: number;
+  documentapi: string;
 }

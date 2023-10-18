@@ -15,7 +15,7 @@ import {DocumentDownload} from '../document-download';
 
 type DocumentProps = Partial<PortalDocument>;
 
-const Document: FC<DocumentProps> = ({uuid, extension, name, size}) => {
+const Document: FC<DocumentProps> = ({uuid, extension, name, size,documentapi}) => {
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
   const {hrefLang} = useContext(LocaleContext);
   const intl = useIntl();
@@ -41,7 +41,7 @@ const Document: FC<DocumentProps> = ({uuid, extension, name, size}) => {
             </span>
           )}
         </Paragraph>
-        <DocumentDownload uuid={uuid} name={name} />
+        <DocumentDownload uuid={uuid} name={name} documentapi={documentapi}/>
       </div>
     </div>
   );
