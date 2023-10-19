@@ -14,7 +14,6 @@ export const QUERY_GET_TAKEN = gql`
         title
         status
         date
-        data
         verloopdatum
       }
     }

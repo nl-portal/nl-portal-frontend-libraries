@@ -2,7 +2,6 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 // @ts-ignore - Formio is not typed, fixed in version 5.3.*, RC now available
 import {Form} from '@formio/react';
-import './task-page.css';
 import _ from 'lodash';
 import {
   useSubmitTaskMutation,
@@ -10,12 +9,12 @@ import {
   useGetFormDefinitionByIdLazyQuery,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
 } from '@nl-portal/nl-portal-api';
-import 'bootstrap/dist/css/bootstrap.min.css';
 // TODO: Formio need this old version (4.7) of awesome font
 import 'font-awesome/css/font-awesome.min.css';
 import {Alert} from '@gemeente-denhaag/components-react';
 import {useIntl} from 'react-intl';
 import {useQuery} from '../../hooks';
+import './task-page.module.scss';
 
 export const TaskPage = () => {
   const query = useQuery();
@@ -58,13 +57,12 @@ export const TaskPage = () => {
       payload = _.merge(payload, item);
     });
 
-    submission.data = payload;
-    setSubmission(submission);
+    setSubmission({...submission, data: payload});
   };
 
   useEffect(() => {
     if (!task) return;
-    transformPrefilledDataToFormioSubmission(task);
+    transformPrefilledDataToFormioSubmission(task.getTaakById.data);
 
     if (task.getTaakById.formulier.formuliertype === 'portalid') {
       getFormById({variables: {id: task.getTaakById.formulier.value}});
@@ -80,11 +78,7 @@ export const TaskPage = () => {
   }, [task]);
 
   const setFormSubmission = (formioSubmission: any) => {
-    if (_.isEqual(formioSubmission.data, submission.data)) {
-      // eslint-disable-next-line no-param-reassign
-      formioSubmission.data = {...formioSubmission.data, ...submission.data};
-      setSubmission(formioSubmission);
-    }
+    setSubmission({...formioSubmission, data: {...formioSubmission.data, ...submission.data}});
   };
 
   const onFormSubmit = async (formioSubmission: any) => {
@@ -94,6 +88,7 @@ export const TaskPage = () => {
           id: `${taskId}`,
           submission: formioSubmission.data,
         },
+        onCompleted: () => setSubmitted(true),
       });
     }
   };
@@ -117,7 +112,7 @@ export const TaskPage = () => {
   }
 
   return (
-    <React.Fragment>
+    <div className="bootstrap">
       <Form
         form={
           formDefinitionId?.getFormDefinitionById?.formDefinition ||
@@ -126,9 +121,8 @@ export const TaskPage = () => {
         submission={submission}
         onChange={setFormSubmission}
         onSubmit={onFormSubmit}
-        onSubmitDone={() => setSubmitted(true)}
         options={{noAlerts: true}}
       />
-    </React.Fragment>
+    </div>
   );
 };
