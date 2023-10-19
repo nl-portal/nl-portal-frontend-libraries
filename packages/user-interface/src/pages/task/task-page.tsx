@@ -77,6 +77,10 @@ export const TaskPage = () => {
     setLoading(false);
   }, [task]);
 
+  const setFormSubmission = (formioSubmission: any) => {
+    setSubmission({...formioSubmission, data: {...formioSubmission.data, ...submission.data}});
+  };
+
   const onFormSubmit = async (formioSubmission: any) => {
     if (formioSubmission?.state === 'submitted') {
       await submitTask({
@@ -114,7 +118,7 @@ export const TaskPage = () => {
           formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
         }
         submission={submission}
-        onChange={setSubmission}
+        onChange={setFormSubmission}
         onSubmit={onFormSubmit}
         onSubmitDone={() => setSubmitted(true)}
         options={{noAlerts: true}}
