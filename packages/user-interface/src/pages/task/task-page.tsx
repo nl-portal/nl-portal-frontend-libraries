@@ -88,6 +88,7 @@ export const TaskPage = () => {
           id: `${taskId}`,
           submission: formioSubmission.data,
         },
+        onCompleted: () => setSubmitted(true),
       });
     }
   };
@@ -120,7 +121,6 @@ export const TaskPage = () => {
         submission={submission}
         onChange={setFormSubmission}
         onSubmit={onFormSubmit}
-        onSubmitDone={() => setSubmitted(true)}
         options={{noAlerts: true}}
       />
     </div>
