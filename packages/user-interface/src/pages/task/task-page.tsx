@@ -57,13 +57,12 @@ export const TaskPage = () => {
       payload = _.merge(payload, item);
     });
 
-    submission.data = payload;
-    setSubmission(submission);
+    setSubmission({...submission, data: payload});
   };
 
   useEffect(() => {
     if (!task) return;
-    transformPrefilledDataToFormioSubmission(task);
+    transformPrefilledDataToFormioSubmission(task.getTaakById.data);
 
     if (task.getTaakById.formulier.formuliertype === 'portalid') {
       getFormById({variables: {id: task.getTaakById.formulier.value}});
@@ -77,14 +76,6 @@ export const TaskPage = () => {
 
     setLoading(false);
   }, [task]);
-
-  const setFormSubmission = (formioSubmission: any) => {
-    if (_.isEqual(formioSubmission.data, submission.data)) {
-      // eslint-disable-next-line no-param-reassign
-      formioSubmission.data = {...formioSubmission.data, ...submission.data};
-      setSubmission(formioSubmission);
-    }
-  };
 
   const onFormSubmit = async (formioSubmission: any) => {
     if (formioSubmission?.state === 'submitted') {
@@ -123,7 +114,7 @@ export const TaskPage = () => {
           formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
         }
         submission={submission}
-        onChange={setFormSubmission}
+        onChange={setSubmission}
         onSubmit={onFormSubmit}
         onSubmitDone={() => setSubmitted(true)}
         options={{noAlerts: true}}
