@@ -2,7 +2,6 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 // @ts-ignore - Formio is not typed, fixed in version 5.3.*, RC now available
 import {Form} from '@formio/react';
-import './task-page.css';
 import _ from 'lodash';
 import {
   useSubmitTaskMutation,
@@ -10,12 +9,12 @@ import {
   useGetFormDefinitionByIdLazyQuery,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
 } from '@nl-portal/nl-portal-api';
-import 'bootstrap/dist/css/bootstrap.min.css';
 // TODO: Formio need this old version (4.7) of awesome font
 import 'font-awesome/css/font-awesome.min.css';
 import {Alert} from '@gemeente-denhaag/components-react';
 import {useIntl} from 'react-intl';
 import {useQuery} from '../../hooks';
+import './task-page.module.scss';
 
 export const TaskPage = () => {
   const query = useQuery();
@@ -117,7 +116,7 @@ export const TaskPage = () => {
   }
 
   return (
-    <React.Fragment>
+    <div className="bootstrap">
       <Form
         form={
           formDefinitionId?.getFormDefinitionById?.formDefinition ||
@@ -129,6 +128,6 @@ export const TaskPage = () => {
         onSubmitDone={() => setSubmitted(true)}
         options={{noAlerts: true}}
       />
-    </React.Fragment>
+    </div>
   );
 };
