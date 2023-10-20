@@ -20,7 +20,6 @@ const DocumentList: FC<DocumentListProps> = ({documents}) => (
     {documents && documents.length > 0 && (
       <Fragment>
         {documents.map(document => {
-          console.log(document.documentapi)
           const documentName = document?.bestandsnaam || '';
           const splitName = documentName?.split('.');
           const documentExtension =
@@ -37,7 +36,7 @@ const DocumentList: FC<DocumentListProps> = ({documents}) => (
                 extension={documentExtension}
                 name={documentName}
                 size={document.bestandsomvang || 0}
-                uuid={document.uuid || ''}
+                uuid={document.uuid}
                 documentapi={document.documentapi}
               />
             </div>

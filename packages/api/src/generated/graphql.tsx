@@ -234,6 +234,7 @@ export type Query = {
 
 
 export type QueryGetDocumentContentArgs = {
+  documentApi: Scalars['String'];
   id: Scalars['UUID'];
 };
 

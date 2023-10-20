@@ -41,7 +41,7 @@ const Document: FC<DocumentProps> = ({uuid, extension, name, size,documentapi}) 
             </span>
           )}
         </Paragraph>
-        <DocumentDownload uuid={uuid} name={name} documentapi={documentapi}/>
+        <DocumentDownload uuid={uuid!} name={name} documentapi={documentapi!}/>
       </div>
     </div>
   );

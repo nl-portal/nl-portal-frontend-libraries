@@ -8,16 +8,16 @@ import {ApiContext} from '@nl-portal/nl-portal-api';
 import {KeycloakContext} from '@nl-portal/nl-portal-authentication';
 
 interface DocumentDownloadProps {
-  uuid?: string;
+  uuid: string;
   name?: string;
-  documentapi?: string;
+  documentapi: string;
 }
 
 const DocumentDownload: FC<DocumentDownloadProps> = ({uuid, name,documentapi}) => {
   const {restUri} = useContext(ApiContext);
   const {keycloakToken} = useContext(KeycloakContext);
   const intl = useIntl();
-  const downloadLink = `${restUri}/document/${uuid}/documentapi/${documentapi}/content`;
+  const downloadLink = `${restUri}/documentapi/${documentapi}/document/${uuid}/content`;
 
   const handleLink = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
