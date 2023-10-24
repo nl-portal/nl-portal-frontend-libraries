@@ -54,7 +54,6 @@ export type Document = {
   formaat?: Maybe<Scalars['String']>;
   identificatie?: Maybe<Scalars['String']>;
   titel?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
   uuid: Scalars['UUID'];
 };
 
