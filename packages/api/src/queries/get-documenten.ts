@@ -7,6 +7,7 @@ export const QUERY_GET_DOCUMENTEN = gql`
         identificatie
       }
       documenten {
+        documentapi
         bestandsnaam
         bestandsomvang
         creatiedatum

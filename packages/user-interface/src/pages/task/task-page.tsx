@@ -1,36 +1,39 @@
 import * as React from 'react';
-import {Link, useHistory} from 'react-router-dom';
 import {useEffect, useState} from 'react';
-// @ts-ignore
+// @ts-ignore - Formio is not typed, fixed in version 5.3.*, RC now available
 import {Form} from '@formio/react';
-import {Helmet} from 'react-helmet-async';
-import {useQuery} from '../../hooks';
-import './task-page.css';
 import _ from 'lodash';
 import {
   useSubmitTaskMutation,
-  useGetFormDefinitionByIdLazyQuery,
   useGetTaakByIdQuery,
+  useGetFormDefinitionByIdLazyQuery,
+  useGetFormDefinitionByObjectenApiUrlLazyQuery,
 } from '@nl-portal/nl-portal-api';
+// TODO: Formio need this old version (4.7) of awesome font
+import 'font-awesome/css/font-awesome.min.css';
+import {Alert} from '@gemeente-denhaag/components-react';
+import {useIntl} from 'react-intl';
+import {useQuery} from '../../hooks';
+import './task-page.module.scss';
 
-const TaskPage = () => {
+export const TaskPage = () => {
   const query = useQuery();
-  const taskId = query.get('id')!;
-  const formId = query.get('formulier')!;
-
+  const intl = useIntl();
+  const taskId = query.get('id');
+  const [loading, setLoading] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState({
     data: {},
   });
-  const [mutateFunction, {loading: loadingSubmitTask, error: errorSubmitTask}] =
-    useSubmitTaskMutation();
-  const [mutating, setMutationStatus] = useState(false);
-  const history = useHistory();
 
-  const [loadFormById, {loading, data}] = useGetFormDefinitionByIdLazyQuery({
-    variables: {id: formId},
+  const [submitTask] = useSubmitTaskMutation();
+  const {data: task} = useGetTaakByIdQuery({variables: {id: taskId}});
+  const [getFormById, {data: formDefinitionId}] = useGetFormDefinitionByIdLazyQuery({
+    onCompleted: () => setLoading(false),
   });
-
-  const {data: taskData} = useGetTaakByIdQuery({variables: {id: taskId}});
+  const [getFormByUrl, {data: formDefinitionUrl}] = useGetFormDefinitionByObjectenApiUrlLazyQuery({
+    onCompleted: () => setLoading(false),
+  });
 
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
     const keys = Object.keys(submissionData);
@@ -54,109 +57,72 @@ const TaskPage = () => {
       payload = _.merge(payload, item);
     });
 
-    submission.data = payload;
-    setSubmission(submission);
-  };
-
-  const getTaskData = () => {
-    if (taskData) {
-      transformPrefilledDataToFormioSubmission(taskData);
-    }
-  };
-
-  const navigateToTasksPage = (): void => {
-    history.push(`/taken/`);
+    setSubmission({...submission, data: payload});
   };
 
   useEffect(() => {
-    getTaskData();
-    loadFormById();
-  }, []);
+    if (!task) return;
+    transformPrefilledDataToFormioSubmission(task.getTaakById.data);
 
-  useEffect(() => {
-    if (mutating && !loadingSubmitTask) {
-      if (!errorSubmitTask) {
-        navigateToTasksPage();
-      }
-      setMutationStatus(false);
+    if (task.getTaakById.formulier.formuliertype === 'portalid') {
+      getFormById({variables: {id: task.getTaakById.formulier.value}});
+      return;
     }
-  }, [loadingSubmitTask]);
 
-  const completeTask = (submissionData: any) => {
-    setMutationStatus(true);
-    mutateFunction({
-      variables: {
-        id: `${taskId}`,
-        submission: submissionData,
-      },
-    });
-  };
+    if (task.getTaakById.formulier.formuliertype === 'objecturl') {
+      getFormByUrl({variables: {url: task.getTaakById.formulier.value}});
+      return;
+    }
+
+    setLoading(false);
+  }, [task]);
 
   const setFormSubmission = (formioSubmission: any) => {
-    if (_.isEqual(formioSubmission.data, submission.data)) {
-      // eslint-disable-next-line no-param-reassign
-      formioSubmission.data = {...formioSubmission.data, ...submission.data};
-      setSubmission(formioSubmission);
-    }
+    setSubmission({...formioSubmission, data: {...formioSubmission.data, ...submission.data}});
   };
 
-  const onFormSubmit = (formioSubmission: any) => {
+  const onFormSubmit = async (formioSubmission: any) => {
     if (formioSubmission?.state === 'submitted') {
-      completeTask(formioSubmission.data);
+      await submitTask({
+        variables: {
+          id: `${taskId}`,
+          submission: formioSubmission.data,
+        },
+        onCompleted: () => setSubmitted(true),
+      });
     }
   };
 
-  const redrawForm = (form: any) => {
-    form.triggerRedraw();
-  };
+  if (loading) {
+    return null;
+  }
 
-  const removeLocalStorage = () => {
-    localStorage.removeItem(formId);
-  };
+  if (!formDefinitionId && !formDefinitionUrl) {
+    return <Alert variant="error" title={intl.formatMessage({id: 'task.fetchError'})} text="" />;
+  }
 
-  const getSubmittedMessage = () => (
-    <React.Fragment>
-      <h2 className="utrecht-heading-2 utrecht-heading-2--distanced pb-1">Taak is afgerond</h2>
-      <Link
-        onClick={removeLocalStorage}
-        className="btn btn-primary"
-        role="button"
-        rel="noopener noreferrer"
-        to="/taken"
-      >
-        Klik hier om terug te gaan naar je openstaande taken
-      </Link>
-    </React.Fragment>
-  );
+  if (submitted) {
+    return (
+      <Alert
+        variant="success"
+        title={intl.formatMessage({id: 'task.completeTitle'})}
+        text={intl.formatMessage({id: 'task.completeDescription'})}
+      />
+    );
+  }
 
   return (
-    <React.Fragment>
-      <Helmet>
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        />
-        <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.full.min.css" />
-        <script src="https://cdn.form.io/formiojs/formio.full.min.js" />
-      </Helmet>
-      {!loading ? (
-        <Form
-          form={data?.getFormDefinitionById?.formDefinition}
-          formReady={redrawForm}
-          submission={submission}
-          onChange={setFormSubmission}
-          onSubmit={onFormSubmit}
-          options={{noAlerts: true}}
-        />
-      ) : (
-        getSubmittedMessage()
-      )}
-    </React.Fragment>
+    <div className="bootstrap">
+      <Form
+        form={
+          formDefinitionId?.getFormDefinitionById?.formDefinition ||
+          formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
+        }
+        submission={submission}
+        onChange={setFormSubmission}
+        onSubmit={onFormSubmit}
+        options={{noAlerts: true}}
+      />
+    </div>
   );
 };
-
-export {TaskPage};

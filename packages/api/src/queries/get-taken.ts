@@ -11,11 +11,9 @@ export const QUERY_GET_TAKEN = gql`
         formulier {
           ...FormulierFields
         }
-        formId
         title
         status
         date
-        data
         verloopdatum
       }
     }

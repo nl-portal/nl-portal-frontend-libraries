@@ -9,7 +9,6 @@ export const QUERY_GET_TAAK_BY_ID = gql`
       formulier {
         ...FormulierFields
       }
-      formId
       status
       date
       data
