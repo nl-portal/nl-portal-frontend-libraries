@@ -36,7 +36,8 @@ const DocumentList: FC<DocumentListProps> = ({documents}) => (
                 extension={documentExtension}
                 name={documentName}
                 size={document.bestandsomvang || 0}
-                uuid={document.uuid || ''}
+                uuid={document.uuid}
+                documentapi={document.documentapi}
               />
             </div>
           );
