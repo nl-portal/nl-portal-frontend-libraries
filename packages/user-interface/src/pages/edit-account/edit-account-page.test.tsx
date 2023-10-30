@@ -4,9 +4,9 @@ import {MemoryRouter} from 'react-router-dom';
 import {MockedProvider} from '@apollo/client/testing';
 import {gql} from '@apollo/client';
 import {LocalizationProvider} from '@nl-portal/nl-portal-localization';
-import {CUSTOM_MESSAGES} from '../../../../../app/src/i18n';
-import {UserInformationProvider} from '../../../providers';
-import {EditAccountPage} from '../edit-account-page';
+import {CUSTOM_MESSAGES} from '../../../../app/src/i18n';
+import {UserInformationProvider} from '../../providers';
+import {EditAccountPage} from './edit-account-page';
 
 describe('EditAccountPage', () => {
   const errorText = 'a valid phone number consists of 10 digits';
