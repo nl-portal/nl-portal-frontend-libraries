@@ -38,7 +38,7 @@ jobs:
           yarn run bootstrap
       
       - name: run tests
-        run: yarn test:user-interface
+        run: yarn jest --testPathPattern=packages/user-interface
 
       - name: build library
         run: yarn run build
