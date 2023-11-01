@@ -34,6 +34,7 @@ jobs:
       - name: lerna bootstrap
         run: |
           npm install -g yarn
+          npm install -g lerna@6.6.2
           yarn run bootstrap
 
       - name: build library
