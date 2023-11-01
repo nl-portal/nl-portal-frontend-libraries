@@ -59,7 +59,6 @@ describe('EditAccountPage', () => {
   const saveButton = () => screen.getByText('Save');
 
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     render(MockEditAccountPage());
   });
 
