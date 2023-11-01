@@ -1,5 +1,5 @@
 import {fireEvent, render, screen} from '@testing-library/react';
-import { MockEditAccountPage } from './mock-edit-account-page';
+import {MockEditAccountPage} from './edit-account-page.mock';
 
 describe('EditAccountPage', () => {
   const errorText = 'a valid phone number consists of 10 digits';
