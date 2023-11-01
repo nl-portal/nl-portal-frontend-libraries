@@ -63,7 +63,7 @@ const CasesList: FC<CasesListProps> = ({
     refetch();
   }, []);
 
-  const getCaseCards = (): JSX.Element[] =>
+  const getCaseCards = () =>
     data?.getZaken
       .filter(zaak => {
         const isEndStatus = zaak?.status?.statustype.isEindstatus;
