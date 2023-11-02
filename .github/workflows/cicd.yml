@@ -40,6 +40,9 @@ jobs:
       - name: build library
         run: yarn run build
 
+      - name: run tests
+        run: yarn test
+
       - name: "Retain build artifact: api"
         uses: actions/upload-artifact@v3
         with:

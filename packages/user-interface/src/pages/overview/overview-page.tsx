@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
-import {Paragraph} from '@gemeente-denhaag/components-react';
+import {Paragraph, Heading2, Heading3} from '@gemeente-denhaag/components-react';
 import {Link} from '@gemeente-denhaag/link';
 import {Alert} from '@gemeente-denhaag/alert';
-import {Heading2, Heading3} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {FC, useContext} from 'react';
 import {LocaleContext} from '@nl-portal/nl-portal-localization';
