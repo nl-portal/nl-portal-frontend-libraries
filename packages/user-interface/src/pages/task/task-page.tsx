@@ -118,6 +118,7 @@ export const TaskPage = () => {
           formDefinitionId?.getFormDefinitionById?.formDefinition ||
           formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
         }
+        formReady={(form: any) => form.triggerRedraw()} // TODO: here because customConditional don't work, update FormIO
         submission={submission}
         onChange={setFormSubmission}
         onSubmit={onFormSubmit}
