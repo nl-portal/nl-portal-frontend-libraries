@@ -36,12 +36,12 @@ jobs:
           npm install -g yarn
           npm install -g lerna@6.6.2
           yarn run bootstrap
-      
-      - name: run tests
-        run: yarn test
 
       - name: build library
         run: yarn run build
+
+      - name: run tests
+        run: yarn test
 
       - name: "Retain build artifact: api"
         uses: actions/upload-artifact@v3
