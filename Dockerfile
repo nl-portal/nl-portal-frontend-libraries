@@ -1,17 +1,20 @@
 # stage 1 - get dependencies
-FROM node:14-alpine as deps
+FROM node:16-alpine as deps
+RUN apk add --no-cache python3 py3-pip make g++
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 COPY ./package.json ./yarn.lock ./lerna.json ./
 
 COPY ./packages/app/package.json /app/packages/app/
+COPY ./packages/app/public/config.js /app/packages/app/
 COPY ./packages/authentication/package.json /app/packages/authentication/
 COPY ./packages/api/package.json /app/packages/api/
 COPY ./packages/localization/package.json /app/packages/localization/
 COPY ./packages/user-interface/package.json /app/packages/user-interface/
 
-RUN yarn global add lerna && yarn run bootstrap
+RUN npm install -g lerna@6.6.2
+RUN yarn run bootstrap
 
 # stage 2 - run build
 FROM deps as build
@@ -43,6 +46,6 @@ RUN \
 USER 1000
 
 CMD ["/bin/sh", "-c", "envsubst < /usr/share/nginx/html/config.template.js > /usr/share/nginx/html/config.js && exec nginx -g 'daemon off;'"]
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
 
 EXPOSE 8080
