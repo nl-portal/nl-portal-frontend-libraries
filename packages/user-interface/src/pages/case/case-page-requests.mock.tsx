@@ -1,19 +1,15 @@
+import {FetchResult, GraphQLRequest} from '@apollo/client';
 import {
   QUERY_GET_OBJECT_CONTACT_MOMENTEN,
   QUERY_GET_PERSOON,
   QUERY_GET_TAKEN,
-  QUERY_GET_ZAAK,
-  GetZaakQuery,
+  QUERY_GET_ZAKEN,
 } from '@nl-portal/nl-portal-api';
+import {cloneDeep} from 'lodash';
 
-type Request = {
-  query: string;
-  variables: any;
-};
-
-const getZaken: {request: Request; result: {data: GetZaakQuery}} = {
+const getZaken: {request: GraphQLRequest; result: FetchResult<Record<string, any>>} = {
   request: {
-    query: QUERY_GET_ZAAK,
+    query: QUERY_GET_ZAKEN,
     variables: {
       id: '82cb13cf-d2f9-4e3e-ac07-751373035ecb',
     },
@@ -249,9 +245,6 @@ const getZaken: {request: Request; result: {data: GetZaakQuery}} = {
   },
 };
 
-const clone = {...getZaken};
-clone[0].result.data.getZaak.documenten = [];
-
 const getObjectContactMomenten = {
   request: {
     query: QUERY_GET_OBJECT_CONTACT_MOMENTEN,
@@ -319,80 +312,80 @@ const getTaken = {
     variables: {
       zaakId: '82cb13cf-d2f9-4e3e-ac07-751373035ecb',
     },
-    result: {
-      data: {
-        getTaken: {
-          content: [
-            {
-              id: '1a20092f-8d24-11ee-a314-d2c27970fbf4',
-              objectId: '497e0c6b-ca5a-4603-882b-332e0b183322',
-              formulier: {
-                formuliertype: 'objecturl',
-                value:
-                  'https://objecten-zgw.test.denhaag.nl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02',
-                __typename: 'TaakFormulier',
-              },
-              title: 'Aanleveren informatie',
-              status: 'OPEN',
-              date: '2023-11-27',
-              data: {
-                informatieverzoeken: [
-                  {
-                    deadline: '2023-12-04T22:59:59.999Z',
-                    toelichting: '',
-                    hersteltermijn: true,
-                    dagtekeningBrief: '2023-11-27T12:48:30.000Z',
-                    stopHersteltermijn: '2023-11-27T12:51:27.626210570Z',
-                    startHersteltermijn: '2023-11-27T12:48:43.589109572Z',
-                    datumInformatieverzoek: '2023-11-27T12:48:30.000Z',
-                    opleidingVolgendePersonen: '',
-                    opTeVragenBenodigdeInformatie: {
-                      partnerID: true,
-                      jaarrekening: false,
-                      balansrekening: false,
-                      specificatiePensioen: false,
-                      bewijsVanInschrijving: true,
-                      laatsteInkomstenSpecificatie: false,
-                      bankafschriftenAfgelopenMaand: false,
-                      belastingaanslagAfgelopenJaar: false,
-                      belastingaangifteAfgelopenJaar: false,
-                      laatsteInkomstenSpecificatiePartner: false,
-                      specifiekeBankafschriftenPerPeriode: true,
-                      specifiekeBankafschriftenAfgelopenMaand: false,
-                    },
-                    bankrekeningNummersSpecifiekePeriode: '',
-                  },
-                  {
-                    deadline: '2023-12-04T22:59:59.999Z',
-                    toelichting: '',
-                    hersteltermijn: true,
-                    dagtekeningBrief: '2023-11-27T12:53:00.000Z',
-                    startHersteltermijn: '2023-11-27T12:54:25.021822783Z',
-                    datumInformatieverzoek: '2023-11-27T12:53:00.000Z',
-                    opleidingVolgendePersonen: '',
-                    opTeVragenBenodigdeInformatie: {
-                      partnerID: true,
-                      jaarrekening: true,
-                      balansrekening: true,
-                      specificatiePensioen: false,
-                      bewijsVanInschrijving: true,
-                      laatsteInkomstenSpecificatie: false,
-                      bankafschriftenAfgelopenMaand: false,
-                      belastingaanslagAfgelopenJaar: false,
-                      belastingaangifteAfgelopenJaar: true,
-                      laatsteInkomstenSpecificatiePartner: false,
-                      specifiekeBankafschriftenPerPeriode: false,
-                      specifiekeBankafschriftenAfgelopenMaand: false,
-                    },
-                  },
-                ],
-              },
-              verloopdatum: '2023-12-04T12:54:29.211',
-              __typename: 'Taak',
+  },
+  result: {
+    data: {
+      getTaken: {
+        content: [
+          {
+            id: '1a20092f-8d24-11ee-a314-d2c27970fbf4',
+            objectId: '497e0c6b-ca5a-4603-882b-332e0b183322',
+            formulier: {
+              formuliertype: 'objecturl',
+              value:
+                'https://objecten-zgw.test.denhaag.nl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02',
+              __typename: 'TaakFormulier',
             },
-          ],
-          __typename: 'TaakPage',
-        },
+            title: 'Aanleveren informatie',
+            status: 'OPEN',
+            date: '2023-11-27',
+            data: {
+              informatieverzoeken: [
+                {
+                  deadline: '2023-12-04T22:59:59.999Z',
+                  toelichting: '',
+                  hersteltermijn: true,
+                  dagtekeningBrief: '2023-11-27T12:48:30.000Z',
+                  stopHersteltermijn: '2023-11-27T12:51:27.626210570Z',
+                  startHersteltermijn: '2023-11-27T12:48:43.589109572Z',
+                  datumInformatieverzoek: '2023-11-27T12:48:30.000Z',
+                  opleidingVolgendePersonen: '',
+                  opTeVragenBenodigdeInformatie: {
+                    partnerID: true,
+                    jaarrekening: false,
+                    balansrekening: false,
+                    specificatiePensioen: false,
+                    bewijsVanInschrijving: true,
+                    laatsteInkomstenSpecificatie: false,
+                    bankafschriftenAfgelopenMaand: false,
+                    belastingaanslagAfgelopenJaar: false,
+                    belastingaangifteAfgelopenJaar: false,
+                    laatsteInkomstenSpecificatiePartner: false,
+                    specifiekeBankafschriftenPerPeriode: true,
+                    specifiekeBankafschriftenAfgelopenMaand: false,
+                  },
+                  bankrekeningNummersSpecifiekePeriode: '',
+                },
+                {
+                  deadline: '2023-12-04T22:59:59.999Z',
+                  toelichting: '',
+                  hersteltermijn: true,
+                  dagtekeningBrief: '2023-11-27T12:53:00.000Z',
+                  startHersteltermijn: '2023-11-27T12:54:25.021822783Z',
+                  datumInformatieverzoek: '2023-11-27T12:53:00.000Z',
+                  opleidingVolgendePersonen: '',
+                  opTeVragenBenodigdeInformatie: {
+                    partnerID: true,
+                    jaarrekening: true,
+                    balansrekening: true,
+                    specificatiePensioen: false,
+                    bewijsVanInschrijving: true,
+                    laatsteInkomstenSpecificatie: false,
+                    bankafschriftenAfgelopenMaand: false,
+                    belastingaanslagAfgelopenJaar: false,
+                    belastingaangifteAfgelopenJaar: true,
+                    laatsteInkomstenSpecificatiePartner: false,
+                    specifiekeBankafschriftenPerPeriode: false,
+                    specifiekeBankafschriftenAfgelopenMaand: false,
+                  },
+                },
+              ],
+            },
+            verloopdatum: '2023-12-04T12:54:29.211',
+            __typename: 'Taak',
+          },
+        ],
+        __typename: 'TaakPage',
       },
     },
   },
@@ -402,25 +395,43 @@ const getPersoon = {
   request: {
     query: QUERY_GET_PERSOON,
     variables: {},
-    result: {
-      data: {
-        getPersoon: null,
-      },
-      errors: [
-        {
-          message:
-            'Exception while fetching data (/getPersoon) : 500 Internal Server Error from GET https://wsgateway.ot.denhaag.nl/haalcentraal/api/brp/ingeschrevenpersonen/999991966?fields=naam,nationaliteiten,geslachtsaanduiding,geboorte,burgerservicenummer,verblijfplaats',
-          locations: [
-            {
-              line: 2,
-              column: 3,
-            },
-          ],
-          path: ['getPersoon'],
-        },
-      ],
+  },
+  result: {
+    data: {
+      getPersoon: null,
     },
+    errors: [],
   },
 };
 
 export const mocksRequestWithAll = [getZaken, getObjectContactMomenten, getTaken, getPersoon];
+
+const cloneZaken = () => {
+  let cloneZaken = cloneDeep(getZaken);
+  if (cloneZaken.result.data) {
+    cloneZaken.result.data.getZaak.documenten = [];
+  }
+  return cloneZaken;
+};
+
+const cloneContactmomenten = () => {
+  let cloneConctactmomenten = cloneDeep(getObjectContactMomenten);
+  if (cloneConctactmomenten.result.data) {
+    cloneConctactmomenten.result.data.getObjectContactMomenten.content = [];
+  }
+  return cloneConctactmomenten;
+};
+
+export const mocksRequestWithoutDocuments = [
+  cloneZaken(),
+  getObjectContactMomenten,
+  getTaken,
+  getPersoon,
+];
+
+export const mocksRequestWithoutContactMomenten = [
+  getZaken,
+  cloneContactmomenten(),
+  getTaken,
+  getPersoon,
+];
