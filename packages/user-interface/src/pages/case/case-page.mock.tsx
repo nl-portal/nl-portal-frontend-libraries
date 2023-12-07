@@ -18,7 +18,7 @@ export const MockCasePage = (): ReactElement => {
     DUTCH: 'nl-NL',
   };
 
-  let showCTline = true;
+  const showCTline = true;
 
   return (
     <LocalizationProvider customMessages={CUSTOM_MESSAGES} customLocales={LOCALES_TEST}>
@@ -27,8 +27,8 @@ export const MockCasePage = (): ReactElement => {
           <MemoryRouter initialEntries={[route]}>
             <CasePage
               showContactTimeline={showCTline}
-              statusHistoryFacet={<img src={''} alt="" />}
-              statusHistoryBackground={<img src={''} alt="" />}
+              statusHistoryFacet={<img src="" alt="" />}
+              statusHistoryBackground={<img src="" alt="" />}
             />
           </MemoryRouter>
         </MockedProvider>
@@ -44,7 +44,7 @@ export const MockCasePageWithoutDocuments = (): ReactElement => {
     DUTCH: 'nl-NL',
   };
 
-  let showCTline = true;
+  const showCTline = true;
 
   return (
     <LocalizationProvider customMessages={CUSTOM_MESSAGES} customLocales={LOCALES_TEST}>
@@ -53,8 +53,8 @@ export const MockCasePageWithoutDocuments = (): ReactElement => {
           <MemoryRouter initialEntries={[route]}>
             <CasePage
               showContactTimeline={showCTline}
-              statusHistoryFacet={<img src={''} alt="" />}
-              statusHistoryBackground={<img src={''} alt="" />}
+              statusHistoryFacet={<img src="" alt="" />}
+              statusHistoryBackground={<img src="" alt="" />}
             />
           </MemoryRouter>
         </MockedProvider>
@@ -70,7 +70,7 @@ export const MockCasePageWithoutContactMoments = (): ReactElement => {
     DUTCH: 'nl-NL',
   };
 
-  let showCTline = true;
+  const showCTline = true;
 
   return (
     <LocalizationProvider customMessages={CUSTOM_MESSAGES} customLocales={LOCALES_TEST}>
@@ -79,8 +79,8 @@ export const MockCasePageWithoutContactMoments = (): ReactElement => {
           <MemoryRouter initialEntries={[route]}>
             <CasePage
               showContactTimeline={showCTline}
-              statusHistoryFacet={<img src={''} alt="" />}
-              statusHistoryBackground={<img src={''} alt="" />}
+              statusHistoryFacet={<img src="" alt="" />}
+              statusHistoryBackground={<img src="" alt="" />}
             />
           </MemoryRouter>
         </MockedProvider>

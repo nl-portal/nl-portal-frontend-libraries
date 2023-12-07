@@ -407,15 +407,15 @@ const getPersoon = {
 export const mocksRequestWithAll = [getZaken, getObjectContactMomenten, getTaken, getPersoon];
 
 const cloneZaken = () => {
-  let cloneZaken = cloneDeep(getZaken);
-  if (cloneZaken.result.data) {
-    cloneZaken.result.data.getZaak.documenten = [];
+  const clone = cloneDeep(getZaken);
+  if (clone.result.data) {
+    clone.result.data.getZaak.documenten = [];
   }
-  return cloneZaken;
+  return clone;
 };
 
 const cloneContactmomenten = () => {
-  let cloneConctactmomenten = cloneDeep(getObjectContactMomenten);
+  const cloneConctactmomenten = cloneDeep(getObjectContactMomenten);
   if (cloneConctactmomenten.result.data) {
     cloneConctactmomenten.result.data.getObjectContactMomenten.content = [];
   }

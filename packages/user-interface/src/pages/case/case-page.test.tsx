@@ -29,7 +29,6 @@ describe('CasePage', () => {
     await waitForElementToBeRemoved(() => screen.getAllByLabelText('Aan het laden'));
     expect(screen.queryByText('Certificaat WWJB.pdf (pdf, 60,2 kB)')).toBeVisible();
     expect(screen.queryByText('Eerdere contactmomenten')).toBeVisible();
-    //
   });
 
   it('should render without any documents present', async () => {

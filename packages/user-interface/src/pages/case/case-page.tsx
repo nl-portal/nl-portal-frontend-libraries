@@ -26,6 +26,7 @@ import '@utrecht/component-library-css';
 import {DocumentList} from '../../components/document-list';
 import {StatusHistory} from '../../components/status-history';
 import {getTaskUrl} from '../../utils';
+import {uniqueId} from 'lodash';
 
 const Task = ({task}: {task: any}) => {
   if (!task) return null;
@@ -163,9 +164,9 @@ const CasePage: FC<CasePageProps> = ({
             const tables = section.waarde.filter((i: any) => i.type === 'table');
 
             return (
-              <React.Fragment>
+              <React.Fragment key={section.heading}>
                 {listItems.length > 0 && (
-                  <div className={styles.case__article} key={section.heading}>
+                  <div className={styles.case__article}>
                     <Heading3 className={styles['case__sub-header']}>{section.heading}</Heading3>
                     <DescriptionList
                       items={listItems.map((item: any) => ({
@@ -177,14 +178,16 @@ const CasePage: FC<CasePageProps> = ({
                 )}
                 {tables.length > 0 &&
                   tables.map((table: any) => (
-                    <div className={styles.case__article} key={section.heading}>
+                    <div key={table.heading} className={styles.case__article}>
                       <Heading4 className={styles['case__sub-header']}>{table.heading}</Heading4>
                       <Table>
                         {table.waarde.headers.length > 0 && (
                           <TableHead>
                             <TableRow>
                               {table.waarde.headers?.map((header: any) => (
-                                <TableHeader>{header.waarde}</TableHeader>
+                                <TableHeader key={`${uniqueId(header.waarde)}`}>
+                                  {header.waarde}
+                                </TableHeader>
                               ))}
                             </TableRow>
                           </TableHead>
@@ -192,9 +195,11 @@ const CasePage: FC<CasePageProps> = ({
                         {table.waarde.rows.length > 0 && (
                           <TableBody>
                             {table.waarde.rows.map((row: any) => (
-                              <TableRow>
+                              <TableRow key={`${uniqueId('TableRow')}`}>
                                 {row.map((cell: {waarde: string}) => (
-                                  <TableCell>{cell.waarde}</TableCell>
+                                  <TableCell key={`${uniqueId(cell.waarde)}`}>
+                                    {cell.waarde}
+                                  </TableCell>
                                 ))}
                               </TableRow>
                             ))}
