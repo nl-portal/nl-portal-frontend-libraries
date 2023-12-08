@@ -22,8 +22,6 @@ describe('CasePage', () => {
     });
   });
 
-  afterAll(() => {});
-
   it('should render with all elements present', async () => {
     render(MockCasePage());
     await waitForElementToBeRemoved(() => screen.getAllByLabelText('Aan het laden'));
