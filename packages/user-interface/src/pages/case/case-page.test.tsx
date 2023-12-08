@@ -28,6 +28,10 @@ describe('CasePage', () => {
     render(MockCasePage());
     await waitForElementToBeRemoved(() => screen.getAllByLabelText('Aan het laden'));
     expect(screen.queryByText('Certificaat WWJB.pdf (pdf, 60,2 kB)')).toBeVisible();
+    expect(screen.getByText('In behandeling genomen')).toBeVisible();
+    expect(screen.getByText('ZAAK-2023-0000007947')).toBeVisible();
+    expect(screen.getByRole('table')).toBeVisible();
+    expect(screen.getByText('Dit is een sms')).toBeVisible();
     expect(screen.queryByText('Eerdere contactmomenten')).toBeVisible();
   });
 
