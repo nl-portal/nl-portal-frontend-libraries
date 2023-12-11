@@ -2,10 +2,10 @@ import {fireEvent, render, screen} from '@testing-library/react';
 import {MockEditAccountPage} from './edit-account-page.mock';
 
 describe('EditAccountPage', () => {
-  const errorText = 'a valid phone number consists of 10 digits';
+  const errorText = 'een geldig telefoonnummer bestaat uit 10 cijfers';
   const inputField = () => screen.getByRole('textbox');
   const errorTextP = () => screen.queryByText(errorText);
-  const saveButton = () => screen.getByText('Save');
+  const saveButton = () => screen.getByText('Opslaan');
 
   beforeEach(() => {
     render(MockEditAccountPage());

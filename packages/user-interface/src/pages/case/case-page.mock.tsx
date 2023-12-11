@@ -1,6 +1,4 @@
 import React, {ReactElement} from 'react';
-import {MemoryRouter} from 'react-router-dom';
-import {MockedProvider} from '@apollo/client/testing';
 import {CasePage} from './case-page';
 import {
   mocksRequestWithAll,
@@ -9,7 +7,7 @@ import {
 } from './case-page-requests.mock';
 import {TestProviderWrapper} from '../../testUtils/TestProviderWrapper/TestProviderWrapper';
 
-const route = '/zaken/zaak?id=82cb13cf-d2f9-4e3e-ac07-751373035ecb';
+const routeCase = '/zaken/zaak?id=82cb13cf-d2f9-4e3e-ac07-751373035ecb';
 
 const CasePageTestComponent = ({}): ReactElement => {
   return (
@@ -23,36 +21,24 @@ const CasePageTestComponent = ({}): ReactElement => {
 
 export const MockCasePage = (): ReactElement => {
   return (
-    <TestProviderWrapper>
-      <MockedProvider mocks={mocksRequestWithAll} addTypename={false}>
-        <MemoryRouter initialEntries={[route]}>
-          <CasePageTestComponent />
-        </MemoryRouter>
-      </MockedProvider>
+    <TestProviderWrapper mocks={mocksRequestWithAll} route={routeCase}>
+      <CasePageTestComponent />
     </TestProviderWrapper>
   );
 };
 
 export const MockCasePageWithoutDocuments = (): ReactElement => {
   return (
-    <TestProviderWrapper>
-      <MockedProvider mocks={mocksRequestWithoutDocuments} addTypename={false}>
-        <MemoryRouter initialEntries={[route]}>
-          <CasePageTestComponent />
-        </MemoryRouter>
-      </MockedProvider>
+    <TestProviderWrapper mocks={mocksRequestWithoutDocuments} route={routeCase}>
+      <CasePageTestComponent />
     </TestProviderWrapper>
   );
 };
 
 export const MockCasePageWithoutContactMoments = (): ReactElement => {
   return (
-    <TestProviderWrapper>
-      <MockedProvider mocks={mocksRequestWithoutContactMomenten} addTypename={false}>
-        <MemoryRouter initialEntries={[route]}>
-          <CasePageTestComponent />
-        </MemoryRouter>
-      </MockedProvider>
+    <TestProviderWrapper mocks={mocksRequestWithoutContactMomenten} route={routeCase}>
+      <CasePageTestComponent />
     </TestProviderWrapper>
   );
 };
