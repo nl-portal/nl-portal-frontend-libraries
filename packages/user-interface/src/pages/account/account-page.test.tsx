@@ -24,5 +24,12 @@ describe('AccountPage', () => {
       expect(screen.getByText('Sierra')).toBeInTheDocument();
     });
     expect(screen.getByText('Nederlandse, Portugees')).toBeVisible();
+    expect(screen.getByText('Kooyman')).toBeVisible();
+    expect(screen.getByText('vrouw')).toBeVisible();
+    expect(screen.getByText('999991954')).toBeVisible();
+    expect(screen.getByText('3 maart 2003')).toBeVisible();
+    expect(screen.getByText('Nederland')).toBeVisible();
+    expect(screen.getByText('Leyweg 61e')).toBeVisible();
+    expect(screen.getByText("2545CC 's-Gravenhage")).toBeVisible();
   });
 });
