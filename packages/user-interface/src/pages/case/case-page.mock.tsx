@@ -5,7 +5,7 @@ import {
   mocksRequestWithoutContactMomenten,
   mocksRequestWithoutDocuments,
 } from './case-page-requests.mock';
-import {TestProviderWrapper} from '../../testUtils/TestProviderWrapper/TestProviderWrapper';
+import {TestProviderWrapper} from '../../testUtils/TestProviderWrapper';
 
 const routeCase = '/zaken/zaak?id=82cb13cf-d2f9-4e3e-ac07-751373035ecb';
 

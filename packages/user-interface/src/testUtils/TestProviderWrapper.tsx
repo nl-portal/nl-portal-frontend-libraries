@@ -1,10 +1,10 @@
-import {Locales, LocalizationProvider} from '@nl-portal/nl-portal-localization';
+import {LocalizationProvider} from '@nl-portal/nl-portal-localization';
 import {ReactElement} from 'react';
-import {UserInformationProvider} from '../../providers';
-import {CUSTOM_MESSAGES} from '../custom-messages/custom-messages';
+import {UserInformationProvider} from '../providers';
 import React from 'react';
 import {MockedProvider, MockedResponse} from '@apollo/client/testing';
 import {MemoryRouter} from 'react-router-dom';
+import {CUSTOM_MESSAGES} from './../../../app/src/i18n/custom-messages/custom-messages';
 
 export const TestProviderWrapper = ({
   children,
@@ -15,12 +15,8 @@ export const TestProviderWrapper = ({
   mocks: MockedResponse<Record<string, any>>[];
   route: string;
 }): ReactElement => {
-  const LOCALES_TEST: Locales = {
-    DUTCH: 'nl-NL',
-  };
-
   return (
-    <LocalizationProvider customMessages={CUSTOM_MESSAGES} customLocales={LOCALES_TEST}>
+    <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
       <UserInformationProvider>
         <MockedProvider mocks={mocks} addTypename={false}>
           <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>

@@ -1,7 +1,7 @@
 import React, {ReactElement} from 'react';
 import {gql} from '@apollo/client';
 import {EditAccountPage} from './edit-account-page';
-import {TestProviderWrapper} from '../../testUtils/TestProviderWrapper/TestProviderWrapper';
+import {TestProviderWrapper} from '../../testUtils/TestProviderWrapper';
 
 export const MockEditAccountPage = (): ReactElement => {
   const route = '/account/aanpassen?prop=telefoonnummer';
