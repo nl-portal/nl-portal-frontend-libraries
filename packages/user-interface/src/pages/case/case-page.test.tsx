@@ -30,7 +30,7 @@ describe('CasePage', () => {
     await waitForElementToBeRemoved(() => screen.getAllByLabelText('Loading'));
 
     expect(screen.getByText(pdfFile)).toBeVisible();
-    expect(screen.getByText('Notice of objection')).toBeVisible();
+    expect(screen.getByText('case.B0756.title')).toBeVisible();
 
     expect(screen.getByText('ZAAK-2023-0000007947')).toBeVisible();
     expect(screen.getByRole('table')).toBeVisible();
