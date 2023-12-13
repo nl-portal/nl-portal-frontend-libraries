@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, useState} from 'react';
-import {IntlProvider} from 'react-intl';
+import {IntlProvider, MissingTranslationError} from 'react-intl';
 import deepmerge from 'deepmerge';
 import {DEFAULT_LOCALES, DEFAULT_MESSAGES} from '../../i18n';
 import {LocaleContext} from '../../contexts';
@@ -29,6 +29,13 @@ const LocalizationProvider: FC<LocalizationProviderProps> = ({
   const [supportedLocales] = useState(Object.values(locales));
 
   const hrefLang = currentLocale.toLocaleLowerCase().split('-')[0];
+  const onError = (error: MissingTranslationError) => {
+    if (error.code === 'MISSING_TRANSLATION') {
+      console.log('Missing translation', error.message);
+      return;
+    }
+    throw error;
+  };
 
   localStorage.setItem(LOCAL_STORAGE_LANG_KEY, currentLocale);
 
@@ -36,7 +43,7 @@ const LocalizationProvider: FC<LocalizationProviderProps> = ({
 
   return (
     <LocaleContext.Provider value={{currentLocale, supportedLocales, setCurrentLocale, hrefLang}}>
-      <IntlProvider locale={currentLocale} messages={messages[currentLocale]}>
+      <IntlProvider locale={currentLocale} messages={messages[currentLocale]} onError={onError}>
         {children}
       </IntlProvider>
     </LocaleContext.Provider>
