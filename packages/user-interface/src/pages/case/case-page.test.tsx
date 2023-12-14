@@ -38,7 +38,7 @@ describe('CasePage', () => {
     expect(screen.queryByText('Previous contact moments')).toBeVisible();
   });
 
-  it('should render without any documents present', async () => {
+  it('should render without any documents present and show message that no documents are present', async () => {
     render(MockCasePageWithoutDocuments());
     await waitForElementToBeRemoved(() => screen.getAllByLabelText('Loading'));
     expect(screen.queryByText(pdfFile)).toBeNull();
@@ -46,7 +46,7 @@ describe('CasePage', () => {
     expect(screen.queryByText('Previous contact moments')).toBeVisible();
   });
 
-  it('should render without any contactmoments present', async () => {
+  it('should render without any contactmoments present and not show header contactmoments', async () => {
     render(MockCasePageWithoutContactMoments());
     await waitForElementToBeRemoved(() => screen.getAllByLabelText('Loading'));
     expect(screen.getByText('Documents'));
