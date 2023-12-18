@@ -1,10 +1,7 @@
 import React, {ReactElement} from 'react';
-import {MemoryRouter} from 'react-router-dom';
-import {MockedProvider} from '@apollo/client/testing';
 import {gql} from '@apollo/client';
-import {LocalizationProvider} from '@nl-portal/nl-portal-localization';
-import {UserInformationProvider} from '../../providers';
 import {EditAccountPage} from './edit-account-page';
+import {TestProvider} from '../../providers/TestProvider';
 
 export const MockEditAccountPage = (): ReactElement => {
   const route = '/account/aanpassen?prop=telefoonnummer';
@@ -39,14 +36,8 @@ export const MockEditAccountPage = (): ReactElement => {
   ];
 
   return (
-    <LocalizationProvider>
-      <UserInformationProvider>
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <MemoryRouter initialEntries={[route]}>
-            <EditAccountPage />
-          </MemoryRouter>
-        </MockedProvider>
-      </UserInformationProvider>
-    </LocalizationProvider>
+    <TestProvider mocks={mocks} route={route}>
+      <EditAccountPage />
+    </TestProvider>
   );
 };
