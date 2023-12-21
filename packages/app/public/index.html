@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="%PUBLIC_URL%/config.js"></script>
+    <script src="%PUBLIC_URL%/config.js" nonce="%REACT_APP_NONCE%"></script>
     <meta charset="utf-8" />
+    <meta property="csp-nonce" content="%REACT_APP_NONCE%" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Web site created using create-react-app" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; frame-src 'self'; object-src 'none'; script-src 'self' 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; connect-src 'self' https://keycloak-zgw.test.denhaag.nl https://keycloak-zgw.acc.denhaag.nl https://keycloak.denhaag.nl http://localhost:8082 http://localhost:8090; font-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; base-uri 'self'; img-src 'self' data:;"
+      content="default-src 'self'; frame-src 'self'; object-src 'none'; script-src 'self' 'unsafe-eval' 'nonce-%REACT_APP_NONCE%'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'nonce-%REACT_APP_NONCE%'; connect-src 'self' https://keycloak-zgw.test.denhaag.nl https://keycloak-zgw.acc.denhaag.nl https://keycloak.denhaag.nl http://localhost:8082 http://localhost:8090; font-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; base-uri 'self'; img-src 'self' data:;"
     />
 
+    <script nonce="%REACT_APP_NONCE%">
+      window.NONCE = '%REACT_APP_NONCE%';
+    </script>
+
     <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+        manifest.json provides metadata used when your web app is installed on a
+        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+      -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+        Notice the use of %PUBLIC_URL% in the tags above.
+        It will be replaced with the URL of the `public` folder during the build.
+        Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+        work correctly both with client-side routing and a non-root public URL.
+        Learn how to configure a non-root public URL by running `npm run build`.
+      -->
     <title>React App</title>
 
     <link rel="icon" type="image/png" sizes="196x196" href="%PUBLIC_URL%/pwa/favicon-196.png" />
@@ -169,7 +174,9 @@
       media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
     />
     <!--    <link rel="stylesheet" href="%PUBLIC_URL%/open-forms/open-forms-sdk.css" />
-    <script src="%PUBLIC_URL%/open-forms/open-forms-sdk.js"></script>-->
+      <script src="%PUBLIC_URL%/open-forms/open-forms-sdk.js">
+    </script>
+    -->
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

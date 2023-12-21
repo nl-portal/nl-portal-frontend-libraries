@@ -7,6 +7,26 @@
   "engines": {
     "node": ">=14 <17"
   },
+  "scripts": {
+    "start": "wait-on ../../packages/user-interface/dist/index.js && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "generate-pwa-assets": "pwa-asset-generator ./src/assets/pwa-logo.svg ./public/pwa -f -w -o false -e true -i ./public/index.html -m ./public/manifest.json -a \"%PUBLIC_URL%\"",
+    "clean": "rimraf build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.348",
     "@gemeente-denhaag/icons": "0.2.3-alpha.70",
@@ -42,26 +62,6 @@
     "workbox-routing": "6.3.0",
     "workbox-strategies": "6.3.0",
     "workbox-streams": "6.3.0"
-  },
-  "scripts": {
-    "start": "wait-on ../../packages/user-interface/dist/index.js && react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "generate-pwa-assets": "pwa-asset-generator ./src/assets/pwa-logo.svg ./public/pwa -f -w -o false -e true -i ./public/index.html -m ./public/manifest.json -a \"%PUBLIC_URL%\"",
-    "clean": "rimraf build"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "pwa-asset-generator": "^4.3.9",
