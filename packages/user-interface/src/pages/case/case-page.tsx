@@ -28,12 +28,26 @@ import {StatusHistory} from '../../components/status-history';
 import {getTaskUrl} from '../../utils';
 import {uniqueId} from 'lodash';
 
+const labels = {
+  today: 'vandaag',
+  yesterday: 'gisteren',
+  before: 'vóór',
+  approachingDeadline: (daysDifference: number) => {
+    if (daysDifference === 1) {
+      return `nog ${daysDifference} dag`;
+    }
+    return `nog ${daysDifference} dagen`;
+  },
+};
+
 const Task = ({task}: {task: any}) => {
   if (!task) return null;
 
   return (
     <div className={styles.case__article}>
       <Action
+        dateTime={task?.verloopdatum}
+        labels={labels}
         actions={
           <RouterLink
             to={getTaskUrl(task.formulier.formuliertype, task.formulier.value, task.id)}
@@ -42,7 +56,6 @@ const Task = ({task}: {task: any}) => {
             Ga naar taak
           </RouterLink>
         }
-        dateTime={task?.verloopdatum}
         relativeDate
       >
         {task?.title}
@@ -224,7 +237,10 @@ const CasePage: FC<CasePageProps> = ({
               </Heading3>
               <ContactTimelineMobile
                 items={contactItems}
-                todayLabel={intl.formatMessage({id: 'case.contacttimeline.today'})}
+                labels={{
+                  today: intl.formatMessage({id: 'case.contacttimeline.today'}),
+                  yesterday: intl.formatMessage({id: 'case.contacttimeline.yesterday'}),
+                }}
               />
             </div>
           )}

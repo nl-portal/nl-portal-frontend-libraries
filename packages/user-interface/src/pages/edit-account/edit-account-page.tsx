@@ -21,7 +21,6 @@ const EditAccountPage = () => {
 
   const prop = query.get('prop');
   const propTranslation = intl.formatMessage({id: `account.detail.${prop}`});
-  const errorTranslation = intl.formatMessage({id: `account.detail.${prop}.error`});
 
   const defaultValue = userInformation[`${prop}`];
   const regex = REGEX_PATTERNS[`${prop}`];
@@ -66,11 +65,8 @@ const EditAccountPage = () => {
       <div className={styles['edit-account__text-field-container']}>
         <TextField
           onChange={e => setValue(e.target.value)}
-          label={propTranslation}
           className={styles['edit-account__text-field']}
           defaultValue={defaultValue || ''}
-          error={!valid && `${value}`.length >= 1}
-          helperText={!valid && `${value}`.length >= 1 ? errorTranslation : ''}
           disabled={loading}
         />
       </div>
