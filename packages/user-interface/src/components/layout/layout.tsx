@@ -112,6 +112,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
                   </Fragment>
                 ))}
                 <Route
+                  path="*"
                   element={
                     <Navigate to={sessionStorage.getItem("entryUrl") || "/"} />
                   }
