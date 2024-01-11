@@ -1,25 +1,31 @@
-import { resolve } from 'path'
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import dts from 'vite-plugin-dts'
+import { resolve } from "path";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import dts from "vite-plugin-dts";
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react(), dts()],
   build: {
+    minify: mode === "production",
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'api',
-      fileName: 'index',
+      entry: resolve(__dirname, "src/index.ts"),
+      name: "api",
+      fileName: "index",
       formats: ["es"],
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@nl-portal/nl-portal-authentication'],
+      external: ["react", "react-dom", "@nl-portal/nl-portal-authentication"],
       output: {
-        entryFileNames: '[name].js',
+        entryFileNames: "[name].js",
         globals: {
-          react: 'React',
+          react: "React",
         },
       },
     },
   },
-})
+  // resolve: {
+  //   alias: {
+  //     "@nl-portal/nl-portal-api": resolve("../api/dist/index.ts"),
+  //   },
+  // },
+}));
