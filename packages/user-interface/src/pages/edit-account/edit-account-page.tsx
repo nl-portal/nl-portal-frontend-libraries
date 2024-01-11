@@ -3,7 +3,7 @@ import { TextField } from "@gemeente-denhaag/textfield";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useContext, useEffect, useState } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUpdateBurgerProfielMutation } from "@nl-portal/nl-portal-api";
 import { useQuery } from "../../hooks";
 import styles from "./edit-account-page.module.scss";
@@ -15,7 +15,7 @@ const EditAccountPage = () => {
   const { userInformation } = useContext(UserInformationContext);
   const query = useQuery();
   const intl = useIntl();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [mutateFunction, { loading, error }] = useUpdateBurgerProfielMutation();
 
   const prop = query.get("prop");
@@ -29,7 +29,7 @@ const EditAccountPage = () => {
   const [mutating, setMutationStatus] = useState(false);
 
   const navigateToAccountPage = (): void => {
-    history.push(`/account/`);
+    navigate(`/account/`);
   };
 
   const onSave = (): void => {

@@ -4,19 +4,19 @@ import {DocumentIcon} from '@gemeente-denhaag/icons';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useGetFormsQuery} from '@nl-portal/nl-portal-api';
 import {Fragment, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import styles from './forms-page.module.scss';
 import {ListItemSkeleton} from '../../components/list-item-skeleton';
 
 const FormsPage = () => {
   const intl = useIntl();
   const {data, loading, refetch} = useGetFormsQuery();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onClickFunction = (event: React.MouseEvent<HTMLButtonElement>, formId: string): void => {
     event.stopPropagation();
     event.preventDefault();
-    history.push(`/formulier/${formId}`);
+    navigate(`/formulier/${formId}`);
   };
 
   useEffect(() => {

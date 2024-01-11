@@ -263,11 +263,8 @@ const App = () => {
         url={config.KEYCLOAK_URL}
         redirectUri={config.KEYCLOAK_REDIRECT_URI}
       >
-        api
         <ApiWrapper graphqlUri={config.GRAPHQL_URI} restUri={config.REST_URI}>
-          Localize
           <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-            layout
             <Layout
               pages={pages}
               headerLogo={<img src={HeaderLogo} alt="logo" />}

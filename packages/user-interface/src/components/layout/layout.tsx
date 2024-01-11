@@ -1,9 +1,9 @@
 import { FC, Fragment, ReactElement, useEffect } from "react";
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
-  Redirect,
+  Navigate,
 } from "react-router-dom";
 import { StylesProvider } from "@gemeente-denhaag/components-react";
 import {
@@ -85,46 +85,50 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
           <Menu items={pages} legacy={legacy} />
           <div className="denhaag-page-content__main">
             {online && (
-              <Switch>
+              <Routes>
                 {pages.map((page) => (
                   <Fragment key={page.path}>
-                    <Route exact key={page.path} path={page.path}>
-                      <Page page={page}>{page.pageComponent}</Page>
-                    </Route>
+                    <Route
+                      key={page.path}
+                      path={page.path}
+                      element={<Page page={page}>{page.pageComponent}</Page>}
+                    />
                     {page.children?.map((childPage) => (
                       <Route
                         key={childPage.path}
                         path={`${page.path}${childPage.path}`}
-                      >
-                        <Page page={childPage}>
-                          <Fragment>
-                            {childPage.showLinkToParent && (
-                              <LinkToParent parentPage={page} />
-                            )}
-                            {childPage.pageComponent}
-                          </Fragment>
-                        </Page>
-                      </Route>
+                        element={
+                          <Page page={childPage}>
+                            <Fragment>
+                              {childPage.showLinkToParent && (
+                                <LinkToParent parentPage={page} />
+                              )}
+                              {childPage.pageComponent}
+                            </Fragment>
+                          </Page>
+                        }
+                      />
                     ))}
                   </Fragment>
                 ))}
                 <Route
-                  render={() => (
-                    <Redirect to={sessionStorage.getItem("entryUrl") || "/"} />
-                  )}
+                  element={
+                    <Navigate to={sessionStorage.getItem("entryUrl") || "/"} />
+                  }
                 />
-              </Switch>
+              </Routes>
             )}
             {offline && (
-              <Switch>
-                <Route exact key={0} path={offlinePage.path}>
-                  <Page page={offlinePage}>{offlinePage.pageComponent}</Page>
-                </Route>
+              <Routes>
                 <Route
-                  key={1}
-                  render={() => <Redirect to={offlinePage.path} />}
+                  key={0}
+                  path={offlinePage.path}
+                  element={
+                    <Page page={offlinePage}>{offlinePage.pageComponent}</Page>
+                  }
                 />
-              </Switch>
+                <Route key={1} element={<Navigate to={offlinePage.path} />} />
+              </Routes>
             )}
           </div>
         </ResponsiveContent>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, Fragment, ReactElement, useContext, useEffect, useState} from 'react';
 import {useIntl} from 'react-intl';
 import {LocaleContext} from '@nl-portal/nl-portal-localization';
-import {Link, useHistory} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import classNames from 'classnames';
 import useSize from '@react-hook/size';
 import useScrollPosition from '@react-hook/window-scroll';
@@ -43,7 +43,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline, logoSmall}) =>
   const {hrefLang} = useContext(LocaleContext);
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const intl = useIntl();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [previousScrollY, setPreviousScrollY] = useState(0);
   const [headerFixed, setHeaderFixed] = useState(false);
   const [headerMarginTop, setHeaderMarginTop] = useState(0);
@@ -174,7 +174,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline, logoSmall}) =>
                 {React.cloneElement(
                   <IconButton
                     className={styles['header__close-button']}
-                    onClick={() => history.push(homePage?.path || '/')}
+                    onClick={() => navigate(homePage?.path || '/')}
                   >
                     <CloseIcon />
                   </IconButton>,
