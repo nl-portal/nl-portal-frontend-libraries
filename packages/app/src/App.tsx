@@ -70,9 +70,9 @@ const pages: Array<PortalPage> = [
         pageComponent: (
           <CasePage
             showContactTimeline
-            statusHistoryFacet={<img src={Facet} alt="" />}
+            statusHistoryFacet={<img src={Facet} alt="facet" />}
             statusHistoryBackground={
-              <img src={StatusHistoryBackground} alt="" />
+              <img src={StatusHistoryBackground} alt="background" />
             }
           />
         ),
@@ -270,9 +270,9 @@ const App = () => {
             layout
             <Layout
               pages={pages}
-              headerLogo={<HeaderLogo />}
-              headerLogoSmall={<HeaderLogoSmall />}
-              facet={<img src={Facet} alt="" />}
+              headerLogo={<img src={HeaderLogo} alt="logo" />}
+              headerLogoSmall={<img src={HeaderLogoSmall} alt="logo-small" />}
+              facet={<img src={Facet} alt="facet" />}
               footer={footer}
             />
           </LocalizationProvider>
