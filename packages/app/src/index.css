@@ -1,0 +1,17 @@
+#root,
+.utrecht-document {
+  height: 100%;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

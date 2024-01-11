@@ -1,0 +1,9 @@
+@import '../../styles/mixins';
+
+.link-to-parent {
+  margin-bottom: var(--nlportal-space-block-3xl, 2.5rem);
+
+  @include breakpoint(tablet) {
+    margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+  }
+}

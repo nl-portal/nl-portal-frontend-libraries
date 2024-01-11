@@ -1,0 +1,32 @@
+@import '../../styles/mixins';
+
+.forms {
+  display: flex;
+  flex-direction: column;
+}
+
+.forms__header {
+  margin-block-end: var(--nlportal-space-block-md, 1rem);
+
+  @include breakpoint(tablet) {
+    margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+  }
+}
+
+.forms__forms-list {
+  @include breakpoint(tablet) {
+    max-width: var(--nlportal-forms-list-max-width-tablet, 75%);
+  }
+
+  @include breakpoint(desktop) {
+    max-width: var(--nlportal-forms-list-max-width-desktop, 50%);
+  }
+}
+
+.forms__list-item-button {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}

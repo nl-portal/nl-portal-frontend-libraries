@@ -1,0 +1,16 @@
+@import '../../styles/mixins';
+
+.list-item-skeleton {
+  padding-block-end: var(--nlportal-list-item-skeleton-padding-block, 12px);
+  padding-block-start: var(--nlportal-list-item-skeleton-padding-block, 12px);
+  padding-inline-end: var(--nlportal-list-item-skeleton-padding-inline, 16px);
+  padding-inline-start: var(--nlportal-list-item-skeleton-padding-inline, 16px);
+  color: var(--nlportal-list-item-skeleton-color, hsl(0 0% 48%));
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.list-item-skeleton__icon {
+  min-width: var(--nlportal-list-item-skeleton-icon-min-width, 48px);
+}

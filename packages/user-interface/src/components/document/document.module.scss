@@ -1,0 +1,45 @@
+.document {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: var(--nlportal-document-border, 1px solid hsl(0 0% 82%));
+  border-radius: var(--nlportal-document-border-radius, 3px);
+  overflow: hidden;
+}
+
+.document__icon-container {
+  background-color: var(--nlportal-document-icon-background-color, hsl(0 0% 95%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.document__icon {
+  color: var(--nlportal-document-icon-color, hsl(0 0% 29%));
+  margin-inline-start: var(--nlportal-space-inline-lg, 1.25rem);
+  margin-inline-end: var(--nlportal-space-inline-lg, 1.25rem);
+  margin-block-start: var(--nlportal-space-block-lg, 1.25rem);
+  margin-block-end: var(--nlportal-space-block-lg, 1.25rem);
+}
+
+.document__content {
+  display: flex;
+  flex-direction: column;
+  padding-inline-start: var(--nlportal-space-inline-md, 1rem);
+  padding-inline-end: var(--nlportal-space-inline-md, 1rem);
+  padding-block-start: var(--nlportal-space-block-md, 1rem);
+  padding-block-end: var(--nlportal-space-block-md, 1rem);
+  overflow: hidden;
+}
+
+.document__content--desktop {
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.document__file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

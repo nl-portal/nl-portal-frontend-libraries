@@ -1,0 +1,54 @@
+$breakpoints: (
+  mobile: 320px,
+  tablet: 768px,
+  desktop: 1024px,
+);
+@use 'sass:map';
+
+@mixin breakpoint($breakpoint) {
+  @media only screen and (min-width: map.get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  --denhaag-card-width: 100%;
+
+  div[role='tabpanel'] {
+    padding: 0;
+    padding-block-start: var(--nlportal-space-block-2xl, 2rem);
+  }
+}
+
+.tasks__header {
+  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+
+  @include breakpoint(tablet) {
+    margin-block-end: var(--nlportal-space-block-2xl, 2rem);
+  }
+}
+
+.tasks__cards {
+  display: flex;
+  flex-direction: column;
+
+  @include breakpoint(desktop) {
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+}
+
+.tasks__card {
+  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+
+  @include breakpoint(desktop) {
+    width: calc(50% - var(--nlportal-space-inline-md, 1rem));
+  }
+}
+
+.tasks__no-data-message {
+  width: 100%;
+  text-align: center;
+}

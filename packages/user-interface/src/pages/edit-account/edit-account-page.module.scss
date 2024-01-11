@@ -1,0 +1,59 @@
+@import '../../styles/mixins';
+
+.edit-account {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-account__header {
+  margin-block-end: var(--nlportal-space-block-2xl, 2rem);
+}
+
+.edit-account__buttons {
+  display: flex;
+  flex-direction: column;
+
+  @include breakpoint(tablet) {
+    flex-direction: row;
+  }
+}
+
+.edit-account__button {
+  width: 100%;
+
+  @include breakpoint(tablet) {
+    width: auto;
+  }
+
+  span {
+    width: 100%;
+    text-align: center;
+
+    @include breakpoint(tablet) {
+      width: auto;
+    }
+  }
+
+  &:not(:last-child) {
+    margin-block-end: var(--nl-portal-space-block-md, 1rem);
+
+    @include breakpoint(tablet) {
+      margin-block-end: 0;
+      margin-inline-end: var(--nl-portal-space-inline-md, 1rem);
+    }
+  }
+}
+
+.edit-account__text-field-container {
+  margin-block-end: var(--nlportal-space-block-4xl, 3rem);
+  width: 100%;
+  display: flex;
+
+  @include breakpoint(tablet) {
+    width: var(--nlportal-edit-account-text-field-width, 260px);
+  }
+}
+
+.edit-account__text-field {
+  width: 100%;
+}

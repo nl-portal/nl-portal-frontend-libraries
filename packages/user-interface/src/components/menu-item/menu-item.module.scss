@@ -1,0 +1,29 @@
+@import '../../styles/mixins';
+
+.denhaag-menu-button--flex {
+  display: flex !important;
+  align-items: center;
+  height: var(--nlportal-menu-item-height, 3rem);
+  flex-shrink: 0;
+
+  @include breakpoint(tablet) {
+    --denhaag-menu-button-font-size: var(--nlportal-base-font-size, 1rem);
+  }
+
+  &:after {
+    display: none !important;
+  }
+}
+
+.denhaag-menu-button__icon {
+  display: flex;
+  margin-inline-end: var(--nlportal-space-inline-md, 1rem);
+
+  svg {
+    font-size: var(--nlportal-menu-button-font-size, 1.25rem);
+  }
+}
+
+.denhaag-menu-button__counter {
+  margin-inline-start: var(--nlportal-space-block-xs, 0.5rem);
+}
