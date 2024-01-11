@@ -19,7 +19,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "clean": "rimraf dist",
-    "dev": "vite build --watch",
+    "dev": "vite build --watch --mode development",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm"

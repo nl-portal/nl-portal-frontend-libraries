@@ -89,7 +89,6 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
                 {pages.map((page) => (
                   <Fragment key={page.path}>
                     <Route
-                      key={page.path}
                       path={page.path}
                       element={<Page page={page}>{page.pageComponent}</Page>}
                     />

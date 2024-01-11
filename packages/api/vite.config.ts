@@ -3,10 +3,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   plugins: [react(), dts()],
   build: {
-    minify: mode === "production",
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "api",
@@ -23,9 +22,4 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
-  // resolve: {
-  //   alias: {
-  //     "@nl-portal/nl-portal-api": resolve("../api/dist/index.ts"),
-  //   },
-  // },
-}));
+});

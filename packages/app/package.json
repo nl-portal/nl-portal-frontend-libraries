@@ -5,7 +5,7 @@
   "license": "EUPL-1.2",
   "type": "module",
   "scripts": {
-    "dev": "pnpm wait && vite --port 3000",
+    "dev": "pnpm wait && vite --port 3000 --mode development",
     "build": "pnpm wait && tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preinstall": "npx only-allow pnpm",

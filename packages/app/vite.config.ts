@@ -1,9 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   plugins: [react()],
   build: {
-    minify: mode === "production",
+    commonjsOptions: {
+      include: [/api/, /node_modules/],
+    },
   },
-}));
+});
