@@ -1,65 +1,13 @@
 {
   "name": "nl-portal-frontend-libraries",
   "private": true,
-  "engines": {
-    "node": ">=14 <17"
-  },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
-    "kill-ports": "kill-port --port 3000",
-    "start": "npm run clean && npm run kill-ports && lerna run start --parallel",
-    "test": "yarn jest",
-    "test:watch": "yarn jest --watchAll",
-    "test:api": "yarn jest --watchAll --testPathPattern=packages/api",
-    "test:app": "yarn jest --watchAll --testPathPattern=packages/app",
-    "test:authentication": "yarn jest --watchAll --testPathPattern=packages/authentication",
-    "test:localization": "yarn jest --watchAll --testPathPattern=packages/localization",
-    "test:user-interface": "yarn jest --watchAll --testPathPattern=packages/user-interface",
-    "lint": "eslint \"packages/**/*.{js,jsx,ts,tsx}\"",
-    "lint:fix": "eslint \"packages/**/*.{js,jsx,ts,tsx}\" --fix",
-    "prettier": "prettier --check .",
-    "prettier:fix": "prettier --write .",
-    "codegen": "lerna run codegen",
-    "generate-pwa-assets": "lerna run generate-pwa-assets && prettier --write ./packages/app/public/index.html",
-    "clean": "lerna run clean",
-    "release": "lerna version prerelease --no-changelog --no-private --no-commit-hooks",
-    "publish": "lerna publish from-package"
+    "build": "pnpm run --recursive --parallel build",
+    "clean": "pnpm run --recursive clean",
+    "dev": "pnpm clean && pnpm run --recursive --parallel dev",
+    "preinstall": "npx only-allow pnpm"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
-    "@babel/preset-react": "^7.16.0",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@typescript-eslint/eslint-plugin": "^4.29.0",
-    "@typescript-eslint/parser": "^4.29.0",
-    "babel-core": "^6.26.3",
-    "babel-jest": "^27.0.6",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-import-resolver-webpack": "^0.13.2",
-    "eslint-plugin-import": "^2.24.0",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "global-jsdom": "^8.1.0",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^27.0.6",
-    "jest-transform-stub": "^2.0.0",
-    "jsdom": "^16.7.0",
-    "kill-port": "^1.6.1",
-    "lerna": "^4.0.0",
-    "prettier": "^2.3.2",
-    "prettier-airbnb-config": "^1.0.0",
-    "ts-jest": "^27.0.4",
-    "wait-on": "^6.0.1"
-  },
-  "dependencies": {
-    "formiojs": "^4.14.7"
+    "typescript": "^5.3.3"
   }
 }
