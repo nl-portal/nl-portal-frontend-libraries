@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["react", "react-dom", "@react-keycloak/web"],
       output: {
         entryFileNames: "[name].js",
         globals: {

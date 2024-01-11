@@ -25,7 +25,6 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "@react-keycloak/web": "^3.4.0",
     "jwt-decode": "^3.1.2",
     "keycloak-js": "^15.0.1"
   },
@@ -45,6 +44,7 @@
     "vite-plugin-dts": "^3.7.0"
   },
   "peerDependencies": {
+    "@react-keycloak/web": "^3.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
