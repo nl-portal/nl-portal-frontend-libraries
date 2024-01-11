@@ -105,8 +105,6 @@ const KeycloakProvider = ({
     authClient.updateToken(minValiditySeconds);
   };
 
-  console.log(initOptions);
-
   return (
     <ReactKeycloakProvider
       authClient={authClient}
@@ -115,7 +113,6 @@ const KeycloakProvider = ({
       autoRefreshToken={autoRefreshToken}
       onTokens={({ token }) => {
         if (!token) return;
-        console.log("onToken", token);
         setKeycloakToken(token);
         setDecodedToken(decodeToken(token));
       }}
@@ -141,7 +138,6 @@ const KeycloakWrapper: FC<KeycloakWrapperProps> = (props) => {
   const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
     undefined
   );
-  console.log("decodedToken", decodedToken, "keycloakToken", keycloakToken);
   const ENTRY_URL_KEY = "entryUrl";
   const entryUrl = sessionStorage.getItem(ENTRY_URL_KEY);
 

@@ -23,8 +23,7 @@ const ApiWrapper = ({ children, graphqlUri, restUri }: ApiWrapperProps) => {
   const LOCAL_STORAGE_REST_URI_KEY = "REST_URI";
   const formattedGraphqlUri = formatUrlTrailingSlash(graphqlUri, false);
   const formattedRestUri = formatUrlTrailingSlash(restUri, false);
-  const test = useContext(KeycloakContext);
-  console.log(test);
+  const { keycloakToken } = useContext(KeycloakContext);
   const httpLink = new HttpLink({ uri: formattedGraphqlUri });
 
   const getLink = (authToken: string) =>
@@ -42,21 +41,18 @@ const ApiWrapper = ({ children, graphqlUri, restUri }: ApiWrapperProps) => {
       new ApolloClient({
         uri: formattedGraphqlUri,
         cache: new InMemoryCache(),
-        link: getLink(test.keycloakToken),
+        link: getLink(keycloakToken),
       })
   );
 
   useEffect(() => {
-    console.log("effect", test.keycloakToken);
-    client.setLink(getLink(test.keycloakToken));
-    TOKEN_OBJECT[TOKEN_KEY] = test.keycloakToken;
-  }, [test.keycloakToken]);
+    client.setLink(getLink(keycloakToken));
+    TOKEN_OBJECT[TOKEN_KEY] = keycloakToken;
+  }, [keycloakToken]);
 
   sessionStorage.setItem(LOCAL_STORAGE_REST_URI_KEY, formattedRestUri);
 
-  console.log("test.keycloakToken", test.keycloakToken);
-
-  return test.keycloakToken ? (
+  return keycloakToken ? (
     <ApiContext.Provider value={{ restUri: formattedRestUri }}>
       <ApolloProvider client={client}>{children}</ApolloProvider>
     </ApiContext.Provider>

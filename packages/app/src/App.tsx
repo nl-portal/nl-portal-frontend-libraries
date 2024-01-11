@@ -255,8 +255,6 @@ const App = () => {
     return null;
   }
 
-  console.log("config", config);
-
   return (
     <div className={config.THEME_CLASS}>
       <KeycloakWrapper
