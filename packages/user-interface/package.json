@@ -44,9 +44,6 @@
     "@gemeente-denhaag/tab": "0.2.3-alpha.362",
     "@gemeente-denhaag/table": "0.1.1-alpha.264",
     "@gemeente-denhaag/textfield": "0.2.3-alpha.362",
-    "@nl-portal/nl-portal-api": "workspace:*",
-    "@nl-portal/nl-portal-authentication": "workspace:*",
-    "@nl-portal/nl-portal-localization": "workspace:*",
     "@react-hook/size": "^2.1.2",
     "@react-hook/window-scroll": "^1.3.0",
     "@react-keycloak/web": "^3.4.0",
@@ -88,6 +85,9 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "@nl-portal/nl-portal-api": "workspace:*",
+    "@nl-portal/nl-portal-authentication": "workspace:*",
+    "@nl-portal/nl-portal-localization": "workspace:*"
   }
 }

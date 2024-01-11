@@ -26,8 +26,7 @@
     "wait": "wait-on ../authentication/dist/index.js"
   },
   "dependencies": {
-    "@apollo/client": "^3.8.8",
-    "@nl-portal/nl-portal-authentication": "workspace:*"
+    "@apollo/client": "^3.8.8"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.0",
@@ -52,6 +51,7 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "@nl-portal/nl-portal-authentication": "workspace:*"
   }
 }

@@ -13,7 +13,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', '@nl-portal/nl-portal-authentication'],
       output: {
         entryFileNames: '[name].js',
         globals: {
