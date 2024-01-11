@@ -87,7 +87,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
             {online && (
               <Switch>
                 {pages.map((page) => (
-                  <>
+                  <Fragment key={page.path}>
                     <Route exact key={page.path} path={page.path}>
                       <Page page={page}>{page.pageComponent}</Page>
                     </Route>
@@ -106,7 +106,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
                         </Page>
                       </Route>
                     ))}
-                  </>
+                  </Fragment>
                 ))}
                 <Route
                   render={() => (
