@@ -74,8 +74,6 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "rimraf": "^5.0.5",
     "sass": "^1.69.7",
     "typescript": "^5.2.2",
@@ -84,10 +82,10 @@
     "wait-on": "^7.2.0"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
-    "@nl-portal/nl-portal-localization": "workspace:*"
+    "@nl-portal/nl-portal-localization": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
