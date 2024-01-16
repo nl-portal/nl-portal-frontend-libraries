@@ -22,7 +22,8 @@
     "dev": "vite build --watch --mode development",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "test": "vitest --environment jsdom"
   },
   "dependencies": {
     "deepmerge": "^4.2.2",
@@ -41,7 +42,8 @@
     "rimraf": "^5.0.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
-    "vite-plugin-dts": "^3.7.0"
+    "vite-plugin-dts": "^3.7.0",
+    "vitest": "^1.2.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
