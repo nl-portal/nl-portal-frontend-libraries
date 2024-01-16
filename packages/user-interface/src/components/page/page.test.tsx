@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { render } from "@testing-library/react";
 import { MockWrapper } from "@nl-portal/nl-portal-localization";
 import { unmountComponentAtNode } from "react-dom";

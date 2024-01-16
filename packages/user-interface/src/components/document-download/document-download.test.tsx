@@ -1,7 +1,8 @@
-import {DocumentDownload} from './document-download';
+import { describe, it, expect } from "vitest";
+import { DocumentDownload } from "./document-download";
 
-describe('DocumentDownload', () => {
-  it('is truthy', () => {
+describe("DocumentDownload", () => {
+  it("is truthy", () => {
     expect(DocumentDownload).toBeTruthy();
   });
 });

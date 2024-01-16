@@ -1,6 +1,6 @@
-import {gql} from '@apollo/client';
+import { gql } from "@apollo/client";
 
-export const QUERY_GET_ZAKEN = gql`
+export const QUERY_GET_ZAAK = gql`
   query GetZaak($id: UUID!) {
     getZaak(id: $id) {
       uuid

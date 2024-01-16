@@ -1,7 +1,8 @@
-import {FormPage} from './form-page';
+import { describe, it, expect } from "vitest";
+import { FormPage } from "./form-page";
 
-describe('FormPage', () => {
-  it('is truthy', () => {
+describe("FormPage", () => {
+  it("is truthy", () => {
     expect(FormPage).toBeTruthy();
   });
 });
