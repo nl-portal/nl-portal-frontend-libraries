@@ -24,7 +24,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preinstall": "npx only-allow pnpm",
     "wait": "wait-on ../authentication/dist/index.js",
-    "test": "vitest --environment jsdom"
+    "test": "vitest run",
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "@apollo/client": "^3.8.8"

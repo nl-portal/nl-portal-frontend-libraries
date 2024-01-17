@@ -2,10 +2,11 @@
   "name": "nl-portal-frontend-libraries",
   "private": true,
   "scripts": {
-    "build": "pnpm run --recursive --parallel build",
+    "build": "pnpm clean && pnpm run --recursive --parallel build",
     "clean": "pnpm run --recursive clean",
     "dev": "pnpm clean && pnpm run --recursive --parallel dev",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "test": "pnpm run --recursive --parallel test"
   },
   "devDependencies": {
     "typescript": "^5.3.3"

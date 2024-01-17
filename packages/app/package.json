@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "clean": "rimraf dist",
     "wait": "wait-on ../api/dist/index.js && wait-on ../authentication/dist/index.js && wait-on ../localization/dist/index.js && wait-on ../user-interface/dist/index.js",
-    "test": "vitest --environment jsdom"
+    "test": "vitest run",
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.361",

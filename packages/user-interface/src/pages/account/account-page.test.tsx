@@ -1,4 +1,3 @@
-globalThis.jest = vi;
 import { describe, it, expect, beforeAll } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MockAccountPage } from "./account-page.mock";
@@ -7,15 +6,15 @@ describe("AccountPage", () => {
   beforeAll(() => {
     Object.defineProperty(window, "matchMedia", {
       writable: true,
-      value: jest.fn().mockImplementation((query) => ({
+      value: vitest.fn().mockImplementation((query) => ({
         matches: false,
         media: query,
         onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
+        addListener: vitest.fn(), // Deprecated
+        removeListener: vitest.fn(), // Deprecated
+        addEventListener: vitest.fn(),
+        removeEventListener: vitest.fn(),
+        dispatchEvent: vitest.fn(),
       })),
     });
   });
