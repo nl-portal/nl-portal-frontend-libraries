@@ -4,6 +4,7 @@ import Keycloak, {
   KeycloakConfig,
   KeycloakInitOptions,
   KeycloakInstance,
+  KeycloakOnLoad,
 } from "keycloak-js";
 import { FC, Fragment, useContext, useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
@@ -18,6 +19,7 @@ interface KeycloakWrapperProps extends KeycloakConfig {
   autoIdleSessionLogout?: boolean;
   idleTimeoutMinutes?: number;
   minValiditySeconds?: number;
+  onLoad?: KeycloakOnLoad;
 }
 
 interface IdleTimerProps {
@@ -83,6 +85,7 @@ const KeycloakProvider = ({
   autoIdleSessionLogout = true,
   idleTimeoutMinutes = 15,
   minValiditySeconds = 30,
+  onLoad = "login-required",
 }: KeycloakWrapperProps) => {
   const { setKeycloakToken, setDecodedToken } = useContext(KeycloakContext);
   const [authClient] = useState(
@@ -95,14 +98,16 @@ const KeycloakProvider = ({
   );
   const initOptions: KeycloakInitOptions = {
     checkLoginIframe: false,
-    onLoad: "login-required",
+    onLoad,
     flow: "standard",
     redirectUri: formatUrlTrailingSlash(redirectUri, false),
   };
   const decodeToken = (jwtToken: string) => jwtDecode<DecodedToken>(jwtToken);
 
   const updateToken = () => {
-    authClient.updateToken(minValiditySeconds);
+    if (authClient.token) {
+      authClient.updateToken(minValiditySeconds);
+    }
   };
 
   return (

@@ -44,6 +44,7 @@ export const NL_NL_MESSAGES: Messages = {
     'case.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
     'case.statusUnknown': 'niet beschikbaar',
     'case.contacttimeline.today': 'vandaag',
+    'case.contacttimeline.yesterday': 'gisteren',
     'documents.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
     'documents.noDocuments': 'Er zijn geen documenten.',
     'offline.warning':

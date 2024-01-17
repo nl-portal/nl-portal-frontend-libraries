@@ -24,7 +24,7 @@ import {
 import { FormattedMessage, useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
 import { Link as RouterLink } from "react-router-dom";
-import ContactTimelineMobile from "@gemeente-denhaag/contact-timeline";
+import ContactTimeline from "@gemeente-denhaag/contact-timeline";
 import { useQuery } from "../../hooks";
 import styles from "./case-page.module.scss";
 import "@utrecht/component-library-css";
@@ -130,12 +130,15 @@ const CasePage: FC<CasePageProps> = ({
         id: index,
         title: contact.tekst,
         channel: contact.kanaal,
-        date: "",
         isoDate: contact.registratiedatum,
-        todayLabel: intl.formatMessage({ id: "case.contacttimeline.today" }),
       })
     );
   }, [contacten]);
+
+  const contactLabels = {
+    yesterday: intl.formatMessage({ id: "case.contacttimeline.yesterday" }),
+    today: intl.formatMessage({ id: "case.contacttimeline.today" }),
+  };
 
   React.useEffect(() => {
     if (!zaak) return;
@@ -259,17 +262,7 @@ const CasePage: FC<CasePageProps> = ({
               <Heading3 className={styles["case__sub-header"]}>
                 <FormattedMessage id="case.contactHeader" />
               </Heading3>
-              <ContactTimelineMobile
-                items={contactItems}
-                labels={{
-                  today: intl.formatMessage({
-                    id: "case.contacttimeline.today",
-                  }),
-                  yesterday: intl.formatMessage({
-                    id: "case.contacttimeline.yesterday",
-                  }),
-                }}
-              />
+              <ContactTimeline items={contactItems} labels={contactLabels} />
             </div>
           )}
           <Task task={firstTask} />
