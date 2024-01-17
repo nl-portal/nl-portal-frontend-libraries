@@ -29,19 +29,19 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v2
         with:
-          node-version: "14.x"
+          node-version: "18.x"
 
-      - name: lerna bootstrap
+      - name: intall
         run: |
-          npm install -g yarn
+          npm install -g pnpm
           npm install -g lerna@6.6.2
-          yarn run bootstrap
+          pnpm install
 
       - name: build library
-        run: yarn run build
+        run: pnpm build
 
       - name: run tests
-        run: yarn test
+        run: pnpm test
 
       - name: "Retain build artifact: api"
         uses: actions/upload-artifact@v3
@@ -92,11 +92,11 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v2
         with:
-          node-version: "14.x"
+          node-version: "18.x"
 
-      - name: install yarn + lerna
+      - name: install
         run: |
-          npm install -g yarn
+          npm install -g pnpm
           npm install -g lerna@6.6.2
 
       - name: "Restore build artifact: api"
@@ -132,8 +132,8 @@ jobs:
           GIT_COMMITTER_NAME: "nl-portal"
         run: |
           git push --set-upstream origin HEAD
-          yarn run release -- --yes
-      
+          pnpm run release -- --yes
+
       - name: lerna publish
         env:
           NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
