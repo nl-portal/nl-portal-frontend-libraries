@@ -33,6 +33,7 @@ import HeaderLogoSmall from "./assets/header-logo-small.svg";
 import Facet from "./assets/facet.png";
 import { config } from "./constants/config";
 import StatusHistoryBackground from "./assets/status-history-background.svg";
+import React from "react";
 
 const pages: Array<PortalPage> = [
   {
@@ -263,17 +264,20 @@ const App = () => {
         url={config.KEYCLOAK_URL}
         redirectUri={config.KEYCLOAK_REDIRECT_URI}
       >
-        <ApiWrapper graphqlUri={config.GRAPHQL_URI} restUri={config.REST_URI}>
-          <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-            <Layout
-              pages={pages}
-              headerLogo={<img src={HeaderLogo} alt="logo" />}
-              headerLogoSmall={<img src={HeaderLogoSmall} alt="logo-small" />}
-              facet={<img src={Facet} alt="facet" />}
-              footer={footer}
-            />
-          </LocalizationProvider>
-        </ApiWrapper>
+        {/* TODO: Moved StrictMode, because of Keycloak - React 18: https://github.com/react-keycloak/react-keycloak/issues/182 */}
+        <React.StrictMode>
+          <ApiWrapper graphqlUri={config.GRAPHQL_URI} restUri={config.REST_URI}>
+            <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
+              <Layout
+                pages={pages}
+                headerLogo={<img src={HeaderLogo} alt="logo" />}
+                headerLogoSmall={<img src={HeaderLogoSmall} alt="logo-small" />}
+                facet={<img src={Facet} alt="facet" />}
+                footer={footer}
+              />
+            </LocalizationProvider>
+          </ApiWrapper>
+        </React.StrictMode>
       </KeycloakWrapper>
     </div>
   );
