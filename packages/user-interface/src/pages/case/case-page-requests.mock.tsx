@@ -317,9 +317,6 @@ const getTaken = {
     },
   },
   result: {
-    variables: {
-      zaakId: "82cb13cf-d2f9-4e3e-ac07-751373035ecb",
-    },
     data: {
       getTaken: {
         content: [

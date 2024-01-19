@@ -21,8 +21,7 @@ describe("EditAccountPage", () => {
     expect(inputField()).not.toBeNull();
 
     fireEvent.change(inputField(), { target: { value: "hoiDitIsNietGeldig" } });
-
-    expect(errorTextP()).not.toBeTruthy();
+    expect(errorTextP()).toBeVisible();
     expect(saveButton().closest("button")).toBeDisabled();
   });
 
@@ -31,8 +30,7 @@ describe("EditAccountPage", () => {
     expect(inputField()).not.toBeNull();
 
     fireEvent.change(inputField(), { target: { value: "12345678910" } });
-
-    expect(errorTextP()).not.toBeTruthy();
+    expect(errorTextP()).toBeVisible();
     expect(saveButton().closest("button")).toBeDisabled();
   });
 
@@ -53,7 +51,7 @@ describe("EditAccountPage", () => {
 
     fireEvent.change(inputField(), { target: { value: "-012345678" } });
 
-    expect(errorTextP()).not.toBeTruthy();
+    expect(errorTextP()).toBeVisible();
     expect(saveButton().closest("button")).toBeDisabled();
   });
 });
