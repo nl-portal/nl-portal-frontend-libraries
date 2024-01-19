@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+import { QUERY_GET_TAKEN } from '..';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -1136,24 +1137,7 @@ export function useGetTaakByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type GetTaakByIdQueryHookResult = ReturnType<typeof useGetTaakByIdQuery>;
 export type GetTaakByIdLazyQueryHookResult = ReturnType<typeof useGetTaakByIdLazyQuery>;
 export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaakByIdQueryVariables>;
-export const GetTakenDocument = gql`
-    query GetTaken($zaakId: UUID) {
-  getTaken(zaakUUID: $zaakId) {
-    content {
-      id
-      objectId
-      formulier {
-        ...FormulierFields
-      }
-      title
-      status
-      date
-      data
-      verloopdatum
-    }
-  }
-}
-    ${FormulierFieldsFragmentDoc}`;
+export const GetTakenDocument = QUERY_GET_TAKEN;
 
 /**
  * __useGetTakenQuery__
