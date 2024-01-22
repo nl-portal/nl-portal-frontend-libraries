@@ -52,7 +52,7 @@ const DetailList: FC<DetailListProps> = ({ details }) => {
                 onClick={() =>
                   setUserInformation(
                     detail.translationKey,
-                    typeof detail.value === "string" ? detail.value : ""
+                    typeof detail.value === "string" ? detail.value : "",
                   )
                 }
                 component={RouterLink}

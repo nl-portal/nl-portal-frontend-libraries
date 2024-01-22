@@ -37,7 +37,7 @@ describe("Page", () => {
           <span>test</span>
         </Page>
       </LayoutProvider>,
-      { wrapper: MockWrapper as React.ComponentType, container }
+      { wrapper: MockWrapper as React.ComponentType, container },
     );
 
     expect(document.title).toContain("Overview");

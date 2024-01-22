@@ -1,4 +1,4 @@
-@import '../styles/mixins';
+@import "../styles/mixins";
 
 .footer {
   width: 100%;
@@ -6,7 +6,10 @@
   flex-direction: column;
   align-items: center;
   background-color: var(--nlportal-footer-background-color, hsl(207 87% 27%));
-  --utrecht-heading-color: var(--nlportal-footer-header-color, hsl(208 76% 92%));
+  --utrecht-heading-color: var(
+    --nlportal-footer-header-color,
+    hsl(208 76% 92%)
+  );
 }
 
 .footer__inner {
@@ -38,7 +41,10 @@
   }
 
   @include breakpoint(desktop) {
-    margin-inline-start: var(--nlportal-footer-column-space-inline-large, 250px);
+    margin-inline-start: var(
+      --nlportal-footer-column-space-inline-large,
+      250px
+    );
   }
 }
 

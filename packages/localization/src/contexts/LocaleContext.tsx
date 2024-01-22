@@ -8,7 +8,7 @@ interface LocaleContextInterface {
 }
 
 const LocaleContext = React.createContext<LocaleContextInterface>(
-  {} as LocaleContextInterface
+  {} as LocaleContextInterface,
 );
 
 export default LocaleContext;

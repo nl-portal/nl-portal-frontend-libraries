@@ -147,7 +147,7 @@ describe("getNameString", () => {
         voorvoegsel: "de",
         geslachtsnaam: "Vries",
       },
-      "lastName"
+      "lastName",
     );
     expect(nameString).toBe("De Vries");
   });
@@ -159,7 +159,7 @@ describe("getNameString", () => {
         voorvoegsel: "de",
         geslachtsnaam: "Vries",
       },
-      "firstNames"
+      "firstNames",
     );
     expect(nameString).toBe("Jan");
   });

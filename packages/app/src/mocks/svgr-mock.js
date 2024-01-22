@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as React from 'react';
+import * as React from "react";
 
-export default 'SvgrURL';
-export const ReactComponent = 'div';
+export default "SvgrURL";
+export const ReactComponent = "div";

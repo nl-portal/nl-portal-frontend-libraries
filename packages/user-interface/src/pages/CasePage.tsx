@@ -56,7 +56,7 @@ const Task = ({ task }: { task: any }) => {
             to={getTaskUrl(
               task.formulier.formuliertype,
               task.formulier.value,
-              task.id
+              task.id,
             )}
             className="utrecht-button-link utrecht-button-link--html-a"
           >
@@ -131,7 +131,7 @@ const CasePage: FC<CasePageProps> = ({
         title: contact.tekst,
         channel: contact.kanaal,
         isoDate: contact.registratiedatum,
-      })
+      }),
     );
   }, [contacten]);
 
@@ -191,10 +191,10 @@ const CasePage: FC<CasePageProps> = ({
           )}
           {zaak?.getZaak.zaakdetails.data.map((section: any) => {
             const listItems = section.waarde.filter(
-              (i: any) => i.type !== "table"
+              (i: any) => i.type !== "table",
             );
             const tables = section.waarde.filter(
-              (i: any) => i.type === "table"
+              (i: any) => i.type === "table",
             );
 
             return (

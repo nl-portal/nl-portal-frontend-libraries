@@ -47,9 +47,12 @@ const IdleTimer = ({ idleTimeoutMinutes, onTimerReset }: IdleTimerProps) => {
       clearTimeout(timeout);
     }
 
-    timeout = setTimeout(() => {
-      window.location.reload(); // Refresh to check with Keycloak if session is still valid
-    }, 1000 * 60 * idleTimeoutMinutes); // Should be 15 minutes to comply with DigiD requirements: SSO session idle + 2 minute (internal Keycloak buffer time).
+    timeout = setTimeout(
+      () => {
+        window.location.reload(); // Refresh to check with Keycloak if session is still valid
+      },
+      1000 * 60 * idleTimeoutMinutes,
+    ); // Should be 15 minutes to comply with DigiD requirements: SSO session idle + 2 minute (internal Keycloak buffer time).
   };
 
   useEffect(() => {
@@ -94,7 +97,7 @@ const KeycloakProvider = ({
         url: formatUrlTrailingSlash(`${url}`, false),
         clientId,
         realm,
-      }) as KeycloakInstance
+      }) as KeycloakInstance,
   );
   const initOptions: KeycloakInitOptions = {
     checkLoginIframe: false,
@@ -141,7 +144,7 @@ const KeycloakProvider = ({
 const KeycloakWrapper: FC<KeycloakWrapperProps> = (props) => {
   const [keycloakToken, setKeycloakToken] = useState("");
   const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
-    undefined
+    undefined,
   );
   const ENTRY_URL_KEY = "entryUrl";
   const entryUrl = sessionStorage.getItem(ENTRY_URL_KEY);
@@ -152,7 +155,7 @@ const KeycloakWrapper: FC<KeycloakWrapperProps> = (props) => {
     const entryUrlPart = splitHref[1];
     sessionStorage.setItem(
       ENTRY_URL_KEY,
-      !entryUrlPart.includes("keycloak") ? entryUrlPart : "/"
+      !entryUrlPart.includes("keycloak") ? entryUrlPart : "/",
     );
   }
 

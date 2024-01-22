@@ -22,7 +22,7 @@ const TasksPage = () => {
           href={getTaskUrl(
             task.formulier.formuliertype,
             task.formulier.value,
-            task.id
+            task.id,
           )}
           Link={PortalLink}
         />

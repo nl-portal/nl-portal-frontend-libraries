@@ -29,7 +29,7 @@ const Footer: FC<FooterProps> = ({ footer, facet }) => {
       <ResponsiveContent className={styles.footer__inner}>
         {footer
           .filter((column) =>
-            column.links.find((link) => link.hrefLang === hrefLang)
+            column.links.find((link) => link.hrefLang === hrefLang),
           )
           .map((column, index) => (
             <div

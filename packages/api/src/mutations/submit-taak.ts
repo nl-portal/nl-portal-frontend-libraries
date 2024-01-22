@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const MUTATION_SUBMIT_TAAK = gql`
   mutation SubmitTask($id: UUID!, $submission: JSON!) {

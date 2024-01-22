@@ -28,7 +28,7 @@ const MetaIcon: FC<MetaIconProps> = ({
       <Paragraph
         className={classNames(
           styles["meta-icon__paragraph"],
-          styles["meta-icon__paragraph--bold"]
+          styles["meta-icon__paragraph--bold"],
         )}
       >
         {subtitle || (

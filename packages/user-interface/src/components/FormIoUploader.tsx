@@ -48,7 +48,7 @@ class FormIoUploader extends ReactComponent {
   onChangeHandler = (files: Array<UploadedFile>) => {
     this.updateValue(
       files.map((file) => file.url),
-      undefined
+      undefined,
     );
   };
 
@@ -60,7 +60,7 @@ class FormIoUploader extends ReactComponent {
         onChange={this.onChangeHandler}
         informatieobjecttype={this.component.informatieobjecttype || ""}
       />,
-      element
+      element,
     );
   };
 

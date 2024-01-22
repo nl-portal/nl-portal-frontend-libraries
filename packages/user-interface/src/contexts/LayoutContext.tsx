@@ -23,7 +23,7 @@ interface LayoutContextInterface {
 }
 
 const LayoutContext = React.createContext<LayoutContextInterface>(
-  {} as LayoutContextInterface
+  {} as LayoutContextInterface,
 );
 
 export default LayoutContext;

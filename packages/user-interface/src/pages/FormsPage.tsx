@@ -20,7 +20,7 @@ const FormsPage = () => {
 
   const onClickFunction = (
     event: React.MouseEvent<HTMLButtonElement>,
-    formId: string
+    formId: string,
   ): void => {
     event.stopPropagation();
     event.preventDefault();

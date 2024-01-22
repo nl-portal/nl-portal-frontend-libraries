@@ -51,7 +51,7 @@ const AccountPage: FC<AccountPageProps> = ({
     const newWindow = window.open(
       addressResearchUrl,
       "_blank",
-      "noopener,noreferrer"
+      "noopener,noreferrer",
     );
     if (newWindow) newWindow.opener = null;
   };
@@ -139,7 +139,7 @@ const AccountPage: FC<AccountPageProps> = ({
             {
               translationKey: "dateOfBirth",
               value: getLocaleDateOfBirth(
-                personData?.getPersoon?.geboorte?.datum
+                personData?.getPersoon?.geboorte?.datum,
               ),
               loading: personLoading,
             },
@@ -151,7 +151,7 @@ const AccountPage: FC<AccountPageProps> = ({
             {
               translationKey: "nationality",
               value: getNationalitiesString(
-                personData?.getPersoon?.nationaliteiten
+                personData?.getPersoon?.nationaliteiten,
               ),
               loading: personLoading,
             },
@@ -170,7 +170,7 @@ const AccountPage: FC<AccountPageProps> = ({
                 personData?.getPersoon?.verblijfplaats?.straat,
                 personData?.getPersoon?.verblijfplaats?.huisnummer,
                 personData?.getPersoon?.verblijfplaats?.huisletter,
-                personData?.getPersoon?.verblijfplaats?.huisnummertoevoeging
+                personData?.getPersoon?.verblijfplaats?.huisnummertoevoeging,
               ),
               loading: personLoading,
             },
@@ -178,7 +178,7 @@ const AccountPage: FC<AccountPageProps> = ({
               translationKey: "postalCodeAndCity",
               value: getPostalCodeCityString(
                 personData?.getPersoon?.verblijfplaats?.postcode,
-                personData?.getPersoon?.verblijfplaats?.woonplaats
+                personData?.getPersoon?.verblijfplaats?.woonplaats,
               ),
               loading: personLoading,
             },

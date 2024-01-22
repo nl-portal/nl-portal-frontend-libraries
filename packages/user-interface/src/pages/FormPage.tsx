@@ -28,7 +28,7 @@ const FormPage: FC<FormPageProps> = ({
     clearCurrentFormTitle,
   } = useContext(LayoutContext);
   const openFormsScript = useScript(
-    formatUrlTrailingSlash(openFormsSdkUrl, false)
+    formatUrlTrailingSlash(openFormsSdkUrl, false),
   );
   const { slug } = useParams<{ slug: string }>();
   const FORM_ID_LOCAL_STORAGE_KEY = "FORM_ID";
@@ -49,7 +49,7 @@ const FormPage: FC<FormPageProps> = ({
   useEffect(() => {
     if (typeof OpenForms !== "undefined") {
       const localStorageFormId = localStorage.getItem(
-        FORM_ID_LOCAL_STORAGE_KEY
+        FORM_ID_LOCAL_STORAGE_KEY,
       );
       const formId = slug || localStorageFormId || "";
       const baseUrl = formatUrlTrailingSlash(openFormsBaseUrl, true);

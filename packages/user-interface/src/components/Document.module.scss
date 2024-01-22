@@ -8,7 +8,10 @@
 }
 
 .document__icon-container {
-  background-color: var(--nlportal-document-icon-background-color, hsl(0 0% 95%));
+  background-color: var(
+    --nlportal-document-icon-background-color,
+    hsl(0 0% 95%)
+  );
   display: flex;
   align-items: center;
   justify-content: center;

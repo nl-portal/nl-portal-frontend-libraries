@@ -1,4 +1,4 @@
-@import '../styles/mixins';
+@import "../styles/mixins";
 
 .page-container {
   width: auto;
@@ -42,7 +42,8 @@
 
   @include breakpoint(tablet) {
     margin-left: calc(
-      var(--nlportal-desktop-menu-width, 230px) + var(--nlportal-space-inline-2xl, 2rem)
+      var(--nlportal-desktop-menu-width, 230px) +
+        var(--nlportal-space-inline-2xl, 2rem)
     );
   }
 }

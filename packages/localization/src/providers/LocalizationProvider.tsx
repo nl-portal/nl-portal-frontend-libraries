@@ -28,7 +28,7 @@ const LocalizationProvider = ({
   const locales = customLocales || DEFAULT_LOCALES;
 
   const savedLocaleIndex = Object.values(locales).findIndex(
-    (locale) => locale === savedLocale
+    (locale) => locale === savedLocale,
   );
   const localeToUse =
     locales[

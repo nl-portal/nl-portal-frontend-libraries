@@ -47,7 +47,7 @@ const Menu: FC<MenuProps> = ({ items, legacy }) => {
               <IconButton onClick={hideMenu}>
                 <CloseIcon />
               </IconButton>,
-              { title: intl.formatMessage({ id: "menu.close" }) }
+              { title: intl.formatMessage({ id: "menu.close" }) },
             )}
           </header>
           <nav className={styles.menu__items}>

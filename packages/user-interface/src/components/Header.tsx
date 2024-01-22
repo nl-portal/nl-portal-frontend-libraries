@@ -205,7 +205,7 @@ const Header: FC<HeaderProps> = ({
                   >
                     <CloseIcon />
                   </IconButton>,
-                  { title: intl.formatMessage({ id: "menu.close" }) }
+                  { title: intl.formatMessage({ id: "menu.close" }) },
                 )}
               </div>
             )}

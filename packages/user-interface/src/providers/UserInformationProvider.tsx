@@ -11,7 +11,7 @@ const UserInformationProvider = ({ children }: Props) => {
 
   const setUserInformation = (
     key: string,
-    value: string | false | undefined | null
+    value: string | false | undefined | null,
   ): void => {
     modifyUserInformation({ ...userInformation, [key]: value });
   };

@@ -60,7 +60,7 @@ export const useUserInfo = () => {
   useEffect(() => {
     if (gemachtigdeData?.getGemachtigde?.persoon) {
       setUserName(
-        getNameString(gemachtigdeData?.getGemachtigde?.persoon) || ""
+        getNameString(gemachtigdeData?.getGemachtigde?.persoon) || "",
       );
     } else {
       setUserName(gemachtigdeData?.getGemachtigde?.bedrijf?.naam || "");

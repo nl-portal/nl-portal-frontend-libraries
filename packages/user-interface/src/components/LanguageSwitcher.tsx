@@ -12,7 +12,7 @@ const LanguageSwitcher = ({ mobileMenu }: LanguageSwitcherProps) => {
   const { currentLocale, setCurrentLocale, supportedLocales } =
     useContext(LocaleContext);
   const currentLocaleIndex = supportedLocales.findIndex(
-    (locale) => locale === currentLocale
+    (locale) => locale === currentLocale,
   );
   const nextLocale =
     supportedLocales[currentLocaleIndex + 1] || supportedLocales[0];

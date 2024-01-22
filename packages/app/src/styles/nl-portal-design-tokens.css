@@ -44,7 +44,9 @@
   --nlportal-menu-button-font-size: var(--denhaag-menu-button-font-size);
   --nlportal-base-font-size: var(--denhaag-typography-scale-base-font-size);
   --nlportal-heading-5-color: var(--denhaag-color-blue-3);
-  --nlportal-current-page-indicator-background-color: var(--denhaag-color-blue-1);
+  --nlportal-current-page-indicator-background-color: var(
+    --denhaag-color-blue-1
+  );
   --nlportal-current-page-indicator-height: 56px;
   --nlportal-footer-background-color: var(--denhaag-color-blue-4);
   --nlportal-footer-header-color: var(--denhaag-color-blue-1);
@@ -57,7 +59,9 @@
   --nlportal-mobile-menu-element-height: 43px;
   --nlportal-mobile-menu-background-color: var(--denhaag-color-grey-1);
   --nlportal-mobile-menu-font-color: var(--denhaag-color-green-3);
-  --nlportal-mobile-menu-font-weight: var(--denhaag-menu-button-active-font-weight);
+  --nlportal-mobile-menu-font-weight: var(
+    --denhaag-menu-button-active-font-weight
+  );
   --nlportal-meta-icon-line-height: 1.5rem;
   --nlportal-meta-icon-font-weight-bold: 700;
   --nlportal-meta-icon-size: 2rem;
@@ -68,7 +72,9 @@
   --nlportal-status-history-facet-height: 8px;
   --nlportal-status-history-box-shadow: 0px 4px 4px 0px hsla(0, 0%, 0%, 0.1);
   --nlportal-skeleton-step-padding: var(--denhaag-timeline-step-padding);
-  --nlportal-skeleton-step-circle-padding: var(--denhaag-timeline-step-icon-padding);
+  --nlportal-skeleton-step-circle-padding: var(
+    --denhaag-timeline-step-icon-padding
+  );
   --nlportal-focus-border: var(--denhaag-focus-border);
   --nlportal-document-border-width: 1px;
   --nlportal-document-border-style: solid;
@@ -85,11 +91,17 @@
   --nlportal-detail-list-min-height: 2rem;
   --nlportal-forms-list-max-width-tablet: 75%;
   --nlportal-forms-list-max-width-desktop: 50%;
-  --nlportal-list-item-skeleton-padding-block: var(--denhaag-list-item-padding-block);
-  --nlportal-list-item-skeleton-padding-inline: var(--denhaag-list-item-padding-inline);
+  --nlportal-list-item-skeleton-padding-block: var(
+    --denhaag-list-item-padding-block
+  );
+  --nlportal-list-item-skeleton-padding-inline: var(
+    --denhaag-list-item-padding-inline
+  );
   --nlportal-list-item-skeleton-color: var(--denhaag-color-grey-3);
   --nlportal-list-item-skeleton-icon-min-width: 48px;
   --utrecht-heading-2-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
-  --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);
+  --denhaag-menu-button-line-height: var(
+    --denhaag-typography-scale-xl-font-size
+  );
 }

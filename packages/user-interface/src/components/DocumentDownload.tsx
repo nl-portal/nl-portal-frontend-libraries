@@ -38,7 +38,11 @@ const DocumentDownload: FC<DocumentDownloadProps> = ({
     link.download = `${name}`;
     document.body.appendChild(link);
     link.dispatchEvent(
-      new MouseEvent("click", { bubbles: true, cancelable: true, view: window })
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+      }),
     );
     link.remove();
     window.URL.revokeObjectURL(link.href);
@@ -54,7 +58,7 @@ const DocumentDownload: FC<DocumentDownloadProps> = ({
       >
         <FormattedMessage id="element.download" />
       </Link>,
-      { onClick: handleLink }
+      { onClick: handleLink },
     )
   ) : (
     <Link iconAlign="start" disabled icon={<DownloadIcon />} href="/">

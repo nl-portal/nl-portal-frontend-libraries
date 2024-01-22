@@ -42,7 +42,7 @@ const ApiWrapper = ({ children, graphqlUri, restUri }: ApiWrapperProps) => {
         uri: formattedGraphqlUri,
         cache: new InMemoryCache(),
         link: getLink(keycloakToken),
-      })
+      }),
   );
 
   useEffect(() => {

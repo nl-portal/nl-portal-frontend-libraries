@@ -1,6 +1,6 @@
-import * as React from 'react';
-import {Dispatch, SetStateAction} from 'react';
-import {DecodedToken} from '../interfaces/decoded-token';
+import * as React from "react";
+import { Dispatch, SetStateAction } from "react";
+import { DecodedToken } from "../interfaces/decoded-token";
 
 interface KeycloakContextInterface {
   keycloakToken: string;
@@ -10,7 +10,7 @@ interface KeycloakContextInterface {
 }
 
 const KeycloakContext = React.createContext<KeycloakContextInterface>(
-  {} as KeycloakContextInterface
+  {} as KeycloakContextInterface,
 );
 
 export default KeycloakContext;

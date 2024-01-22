@@ -35,7 +35,7 @@ const MenuItem: FC<MenuItemProps> = ({ item }) => {
         {
           "denhaag-menu-button--active":
             getBasePath(location.pathname) === getBasePath(item.path),
-        }
+        },
       )}
     >
       {item.icon && (

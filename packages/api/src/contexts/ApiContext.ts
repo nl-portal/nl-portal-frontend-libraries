@@ -1,9 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
 interface ApiContextInterface {
   restUri: string;
 }
 
-const ApiContext = React.createContext<ApiContextInterface>({} as ApiContextInterface);
+const ApiContext = React.createContext<ApiContextInterface>(
+  {} as ApiContextInterface,
+);
 
 export default ApiContext;

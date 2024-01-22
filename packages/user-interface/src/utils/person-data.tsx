@@ -7,7 +7,7 @@ import { ReactElement } from "react";
 import LocaleDate from "../components/LocaleDate";
 
 const getNationalitiesString = (
-  nationalities: Array<PersoonNationaliteiten> | undefined | null
+  nationalities: Array<PersoonNationaliteiten> | undefined | null,
 ): string => {
   if (Array.isArray(nationalities)) {
     return nationalities
@@ -28,7 +28,7 @@ const getStreetString = (
   street: string | null | undefined,
   number: string | null | undefined,
   letter: string | null | undefined,
-  addition: string | null | undefined
+  addition: string | null | undefined,
 ): string => {
   if (street && number && letter && addition) {
     return `${street} ${number}${letter} ${addition}`;
@@ -48,7 +48,7 @@ const getStreetString = (
 
 const getPostalCodeCityString = (
   postalCode: string | null | undefined,
-  city: string | null | undefined
+  city: string | null | undefined,
 ): string => {
   if (city) {
     if (postalCode) {
@@ -62,7 +62,7 @@ const getPostalCodeCityString = (
 };
 
 const getLocaleDateOfBirth = (
-  dateOfBirth: PersoonGeboorteDatum | null | undefined
+  dateOfBirth: PersoonGeboorteDatum | null | undefined,
 ): string | ReactElement => {
   if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
     return (
@@ -82,7 +82,7 @@ const capitalizeFirstLetter = (text: string): string =>
 
 const getNameString = (
   name: PersoonNaam | null | undefined,
-  returnType: "fullName" | "firstNames" | "lastName" = "fullName"
+  returnType: "fullName" | "firstNames" | "lastName" = "fullName",
 ): string => {
   const returnFullName = returnType === "fullName";
   const returnLastName = returnType === "lastName";
