@@ -8,11 +8,15 @@
     "lint": "eslint \"packages/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint \"packages/**/*.{js,jsx,ts,tsx}\" --fix",
     "preinstall": "npx only-allow pnpm",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
     "publish": "lerna publish from-package",
     "release": "lerna version prerelease --no-changelog --no-private --no-commit-hooks",
     "test": "pnpm run --recursive --parallel test"
   },
   "devDependencies": {
+    "prettier": "^3.2.4",
+    "prettier-airbnb-config": "^1.0.0",
     "typescript": "^5.3.3"
   }
 }
