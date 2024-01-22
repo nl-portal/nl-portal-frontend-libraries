@@ -68,16 +68,16 @@ errors in all packages by running `pnpm run prettier` from the project root. Use
 ### Adding dependencies
 
 To add a dependency to _all individual packages_, use `pnpm add <package-name>` from the project
-root. For example: `pnpm add jest`.
+root. For example: `pnpm add vitest`.
 
 To add a dependency to one or more specific packages use
-`pnpm add <package-name> --scope=<package-name>`. For example, to add Jest as a dependency to
+`pnpm add <package-name> --scope=<package-name>`. For example, to add Vitest as a dependency to
 [@nl-portal/nl-portal-app](./packages/app) and
 [@nl-portal/nl-portal-user-interface](./packages/user-interface), use:
-`pnpm add jest --scope=@nl-portal/nl-portal-app --scope=@nl-portal/nl-portal-user-interface`.
+`pnpm add vitest --scope=@nl-portal/nl-portal-app --scope=@nl-portal/nl-portal-user-interface`.
 
 If you must add a devDependency to the root project, use `pnpm add <package-name> --dev -W` from the
-project root. For example: `pnpm add jest --dev -W`.
+project root. For example: `pnpm add vitest --dev -W`.
 
 ### Local dependencies
 
