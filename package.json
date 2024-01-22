@@ -5,6 +5,8 @@
     "build": "pnpm clean && pnpm run --recursive --parallel build",
     "clean": "pnpm run --recursive clean",
     "dev": "pnpm clean && pnpm run --recursive --parallel dev",
+    "lint": "eslint \"packages/**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint \"packages/**/*.{js,jsx,ts,tsx}\" --fix",
     "preinstall": "npx only-allow pnpm",
     "publish": "lerna publish from-package",
     "release": "lerna version prerelease --no-changelog --no-private --no-commit-hooks",

@@ -21,7 +21,6 @@
     "clean": "rimraf dist",
     "codegen": "graphql-codegen --config codegen.yml",
     "dev": "pnpm wait && vite build --watch --mode development",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preinstall": "npx only-allow pnpm",
     "wait": "wait-on ../authentication/dist/index.js",
     "test": "vitest run",

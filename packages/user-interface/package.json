@@ -21,7 +21,6 @@
     "build": "pnpm wait && tsc && vite build",
     "clean": "rimraf dist",
     "dev": "pnpm wait && vite build --watch --mode development",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
     "wait": "wait-on ../api/dist/index.js && wait-on ../authentication/dist/index.js && wait-on ../localization/dist/index.js",
