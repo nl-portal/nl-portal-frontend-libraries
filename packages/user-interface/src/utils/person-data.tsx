@@ -4,7 +4,7 @@ import {
   PersoonNationaliteiten,
 } from "@nl-portal/nl-portal-api";
 import { ReactElement } from "react";
-import { LocaleDate } from "../components/locale-date";
+import LocaleDate from "../components/LocaleDate";
 
 const getNationalitiesString = (
   nationalities: Array<PersoonNationaliteiten> | undefined | null

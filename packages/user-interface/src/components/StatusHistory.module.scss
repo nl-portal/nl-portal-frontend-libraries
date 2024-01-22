@@ -1,0 +1,17 @@
+@import '../styles/mixins';
+
+.status-history-container {
+  position: relative;
+}
+
+.skeleton-step {
+  display: flex;
+  flex-direction: row;
+  padding-block-end: var(--nlportal-skeleton-step-padding, 12px);
+  padding-block-start: var(--nlportal-skeleton-step-padding, 12px);
+  align-items: center;
+}
+
+.skeleton-step__circle {
+  padding-inline-end: var(--nlportal-skeleton-step-circle-padding, 12px);
+}

@@ -2,9 +2,9 @@ import React, { ReactElement } from "react";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { MemoryRouter } from "react-router-dom";
-import { UserInformationProvider } from ".";
+import UserInformationProvider from "./UserInformationProvider";
 
-export const TestProvider = ({
+const TestProvider = ({
   children,
   mocks,
   route,
@@ -21,3 +21,5 @@ export const TestProvider = ({
     </UserInformationProvider>
   </LocalizationProvider>
 );
+
+export default TestProvider;

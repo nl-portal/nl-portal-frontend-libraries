@@ -1,0 +1,69 @@
+@import '../styles/mixins';
+
+.menu {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--nlportal-menu-background-color, white);
+  padding-block-start: var(--nlportal-space-block-2xl, 2rem);
+  padding-block-end: var(--nlportal-space-block-2xl, 2rem);
+  padding-inline-start: var(--nlportal-space-inline-2xl, 2rem);
+  padding-inline-end: var(--nlportal-space-inline-2xl, 2rem);
+  z-index: 10;
+
+  @include breakpoint(tablet) {
+    position: relative;
+    width: auto;
+    height: auto;
+    padding-block-start: 0;
+    padding-block-end: 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+  }
+}
+
+.menu--hidden {
+  display: none;
+
+  @include breakpoint(tablet) {
+    display: block;
+    min-width: var(--denhaag-sidenav-min-width);
+    background-color: transparent;
+  }
+}
+
+.menu__inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+}
+
+.menu__header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-block-end: var(--nlportal-space-block-2xl, 2rem);
+
+  svg {
+    font-size: var(--nlportal-menu-button-font-size, 1.25rem);
+  }
+
+  @include breakpoint(tablet) {
+    display: none;
+  }
+}
+
+.menu__items {
+  display: inline-flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+
+  @include breakpoint(tablet) {
+    overflow: visible;
+  }
+}
