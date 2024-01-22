@@ -26,7 +26,7 @@ Install dependencies for all projects in the [packages](./packages) directory wi
 
 ### Starting the project
 
-After installing dependencies, start the project with `pnpm run start` from the project root.
+After installing dependencies, start the project with `pnpm dev` from the project root.
 
 This commands runs all the `start` scripts of each of the individual packages in the
 [packages](./packages) directory in parallel.
@@ -34,36 +34,34 @@ This commands runs all the `start` scripts of each of the individual packages in
 Please note that on first run, all packages must have been built first. Please refer to the section
 below.
 
-_Tip: Packages can started individually by running `pnpm run start` from their respective
+_Tip: Packages can started individually by running `pnpm dev` from their respective
 directories._
 
 ### Building
 
-After installing dependencies, build the project with `pnpm run build` from the project root.
+After installing dependencies, build the project with `pnpm build` from the project root.
 
 This commands runs all the `build` scripts of each of the individual packages in the
 [packages](./packages) directory.
 
-_Tip: Packages can built individually by running `pnpm run build` from their respective
+_Tip: Packages can built individually by running `pnpm build` from their respective
 directories._
 
 ### Testing
 
 Testing in this project is done with [Vitest](https://vitest.dev/). Run the tests of all packages with
-`pnpm run test` from the project root. To keep watching the tests for any changes, use
-`pnpm run test:watch`.
+`pnpm test` from the project root. To keep watching the tests for any changes, use `pnpm test:watch`.
 
 ### Linting
 
 Testing in this project is done with [ESLint](https://eslint.org/). Look for linting errors in all
-packages by running `pnpm run lint` from the project root. Use `pnpm run lint:fix` to automatically
-fix these errors.
+packages by running `pnpm lint` from the project root. Use `pnpm lint:fix` to automatically fix these errors.
 
 ### Prettifying
 
 Prettifying in this project is done with [Prettier](https://prettier.io/). Look for formatting
-errors in all packages by running `pnpm run prettier` from the project root. Use
-`pnpm run prettier:fix` to automatically fix these errors.
+errors in all packages by running `pnpm prettier` from the project root. Use
+`pnpm prettier:fix` to automatically fix these errors.
 
 ### Adding dependencies
 
@@ -82,7 +80,7 @@ project root. For example: `pnpm add vitest --dev -W`.
 ### Local dependencies
 
 Packages inside the [packages](./packages) folder may depend on each other, simply by adding them to
-their respective `package.json` files and running `pnpm run bootstrap` from the project root
+their respective `package.json` files and running `pnpm install` from the project root
 afterwards.
 
 For example, the `package.json` of [@nl-portal/nl-portal-app](./packages/app) might include
