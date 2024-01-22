@@ -27,7 +27,7 @@ import {
   InboxIcon,
   UserIcon,
 } from "@gemeente-denhaag/icons";
-import { CUSTOM_MESSAGES } from "./i18n";
+import { CUSTOM_MESSAGES } from "./i18n/custom-messages/custom-messages";
 import HeaderLogo from "./assets/header-logo.svg";
 import HeaderLogoSmall from "./assets/header-logo-small.svg";
 import Facet from "./assets/facet.png";
