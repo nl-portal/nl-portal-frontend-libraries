@@ -1,4 +1,8 @@
-import { Button, Heading2 } from "@gemeente-denhaag/components-react";
+import {
+  Button,
+  FormGroup,
+  Heading2,
+} from "@gemeente-denhaag/components-react";
 import { TextField } from "@gemeente-denhaag/textfield";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useContext, useEffect, useState } from "react";
@@ -20,6 +24,9 @@ const EditAccountPage = () => {
 
   const prop = query.get("prop");
   const propTranslation = intl.formatMessage({ id: `account.detail.${prop}` });
+  const errorTranslation = intl.formatMessage({
+    id: `account.detail.${prop}.error`,
+  });
 
   const defaultValue = userInformation[`${prop}`];
   const regex = REGEX_PATTERNS[`${prop}`];
@@ -66,13 +73,21 @@ const EditAccountPage = () => {
         </Heading2>
       </header>
       <div className={styles["edit-account__text-field-container"]}>
-        <TextField
-          onChange={(e) => setValue(e.target.value)}
-          className={styles["edit-account__text-field"]}
-          defaultValue={defaultValue || ""}
-          disabled={loading}
-        />
+        <FormGroup
+          helperText={!valid && `${value}`.length >= 1 ? errorTranslation : ""}
+          error={!valid && `${value}`.length >= 1}
+        >
+          <TextField
+            id={propTranslation}
+            aria-describedby={propTranslation}
+            onChange={(e) => setValue(e.target.value)}
+            invalid={!valid && `${value}`.length >= 1}
+            defaultValue={defaultValue || ""}
+            disabled={loading}
+          />
+        </FormGroup>
       </div>
+
       <div className={styles["edit-account__buttons"]}>
         <Button
           className={styles["edit-account__button"]}
