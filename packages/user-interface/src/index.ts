@@ -1,7 +1,10 @@
 export { default as Layout } from "./components/Layout";
+export { default as PortalLink } from "./components/PortalLink";
 
 export * from "./interfaces/portal-footer";
 export * from "./interfaces/portal-page";
+
+export { default as useUserInfo } from "./hooks/useUserInfo";
 
 export { default as AccountPage } from "./pages/AccountPage";
 export { default as CasePage } from "./pages/CasePage";
