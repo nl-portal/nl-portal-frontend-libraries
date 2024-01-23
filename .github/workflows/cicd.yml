@@ -132,7 +132,7 @@ jobs:
           GIT_COMMITTER_NAME: "nl-portal"
         run: |
           git push --set-upstream origin HEAD
-          pnpm run release -- --yes
+          pnpm run release --yes
 
       - name: lerna publish
         env:
