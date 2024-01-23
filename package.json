@@ -1,6 +1,9 @@
 {
   "name": "nl-portal-frontend-libraries",
   "private": true,
+  "packages": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "pnpm clean && pnpm run --recursive --parallel build",
     "clean": "pnpm run --recursive clean",
