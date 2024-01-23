@@ -91,8 +91,8 @@ importers:
         specifier: 0.2.3-alpha.361
         version: 0.2.3-alpha.361
       '@gemeente-denhaag/icons':
-        specifier: 0.2.3-alpha.361
-        version: 0.2.3-alpha.361(react@18.2.0)
+        specifier: 0.2.3-alpha.369
+        version: 0.2.3-alpha.369(react@18.2.0)
       '@nl-portal/nl-portal-api':
         specifier: workspace:*
         version: link:../api
@@ -301,8 +301,8 @@ importers:
         specifier: 0.1.1-alpha.262
         version: 0.1.1-alpha.262
       '@gemeente-denhaag/icons':
-        specifier: 0.2.3-alpha.362
-        version: 0.2.3-alpha.362(react@18.2.0)
+        specifier: 0.2.3-alpha.369
+        version: 0.2.3-alpha.369(react@18.2.0)
       '@gemeente-denhaag/link':
         specifier: 0.2.3-alpha.70
         version: 0.2.3-alpha.70(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
@@ -1888,16 +1888,16 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@gemeente-denhaag/icons@0.2.3-alpha.361(react@18.2.0):
-    resolution: {integrity: sha512-AFOSO6mdhSWXQLyWbPjlzYDN0s96nGka7q94YXbeaTDAWutnfom3eLbvb2LA09+hcIlA4ZD5xW+QtrRqyhx5UQ==}
+  /@gemeente-denhaag/icons@0.2.3-alpha.362(react@18.2.0):
+    resolution: {integrity: sha512-78+VVyDSo83va+uEB4hZUptSmL18PETzLV/STzDGmrxzh+b73kJhyakqu8UjVrdYT8oLK0snC0zavytQKcsVRw==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
       react: 18.2.0
     dev: false
 
-  /@gemeente-denhaag/icons@0.2.3-alpha.362(react@18.2.0):
-    resolution: {integrity: sha512-78+VVyDSo83va+uEB4hZUptSmL18PETzLV/STzDGmrxzh+b73kJhyakqu8UjVrdYT8oLK0snC0zavytQKcsVRw==}
+  /@gemeente-denhaag/icons@0.2.3-alpha.369(react@18.2.0):
+    resolution: {integrity: sha512-kWpUZUCaMEVirecjS90W+6CiWu5dpzu5NO70yDnZslPrFay/vhAqYTntcF7WC5PyhBQ+1ph4bX2yaCOyZ/0zcw==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
