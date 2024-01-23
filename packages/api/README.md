@@ -1,6 +1,6 @@
 # @nl-portal/nl-portal-api
 
-> Made with create-react-library
+> Made with vite
 
 [![NPM](https://img.shields.io/npm/v/@nl-portal/nl-portal-user-interface.svg)](https://www.npmjs.com/package/@nl-portal/nl-portal-user-interface)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)

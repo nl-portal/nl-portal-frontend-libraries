@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_GET_OBJECT_CONTACT_MOMENTEN = gql`
   query GetObjectContactMomenten($objectUrl: String!) {

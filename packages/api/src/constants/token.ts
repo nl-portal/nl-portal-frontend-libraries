@@ -1,9 +1,9 @@
-import {TokenObject} from '../interfaces';
+interface TokenObject {
+  KEYCLOAK_TOKEN: string;
+}
 
-const TOKEN_KEY = 'KEYCLOAK_TOKEN';
+export const TOKEN_KEY = "KEYCLOAK_TOKEN";
 
-const TOKEN_OBJECT: TokenObject = {
-  [TOKEN_KEY]: '',
+export const TOKEN_OBJECT: TokenObject = {
+  [TOKEN_KEY]: "",
 };
-
-export {TOKEN_KEY, TOKEN_OBJECT};

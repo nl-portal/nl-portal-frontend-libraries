@@ -1,0 +1,21 @@
+@import "../styles/mixins";
+
+.cases {
+  div[role="tabpanel"] {
+    padding: 0;
+    padding-block-start: var(--nlportal-space-block-2xl, 2rem);
+  }
+}
+
+.cases__header {
+  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+
+  @include breakpoint(tablet) {
+    margin-block-end: var(--nlportal-space-block-2xl, 2rem);
+  }
+}
+
+.cases__no-data-message {
+  width: 100%;
+  text-align: center;
+}

@@ -1,31 +1,34 @@
-import {PersoonGeboorteDatum, PersoonNaam, PersoonNationaliteiten} from '@nl-portal/nl-portal-api';
-import {ReactElement} from 'react';
-import * as React from 'react';
-import {LocaleDate} from '../components/locale-date';
+import {
+  PersoonGeboorteDatum,
+  PersoonNaam,
+  PersoonNationaliteiten,
+} from "@nl-portal/nl-portal-api";
+import { ReactElement } from "react";
+import LocaleDate from "../components/LocaleDate";
 
 const getNationalitiesString = (
-  nationalities: Array<PersoonNationaliteiten> | undefined | null
+  nationalities: Array<PersoonNationaliteiten> | undefined | null,
 ): string => {
   if (Array.isArray(nationalities)) {
     return nationalities
-      .map(nationality => nationality?.nationaliteit?.omschrijving)
-      .filter(nationalityString => nationalityString)
+      .map((nationality) => nationality?.nationaliteit?.omschrijving)
+      .filter((nationalityString) => nationalityString)
       .reduce((accumulatedString, currentNationalityString) => {
-        if (accumulatedString === '') {
+        if (accumulatedString === "") {
           return currentNationalityString;
         }
         return `${accumulatedString}, ${currentNationalityString}`;
-      }, '') as string;
+      }, "") as string;
   }
 
-  return '';
+  return "";
 };
 
 const getStreetString = (
   street: string | null | undefined,
   number: string | null | undefined,
   letter: string | null | undefined,
-  addition: string | null | undefined
+  addition: string | null | undefined,
 ): string => {
   if (street && number && letter && addition) {
     return `${street} ${number}${letter} ${addition}`;
@@ -40,12 +43,12 @@ const getStreetString = (
     return street;
   }
 
-  return '';
+  return "";
 };
 
 const getPostalCodeCityString = (
   postalCode: string | null | undefined,
-  city: string | null | undefined
+  city: string | null | undefined,
 ): string => {
   if (city) {
     if (postalCode) {
@@ -55,17 +58,23 @@ const getPostalCodeCityString = (
     return city;
   }
 
-  return '';
+  return "";
 };
 
 const getLocaleDateOfBirth = (
-  dateOfBirth: PersoonGeboorteDatum | null | undefined
+  dateOfBirth: PersoonGeboorteDatum | null | undefined,
 ): string | ReactElement => {
   if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
-    return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand - 1, dateOfBirth.dag)} />;
+    return (
+      <LocaleDate
+        date={
+          new Date(dateOfBirth.jaar, dateOfBirth.maand - 1, dateOfBirth.dag)
+        }
+      />
+    );
   }
 
-  return '';
+  return "";
 };
 
 const capitalizeFirstLetter = (text: string): string =>
@@ -73,11 +82,11 @@ const capitalizeFirstLetter = (text: string): string =>
 
 const getNameString = (
   name: PersoonNaam | null | undefined,
-  returnType: 'fullName' | 'firstNames' | 'lastName' = 'fullName'
+  returnType: "fullName" | "firstNames" | "lastName" = "fullName",
 ): string => {
-  const returnFullName = returnType === 'fullName';
-  const returnLastName = returnType === 'lastName';
-  const returnFirstName = returnType === 'firstNames';
+  const returnFullName = returnType === "fullName";
+  const returnLastName = returnType === "lastName";
+  const returnFirstName = returnType === "firstNames";
   const firstNames = name?.voornamen;
   const prefix = name?.voorvoegsel;
   const lastName = name?.geslachtsnaam;
@@ -107,7 +116,7 @@ const getNameString = (
     return firstNames;
   }
 
-  return '';
+  return "";
 };
 
 export {

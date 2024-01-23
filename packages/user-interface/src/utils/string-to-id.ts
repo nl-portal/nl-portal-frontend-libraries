@@ -1,1 +1,2 @@
-export const stringToId = (text: string) => text.replace(/\s+/g, '-').toLowerCase();
+export const stringToId = (text: string) =>
+  text.replace(/\s+/g, "-").toLowerCase();

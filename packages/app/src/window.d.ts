@@ -1,4 +1,3 @@
-/* eslint no-unused-vars: 0 */
 export declare global {
   interface Window {
     KEYCLOAK_URL: string;

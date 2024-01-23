@@ -1,0 +1,31 @@
+@import "../styles/mixins";
+
+.user-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user-name--mobile-menu {
+  background-color: var(--nlportal-mobile-menu-background-color, hsl(0 0% 95%));
+  height: var(--nlportal-mobile-menu-element-height, 43px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name__paragraph {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - var(--nlportal-space-inline-4xl, 3rem));
+
+  @include breakpoint(tablet) {
+    max-width: var(--nlportal-header-user-name-max-width-tablet, 275px);
+  }
+
+  @include breakpoint(desktop) {
+    max-width: var(--nlportal-header-user-name-max-width-desktop, 350px);
+  }
+}

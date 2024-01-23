@@ -1,0 +1,30 @@
+@import "../styles/mixins";
+
+.account {
+  display: flex;
+  flex-direction: column;
+}
+
+.account__header {
+  margin-block-end: var(--nlportal-space-block-4xl, 3rem);
+}
+
+.account__sub-section {
+  margin-block-end: var(--nlportal-space-block-4xl, 3rem);
+
+  @include breakpoint(tablet) {
+    margin-block-end: var(--nlportal-space-block-5xl, 4rem);
+  }
+}
+
+.account__sub-header {
+  margin-block-end: var(--nlportal-space-block-2xl, 2rem) !important;
+
+  @include breakpoint(tablet) {
+    margin-block-end: var(--nlportal-space-block-md, 1rem) !important;
+  }
+}
+
+.account__label-description {
+  margin-block-end: var(--nlportal-space-block-md, 2rem) !important;
+}
