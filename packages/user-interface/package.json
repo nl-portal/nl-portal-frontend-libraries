@@ -30,7 +30,7 @@
   "dependencies": {
     "@apollo/client": "^3.4.11",
     "@formio/react": "^5.2.3",
-    "@gemeente-denhaag/action": "0.1.1-alpha.28",
+    "@gemeente-denhaag/action": "0.1.1-alpha.35",
     "@gemeente-denhaag/alert": "0.1.1-alpha.332",
     "@gemeente-denhaag/card": "0.2.3-alpha.362",
     "@gemeente-denhaag/components-react": "0.1.1-alpha.300",
