@@ -88,8 +88,8 @@ importers:
   packages/app:
     dependencies:
       '@gemeente-denhaag/design-tokens-components':
-        specifier: 0.2.3-alpha.361
-        version: 0.2.3-alpha.361
+        specifier: 0.2.3-alpha.369
+        version: 0.2.3-alpha.369
       '@gemeente-denhaag/icons':
         specifier: 0.2.3-alpha.361
         version: 0.2.3-alpha.361(react@18.2.0)
@@ -1763,12 +1763,12 @@ packages:
     resolution: {integrity: sha512-oSaeDEOTucUtp+zlN9ZAIcQR/VhNWtIXF1DuFriFeMyWFP3690QQm7i+EeKsqSCUDe1KzT8/AiowW9YJ3fUuGQ==}
     dev: false
 
-  /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.361:
-    resolution: {integrity: sha512-BnrIP7PIRCcbOzOAanCSjI/lvMz4qutW/tDPGwHr1L+ysmO7ufZ34Nkj3crXvuGZO7QlGUiirnguCrQO9mDahg==}
-    dev: false
-
   /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.362:
     resolution: {integrity: sha512-fxWseBvcjCt/ooJWuSrxio5RpOLM3CJDBu3kLkfJAgK1fZ/mimVSCIysVXu8pRUWbfpwbGMPFrHut0D0Wb+DoA==}
+    dev: false
+
+  /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.369:
+    resolution: {integrity: sha512-SqsthdbholnouVOnVCGR8YxTHyMiUDfst97Dlufu/fay/05ZYElc3aBTOzgBrnvVG/hnTUYiNqYZLesZcNTzpQ==}
     dev: false
 
   /@gemeente-denhaag/divider@0.2.3-alpha.362(react@18.2.0):
