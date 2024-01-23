@@ -34,7 +34,7 @@ jobs:
       - name: intall
         run: |
           npm install -g pnpm
-          npm install -g lerna@6.6.2
+          npm install -g lerna@7.4.2
           pnpm install
 
       - name: build library
@@ -97,7 +97,7 @@ jobs:
       - name: install
         run: |
           npm install -g pnpm
-          npm install -g lerna@6.6.2
+          npm install -g lerna@7.4.2
 
       - name: "Restore build artifact: api"
         uses: actions/download-artifact@v3
@@ -132,7 +132,7 @@ jobs:
           GIT_COMMITTER_NAME: "nl-portal"
         run: |
           git push --set-upstream origin HEAD
-          pnpm run release -- --yes
+          pnpm run release --yes
 
       - name: lerna publish
         env:
