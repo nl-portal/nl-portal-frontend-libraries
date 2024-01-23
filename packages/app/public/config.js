@@ -11,3 +11,5 @@ window.OPEN_FORMS_SDK_URL = 'https://openformulieren-cg.test.denhaag.nl/static/s
 window.OPEN_FORMS_STYLES_URL = 'https://openformulieren-cg.test.denhaag.nl/static/sdk/oidc-digid/open-forms-sdk.css';
 window.SHOW_INHABITANT_AMOUNT = 'true';
 window.ADDRESS_RESEARCH_URL = 'https://www.google.nl';
+window.NONCE = 'NjUwYzhhYzgtNzlmZC00NDVhLThhMDAtMmU4YjFmNTcyMDQ4';
+window.__webpack_nonce__ = 'NjUwYzhhYzgtNzlmZC00NDVhLThhMDAtMmU4YjFmNTcyMDQ4';
