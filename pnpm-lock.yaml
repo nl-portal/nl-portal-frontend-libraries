@@ -307,8 +307,8 @@ importers:
         specifier: 0.2.3-alpha.70
         version: 0.2.3-alpha.70(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
       '@gemeente-denhaag/page':
-        specifier: 0.1.1-alpha.222
-        version: 0.1.1-alpha.222
+        specifier: 0.1.1-alpha.229
+        version: 0.1.1-alpha.229
       '@gemeente-denhaag/process-steps':
         specifier: 0.1.0-alpha.191
         version: 0.1.0-alpha.191(react@18.2.0)
@@ -1991,6 +1991,10 @@ packages:
 
   /@gemeente-denhaag/page@0.1.1-alpha.222:
     resolution: {integrity: sha512-OHMBRNWM7U8dcHrCukhoSGNSXw2GhOgMc8lO2O0DbW+GfDgA48GaT+L5bBnfWttA+516waE2LocBMy7RFisfDg==}
+    dev: false
+
+  /@gemeente-denhaag/page@0.1.1-alpha.229:
+    resolution: {integrity: sha512-hCT/vQB9tJ69Lci+fdFlztlbT5B4AVin7Q0Qx7avCKwnweGlikckmfFgmakjshDTLmpicTbUKOBGk4UWSsLR1A==}
     dev: false
 
   /@gemeente-denhaag/process-steps@0.1.0-alpha.191(react@18.2.0):
