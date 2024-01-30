@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
 import Keycloak, {
   KeycloakConfig,
@@ -90,13 +90,12 @@ const KeycloakProvider = ({
   onLoad = "login-required",
 }: KeycloakWrapperProps) => {
   const { setKeycloakToken, setDecodedToken } = useContext(KeycloakContext);
-  const [authClient] = useState(
-    () =>
-      new Keycloak({
-        url: formatUrlTrailingSlash(`${url}`, false),
-        clientId,
-        realm,
-      }),
+  const { current: authClient } = useRef(
+    new Keycloak({
+      url: formatUrlTrailingSlash(`${url}`, false),
+      clientId,
+      realm,
+    }),
   );
   const initOptions: KeycloakInitOptions = {
     checkLoginIframe: false,
