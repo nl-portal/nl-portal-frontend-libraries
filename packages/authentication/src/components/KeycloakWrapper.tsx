@@ -7,7 +7,7 @@ import Keycloak, {
   KeycloakOnLoad,
 } from "keycloak-js";
 import { FC, Fragment, useContext, useState, useEffect } from "react";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { formatUrlTrailingSlash } from "../utils/format-url-trailing-slash";
 import KeycloakContext from "../contexts/KeycloakContext";
 import { DecodedToken } from "../interfaces/decoded-token";
