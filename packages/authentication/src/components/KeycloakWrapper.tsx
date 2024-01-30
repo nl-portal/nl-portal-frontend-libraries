@@ -3,7 +3,6 @@ import { ReactKeycloakProvider } from "@react-keycloak/web";
 import Keycloak, {
   KeycloakConfig,
   KeycloakInitOptions,
-  KeycloakInstance,
   KeycloakOnLoad,
 } from "keycloak-js";
 import { FC, Fragment, useContext, useState, useEffect } from "react";
@@ -93,11 +92,11 @@ const KeycloakProvider = ({
   const { setKeycloakToken, setDecodedToken } = useContext(KeycloakContext);
   const [authClient] = useState(
     () =>
-      new (Keycloak as any)({
+      new Keycloak({
         url: formatUrlTrailingSlash(`${url}`, false),
         clientId,
         realm,
-      }) as KeycloakInstance,
+      }),
   );
   const initOptions: KeycloakInitOptions = {
     checkLoginIframe: false,
