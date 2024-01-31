@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-import Keycloak, {
+// Workaround because of export issue in keycloak-js, solved in keycloak-js 24: https://github.com/keycloak/keycloak/pull/24974/files
+import Keycloak from "keycloak-js/dist/keycloak.js";
+import {
   KeycloakConfig,
   KeycloakInitOptions,
   KeycloakOnLoad,
