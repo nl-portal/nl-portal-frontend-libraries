@@ -5,7 +5,7 @@ import {
   QUERY_GET_TAKEN,
   QUERY_GET_ZAAK,
 } from "@nl-portal/nl-portal-api";
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash.clonedeep";
 
 const getZaak: {
   request: GraphQLRequest;

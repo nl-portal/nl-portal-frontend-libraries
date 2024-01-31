@@ -31,7 +31,7 @@ import "@utrecht/component-library-css";
 import DocumentList from "../components/DocumentList";
 import StatusHistory from "../components/StatusHistory";
 import { getTaskUrl } from "../utils/get-task-url";
-import { uniqueId } from "lodash";
+import uniqueId from "lodash.uniqueid";
 
 const labels = {
   today: "vandaag",

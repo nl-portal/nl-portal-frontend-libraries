@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // @ts-ignore - Formio is not typed, fixed in version 5.3.*, RC now available
 import { Form } from "@formio/react";
-import _ from "lodash";
+import merge from "lodash.merge";
 import {
   useSubmitTaskMutation,
   useGetTaakByIdQuery,
@@ -55,7 +55,7 @@ const TaskPage = () => {
     });
     let payload = {};
     arrayPrefilledData.forEach((item: any) => {
-      payload = _.merge(payload, item);
+      payload = merge(payload, item);
     });
 
     setSubmission({ ...submission, data: payload });
