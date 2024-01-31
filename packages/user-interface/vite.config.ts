@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "localization",
+      name: "user-interface",
       fileName: "index",
       formats: ["es"],
     },

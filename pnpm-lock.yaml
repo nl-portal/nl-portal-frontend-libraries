@@ -18,8 +18,8 @@ importers:
   packages/api:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.10
-        version: 3.8.10(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^3.9.0
+        version: 3.9.0(@types/react@18.2.48)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@nl-portal/nl-portal-authentication':
         specifier: workspace:*
         version: link:../authentication
@@ -277,8 +277,8 @@ importers:
   packages/user-interface:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.10
-        version: 3.8.10(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^3.9.0
+        version: 3.9.0(@types/react@18.2.48)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@formio/react':
         specifier: ^5.3.0
         version: 5.3.0(formiojs@4.18.1)(react-dom@18.2.0)(react@18.2.0)
@@ -346,8 +346,8 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0(keycloak-js@23.0.5)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       '@utrecht/component-library-css':
-        specifier: 1.0.0-alpha.589
-        version: 1.0.0-alpha.589
+        specifier: 3.0.1-alpha.11
+        version: 3.0.1-alpha.11
       bootstrap:
         specifier: ^4.6.2
         version: 4.6.2(jquery@3.7.1)(popper.js@1.16.1)
@@ -392,8 +392,8 @@ importers:
         specifier: ^6.4.0
         version: 6.4.0(vitest@1.2.2)
       '@testing-library/react':
-        specifier: ^14.1.2
-        version: 14.1.2(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^14.2.0
+        version: 14.2.0(react-dom@18.2.0)(react@18.2.0)
       '@types/lodash':
         specifier: ^4.14.202
         version: 4.14.202
@@ -468,10 +468,10 @@ packages:
       '@jridgewell/trace-mapping': 0.3.22
     dev: true
 
-  /@apollo/client@3.8.10(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-p/22RZ8ehHyvySnC20EHPPe0gdu8Xp6ZCiXOfdEe1ZORw5cUteD/TLc66tfKv8qu8NLIfbiWoa+6s70XnKvxqg==}
+  /@apollo/client@3.9.0(@types/react@18.2.48)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-M6I7h9UF0MmW/eK1oTzuHewZRZmvNzvw4c7nXhvQnxIk0V0VeJWSmscRGQNtsNmk8WnBmgyV/1KOVNow2aOM8w==}
     peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
+      graphql: ^15.0.0 || ^16.0.0
       graphql-ws: ^5.5.5
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -487,6 +487,7 @@ packages:
         optional: true
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
+      '@wry/caches': 1.0.1
       '@wry/equality': 0.5.7
       '@wry/trie': 0.5.0
       graphql: 16.8.1
@@ -496,11 +497,14 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+      rehackt: 0.0.3(@types/react@18.2.48)(react@18.2.0)
       response-iterator: 0.2.6
       symbol-observable: 4.0.0
       ts-invariant: 0.10.3
       tslib: 2.6.2
       zen-observable-ts: 1.2.5
+    transitivePeerDependencies:
+      - '@types/react'
     dev: false
 
   /@ardatan/relay-compiler@12.0.0(graphql@16.8.1):
@@ -3250,8 +3254,8 @@ packages:
       vitest: 1.2.2(jsdom@24.0.0)(sass@1.70.0)
     dev: true
 
-  /@testing-library/react@14.1.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-z4p7DVBTPjKM5qDZ0t5ZjzkpSNb+fZy1u6bzO7kk8oeGagpPCAtgh4cx1syrfp7a+QWkM021jGqjJaxJJnXAZg==}
+  /@testing-library/react@14.2.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-7uBnPHyOG6nDGCzv8SLeJbSa33ZoYw7swYpSLIgJvBALdq7l9zPNk33om4USrxy1lKTxXaVfufzLmq83WNfWIw==}
     engines: {node: '>=14'}
     peerDependencies:
       react: ^18.0.0
@@ -3565,12 +3569,12 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@utrecht/component-library-css@1.0.0-alpha.589:
-    resolution: {integrity: sha512-/X7uYr+it/io3+w/K+E9BPMW9src6lrX8348JQl/6CD4mOiQm5KF9nyW6ZSb0oAIBOEzKKuWXpllAdtbS0760g==}
-    dev: false
-
   /@utrecht/component-library-css@1.0.0-alpha.602:
     resolution: {integrity: sha512-oknDZS/EoeSrHcp4nAhQK41PHTVCXVBI4JDT/D+g9wMbyFpl5D/bK4jGP2ChmQe5m3RQUSO5dYJ2rIRthy+6Mg==}
+    dev: false
+
+  /@utrecht/component-library-css@3.0.1-alpha.11:
+    resolution: {integrity: sha512-YArt42mS7pYMWR+5vfnkT7+wPsTWnhkS+52Y1O+pQaV9q2dNbttE1O5/xPMMvr53TMbnOgA4OONsjl2HBw8nGg==}
     dev: false
 
   /@utrecht/component-library-react@1.0.0-alpha.411(react-dom@18.2.0)(react@18.2.0):
@@ -7083,6 +7087,21 @@ packages:
       call-bind: 1.0.5
       define-properties: 1.2.1
       set-function-name: 2.0.1
+
+  /rehackt@0.0.3(@types/react@18.2.48)(react@18.2.0):
+    resolution: {integrity: sha512-aBRHudKhOWwsTvCbSoinzq+Lej/7R8e8UoPvLZo5HirZIIBLGAgdG7SL9QpdcBoQ7+3QYPi3lRLknAzXBlhZ7g==}
+    peerDependencies:
+      '@types/react': '*'
+      react: '*'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      '@types/react': 18.2.48
+      react: 18.2.0
+    dev: false
 
   /relay-runtime@12.0.0:
     resolution: {integrity: sha512-QU6JKr1tMsry22DXNy9Whsq5rmvwr3LSZiiWV/9+DFpuTWvp+WFhobWMc8TC4OjKFfNhEZy7mOiqUAn5atQtug==}
