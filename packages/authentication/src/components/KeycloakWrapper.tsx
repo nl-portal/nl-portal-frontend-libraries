@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-import Keycloak, {
+// Workaround because of export issue in keycloak-js, solved in keycloak-js 24: https://github.com/keycloak/keycloak/pull/24974/files
+import Keycloak from "keycloak-js/dist/keycloak.js";
+import {
   KeycloakConfig,
   KeycloakInitOptions,
-  KeycloakInstance,
   KeycloakOnLoad,
 } from "keycloak-js";
 import { FC, Fragment, useContext, useState, useEffect } from "react";
@@ -91,13 +92,12 @@ const KeycloakProvider = ({
   onLoad = "login-required",
 }: KeycloakWrapperProps) => {
   const { setKeycloakToken, setDecodedToken } = useContext(KeycloakContext);
-  const [authClient] = useState(
-    () =>
-      new (Keycloak as any)({
-        url: formatUrlTrailingSlash(`${url}`, false),
-        clientId,
-        realm,
-      }) as KeycloakInstance,
+  const { current: authClient } = useRef(
+    new Keycloak({
+      url: formatUrlTrailingSlash(`${url}`, false),
+      clientId,
+      realm,
+    }),
   );
   const initOptions: KeycloakInitOptions = {
     checkLoginIframe: false,
