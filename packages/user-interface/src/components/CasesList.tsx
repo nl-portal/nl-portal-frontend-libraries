@@ -1,13 +1,15 @@
 import { FC, Fragment, useEffect, useContext } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { Link as RouterLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { Heading3, Paragraph } from "@gemeente-denhaag/components-react";
-import { CaseCard } from "@gemeente-denhaag/card";
-import { Link } from "@gemeente-denhaag/link";
-import { ArrowRightIcon } from "@gemeente-denhaag/icons";
+import {
+  CaseCard,
+  Heading3,
+  Link,
+  Paragraph,
+  ArrowRightIcon,
+} from "@gemeente-denhaag/components-react";
 import PortalLink from "./PortalLink";
 import styles from "./CasesList.module.scss";
 
@@ -37,8 +39,8 @@ const CasesListContainer: FC<CasesListContainerProps> = ({
         </Heading3>
         {numCases > 0 && (
           <Link
-            component={RouterLink}
-            to="/zaken"
+            Link={PortalLink}
+            href="/zaken"
             icon={<ArrowRightIcon />}
             iconAlign="end"
             hrefLang={hrefLang}

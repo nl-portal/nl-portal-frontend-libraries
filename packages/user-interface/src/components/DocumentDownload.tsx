@@ -1,8 +1,7 @@
 import * as React from "react";
 import { FC, useContext } from "react";
-import { DownloadIcon } from "@gemeente-denhaag/icons";
 import { FormattedMessage, useIntl } from "react-intl";
-import { Link } from "@gemeente-denhaag/components-react";
+import { DownloadIcon, Link } from "@gemeente-denhaag/components-react";
 import Skeleton from "react-loading-skeleton";
 import { ApiContext } from "@nl-portal/nl-portal-api";
 import { KeycloakContext } from "@nl-portal/nl-portal-authentication";

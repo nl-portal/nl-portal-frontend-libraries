@@ -1,7 +1,10 @@
 import * as React from "react";
 import { Fragment, useEffect } from "react";
-import { Heading2, Paragraph } from "@gemeente-denhaag/components-react";
-import { SubjectCard } from "@gemeente-denhaag/card";
+import {
+  Heading2,
+  Paragraph,
+  SubjectCard,
+} from "@gemeente-denhaag/components-react";
 import { FormattedMessage, useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
 import { useGetTakenQuery } from "@nl-portal/nl-portal-api";

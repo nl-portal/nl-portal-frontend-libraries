@@ -1,11 +1,11 @@
 import * as React from "react";
 import {
+  DocumentIcon,
   Heading2,
   List,
   ListItem,
   ListSubheader,
 } from "@gemeente-denhaag/components-react";
-import { DocumentIcon } from "@gemeente-denhaag/icons";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useGetFormsQuery } from "@nl-portal/nl-portal-api";
 import { Fragment, useEffect } from "react";

@@ -14,12 +14,12 @@ import classNames from "classnames";
 import useSize from "@react-hook/size";
 import useScrollPosition from "@react-hook/window-scroll";
 import {
+  CloseIcon,
   Heading3,
   Heading4,
   IconButton,
+  ResponsiveContent,
 } from "@gemeente-denhaag/components-react";
-import { CloseIcon } from "@gemeente-denhaag/icons";
-import ResponsiveContent from "@gemeente-denhaag/responsive-content";
 import Skeleton from "react-loading-skeleton";
 import styles from "./Header.module.scss";
 import LanguageSwitcher from "./LanguageSwitcher";

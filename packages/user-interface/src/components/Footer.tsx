@@ -1,9 +1,12 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { FC, ReactElement, useContext } from "react";
-import { Heading4, Link } from "@gemeente-denhaag/components-react";
-import { ExternalLinkIcon } from "@gemeente-denhaag/icons";
-import ResponsiveContent from "@gemeente-denhaag/responsive-content";
+import {
+  Heading4,
+  ExternalLinkIcon,
+  Link,
+  ResponsiveContent,
+} from "@gemeente-denhaag/components-react";
 import classNames from "classnames";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { PortalFooter } from "../interfaces/portal-footer";

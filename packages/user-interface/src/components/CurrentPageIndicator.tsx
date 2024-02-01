@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { Heading5 } from "@gemeente-denhaag/components-react";
-import { ChevronDownIcon } from "@gemeente-denhaag/icons";
+import { ChevronDownIcon, Heading5 } from "@gemeente-denhaag/components-react";
 import LayoutContext from "../contexts/LayoutContext";
 import styles from "./CurrentPageIndicator.module.scss";
 

@@ -1,8 +1,5 @@
-import {
-  Button,
-  FormGroup,
-  Heading2,
-} from "@gemeente-denhaag/components-react";
+import { Button, Heading2 } from "@gemeente-denhaag/components-react";
+import { FormGroup } from "@gemeente-denhaag/formgroup";
 import { TextField } from "@gemeente-denhaag/textfield";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useContext, useEffect, useState } from "react";

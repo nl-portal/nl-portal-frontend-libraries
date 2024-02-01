@@ -1,7 +1,6 @@
 import { FC, Fragment, ReactElement } from "react";
 import { StatusType, ZaakStatus } from "@nl-portal/nl-portal-api";
-import { Paragraph } from "@gemeente-denhaag/components-react";
-import { Status } from "@gemeente-denhaag/process-steps";
+import { Paragraph, Status } from "@gemeente-denhaag/components-react";
 import Skeleton from "react-loading-skeleton";
 import { useIntl } from "react-intl";
 import { stringToId } from "../utils/string-to-id";

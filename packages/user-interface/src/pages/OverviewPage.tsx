@@ -1,17 +1,17 @@
 import * as React from "react";
-import { Link as RouterLink } from "react-router-dom";
 import {
-  Paragraph,
+  Alert,
   Heading2,
   Heading3,
+  Link,
+  Paragraph,
 } from "@gemeente-denhaag/components-react";
-import { Link } from "@gemeente-denhaag/link";
-import { Alert } from "@gemeente-denhaag/alert";
 import { FormattedMessage, useIntl } from "react-intl";
 import { FC, useContext } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
+import { PortalLink } from "..";
 
 interface OverviewPageProps {
   openFormsFormId?: string;
@@ -86,8 +86,8 @@ const OverviewPage: FC<OverviewPageProps> = ({
       )}
       {showFormsLink === "true" && (
         <Link
-          component={RouterLink}
-          to={`/formulier/${openFormsFormId}`}
+          Link={PortalLink}
+          href={`/formulier/${openFormsFormId}`}
           hrefLang={hrefLang}
         >
           <FormattedMessage id="overview.defaultFormTitle" />

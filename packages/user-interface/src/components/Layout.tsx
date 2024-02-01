@@ -5,13 +5,13 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { StylesProvider } from "@gemeente-denhaag/components-react";
 import {
   Page as PageWrapper,
   PageHeader,
   PageFooter,
-} from "@gemeente-denhaag/page";
-import ResponsiveContent from "@gemeente-denhaag/responsive-content";
+  ResponsiveContent,
+  StylesProvider,
+} from "@gemeente-denhaag/components-react";
 import classNames from "classnames";
 import Header from "./Header";
 import Menu from "./Menu";

@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Heading2 } from "@gemeente-denhaag/components-react";
-import Tabs from "@gemeente-denhaag/tab";
+import { Heading2, Tabs } from "@gemeente-denhaag/components-react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useNavigate, useLocation } from "react-router-dom";
 import CasesList from "../components/CasesList";

@@ -6,28 +6,25 @@ import {
 } from "@nl-portal/nl-portal-api";
 import { FC, Fragment, ReactElement } from "react";
 import {
+  Action,
+  ContactTimeline,
   Heading2,
   Heading3,
   Heading4,
   Paragraph,
-} from "@gemeente-denhaag/components-react";
-import { Action } from "@gemeente-denhaag/action";
-import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
-import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "@gemeente-denhaag/table";
+} from "@gemeente-denhaag/components-react";
+import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
 import { FormattedMessage, useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
 import { Link as RouterLink } from "react-router-dom";
-import ContactTimeline from "@gemeente-denhaag/contact-timeline";
 import useQuery from "../hooks/useQuery";
 import styles from "./CasePage.module.scss";
-import "@utrecht/component-library-css";
 import DocumentList from "../components/DocumentList";
 import StatusHistory from "../components/StatusHistory";
 import { getTaskUrl } from "../utils/get-task-url";

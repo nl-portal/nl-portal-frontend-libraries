@@ -1,6 +1,5 @@
 import { FC, useContext } from "react";
-import { DocumentIcon } from "@gemeente-denhaag/icons";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { DocumentIcon, Paragraph } from "@gemeente-denhaag/components-react";
 import classNames from "classnames";
 import Skeleton from "react-loading-skeleton";
 import { useIntl } from "react-intl";
