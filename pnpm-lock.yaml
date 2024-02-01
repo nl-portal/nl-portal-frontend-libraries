@@ -277,8 +277,8 @@ importers:
   packages/user-interface:
     dependencies:
       '@apollo/client':
-        specifier: ^3.9.0
-        version: 3.9.0(@types/react@18.2.48)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^3.9.1
+        version: 3.9.1(@types/react@18.2.51)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@formio/react':
         specifier: ^5.3.0
         version: 5.3.0(formiojs@4.18.1)(react-dom@18.2.0)(react@18.2.0)
@@ -305,7 +305,7 @@ importers:
         version: 0.2.3-alpha.362(react@18.2.0)
       '@gemeente-denhaag/link':
         specifier: 0.2.3-alpha.70
-        version: 0.2.3-alpha.70(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
+        version: 0.2.3-alpha.70(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
       '@gemeente-denhaag/page':
         specifier: 0.1.1-alpha.222
         version: 0.1.1-alpha.222
@@ -395,8 +395,8 @@ importers:
         version: 2.10.0(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@testing-library/jest-dom':
-        specifier: ^6.4.0
-        version: 6.4.0(vitest@1.2.2)
+        specifier: ^6.4.1
+        version: 6.4.1(vitest@1.2.2)
       '@testing-library/react':
         specifier: ^14.2.0
         version: 14.2.0(react-dom@18.2.0)(react@18.2.0)
@@ -410,8 +410,8 @@ importers:
         specifier: ^4.0.9
         version: 4.0.9
       '@types/react':
-        specifier: ^18.2.48
-        version: 18.2.48
+        specifier: ^18.2.50
+        version: 18.2.51
       '@types/react-dom':
         specifier: ^18.2.18
         version: 18.2.18
@@ -510,6 +510,45 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       rehackt: 0.0.3(@types/react@18.2.48)(react@18.2.0)
+      response-iterator: 0.2.6
+      symbol-observable: 4.0.0
+      ts-invariant: 0.10.3
+      tslib: 2.6.2
+      zen-observable-ts: 1.2.5
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
+  /@apollo/client@3.9.1(@types/react@18.2.51)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-gpnIwMrEZ4n811gy2Ksz51Ax4zjAR5O5Tg1vlKs70Eig5Qj7kGGfnWfH5B37LSCIXanRyuMgVbQx+Aty5WruBA==}
+    peerDependencies:
+      graphql: ^15.0.0 || ^16.0.0
+      graphql-ws: ^5.5.5
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      subscriptions-transport-ws: ^0.9.0 || ^0.11.0
+    peerDependenciesMeta:
+      graphql-ws:
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+      subscriptions-transport-ws:
+        optional: true
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
+      '@wry/caches': 1.0.1
+      '@wry/equality': 0.5.7
+      '@wry/trie': 0.5.0
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      hoist-non-react-statics: 3.3.2
+      optimism: 0.18.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      rehackt: 0.0.3(@types/react@18.2.51)(react@18.2.0)
       response-iterator: 0.2.6
       symbol-observable: 4.0.0
       ts-invariant: 0.10.3
@@ -1808,13 +1847,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@gemeente-denhaag/icons@0.2.3-alpha.70(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
+  /@gemeente-denhaag/icons@0.2.3-alpha.70(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-L64C2CRdhe/vPs9rYmObFBwRfWHhH72TX2Lst4McaCwazLWF7I2ao8VDIecLf2SPUgv6kTwn7MvLS73/Pa4BxQ==}
     peerDependencies:
       react: ^17.0.0
     dependencies:
       '@gemeente-denhaag/baseprops': 0.2.3-alpha.70(react@18.2.0)
-      '@material-ui/core': 4.12.3(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
+      '@material-ui/core': 4.12.3(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
       - '@types/react'
@@ -1850,13 +1889,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@gemeente-denhaag/link@0.2.3-alpha.70(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
+  /@gemeente-denhaag/link@0.2.3-alpha.70(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-UONB/rhc9UCDHkBJbfQ/De89Q6OkTF2txLm9OCoFQp5tFdMj9rpDz0KxF0jvJhQNmn43fW/kwiJAs/vJ6NfU4A==}
     peerDependencies:
       react: ^17.0.0
     dependencies:
       '@gemeente-denhaag/baseprops': 0.2.3-alpha.70(react@18.2.0)
-      '@gemeente-denhaag/icons': 0.2.3-alpha.70(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
+      '@gemeente-denhaag/icons': 0.2.3-alpha.70(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
     transitivePeerDependencies:
       - '@types/react'
@@ -2737,7 +2776,7 @@ packages:
     resolution: {integrity: sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew==}
     dev: true
 
-  /@material-ui/core@4.12.3(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
+  /@material-ui/core@4.12.3(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-sdpgI/PL56QVsEJldwEe4FFaFTLUqN+rd7sSZiRCdx2E/C7z5yK0y/khAWVBH24tXwto7I1hCzNWfJGZIYJKnw==}
     engines: {node: '>=8.0.0'}
     deprecated: Material UI v4 doesn't receive active development since September 2021. See the guide https://mui.com/material-ui/migration/migration-v4/ to upgrade to v5.
@@ -2750,11 +2789,11 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.23.9
-      '@material-ui/styles': 4.11.5(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
-      '@material-ui/system': 4.12.2(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
-      '@material-ui/types': 5.1.0(@types/react@18.2.48)
+      '@material-ui/styles': 4.11.5(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
+      '@material-ui/system': 4.12.2(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
+      '@material-ui/types': 5.1.0(@types/react@18.2.51)
       '@material-ui/utils': 4.11.3(react-dom@18.2.0)(react@18.2.0)
-      '@types/react': 18.2.48
+      '@types/react': 18.2.51
       '@types/react-transition-group': 4.4.10
       clsx: 1.2.1
       hoist-non-react-statics: 3.3.2
@@ -2766,7 +2805,7 @@ packages:
       react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
-  /@material-ui/styles@4.11.5(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
+  /@material-ui/styles@4.11.5(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-o/41ot5JJiUsIETME9wVLAJrmIWL3j0R0Bj2kCOLbSfqEkKf0fmaPt+5vtblUh5eXr2S+J/8J3DaCb10+CzPGA==}
     engines: {node: '>=8.0.0'}
     deprecated: Material UI v4 doesn't receive active development since September 2021. See the guide https://mui.com/material-ui/migration/migration-v4/ to upgrade to v5.
@@ -2780,9 +2819,9 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.9
       '@emotion/hash': 0.8.0
-      '@material-ui/types': 5.1.0(@types/react@18.2.48)
+      '@material-ui/types': 5.1.0(@types/react@18.2.51)
       '@material-ui/utils': 4.11.3(react-dom@18.2.0)(react@18.2.0)
-      '@types/react': 18.2.48
+      '@types/react': 18.2.51
       clsx: 1.2.1
       csstype: 2.6.21
       hoist-non-react-statics: 3.3.2
@@ -2799,7 +2838,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@material-ui/system@4.12.2(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0):
+  /@material-ui/system@4.12.2(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-6CSKu2MtmiJgcCGf6nBQpM8fLkuB9F55EKfbdTC80NND5wpTmKzwdhLYLH3zL4cLlK0gVaaltW7/wMuyTnN0Lw==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
@@ -2812,14 +2851,14 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.9
       '@material-ui/utils': 4.11.3(react-dom@18.2.0)(react@18.2.0)
-      '@types/react': 18.2.48
+      '@types/react': 18.2.51
       csstype: 2.6.21
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@material-ui/types@5.1.0(@types/react@18.2.48):
+  /@material-ui/types@5.1.0(@types/react@18.2.51):
     resolution: {integrity: sha512-7cqRjrY50b8QzRSYyhSpx4WRw2YuO0KKIGQEVk5J8uoz2BanawykgZGoWEqKm7pVIbzFDN0SpPcVV4IhOFkl8A==}
     peerDependencies:
       '@types/react': '*'
@@ -2827,7 +2866,7 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.48
+      '@types/react': 18.2.51
     dev: false
 
   /@material-ui/utils@4.11.3(react-dom@18.2.0)(react@18.2.0):
@@ -3234,8 +3273,8 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/jest-dom@6.4.0(vitest@1.2.2):
-    resolution: {integrity: sha512-GgGT3OR8qhIjk2SBMy51AYDWoMnAyR/cwjZO4SttuBmIQ9wWy9QmVOeaSbgT5Bm0J6qLBaf4+dsJWfisvafoaA==}
+  /@testing-library/jest-dom@6.4.1(vitest@1.2.2):
+    resolution: {integrity: sha512-Z7qMM3J2Zw5H/nC2/5CYx5YcuaD56JmDFKNIozZ89VIo6o6Y9FMhssics4e2madEKYDNEpZz3+glPGz0yWMOag==}
     engines: {node: '>=14', npm: '>=6', yarn: '>=1'}
     peerDependencies:
       '@jest/globals': '>= 28'
@@ -3328,7 +3367,7 @@ packages:
   /@types/hoist-non-react-statics@3.3.5:
     resolution: {integrity: sha512-SbcrWzkKBw2cdwRTwQAswfpB9g9LJWfjtUeW/jvNwbhC8cpmmNYVePa+ncbUe0rGTQ7G3Ff6mYUN2VMfLVr+Sg==}
     dependencies:
-      '@types/react': 18.2.48
+      '@types/react': 18.2.51
       hoist-non-react-statics: 3.3.2
     dev: false
 
@@ -3408,7 +3447,7 @@ packages:
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 18.2.48
+      '@types/react': 18.2.51
       '@types/react-router': 5.1.20
     dev: true
 
@@ -3416,17 +3455,24 @@ packages:
     resolution: {integrity: sha512-jGjmu/ZqS7FjSH6owMcD5qpq19+1RS9DeVRqfl1FeBMxTDQAGwlMWOcs52NDoXaNKyG3d1cYQFMs9rCrb88o9Q==}
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 18.2.48
+      '@types/react': 18.2.51
     dev: true
 
   /@types/react-transition-group@4.4.10:
     resolution: {integrity: sha512-hT/+s0VQs2ojCX823m60m5f0sL5idt9SO6Tj6Dg+rdphGPIeJbJ6CxvBYkgkGKrYeDjvIpKTR38UzmtHJOGW3Q==}
     dependencies:
-      '@types/react': 18.2.48
+      '@types/react': 18.2.51
     dev: false
 
   /@types/react@18.2.48:
     resolution: {integrity: sha512-qboRCl6Ie70DQQG9hhNREz81jqC1cs9EVNcjQ1AU+jH6NFfSAhVVbrrY/+nSF+Bsk4AOwm9Qa61InvMCyV+H3w==}
+    dependencies:
+      '@types/prop-types': 15.7.11
+      '@types/scheduler': 0.16.8
+      csstype: 3.1.3
+
+  /@types/react@18.2.51:
+    resolution: {integrity: sha512-XeoMaU4CzyjdRr3c4IQQtiH7Rpo18V07rYZUucEZQwOUEtGgTXv7e6igQiQ+xnV6MbMe1qjEmKdgMNnfppnXfg==}
     dependencies:
       '@types/prop-types': 15.7.11
       '@types/scheduler': 0.16.8
@@ -7137,6 +7183,21 @@ packages:
         optional: true
     dependencies:
       '@types/react': 18.2.48
+      react: 18.2.0
+    dev: false
+
+  /rehackt@0.0.3(@types/react@18.2.51)(react@18.2.0):
+    resolution: {integrity: sha512-aBRHudKhOWwsTvCbSoinzq+Lej/7R8e8UoPvLZo5HirZIIBLGAgdG7SL9QpdcBoQ7+3QYPi3lRLknAzXBlhZ7g==}
+    peerDependencies:
+      '@types/react': '*'
+      react: '*'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      '@types/react': 18.2.51
       react: 18.2.0
     dev: false
 
