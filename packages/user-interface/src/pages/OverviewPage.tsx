@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Link as RouterLink } from "react-router-dom";
 import {
   Paragraph,
   Heading2,
@@ -12,6 +11,7 @@ import { FC, useContext } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
+import PortalLink from "../components/PortalLink";
 
 interface OverviewPageProps {
   openFormsFormId?: string;
@@ -86,8 +86,8 @@ const OverviewPage: FC<OverviewPageProps> = ({
       )}
       {showFormsLink === "true" && (
         <Link
-          component={RouterLink}
-          to={`/formulier/${openFormsFormId}`}
+          Link={PortalLink}
+          href={`/formulier/${openFormsFormId}`}
           hrefLang={hrefLang}
         >
           <FormattedMessage id="overview.defaultFormTitle" />

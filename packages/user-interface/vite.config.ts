@@ -34,5 +34,10 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
+    server: {
+      deps: {
+        inline: ["@gemeente-denhaag/form-field-error-message"],
+      },
+    },
   },
 });

@@ -16,8 +16,8 @@
     "test:watch": "vitest --watch"
   },
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.369",
-    "@gemeente-denhaag/icons": "0.2.3-alpha.369",
+    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.371",
+    "@gemeente-denhaag/icons": "0.2.3-alpha.371",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
@@ -26,8 +26,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.11",
-    "@types/react": "^18.2.48",
+    "@types/jest": "^29.5.12",
+    "@types/react": "^18.2.53",
     "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",

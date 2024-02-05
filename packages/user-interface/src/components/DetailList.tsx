@@ -1,14 +1,14 @@
-import { FC, Fragment, ReactElement, useContext } from "react";
+import { Fragment, ReactElement, useContext } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link } from "@gemeente-denhaag/link";
 import { EditIcon } from "@gemeente-denhaag/icons";
 import Skeleton from "react-loading-skeleton";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { Link as RouterLink } from "react-router-dom";
 import styles from "./DetailList.module.scss";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { BREAKPOINTS } from "../constants/breakpoints";
 import UserInformationContext from "../contexts/UserInformationContext";
+import { PortalLink } from "..";
 
 interface DetailListProps {
   details: Array<{
@@ -19,7 +19,7 @@ interface DetailListProps {
   }>;
 }
 
-const DetailList: FC<DetailListProps> = ({ details }) => {
+const DetailList = ({ details }: DetailListProps) => {
   const { hrefLang } = useContext(LocaleContext);
   const { setUserInformation } = useContext(UserInformationContext);
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
@@ -55,8 +55,8 @@ const DetailList: FC<DetailListProps> = ({ details }) => {
                     typeof detail.value === "string" ? detail.value : "",
                   )
                 }
-                component={RouterLink}
-                to={`/account/aanpassen?prop=${detail.translationKey}`}
+                href={`/account/aanpassen?prop=${detail.translationKey}`}
+                Link={PortalLink}
                 hrefLang={hrefLang}
                 icon={<EditIcon />}
                 iconAlign="start"
