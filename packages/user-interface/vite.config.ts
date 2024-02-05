@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "localization",
+      name: "user-interface",
       fileName: "index",
       formats: ["es"],
     },
@@ -34,5 +34,10 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
+    server: {
+      deps: {
+        inline: ["@gemeente-denhaag/form-field-error-message"],
+      },
+    },
   },
 });

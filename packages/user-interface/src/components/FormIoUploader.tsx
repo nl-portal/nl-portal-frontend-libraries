@@ -1,14 +1,16 @@
-import ReactDOM from "react-dom";
 import { ReactComponent, Formio } from "@formio/react";
 import { formIoUploaderEditForm } from "./FormIoUploaderEditForm";
 import FileUpload, { UploadedFile } from "./FileUpload";
+import { Root, createRoot } from "react-dom/client";
 
 class FormIoUploader extends ReactComponent {
   private component: any;
+  private element: Root | null;
 
   constructor(component: any, options: any, data: any) {
     super(component, options, data);
     this.component = component;
+    this.element = null;
 
     if (this.component.multipleFiles === undefined) {
       this.component.multipleFiles = true;
@@ -53,21 +55,19 @@ class FormIoUploader extends ReactComponent {
   };
 
   attachReact = (element: Element) => {
-    ReactDOM.render(
+    this.element = createRoot(element);
+    this.element.render(
       <FileUpload
         disabled={this.component.disabled}
         multiple={this.component.multipleFiles}
         onChange={this.onChangeHandler}
         informatieobjecttype={this.component.informatieobjecttype || ""}
       />,
-      element,
     );
   };
 
-  detachReact = (element: Element) => {
-    if (element) {
-      ReactDOM.unmountComponentAtNode(element);
-    }
+  detachReact = () => {
+    this.element?.unmount();
   };
 }
 

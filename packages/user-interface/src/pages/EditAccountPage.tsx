@@ -1,8 +1,9 @@
 import {
   Button,
-  FormGroup,
+  FormField,
   Heading2,
 } from "@gemeente-denhaag/components-react";
+import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 import { TextField } from "@gemeente-denhaag/textfield";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useContext, useEffect, useState } from "react";
@@ -73,10 +74,7 @@ const EditAccountPage = () => {
         </Heading2>
       </header>
       <div className={styles["edit-account__text-field-container"]}>
-        <FormGroup
-          helperText={!valid && `${value}`.length >= 1 ? errorTranslation : ""}
-          error={!valid && `${value}`.length >= 1}
-        >
+        <FormField invalid={!valid && `${value}`.length >= 1}>
           <TextField
             id={propTranslation}
             aria-describedby={propTranslation}
@@ -85,7 +83,10 @@ const EditAccountPage = () => {
             defaultValue={defaultValue || ""}
             disabled={loading}
           />
-        </FormGroup>
+          <FormFieldErrorMessage>
+            {!valid && `${value}`.length >= 1 ? errorTranslation : ""}
+          </FormFieldErrorMessage>
+        </FormField>
       </div>
 
       <div className={styles["edit-account__buttons"]}>
