@@ -22,7 +22,7 @@ jobs:
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: repo checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ steps.generate_token.outputs.token }}
 
@@ -85,7 +85,7 @@ jobs:
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: repo checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ steps.generate_token.outputs.token }}
 
