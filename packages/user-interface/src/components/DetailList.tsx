@@ -7,7 +7,7 @@ import styles from "./DetailList.module.scss";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { BREAKPOINTS } from "../constants/breakpoints";
 import UserInformationContext from "../contexts/UserInformationContext";
-import { PortalLink } from "..";
+import PortalLink from "../components/PortalLink";
 
 interface DetailListProps {
   details: Array<{

@@ -11,7 +11,8 @@ import { FC, useContext } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
-import { PortalLink } from "..";
+import PortalLink from "../components/PortalLink";
+
 
 interface OverviewPageProps {
   openFormsFormId?: string;

@@ -5,7 +5,7 @@ import { ChevronLeftIcon, Link } from "@gemeente-denhaag/components-react";
 import Skeleton from "react-loading-skeleton";
 import styles from "./LinkToParent.module.scss";
 import { PortalPage } from "../interfaces/portal-page";
-import { PortalLink } from "..";
+import PortalLink from "../components/PortalLink";
 
 interface LinkToParentProps {
   parentPage?: PortalPage;
