@@ -29,8 +29,8 @@ import { HelmetProvider } from "react-helmet-async";
 
 interface LayoutComponentProps {
   pages: Array<PortalPage>;
-  Header?: () => ReactElement;
-  Footer?: () => ReactElement;
+  customHeader?: ReactElement;
+  customFooter?: ReactElement;
   headerLogo?: ReactElement;
   headerLogoSmall?: ReactElement;
   facet?: ReactElement;
@@ -39,8 +39,8 @@ interface LayoutComponentProps {
 }
 
 const LayoutComponent: FC<LayoutComponentProps> = ({
-  Header: CustomHeader,
-  Footer: CustomFooter,
+  customHeader,
+  customFooter,
   headerLogo,
   facet,
   pages,
@@ -56,7 +56,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
     isHome: true,
   };
 
-  const legacy = CustomHeader === undefined && CustomFooter === undefined;
+  const legacy = customHeader === undefined && customFooter === undefined;
   let pageHeaderClassnames = "";
   if (legacy) {
     pageHeaderClassnames = classNames(styles["header-wrapper--legacy"]);
@@ -70,19 +70,18 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
     <Router>
       <PageWrapper>
         <PageHeader className={pageHeaderClassnames}>
-          {CustomHeader ? (
-            <CustomHeader />
-          ) : headerLogo && headerLogoSmall ? (
-            <Header
-              logo={headerLogo}
-              logoSmall={headerLogoSmall}
-              facet={facet}
-              homePage={pages.find((page) => page.isHome)}
-              offline={offline}
-            />
-          ) : (
-            ""
-          )}
+          {customHeader ||
+            (headerLogo && headerLogoSmall ? (
+              <Header
+                logo={headerLogo}
+                logoSmall={headerLogoSmall}
+                facet={facet}
+                homePage={pages.find((page) => page.isHome)}
+                offline={offline}
+              />
+            ) : (
+              ""
+            ))}
         </PageHeader>
         <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
           <Menu items={pages} legacy={legacy} />
@@ -137,11 +136,8 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
         </ResponsiveContent>
         {online && (
           <PageFooter>
-            {CustomFooter ? (
-              <CustomFooter />
-            ) : (
-              footer && <Footer footer={footer} facet={facet} />
-            )}
+            {customFooter ||
+              (footer && <Footer footer={footer} facet={facet} />)}
           </PageFooter>
         )}
       </PageWrapper>
@@ -150,8 +146,8 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
 };
 
 const Layout: FC<LayoutComponentProps> = ({
-  Header,
-  Footer,
+  customHeader,
+  customFooter,
   headerLogo,
   facet,
   pages,
@@ -165,11 +161,11 @@ const Layout: FC<LayoutComponentProps> = ({
         <HelmetProvider>
           <LayoutComponent
             pages={pages}
-            Header={Header}
+            customHeader={customHeader}
             headerLogo={headerLogo}
             headerLogoSmall={headerLogoSmall}
             footer={footer}
-            Footer={Footer}
+            customFooter={customFooter}
             facet={facet}
             offline={offline}
           />
