@@ -19,7 +19,7 @@ const getZaken: {
                   "omschrijving": "",
                   "identificatie": "ZAAK-2024-0000001324",
                   "zaaktype": {
-                      "identificatie": "B0756",
+                      "identificatie": "GESLOTENZAAK1",
                       "__typename": "ZaakType"
                   },
                   "startdatum": "2024-02-02",
@@ -37,7 +37,7 @@ const getZaken: {
                   "omschrijving": "",
                   "identificatie": "ZAAK-2024-0000001317",
                   "zaaktype": {
-                      "identificatie": "Aanvraag-stadspas-behandelen-v6",
+                      "identificatie": "OPENZAAK1",
                       "__typename": "ZaakType"
                   },
                   "startdatum": "2024-02-01",
@@ -55,7 +55,7 @@ const getZaken: {
                   "omschrijving": "",
                   "identificatie": "ZAAK-2024-0000001263",
                   "zaaktype": {
-                      "identificatie": "Aanvraag-stadspas-behandelen-v6",
+                      "identificatie": "OPENZAAK2",
                       "__typename": "ZaakType"
                   },
                   "startdatum": "2024-02-01",
@@ -73,7 +73,7 @@ const getZaken: {
                   "omschrijving": "",
                   "identificatie": "ZAAK-2024-0000001261",
                   "zaaktype": {
-                      "identificatie": "B0756",
+                      "identificatie": "GESLOTENZAAK2",
                       "__typename": "ZaakType"
                   },
                   "startdatum": "2024-02-01",
