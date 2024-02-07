@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { Button, Heading2, Heading3 } from "@gemeente-denhaag/components-react";
+import { Button, Heading3 } from "@gemeente-denhaag/components-react";
 import { FormattedMessage } from "react-intl";
 import {
   useGetBewonersAantalQuery,

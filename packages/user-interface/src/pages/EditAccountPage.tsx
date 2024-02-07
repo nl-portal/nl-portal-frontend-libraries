@@ -14,6 +14,7 @@ import useQuery from "../hooks/useQuery";
 import styles from "./EditAccountPage.module.scss";
 import UserInformationContext from "../contexts/UserInformationContext";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
+import PageHeader from "../components/PageHeader";
 
 const EditAccountPage = () => {
   const { currentLocale } = useContext(LocaleContext);
@@ -62,17 +63,17 @@ const EditAccountPage = () => {
 
   return (
     <section className={styles["edit-account"]}>
-      <header className={styles["edit-account__header"]}>
-        <Heading2>
-          {currentLocale.toLowerCase().includes("nl")
+      <PageHeader
+        title={
+          currentLocale.toLowerCase().includes("nl")
             ? `${propTranslation} ${intl
                 .formatMessage({ id: "account.edit" })
                 .toLowerCase()}`
             : `${intl.formatMessage({
                 id: "account.edit",
-              })} ${propTranslation.toLowerCase()}`}
-        </Heading2>
-      </header>
+              })} ${propTranslation.toLowerCase()}`
+        }
+      />
       <div className={styles["edit-account__text-field-container"]}>
         <FormField invalid={!valid && `${value}`.length >= 1}>
           <TextField

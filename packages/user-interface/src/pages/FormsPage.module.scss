@@ -5,14 +5,6 @@
   flex-direction: column;
 }
 
-.forms__header {
-  margin-block-end: var(--nlportal-space-block-md, 1rem);
-
-  @include breakpoint(tablet) {
-    margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
-  }
-}
-
 .forms__forms-list {
   @include breakpoint(tablet) {
     max-width: var(--nlportal-forms-list-max-width-tablet, 75%);

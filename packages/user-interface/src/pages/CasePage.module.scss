@@ -5,14 +5,6 @@
   flex-direction: column;
 }
 
-.case__header {
-  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
-
-  @include breakpoint(tablet) {
-    margin-block-end: var(--nlportal-space-block-2xl, 2rem);
-  }
-}
-
 .case__sub-header {
   margin-block-end: var(--nlportal-space-block-lg, 1rem) !important;
 }
