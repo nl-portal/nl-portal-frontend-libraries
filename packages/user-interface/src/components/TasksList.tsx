@@ -3,7 +3,7 @@ import { FormattedMessage } from "react-intl";
 import styles from "./TasksList.module.scss";
 import { getTaskUrl } from "../utils/get-task-url";
 import PortalLink from "./PortalLink";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
 import { GetTakenQuery } from "@nl-portal/nl-portal-api";
 
