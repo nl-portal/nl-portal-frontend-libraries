@@ -20,7 +20,7 @@ const getZaken: {
                       "identificatie": "GESLOTENZAAK1",
                       "__typename": "ZaakType"
                   },
-                  "startdatum": "2024-02-02",
+                  "startdatum": "2024-02-01",
                   "status": {
                       "statustype": {
                           "isEindstatus": true,
@@ -38,7 +38,7 @@ const getZaken: {
                       "identificatie": "OPENZAAK1",
                       "__typename": "ZaakType"
                   },
-                  "startdatum": "2024-02-01",
+                  "startdatum": "2024-01-01",
                   "status": {
                       "statustype": {
                           "isEindstatus": false,
@@ -56,7 +56,7 @@ const getZaken: {
                       "identificatie": "OPENZAAK2",
                       "__typename": "ZaakType"
                   },
-                  "startdatum": "2024-02-01",
+                  "startdatum": "2024-01-02",
                   "status": {
                       "statustype": {
                           "isEindstatus": false,
@@ -74,7 +74,7 @@ const getZaken: {
                       "identificatie": "GESLOTENZAAK2",
                       "__typename": "ZaakType"
                   },
-                  "startdatum": "2024-02-01",
+                  "startdatum": "2024-02-02",
                   "status": {
                       "statustype": {
                           "isEindstatus": true,
