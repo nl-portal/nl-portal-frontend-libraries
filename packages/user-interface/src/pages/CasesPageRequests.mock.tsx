@@ -1,7 +1,5 @@
 import { FetchResult, GraphQLRequest } from "@apollo/client";
-import {
-  QUERY_GET_ZAKEN,
-} from "@nl-portal/nl-portal-api";
+import { QUERY_GET_ZAKEN } from "@nl-portal/nl-portal-api";
 
 const getZaken: {
   request: GraphQLRequest;
