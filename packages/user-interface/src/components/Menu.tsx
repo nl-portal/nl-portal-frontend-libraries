@@ -33,7 +33,7 @@ const Menu: FC<MenuProps> = ({ items, legacy }) => {
 
   if (legacy) {
     return (
-      <div
+      <aside
         className={classNames(styles.menu, {
           [styles["menu--hidden"]]: !menuOpened,
         })}
@@ -58,7 +58,7 @@ const Menu: FC<MenuProps> = ({ items, legacy }) => {
               ))}
           </nav>
         </div>
-      </div>
+      </aside>
     );
   }
 
