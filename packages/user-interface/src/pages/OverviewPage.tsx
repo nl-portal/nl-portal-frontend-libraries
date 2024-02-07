@@ -39,7 +39,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
 
   return (
-    <section>
+    <>
       {showAlert === "true" && (
         <Alert
           variant={alertType}
@@ -95,7 +95,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
       {showCasesPreview && (
         <CasesList showHeader numElements={casesPreviewLength} />
       )}
-    </section>
+    </>
   );
 };
 

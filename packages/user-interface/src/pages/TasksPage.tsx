@@ -7,14 +7,14 @@ const TasksPage = () => {
   const { data, loading, error } = useGetTakenQuery();
 
   return (
-    <section>
+    <>
       <PageHeader title={<FormattedMessage id="pageTitles.tasks" />} />
       <TasksList
         loading={loading}
         error={Boolean(error)}
         tasks={data?.getTaken.content}
       />
-    </section>
+    </>
   );
 };
 

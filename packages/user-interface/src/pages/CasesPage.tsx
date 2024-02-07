@@ -48,10 +48,10 @@ const CasesPage = ({ showCaseIdentification }: CasesPageProps) => {
   ];
 
   return (
-    <section className={styles.cases}>
+    <div className={styles.cases}>
       <PageHeader title={<FormattedMessage id="pageTitles.cases" />} />
       <Tabs tabData={tabData} />
-    </section>
+    </div>
   );
 };
 

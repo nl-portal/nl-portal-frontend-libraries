@@ -64,7 +64,7 @@ const AccountPage: FC<AccountPageProps> = ({
   }, []);
 
   return (
-    <section className={styles.account}>
+    <div className={styles.account}>
       <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
       <div className={styles["account__sub-section"]}>
         <Heading3 className={styles["account__sub-header"]}>
@@ -206,7 +206,8 @@ const AccountPage: FC<AccountPageProps> = ({
           )}
         </div>
       )}
-    </section>
+    </div>
   );
 };
+
 export default AccountPage;

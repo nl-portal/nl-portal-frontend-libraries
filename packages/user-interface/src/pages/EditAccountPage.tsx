@@ -62,7 +62,7 @@ const EditAccountPage = () => {
   }, [loading]);
 
   return (
-    <section className={styles["edit-account"]}>
+    <div className={styles["edit-account"]}>
       <PageHeader
         title={
           currentLocale.toLowerCase().includes("nl")
@@ -107,7 +107,7 @@ const EditAccountPage = () => {
           <FormattedMessage id="account.cancel" />
         </Button>
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -38,7 +38,7 @@ const TasksList = ({ loading, error, tasks }: Props) => {
     );
 
   return (
-    <div className={styles.tasks__cards}>
+    <section className={styles.tasks__cards}>
       {tasks.map((task) => (
         <div className={styles.tasks__card} key={task.id}>
           <SubjectCard
@@ -53,7 +53,7 @@ const TasksList = ({ loading, error, tasks }: Props) => {
           />
         </div>
       ))}
-    </div>
+    </section>
   );
 };
 

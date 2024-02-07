@@ -33,7 +33,7 @@ const FormsPage = () => {
   }, []);
 
   return (
-    <section className={styles.forms}>
+    <div className={styles.forms}>
       <PageHeader title={<FormattedMessage id="pageTitles.forms" />} />
       <div className={styles["forms__forms-list"]}>
         <List
@@ -62,7 +62,7 @@ const FormsPage = () => {
           )}
         </List>
       </div>
-    </section>
+    </div>
   );
 };
 export default FormsPage;
