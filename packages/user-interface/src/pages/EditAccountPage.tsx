@@ -1,10 +1,8 @@
-import {
-  Button,
-  FormField,
-  Heading2,
-} from "@gemeente-denhaag/components-react";
+import { Button, Heading2 } from "@gemeente-denhaag/components-react";
 import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
-import { TextField } from "@gemeente-denhaag/textfield";
+import { FormField } from "@gemeente-denhaag/form-field";
+import { FormLabel } from "@gemeente-denhaag/form-label";
+import { TextInput } from "@gemeente-denhaag/text-input";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useContext, useEffect, useState } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
@@ -60,6 +58,9 @@ const EditAccountPage = () => {
     }
   }, [loading]);
 
+  const invalid = !valid && `${value}`.length >= 1;
+  const inputId = propTranslation.toLowerCase();
+
   return (
     <section className={styles["edit-account"]}>
       <header className={styles["edit-account__header"]}>
@@ -74,17 +75,17 @@ const EditAccountPage = () => {
         </Heading2>
       </header>
       <div className={styles["edit-account__text-field-container"]}>
-        <FormField invalid={!valid && `${value}`.length >= 1}>
-          <TextField
-            id={propTranslation}
-            aria-describedby={propTranslation}
+        <FormField invalid={invalid} type="text">
+          <FormLabel htmlFor={inputId}>{propTranslation}</FormLabel>
+          <TextInput
+            id={inputId}
             onChange={(e) => setValue(e.target.value)}
-            invalid={!valid && `${value}`.length >= 1}
+            invalid={invalid}
             defaultValue={defaultValue || ""}
             disabled={loading}
           />
           <FormFieldErrorMessage>
-            {!valid && `${value}`.length >= 1 ? errorTranslation : ""}
+            {invalid ? errorTranslation : ""}
           </FormFieldErrorMessage>
         </FormField>
       </div>
