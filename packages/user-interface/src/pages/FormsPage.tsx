@@ -12,6 +12,7 @@ import { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./FormsPage.module.scss";
 import ListItemSkeleton from "../components/ListItemSkeleton";
+import PageHeader from "../components/PageHeader";
 
 const FormsPage = () => {
   const intl = useIntl();
@@ -33,11 +34,7 @@ const FormsPage = () => {
 
   return (
     <section className={styles.forms}>
-      <header className={styles.forms__header}>
-        <Heading2>
-          <FormattedMessage id="pageTitles.forms" />
-        </Heading2>
-      </header>
+      <PageHeader title={<FormattedMessage id="pageTitles.forms" />} />
       <div className={styles["forms__forms-list"]}>
         <List
           subheader={
