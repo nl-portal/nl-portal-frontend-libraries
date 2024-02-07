@@ -1,0 +1,10 @@
+@import "../styles/mixins";
+
+.page-header {
+  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+  --utrecht-heading-2-margin-block-end: 0;
+
+  @include breakpoint(tablet) {
+    margin-block-end: var(--nlportal-space-block-2xl, 2rem);
+  }
+}

@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect, useContext } from "react";
+import { Fragment, useEffect, useContext } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
 import { useGetZakenQuery } from "@nl-portal/nl-portal-api";
@@ -10,22 +10,15 @@ import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 import PortalLink from "./PortalLink";
 import styles from "./CasesList.module.scss";
 
-interface CasesListProps {
-  showCaseIdentification?: boolean;
-  numElements?: number;
-  completed?: boolean;
-  showHeader?: boolean;
-}
-
 interface CasesListContainerProps {
   children: React.ReactNode;
   numCases: number;
 }
 
-const CasesListContainer: FC<CasesListContainerProps> = ({
+const CasesListContainer = ({
   children,
   numCases,
-}) => {
+}: CasesListContainerProps) => {
   const { hrefLang } = useContext(LocaleContext);
 
   return (
@@ -51,12 +44,19 @@ const CasesListContainer: FC<CasesListContainerProps> = ({
   );
 };
 
-const CasesList: FC<CasesListProps> = ({
+interface CasesListProps {
+  showCaseIdentification?: boolean;
+  numElements?: number;
+  completed?: boolean;
+  showHeader?: boolean;
+}
+
+const CasesList = ({
   showCaseIdentification,
   numElements,
   completed,
   showHeader,
-}) => {
+}: CasesListProps) => {
   const { data, loading, error, refetch } = useGetZakenQuery();
   const intl = useIntl();
   const getCaseUrl = (id: string) => `/zaken/zaak?id=${id}`;

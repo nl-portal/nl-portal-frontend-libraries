@@ -330,6 +330,9 @@ importers:
       '@gemeente-denhaag/textfield':
         specifier: 0.2.3-alpha.368
         version: 0.2.3-alpha.368(react@18.2.0)
+      '@gemeente-denhaag/typography':
+        specifier: 0.2.3-alpha.372
+        version: 0.2.3-alpha.372(react@18.2.0)
       '@nl-portal/nl-portal-api':
         specifier: workspace:*
         version: link:../api
@@ -1668,8 +1671,16 @@ packages:
     resolution: {integrity: sha512-Bt8mZ4pVVLiOuAy8P3AM1tJQNM+Lmqj3J6vPwaNx6ljw2pbQU83wLwmD677amTXP0V/Ggs69qkBTAWgO0CMSEA==}
     dev: false
 
+  /@gemeente-denhaag/design-tokens-common@0.2.3-alpha.374:
+    resolution: {integrity: sha512-iVaHPGpffYfvVwZwX7GZ5zC380ZGk9kRv7Fxt7hVr9S5XHhNsw9jz/QCVpjoC4H2Z79t7jrveEo0+tNzGv71Sg==}
+    dev: false
+
   /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.371:
     resolution: {integrity: sha512-TJxBnz7t0bAOGEi27lNlwR953W9iO8QZ4LVeq00OLmxTHEg0+LXf9blb+d+KC/JJaFZJeF5pJVxneXnRjyzMJA==}
+    dev: false
+
+  /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.374:
+    resolution: {integrity: sha512-qmvli3ZhJCF2ai6J6dy15nBzPc9stSqAzhggSbQM7xlapYIofKjpxCd8loOp6lawUH2utv7YnEN5C9taQkgQvA==}
     dev: false
 
   /@gemeente-denhaag/divider@0.2.3-alpha.371(react@18.2.0):
@@ -2037,6 +2048,17 @@ packages:
     dependencies:
       '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.371
       '@gemeente-denhaag/design-tokens-components': 0.2.3-alpha.371
+      '@utrecht/components': 3.0.0
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/typography@0.2.3-alpha.372(react@18.2.0):
+    resolution: {integrity: sha512-vEWlaYJrI2H3mrn4EB6mEk8PWaR9uyKueyJoQEU/KJWhnhNo09njY5ZwrWVCG3QIaoCNETH79K1PpJbujAFZSQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.374
+      '@gemeente-denhaag/design-tokens-components': 0.2.3-alpha.374
       '@utrecht/components': 3.0.0
       react: 18.2.0
     dev: false

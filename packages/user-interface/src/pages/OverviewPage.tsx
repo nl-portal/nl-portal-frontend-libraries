@@ -34,9 +34,8 @@ const OverviewPage: FC<OverviewPageProps> = ({
   showCasesPreview = false,
   casesPreviewLength = 6,
 }) => {
-  const { hrefLang } = useContext(LocaleContext);
   const intl = useIntl();
-
+  const { hrefLang } = useContext(LocaleContext);
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
 
   return (

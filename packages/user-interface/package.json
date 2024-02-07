@@ -46,6 +46,7 @@
     "@gemeente-denhaag/tab": "0.2.3-alpha.371",
     "@gemeente-denhaag/table": "0.1.1-alpha.273",
     "@gemeente-denhaag/textfield": "0.2.3-alpha.368",
+    "@gemeente-denhaag/typography": "0.2.3-alpha.372",
     "@react-hook/size": "^2.1.2",
     "@react-hook/window-scroll": "^1.3.0",
     "@utrecht/component-library-css": "3.0.1-alpha.12",

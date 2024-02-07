@@ -1,0 +1,19 @@
+@import "../styles/mixins";
+
+.tasks__cards {
+  display: flex;
+  flex-direction: column;
+
+  @include breakpoint(desktop) {
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+}
+
+.tasks__card {
+  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+
+  @include breakpoint(desktop) {
+    width: calc(50% - var(--nlportal-space-inline-md, 1rem));
+  }
+}
