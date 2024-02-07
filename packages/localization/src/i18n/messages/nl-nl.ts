@@ -89,5 +89,9 @@ export const NL_NL_MESSAGES: Messages = {
     "task.fetchError": "Er is een fout opgetreden, probeer het later nogmaals.",
     "task.completeTitle": "Taak is afgerond",
     "task.completeDescription": "De taak is succesvol voltooid.",
+    "overviewpage.title": "Welkom {userName}",
+    "overview.subTitle": "Gemachtigd voor {volmachtgever}",
+    "overviewpage.paragraph":
+      "In MijnDenHaag kunt u zelf uw persoonlijke zaken regelen wanneer het u uitkomt. U kunt bijvoorbeeld uw rekeningen betalen en zien wanneer uw aanvraag klaar is.",
   },
 };

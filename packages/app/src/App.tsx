@@ -40,6 +40,7 @@ const pages: Array<PortalPage> = [
     icon: <GridIcon />,
     pageComponent: (
       <OverviewPage
+        showIntro="true"
         openFormsFormId={config.OPEN_FORMS_FORM_ID}
         showCasesPreview
         casesPreviewLength={6}
