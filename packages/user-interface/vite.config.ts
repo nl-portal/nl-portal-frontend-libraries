@@ -38,7 +38,12 @@ export default defineConfig({
     setupFiles: "./src/setupTests.ts",
     server: {
       deps: {
-        inline: ["@gemeente-denhaag/form-field-error-message"],
+        inline: [
+          "@gemeente-denhaag/form-field",
+          "@gemeente-denhaag/form-field-error-message",
+          "@gemeente-denhaag/form-label",
+          "@gemeente-denhaag/text-input",
+        ],
       },
     },
   },
