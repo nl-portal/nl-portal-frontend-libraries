@@ -1,11 +1,9 @@
-import { SubjectCard } from "@gemeente-denhaag/card";
 import { FormattedMessage } from "react-intl";
 import styles from "./TasksList.module.scss";
-import { getTaskUrl } from "../utils/get-task-url";
-import PortalLink from "./PortalLink";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
 import { GetTakenQuery } from "@nl-portal/nl-portal-api";
+import Task from "./Task";
 
 interface Props {
   loading: boolean;
@@ -16,9 +14,9 @@ interface Props {
 const TasksList = ({ loading, error, tasks }: Props) => {
   if (loading) {
     return (
-      <div className={styles.tasks__cards}>
-        <Skeleton className={styles.tasks__card} height={220} />
-        <Skeleton className={styles.tasks__card} height={220} />
+      <div className={styles["tasks-list"]}>
+        <Skeleton className={styles["tasks-list__skeleton"]} height={220} />
+        <Skeleton className={styles["tasks-list__skeleton"]} height={220} />
       </div>
     );
   }
@@ -38,20 +36,9 @@ const TasksList = ({ loading, error, tasks }: Props) => {
     );
 
   return (
-    <section className={styles.tasks__cards}>
+    <section className={styles["tasks-list"]}>
       {tasks.map((task) => (
-        <div className={styles.tasks__card} key={task.id}>
-          <SubjectCard
-            title={task.title}
-            date={new Date(task.date)}
-            Link={PortalLink}
-            href={getTaskUrl(
-              task.formulier.formuliertype,
-              task.formulier.value,
-              task.id,
-            )}
-          />
-        </div>
+        <Task key={task.id} task={task} />
       ))}
     </section>
   );
