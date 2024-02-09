@@ -37,7 +37,7 @@ const getTaken: {
                 "https://objecten-zgw.test.denhaag.nl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
               __typename: "TaakFormulier",
             },
-            title: "Aanleveren informatie 2",
+            title: "Aanleveren informatie",
             status: "OPEN",
             date: "2024-02-01",
             verloopdatum: null,

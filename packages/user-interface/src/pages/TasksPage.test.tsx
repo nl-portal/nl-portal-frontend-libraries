@@ -3,17 +3,30 @@ import { describe, it, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 
 describe("TasksPage", () => {
-  const taken = () =>
+  const takenAlgemeneInformatie = () =>
     screen.getAllByText("Aanleveren informatie");
+  const taakAanvullendeInformatie = () =>
+    screen.getByText("Aanvullende informatie aanleveren");
 
   it("Shows an overview of all tasks", async () => {
     render(MockTasksPage());
     await waitFor(async () => {
-      expect(taken()[0]).toBeVisible();
+      expect(takenAlgemeneInformatie()[0]).toBeVisible();
     });
 
-    expect(screen.getAllByText("Aanleveren informatie")[0]).toHaveTextContent("Aanleveren informatie");
-    expect(screen.getAllByText("Aanleveren informatie").length).toBe(2);
-    expect(screen.getByText("Aanvullende informatie aanleveren")).toHaveTextContent("Aanvullende informatie aanleveren");
+    expect(takenAlgemeneInformatie().length).toBe(3);
+    expect(taakAanvullendeInformatie()).toBeVisible();
+  });
+
+  it("Allows me to continue to a task", async () => {
+    render(MockTasksPage());
+    await waitFor(async () => {
+      expect(taakAanvullendeInformatie()).toBeVisible();
+    });
+
+    expect(screen.getByRole("link", {name: "Aanvullende informatie aanleveren"})).toHaveAttribute(
+      "href",
+      "/taken/taak?id=021118b9-bc59-11ee-b651-366634c97df6",
+    );
   });
 });
