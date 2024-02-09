@@ -31,7 +31,6 @@ describe("The CasesPage", () => {
     expect(tabLopendeZaken().getAttribute("aria-selected")).toBe("true");
     expect(tabAfgerondeZaken().getAttribute("aria-selected")).toBe("false");
 
-    console.log("System locale = " + systemLocale);
     expect(openZaak1()).toBeVisible();
     let screenDate = new Date(Date.parse(openZaak1Date));
     expect(screen.getByText(screenDate.toLocaleDateString())).toBeVisible();
