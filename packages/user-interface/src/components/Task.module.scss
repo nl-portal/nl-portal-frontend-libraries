@@ -1,0 +1,7 @@
+@import "../styles/mixins";
+
+.task {
+  @include breakpoint(desktop) {
+    width: calc(50% - var(--nlportal-space-inline-md, 1rem));
+  }
+}

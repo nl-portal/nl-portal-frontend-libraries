@@ -85,7 +85,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
         </PageHeader>
         <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
           <Menu items={pages} legacy={legacy} />
-          <div className="denhaag-page-content__main">
+          <main className="denhaag-page-content__main">
             {online && (
               <Routes>
                 {pages.map((page) => (
@@ -132,7 +132,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
                 <Route key={1} element={<Navigate to={offlinePage.path} />} />
               </Routes>
             )}
-          </div>
+          </main>
         </ResponsiveContent>
         {online && (
           <PageFooter>

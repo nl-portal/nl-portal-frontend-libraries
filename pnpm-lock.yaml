@@ -336,6 +336,9 @@ importers:
       '@gemeente-denhaag/text-input':
         specifier: 0.3.0-alpha.372
         version: 0.3.0-alpha.372(react-dom@18.2.0)(react@18.2.0)
+      '@gemeente-denhaag/typography':
+        specifier: 0.2.3-alpha.372
+        version: 0.2.3-alpha.372(react@18.2.0)
       '@nl-portal/nl-portal-api':
         specifier: workspace:*
         version: link:../api

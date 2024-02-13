@@ -1,17 +1,17 @@
-import { FC, useEffect, useState } from "react";
-import { Heading2 } from "@gemeente-denhaag/components-react";
+import { useEffect, useState } from "react";
 import Tabs from "@gemeente-denhaag/tab";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useNavigate, useLocation } from "react-router-dom";
 import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import useQuery from "../hooks/useQuery";
+import PageHeader from "../components/PageHeader";
 
 interface CasesPageProps {
   showCaseIdentification?: boolean;
 }
 
-const CasesPage: FC<CasesPageProps> = ({ showCaseIdentification }) => {
+const CasesPage = ({ showCaseIdentification }: CasesPageProps) => {
   const [tabNumber, setTabNumber] = useState(0);
   const intl = useIntl();
   const TAB_QUERY_PARAM = "tab";
@@ -48,14 +48,10 @@ const CasesPage: FC<CasesPageProps> = ({ showCaseIdentification }) => {
   ];
 
   return (
-    <section className={styles.cases}>
-      <header className={styles.cases__header}>
-        <Heading2>
-          <FormattedMessage id="pageTitles.cases" />
-        </Heading2>
-      </header>
+    <div className={styles.cases}>
+      <PageHeader title={<FormattedMessage id="pageTitles.cases" />} />
       <Tabs tabData={tabData} />
-    </section>
+    </div>
   );
 };
 

@@ -1,9 +1,3 @@
-import * as React from "react";
-import {
-  Paragraph,
-  Heading2,
-  Heading3,
-} from "@gemeente-denhaag/components-react";
 import { Link } from "@gemeente-denhaag/link";
 import { Alert } from "@gemeente-denhaag/alert";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -12,12 +6,12 @@ import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PortalLink from "../components/PortalLink";
+import PageHeader from "../components/PageHeader";
 
 interface OverviewPageProps {
   openFormsFormId?: string;
   showFormsLink?: string;
   showIntro?: string;
-  personalizeIntro?: string;
   showAlert?: string;
   alertType?: "error" | "info" | "success" | "warning";
   showCasesPreview?: boolean;
@@ -28,19 +22,17 @@ const OverviewPage: FC<OverviewPageProps> = ({
   openFormsFormId,
   showFormsLink = "true",
   showIntro = "false",
-  personalizeIntro = "false",
   showAlert = "false",
   alertType = "warning",
   showCasesPreview = false,
   casesPreviewLength = 6,
 }) => {
-  const { hrefLang } = useContext(LocaleContext);
   const intl = useIntl();
-
+  const { hrefLang } = useContext(LocaleContext);
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
 
   return (
-    <section>
+    <>
       {showAlert === "true" && (
         <Alert
           variant={alertType}
@@ -49,40 +41,21 @@ const OverviewPage: FC<OverviewPageProps> = ({
         />
       )}
       {showIntro === "true" && (
-        <React.Fragment>
-          {personalizeIntro ? (
-            <React.Fragment>
-              <Heading2>
-                <FormattedMessage
-                  id="overviewpage.title"
-                  values={{ userName }}
-                />
-              </Heading2>
-              {isVolmachtLogin && (
-                <div>
-                  <Heading3>
-                    <FormattedMessage
-                      id="overviewpage.subtitle"
-                      values={{ volmachtgever }}
-                    />
-                  </Heading3>
-                </div>
-              )}
-              <Paragraph>
-                <FormattedMessage id="overviewpage.paragraph" />
-              </Paragraph>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <Heading2 className="utrecht-heading-2">
-                <FormattedMessage id="overviewpage.title" />
-              </Heading2>
-              <Paragraph>
-                <FormattedMessage id="overviewpage.paragraph" />
-              </Paragraph>
-            </React.Fragment>
-          )}
-        </React.Fragment>
+        <PageHeader
+          title={
+            <FormattedMessage id="overviewpage.title" values={{ userName }} />
+          }
+          subTitle={
+            isVolmachtLogin && (
+              <FormattedMessage
+                id="overview.subTitle"
+                values={{ volmachtgever }}
+              />
+            )
+          }
+        >
+          <FormattedMessage id="overviewpage.paragraph" />
+        </PageHeader>
       )}
       {showFormsLink === "true" && (
         <Link
@@ -96,7 +69,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
       {showCasesPreview && (
         <CasesList showHeader numElements={casesPreviewLength} />
       )}
-    </section>
+    </>
   );
 };
 

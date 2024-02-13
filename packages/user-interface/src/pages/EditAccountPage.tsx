@@ -1,4 +1,4 @@
-import { Button, Heading2 } from "@gemeente-denhaag/components-react";
+import { Button } from "@gemeente-denhaag/components-react";
 import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 import { FormField } from "@gemeente-denhaag/form-field";
 import { FormLabel } from "@gemeente-denhaag/form-label";
@@ -12,6 +12,7 @@ import useQuery from "../hooks/useQuery";
 import styles from "./EditAccountPage.module.scss";
 import UserInformationContext from "../contexts/UserInformationContext";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
+import PageHeader from "../components/PageHeader";
 
 const EditAccountPage = () => {
   const { currentLocale } = useContext(LocaleContext);
@@ -62,18 +63,18 @@ const EditAccountPage = () => {
   const inputId = propTranslation.toLowerCase();
 
   return (
-    <section className={styles["edit-account"]}>
-      <header className={styles["edit-account__header"]}>
-        <Heading2>
-          {currentLocale.toLowerCase().includes("nl")
+    <div className={styles["edit-account"]}>
+      <PageHeader
+        title={
+          currentLocale.toLowerCase().includes("nl")
             ? `${propTranslation} ${intl
                 .formatMessage({ id: "account.edit" })
                 .toLowerCase()}`
             : `${intl.formatMessage({
                 id: "account.edit",
-              })} ${propTranslation.toLowerCase()}`}
-        </Heading2>
-      </header>
+              })} ${propTranslation.toLowerCase()}`
+        }
+      />
       <div className={styles["edit-account__text-field-container"]}>
         <FormField invalid={invalid} type="text">
           <FormLabel htmlFor={inputId}>{propTranslation}</FormLabel>
@@ -107,7 +108,7 @@ const EditAccountPage = () => {
           <FormattedMessage id="account.cancel" />
         </Button>
       </div>
-    </section>
+    </div>
   );
 };
 

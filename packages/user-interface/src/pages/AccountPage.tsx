@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { Button, Heading2, Heading3 } from "@gemeente-denhaag/components-react";
+import { Button, Heading3 } from "@gemeente-denhaag/components-react";
 import { FormattedMessage } from "react-intl";
 import {
   useGetBewonersAantalQuery,
@@ -15,6 +15,7 @@ import {
   getPostalCodeCityString,
   getStreetString,
 } from "../utils/person-data";
+import PageHeader from "../components/PageHeader";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
@@ -63,12 +64,8 @@ const AccountPage: FC<AccountPageProps> = ({
   }, []);
 
   return (
-    <section className={styles.account}>
-      <header className={styles.account__header}>
-        <Heading2>
-          <FormattedMessage id="pageTitles.account" />
-        </Heading2>
-      </header>
+    <div className={styles.account}>
+      <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
       <div className={styles["account__sub-section"]}>
         <Heading3 className={styles["account__sub-header"]}>
           <FormattedMessage id="account.contactHeader" />
@@ -209,7 +206,8 @@ const AccountPage: FC<AccountPageProps> = ({
           )}
         </div>
       )}
-    </section>
+    </div>
   );
 };
+
 export default AccountPage;

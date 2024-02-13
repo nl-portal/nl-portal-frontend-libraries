@@ -146,7 +146,7 @@ const CasePage: FC<CasePageProps> = ({
   }, [zaak]);
 
   return (
-    <section className={styles.case}>
+    <div className={styles.case}>
       {!error ? (
         <Fragment>
           <header className={styles.case__header}>
@@ -272,7 +272,7 @@ const CasePage: FC<CasePageProps> = ({
           <FormattedMessage id="case.fetchError" />
         </Paragraph>
       )}
-    </section>
+    </div>
   );
 };
 
