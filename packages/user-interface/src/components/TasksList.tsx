@@ -1,23 +1,31 @@
 import { FormattedMessage } from "react-intl";
 import styles from "./TasksList.module.scss";
-import { Paragraph } from "@gemeente-denhaag/typography";
+import { Heading3, Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
 import { GetTakenQuery } from "@nl-portal/nl-portal-api";
 import Task from "./Task";
+import Link from "@gemeente-denhaag/link";
+import PortalLink from "./PortalLink";
 
 interface Props {
-  loading: boolean;
-  error: boolean;
+  loading?: boolean;
+  error?: boolean;
+  title?: string;
   tasks?: GetTakenQuery["getTaken"]["content"];
+  total?: number;
 }
 
-const TasksList = ({ loading, error, tasks }: Props) => {
+const TasksList = ({ loading, error, title, tasks, total }: Props) => {
   if (loading) {
     return (
-      <div className={styles["tasks-list"]}>
-        <Skeleton className={styles["tasks-list__skeleton"]} height={220} />
-        <Skeleton className={styles["tasks-list__skeleton"]} height={220} />
-      </div>
+      <section className={styles["tasks-list"]}>
+        <header className={styles["tasks-list__header"]}>
+          {title && <Heading3>{title}</Heading3>}
+        </header>
+        <Skeleton height={60} />
+        <Skeleton height={60} />
+        <Skeleton height={60} />
+      </section>
     );
   }
 
@@ -37,6 +45,16 @@ const TasksList = ({ loading, error, tasks }: Props) => {
 
   return (
     <section className={styles["tasks-list"]}>
+      {title && (
+        <header className={styles["tasks-list__header"]}>
+          <Heading3>{title}</Heading3>
+          {total && (
+            <Link href="/taken" Link={PortalLink}>
+              <FormattedMessage id="tasks.viewAll" values={{ total }} />
+            </Link>
+          )}
+        </header>
+      )}
       {tasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}

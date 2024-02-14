@@ -7,7 +7,7 @@ export const NL_NL_MESSAGES: Messages = {
     "locales.en-GB": "English",
     "locales.nl-NL": "Nederlands",
     "pageTitles.overview": "Overzicht",
-    "pageTitles.cases": "Lopende zaken",
+    "pageTitles.cases": "Mijn lopende zaken",
     "pageTitles.notifications": "Mijn berichten",
     "pageTitles.themes": "Thema's",
     "pageTitles.documents": "Documenten",
@@ -28,6 +28,7 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.defaultFormTitle": "Bezwaar maken",
     "overview.showAllCases": "Bekijk alle zaken",
     "overview.currentCases": "Mijn lopende zaken",
+    "overview.tasksTitle": "Mijn taken",
     "cases.noOpenCases": "Er zijn geen lopende zaken.",
     "cases.noClosedCases": "Er zijn geen afgeronde zaken.",
     "cases.fetchError":
@@ -83,6 +84,7 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.inhabitantAmount": "Aantal inwoners op uw woonadres",
     "account.addressResearchRequestButton": "Vraag onderzoek aan",
     "forms.listSubHeader": "Beschikbare formulieren",
+    "tasks.viewAll": "Bekijk alle taken ({total})",
     "tasks.noOpenTasks": "Er zijn geen openstaande taken.",
     "tasks.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",

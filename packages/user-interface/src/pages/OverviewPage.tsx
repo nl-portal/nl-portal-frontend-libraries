@@ -7,40 +7,45 @@ import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PortalLink from "../components/PortalLink";
 import PageHeader from "../components/PageHeader";
+import { useGetTakenQuery } from "@nl-portal/nl-portal-api";
+import TasksList from "../components/TasksList";
 
 interface OverviewPageProps {
   openFormsFormId?: string;
-  showFormsLink?: string;
-  showIntro?: string;
-  showAlert?: string;
+  showFormsLink?: boolean;
+  showIntro?: boolean;
+  showAlert?: boolean;
   alertType?: "error" | "info" | "success" | "warning";
+  showTasksPreview?: boolean;
   showCasesPreview?: boolean;
   casesPreviewLength?: number;
 }
 
 const OverviewPage: FC<OverviewPageProps> = ({
   openFormsFormId,
-  showFormsLink = "true",
-  showIntro = "false",
-  showAlert = "false",
+  showFormsLink = false,
+  showIntro = false,
+  showAlert = false,
   alertType = "warning",
+  showTasksPreview = false,
   showCasesPreview = false,
   casesPreviewLength = 6,
 }) => {
   const intl = useIntl();
   const { hrefLang } = useContext(LocaleContext);
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
+  const { data, loading, error } = useGetTakenQuery();
 
   return (
     <>
-      {showAlert === "true" && (
+      {showAlert && (
         <Alert
           variant={alertType}
           title={intl.formatMessage({ id: "overview.alertTitle" })}
           text={intl.formatMessage({ id: "overview.alertText" })}
         />
       )}
-      {showIntro === "true" && (
+      {showIntro && (
         <PageHeader
           title={
             <FormattedMessage id="overviewpage.title" values={{ userName }} />
@@ -57,7 +62,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
           <FormattedMessage id="overviewpage.paragraph" />
         </PageHeader>
       )}
-      {showFormsLink === "true" && (
+      {showFormsLink && (
         <Link
           Link={PortalLink}
           href={`/formulier/${openFormsFormId}`}
@@ -65,6 +70,15 @@ const OverviewPage: FC<OverviewPageProps> = ({
         >
           <FormattedMessage id="overview.defaultFormTitle" />
         </Link>
+      )}
+      {showTasksPreview && (
+        <TasksList
+          loading={loading}
+          error={Boolean(error)}
+          title={intl.formatMessage({ id: "overview.tasksTitle" })}
+          total={64}
+          tasks={data?.getTaken.content}
+        />
       )}
       {showCasesPreview && (
         <CasesList showHeader numElements={casesPreviewLength} />

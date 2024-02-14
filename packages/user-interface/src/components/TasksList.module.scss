@@ -1,18 +1,9 @@
 @import "../styles/mixins";
 
 .tasks-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--nlportal-space-block-xl, 1rem);
+  --utrecht-heading-3-margin-block-end: var(--denhaag-space-block-xs, 0.5rem);
 
-  @include breakpoint(desktop) {
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
-
-  &__skeleton {
-    @include breakpoint(desktop) {
-      width: calc(50% - var(--nlportal-space-inline-md, 1rem));
-    }
+  &__header {
+    margin-block-end: var(--denhaag-space-block-xl, 1.5rem);
   }
 }

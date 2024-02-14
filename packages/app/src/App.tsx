@@ -42,6 +42,7 @@ const pages: Array<PortalPage> = [
       <OverviewPage
         showIntro="true"
         openFormsFormId={config.OPEN_FORMS_FORM_ID}
+        showTasksPreview
         showCasesPreview
         casesPreviewLength={6}
       />
@@ -53,7 +54,6 @@ const pages: Array<PortalPage> = [
   },
   {
     icon: <InboxIcon />,
-
     pageComponent: <NotificationsPage />,
     path: "/berichten",
     titleTranslationKey: "notifications",
