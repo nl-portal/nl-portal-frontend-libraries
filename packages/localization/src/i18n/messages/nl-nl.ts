@@ -17,6 +17,7 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.forms": "Formulieren",
     "pageTitles.tasks": "Taken",
     "pageTitles.task": "Taak",
+    "backlink.back": "Terug",
     "header.logout": "Uitloggen",
     "header.welcome": "Welkom",
     "header.proxyFor": "Gemachtigd voor",

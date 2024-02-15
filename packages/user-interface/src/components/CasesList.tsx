@@ -9,6 +9,8 @@ import { Link } from "@gemeente-denhaag/link";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 import PortalLink from "./PortalLink";
 import styles from "./CasesList.module.scss";
+import { useOutletContext } from "react-router-dom";
+import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 interface CasesListContainerProps {
   children: React.ReactNode;
@@ -57,9 +59,10 @@ const CasesList = ({
   completed,
   showHeader,
 }: CasesListProps) => {
+  const { paths } = useOutletContext<RouterOutletContext>();
   const { data, loading, error, refetch } = useGetZakenQuery();
   const intl = useIntl();
-  const getCaseUrl = (id: string) => `/zaken/zaak?id=${id}`;
+  const getCaseUrl = (id: string) => paths.case.replace(":id", id);
 
   useEffect(() => {
     refetch();

@@ -25,17 +25,17 @@ import styles from "./Header.module.scss";
 import LanguageSwitcher from "./LanguageSwitcher";
 import Logout from "./Logout";
 import UserName from "./UserName";
-import { PortalPage } from "../interfaces/portal-page";
 import LayoutContext from "../contexts/LayoutContext";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { BREAKPOINTS } from "../constants/breakpoints";
 import CurrentPageIndicator from "./CurrentPageIndicator";
 import MenuToggleButton from "./MenuToggleButton";
+import { Navigation } from "./Layout";
 
 interface HeaderProps {
   logo: ReactElement;
   logoSmall: ReactElement;
-  homePage?: PortalPage;
+  navigationItems: Navigation[];
   facet?: ReactElement;
   offline?: boolean;
 }
@@ -43,7 +43,7 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = ({
   logo,
   facet,
-  homePage,
+  navigationItems,
   offline,
   logoSmall,
 }) => {
@@ -79,6 +79,7 @@ const Header: FC<HeaderProps> = ({
   const headerLogoElementToUse =
     !isTablet && fullscreenForm ? headerLogoSmallElement : headerLogoElement;
   const online = !offline;
+  const homeNavigation = navigationItems[0];
 
   useEffect(() => {
     if (height !== headerHeight) {
@@ -152,12 +153,12 @@ const Header: FC<HeaderProps> = ({
                 [styles["header__logo-container--fullscreen"]]: fullscreenForm,
               })}
             >
-              {homePage ? (
+              {homeNavigation ? (
                 <Link
-                  to={homePage.path}
+                  to={homeNavigation.path}
                   hrefLang={hrefLang}
                   title={intl.formatMessage({
-                    id: `pageTitles.${homePage.titleTranslationKey}`,
+                    id: `pageTitles.${homeNavigation.titleTranslationKey}`,
                   })}
                   className={styles["header__logo-link"]}
                 >
@@ -201,7 +202,7 @@ const Header: FC<HeaderProps> = ({
                 {React.cloneElement(
                   <IconButton
                     className={styles["header__close-button"]}
-                    onClick={() => navigate(homePage?.path || "/")}
+                    onClick={() => navigate(homeNavigation?.path || "/")}
                   >
                     <CloseIcon />
                   </IconButton>,
@@ -234,7 +235,9 @@ const Header: FC<HeaderProps> = ({
           </div>
         )}
       </div>
-      {online && !fullscreenForm && <CurrentPageIndicator />}
+      {online && !fullscreenForm && (
+        <CurrentPageIndicator navigationItems={navigationItems} />
+      )}
     </div>
   );
 };

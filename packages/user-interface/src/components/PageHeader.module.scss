@@ -11,10 +11,16 @@
   }
 
   p {
-    --utrecht-paragraph-margin-block-start: var(--nlportal-space-block-md, 1rem) !important;
+    --utrecht-paragraph-margin-block-start: var(
+      --nlportal-space-block-md,
+      1rem
+    ) !important;
 
     @include breakpoint(tablet) {
-      --utrecht-paragraph-margin-block-start: var(--nlportal-space-block-2xl, 2rem) !important;
+      --utrecht-paragraph-margin-block-start: var(
+        --nlportal-space-block-2xl,
+        2rem
+      ) !important;
     }
   }
 }

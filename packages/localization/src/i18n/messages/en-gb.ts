@@ -17,6 +17,7 @@ export const EN_GB_MESSAGES: Messages = {
     "pageTitles.forms": "Forms",
     "pageTitles.tasks": "Tasks",
     "pageTitles.task": "Task",
+    "backlink.back": "Back",
     "header.logout": "Log out",
     "header.welcome": "Welcome",
     "header.proxyFor": "Proxy for",

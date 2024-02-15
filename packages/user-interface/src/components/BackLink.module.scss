@@ -1,6 +1,6 @@
 @import "../styles/mixins";
 
-.link-to-parent {
+.back-link {
   margin-bottom: var(--nlportal-space-block-3xl, 2.5rem);
 
   @include breakpoint(tablet) {

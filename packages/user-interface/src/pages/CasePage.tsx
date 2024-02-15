@@ -23,15 +23,15 @@ import {
 } from "@gemeente-denhaag/table";
 import { FormattedMessage, useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import ContactTimeline from "@gemeente-denhaag/contact-timeline";
-import useQuery from "../hooks/useQuery";
 import styles from "./CasePage.module.scss";
 import "@utrecht/component-library-css";
 import DocumentList from "../components/DocumentList";
 import StatusHistory from "../components/StatusHistory";
 import { getTaskUrl } from "../utils/get-task-url";
 import uniqueId from "lodash.uniqueid";
+import BackLink, { BackLinkProps } from "../components/BackLink";
 
 const labels = {
   today: "vandaag",
@@ -74,19 +74,16 @@ const Task = ({ task }: { task: any }) => {
 };
 
 interface CasePageProps {
-  statusHistoryFacet?: ReactElement;
-  statusHistoryBackground?: ReactElement;
   showContactTimeline?: boolean;
+  backlink?: BackLinkProps;
 }
 
-const CasePage: FC<CasePageProps> = ({
-  statusHistoryFacet,
-  statusHistoryBackground,
+const CasePage = ({
   showContactTimeline = false,
-}) => {
+  backlink = {},
+}: CasePageProps) => {
   const intl = useIntl();
-  const query = useQuery();
-  const id = query.get("id");
+  const { id } = useParams();
   const {
     data: zaak,
     loading,
@@ -149,6 +146,7 @@ const CasePage: FC<CasePageProps> = ({
     <div className={styles.case}>
       {!error ? (
         <Fragment>
+          {backlink && <BackLink {...backlink} />}
           <header className={styles.case__header}>
             <Heading2>
               {loading ? (
@@ -177,8 +175,6 @@ const CasePage: FC<CasePageProps> = ({
               statuses={zaak?.getZaak.statussen}
               status={zaak?.getZaak.status}
               loading={loading}
-              facet={statusHistoryFacet}
-              background={statusHistoryBackground}
             />
           </div>
           {details.length > 0 && (

@@ -12,13 +12,12 @@ import {
 import "font-awesome/css/font-awesome.min.css";
 import { Alert } from "@gemeente-denhaag/components-react";
 import { useIntl } from "react-intl";
-import useQuery from "../hooks/useQuery";
 import "./TaskPage.module.scss";
+import { useParams } from "react-router-dom";
 
 const TaskPage = () => {
-  const query = useQuery();
+  const { id } = useParams();
   const intl = useIntl();
-  const taskId = query.get("id");
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState({
@@ -26,7 +25,7 @@ const TaskPage = () => {
   });
 
   const [submitTask] = useSubmitTaskMutation();
-  const { data: task } = useGetTaakByIdQuery({ variables: { id: taskId } });
+  const { data: task } = useGetTaakByIdQuery({ variables: { id } });
   const [getFormById, { data: formDefinitionId }] =
     useGetFormDefinitionByIdLazyQuery({
       onCompleted: () => setLoading(false),
@@ -89,7 +88,7 @@ const TaskPage = () => {
     if (formioSubmission?.state === "submitted") {
       await submitTask({
         variables: {
-          id: `${taskId}`,
+          id,
           submission: formioSubmission.data,
         },
         onCompleted: () => setSubmitted(true),

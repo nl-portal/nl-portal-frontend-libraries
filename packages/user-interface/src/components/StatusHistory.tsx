@@ -13,8 +13,6 @@ interface StatusHistoryProps {
   statuses?: Array<StatusType>;
   status?: ZaakStatus | null;
   loading: boolean;
-  facet?: ReactElement;
-  background?: ReactElement;
 }
 
 const StatusHistory: FC<StatusHistoryProps> = ({

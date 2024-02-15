@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { render } from "@testing-library/react";
 import { MockWrapper } from "@nl-portal/nl-portal-localization";
 import { unmountComponentAtNode } from "react-dom";
-import Page from "./Page";
+import Page from "./PageMetaData";
 import LayoutProvider from "../providers/LayoutProvider";
 import { PortalPage } from "../interfaces/portal-page";
 
