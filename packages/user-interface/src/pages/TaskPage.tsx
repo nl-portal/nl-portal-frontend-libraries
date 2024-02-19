@@ -14,6 +14,10 @@ import { Alert } from "@gemeente-denhaag/components-react";
 import { useIntl } from "react-intl";
 import useQuery from "../hooks/useQuery";
 import "./TaskPage.module.scss";
+import ProtectedEval from "@formio/protected-eval";
+import { Formio } from "formiojs";
+
+Formio.use(ProtectedEval);
 
 const TaskPage = () => {
   const query = useQuery();
