@@ -28,6 +28,7 @@ const Task = ({ task }: Props) => {
         task.formulier.value,
         task.id,
       )}
+      Link={PortalLink}
     >
       {task.title}
     </Action>
