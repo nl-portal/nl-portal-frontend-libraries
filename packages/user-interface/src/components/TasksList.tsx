@@ -1,11 +1,11 @@
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import styles from "./TasksList.module.scss";
-import { Heading3, Paragraph } from "@gemeente-denhaag/typography";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
 import { GetTakenQuery } from "@nl-portal/nl-portal-api";
 import Task from "./Task";
-import Link from "@gemeente-denhaag/link";
-import PortalLink from "./PortalLink";
+import { Pagination } from "@gemeente-denhaag/pagination";
+import SectionHeader from "./SectionHeader";
 
 interface Props {
   loading?: boolean;
@@ -13,15 +13,29 @@ interface Props {
   title?: string;
   tasks?: GetTakenQuery["getTaken"]["content"];
   total?: number;
+  index?: number;
+  indexLimit?: number;
+  onChange?: (index: number) => number;
 }
 
-const TasksList = ({ loading, error, title, tasks, total }: Props) => {
+const TasksList = ({
+  loading,
+  error,
+  title,
+  tasks,
+  total,
+  index,
+  indexLimit,
+  onChange,
+}: Props) => {
+  const intl = useIntl();
+  const href = "/taken";
+  const subTitle = intl.formatMessage({ id: "tasks.viewAll" }, { total });
+
   if (loading) {
     return (
       <section className={styles["tasks-list"]}>
-        <header className={styles["tasks-list__header"]}>
-          {title && <Heading3>{title}</Heading3>}
-        </header>
+        <SectionHeader title={title} href={href} />
         <Skeleton height={60} />
         <Skeleton height={60} />
         <Skeleton height={60} />
@@ -31,33 +45,38 @@ const TasksList = ({ loading, error, title, tasks, total }: Props) => {
 
   if (error)
     return (
-      <Paragraph>
-        <FormattedMessage id="tasks.fetchError" />
-      </Paragraph>
+      <section className={styles["tasks-list"]}>
+        <SectionHeader title={title} />
+        <Paragraph>
+          <FormattedMessage id="tasks.fetchError" />
+        </Paragraph>
+      </section>
     );
 
   if (!tasks || tasks.length === 0)
     return (
-      <Paragraph>
-        <FormattedMessage id="tasks.noOpenTasks" />
-      </Paragraph>
+      <section className={styles["tasks-list"]}>
+        <SectionHeader title={title} />
+        <Paragraph>
+          <FormattedMessage id="tasks.noOpenTasks" />
+        </Paragraph>
+      </section>
     );
 
   return (
     <section className={styles["tasks-list"]}>
-      {title && (
-        <header className={styles["tasks-list__header"]}>
-          <Heading3>{title}</Heading3>
-          {total && (
-            <Link href="/taken" Link={PortalLink}>
-              <FormattedMessage id="tasks.viewAll" values={{ total }} />
-            </Link>
-          )}
-        </header>
-      )}
+      <SectionHeader title={title} href={href} subTitle={subTitle} />
       {tasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}
+      {indexLimit && (
+        <Pagination
+          className={`denhaag-pagination--center ${styles["tasks-list__pagination"]}`}
+          index={index}
+          indexLimit={indexLimit}
+          onChange={onChange}
+        />
+      )}
     </section>
   );
 };

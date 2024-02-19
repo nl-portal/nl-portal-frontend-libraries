@@ -1,9 +1,7 @@
 @import "../styles/mixins";
 
 .tasks-list {
-  --utrecht-heading-3-margin-block-end: var(--denhaag-space-block-xs, 0.5rem);
-
-  &__header {
-    margin-block-end: var(--denhaag-space-block-xl, 1.5rem);
+  &__pagination {
+    margin-block-start: var(--nlportal-space-block-2xl, 2rem);
   }
 }

@@ -88,8 +88,8 @@ importers:
   packages/app:
     dependencies:
       '@gemeente-denhaag/design-tokens-components':
-        specifier: 0.2.3-alpha.374
-        version: 0.2.3-alpha.374
+        specifier: 0.2.3-alpha.376
+        version: 0.2.3-alpha.376
       '@gemeente-denhaag/icons':
         specifier: 0.2.3-alpha.372
         version: 0.2.3-alpha.372(react@18.2.0)
@@ -1717,6 +1717,10 @@ packages:
 
   /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.374:
     resolution: {integrity: sha512-qmvli3ZhJCF2ai6J6dy15nBzPc9stSqAzhggSbQM7xlapYIofKjpxCd8loOp6lawUH2utv7YnEN5C9taQkgQvA==}
+    dev: false
+
+  /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.376:
+    resolution: {integrity: sha512-Z6flaBLBbXplRHZB+fgZafSqKtiW1cLlZhoG6ADBGmIO2A2MWqCEYGaMxXNFJapOZaJqOo6e/NtYmjrtyGOt2A==}
     dev: false
 
   /@gemeente-denhaag/divider@0.2.3-alpha.372(react@18.2.0):
