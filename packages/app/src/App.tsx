@@ -40,7 +40,7 @@ const pages: Array<PortalPage> = [
     icon: <GridIcon />,
     pageComponent: (
       <OverviewPage
-        showIntro="true"
+        showIntro
         openFormsFormId={config.OPEN_FORMS_FORM_ID}
         showTasksPreview
         showCasesPreview
