@@ -3,19 +3,35 @@ import { render } from "@testing-library/react";
 import { MockWrapper } from "@nl-portal/nl-portal-localization";
 import { unmountComponentAtNode } from "react-dom";
 import Page from "./PageMetaData";
-import LayoutProvider from "../providers/LayoutProvider";
-import { PortalPage } from "../interfaces/portal-page";
+import { Navigation } from "./Layout";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { testPaths as paths } from "../providers/TestProvider";
 
 let container!: HTMLElement | undefined;
 
-const testPage: PortalPage = {
-  icon: <span />,
-  pageComponent: <span />,
-  path: "/",
-  titleTranslationKey: "overview",
-  showInMenu: true,
-  isHome: true,
+const navigationItems: Navigation[] = [
+  {
+    titleTranslationKey: "overview",
+    path: paths.overview,
+    icon: <span />,
+  },
+];
+
+const route = {
+  path: paths.overview,
+  element: (
+    <Page navigationItems={navigationItems}>
+      <span>test</span>
+    </Page>
+  ),
 };
+
+const router = createBrowserRouter([
+  {
+    element: <Outlet />,
+    children: [route],
+  },
+]);
 
 describe("Page", () => {
   beforeEach(() => {
@@ -31,14 +47,10 @@ describe("Page", () => {
   });
 
   it("should correctly set the document title", () => {
-    render(
-      <LayoutProvider initialPage={testPage}>
-        <Page page={testPage}>
-          <span>test</span>
-        </Page>
-      </LayoutProvider>,
-      { wrapper: MockWrapper as React.ComponentType, container },
-    );
+    render(<RouterProvider router={router} />, {
+      wrapper: MockWrapper as React.ComponentType,
+      container,
+    });
 
     expect(document.title).toContain("Overview");
   });
