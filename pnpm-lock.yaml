@@ -279,6 +279,9 @@ importers:
       '@apollo/client':
         specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.53)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@formio/protected-eval':
+        specifier: ^1.2.2
+        version: 1.2.2(formiojs@4.18.1)
       '@formio/react':
         specifier: ^5.3.0
         version: 5.3.0(formiojs@4.18.1)(react-dom@18.2.0)(react@18.2.0)
@@ -1468,6 +1471,17 @@ packages:
       deepmerge: 4.3.1
       fuse.js: 6.6.2
       redux: 4.2.1
+    dev: false
+
+  /@formio/protected-eval@1.2.2(formiojs@4.18.1):
+    resolution: {integrity: sha512-Nv1Lo90Om3PXjJOuj+ynsr74MTeO9id6OSjWD1akuMXI0Jfhs1936seBLRxwb+iQ/gJj5K5KBxOJbJW+FR7QVw==}
+    peerDependencies:
+      formiojs: ^4.12.6
+    dependencies:
+      formiojs: 4.18.1
+      js-interpreter: github.com/formio/JS-Interpreter/0ed5007ada500c12d797ab867a15cfab736e9b25
+      lodash: 4.17.21
+      vm-browserify: 1.1.2
     dev: false
 
   /@formio/react@5.3.0(formiojs@4.18.1)(react-dom@18.2.0)(react@18.2.0):
@@ -3784,7 +3798,6 @@ packages:
     resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
-    dev: true
 
   /agent-base@7.1.0:
     resolution: {integrity: sha512-o/zjMZRhJxny7OyEF+Op8X+efiELC7k7yOjMzgfzVqOzXqkBkWI79YoTdOtsuWd5BWhAGAuOY/Xa6xpiaWXiNg==}
@@ -7822,6 +7835,10 @@ packages:
       - terser
     dev: true
 
+  /vm-browserify@1.1.2:
+    resolution: {integrity: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==}
+    dev: false
+
   /vue-template-compiler@2.7.16:
     resolution: {integrity: sha512-AYbUWAJHLGGQM7+cNTELw+KsOG9nl2CnSv467WobS5Cv9uk3wFcnr1Etsz2sEIHEZvw1U+o9mRlEO6QbZvUPGQ==}
     dependencies:
@@ -8117,4 +8134,12 @@ packages:
 
   /zen-observable@0.8.15:
     resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
+    dev: false
+
+  github.com/formio/JS-Interpreter/0ed5007ada500c12d797ab867a15cfab736e9b25:
+    resolution: {tarball: https://codeload.github.com/formio/JS-Interpreter/tar.gz/0ed5007ada500c12d797ab867a15cfab736e9b25}
+    name: js-interpreter
+    version: 1.1.0-formio.2
+    dependencies:
+      acorn: 8.11.3
     dev: false
