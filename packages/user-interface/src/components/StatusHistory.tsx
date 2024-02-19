@@ -1,4 +1,4 @@
-import { FC, Fragment, ReactElement } from "react";
+import { FC, Fragment } from "react";
 import { StatusType, ZaakStatus } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/components-react";
 import { Status } from "@gemeente-denhaag/process-steps";

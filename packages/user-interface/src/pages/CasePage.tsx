@@ -4,7 +4,7 @@ import {
   useGetTakenQuery,
   useGetObjectContactMomentenLazyQuery,
 } from "@nl-portal/nl-portal-api";
-import { FC, Fragment, ReactElement } from "react";
+import { Fragment } from "react";
 import {
   Heading2,
   Heading3,
