@@ -95,5 +95,10 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.subTitle": "Gemachtigd voor {volmachtgever}",
     "overviewpage.paragraph":
       "In MijnDenHaag kunt u zelf uw persoonlijke zaken regelen wanneer het u uitkomt. U kunt bijvoorbeeld uw rekeningen betalen en zien wanneer uw aanvraag klaar is.",
+    "actionLabels.today": "vandaag",
+    "actionLabels.yesterday": "gisteren",
+    "actionLabels.before": "vóór",
+    "actionLabels.approachingDeadlineDay": "nog {days} dag",
+    "actionLabels.approachingDeadlineDays": "nog {days} dagen",
   },
 };

@@ -32,20 +32,11 @@ import DocumentList from "../components/DocumentList";
 import StatusHistory from "../components/StatusHistory";
 import { getTaskUrl } from "../utils/get-task-url";
 import uniqueId from "lodash.uniqueid";
-
-const labels = {
-  today: "vandaag",
-  yesterday: "gisteren",
-  before: "vóór",
-  approachingDeadline: (daysDifference: number) => {
-    if (daysDifference === 1) {
-      return `nog ${daysDifference} dag`;
-    }
-    return `nog ${daysDifference} dagen`;
-  },
-};
+import useActionLabels from "../hooks/useActionLabels";
 
 const Task = ({ task }: { task: any }) => {
+  const labels = useActionLabels();
+
   if (!task) return null;
 
   return (
