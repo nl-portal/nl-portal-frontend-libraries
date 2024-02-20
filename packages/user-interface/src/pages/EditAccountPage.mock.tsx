@@ -62,9 +62,9 @@ export const MockEditAccountPage = () => {
       routes={routes}
       initialIndex={2}
       initialEntries={[
-        "/",
-        "/account",
-        "/account/aanpassen?prop=telefoonnummer",
+        paths.overview,
+        paths.account,
+        `${paths.edit_account}?prop=telefoonnummer`,
       ]}
     ></TestProvider>
   );

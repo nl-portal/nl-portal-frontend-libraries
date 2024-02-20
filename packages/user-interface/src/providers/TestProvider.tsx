@@ -24,7 +24,6 @@ export const testPaths: Paths = {
   edit_account: "/account/aanpassen",
 };
 
-
 const TestContent = ({
   mocks,
   paths,

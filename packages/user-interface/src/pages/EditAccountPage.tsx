@@ -6,17 +6,19 @@ import { TextInput } from "@gemeente-denhaag/text-input";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useContext, useEffect, useState } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { useUpdateBurgerProfielMutation } from "@nl-portal/nl-portal-api";
 import useQuery from "../hooks/useQuery";
 import styles from "./EditAccountPage.module.scss";
 import UserInformationContext from "../contexts/UserInformationContext";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
 import PageHeader from "../components/PageHeader";
+import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 const EditAccountPage = () => {
   const { currentLocale } = useContext(LocaleContext);
   const { userInformation } = useContext(UserInformationContext);
+  const { paths } = useOutletContext<RouterOutletContext>();
   const query = useQuery();
   const intl = useIntl();
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ const EditAccountPage = () => {
   const [mutating, setMutationStatus] = useState(false);
 
   const navigateToAccountPage = (): void => {
-    navigate(`/account/`);
+    navigate(paths.account);
   };
 
   const onSave = (): void => {

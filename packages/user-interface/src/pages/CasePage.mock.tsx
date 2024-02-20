@@ -35,11 +35,7 @@ export const MockCasePage = () => (
     mocks={mocksRequestWithAll}
     routes={routes}
     initialIndex={2}
-    initialEntries={[
-      paths.overview,
-      paths.cases,
-      paths.case(caseId),
-    ]}
+    initialEntries={[paths.overview, paths.cases, paths.case(caseId)]}
   ></TestProvider>
 );
 
@@ -48,11 +44,7 @@ export const MockCasePageWithoutDocuments = () => (
     mocks={mocksRequestWithoutDocuments}
     routes={routes}
     initialIndex={2}
-    initialEntries={[
-      paths.overview,
-      paths.cases,
-      paths.case(caseId),
-    ]}
+    initialEntries={[paths.overview, paths.cases, paths.case(caseId)]}
   ></TestProvider>
 );
 
@@ -61,10 +53,6 @@ export const MockCasePageWithoutContactMoments = () => (
     mocks={mocksRequestWithoutContactMomenten}
     routes={routes}
     initialIndex={2}
-    initialEntries={[
-      paths.overview,
-      paths.cases,
-      paths.case(caseId),
-    ]}
+    initialEntries={[paths.overview, paths.cases, paths.case(caseId)]}
   ></TestProvider>
 );

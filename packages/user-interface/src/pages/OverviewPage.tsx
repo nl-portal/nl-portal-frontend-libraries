@@ -7,6 +7,8 @@ import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PortalLink from "../components/PortalLink";
 import PageHeader from "../components/PageHeader";
+import { useOutletContext } from "react-router-dom";
+import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 interface OverviewPageProps {
   openFormsFormId?: string;
@@ -30,6 +32,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
   const intl = useIntl();
   const { hrefLang } = useContext(LocaleContext);
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
+  const { paths } = useOutletContext<RouterOutletContext>();
 
   return (
     <>
@@ -60,7 +63,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
       {showFormsLink === "true" && (
         <Link
           Link={PortalLink}
-          href={`/formulier/${openFormsFormId}`}
+          href={paths.form(openFormsFormId)}
           hrefLang={hrefLang}
         >
           <FormattedMessage id="overview.defaultFormTitle" />

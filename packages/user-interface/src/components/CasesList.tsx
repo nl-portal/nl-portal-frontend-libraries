@@ -22,6 +22,7 @@ const CasesListContainer = ({
   numCases,
 }: CasesListContainerProps) => {
   const { hrefLang } = useContext(LocaleContext);
+  const { paths } = useOutletContext<RouterOutletContext>();
 
   return (
     <div className={styles.cases__container}>
@@ -32,7 +33,7 @@ const CasesListContainer = ({
         {numCases > 0 && (
           <Link
             Link={PortalLink}
-            href="/zaken"
+            href={paths.cases}
             icon={<ArrowRightIcon />}
             iconAlign="end"
             hrefLang={hrefLang}

@@ -2,8 +2,9 @@ import { FC, useContext, useEffect } from "react";
 import { useScript } from "usehooks-ts";
 import { Helmet } from "react-helmet-async";
 import { formatUrlTrailingSlash } from "@nl-portal/nl-portal-authentication";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import LayoutContext from "../contexts/LayoutContext";
+import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 // eslint-disable-next-line
 declare const OpenForms: any;
@@ -30,6 +31,7 @@ const FormPage: FC<FormPageProps> = ({
   const openFormsScript = useScript(
     formatUrlTrailingSlash(openFormsSdkUrl, false),
   );
+  const { paths } = useOutletContext<RouterOutletContext>();
   const { id } = useParams<{ id: string }>();
   const FORM_ID_LOCAL_STORAGE_KEY = "FORM_ID";
 
@@ -53,7 +55,7 @@ const FormPage: FC<FormPageProps> = ({
       );
       const formId = id || localStorageFormId || "";
       const baseUrl = formatUrlTrailingSlash(openFormsBaseUrl, true);
-      const basePath = `/formulier/${formId}`;
+      const basePath = paths.form(formId);
       const targetNode = document.getElementById("openforms\u002Dcontainer");
       const sentryEnv = openFormsEntryEnv;
       const form = new OpenForms.OpenForm(targetNode, {

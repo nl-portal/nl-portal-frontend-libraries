@@ -40,7 +40,7 @@ export const routes = [
       },
       {
         path: paths.case(),
-        element: <CasePage showContactTimeline  />,
+        element: <CasePage showContactTimeline />,
       },
     ],
   },

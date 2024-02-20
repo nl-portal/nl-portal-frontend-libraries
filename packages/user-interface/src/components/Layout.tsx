@@ -21,7 +21,6 @@ import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";
 
-
 interface LayoutComponentProps {
   navigationItems: NavigationItem[];
   paths: Paths;
