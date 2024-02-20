@@ -1,12 +1,12 @@
 import { ReactElement, useEffect } from "react";
 import { useIntl } from "react-intl";
-import { Navigation } from "./Layout";
+import { NavigationItem } from "../interfaces/navigation-item";
 import { useMatches } from "react-router-dom";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 
 interface PageMetaDataProps {
   children: ReactElement;
-  navigationItems: Navigation[];
+  navigationItems: NavigationItem[];
 }
 
 const PageMetaData = ({ children, navigationItems }: PageMetaDataProps) => {

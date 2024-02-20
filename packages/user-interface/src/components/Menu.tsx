@@ -10,10 +10,10 @@ import classNames from "classnames";
 import LayoutContext from "../contexts/LayoutContext";
 import styles from "./Menu.module.scss";
 import MenuItem from "./MenuItem";
-import { Navigation } from "./Layout";
+import { NavigationItem } from "../interfaces/navigation-item";
 
 interface MenuProps {
-  items: Navigation[];
+  items: NavigationItem[];
   legacy?: boolean;
 }
 

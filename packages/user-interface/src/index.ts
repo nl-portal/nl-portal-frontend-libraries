@@ -3,8 +3,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 export { default as Layout } from "./components/Layout";
 export { default as PortalLink } from "./components/PortalLink";
 
+export * from "./interfaces/navigation-item";
+export * from "./interfaces/paths";
 export * from "./interfaces/portal-footer";
-export * from "./interfaces/portal-page";
 
 export { default as useUserInfo } from "./hooks/useUserInfo";
 

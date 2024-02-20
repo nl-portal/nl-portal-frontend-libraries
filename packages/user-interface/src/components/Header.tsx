@@ -30,12 +30,12 @@ import useMediaQuery from "../hooks/useMediaQuery";
 import { BREAKPOINTS } from "../constants/breakpoints";
 import CurrentPageIndicator from "./CurrentPageIndicator";
 import MenuToggleButton from "./MenuToggleButton";
-import { Navigation } from "./Layout";
+import { NavigationItem } from "../interfaces/navigation-item";
 
 interface HeaderProps {
   logo: ReactElement;
   logoSmall: ReactElement;
-  navigationItems: Navigation[];
+  navigationItems: NavigationItem[];
   facet?: ReactElement;
   offline?: boolean;
 }

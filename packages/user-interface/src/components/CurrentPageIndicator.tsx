@@ -4,12 +4,12 @@ import { Heading5 } from "@gemeente-denhaag/components-react";
 import { ChevronDownIcon } from "@gemeente-denhaag/icons";
 import LayoutContext from "../contexts/LayoutContext";
 import styles from "./CurrentPageIndicator.module.scss";
-import { Navigation } from "./Layout";
+import { NavigationItem } from "../interfaces/navigation-item";
 import { useMatches } from "react-router-dom";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 
 interface CurrentPageIndicatorProps {
-  navigationItems: Navigation[];
+  navigationItems: NavigationItem[];
 }
 
 const CurrentPageIndicator = ({

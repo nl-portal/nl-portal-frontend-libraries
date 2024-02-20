@@ -6,10 +6,10 @@ import { FormattedMessage } from "react-intl";
 import { BadgeCounter } from "@gemeente-denhaag/components-react";
 import styles from "./MenuItem.module.scss";
 import LayoutContext from "../contexts/LayoutContext";
-import { Navigation } from "./Layout";
+import { NavigationItem } from "../interfaces/navigation-item";
 
 interface MenuItemProps {
-  item: Navigation;
+  item: NavigationItem;
 }
 
 const MenuItem: FC<MenuItemProps> = ({ item }) => {

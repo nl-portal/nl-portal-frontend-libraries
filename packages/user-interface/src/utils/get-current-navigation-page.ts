@@ -1,5 +1,5 @@
 import { UIMatch } from "react-router-dom";
-import { Navigation } from "../components/Layout";
+import { NavigationItem } from "../interfaces/navigation-item";
 
 /**
  * Needed for multiple backwards compatibility reasons, because the old nl-portal design
@@ -12,7 +12,7 @@ import { Navigation } from "../components/Layout";
  */
 export const getCurrentNavigationPage = (
   matches: UIMatch[],
-  navigationItems: Navigation[],
+  navigationItems: NavigationItem[],
 ) => {
   while (matches.length > 0) {
     const match = matches.pop();

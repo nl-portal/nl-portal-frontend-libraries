@@ -8,7 +8,7 @@ import {
   RouteObject,
 } from "react-router-dom";
 import UserInformationProvider from "./UserInformationProvider";
-import { Paths } from "../components/Layout";
+import { Paths } from "../interfaces/paths";
 
 export const testPaths = {
   overview: "/",

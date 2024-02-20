@@ -3,13 +3,13 @@ import { render } from "@testing-library/react";
 import { MockWrapper } from "@nl-portal/nl-portal-localization";
 import { unmountComponentAtNode } from "react-dom";
 import Page from "./PageMetaData";
-import { Navigation } from "./Layout";
+import { NavigationItem } from "../interfaces/navigation-item";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { testPaths as paths } from "../providers/TestProvider";
 
 let container!: HTMLElement | undefined;
 
-const navigationItems: Navigation[] = [
+const navigationItems: NavigationItem[] = [
   {
     titleTranslationKey: "overview",
     path: paths.overview,

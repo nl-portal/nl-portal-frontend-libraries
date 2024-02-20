@@ -1,4 +1,4 @@
-import { FC, ReactElement, ReactNode, useEffect } from "react";
+import { FC, ReactElement, useEffect } from "react";
 import { StylesProvider } from "@gemeente-denhaag/components-react";
 import {
   Page as PageWrapper,
@@ -18,31 +18,12 @@ import styles from "./Layout.module.scss";
 import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router-dom";
 import PageMetaData from "./PageMetaData";
+import { Paths } from "../interfaces/paths";
+import { NavigationItem } from "../interfaces/navigation-item";
 
-export interface Navigation {
-  titleTranslationKey: string;
-  path: string;
-  icon: ReactNode;
-  hasMessagesCount?: boolean;
-}
-
-export interface Paths {
-  overview: string;
-  cases: string;
-  case: string;
-  tasks: string;
-  task: string;
-  notifications: string;
-  themes: string;
-  forms: string;
-  form: string;
-  account: string;
-  edit_account: string;
-  [key: string]: string | undefined;
-}
 
 interface LayoutComponentProps {
-  navigationItems: Navigation[];
+  navigationItems: NavigationItem[];
   paths: Paths;
   customHeader?: ReactElement;
   customFooter?: ReactElement;
