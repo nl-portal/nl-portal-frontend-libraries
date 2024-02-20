@@ -30,7 +30,9 @@ const TasksList = ({
 }: Props) => {
   const intl = useIntl();
   const href = "/taken";
-  const subTitle = intl.formatMessage({ id: "tasks.viewAll" }, { total });
+  const subTitle = total
+    ? intl.formatMessage({ id: "tasks.viewAll" }, { total })
+    : undefined;
 
   if (loading) {
     return (

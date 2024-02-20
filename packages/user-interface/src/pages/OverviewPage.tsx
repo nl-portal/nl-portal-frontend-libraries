@@ -76,7 +76,6 @@ const OverviewPage: FC<OverviewPageProps> = ({
           loading={loading}
           error={Boolean(error)}
           title={intl.formatMessage({ id: "overview.tasksTitle" })}
-          total={64}
           tasks={data?.getTaken.content}
         />
       )}
