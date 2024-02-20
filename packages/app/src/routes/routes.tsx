@@ -39,8 +39,8 @@ export const routes = [
         element: <CasesPage />,
       },
       {
-        path: paths.case,
-        element: <CasePage showContactTimeline />,
+        path: paths.case(),
+        element: <CasePage showContactTimeline  />,
       },
     ],
   },
@@ -52,7 +52,7 @@ export const routes = [
         element: <TasksPage />,
       },
       {
-        path: paths.task,
+        path: paths.task(),
         element: <TaskPage />,
       },
     ],
@@ -73,7 +73,7 @@ export const routes = [
         element: <FormsPage />,
       },
       {
-        path: paths.form,
+        path: paths.form(),
         element: (
           <FormPage
             openFormsBaseUrl={config.OPEN_FORMS_BASE_URL!}

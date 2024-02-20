@@ -1,13 +1,15 @@
-export const paths = {
+import { Paths } from "@nl-portal/nl-portal-user-interface";
+
+export const paths: Paths = {
   overview: "/",
   cases: "/zaken",
-  case: "/zaken/zaak/:id",
+  case: (id = ":id") => `/zaken/zaak/${id}`,
   tasks: "/taken",
-  task: "/taken/taak/:id",
+  task: (id = ":id") => `/taken/taak/${id}`,
   notifications: "/berichten",
   themes: "/themas",
   forms: "/formulieren",
-  form: "/formulieren/formulier/:slug",
+  form: (id = ":id") => `/formulieren/formulier/${id}`,
   account: "/account",
   edit_account: "/account/aanpassen",
 };

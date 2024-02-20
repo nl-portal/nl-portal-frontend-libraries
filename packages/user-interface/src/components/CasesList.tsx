@@ -62,7 +62,6 @@ const CasesList = ({
   const { paths } = useOutletContext<RouterOutletContext>();
   const { data, loading, error, refetch } = useGetZakenQuery();
   const intl = useIntl();
-  const getCaseUrl = (id: string) => paths.case.replace(":id", id);
 
   useEffect(() => {
     refetch();
@@ -86,7 +85,7 @@ const CasesList = ({
               showCaseIdentification ? zaak.identificatie : zaak.omschrijving
             }
             date={new Date(zaak.startdatum)}
-            href={getCaseUrl(zaak.uuid)}
+            href={paths.case(zaak.uuid)}
             Link={PortalLink}
           />
         </div>

@@ -1,14 +1,14 @@
 export interface Paths {
   overview: string;
   cases: string;
-  case: string;
+  case: (id?: string | number) => string;
   tasks: string;
-  task: string;
+  task: (id?: string | number) => string;
   notifications: string;
   themes: string;
   forms: string;
-  form: string;
+  form: (id?: string | number) => string;
   account: string;
   edit_account: string;
-  [key: string]: string | undefined;
+  [key: string]: ((...args: any[]) => string) | string | undefined;
 }

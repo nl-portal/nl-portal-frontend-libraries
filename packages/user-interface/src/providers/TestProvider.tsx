@@ -10,19 +10,20 @@ import {
 import UserInformationProvider from "./UserInformationProvider";
 import { Paths } from "../interfaces/paths";
 
-export const testPaths = {
+export const testPaths: Paths = {
   overview: "/",
   cases: "/zaken",
-  case: "/zaken/zaak/:id",
+  case: (id = ":id") => `/zaken/zaak/${id}`,
   tasks: "/taken",
-  task: "/taken/taak/:id",
+  task: (id = ":id") => `/taken/taak/${id}`,
   notifications: "/berichten",
   themes: "/themas",
   forms: "/formulieren",
-  form: "/formulieren/formulier/:slug",
+  form: (id = ":id") => `/formulieren/formulier/${id}`,
   account: "/account",
   edit_account: "/account/aanpassen",
 };
+
 
 const TestContent = ({
   mocks,

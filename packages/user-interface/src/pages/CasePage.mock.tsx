@@ -23,7 +23,7 @@ const routes = [
         element: <></>,
       },
       {
-        path: paths.case,
+        path: paths.case(),
         element: <CasePageTestComponent />,
       },
     ],
@@ -38,7 +38,7 @@ export const MockCasePage = () => (
     initialEntries={[
       paths.overview,
       paths.cases,
-      paths.case.replace(":id", caseId),
+      paths.case(caseId),
     ]}
   ></TestProvider>
 );
@@ -51,7 +51,7 @@ export const MockCasePageWithoutDocuments = () => (
     initialEntries={[
       paths.overview,
       paths.cases,
-      paths.case.replace(":id", caseId),
+      paths.case(caseId),
     ]}
   ></TestProvider>
 );
@@ -64,7 +64,7 @@ export const MockCasePageWithoutContactMoments = () => (
     initialEntries={[
       paths.overview,
       paths.cases,
-      paths.case.replace(":id", caseId),
+      paths.case(caseId),
     ]}
   ></TestProvider>
 );

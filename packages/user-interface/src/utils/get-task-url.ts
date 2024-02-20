@@ -8,5 +8,5 @@ export const getTaskUrl = (
 ) => {
   if (formType === "externalurl") return formValue;
   const { paths } = useOutletContext<RouterOutletContext>();
-  return paths.task.replace(":id", taakId);
+  return paths.task(taakId);
 };
