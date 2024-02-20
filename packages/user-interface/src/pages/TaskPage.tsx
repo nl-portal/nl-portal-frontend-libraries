@@ -14,8 +14,13 @@ import { Alert } from "@gemeente-denhaag/components-react";
 import { useIntl } from "react-intl";
 import "./TaskPage.module.scss";
 import { useParams } from "react-router-dom";
+import BackLink, { BackLinkProps } from "../components/BackLink";
 
-const TaskPage = () => {
+interface TaskPageProps {
+  backlink?: BackLinkProps;
+}
+
+const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const { id } = useParams();
   const intl = useIntl();
   const [loading, setLoading] = useState(true);
@@ -121,19 +126,22 @@ const TaskPage = () => {
   }
 
   return (
-    <div className="bootstrap">
-      <Form
-        form={
-          formDefinitionId?.getFormDefinitionById?.formDefinition ||
-          formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
-        }
-        formReady={(form: any) => form.triggerRedraw()} // TODO: here because customConditional don't work, update FormIO
-        submission={submission}
-        onChange={setFormSubmission}
-        onSubmit={onFormSubmit}
-        options={{ noAlerts: true }}
-      />
-    </div>
+    <>
+      {backlink && <BackLink {...backlink} />}
+      <div className="bootstrap">
+        <Form
+          form={
+            formDefinitionId?.getFormDefinitionById?.formDefinition ||
+            formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
+          }
+          formReady={(form: any) => form.triggerRedraw()} // TODO: here because customConditional don't work, update FormIO
+          submission={submission}
+          onChange={setFormSubmission}
+          onSubmit={onFormSubmit}
+          options={{ noAlerts: true }}
+        />
+      </div>
+    </>
   );
 };
 
