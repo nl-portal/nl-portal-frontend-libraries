@@ -6,12 +6,9 @@ import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import useQuery from "../hooks/useQuery";
 import PageHeader from "../components/PageHeader";
+import { useGetZakenQuery } from "@nl-portal/nl-portal-api";
 
-interface CasesPageProps {
-  showCaseIdentification?: boolean;
-}
-
-const CasesPage = ({ showCaseIdentification }: CasesPageProps) => {
+const CasesPage = () => {
   const [tabNumber, setTabNumber] = useState(0);
   const intl = useIntl();
   const TAB_QUERY_PARAM = "tab";
@@ -19,39 +16,46 @@ const CasesPage = ({ showCaseIdentification }: CasesPageProps) => {
   const navigate = useNavigate();
   const query = useQuery();
   const queryTab = Number(query.get(TAB_QUERY_PARAM));
+  const { data, loading, error } = useGetZakenQuery();
 
   useEffect(() => {
-    if (queryTab !== tabNumber) {
-      navigate(`${location.pathname}?${TAB_QUERY_PARAM}=${tabNumber}`);
-    }
+    if (queryTab === tabNumber) return;
+    navigate(`${location.pathname}?${TAB_QUERY_PARAM}=${tabNumber}`);
   }, [tabNumber]);
 
   useEffect(() => {
-    if (queryTab && queryTab !== tabNumber) {
-      setTabNumber(queryTab);
-    }
+    if (queryTab === tabNumber) return;
+    setTabNumber(queryTab);
   }, [queryTab]);
 
-  const tabData = [
-    {
-      label: intl.formatMessage({ id: "titles.currentCases" }),
-      panelContent: (
-        <CasesList showCaseIdentification={showCaseIdentification} />
-      ),
-    },
-    {
-      label: intl.formatMessage({ id: "titles.completedCases" }),
-      panelContent: (
-        <CasesList completed showCaseIdentification={showCaseIdentification} />
-      ),
-    },
-  ];
-
   return (
-    <div className={styles.cases}>
+    <section className={styles.cases}>
       <PageHeader title={<FormattedMessage id="pageTitles.cases" />} />
-      <Tabs tabData={tabData} />
-    </div>
+      <Tabs
+        tabData={[
+          {
+            label: intl.formatMessage({ id: "titles.currentCases" }),
+            panelContent: (
+              <CasesList
+                loading={loading}
+                error={Boolean(error)}
+                cases={data?.getZaken}
+              />
+            ),
+          },
+          {
+            label: intl.formatMessage({ id: "titles.completedCases" }),
+            panelContent: (
+              <CasesList
+                loading={loading}
+                error={Boolean(error)}
+                cases={data?.getZaken}
+              />
+            ),
+          },
+        ]}
+      />
+    </section>
   );
 };
 

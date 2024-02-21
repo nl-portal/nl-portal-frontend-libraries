@@ -7,8 +7,9 @@ import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PortalLink from "../components/PortalLink";
 import PageHeader from "../components/PageHeader";
-import { useGetTakenQuery } from "@nl-portal/nl-portal-api";
+import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
+import { GetZakenQuery } from "@nl-portal/nl-portal-api";
 
 interface OverviewPageProps {
   openFormsFormId?: string;
@@ -29,12 +30,52 @@ const OverviewPage: FC<OverviewPageProps> = ({
   alertType = "warning",
   showTasksPreview = false,
   showCasesPreview = false,
-  casesPreviewLength = 6,
+  casesPreviewLength = 4,
 }) => {
   const intl = useIntl();
   const { hrefLang } = useContext(LocaleContext);
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
-  const { data, loading, error } = useGetTakenQuery();
+  const {
+    data: taskData,
+    loading: taskLoading,
+    error: taskError,
+  } = useGetTakenQuery();
+  const {
+    data: caseData,
+    loading: caseLoading,
+    error: caseError,
+  } = useGetZakenQuery();
+  const loading = taskLoading || caseLoading;
+
+  const casesDummy: GetZakenQuery["getZaken"][0] = [
+    {
+      uuid: "1",
+      title: "Zaak 1",
+      omschrijving: "Omschrijving zaak 1",
+      startdatum: new Date(),
+      zaaktype: {
+        identificatie: "ZAAKTYPE1",
+      },
+    },
+    {
+      uuid: "2",
+      title: "Zaak 2",
+      omschrijving: "Omschrijving zaak 2",
+      startdatum: new Date(),
+      zaaktype: {
+        identificatie: "ZAAKTYPE2",
+      },
+    },
+    {
+      uuid: "3",
+      title: "Zaak 3",
+      omschrijving: "Omschrijving zaak 3",
+      startdatum: new Date(),
+      zaaktype: {
+        identificatie: "ZAAKTYPE3",
+      },
+    },
+  ];
 
   return (
     <>
@@ -74,13 +115,18 @@ const OverviewPage: FC<OverviewPageProps> = ({
       {showTasksPreview && (
         <TasksList
           loading={loading}
-          error={Boolean(error)}
+          error={Boolean(taskError)}
           title={intl.formatMessage({ id: "overview.tasksTitle" })}
-          tasks={data?.getTaken.content}
+          tasks={taskData?.getTaken.content}
         />
       )}
       {showCasesPreview && (
-        <CasesList showHeader numElements={casesPreviewLength} />
+        <CasesList
+          loading={loading}
+          error={Boolean(caseError)}
+          title={intl.formatMessage({ id: "overview.casesTitle" })}
+          cases={casesDummy}
+        />
       )}
     </>
   );
