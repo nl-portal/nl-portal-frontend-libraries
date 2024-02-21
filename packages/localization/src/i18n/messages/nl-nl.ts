@@ -30,6 +30,7 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.currentCases": "Mijn lopende zaken",
     "overview.tasksTitle": "Mijn taken",
     "overview.casesTitle": "Mijn lopende zaken",
+    "cases.viewAll": "Bekijk alle zaken ({total})",
     "cases.noOpenCases": "Er zijn geen zaken.",
     "cases.noClosedCases": "Er zijn geen zaken.",
     "cases.fetchError":

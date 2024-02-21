@@ -5,6 +5,7 @@ import { Paragraph } from "@gemeente-denhaag/components-react";
 import styles from "./CasesList.module.scss";
 import SectionHeader from "./SectionHeader";
 import Case from "./Case";
+import { Pagination } from "@gemeente-denhaag/pagination";
 
 interface Props {
   loading?: boolean;
@@ -72,6 +73,14 @@ const CasesList = ({
           <Case key={cs.uuid} cs={cs} />
         ))}
       </div>
+      {indexLimit && (
+        <Pagination
+          className={`denhaag-pagination--center ${styles["cases-list__pagination"]}`}
+          index={index}
+          indexLimit={indexLimit}
+          onChange={onChange}
+        />
+      )}
     </section>
   );
 };

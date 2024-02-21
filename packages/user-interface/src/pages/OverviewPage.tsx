@@ -126,6 +126,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
           error={Boolean(caseError)}
           title={intl.formatMessage({ id: "overview.casesTitle" })}
           cases={casesDummy}
+          indexLimit={40}
         />
       )}
     </>
