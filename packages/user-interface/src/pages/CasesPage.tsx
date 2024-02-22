@@ -6,7 +6,7 @@ import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import useQuery from "../hooks/useQuery";
 import PageHeader from "../components/PageHeader";
-import { GetZakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import { useGetZakenQuery } from "@nl-portal/nl-portal-api";
 
 const CasesPage = () => {
   const [tabNumber, setTabNumber] = useState(0);
