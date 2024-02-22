@@ -9,8 +9,6 @@ import {
   CasePage,
   CasesPage,
   EditAccountPage,
-  FormPage,
-  FormsPage,
   Layout,
   NotificationsPage,
   OverviewPage,
@@ -108,13 +106,6 @@ const pages: Array<PortalPage> = [
     showInMenu: true,
   },
   {
-    icon: <DocumentIcon />,
-    pageComponent: <FormsPage />,
-    path: "/formulieren",
-    titleTranslationKey: "forms",
-    showInMenu: true,
-  },
-  {
     icon: <UserIcon />,
     pageComponent: (
       <AccountPage
@@ -136,42 +127,6 @@ const pages: Array<PortalPage> = [
     ],
   },
 ];
-
-if (
-  config.OPEN_FORMS_BASE_URL &&
-  config.OPEN_FORMS_ENTRY_ENV &&
-  config.OPEN_FORMS_SDK_URL &&
-  config.OPEN_FORMS_STYLES_URL
-) {
-  pages.push({
-    icon: <DocumentIcon />,
-    pageComponent: (
-      <FormPage
-        openFormsBaseUrl={config.OPEN_FORMS_BASE_URL}
-        openFormsEntryEnv={config.OPEN_FORMS_ENTRY_ENV}
-        openFormsSdkUrl={config.OPEN_FORMS_SDK_URL}
-        openFormsStylesUrl={config.OPEN_FORMS_STYLES_URL}
-      />
-    ),
-    path: "/formulier",
-    titleTranslationKey: "form",
-    showInMenu: false,
-    children: [
-      {
-        titleTranslationKey: "form",
-        path: "/:slug",
-        pageComponent: (
-          <FormPage
-            openFormsBaseUrl={config.OPEN_FORMS_BASE_URL}
-            openFormsEntryEnv={config.OPEN_FORMS_ENTRY_ENV}
-            openFormsSdkUrl={config.OPEN_FORMS_SDK_URL}
-            openFormsStylesUrl={config.OPEN_FORMS_STYLES_URL}
-          />
-        ),
-      },
-    ],
-  });
-}
 
 const footer: PortalFooter = [
   {
