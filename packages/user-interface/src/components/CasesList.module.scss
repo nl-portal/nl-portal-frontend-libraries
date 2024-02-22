@@ -11,6 +11,10 @@
       grid-template-columns: 1fr 1fr;
       gap: var(--nlportal-space-inline-xl2, 2rem);
     }
+
+    &--list {
+      display: block;
+    }
   }
 
   &__pagination {

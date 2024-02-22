@@ -6,6 +6,7 @@ import styles from "./CasesList.module.scss";
 import SectionHeader from "./SectionHeader";
 import Case from "./Case";
 import { Pagination } from "@gemeente-denhaag/pagination";
+import classnames from "classnames";
 
 interface Props {
   loading?: boolean;
@@ -29,6 +30,7 @@ const CasesList = ({
   onChange,
 }: Props) => {
   const intl = useIntl();
+  const listView = Boolean(total && total > 8);
   const subTitle = total
     ? intl.formatMessage({ id: "cases.viewAll" }, { total })
     : undefined;
@@ -68,9 +70,13 @@ const CasesList = ({
   return (
     <section className={styles["cases-list"]}>
       <SectionHeader title={title} subTitle={subTitle} href="/zaken" />
-      <div className={styles["cases-list__cases"]}>
+      <div
+        className={classnames(styles["cases-list__cases"], {
+          [styles["cases-list__cases--list"]]: listView,
+        })}
+      >
         {cases.map((cs) => (
-          <Case key={cs.uuid} cs={cs} />
+          <Case key={cs.uuid} cs={cs} listView={listView} />
         ))}
       </div>
       {indexLimit && (

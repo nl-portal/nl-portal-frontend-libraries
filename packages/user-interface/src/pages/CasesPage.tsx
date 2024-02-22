@@ -6,7 +6,7 @@ import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import useQuery from "../hooks/useQuery";
 import PageHeader from "../components/PageHeader";
-import { useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import { GetZakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 
 const CasesPage = () => {
   const [tabNumber, setTabNumber] = useState(0);
@@ -39,7 +39,9 @@ const CasesPage = () => {
               <CasesList
                 loading={loading}
                 error={Boolean(error)}
-                cases={data?.getZaken}
+                cases={data?.getZaken.filter(
+                  (c) => !c.status?.statustype.isEindstatus,
+                )}
               />
             ),
           },
@@ -49,7 +51,9 @@ const CasesPage = () => {
               <CasesList
                 loading={loading}
                 error={Boolean(error)}
-                cases={data?.getZaken}
+                cases={data?.getZaken.filter(
+                  (c) => c.status?.statustype.isEindstatus,
+                )}
               />
             ),
           },

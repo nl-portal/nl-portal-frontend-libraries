@@ -9,7 +9,6 @@ import PortalLink from "../components/PortalLink";
 import PageHeader from "../components/PageHeader";
 import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
-import { GetZakenQuery } from "@nl-portal/nl-portal-api";
 
 interface OverviewPageProps {
   openFormsFormId?: string;
@@ -46,36 +45,6 @@ const OverviewPage: FC<OverviewPageProps> = ({
     error: caseError,
   } = useGetZakenQuery();
   const loading = taskLoading || caseLoading;
-
-  const casesDummy: GetZakenQuery["getZaken"][0] = [
-    {
-      uuid: "1",
-      title: "Zaak 1",
-      omschrijving: "Omschrijving zaak 1",
-      startdatum: new Date(),
-      zaaktype: {
-        identificatie: "ZAAKTYPE1",
-      },
-    },
-    {
-      uuid: "2",
-      title: "Zaak 2",
-      omschrijving: "Omschrijving zaak 2",
-      startdatum: new Date(),
-      zaaktype: {
-        identificatie: "ZAAKTYPE2",
-      },
-    },
-    {
-      uuid: "3",
-      title: "Zaak 3",
-      omschrijving: "Omschrijving zaak 3",
-      startdatum: new Date(),
-      zaaktype: {
-        identificatie: "ZAAKTYPE3",
-      },
-    },
-  ];
 
   return (
     <>
@@ -117,7 +86,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
           loading={loading}
           error={Boolean(taskError)}
           title={intl.formatMessage({ id: "overview.tasksTitle" })}
-          tasks={taskData?.getTaken.content}
+          tasks={taskData?.getTaken.content.slice(0, 4)}
         />
       )}
       {showCasesPreview && (
@@ -125,8 +94,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
           loading={loading}
           error={Boolean(caseError)}
           title={intl.formatMessage({ id: "overview.casesTitle" })}
-          cases={casesDummy}
-          indexLimit={40}
+          cases={caseData?.getZaken.slice(0, 4)}
         />
       )}
     </>
