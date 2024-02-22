@@ -39,7 +39,6 @@ const pages: Array<PortalPage> = [
     pageComponent: (
       <OverviewPage
         showIntro
-        openFormsFormId={config.OPEN_FORMS_FORM_ID}
         showTasksPreview
         showCasesPreview
         casesPreviewLength={6}

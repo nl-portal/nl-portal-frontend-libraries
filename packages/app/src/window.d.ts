@@ -6,7 +6,6 @@ export declare global {
     KEYCLOAK_REDIRECT_URI: string;
     GRAPHQL_URI: string;
     REST_URI: string;
-    OPEN_FORMS_FORM_ID: string;
     SHOW_INHABITANT_AMOUNT: string;
     SHOW_ADDRESS_RESEARCH: string;
     ADDRESS_RESEARCH_URL: string;
