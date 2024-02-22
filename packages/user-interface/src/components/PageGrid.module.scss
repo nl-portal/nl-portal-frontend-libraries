@@ -1,0 +1,7 @@
+@import "../styles/mixins";
+
+.page-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nlportal-space-block-5xl, 4rem);
+}

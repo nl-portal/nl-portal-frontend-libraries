@@ -9,7 +9,7 @@
 
     @include breakpoint(desktop) {
       grid-template-columns: 1fr 1fr;
-      gap: var(--nlportal-space-inline-xl2, 2rem);
+      gap: var(--nlportal-space-inline-2xl, 2rem);
     }
 
     &--list {

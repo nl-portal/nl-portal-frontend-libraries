@@ -7,6 +7,7 @@ import styles from "./CasesPage.module.scss";
 import useQuery from "../hooks/useQuery";
 import PageHeader from "../components/PageHeader";
 import { useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import PageGrid from "../components/PageGrid";
 
 const CasesPage = () => {
   const [tabNumber, setTabNumber] = useState(0);
@@ -29,37 +30,39 @@ const CasesPage = () => {
   }, [queryTab]);
 
   return (
-    <section className={styles.cases}>
+    <PageGrid className={styles.cases}>
       <PageHeader title={<FormattedMessage id="pageTitles.cases" />} />
-      <Tabs
-        tabData={[
-          {
-            label: intl.formatMessage({ id: "titles.currentCases" }),
-            panelContent: (
-              <CasesList
-                loading={loading}
-                error={Boolean(error)}
-                cases={data?.getZaken.filter(
-                  (c) => !c.status?.statustype.isEindstatus,
-                )}
-              />
-            ),
-          },
-          {
-            label: intl.formatMessage({ id: "titles.completedCases" }),
-            panelContent: (
-              <CasesList
-                loading={loading}
-                error={Boolean(error)}
-                cases={data?.getZaken.filter(
-                  (c) => c.status?.statustype.isEindstatus,
-                )}
-              />
-            ),
-          },
-        ]}
-      />
-    </section>
+      <div>
+        <Tabs
+          tabData={[
+            {
+              label: intl.formatMessage({ id: "titles.currentCases" }),
+              panelContent: (
+                <CasesList
+                  loading={loading}
+                  error={Boolean(error)}
+                  cases={data?.getZaken.filter(
+                    (c) => !c.status?.statustype.isEindstatus,
+                  )}
+                />
+              ),
+            },
+            {
+              label: intl.formatMessage({ id: "titles.completedCases" }),
+              panelContent: (
+                <CasesList
+                  loading={loading}
+                  error={Boolean(error)}
+                  cases={data?.getZaken.filter(
+                    (c) => c.status?.statustype.isEindstatus,
+                  )}
+                />
+              ),
+            },
+          ]}
+        />
+      </div>
+    </PageGrid>
   );
 };
 

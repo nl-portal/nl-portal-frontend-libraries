@@ -9,6 +9,7 @@ import PortalLink from "../components/PortalLink";
 import PageHeader from "../components/PageHeader";
 import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
+import PageGrid from "../components/PageGrid";
 
 interface OverviewPageProps {
   openFormsFormId?: string;
@@ -49,7 +50,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
   const loading = taskLoading || caseLoading;
 
   return (
-    <>
+    <PageGrid>
       {showAlert && (
         <Alert
           variant={alertType}
@@ -99,7 +100,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
           cases={caseData?.getZaken.slice(0, casesPreviewLength)}
         />
       )}
-    </>
+    </PageGrid>
   );
 };
 
