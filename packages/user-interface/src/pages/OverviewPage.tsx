@@ -18,6 +18,7 @@ interface OverviewPageProps {
   alertType?: "error" | "info" | "success" | "warning";
   showTasksPreview?: boolean;
   showCasesPreview?: boolean;
+  tasksPreviewLength?: number;
   casesPreviewLength?: number;
 }
 
@@ -29,6 +30,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
   alertType = "warning",
   showTasksPreview = false,
   showCasesPreview = false,
+  tasksPreviewLength = 4,
   casesPreviewLength = 4,
 }) => {
   const intl = useIntl();
@@ -86,7 +88,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
           loading={loading}
           error={Boolean(taskError)}
           title={intl.formatMessage({ id: "overview.tasksTitle" })}
-          tasks={taskData?.getTaken.content.slice(0, 4)}
+          tasks={taskData?.getTaken.content.slice(0, tasksPreviewLength)}
         />
       )}
       {showCasesPreview && (
@@ -94,7 +96,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
           loading={loading}
           error={Boolean(caseError)}
           title={intl.formatMessage({ id: "overview.casesTitle" })}
-          cases={caseData?.getZaken.slice(0, 4)}
+          cases={caseData?.getZaken.slice(0, casesPreviewLength)}
         />
       )}
     </>
