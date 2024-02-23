@@ -58,7 +58,7 @@ const DetailList = ({ details }: DetailListProps) => {
                     typeof detail.value === "string" ? detail.value : "",
                   )
                 }
-                href={`${paths.edit_account}?prop=${detail.translationKey}`}
+                href={`${paths.editAccount}?prop=${detail.translationKey}`}
                 Link={PortalLink}
                 hrefLang={hrefLang}
                 icon={<EditIcon />}

@@ -9,6 +9,6 @@ export interface Paths {
   forms: string;
   form: (id?: string | number) => string;
   account: string;
-  edit_account: string;
+  editAccount: string;
   [key: string]: ((...args: any[]) => string) | string | undefined;
 }

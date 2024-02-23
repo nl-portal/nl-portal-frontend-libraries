@@ -98,7 +98,7 @@ export const routes = [
         ),
       },
       {
-        path: paths.edit_account,
+        path: paths.editAccount,
         element: <EditAccountPage />,
       },
     ],

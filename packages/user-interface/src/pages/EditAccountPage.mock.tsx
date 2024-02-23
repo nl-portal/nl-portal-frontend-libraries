@@ -16,7 +16,7 @@ export const MockEditAccountPage = () => {
           element: <></>,
         },
         {
-          path: paths.edit_account,
+          path: paths.editAccount,
           element: <EditAccountPage />,
         },
       ],
@@ -64,7 +64,7 @@ export const MockEditAccountPage = () => {
       initialEntries={[
         paths.overview,
         paths.account,
-        `${paths.edit_account}?prop=telefoonnummer`,
+        `${paths.editAccount}?prop=telefoonnummer`,
       ]}
     ></TestProvider>
   );
