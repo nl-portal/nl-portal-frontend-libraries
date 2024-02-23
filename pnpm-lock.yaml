@@ -314,6 +314,9 @@ importers:
       '@gemeente-denhaag/link':
         specifier: 0.2.3-alpha.372
         version: 0.2.3-alpha.372(react@18.2.0)
+      '@gemeente-denhaag/link-button':
+        specifier: 0.0.1-alpha.2
+        version: 0.0.1-alpha.2(react-dom@18.2.0)(react@18.2.0)
       '@gemeente-denhaag/page':
         specifier: 0.1.1-alpha.232
         version: 0.1.1-alpha.232
@@ -1856,6 +1859,21 @@ packages:
       '@gemeente-denhaag/icons': 0.2.3-alpha.372(react@18.2.0)
       '@gemeente-denhaag/link': 0.2.3-alpha.372(react@18.2.0)
       '@utrecht/component-library-react': 3.0.0(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+    transitivePeerDependencies:
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
+    dev: false
+
+  /@gemeente-denhaag/link-button@0.0.1-alpha.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-oRqmSWv+buiuxyErJ+IHx9IXSkbOf36H4TtdnAUjQimU2YZBOQFJyOYdeTpOP8Nppr70MEo3OAPHK7vJug7koA==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@utrecht/component-library-react': 3.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@utrecht/components': 3.0.0
       react: 18.2.0
     transitivePeerDependencies:
       - date-fns

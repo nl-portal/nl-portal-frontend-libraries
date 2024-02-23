@@ -40,6 +40,7 @@
     "@gemeente-denhaag/form-field-error-message": "0.3.0-alpha.5",
     "@gemeente-denhaag/form-label": "0.3.0-alpha.5",
     "@gemeente-denhaag/icons": "0.2.3-alpha.372",
+    "@gemeente-denhaag/link-button": "0.0.1-alpha.2",
     "@gemeente-denhaag/link": "0.2.3-alpha.372",
     "@gemeente-denhaag/page": "0.1.1-alpha.232",
     "@gemeente-denhaag/process-steps": "0.1.0-alpha.201",

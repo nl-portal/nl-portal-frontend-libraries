@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { FormattedMessage } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Link } from "@gemeente-denhaag/link";
+import { LinkButton } from "@gemeente-denhaag/link-button";
 import { ChevronLeftIcon } from "@gemeente-denhaag/icons";
 import styles from "./BackLink.module.scss";
 import { PortalLink } from "..";
@@ -16,22 +17,24 @@ const BackLink = ({ routePath, text }: BackLinkProps) => {
   const { hrefLang } = useContext(LocaleContext);
   const navigate = useNavigate();
 
-  // TODO: in the future, the Link should be a button that looks like a link if the action is a onClick.
-  const backLinkAction = routePath
-    ? { href: routePath }
-    : { onClick: () => navigate(-1) };
-
   return (
     <div className={styles["back-link"]}>
-      <Link
-        Link={PortalLink}
-        {...backLinkAction}
-        icon={<ChevronLeftIcon />}
-        iconAlign="start"
-        hrefLang={hrefLang}
-      >
-        {text || <FormattedMessage id={`backlink.back`} />}
-      </Link>
+      {routePath ? (
+        <Link
+          Link={PortalLink}
+          href={routePath}
+          icon={<ChevronLeftIcon />}
+          iconAlign="start"
+          hrefLang={hrefLang}
+        >
+          {text || <FormattedMessage id={`backlink.back`} />}
+        </Link>
+      ) : (
+        <LinkButton inline onClick={() => navigate(-1)}>
+          <ChevronLeftIcon />
+          <span>{text || <FormattedMessage id={`backlink.back`} />}</span>
+        </LinkButton>
+      )}
     </div>
   );
 };
