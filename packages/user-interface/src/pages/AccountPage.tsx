@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Heading3 } from "@gemeente-denhaag/components-react";
 import { FormattedMessage } from "react-intl";
 import {
@@ -19,17 +19,17 @@ import PageHeader from "../components/PageHeader";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
-  showAddressResearch?: string;
+  showAddressResearch?: boolean;
   addressResearchUrl?: string;
-  showNotificationSubSection?: string;
+  showNotificationSubSection?: boolean;
 }
 
-const AccountPage: FC<AccountPageProps> = ({
+const AccountPage = ({
   showInhabitantAmount,
-  showAddressResearch = "true",
+  showAddressResearch = true,
   addressResearchUrl,
-  showNotificationSubSection = "true",
-}) => {
+  showNotificationSubSection = true,
+}: AccountPageProps) => {
   const {
     data: contactData,
     loading: contactLoading,
@@ -87,7 +87,7 @@ const AccountPage: FC<AccountPageProps> = ({
           ]}
         />
       </div>
-      {showNotificationSubSection === "true" && (
+      {showNotificationSubSection && (
         <div className={styles["account__sub-section"]}>
           <Heading3 className={styles["account__sub-header"]}>
             <FormattedMessage id="account.notificationsHeader" />
@@ -199,7 +199,7 @@ const AccountPage: FC<AccountPageProps> = ({
           <div className={styles["account__label-description"]}>
             <FormattedMessage id="account.inhabitantAmountDescription" />
           </div>
-          {showAddressResearch === "true" && (
+          {showAddressResearch && (
             <Button onClick={openAddressInvestigation}>
               <FormattedMessage id="account.addressResearchRequestButton" />
             </Button>
