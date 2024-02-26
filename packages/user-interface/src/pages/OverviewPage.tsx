@@ -1,41 +1,32 @@
-import { Link } from "@gemeente-denhaag/link";
 import { Alert } from "@gemeente-denhaag/alert";
 import { FormattedMessage, useIntl } from "react-intl";
-import { FC, useContext } from "react";
-import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
-import PortalLink from "../components/PortalLink";
 import PageHeader from "../components/PageHeader";
 import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
 
 interface OverviewPageProps {
-  openFormsFormId?: string;
-  showFormsLink?: boolean;
-  showIntro?: boolean;
   showAlert?: boolean;
   alertType?: "error" | "info" | "success" | "warning";
+  showIntro?: boolean;
   showTasksPreview?: boolean;
   showCasesPreview?: boolean;
   tasksPreviewLength?: number;
   casesPreviewLength?: number;
 }
 
-const OverviewPage: FC<OverviewPageProps> = ({
-  openFormsFormId,
-  showFormsLink = false,
-  showIntro = false,
+const OverviewPage = ({
   showAlert = false,
   alertType = "warning",
+  showIntro = false,
   showTasksPreview = false,
   showCasesPreview = false,
   tasksPreviewLength = 4,
   casesPreviewLength = 4,
-}) => {
+}: OverviewPageProps) => {
   const intl = useIntl();
-  const { hrefLang } = useContext(LocaleContext);
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
   const {
     data: taskData,
@@ -74,15 +65,6 @@ const OverviewPage: FC<OverviewPageProps> = ({
         >
           <FormattedMessage id="overviewpage.paragraph" />
         </PageHeader>
-      )}
-      {showFormsLink && (
-        <Link
-          Link={PortalLink}
-          href={`/formulier/${openFormsFormId}`}
-          hrefLang={hrefLang}
-        >
-          <FormattedMessage id="overview.defaultFormTitle" />
-        </Link>
       )}
       {showTasksPreview && (
         <TasksList

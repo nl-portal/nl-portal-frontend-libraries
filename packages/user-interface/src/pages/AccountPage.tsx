@@ -20,16 +20,16 @@ import PageGrid from "../components/PageGrid";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
-  showAddressResearch?: string;
+  showAddressResearch?: boolean;
   addressResearchUrl?: string;
-  showNotificationSubSection?: string;
+  showNotificationSubSection?: boolean;
 }
 
 const AccountPage = ({
   showInhabitantAmount,
-  showAddressResearch = "true",
+  showAddressResearch = true,
   addressResearchUrl,
-  showNotificationSubSection = "true",
+  showNotificationSubSection = true,
 }: AccountPageProps) => {
   const {
     data: contactData,
@@ -88,8 +88,8 @@ const AccountPage = ({
           ]}
         />
       </div>
-      {showNotificationSubSection === "true" && (
-        <div>
+      {showNotificationSubSection && (
+        <div className={styles["account__sub-section"]}>
           <Heading3 className={styles["account__sub-header"]}>
             <FormattedMessage id="account.notificationsHeader" />
           </Heading3>
@@ -200,7 +200,7 @@ const AccountPage = ({
           <div className={styles["account__label-description"]}>
             <FormattedMessage id="account.inhabitantAmountDescription" />
           </div>
-          {showAddressResearch === "true" && (
+          {showAddressResearch && (
             <Button onClick={openAddressInvestigation}>
               <FormattedMessage id="account.addressResearchRequestButton" />
             </Button>
