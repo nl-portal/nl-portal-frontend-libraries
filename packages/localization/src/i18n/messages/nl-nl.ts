@@ -29,8 +29,10 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.showAllCases": "Bekijk alle zaken",
     "overview.currentCases": "Mijn lopende zaken",
     "overview.tasksTitle": "Mijn taken",
-    "cases.noOpenCases": "Er zijn geen lopende zaken.",
-    "cases.noClosedCases": "Er zijn geen afgeronde zaken.",
+    "overview.casesTitle": "Mijn lopende zaken",
+    "cases.viewAll": "Bekijk alle zaken ({total})",
+    "cases.noOpenCases": "Er zijn geen zaken.",
+    "cases.noClosedCases": "Er zijn geen zaken.",
     "cases.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "case.caseNumber": "Zaaknummer",

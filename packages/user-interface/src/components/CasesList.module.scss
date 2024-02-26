@@ -1,37 +1,25 @@
 @import "../styles/mixins";
 
-.cases__container {
-}
+.cases-list {
+  &__cases {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--nlportal-space-inline-xl, 1.5rem);
+    --denhaag-card-width: 100%;
 
-.cases__container:not(:first-child) {
-  margin-block-start: var(--nlportal-space-block-5xl, 4rem);
-}
+    @include breakpoint(desktop) {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--nlportal-space-inline-2xl, 2rem);
+    }
 
-.cases__container-header {
-  @media (min-width: 1024px) {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    &--list {
+      display: block;
+    }
   }
 
-  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
-}
-
-.cases__cards {
-  display: flex;
-  flex-direction: column;
-  --denhaag-card-width: 100%;
-
-  @include breakpoint(desktop) {
-    flex-flow: row wrap;
-    justify-content: space-between;
+  &__pagination {
+    margin-block-start: var(--nlportal-space-block-2xl, 2rem);
   }
 }
 
-.cases__card {
-  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
 
-  @include breakpoint(desktop) {
-    width: calc(50% - var(--nlportal-space-inline-md, 1rem));
-  }
-}

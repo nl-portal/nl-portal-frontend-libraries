@@ -29,7 +29,6 @@ const TasksList = ({
   onChange,
 }: Props) => {
   const intl = useIntl();
-  const href = "/taken";
   const subTitle = total
     ? intl.formatMessage({ id: "tasks.viewAll" }, { total })
     : undefined;
@@ -37,7 +36,7 @@ const TasksList = ({
   if (loading) {
     return (
       <section className={styles["tasks-list"]}>
-        <SectionHeader title={title} href={href} />
+        <SectionHeader title={title} />
         <Skeleton height={60} />
         <Skeleton height={60} />
         <Skeleton height={60} />
@@ -67,7 +66,7 @@ const TasksList = ({
 
   return (
     <section className={styles["tasks-list"]}>
-      <SectionHeader title={title} href={href} subTitle={subTitle} />
+      <SectionHeader title={title} subTitle={subTitle} href="/taken" />
       {tasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}

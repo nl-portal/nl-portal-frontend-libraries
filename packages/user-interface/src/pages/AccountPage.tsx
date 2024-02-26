@@ -16,6 +16,7 @@ import {
   getStreetString,
 } from "../utils/person-data";
 import PageHeader from "../components/PageHeader";
+import PageGrid from "../components/PageGrid";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
@@ -64,9 +65,9 @@ const AccountPage = ({
   }, []);
 
   return (
-    <div className={styles.account}>
+    <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
-      <div className={styles["account__sub-section"]}>
+      <div>
         <Heading3 className={styles["account__sub-header"]}>
           <FormattedMessage id="account.contactHeader" />
         </Heading3>
@@ -107,7 +108,7 @@ const AccountPage = ({
           />
         </div>
       )}
-      <div className={styles["account__sub-section"]}>
+      <div>
         <Heading3 className={styles["account__sub-header"]}>
           <FormattedMessage id="account.detailsHeader" />
         </Heading3>
@@ -155,7 +156,7 @@ const AccountPage = ({
           ]}
         />
       </div>
-      <div className={styles["account__sub-section"]}>
+      <div>
         <Heading3 className={styles["account__sub-header"]}>
           <FormattedMessage id="account.addressHeader" />
         </Heading3>
@@ -183,7 +184,7 @@ const AccountPage = ({
         />
       </div>
       {showInhabitantAmount === "true" && (
-        <div className={styles["account__sub-section"]}>
+        <div>
           <Heading3 className={styles["account__sub-header"]}>
             <FormattedMessage id="account.inhabitantAmountHeader" />
           </Heading3>
@@ -206,7 +207,7 @@ const AccountPage = ({
           )}
         </div>
       )}
-    </div>
+    </PageGrid>
   );
 };
 
