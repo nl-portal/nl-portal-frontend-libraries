@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { Link, useMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { FormattedMessage } from "react-intl";
 import { BadgeCounter } from "@gemeente-denhaag/components-react";
