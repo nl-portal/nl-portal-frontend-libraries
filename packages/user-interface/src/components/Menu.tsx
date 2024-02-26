@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FC, useContext } from "react";
-import { Link, useMatch } from "react-router-dom";
+import { Link, useMatches } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Sidenav, SidenavItem, SidenavList } from "@gemeente-denhaag/sidenav";
@@ -11,6 +11,7 @@ import LayoutContext from "../contexts/LayoutContext";
 import styles from "./Menu.module.scss";
 import MenuItem from "./MenuItem";
 import { NavigationItem } from "../interfaces/navigation-item";
+import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 
 interface MenuProps {
   items: NavigationItem[];
@@ -21,6 +22,9 @@ const Menu: FC<MenuProps> = ({ items, legacy }) => {
   const { hrefLang } = useContext(LocaleContext);
   const { menuOpened, hideMenu } = useContext(LayoutContext);
   const intl = useIntl();
+  const matches = useMatches();
+  const currentNavigationItem =
+    getCurrentNavigationPage(matches, items) || items[0];
 
   if (legacy) {
     return (
@@ -43,7 +47,11 @@ const Menu: FC<MenuProps> = ({ items, legacy }) => {
           </header>
           <nav className={styles.menu__items}>
             {items.map((item) => (
-              <MenuItem key={item.path} item={item} />
+              <MenuItem
+                key={item.path}
+                item={item}
+                current={item === currentNavigationItem}
+              />
             ))}
           </nav>
         </div>
@@ -55,7 +63,7 @@ const Menu: FC<MenuProps> = ({ items, legacy }) => {
     <Sidenav>
       <SidenavList>
         {items.map((item) => {
-          const current = useMatch(item.path);
+          const current = item === currentNavigationItem;
           const className = `denhaag-sidenav__link ${
             current && "denhaag-sidenav__link--current"
           }`;

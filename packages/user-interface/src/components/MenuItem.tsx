@@ -10,12 +10,12 @@ import { NavigationItem } from "../interfaces/navigation-item";
 
 interface MenuItemProps {
   item: NavigationItem;
+  current?: boolean;
 }
 
-const MenuItem: FC<MenuItemProps> = ({ item }) => {
+const MenuItem: FC<MenuItemProps> = ({ item, current = false }) => {
   const { hrefLang } = useContext(LocaleContext);
   const { hideMenu, messagesCount } = useContext(LayoutContext);
-  const isActive = Boolean(useMatch(item.path));
 
   return (
     <Link
@@ -26,7 +26,7 @@ const MenuItem: FC<MenuItemProps> = ({ item }) => {
         "denhaag-menu-button",
         styles["denhaag-menu-button--flex"],
         {
-          "denhaag-menu-button--active": isActive,
+          "denhaag-menu-button--active": current,
         },
       )}
     >
