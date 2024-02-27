@@ -16,7 +16,7 @@ import {
   PortalPage,
   TasksPage,
   TaskPage,
-  ThemesPage,
+  ThemeOverviewPage,
 } from "@nl-portal/nl-portal-user-interface";
 import {
   ArchiveIcon,
@@ -99,9 +99,15 @@ const pages: Array<PortalPage> = [
   },
   {
     icon: <DocumentIcon />,
-    pageComponent: <ThemesPage />,
-    path: "/themas",
-    titleTranslationKey: "themes",
+    pageComponent: (
+      <ThemeOverviewPage
+        titleTranslationKey="pageTitles.themeOverview"
+        showTasksLength={5}
+        showCasesLength={4}
+      />
+    ),
+    path: "/thema",
+    titleTranslationKey: "themeOverview",
     showInMenu: true,
   },
   {
