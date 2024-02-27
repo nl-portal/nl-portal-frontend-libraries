@@ -6,16 +6,18 @@ import {
   TableRow,
   TableBody,
 } from "@gemeente-denhaag/table";
+import React from "react";
 
-export type Cell =
-  | string
-  | undefined
-  | {
-      className?: string;
-      children?: React.ReactNode;
-      href?: string;
-      head?: boolean;
-    };
+interface CellObject {
+  className?: string;
+  children?: React.ReactNode;
+  href?: string;
+  head?: boolean;
+}
+
+type CellSingle = React.ReactNode | string | undefined;
+
+export type Cell = CellSingle | CellObject;
 
 interface Props {
   headers?: Cell[];
@@ -23,24 +25,35 @@ interface Props {
 }
 
 const Table = ({ headers, rows }: Props) => {
+  const isObject = (cell: Cell): cell is CellObject => {
+    return (
+      typeof cell === "object" &&
+      cell !== null &&
+      ("className" in cell ||
+        "children" in cell ||
+        "href" in cell ||
+        "head" in cell)
+    );
+  };
+
   const renderCell = (cell: Cell, head?: boolean) => {
-    if (typeof cell === "string" || typeof cell === "undefined") {
-      if (head) return <TableHeader>{cell}</TableHeader>;
-      return <TableCell>{cell}</TableCell>;
+    if (isObject(cell)) {
+      if (cell.head)
+        return (
+          <TableHeader className={cell.className} href={cell.href}>
+            {cell.children}
+          </TableHeader>
+        );
+
+      return (
+        <TableCell className={cell.className} href={cell.href}>
+          {cell.children}
+        </TableCell>
+      );
     }
 
-    if (cell.head)
-      return (
-        <TableHeader className={cell.className} href={cell.href}>
-          {cell.children}
-        </TableHeader>
-      );
-
-    return (
-      <TableCell className={cell.className} href={cell.href}>
-        {cell.children}
-      </TableCell>
-    );
+    if (head) return <TableHeader>{cell}</TableHeader>;
+    return <TableCell>{cell}</TableCell>;
   };
 
   return (

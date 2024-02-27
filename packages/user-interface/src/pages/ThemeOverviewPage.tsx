@@ -4,6 +4,7 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import TableList from "../components/TableList";
 
 interface Props {
   titleTranslationKey: string;
@@ -48,6 +49,28 @@ const ThemeOverviewPage = ({
           cases={caseData?.getZaken.slice(0, showCasesLength)}
         />
       )}
+      <TableList
+        loading={loading}
+        title="Erfpachtcontracten"
+        headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}
+        rows={[
+          [
+            { children: "Westerstraat 393 Den Haag", href: "/test" },
+            { children: "‘s-Gravenhage AF 2679", href: "/test" },
+            { children: "78435785", href: "/test" },
+          ],
+          [
+            { children: "Westerstraat 393 Den Haag", href: "/test" },
+            { children: "‘s-Gravenhage AF 2679", href: "/test" },
+            { children: "78435785", href: "/test" },
+          ],
+          [
+            { children: "Westerstraat 393 Den Haag", href: "/test" },
+            { children: "‘s-Gravenhage AF 2679", href: "/test" },
+            { children: "78435785", href: "/test" },
+          ],
+        ]}
+      />
     </PageGrid>
   );
 };
