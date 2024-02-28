@@ -12,17 +12,21 @@ import {
 import "font-awesome/css/font-awesome.min.css";
 import { Alert } from "@gemeente-denhaag/components-react";
 import { useIntl } from "react-intl";
-import useQuery from "../hooks/useQuery";
 import "./TaskPage.module.scss";
+import { useParams } from "react-router-dom";
+import BackLink, { BackLinkProps } from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
 
 Formio.use(ProtectedEval);
 
-const TaskPage = () => {
-  const query = useQuery();
+interface TaskPageProps {
+  backlink?: BackLinkProps;
+}
+
+const TaskPage = ({ backlink = {} }: TaskPageProps) => {
+  const { id } = useParams();
   const intl = useIntl();
-  const taskId = query.get("id");
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState({
@@ -30,7 +34,7 @@ const TaskPage = () => {
   });
 
   const [submitTask] = useSubmitTaskMutation();
-  const { data: task } = useGetTaakByIdQuery({ variables: { id: taskId } });
+  const { data: task } = useGetTaakByIdQuery({ variables: { id } });
   const [getFormById, { data: formDefinitionId }] =
     useGetFormDefinitionByIdLazyQuery({
       onCompleted: () => setLoading(false),
@@ -93,7 +97,7 @@ const TaskPage = () => {
     if (formioSubmission?.state === "submitted") {
       await submitTask({
         variables: {
-          id: `${taskId}`,
+          id,
           submission: formioSubmission.data,
         },
         onCompleted: () => setSubmitted(true),
@@ -126,19 +130,22 @@ const TaskPage = () => {
   }
 
   return (
-    <div className="bootstrap">
-      <Form
-        form={
-          formDefinitionId?.getFormDefinitionById?.formDefinition ||
-          formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
-        }
-        formReady={(form: any) => form.triggerRedraw()} // TODO: here because customConditional don't work, update FormIO
-        submission={submission}
-        onChange={setFormSubmission}
-        onSubmit={onFormSubmit}
-        options={{ noAlerts: true }}
-      />
-    </div>
+    <>
+      {backlink && <BackLink {...backlink} />}
+      <div className="bootstrap">
+        <Form
+          form={
+            formDefinitionId?.getFormDefinitionById?.formDefinition ||
+            formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
+          }
+          formReady={(form: any) => form.triggerRedraw()} // TODO: here because customConditional don't work, update FormIO
+          submission={submission}
+          onChange={setFormSubmission}
+          onSubmit={onFormSubmit}
+          options={{ noAlerts: true }}
+        />
+      </div>
+    </>
   );
 };
 

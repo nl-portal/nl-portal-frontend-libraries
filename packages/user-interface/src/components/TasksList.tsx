@@ -6,6 +6,8 @@ import { GetTakenQuery } from "@nl-portal/nl-portal-api";
 import Task from "./Task";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import SectionHeader from "./SectionHeader";
+import { useOutletContext } from "react-router-dom";
+import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 interface Props {
   loading?: boolean;
@@ -29,6 +31,7 @@ const TasksList = ({
   onChange,
 }: Props) => {
   const intl = useIntl();
+  const { paths } = useOutletContext<RouterOutletContext>();
   const subTitle = total
     ? intl.formatMessage({ id: "tasks.viewAll" }, { total })
     : undefined;
@@ -66,7 +69,7 @@ const TasksList = ({
 
   return (
     <section className={styles["tasks-list"]}>
-      <SectionHeader title={title} subTitle={subTitle} href="/taken" />
+      <SectionHeader title={title} subTitle={subTitle} href={paths.tasks} />
       {tasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}

@@ -23,7 +23,8 @@
     "@nl-portal/nl-portal-localization": "workspace:*",
     "@nl-portal/nl-portal-user-interface": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",

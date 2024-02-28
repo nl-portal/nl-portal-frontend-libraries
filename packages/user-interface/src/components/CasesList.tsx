@@ -1,5 +1,7 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
+import { useOutletContext } from "react-router-dom";
+import { RouterOutletContext } from "../contexts/RouterOutletContext";
 import { GetZakenQuery } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/components-react";
 import styles from "./CasesList.module.scss";
@@ -30,6 +32,7 @@ const CasesList = ({
   onChange,
 }: Props) => {
   const intl = useIntl();
+  const { paths } = useOutletContext<RouterOutletContext>();
   const listView = Boolean(total && total > 8);
   const subTitle = total
     ? intl.formatMessage({ id: "cases.viewAll" }, { total })
@@ -69,7 +72,7 @@ const CasesList = ({
 
   return (
     <section className={styles["cases-list"]}>
-      <SectionHeader title={title} subTitle={subTitle} href="/zaken" />
+      <SectionHeader title={title} subTitle={subTitle} href={paths.cases} />
       <div
         className={classnames(styles["cases-list__cases"], {
           [styles["cases-list__cases--list"]]: listView,
