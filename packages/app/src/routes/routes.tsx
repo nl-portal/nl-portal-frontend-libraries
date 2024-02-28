@@ -3,13 +3,11 @@ import {
   CasePage,
   CasesPage,
   EditAccountPage,
-  FormsPage,
   NotificationsPage,
   OverviewPage,
   TasksPage,
   TaskPage,
   ThemesPage,
-  FormPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "../constants/paths";
 import { config } from "../constants/config";
@@ -22,14 +20,7 @@ export const routes = [
   },
   {
     path: paths.overview,
-    element: (
-      <OverviewPage
-        showIntro="true"
-        openFormsFormId={config.OPEN_FORMS_FORM_ID}
-        showCasesPreview
-        casesPreviewLength={6}
-      />
-    ),
+    element: <OverviewPage showIntro showCasesPreview casesPreviewLength={6} />,
   },
   {
     path: paths.cases,
@@ -64,26 +55,6 @@ export const routes = [
   {
     path: paths.themes,
     element: <ThemesPage />,
-  },
-  {
-    path: paths.forms,
-    children: [
-      {
-        index: true,
-        element: <FormsPage />,
-      },
-      {
-        path: paths.form(),
-        element: (
-          <FormPage
-            openFormsBaseUrl={config.OPEN_FORMS_BASE_URL!}
-            openFormsEntryEnv={config.OPEN_FORMS_ENTRY_ENV!}
-            openFormsSdkUrl={config.OPEN_FORMS_SDK_URL!}
-            openFormsStylesUrl={config.OPEN_FORMS_STYLES_URL!}
-          />
-        ),
-      },
-    ],
   },
   {
     path: paths.account,

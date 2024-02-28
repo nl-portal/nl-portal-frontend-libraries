@@ -12,7 +12,7 @@ const routes = [
     children: [
       {
         index: true,
-        element: <AccountPage showNotificationSubSection="false" />,
+        element: <AccountPage showNotificationSubSection={false} />,
       },
     ],
   },

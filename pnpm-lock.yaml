@@ -84,8 +84,8 @@ importers:
   packages/app:
     dependencies:
       '@gemeente-denhaag/design-tokens-components':
-        specifier: 0.2.3-alpha.374
-        version: 0.2.3-alpha.374
+        specifier: 0.2.3-alpha.376
+        version: 0.2.3-alpha.376
       '@gemeente-denhaag/icons':
         specifier: 0.2.3-alpha.372
         version: 0.2.3-alpha.372(react@18.2.0)
@@ -278,12 +278,15 @@ importers:
       '@apollo/client':
         specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.53)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@formio/protected-eval':
+        specifier: ^1.2.2
+        version: 1.2.2(formiojs@4.18.1)
       '@formio/react':
         specifier: ^5.3.0
         version: 5.3.0(formiojs@4.18.1)(react-dom@18.2.0)(react@18.2.0)
       '@gemeente-denhaag/action':
-        specifier: 0.1.1-alpha.38
-        version: 0.1.1-alpha.38(react@18.2.0)
+        specifier: 0.1.1-alpha.40
+        version: 0.1.1-alpha.40(react@18.2.0)
       '@gemeente-denhaag/alert':
         specifier: 0.1.1-alpha.342
         version: 0.1.1-alpha.342(react@18.2.0)
@@ -320,6 +323,9 @@ importers:
       '@gemeente-denhaag/page':
         specifier: 0.1.1-alpha.232
         version: 0.1.1-alpha.232
+      '@gemeente-denhaag/pagination':
+        specifier: 0.1.1-alpha.301
+        version: 0.1.1-alpha.301(react@18.2.0)
       '@gemeente-denhaag/process-steps':
         specifier: 0.1.0-alpha.201
         version: 0.1.0-alpha.201(react@18.2.0)
@@ -1472,6 +1478,17 @@ packages:
       redux: 4.2.1
     dev: false
 
+  /@formio/protected-eval@1.2.2(formiojs@4.18.1):
+    resolution: {integrity: sha512-Nv1Lo90Om3PXjJOuj+ynsr74MTeO9id6OSjWD1akuMXI0Jfhs1936seBLRxwb+iQ/gJj5K5KBxOJbJW+FR7QVw==}
+    peerDependencies:
+      formiojs: ^4.12.6
+    dependencies:
+      formiojs: 4.18.1
+      js-interpreter: github.com/formio/JS-Interpreter/0ed5007ada500c12d797ab867a15cfab736e9b25
+      lodash: 4.17.21
+      vm-browserify: 1.1.2
+    dev: false
+
   /@formio/react@5.3.0(formiojs@4.18.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-C5TGhvMb7qD18gINvktG1STkbaDIW0/uqgti216sJCziIX8w5K+RzATrVtxUAQrGxtPF90gxYLglQGYmKhZjnQ==}
     peerDependencies:
@@ -1513,6 +1530,18 @@ packages:
       '@gemeente-denhaag/link': 0.2.3-alpha.372(react@18.2.0)
       '@gemeente-denhaag/utils': 0.2.3-alpha.371(react@18.2.0)
       date-fns: 2.30.0
+    transitivePeerDependencies:
+      - react
+    dev: false
+
+  /@gemeente-denhaag/action@0.1.1-alpha.40(react@18.2.0):
+    resolution: {integrity: sha512-kmcH2+FxiVUlpM7kE9OyCM7r+j7ZMYt0SRyVBe29H24kvgLCcKG70wADLDSjtOh8oviSbeuWXMzFHdvualX1Rw==}
+    dependencies:
+      '@gemeente-denhaag/button': 0.2.3-alpha.374(react@18.2.0)
+      '@gemeente-denhaag/icons': 0.2.3-alpha.374(react@18.2.0)
+      '@gemeente-denhaag/link': 0.2.3-alpha.374(react@18.2.0)
+      '@gemeente-denhaag/utils': 0.2.3-alpha.373(react@18.2.0)
+      date-fns: 3.3.1
     transitivePeerDependencies:
       - react
     dev: false
@@ -1559,6 +1588,15 @@ packages:
       react: ^18.0.0
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.372(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/button@0.2.3-alpha.374(react@18.2.0):
+    resolution: {integrity: sha512-+iDBO8dvzzXDfNtuMC03wJN540W+HfI9syden0I+Rzzw/TGC+FLce2PSx4qtFdFA8YbMtcFsANNGXNaJxlgTBg==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.374(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1681,6 +1719,10 @@ packages:
 
   /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.374:
     resolution: {integrity: sha512-qmvli3ZhJCF2ai6J6dy15nBzPc9stSqAzhggSbQM7xlapYIofKjpxCd8loOp6lawUH2utv7YnEN5C9taQkgQvA==}
+    dev: false
+
+  /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.376:
+    resolution: {integrity: sha512-Z6flaBLBbXplRHZB+fgZafSqKtiW1cLlZhoG6ADBGmIO2A2MWqCEYGaMxXNFJapOZaJqOo6e/NtYmjrtyGOt2A==}
     dev: false
 
   /@gemeente-denhaag/divider@0.2.3-alpha.372(react@18.2.0):
@@ -1851,6 +1893,14 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@gemeente-denhaag/icons@0.2.3-alpha.374(react@18.2.0):
+    resolution: {integrity: sha512-63ZmHziHtSIrkc/bEJQOT6lNFujLsEkGVg59gd5JwoICQv16GIZQSUzqVyQwgkrBGk7tvpIBFAw1uZchLnsEkw==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /@gemeente-denhaag/language-switcher@0.2.3-alpha.364(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-+nFZwaR2padw1u0IST/++cJ1mzRS0fG5yV3Y2RQB7aqt2wJIf5+T315zGQTEa600bt7fXcLrs9aZL8mWAF8LGA==}
     peerDependencies:
@@ -1895,6 +1945,15 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@gemeente-denhaag/link@0.2.3-alpha.374(react@18.2.0):
+    resolution: {integrity: sha512-Q8qtNzieAQuTeOEt3ob71xSv6SzojtUUUWVFgP3Sw9W+PditWP4OvtpDBWp2IBhtb3U3NXJDx7S77hgMWPpfXA==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.374(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
   /@gemeente-denhaag/list@0.2.3-alpha.372(react@18.2.0):
     resolution: {integrity: sha512-FsVX2Uq9vPtlem2J0jzjY+ImX5nFg9RcK3+qsOWGvLypr32xrDG/t3CVdosw117fXLedToKzh25ukhKFYdgWbQ==}
     peerDependencies:
@@ -1927,6 +1986,14 @@ packages:
 
   /@gemeente-denhaag/page@0.1.1-alpha.232:
     resolution: {integrity: sha512-CxHKcSe8KyI9cVhV+rDTtWEltDSVIq0v0Fzp5+Lj/pBz/XFMInWbyrwUsCrC9twEkSjd4ikBJhKLVa/J91+Y+A==}
+    dev: false
+
+  /@gemeente-denhaag/pagination@0.1.1-alpha.301(react@18.2.0):
+    resolution: {integrity: sha512-WvubgLoGxld9IJONzTMzS9YsouIhDtaJ/HvaZi/kS37V/C+3rz1sZa64eS9aRcX1YbQM3QkY8v7n+0uQRlZA8A==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@gemeente-denhaag/process-steps@0.1.0-alpha.201(react@18.2.0):
@@ -2056,6 +2123,15 @@ packages:
       react: ^18.0.0
     dependencies:
       date-fns: 2.30.0
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/utils@0.2.3-alpha.373(react@18.2.0):
+    resolution: {integrity: sha512-Orm5e/pKgjUKwkOIOdtMcQZ0ZebXOlD9bDukZ1Rxb/w2iLemrAveEe5qxHjTOSs9bGogeyhrxPjffniA6QfrKw==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      date-fns: 3.3.1
       react: 18.2.0
     dev: false
 
@@ -3801,7 +3877,6 @@ packages:
     resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
-    dev: true
 
   /agent-base@7.1.0:
     resolution: {integrity: sha512-o/zjMZRhJxny7OyEF+Op8X+efiELC7k7yOjMzgfzVqOzXqkBkWI79YoTdOtsuWd5BWhAGAuOY/Xa6xpiaWXiNg==}
@@ -4526,6 +4601,10 @@ packages:
     engines: {node: '>=0.11'}
     dependencies:
       '@babel/runtime': 7.23.9
+    dev: false
+
+  /date-fns@3.3.1:
+    resolution: {integrity: sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==}
     dev: false
 
   /de-indent@1.0.2:
@@ -7839,6 +7918,10 @@ packages:
       - terser
     dev: true
 
+  /vm-browserify@1.1.2:
+    resolution: {integrity: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==}
+    dev: false
+
   /vue-template-compiler@2.7.16:
     resolution: {integrity: sha512-AYbUWAJHLGGQM7+cNTELw+KsOG9nl2CnSv467WobS5Cv9uk3wFcnr1Etsz2sEIHEZvw1U+o9mRlEO6QbZvUPGQ==}
     dependencies:
@@ -8136,6 +8219,10 @@ packages:
     resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
     dev: false
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
+  github.com/formio/JS-Interpreter/0ed5007ada500c12d797ab867a15cfab736e9b25:
+    resolution: {tarball: https://codeload.github.com/formio/JS-Interpreter/tar.gz/0ed5007ada500c12d797ab867a15cfab736e9b25}
+    name: js-interpreter
+    version: 1.1.0-formio.2
+    dependencies:
+      acorn: 8.11.3
+    dev: false

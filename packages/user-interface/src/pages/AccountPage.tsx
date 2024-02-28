@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Heading3 } from "@gemeente-denhaag/components-react";
 import { FormattedMessage } from "react-intl";
 import {
@@ -16,20 +16,21 @@ import {
   getStreetString,
 } from "../utils/person-data";
 import PageHeader from "../components/PageHeader";
+import PageGrid from "../components/PageGrid";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
-  showAddressResearch?: string;
+  showAddressResearch?: boolean;
   addressResearchUrl?: string;
-  showNotificationSubSection?: string;
+  showNotificationSubSection?: boolean;
 }
 
-const AccountPage: FC<AccountPageProps> = ({
+const AccountPage = ({
   showInhabitantAmount,
-  showAddressResearch = "true",
+  showAddressResearch = true,
   addressResearchUrl,
-  showNotificationSubSection = "true",
-}) => {
+  showNotificationSubSection = true,
+}: AccountPageProps) => {
   const {
     data: contactData,
     loading: contactLoading,
@@ -64,9 +65,9 @@ const AccountPage: FC<AccountPageProps> = ({
   }, []);
 
   return (
-    <div className={styles.account}>
+    <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
-      <div className={styles["account__sub-section"]}>
+      <div>
         <Heading3 className={styles["account__sub-header"]}>
           <FormattedMessage id="account.contactHeader" />
         </Heading3>
@@ -87,7 +88,7 @@ const AccountPage: FC<AccountPageProps> = ({
           ]}
         />
       </div>
-      {showNotificationSubSection === "true" && (
+      {showNotificationSubSection && (
         <div className={styles["account__sub-section"]}>
           <Heading3 className={styles["account__sub-header"]}>
             <FormattedMessage id="account.notificationsHeader" />
@@ -107,7 +108,7 @@ const AccountPage: FC<AccountPageProps> = ({
           />
         </div>
       )}
-      <div className={styles["account__sub-section"]}>
+      <div>
         <Heading3 className={styles["account__sub-header"]}>
           <FormattedMessage id="account.detailsHeader" />
         </Heading3>
@@ -155,7 +156,7 @@ const AccountPage: FC<AccountPageProps> = ({
           ]}
         />
       </div>
-      <div className={styles["account__sub-section"]}>
+      <div>
         <Heading3 className={styles["account__sub-header"]}>
           <FormattedMessage id="account.addressHeader" />
         </Heading3>
@@ -183,7 +184,7 @@ const AccountPage: FC<AccountPageProps> = ({
         />
       </div>
       {showInhabitantAmount === "true" && (
-        <div className={styles["account__sub-section"]}>
+        <div>
           <Heading3 className={styles["account__sub-header"]}>
             <FormattedMessage id="account.inhabitantAmountHeader" />
           </Heading3>
@@ -199,14 +200,14 @@ const AccountPage: FC<AccountPageProps> = ({
           <div className={styles["account__label-description"]}>
             <FormattedMessage id="account.inhabitantAmountDescription" />
           </div>
-          {showAddressResearch === "true" && (
+          {showAddressResearch && (
             <Button onClick={openAddressInvestigation}>
               <FormattedMessage id="account.addressResearchRequestButton" />
             </Button>
           )}
         </div>
       )}
-    </div>
+    </PageGrid>
   );
 };
 

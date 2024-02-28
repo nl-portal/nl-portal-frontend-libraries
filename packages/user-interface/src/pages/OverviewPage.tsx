@@ -1,49 +1,55 @@
-import { Link } from "@gemeente-denhaag/link";
 import { Alert } from "@gemeente-denhaag/alert";
 import { FormattedMessage, useIntl } from "react-intl";
-import { FC, useContext } from "react";
-import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
-import PortalLink from "../components/PortalLink";
 import PageHeader from "../components/PageHeader";
-import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import TasksList from "../components/TasksList";
+import PageGrid from "../components/PageGrid";
 
 interface OverviewPageProps {
-  openFormsFormId?: string;
-  showFormsLink?: string;
-  showIntro?: string;
-  showAlert?: string;
+  showAlert?: boolean;
   alertType?: "error" | "info" | "success" | "warning";
+  showIntro?: boolean;
+  showTasksPreview?: boolean;
   showCasesPreview?: boolean;
+  tasksPreviewLength?: number;
   casesPreviewLength?: number;
 }
 
-const OverviewPage: FC<OverviewPageProps> = ({
-  openFormsFormId,
-  showFormsLink = "true",
-  showIntro = "false",
-  showAlert = "false",
+const OverviewPage = ({
+  showAlert = false,
   alertType = "warning",
+  showIntro = false,
+  showTasksPreview = false,
   showCasesPreview = false,
-  casesPreviewLength = 6,
-}) => {
+  tasksPreviewLength = 4,
+  casesPreviewLength = 4,
+}: OverviewPageProps) => {
   const intl = useIntl();
-  const { hrefLang } = useContext(LocaleContext);
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
-  const { paths } = useOutletContext<RouterOutletContext>();
+  const {
+    data: taskData,
+    loading: taskLoading,
+    error: taskError,
+  } = useGetTakenQuery();
+  const {
+    data: caseData,
+    loading: caseLoading,
+    error: caseError,
+  } = useGetZakenQuery();
+  const loading = taskLoading || caseLoading;
 
   return (
-    <>
-      {showAlert === "true" && (
+    <PageGrid>
+      {showAlert && (
         <Alert
           variant={alertType}
           title={intl.formatMessage({ id: "overview.alertTitle" })}
           text={intl.formatMessage({ id: "overview.alertText" })}
         />
       )}
-      {showIntro === "true" && (
+      {showIntro && (
         <PageHeader
           title={
             <FormattedMessage id="overviewpage.title" values={{ userName }} />
@@ -60,19 +66,23 @@ const OverviewPage: FC<OverviewPageProps> = ({
           <FormattedMessage id="overviewpage.paragraph" />
         </PageHeader>
       )}
-      {showFormsLink === "true" && (
-        <Link
-          Link={PortalLink}
-          href={paths.form(openFormsFormId)}
-          hrefLang={hrefLang}
-        >
-          <FormattedMessage id="overview.defaultFormTitle" />
-        </Link>
+      {showTasksPreview && (
+        <TasksList
+          loading={loading}
+          error={Boolean(taskError)}
+          title={intl.formatMessage({ id: "overview.tasksTitle" })}
+          tasks={taskData?.getTaken.content.slice(0, tasksPreviewLength)}
+        />
       )}
       {showCasesPreview && (
-        <CasesList showHeader numElements={casesPreviewLength} />
+        <CasesList
+          loading={loading}
+          error={Boolean(caseError)}
+          title={intl.formatMessage({ id: "overview.casesTitle" })}
+          cases={caseData?.getZaken.slice(0, casesPreviewLength)}
+        />
       )}
-    </>
+    </PageGrid>
   );
 };
 

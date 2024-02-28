@@ -15,6 +15,10 @@ import { useIntl } from "react-intl";
 import "./TaskPage.module.scss";
 import { useParams } from "react-router-dom";
 import BackLink, { BackLinkProps } from "../components/BackLink";
+import ProtectedEval from "@formio/protected-eval";
+import { Formio } from "formiojs";
+
+Formio.use(ProtectedEval);
 
 interface TaskPageProps {
   backlink?: BackLinkProps;

@@ -7,7 +7,7 @@ export const NL_NL_MESSAGES: Messages = {
     "locales.en-GB": "English",
     "locales.nl-NL": "Nederlands",
     "pageTitles.overview": "Overzicht",
-    "pageTitles.cases": "Lopende zaken",
+    "pageTitles.cases": "Mijn lopende zaken",
     "pageTitles.notifications": "Mijn berichten",
     "pageTitles.themes": "Thema's",
     "pageTitles.documents": "Documenten",
@@ -29,8 +29,11 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.defaultFormTitle": "Bezwaar maken",
     "overview.showAllCases": "Bekijk alle zaken",
     "overview.currentCases": "Mijn lopende zaken",
-    "cases.noOpenCases": "Er zijn geen lopende zaken.",
-    "cases.noClosedCases": "Er zijn geen afgeronde zaken.",
+    "overview.tasksTitle": "Mijn taken",
+    "overview.casesTitle": "Mijn lopende zaken",
+    "cases.viewAll": "Bekijk alle zaken ({total})",
+    "cases.noOpenCases": "Er zijn geen zaken.",
+    "cases.noClosedCases": "Er zijn geen zaken.",
     "cases.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "case.caseNumber": "Zaaknummer",
@@ -84,6 +87,7 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.inhabitantAmount": "Aantal inwoners op uw woonadres",
     "account.addressResearchRequestButton": "Vraag onderzoek aan",
     "forms.listSubHeader": "Beschikbare formulieren",
+    "tasks.viewAll": "Bekijk alle taken ({total})",
     "tasks.noOpenTasks": "Er zijn geen openstaande taken.",
     "tasks.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
@@ -94,5 +98,10 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.subTitle": "Gemachtigd voor {volmachtgever}",
     "overviewpage.paragraph":
       "In MijnDenHaag kunt u zelf uw persoonlijke zaken regelen wanneer het u uitkomt. U kunt bijvoorbeeld uw rekeningen betalen en zien wanneer uw aanvraag klaar is.",
+    "actionLabels.today": "vandaag",
+    "actionLabels.yesterday": "gisteren",
+    "actionLabels.before": "vóór",
+    "actionLabels.approachingDeadlineDay": "nog {days} dag",
+    "actionLabels.approachingDeadlineDays": "nog {days} dagen",
   },
 };

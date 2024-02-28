@@ -18,8 +18,6 @@ export const testPaths: Paths = {
   task: (id = ":id") => `/taken/taak/${id}`,
   notifications: "/berichten",
   themes: "/themas",
-  forms: "/formulieren",
-  form: (id = ":id") => `/formulieren/formulier/${id}`,
   account: "/account",
   editAccount: "/account/aanpassen",
 };

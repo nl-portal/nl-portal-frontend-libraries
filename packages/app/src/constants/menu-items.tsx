@@ -1,3 +1,4 @@
+import { NavigationItem } from "@nl-portal/nl-portal-user-interface";
 import {
   ArchiveIcon,
   DocumentIcon,
@@ -7,7 +8,7 @@ import {
 } from "@gemeente-denhaag/icons";
 import { paths } from "./paths";
 
-export const menuItems = [
+export const menuItems: NavigationItem[] = [
   {
     titleTranslationKey: "overview",
     path: paths.overview,
@@ -32,11 +33,6 @@ export const menuItems = [
   {
     titleTranslationKey: "themes",
     path: paths.themes,
-    icon: <DocumentIcon />,
-  },
-  {
-    titleTranslationKey: "forms",
-    path: paths.forms,
     icon: <DocumentIcon />,
   },
   {

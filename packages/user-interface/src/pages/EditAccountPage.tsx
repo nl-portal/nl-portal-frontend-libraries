@@ -13,6 +13,7 @@ import styles from "./EditAccountPage.module.scss";
 import UserInformationContext from "../contexts/UserInformationContext";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
 import PageHeader from "../components/PageHeader";
+import PageGrid from "../components/PageGrid";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 const EditAccountPage = () => {
@@ -65,7 +66,7 @@ const EditAccountPage = () => {
   const inputId = propTranslation.toLowerCase();
 
   return (
-    <div className={styles["edit-account"]}>
+    <PageGrid>
       <PageHeader
         title={
           currentLocale.toLowerCase().includes("nl")
@@ -77,40 +78,41 @@ const EditAccountPage = () => {
               })} ${propTranslation.toLowerCase()}`
         }
       />
-      <div className={styles["edit-account__text-field-container"]}>
-        <FormField invalid={invalid} type="text">
-          <FormLabel htmlFor={inputId}>{propTranslation}</FormLabel>
-          <TextInput
-            id={inputId}
-            onChange={(e) => setValue(e.target.value)}
-            invalid={invalid}
-            defaultValue={defaultValue || ""}
+      <div>
+        <div className={styles["edit-account__text-field-container"]}>
+          <FormField invalid={invalid} type="text">
+            <FormLabel htmlFor={inputId}>{propTranslation}</FormLabel>
+            <TextInput
+              id={inputId}
+              onChange={(e) => setValue(e.target.value)}
+              invalid={invalid}
+              defaultValue={defaultValue || ""}
+              disabled={loading}
+            />
+            <FormFieldErrorMessage>
+              {invalid ? errorTranslation : ""}
+            </FormFieldErrorMessage>
+          </FormField>
+        </div>
+        <div className={styles["edit-account__buttons"]}>
+          <Button
+            className={styles["edit-account__button"]}
+            onClick={onSave}
+            disabled={!valid || loading || `${value}`.length === 0}
+          >
+            <FormattedMessage id="account.save" />
+          </Button>
+          <Button
+            variant="secondary-action"
+            className={styles["edit-account__button"]}
+            onClick={navigateToAccountPage}
             disabled={loading}
-          />
-          <FormFieldErrorMessage>
-            {invalid ? errorTranslation : ""}
-          </FormFieldErrorMessage>
-        </FormField>
+          >
+            <FormattedMessage id="account.cancel" />
+          </Button>
+        </div>
       </div>
-
-      <div className={styles["edit-account__buttons"]}>
-        <Button
-          className={styles["edit-account__button"]}
-          onClick={onSave}
-          disabled={!valid || loading || `${value}`.length === 0}
-        >
-          <FormattedMessage id="account.save" />
-        </Button>
-        <Button
-          variant="secondary-action"
-          className={styles["edit-account__button"]}
-          onClick={navigateToAccountPage}
-          disabled={loading}
-        >
-          <FormattedMessage id="account.cancel" />
-        </Button>
-      </div>
-    </div>
+    </PageGrid>
   );
 };
 

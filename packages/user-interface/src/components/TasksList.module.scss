@@ -1,18 +1,7 @@
 @import "../styles/mixins";
 
 .tasks-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--nlportal-space-block-xl, 1rem);
-
-  @include breakpoint(desktop) {
-    flex-flow: row wrap;
-    justify-content: space-between;
-  }
-
-  &__skeleton {
-    @include breakpoint(desktop) {
-      width: calc(50% - var(--nlportal-space-inline-md, 1rem));
-    }
+  &__pagination {
+    margin-block-start: var(--nlportal-space-block-2xl, 2rem);
   }
 }

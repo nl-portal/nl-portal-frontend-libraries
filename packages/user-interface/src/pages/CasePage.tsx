@@ -32,20 +32,10 @@ import StatusHistory from "../components/StatusHistory";
 import { getTaskUrl } from "../utils/get-task-url";
 import uniqueId from "lodash.uniqueid";
 import BackLink, { BackLinkProps } from "../components/BackLink";
-
-const labels = {
-  today: "vandaag",
-  yesterday: "gisteren",
-  before: "vóór",
-  approachingDeadline: (daysDifference: number) => {
-    if (daysDifference === 1) {
-      return `nog ${daysDifference} dag`;
-    }
-    return `nog ${daysDifference} dagen`;
-  },
-};
+import useActionLabels from "../hooks/useActionLabels";
 
 const Task = ({ task }: { task: any }) => {
+  const labels = useActionLabels();
   if (!task) return null;
 
   return (
