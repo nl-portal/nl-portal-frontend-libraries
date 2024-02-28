@@ -8,14 +8,14 @@ import {
 } from "@gemeente-denhaag/table";
 import React from "react";
 
-interface CellObject {
+export interface CellObject {
   className?: string;
   children?: React.ReactNode;
   href?: string;
   head?: boolean;
 }
 
-type CellSingle = React.ReactNode | string | undefined;
+export type CellSingle = React.ReactNode | string | undefined;
 
 export type Cell = CellSingle | CellObject;
 

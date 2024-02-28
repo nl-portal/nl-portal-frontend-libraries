@@ -1,7 +1,7 @@
 import { Paragraph } from "@gemeente-denhaag/typography";
 import SectionHeader from "./SectionHeader";
 import Skeleton from "./Skeleton";
-import Table, { Cell } from "./Table";
+import Table, { Cell, CellObject } from "./Table";
 import styles from "./TableList.module.scss";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Pagination } from "@gemeente-denhaag/pagination";
@@ -12,7 +12,7 @@ interface Props {
   error?: boolean;
   title?: string;
   headers?: Cell[];
-  rows?: Cell[][];
+  rows?: CellObject[][];
   total?: number;
   index?: number;
   indexLimit?: number;
@@ -31,8 +31,24 @@ const TableList = ({
   onChange,
 }: Props) => {
   const intl = useIntl();
-  const headers = hdrs && [...hdrs, undefined];
-  const rows = rws && rws.map((row) => [...row, <ArrowRightIcon />]);
+  const headers = hdrs && [
+    ...hdrs,
+    { className: styles["table-list__icon"], children: undefined },
+  ];
+  const rows =
+    rws &&
+    rws.map((row) => [
+      ...row,
+      {
+        href: row[0].href,
+        className: styles["table-list__icon"],
+        children: (
+          <div className={styles["table-list__arrow"]}>
+            <ArrowRightIcon />
+          </div>
+        ),
+      },
+    ]);
   // TODO: translate
   const subTitle = total
     ? intl.formatMessage({ id: "table.viewAll" }, { total })

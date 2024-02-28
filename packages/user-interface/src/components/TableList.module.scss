@@ -1,4 +1,16 @@
 .table-list {
+  td.table-list__icon {
+    width: 1px;
+    white-space: nowrap;
+    min-width: auto;
+  }
+
+  &__arrow {
+    display: flex;
+    justify-content: center;
+    color: var(--nlportal-heading-5-color, hsl(207 80% 35%));
+  }
+
   &__pagination {
     margin-block-start: var(--nlportal-space-block-2xl, 2rem);
   }
