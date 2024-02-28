@@ -10,12 +10,14 @@ interface Props {
   titleTranslationKey: string;
   showTasksLength?: number;
   showCasesLength?: number;
+  children?: React.ReactNode;
 }
 
 const ThemeOverviewPage = ({
   titleTranslationKey,
   showTasksLength,
   showCasesLength,
+  children,
 }: Props) => {
   const intl = useIntl();
   const {
@@ -37,6 +39,7 @@ const ThemeOverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
+          // TODO: translate
           title={intl.formatMessage({ id: "thema.tasksTitle" })}
           tasks={taskData?.getTaken.content.slice(0, showTasksLength)}
         />
@@ -45,6 +48,7 @@ const ThemeOverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
+          // TODO: translate
           title={intl.formatMessage({ id: "thema.casesTitle" })}
           cases={caseData?.getZaken.slice(0, showCasesLength)}
         />
@@ -71,6 +75,7 @@ const ThemeOverviewPage = ({
           ],
         ]}
       />
+      {children}
     </PageGrid>
   );
 };
