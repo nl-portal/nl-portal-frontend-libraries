@@ -17,8 +17,8 @@ interface Props {
 
 const ThemeOverviewPage = ({
   type,
-  showTasksLength,
-  showCasesLength,
+  showTasksLength = 3,
+  showCasesLength = 4,
   children,
 }: Props) => {
   const intl = useIntl();
@@ -36,12 +36,12 @@ const ThemeOverviewPage = ({
 
   return (
     <PageGrid>
-      <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}"` })} />
+      <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}` })} />
       {showTasksLength && (
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          title={intl.formatMessage({ id: "thema.tasksTitle" })}
+          title={intl.formatMessage({ id: `theme.${type}.tasksTitle` })}
           tasks={taskData?.getTaken.content.slice(0, showTasksLength)}
         />
       )}
@@ -49,13 +49,13 @@ const ThemeOverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          title={intl.formatMessage({ id: "thema.casesTitle" })}
+          title={intl.formatMessage({ id: `theme.${type}.casesTitle` })}
           cases={caseData?.getZaken.slice(0, showCasesLength)}
         />
       )}
       <TableList
         loading={loading}
-        title="Erfpachtcontracten"
+        title={intl.formatMessage({ id: `theme.${type}.listTitle` })}
         headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}
         rows={[
           [

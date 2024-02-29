@@ -17,6 +17,7 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.forms": "Formulieren",
     "pageTitles.tasks": "Taken",
     "pageTitles.task": "Taak",
+    "pageTitles.erfpacht": "Erfpacht",
     "backlink.back": "Terug",
     "header.logout": "Uitloggen",
     "header.welcome": "Welkom",
@@ -103,5 +104,8 @@ export const NL_NL_MESSAGES: Messages = {
     "actionLabels.before": "vóór",
     "actionLabels.approachingDeadlineDay": "nog {days} dag",
     "actionLabels.approachingDeadlineDays": "nog {days} dagen",
+    "theme.erfpacht.tasksTitle": "Mijn taken",
+    "theme.erfpacht.casesTitle": "Mijn lopende zaken",
+    "theme.erfpacht.listTitle": "Erfpachtcontracten",
   },
 };
