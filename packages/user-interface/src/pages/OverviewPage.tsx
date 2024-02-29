@@ -66,7 +66,6 @@ const OverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          title={intl.formatMessage({ id: "overview.tasksTitle" })}
           tasks={taskData?.getTaken.content.slice(0, tasksPreviewLength)}
         />
       )}
@@ -74,7 +73,6 @@ const OverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          title={intl.formatMessage({ id: "overview.casesTitle" })}
           cases={caseData?.getZaken.slice(0, casesPreviewLength)}
         />
       )}

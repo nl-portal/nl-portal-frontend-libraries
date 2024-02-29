@@ -18,23 +18,37 @@ interface Props {
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
+  showTitle?: boolean;
+  titleTranslationId?: string;
+  subTitleTranslationId?: string;
+  errorTranslationId?: string;
+  emptyTranslationId?: string;
 }
 
 const TasksList = ({
   loading,
   error,
-  title,
   tasks,
   total,
   index,
   indexLimit,
   onChange,
+  showTitle = true,
+  titleTranslationId = "tasksList.title",
+  subTitleTranslationId = "tasksList.viewAll",
+  errorTranslationId = "tasksList.fetchError",
+  emptyTranslationId = "tasksList.empty",
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
-  const subTitle = total
-    ? intl.formatMessage({ id: "tasks.viewAll" }, { total })
+  const title = showTitle
+    ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
+  const subTitle = total
+    ? intl.formatMessage({ id: subTitleTranslationId }, { total })
+    : undefined;
+  const errorMessage = intl.formatMessage({ id: errorTranslationId });
+  const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
   if (loading) {
     return (
@@ -51,9 +65,7 @@ const TasksList = ({
     return (
       <section className={styles["tasks-list"]}>
         <SectionHeader title={title} />
-        <Paragraph>
-          <FormattedMessage id="tasks.fetchError" />
-        </Paragraph>
+        <Paragraph>{errorMessage}</Paragraph>
       </section>
     );
 
@@ -61,9 +73,7 @@ const TasksList = ({
     return (
       <section className={styles["tasks-list"]}>
         <SectionHeader title={title} />
-        <Paragraph>
-          <FormattedMessage id="tasks.noOpenTasks" />
-        </Paragraph>
+        <Paragraph>{emptyMessage}</Paragraph>
       </section>
     );
 

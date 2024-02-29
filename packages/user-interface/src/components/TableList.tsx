@@ -3,7 +3,7 @@ import SectionHeader from "./SectionHeader";
 import Skeleton from "./Skeleton";
 import Table, { Cell, CellObject } from "./Table";
 import styles from "./TableList.module.scss";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 
@@ -17,18 +17,27 @@ interface Props {
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
+  showTitle?: boolean;
+  titleTranslationId?: string;
+  subTitleTranslationId?: string;
+  errorTranslationId?: string;
+  emptyTranslationId?: string;
 }
 
 const TableList = ({
   loading,
   error,
-  title,
   headers: hdrs,
   rows: rws,
   total,
   index,
   indexLimit,
   onChange,
+  showTitle = true,
+  titleTranslationId = "tableList.title",
+  subTitleTranslationId = "tableList.viewAll",
+  errorTranslationId = "tableList.fetchError",
+  emptyTranslationId = "tableList.empty",
 }: Props) => {
   const intl = useIntl();
   const headers = hdrs && [
@@ -49,10 +58,14 @@ const TableList = ({
         ),
       },
     ]);
-  // TODO: translate
-  const subTitle = total
-    ? intl.formatMessage({ id: "table.viewAll" }, { total })
+  const title = showTitle
+    ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
+  const subTitle = total
+    ? intl.formatMessage({ id: subTitleTranslationId }, { total })
+    : undefined;
+  const errorMessage = intl.formatMessage({ id: errorTranslationId });
+  const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
   if (loading) {
     return (
@@ -69,10 +82,7 @@ const TableList = ({
     return (
       <section className={styles["table-list"]}>
         <SectionHeader title={title} />
-        <Paragraph>
-          {/* TODO */}
-          <FormattedMessage id="table.fetchError" />
-        </Paragraph>
+        <Paragraph>{errorMessage}</Paragraph>
       </section>
     );
 
@@ -80,10 +90,7 @@ const TableList = ({
     return (
       <section className={styles["table-list"]}>
         <SectionHeader title={title} />
-        <Paragraph>
-          {/* TODO */}
-          <FormattedMessage id="table.noClosedCases" />
-        </Paragraph>
+        <Paragraph>{emptyMessage}</Paragraph>
       </section>
     );
 

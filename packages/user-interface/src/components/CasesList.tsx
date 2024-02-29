@@ -13,30 +13,43 @@ import classnames from "classnames";
 interface Props {
   loading?: boolean;
   error?: boolean;
-  title?: string;
   cases?: GetZakenQuery["getZaken"];
   total?: number;
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
+  showTitle?: boolean;
+  titleTranslationId?: string;
+  subTitleTranslationId?: string;
+  errorTranslationId?: string;
+  emptyTranslationId?: string;
 }
 
 const CasesList = ({
   loading,
   error,
-  title,
   cases,
   total,
   index,
   indexLimit,
   onChange,
+  showTitle = true,
+  titleTranslationId = "casesList.title",
+  subTitleTranslationId = "casesList.viewAll",
+  errorTranslationId = "casesList.fetchError",
+  emptyTranslationId = "casesList.empty",
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const listView = Boolean(total && total > 8);
-  const subTitle = total
-    ? intl.formatMessage({ id: "cases.viewAll" }, { total })
+  const title = showTitle
+    ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
+  const subTitle = total
+    ? intl.formatMessage({ id: subTitleTranslationId }, { total })
+    : undefined;
+  const errorMessage = intl.formatMessage({ id: errorTranslationId });
+  const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
   if (loading) {
     return (
@@ -54,9 +67,7 @@ const CasesList = ({
     return (
       <section className={styles["cases-list"]}>
         <SectionHeader title={title} />
-        <Paragraph>
-          <FormattedMessage id="cases.fetchError" />
-        </Paragraph>
+        <Paragraph>{errorMessage}</Paragraph>
       </section>
     );
 
@@ -64,9 +75,7 @@ const CasesList = ({
     return (
       <section className={styles["cases-list"]}>
         <SectionHeader title={title} />
-        <Paragraph>
-          <FormattedMessage id="cases.noClosedCases" />
-        </Paragraph>
+        <Paragraph>{emptyMessage}</Paragraph>
       </section>
     );
 

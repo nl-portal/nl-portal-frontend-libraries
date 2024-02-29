@@ -7,6 +7,8 @@ import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import TableList from "../components/TableList";
 
 // TODO: more tasks link with filter parameters
+// TODO: More erfpachtcontracten custom link
+// TODO: Test error message
 
 interface Props {
   type: string;
@@ -41,7 +43,6 @@ const ThemeOverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          title={intl.formatMessage({ id: `theme.${type}.tasksTitle` })}
           tasks={taskData?.getTaken.content.slice(0, showTasksLength)}
         />
       )}
@@ -49,13 +50,12 @@ const ThemeOverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          title={intl.formatMessage({ id: `theme.${type}.casesTitle` })}
           cases={caseData?.getZaken.slice(0, showCasesLength)}
         />
       )}
       <TableList
         loading={loading}
-        title={intl.formatMessage({ id: `theme.${type}.listTitle` })}
+        titleTranslationId="theme.erfpacht.listTitle"
         headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}
         rows={[
           [
