@@ -5,7 +5,8 @@ export interface Paths {
   tasks: string;
   task: (id?: string | number) => string;
   notifications: string;
-  themes: string;
+  themeOverview: (type?: string) => string;
+  themeDetails: (type?: string, id?: string | number) => string;
   account: string;
   editAccount: string;
   [key: string]: ((...args: any[]) => string) | string | undefined;
