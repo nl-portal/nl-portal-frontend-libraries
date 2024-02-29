@@ -6,15 +6,17 @@ import TasksList from "../components/TasksList";
 import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import TableList from "../components/TableList";
 
+// TODO: more tasks link with filter parameters
+
 interface Props {
-  titleTranslationKey: string;
+  type: string;
   showTasksLength?: number;
   showCasesLength?: number;
   children?: React.ReactNode;
 }
 
 const ThemeOverviewPage = ({
-  titleTranslationKey,
+  type,
   showTasksLength,
   showCasesLength,
   children,
@@ -34,12 +36,11 @@ const ThemeOverviewPage = ({
 
   return (
     <PageGrid>
-      <PageHeader title={intl.formatMessage({ id: titleTranslationKey })} />
+      <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}"` })} />
       {showTasksLength && (
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          // TODO: translate
           title={intl.formatMessage({ id: "thema.tasksTitle" })}
           tasks={taskData?.getTaken.content.slice(0, showTasksLength)}
         />
@@ -48,7 +49,6 @@ const ThemeOverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          // TODO: translate
           title={intl.formatMessage({ id: "thema.casesTitle" })}
           cases={caseData?.getZaken.slice(0, showCasesLength)}
         />

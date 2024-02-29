@@ -101,7 +101,7 @@ const pages: Array<PortalPage> = [
     icon: <DocumentIcon />,
     pageComponent: (
       <ThemeOverviewPage
-        titleTranslationKey="pageTitles.themeOverview"
+        type="erfpacht"
         showTasksLength={5}
         showCasesLength={4}
       />
