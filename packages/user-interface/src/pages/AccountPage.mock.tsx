@@ -1,11 +1,28 @@
 import AccountPage from "./AccountPage";
-import TestProvider from "../providers/TestProvider";
+import TestProvider, { testPaths as paths } from "../providers/TestProvider";
 import { mocksRequestBurgerGegevens } from "./AccountPageRequests.mock";
 
-const route = "/zaken/zaak?id=82cb13cf-d2f9-4e3e-ac07-751373035ecb";
+const routes = [
+  {
+    path: paths.overview,
+    element: <></>,
+  },
+  {
+    path: paths.account,
+    children: [
+      {
+        index: true,
+        element: <AccountPage showNotificationSubSection={false} />,
+      },
+    ],
+  },
+];
 
 export const MockAccountPage = () => (
-  <TestProvider mocks={mocksRequestBurgerGegevens} route={route}>
-    <AccountPage showNotificationSubSection={false} />
-  </TestProvider>
+  <TestProvider
+    mocks={mocksRequestBurgerGegevens}
+    routes={routes}
+    initialIndex={1}
+    initialEntries={[paths.overview, paths.account]}
+  ></TestProvider>
 );
