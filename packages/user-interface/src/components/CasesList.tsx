@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
