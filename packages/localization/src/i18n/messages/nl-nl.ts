@@ -89,8 +89,9 @@ export const NL_NL_MESSAGES: Messages = {
     "account.addressResearchRequestButton": "Vraag onderzoek aan",
     "forms.listSubHeader": "Beschikbare formulieren",
     "tasksList.viewAll": "Bekijk alle taken ({total})",
-    "tasksList.noOpenTasks": "Er zijn geen openstaande taken.",
-    "tasksList.empty": "Er is een fout opgetreden, probeer het later nogmaals.",
+    "tasksList.fetchError":
+      "Er is een fout opgetreden, probeer het later nogmaals.",
+    "tasksList.empty": "Er zijn geen openstaande taken.",
     "task.fetchError": "Er is een fout opgetreden, probeer het later nogmaals.",
     "task.completeTitle": "Taak is afgerond",
     "task.completeDescription": "De taak is succesvol voltooid.",
@@ -104,5 +105,9 @@ export const NL_NL_MESSAGES: Messages = {
     "actionLabels.approachingDeadlineDay": "nog {days} dag",
     "actionLabels.approachingDeadlineDays": "nog {days} dagen",
     "theme.erfpacht.listTitle": "Erfpachtcontracten",
+    "tableList.viewAll": "Bekijk alle items ({total})",
+    "tableList.fetchError":
+      "Er is een fout opgetreden, probeer het later nogmaals.",
+    "tableList.empty": "Er zijn geen items beschikbaar.",
   },
 };

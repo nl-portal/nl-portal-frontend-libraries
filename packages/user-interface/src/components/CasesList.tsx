@@ -13,40 +13,43 @@ import classnames from "classnames";
 interface Props {
   loading?: boolean;
   error?: boolean;
+  errorTranslationId?: string;
+  emptyTranslationId?: string;
+  showTitle?: boolean;
+  titleTranslationId?: string;
+  readMoreAmount?: number;
+  readMoreLink?: string;
+  readMoreTranslationId?: string;
   cases?: GetZakenQuery["getZaken"];
-  total?: number;
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
-  showTitle?: boolean;
-  titleTranslationId?: string;
-  subTitleTranslationId?: string;
-  errorTranslationId?: string;
-  emptyTranslationId?: string;
 }
 
 const CasesList = ({
   loading,
   error,
+  errorTranslationId = "casesList.fetchError",
+  emptyTranslationId = "casesList.empty",
+  showTitle = true,
+  titleTranslationId = "casesList.title",
+  readMoreAmount,
+  readMoreLink,
+  readMoreTranslationId = "casesList.viewAll",
   cases,
-  total,
   index,
   indexLimit,
   onChange,
-  showTitle = true,
-  titleTranslationId = "casesList.title",
-  subTitleTranslationId = "casesList.viewAll",
-  errorTranslationId = "casesList.fetchError",
-  emptyTranslationId = "casesList.empty",
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
-  const listView = Boolean(total && total > 8);
+  const casesPath = readMoreLink || paths.cases;
+  const listView = Boolean(readMoreAmount && readMoreAmount > 8);
   const title = showTitle
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
-  const subTitle = total
-    ? intl.formatMessage({ id: subTitleTranslationId }, { total })
+  const subTitle = readMoreAmount
+    ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
     : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
@@ -81,7 +84,7 @@ const CasesList = ({
 
   return (
     <section className={styles["cases-list"]}>
-      <SectionHeader title={title} subTitle={subTitle} href={paths.cases} />
+      <SectionHeader title={title} subTitle={subTitle} href={casesPath} />
       <div
         className={classnames(styles["cases-list__cases"], {
           [styles["cases-list__cases--list"]]: listView,

@@ -6,10 +6,6 @@ import TasksList from "../components/TasksList";
 import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import TableList from "../components/TableList";
 
-// TODO: more tasks link with filter parameters
-// TODO: More erfpachtcontracten custom link
-// TODO: Test error message
-
 interface Props {
   type: string;
   showTasksLength?: number;

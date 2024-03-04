@@ -12,40 +12,42 @@ import { RouterOutletContext } from "../contexts/RouterOutletContext";
 interface Props {
   loading?: boolean;
   error?: boolean;
-  title?: string;
+  errorTranslationId?: string;
+  emptyTranslationId?: string;
+  showTitle?: boolean;
+  titleTranslationId?: string;
+  readMoreAmount?: number;
+  readMoreLink?: string;
+  readMoreTranslationId?: string;
   tasks?: GetTakenQuery["getTaken"]["content"];
-  total?: number;
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
-  showTitle?: boolean;
-  titleTranslationId?: string;
-  subTitleTranslationId?: string;
-  errorTranslationId?: string;
-  emptyTranslationId?: string;
 }
 
 const TasksList = ({
   loading,
   error,
+  errorTranslationId = "tasksList.fetchError",
+  emptyTranslationId = "tasksList.empty",
+  showTitle = true,
+  titleTranslationId = "tasksList.title",
+  readMoreAmount,
+  readMoreLink,
+  readMoreTranslationId = "tasksList.viewAll",
   tasks,
-  total,
   index,
   indexLimit,
   onChange,
-  showTitle = true,
-  titleTranslationId = "tasksList.title",
-  subTitleTranslationId = "tasksList.viewAll",
-  errorTranslationId = "tasksList.fetchError",
-  emptyTranslationId = "tasksList.empty",
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
+  const tasksPath = readMoreLink || paths.tasks;
   const title = showTitle
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
-  const subTitle = total
-    ? intl.formatMessage({ id: subTitleTranslationId }, { total })
+  const subTitle = readMoreAmount
+    ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
     : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
@@ -79,7 +81,7 @@ const TasksList = ({
 
   return (
     <section className={styles["tasks-list"]}>
-      <SectionHeader title={title} subTitle={subTitle} href={paths.tasks} />
+      <SectionHeader title={title} subTitle={subTitle} href={tasksPath} />
       {tasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}

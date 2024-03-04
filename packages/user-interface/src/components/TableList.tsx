@@ -10,34 +10,35 @@ import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 interface Props {
   loading?: boolean;
   error?: boolean;
-  title?: string;
+  errorTranslationId?: string;
+  emptyTranslationId?: string;
+  showTitle?: boolean;
+  titleTranslationId?: string;
+  readMoreAmount?: number;
+  readMoreLink?: string;
+  readMoreTranslationId?: string;
   headers?: Cell[];
   rows?: CellObject[][];
-  total?: number;
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
-  showTitle?: boolean;
-  titleTranslationId?: string;
-  subTitleTranslationId?: string;
-  errorTranslationId?: string;
-  emptyTranslationId?: string;
 }
 
 const TableList = ({
   loading,
   error,
+  errorTranslationId = "tableList.fetchError",
+  emptyTranslationId = "tableList.empty",
+  showTitle = true,
+  titleTranslationId = "tableList.title",
+  readMoreAmount,
+  readMoreLink,
+  readMoreTranslationId = "tableList.viewAll",
   headers: hdrs,
   rows: rws,
-  total,
   index,
   indexLimit,
   onChange,
-  showTitle = true,
-  titleTranslationId = "tableList.title",
-  subTitleTranslationId = "tableList.viewAll",
-  errorTranslationId = "tableList.fetchError",
-  emptyTranslationId = "tableList.empty",
 }: Props) => {
   const intl = useIntl();
   const headers = hdrs && [
@@ -61,9 +62,10 @@ const TableList = ({
   const title = showTitle
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
-  const subTitle = total
-    ? intl.formatMessage({ id: subTitleTranslationId }, { total })
-    : undefined;
+  const subTitle =
+    readMoreAmount && readMoreLink
+      ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
+      : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
@@ -96,8 +98,7 @@ const TableList = ({
 
   return (
     <section className={styles["table-list"]}>
-      {/* TODO: link to? */}
-      <SectionHeader title={title} subTitle={subTitle} href="#meh" />
+      <SectionHeader title={title} subTitle={subTitle} href={readMoreLink} />
       <Table headers={headers} rows={rows} />
       {indexLimit && (
         <Pagination
