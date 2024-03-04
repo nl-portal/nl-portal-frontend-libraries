@@ -36,37 +36,44 @@ const Table = ({ headers, rows }: Props) => {
     );
   };
 
-  const renderCell = (cell: Cell, head?: boolean) => {
+  const renderCell = (index: number, cell: Cell, head?: boolean) => {
     if (isObject(cell)) {
+      const key = cell.children ? cell?.children.toString() : index;
+
       if (cell.head)
         return (
-          <TableHeader className={cell.className} href={cell.href}>
+          <TableHeader key={key} className={cell.className} href={cell.href}>
             {cell.children}
           </TableHeader>
         );
 
       return (
-        <TableCell className={cell.className} href={cell.href}>
+        <TableCell key={key} className={cell.className} href={cell.href}>
           {cell.children}
         </TableCell>
       );
     }
 
-    if (head) return <TableHeader>{cell}</TableHeader>;
-    return <TableCell>{cell}</TableCell>;
+    const key = cell?.toString();
+    if (head) return <TableHeader key={key}>{cell}</TableHeader>;
+    return <TableCell key={key}>{cell}</TableCell>;
   };
 
   return (
     <TableComp>
       {headers && (
         <TableHead>
-          <TableRow>{headers.map((head) => renderCell(head, true))}</TableRow>
+          <TableRow>
+            {headers.map((head, index) => renderCell(index, head, true))}
+          </TableRow>
         </TableHead>
       )}
       {rows && (
         <TableBody>
-          {rows.map((row) => (
-            <TableRow>{row.map((cell) => renderCell(cell))}</TableRow>
+          {rows.map((row, rowIndex) => (
+            <TableRow key={rowIndex}>
+              {row.map((cell, cellIndex) => renderCell(cellIndex, cell))}
+            </TableRow>
           ))}
         </TableBody>
       )}
