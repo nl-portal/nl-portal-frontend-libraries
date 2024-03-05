@@ -8,5 +8,7 @@ export interface Paths {
   themes: string;
   account: string;
   editAccount: string;
+  forms: string;
+  form: (id?: string | number) => string;
   [key: string]: ((...args: any[]) => string) | string | undefined;
 }

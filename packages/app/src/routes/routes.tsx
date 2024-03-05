@@ -9,10 +9,12 @@ import {
   TaskPage,
   ThemesPage,
   FormsPage,
+  FormPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "../constants/paths";
 import { config } from "../constants/config";
 import { Navigate } from "react-router-dom";
+import { forms } from "../constants/forms";
 
 export const routes = [
   {
@@ -77,6 +79,15 @@ export const routes = [
   },
   {
     path: paths.forms,
-    element: <FormsPage />,
+    children: [
+      {
+        index: true,
+        element: <FormsPage forms={forms} />,
+      },
+      {
+        path: paths.form(),
+        element: <FormPage forms={forms} />,
+      },
+    ],
   },
 ];
