@@ -65,8 +65,6 @@ const Menu = ({ items, legacy }: Props) => {
     );
   }
 
-  console.log(items);
-
   return (
     <Sidenav>
       <SidenavList>
