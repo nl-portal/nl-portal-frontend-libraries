@@ -8,6 +8,7 @@ import {
   TasksPage,
   TaskPage,
   ThemesPage,
+  FormsPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "../constants/paths";
 import { config } from "../constants/config";
@@ -73,5 +74,9 @@ export const routes = [
         element: <EditAccountPage />,
       },
     ],
+  },
+  {
+    path: paths.forms,
+    element: <FormsPage />,
   },
 ];

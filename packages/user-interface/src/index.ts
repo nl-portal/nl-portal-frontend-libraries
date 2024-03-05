@@ -18,3 +18,4 @@ export { default as OverviewPage } from "./pages/OverviewPage";
 export { default as TasksPage } from "./pages/TasksPage";
 export { default as TaskPage } from "./pages/TaskPage";
 export { default as ThemesPage } from "./pages/ThemesPage";
+export { default as FormsPage } from "./pages/FormsPage";

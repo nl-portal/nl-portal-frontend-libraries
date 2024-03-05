@@ -4,7 +4,8 @@ import {
   DocumentIcon,
   GridIcon,
   InboxIcon,
-  UserIcon,
+  ListIcon,
+  UserIcon
 } from "@gemeente-denhaag/icons";
 import { paths } from "./paths";
 
@@ -13,6 +14,11 @@ export const menuItems: NavigationItem[] = [
     titleTranslationKey: "overview",
     path: paths.overview,
     icon: <GridIcon />,
+  },
+  {
+    titleTranslationKey: "forms",
+    path: paths.forms,
+    icon: <ListIcon />,
   },
   {
     titleTranslationKey: "notifications",
