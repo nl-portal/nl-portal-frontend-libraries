@@ -27,8 +27,6 @@ const Menu = ({ items, legacy }: Props) => {
   const currentNavigationItem =
     getCurrentNavigationPage(matches, items) || items[0];
 
-  console.log(items);
-
   if (legacy) {
     return (
       <aside
