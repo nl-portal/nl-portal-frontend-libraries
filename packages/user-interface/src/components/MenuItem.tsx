@@ -1,4 +1,4 @@
-import { FC, useContext } from "react";
+import { useContext } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
@@ -13,9 +13,11 @@ interface MenuItemProps {
   current?: boolean;
 }
 
-const MenuItem: FC<MenuItemProps> = ({ item, current = false }) => {
+const MenuItem = ({ item, current = false }: MenuItemProps) => {
   const { hrefLang } = useContext(LocaleContext);
   const { hideMenu, messagesCount } = useContext(LayoutContext);
+
+  if (!item) return null;
 
   return (
     <Link

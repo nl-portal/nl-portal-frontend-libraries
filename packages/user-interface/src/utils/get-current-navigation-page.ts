@@ -16,15 +16,15 @@ export const getCurrentNavigationPage = (
 ) => {
   while (matches.length > 0) {
     const match = matches.pop();
-    if (!match) {
-      continue;
-    }
+
+    if (!match) continue;
+
     const foundNavItem = navigationItems.find(
-      (item) => item.path === match.pathname,
+      (item) => item?.path === match.pathname,
     );
-    if (foundNavItem) {
-      return foundNavItem;
-    }
+
+    if (foundNavItem) return foundNavItem;
   }
+
   return undefined;
 };

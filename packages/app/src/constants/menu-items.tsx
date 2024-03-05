@@ -1,6 +1,7 @@
 import { NavigationItem } from "@nl-portal/nl-portal-user-interface";
 import {
   ArchiveIcon,
+  CheckCircleIcon,
   DocumentIcon,
   GridIcon,
   InboxIcon,
@@ -14,6 +15,12 @@ export const menuItems: NavigationItem[] = [
     path: paths.overview,
     icon: <GridIcon />,
   },
+  undefined,
+  {
+    titleTranslationKey: "tasks",
+    path: paths.tasks,
+    icon: <CheckCircleIcon />,
+  },
   {
     titleTranslationKey: "notifications",
     path: paths.notifications,
@@ -25,16 +32,13 @@ export const menuItems: NavigationItem[] = [
     path: paths.cases,
     icon: <ArchiveIcon />,
   },
-  {
-    titleTranslationKey: "tasks",
-    path: paths.tasks,
-    icon: <DocumentIcon />,
-  },
+  undefined,
   {
     titleTranslationKey: "themes",
     path: paths.themes,
     icon: <DocumentIcon />,
   },
+  undefined,
   {
     titleTranslationKey: "account",
     path: paths.account,

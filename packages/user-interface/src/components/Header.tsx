@@ -1,12 +1,5 @@
 import * as React from "react";
-import {
-  FC,
-  Fragment,
-  ReactElement,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { Fragment, ReactElement, useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Link, useNavigate } from "react-router-dom";
@@ -40,13 +33,13 @@ interface HeaderProps {
   offline?: boolean;
 }
 
-const Header: FC<HeaderProps> = ({
+const Header = ({
   logo,
   facet,
   navigationItems,
   offline,
   logoSmall,
-}) => {
+}: HeaderProps) => {
   const {
     mobileMenuOpened,
     menuOpened,

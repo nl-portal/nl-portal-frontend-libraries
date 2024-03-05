@@ -45,7 +45,6 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   headerLogoSmall,
 }) => {
   const online = !offline;
-
   const legacy = customHeader === undefined && customFooter === undefined;
   let pageHeaderClassnames = "";
   if (legacy) {
