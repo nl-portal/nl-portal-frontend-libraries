@@ -2,8 +2,6 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import { FormattedMessage } from "react-intl";
 import { useParams } from "react-router-dom";
-import { Paragraph } from "@gemeente-denhaag/components-react";
-import { Alert } from "@gemeente-denhaag/alert";
 
 const FormPage = ({ forms }) => {
   const { id } = useParams();
