@@ -19,7 +19,7 @@ const OverviewPage = ({
   showAlert = false,
   alertType = "warning",
   showIntro = false,
-  tasksPreviewLength = 6,
+  tasksPreviewLength = 3,
   casesPreviewLength = 4,
 }: OverviewPageProps) => {
   const intl = useIntl();
@@ -28,7 +28,7 @@ const OverviewPage = ({
     data: taskData,
     loading: taskLoading,
     error: taskError,
-  } = useGetTakenQuery();
+  } = useGetTakenQuery({ variables: { pageSize: tasksPreviewLength } });
   const {
     data: caseData,
     loading: caseLoading,
@@ -66,7 +66,7 @@ const OverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          tasks={taskData?.getTaken.content.slice(0, tasksPreviewLength)}
+          tasks={taskData?.getTaken.content}
         />
       )}
       {casesPreviewLength && (
