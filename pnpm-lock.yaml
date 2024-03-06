@@ -343,8 +343,8 @@ importers:
         specifier: 0.2.3-alpha.372
         version: 0.2.3-alpha.372(react@18.2.0)
       '@gemeente-denhaag/table':
-        specifier: 0.1.1-alpha.274
-        version: 0.1.1-alpha.274(react@18.2.0)
+        specifier: 0.1.1-alpha.278
+        version: 0.1.1-alpha.278(react@18.2.0)
       '@gemeente-denhaag/text-input':
         specifier: 0.3.0-alpha.372
         version: 0.3.0-alpha.372(react-dom@18.2.0)(react@18.2.0)
@@ -2074,6 +2074,14 @@ packages:
 
   /@gemeente-denhaag/table@0.1.1-alpha.274(react@18.2.0):
     resolution: {integrity: sha512-Laj4vAcyHCpWw56/JD03t1WOdgBHnIZxshMiNpgNDX/gfpNuZ4ZiBv4y03CZI0Rgp2/h2YmzEERq7CbNm1LzcQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/table@0.1.1-alpha.278(react@18.2.0):
+    resolution: {integrity: sha512-HZAx34g0L9nzZMgUJ7GWZ5mVk0awq3TofnS3/VYADlzu1OfUQJa051ThEddjuvRJEasugfjU6RGRCCaoXJbEUQ==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
