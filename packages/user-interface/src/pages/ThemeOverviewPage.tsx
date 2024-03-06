@@ -24,7 +24,7 @@ const ThemeOverviewPage = ({
     data: taskData,
     loading: taskLoading,
     error: taskError,
-  } = useGetTakenQuery();
+  } = useGetTakenQuery({ variables: { pageSize: showTasksLength } });
   const {
     data: caseData,
     loading: caseLoading,
@@ -39,7 +39,7 @@ const ThemeOverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          tasks={taskData?.getTaken.content.slice(0, showTasksLength)}
+          tasks={taskData?.getTaken.content}
         />
       )}
       {showCasesLength && (
