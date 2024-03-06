@@ -13,10 +13,10 @@ const FormsPage = ({ forms }) => {
     <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.forms" />} />
       {forms && forms.length > 0 && (
-        <ul class="utrecht-link-list utrecht-link-list--html-ul denhaag-link-group__list">
+        <ul className="utrecht-link-list utrecht-link-list--html-ul denhaag-link-group__list">
           {forms.map((form) => {
             return (
-              <li class="denhaag-link-group__list-item" key={`${form}`}>
+              <li className="denhaag-link-group__list-item" key={`${form}`}>
                 <Link to={paths.form(form)}>
                   <span className="denhaag-link denhaag-link--with-icon denhaag-link--with-icon-start">
                     <svg  aria-hidden="true"
