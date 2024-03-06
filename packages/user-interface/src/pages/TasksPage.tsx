@@ -21,9 +21,11 @@ const TasksPage = () => {
         loading={loading}
         error={Boolean(error)}
         showTitle={false}
-        tasks={data?.getTaken.results}
+        tasks={data?.getTaken.content}
         onChange={onPageChange}
-        indexLimit={data?.getTaken.totalPages - 1}
+        indexLimit={
+          data?.getTaken.totalPages ? data?.getTaken.totalPages - 1 : undefined
+        }
       />
     </PageGrid>
   );

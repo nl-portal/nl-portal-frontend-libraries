@@ -561,7 +561,7 @@ export type GetTakenQueryVariables = Exact<{
 }>;
 
 
-export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', totalElements: number, totalPages: number, results: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1282,7 +1282,7 @@ export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaa
 export const GetTakenDocument = gql`
     query GetTaken($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
   getTaken(zaakUUID: $zaakId, pageNumber: $pageNumber, pageSize: $pageSize) {
-    results {
+    content {
       id
       objectId
       formulier {

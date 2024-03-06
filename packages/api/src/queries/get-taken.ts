@@ -4,7 +4,7 @@ import { FORMULIER_FIELDS } from "../fragments/formulier";
 export const QUERY_GET_TAKEN = gql`
   query GetTaken($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
     getTaken(zaakUUID: $zaakId, pageNumber: $pageNumber, pageSize: $pageSize) {
-      results {
+      content {
         id
         objectId
         formulier {
