@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-user-interface",
-  "version": "0.1.1-alpha.54",
+  "version": "0.1.1-alpha.55",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -49,7 +49,7 @@
     "@gemeente-denhaag/responsive-content": "0.1.1-alpha.232",
     "@gemeente-denhaag/sidenav": "0.1.0-alpha.190",
     "@gemeente-denhaag/tab": "0.2.3-alpha.372",
-    "@gemeente-denhaag/table": "0.1.1-alpha.274",
+    "@gemeente-denhaag/table": "0.1.1-alpha.278",
     "@gemeente-denhaag/text-input": "0.3.0-alpha.372",
     "@gemeente-denhaag/typography": "0.2.3-alpha.372",
     "@react-hook/size": "^2.1.2",

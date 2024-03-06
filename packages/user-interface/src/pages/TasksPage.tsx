@@ -20,6 +20,7 @@ const TasksPage = () => {
       <TasksList
         loading={loading}
         error={Boolean(error)}
+        showTitle={false}
         tasks={data?.getTaken.results}
         onChange={onPageChange}
         indexLimit={data?.getTaken.totalPages - 1}

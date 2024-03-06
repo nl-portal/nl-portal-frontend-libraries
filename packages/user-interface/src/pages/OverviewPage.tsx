@@ -11,8 +11,6 @@ interface OverviewPageProps {
   showAlert?: boolean;
   alertType?: "error" | "info" | "success" | "warning";
   showIntro?: boolean;
-  showTasksPreview?: boolean;
-  showCasesPreview?: boolean;
   tasksPreviewLength?: number;
   casesPreviewLength?: number;
 }
@@ -21,9 +19,7 @@ const OverviewPage = ({
   showAlert = false,
   alertType = "warning",
   showIntro = false,
-  showTasksPreview = false,
-  showCasesPreview = false,
-  tasksPreviewLength = 4,
+  tasksPreviewLength = 6,
   casesPreviewLength = 4,
 }: OverviewPageProps) => {
   const intl = useIntl();
@@ -66,19 +62,17 @@ const OverviewPage = ({
           <FormattedMessage id="overviewpage.paragraph" />
         </PageHeader>
       )}
-      {showTasksPreview && (
+      {tasksPreviewLength && (
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          title={intl.formatMessage({ id: "overview.tasksTitle" })}
           tasks={taskData?.getTaken.content.slice(0, tasksPreviewLength)}
         />
       )}
-      {showCasesPreview && (
+      {casesPreviewLength && (
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          title={intl.formatMessage({ id: "overview.casesTitle" })}
           cases={caseData?.getZaken.slice(0, casesPreviewLength)}
         />
       )}
