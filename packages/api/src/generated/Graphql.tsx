@@ -21,6 +21,19 @@ export type Scalars = {
   UUID: { input: any; output: any; }
 };
 
+export type Adres = {
+  __typename?: 'Adres';
+  huisnummer: Scalars['Int']['output'];
+  indAfgeschermd: Scalars['String']['output'];
+  land: Scalars['String']['output'];
+  plaats: Scalars['String']['output'];
+  postbusnummer: Scalars['Int']['output'];
+  postcode: Scalars['String']['output'];
+  straatnaam: Scalars['String']['output'];
+  type: Scalars['String']['output'];
+  volledigAdres: Scalars['String']['output'];
+};
+
 export type ContactMoment = {
   __typename?: 'ContactMoment';
   bronorganisatie?: Maybe<Scalars['String']['output']>;
@@ -61,6 +74,19 @@ export type DocumentContent = {
   content: Scalars['String']['output'];
 };
 
+export type Eigenaar = {
+  __typename?: 'Eigenaar';
+  rechtsvorm: Scalars['String']['output'];
+  rsin?: Maybe<Scalars['String']['output']>;
+  uitgebreideRechtsvorm: Scalars['String']['output'];
+};
+
+export type Embedded = {
+  __typename?: 'Embedded';
+  eigenaar: Eigenaar;
+  hoofdvestiging: Hoofdvestiging;
+};
+
 export type Form = {
   __typename?: 'Form';
   name: Scalars['String']['output'];
@@ -78,6 +104,23 @@ export type Gemachtigde = {
   persoon?: Maybe<PersoonNaam>;
 };
 
+export type HandelsNaam = {
+  __typename?: 'HandelsNaam';
+  naam: Scalars['String']['output'];
+  volgorde: Scalars['Int']['output'];
+};
+
+export type Hoofdvestiging = {
+  __typename?: 'Hoofdvestiging';
+  adressen?: Maybe<Array<Adres>>;
+  eersteHandelsnaam: Scalars['String']['output'];
+  indCommercieleVestiging: Scalars['String']['output'];
+  indHoofdvestiging: Scalars['String']['output'];
+  kvkNummer: Scalars['String']['output'];
+  totaalWerkzamePersonen: Scalars['Int']['output'];
+  vestigingsnummer: Scalars['String']['output'];
+};
+
 export type Klant = {
   __typename?: 'Klant';
   emailadres?: Maybe<Scalars['String']['output']>;
@@ -91,7 +134,21 @@ export type KlantUpdateInput = {
 
 export type MaatschappelijkeActiviteit = {
   __typename?: 'MaatschappelijkeActiviteit';
+  embedded?: Maybe<Embedded>;
+  formeleRegistratiedatum?: Maybe<Scalars['String']['output']>;
+  handelsnamen?: Maybe<Array<HandelsNaam>>;
+  indNonMailing?: Maybe<Scalars['String']['output']>;
+  kvkNummer: Scalars['String']['output'];
+  materieleRegistratie?: Maybe<MaterieleRegistratie>;
   naam: Scalars['String']['output'];
+  sbiActiviteiten?: Maybe<Array<SbiActiviteit>>;
+  statutaireNaam?: Maybe<Scalars['String']['output']>;
+  totaalWerkzamePersonen?: Maybe<Scalars['Int']['output']>;
+};
+
+export type MaterieleRegistratie = {
+  __typename?: 'MaterieleRegistratie';
+  datumAanvang: Scalars['String']['output'];
 };
 
 export type Mutation = {
@@ -288,6 +345,13 @@ export type QueryGetZaakArgs = {
 
 export type QueryGetZakenArgs = {
   page?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type SbiActiviteit = {
+  __typename?: 'SbiActiviteit';
+  indHoofdactiviteit: Scalars['String']['output'];
+  sbiCode: Scalars['String']['output'];
+  sbiOmschrijving: Scalars['String']['output'];
 };
 
 export type StatusType = {
@@ -492,10 +556,12 @@ export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename
 
 export type GetTakenQueryVariables = Exact<{
   zaakId?: InputMaybe<Scalars['UUID']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', totalElements: number, totalPages: number, results: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1214,9 +1280,9 @@ export type GetTaakByIdLazyQueryHookResult = ReturnType<typeof useGetTaakByIdLaz
 export type GetTaakByIdSuspenseQueryHookResult = ReturnType<typeof useGetTaakByIdSuspenseQuery>;
 export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaakByIdQueryVariables>;
 export const GetTakenDocument = gql`
-    query GetTaken($zaakId: UUID) {
-  getTaken(zaakUUID: $zaakId) {
-    content {
+    query GetTaken($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
+  getTaken(zaakUUID: $zaakId, pageNumber: $pageNumber, pageSize: $pageSize) {
+    results {
       id
       objectId
       formulier {
@@ -1227,6 +1293,8 @@ export const GetTakenDocument = gql`
       date
       verloopdatum
     }
+    totalElements
+    totalPages
   }
 }
     ${FormulierFieldsFragmentDoc}`;
@@ -1244,6 +1312,8 @@ export const GetTakenDocument = gql`
  * const { data, loading, error } = useGetTakenQuery({
  *   variables: {
  *      zaakId: // value for 'zaakId'
+ *      pageNumber: // value for 'pageNumber'
+ *      pageSize: // value for 'pageSize'
  *   },
  * });
  */

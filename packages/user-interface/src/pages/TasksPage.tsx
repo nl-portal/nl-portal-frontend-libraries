@@ -5,7 +5,14 @@ import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
 
 const TasksPage = () => {
-  const { data, loading, error } = useGetTakenQuery();
+  const { data, loading, error, refetch } = useGetTakenQuery({
+    variables: { pageSize: 10 },
+  });
+
+  const onPageChange = (index: number) => {
+    refetch({ pageNumber: index + 1 });
+    return index;
+  };
 
   return (
     <PageGrid>
@@ -13,7 +20,9 @@ const TasksPage = () => {
       <TasksList
         loading={loading}
         error={Boolean(error)}
-        tasks={data?.getTaken.content}
+        tasks={data?.getTaken.results}
+        onChange={onPageChange}
+        indexLimit={data?.getTaken.totalPages - 1}
       />
     </PageGrid>
   );
