@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import styles from "./TasksList.module.scss";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
@@ -12,9 +12,14 @@ import { RouterOutletContext } from "../contexts/RouterOutletContext";
 interface Props {
   loading?: boolean;
   error?: boolean;
-  title?: string;
+  errorTranslationId?: string;
+  emptyTranslationId?: string;
+  showTitle?: boolean;
+  titleTranslationId?: string;
+  readMoreAmount?: number;
+  readMoreLink?: string;
+  readMoreTranslationId?: string;
   tasks?: GetTakenQuery["getTaken"]["content"];
-  total?: number;
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
@@ -23,18 +28,29 @@ interface Props {
 const TasksList = ({
   loading,
   error,
-  title,
+  errorTranslationId = "tasksList.fetchError",
+  emptyTranslationId = "tasksList.empty",
+  showTitle = true,
+  titleTranslationId = "tasksList.title",
+  readMoreAmount,
+  readMoreLink,
+  readMoreTranslationId = "tasksList.viewAll",
   tasks,
-  total,
   index,
   indexLimit,
   onChange,
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
-  const subTitle = total
-    ? intl.formatMessage({ id: "tasks.viewAll" }, { total })
+  const tasksPath = readMoreLink || paths.tasks;
+  const title = showTitle
+    ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
+  const subTitle = readMoreAmount
+    ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
+    : undefined;
+  const errorMessage = intl.formatMessage({ id: errorTranslationId });
+  const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
   if (loading) {
     return (
@@ -51,9 +67,7 @@ const TasksList = ({
     return (
       <section className={styles["tasks-list"]}>
         <SectionHeader title={title} />
-        <Paragraph>
-          <FormattedMessage id="tasks.fetchError" />
-        </Paragraph>
+        <Paragraph>{errorMessage}</Paragraph>
       </section>
     );
 
@@ -61,15 +75,13 @@ const TasksList = ({
     return (
       <section className={styles["tasks-list"]}>
         <SectionHeader title={title} />
-        <Paragraph>
-          <FormattedMessage id="tasks.noOpenTasks" />
-        </Paragraph>
+        <Paragraph>{emptyMessage}</Paragraph>
       </section>
     );
 
   return (
     <section className={styles["tasks-list"]}>
-      <SectionHeader title={title} subTitle={subTitle} href={paths.tasks} />
+      <SectionHeader title={title} subTitle={subTitle} href={tasksPath} />
       {tasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}

@@ -14,6 +14,7 @@ const TasksPage = () => {
         loading={loading}
         error={Boolean(error)}
         tasks={data?.getTaken.content}
+        showTitle={false}
       />
     </PageGrid>
   );

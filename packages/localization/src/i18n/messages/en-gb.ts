@@ -9,7 +9,7 @@ export const EN_GB_MESSAGES: Messages = {
     "pageTitles.overview": "Overview",
     "pageTitles.cases": "Current cases",
     "pageTitles.notifications": "My messages",
-    "pageTitles.themes": "Themes",
+    "pageTitles.themeOverview": "Theme",
     "pageTitles.documents": "Documents",
     "pageTitles.offline": "No internet connection",
     "pageTitles.form": "Form",
