@@ -7,9 +7,9 @@ import {
   OverviewPage,
   TasksPage,
   TaskPage,
-  ThemesPage,
   FormsPage,
   FormPage,
+  ThemeOverviewPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "../constants/paths";
 import { config } from "../constants/config";
@@ -23,7 +23,7 @@ export const routes = [
   },
   {
     path: paths.overview,
-    element: <OverviewPage showIntro showCasesPreview casesPreviewLength={6} />,
+    element: <OverviewPage showIntro />,
   },
   {
     path: paths.cases,
@@ -56,8 +56,14 @@ export const routes = [
     element: <NotificationsPage />,
   },
   {
-    path: paths.themes,
-    element: <ThemesPage />,
+    path: paths.themeOverview(),
+    element: (
+      <ThemeOverviewPage
+        type="erfpacht"
+        showTasksLength={3}
+        showCasesLength={4}
+      />
+    ),
   },
   {
     path: paths.account,

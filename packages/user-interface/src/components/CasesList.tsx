@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
@@ -13,9 +13,14 @@ import classnames from "classnames";
 interface Props {
   loading?: boolean;
   error?: boolean;
-  title?: string;
+  errorTranslationId?: string;
+  emptyTranslationId?: string;
+  showTitle?: boolean;
+  titleTranslationId?: string;
+  readMoreAmount?: number;
+  readMoreLink?: string;
+  readMoreTranslationId?: string;
   cases?: GetZakenQuery["getZaken"];
-  total?: number;
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
@@ -24,19 +29,30 @@ interface Props {
 const CasesList = ({
   loading,
   error,
-  title,
+  errorTranslationId = "casesList.fetchError",
+  emptyTranslationId = "casesList.empty",
+  showTitle = true,
+  titleTranslationId = "casesList.title",
+  readMoreAmount,
+  readMoreLink,
+  readMoreTranslationId = "casesList.viewAll",
   cases,
-  total,
   index,
   indexLimit,
   onChange,
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
-  const listView = Boolean(total && total > 8);
-  const subTitle = total
-    ? intl.formatMessage({ id: "cases.viewAll" }, { total })
+  const casesPath = readMoreLink || paths.cases;
+  const listView = Boolean(readMoreAmount && readMoreAmount > 8);
+  const title = showTitle
+    ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
+  const subTitle = readMoreAmount
+    ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
+    : undefined;
+  const errorMessage = intl.formatMessage({ id: errorTranslationId });
+  const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
   if (loading) {
     return (
@@ -54,9 +70,7 @@ const CasesList = ({
     return (
       <section className={styles["cases-list"]}>
         <SectionHeader title={title} />
-        <Paragraph>
-          <FormattedMessage id="cases.fetchError" />
-        </Paragraph>
+        <Paragraph>{errorMessage}</Paragraph>
       </section>
     );
 
@@ -64,15 +78,13 @@ const CasesList = ({
     return (
       <section className={styles["cases-list"]}>
         <SectionHeader title={title} />
-        <Paragraph>
-          <FormattedMessage id="cases.noClosedCases" />
-        </Paragraph>
+        <Paragraph>{emptyMessage}</Paragraph>
       </section>
     );
 
   return (
     <section className={styles["cases-list"]}>
-      <SectionHeader title={title} subTitle={subTitle} href={paths.cases} />
+      <SectionHeader title={title} subTitle={subTitle} href={casesPath} />
       <div
         className={classnames(styles["cases-list__cases"], {
           [styles["cases-list__cases--list"]]: listView,

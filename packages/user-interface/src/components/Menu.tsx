@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FC, useContext } from "react";
+import { useContext } from "react";
 import { Link, useMatches } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
@@ -13,18 +13,18 @@ import MenuItem from "./MenuItem";
 import { NavigationItem } from "../interfaces/navigation-item";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 
-interface MenuProps {
-  items: NavigationItem[];
+interface Props {
+  items: NavigationItem[][];
   legacy?: boolean;
 }
 
-const Menu: FC<MenuProps> = ({ items, legacy }) => {
+const Menu = ({ items, legacy }: Props) => {
   const { hrefLang } = useContext(LocaleContext);
   const { menuOpened, hideMenu } = useContext(LayoutContext);
   const intl = useIntl();
   const matches = useMatches();
   const currentNavigationItem =
-    getCurrentNavigationPage(matches, items) || items[0];
+    getCurrentNavigationPage(matches, items) || items[0][0];
 
   if (legacy) {
     return (
@@ -46,13 +46,15 @@ const Menu: FC<MenuProps> = ({ items, legacy }) => {
             )}
           </header>
           <nav className={styles.menu__items}>
-            {items.map((item) => (
-              <MenuItem
-                key={item.path}
-                item={item}
-                current={item === currentNavigationItem}
-              />
-            ))}
+            {items.map((array) =>
+              array.map((item) => (
+                <MenuItem
+                  key={item.path}
+                  item={item}
+                  current={item === currentNavigationItem}
+                />
+              )),
+            )}
           </nav>
         </div>
       </aside>
@@ -61,24 +63,27 @@ const Menu: FC<MenuProps> = ({ items, legacy }) => {
 
   return (
     <Sidenav>
-      <SidenavList>
-        {items.map((item) => {
-          const current = item === currentNavigationItem;
-          const className = `denhaag-sidenav__link ${
-            current && "denhaag-sidenav__link--current"
-          }`;
-          return (
-            <SidenavItem key={item.path}>
-              <Link className={className} hrefLang={hrefLang} to={item.path}>
-                {item.icon}
-                <FormattedMessage
-                  id={`pageTitles.${item.titleTranslationKey}`}
-                />
-              </Link>
-            </SidenavItem>
-          );
-        })}
-      </SidenavList>
+      {items.map((array, index) => (
+        <SidenavList key={`sidenav-list-${index}`}>
+          {array.map((item) => {
+            const current = item === currentNavigationItem;
+            const className = `denhaag-sidenav__link ${
+              current && "denhaag-sidenav__link--current"
+            }`;
+
+            return (
+              <SidenavItem key={item.path}>
+                <Link className={className} hrefLang={hrefLang} to={item.path}>
+                  {item.icon}
+                  <FormattedMessage
+                    id={`pageTitles.${item.titleTranslationKey}`}
+                  />
+                </Link>
+              </SidenavItem>
+            );
+          })}
+        </SidenavList>
+      ))}
     </Sidenav>
   );
 };

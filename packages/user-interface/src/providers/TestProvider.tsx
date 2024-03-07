@@ -17,7 +17,8 @@ export const testPaths: Paths = {
   tasks: "/taken",
   task: (id = ":id") => `/taken/taak/${id}`,
   notifications: "/berichten",
-  themes: "/themas",
+  themeOverview: (type = ":type") => `/${type}`,
+  themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
   account: "/account",
   editAccount: "/account/aanpassen",
 };
