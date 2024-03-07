@@ -9,12 +9,14 @@ import { testPaths as paths } from "../providers/TestProvider";
 
 let container!: HTMLElement | undefined;
 
-const navigationItems: NavigationItem[] = [
-  {
-    titleTranslationKey: "overview",
-    path: paths.overview,
-    icon: <span />,
-  },
+const navigationItems: NavigationItem[][] = [
+  [
+    {
+      titleTranslationKey: "overview",
+      path: paths.overview,
+      icon: <span />,
+    },
+  ],
 ];
 
 const route = {

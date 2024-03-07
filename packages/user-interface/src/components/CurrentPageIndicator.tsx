@@ -9,7 +9,7 @@ import { useMatches } from "react-router-dom";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 
 interface CurrentPageIndicatorProps {
-  navigationItems: NavigationItem[];
+  navigationItems: NavigationItem[][];
 }
 
 const CurrentPageIndicator = ({
@@ -19,7 +19,7 @@ const CurrentPageIndicator = ({
   const intl = useIntl();
   const matches = useMatches();
   const currentPage =
-    getCurrentNavigationPage(matches, navigationItems) || navigationItems[0];
+    getCurrentNavigationPage(matches, navigationItems) || navigationItems[0][0];
 
   return (
     <button

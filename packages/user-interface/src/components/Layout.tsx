@@ -22,7 +22,7 @@ import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";
 
 interface LayoutComponentProps {
-  navigationItems: NavigationItem[];
+  navigationItems: NavigationItem[][];
   paths: Paths;
   customHeader?: ReactElement;
   customFooter?: ReactElement;
@@ -45,7 +45,6 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   headerLogoSmall,
 }) => {
   const online = !offline;
-
   const legacy = customHeader === undefined && customFooter === undefined;
   let pageHeaderClassnames = "";
   if (legacy) {
