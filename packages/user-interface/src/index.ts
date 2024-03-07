@@ -6,6 +6,7 @@ export { default as PortalLink } from "./components/PortalLink";
 export * from "./interfaces/navigation-item";
 export * from "./interfaces/paths";
 export * from "./interfaces/portal-footer";
+export * from "./interfaces/forms";
 
 export { default as useUserInfo } from "./hooks/useUserInfo";
 
