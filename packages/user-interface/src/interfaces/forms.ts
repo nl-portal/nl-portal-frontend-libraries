@@ -1,3 +1,3 @@
 export interface Forms {
-  forms: any[] | undefined;
+  forms: any[];
 }
