@@ -13,7 +13,7 @@ const FormPage = ({ forms }: Forms) => {
           <span data-testid={`form-item-${id}`}>
             <FormattedMessage id={`forms.${id}`} />
           </span>
-        ) || forms && forms.length > 0 && !forms.includes(id) && (
+        ) || forms && (!forms.length || (forms.length > 0 && !forms.includes(id))) && (
           <span data-testid={`form-not-found`}>
             <FormattedMessage id="form.formNotFound" />
           </span>
