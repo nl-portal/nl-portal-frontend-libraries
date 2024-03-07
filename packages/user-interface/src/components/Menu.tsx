@@ -12,10 +12,9 @@ import styles from "./Menu.module.scss";
 import MenuItem from "./MenuItem";
 import { NavigationItem } from "../interfaces/navigation-item";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
-import SidenavDivider from "./SidenavDivider";
 
 interface Props {
-  items: NavigationItem[];
+  items: NavigationItem[][];
   legacy?: boolean;
 }
 
@@ -25,7 +24,7 @@ const Menu = ({ items, legacy }: Props) => {
   const intl = useIntl();
   const matches = useMatches();
   const currentNavigationItem =
-    getCurrentNavigationPage(matches, items) || items[0];
+    getCurrentNavigationPage(matches, items) || items[0][0];
 
   if (legacy) {
     return (
@@ -47,16 +46,15 @@ const Menu = ({ items, legacy }: Props) => {
             )}
           </header>
           <nav className={styles.menu__items}>
-            {items.map((item) => {
-              if (!item) return <SidenavDivider key={Math.random()} />;
-              return (
+            {items.map((array, index) =>
+              array.map((item) => (
                 <MenuItem
                   key={item.path}
                   item={item}
                   current={item === currentNavigationItem}
                 />
-              );
-            })}
+              )),
+            )}
           </nav>
         </div>
       </aside>
@@ -65,27 +63,27 @@ const Menu = ({ items, legacy }: Props) => {
 
   return (
     <Sidenav>
-      <SidenavList>
-        {items.map((item) => {
-          const current = item === currentNavigationItem;
-          const className = `denhaag-sidenav__link ${
-            current && "denhaag-sidenav__link--current"
-          }`;
+      {items.map((array, index) => (
+        <SidenavList key={`sidenav-list-${index}`}>
+          {array.map((item) => {
+            const current = item === currentNavigationItem;
+            const className = `denhaag-sidenav__link ${
+              current && "denhaag-sidenav__link--current"
+            }`;
 
-          if (!item) return <SidenavDivider key={Math.random()} />;
-
-          return (
-            <SidenavItem key={item.path}>
-              <Link className={className} hrefLang={hrefLang} to={item.path}>
-                {item.icon}
-                <FormattedMessage
-                  id={`pageTitles.${item.titleTranslationKey}`}
-                />
-              </Link>
-            </SidenavItem>
-          );
-        })}
-      </SidenavList>
+            return (
+              <SidenavItem key={item.path}>
+                <Link className={className} hrefLang={hrefLang} to={item.path}>
+                  {item.icon}
+                  <FormattedMessage
+                    id={`pageTitles.${item.titleTranslationKey}`}
+                  />
+                </Link>
+              </SidenavItem>
+            );
+          })}
+        </SidenavList>
+      ))}
     </Sidenav>
   );
 };

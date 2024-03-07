@@ -28,7 +28,7 @@ import { NavigationItem } from "../interfaces/navigation-item";
 interface HeaderProps {
   logo: ReactElement;
   logoSmall: ReactElement;
-  navigationItems: NavigationItem[];
+  navigationItems: NavigationItem[][];
   facet?: ReactElement;
   offline?: boolean;
 }
@@ -72,7 +72,7 @@ const Header = ({
   const headerLogoElementToUse =
     !isTablet && fullscreenForm ? headerLogoSmallElement : headerLogoElement;
   const online = !offline;
-  const homeNavigation = navigationItems[0];
+  const homeNavigation = navigationItems[0][0];
 
   useEffect(() => {
     if (height !== headerHeight) {

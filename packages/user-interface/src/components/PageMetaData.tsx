@@ -6,14 +6,14 @@ import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 
 interface PageMetaDataProps {
   children: ReactElement;
-  navigationItems: NavigationItem[];
+  navigationItems: NavigationItem[][];
 }
 
 const PageMetaData = ({ children, navigationItems }: PageMetaDataProps) => {
   const intl = useIntl();
   const matches = useMatches();
   const currentPage =
-    getCurrentNavigationPage(matches, navigationItems) || navigationItems[0];
+    getCurrentNavigationPage(matches, navigationItems) || navigationItems[0][0];
 
   const pageTitle = intl.formatMessage({
     id: `pageTitles.${currentPage?.titleTranslationKey}`,

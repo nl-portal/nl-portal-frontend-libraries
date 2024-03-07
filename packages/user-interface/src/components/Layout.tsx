@@ -22,7 +22,7 @@ import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";
 
 interface LayoutComponentProps {
-  navigationItems: NavigationItem[];
+  navigationItems: NavigationItem[][];
   paths: Paths;
   customHeader?: ReactElement;
   customFooter?: ReactElement;
