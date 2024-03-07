@@ -9,11 +9,11 @@ const FormPage = ({ forms }: Forms) => {
   return (
     <PageGrid>
       <PageHeader title={
-        forms && forms.includes(id) && (
+        forms && forms.length > 0 && forms.includes(id) && (
           <span data-testid={`form-item-${id}`}>
             <FormattedMessage id={`forms.${id}`} />
           </span>
-        ) || forms && !forms.includes(id) && (
+        ) || forms && forms.length > 0 && !forms.includes(id) && (
           <span data-testid={`form-not-found`}>
             <FormattedMessage id="form.formNotFound" />
           </span>
