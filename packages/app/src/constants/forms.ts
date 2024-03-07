@@ -1,6 +1,4 @@
-import { Forms } from "@nl-portal/nl-portal-user-interface/src/interfaces/forms.ts";
-
-export const forms: Forms = [
+export const forms: string[] = [
   'aanvraag-1',
   'aanvraag-2'
 ];
