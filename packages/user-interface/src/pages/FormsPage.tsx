@@ -3,12 +3,9 @@ import PageHeader from "../components/PageHeader";
 import { FormattedMessage } from "react-intl";
 import { Link } from "@gemeente-denhaag/link";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
+import { Forms } from "../interfaces/forms.ts";
 
-interface FormsPageProps {
-  forms?: [string];
-}
-
-const FormsPage = ({ forms }: FormsPageProps) => {
+const FormsPage = ({ forms }: Forms) => {
   return (
     <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.forms" />}>

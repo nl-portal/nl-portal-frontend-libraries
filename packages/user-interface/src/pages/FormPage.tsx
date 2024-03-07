@@ -2,12 +2,9 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import { FormattedMessage } from "react-intl";
 import { useParams } from "react-router-dom";
+import { Forms } from "../interfaces/forms.ts";
 
-interface FormPageProps {
-  forms?: [string];
-}
-
-const FormPage = ({ forms }: FormPageProps) => {
+const FormPage = ({ forms }: Forms) => {
   const { id } = useParams();
   return (
     <PageGrid>
