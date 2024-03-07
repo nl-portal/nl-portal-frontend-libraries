@@ -9,9 +9,13 @@ const FormPage = ({ forms }) => {
     <PageGrid>
       <PageHeader title={
         forms.includes(id) && (
-          <FormattedMessage id={`forms.${id}`} />
+          <span data-testid={`form-item-${form}`}>
+            <FormattedMessage id={`forms.${id}`} />
+          </span>
         ) || !forms.includes(id) && (
-          <FormattedMessage id="form.noForms" />
+          <span data-testid={`form-not-found`}>
+            <FormattedMessage id="form.formNotFound" />
+          </span>
         )
       } />
     </PageGrid>
