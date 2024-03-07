@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import FormsPage from "./FormsPage.tsx";
 import { render, screen } from "@testing-library/react";
-import { RouterProvider } from "react-router-dom";
 import { IntlProvider } from "react-intl";
 
 describe("FormsPage", () => {

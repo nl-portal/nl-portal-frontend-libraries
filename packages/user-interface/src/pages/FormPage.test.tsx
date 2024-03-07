@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import FormPage from "./FormPage.tsx";
 import { render, screen } from "@testing-library/react";
 import { IntlProvider } from "react-intl";
-import FormsPage from "./FormsPage.tsx";
 
 describe("FormPage", () => {
   it("is truthy", () => {

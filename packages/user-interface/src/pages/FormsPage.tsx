@@ -1,8 +1,6 @@
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import { FormattedMessage } from "react-intl";
-import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext.tsx";
 import { Link } from "@gemeente-denhaag/link";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 
