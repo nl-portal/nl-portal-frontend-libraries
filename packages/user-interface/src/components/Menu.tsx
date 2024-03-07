@@ -46,7 +46,7 @@ const Menu = ({ items, legacy }: Props) => {
             )}
           </header>
           <nav className={styles.menu__items}>
-            {items.map((array, index) =>
+            {items.map((array) =>
               array.map((item) => (
                 <MenuItem
                   key={item.path}
