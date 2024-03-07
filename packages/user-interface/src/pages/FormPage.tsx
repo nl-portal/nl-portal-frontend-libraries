@@ -3,7 +3,11 @@ import PageHeader from "../components/PageHeader";
 import { FormattedMessage } from "react-intl";
 import { useParams } from "react-router-dom";
 
-const FormPage = ({ forms }) => {
+interface FormPageProps {
+  forms?: [string];
+}
+
+const FormPage = ({ forms }: FormPageProps) => {
   const { id } = useParams();
   return (
     <PageGrid>

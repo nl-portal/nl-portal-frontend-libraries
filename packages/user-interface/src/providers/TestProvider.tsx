@@ -21,6 +21,8 @@ export const testPaths: Paths = {
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
   account: "/account",
   editAccount: "/account/aanpassen",
+  forms: "/formulieren",
+  form: (id = ":id") => `/formulieren/formulier/${id}`,
 };
 
 const TestContent = ({

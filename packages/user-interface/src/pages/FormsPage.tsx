@@ -4,7 +4,11 @@ import { FormattedMessage } from "react-intl";
 import { Link } from "@gemeente-denhaag/link";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 
-const FormsPage = ({ forms }) => {
+interface FormsPageProps {
+  forms?: [string];
+}
+
+const FormsPage = ({ forms }: FormsPageProps) => {
   return (
     <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.forms" />}>
