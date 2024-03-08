@@ -28,6 +28,5 @@ describe("FormsPage", () => {
     expect(screen.getByTestId('forms-item-form-2')).toBeInTheDocument();
     expect(screen.getByText("forms.form-1")).toBeVisible();
     expect(screen.getByText("forms.form-2")).toBeVisible();
-    screen.debug();
   });
 });
