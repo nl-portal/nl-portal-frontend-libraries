@@ -14,7 +14,6 @@ describe("FormPage", () => {
         <FormPage forms={[]} />
       </IntlProvider>
     );
-    const formNotFound = screen.getByTestId('form-not-found');
-    expect(formNotFound).toBeInTheDocument();
+    expect(screen.getByTestId('form-not-found')).toBeInTheDocument();
   });
 });

@@ -14,21 +14,20 @@ describe("FormsPage", () => {
         <FormsPage forms={[]} />
       </IntlProvider>
     );
-    const emptyForms = screen.getByTestId('empty-forms');
-    expect(emptyForms).toBeInTheDocument();
-    // screen.debug();
+    expect(screen.getByTestId('empty-forms')).toBeInTheDocument();
   });
 
   it("should render forms list", () => {
     render(
       <IntlProvider locale={'nl'}>
-        <FormsPage forms={["form"]} />
+        <FormsPage forms={["form-1", "form-2"]} />
       </IntlProvider>
     );
-    const listForms = screen.getByTestId('list-forms');
-    const formsItem = screen.getByTestId('forms-item-form');
-    expect(listForms).toBeInTheDocument();
-    expect(formsItem).toBeInTheDocument();
-    // screen.debug();
+    expect(screen.getByTestId('list-forms')).toBeInTheDocument();
+    expect(screen.getByTestId('forms-item-form-1')).toBeInTheDocument();
+    expect(screen.getByTestId('forms-item-form-2')).toBeInTheDocument();
+    expect(screen.getByText("forms.form-1")).toBeVisible();
+    expect(screen.getByText("forms.form-2")).toBeVisible();
+    screen.debug();
   });
 });
