@@ -4,7 +4,7 @@ import { FormattedMessage } from "react-intl";
 import { Link } from "@gemeente-denhaag/link";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 import { Forms } from "../interfaces/forms";
-import SectionHeader from "../components/SectionHeader.tsx";
+import { Heading3 } from "@gemeente-denhaag/components-react";
 
 const FormsPage = ({ forms }: Forms) => {
   return (
@@ -18,7 +18,9 @@ const FormsPage = ({ forms }: Forms) => {
       </PageHeader>
       {forms && forms.length > 0 && (
         <section data-testid={"list-forms"}>
-          <SectionHeader title={<FormattedMessage id={`forms.listSubHeader`} />} />
+          <Heading3>
+            <FormattedMessage id={`forms.listSubHeader`} />
+          </Heading3>
           <ul className="utrecht-link-list utrecht-link-list--html-ul denhaag-link-group__list">
             {forms.map((form) => {
               return (
