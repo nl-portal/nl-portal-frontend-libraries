@@ -9,10 +9,12 @@ const FormsPage = ({ forms }: Forms) => {
   return (
     <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.forms" />}>
-        {forms && !forms.length && (
+        {(forms && !forms.length) ? (
           <span data-testid={"empty-forms"}>
-            <FormattedMessage id="forms.emptyForms" />
+            <FormattedMessage id="formsList.empty" />
           </span>
+        ) : (
+          <FormattedMessage id={`forms.listSubHeader`} />
         )}
       </PageHeader>
       {forms && forms.length > 0 && (

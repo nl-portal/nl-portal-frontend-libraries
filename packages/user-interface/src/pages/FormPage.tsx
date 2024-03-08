@@ -9,14 +9,11 @@ const FormPage = ({ forms }: Forms) => {
   const safeId = id || "";
   return (
     <PageGrid>
-      <PageHeader title={
-        (forms && forms.length > 0 && forms.includes(safeId)) ? (
-          <span data-testid={`form-item-${safeId}`}>
-            <FormattedMessage id={`forms.${safeId}`} />
-          </span>
+      <PageHeader title={(forms && forms.length > 0 && forms.includes(safeId)) ? (
+          <FormattedMessage id={`forms.${safeId}`} />
         ) : (
           <span data-testid={`form-not-found`}>
-            <FormattedMessage id="form.formNotFound" />
+            <FormattedMessage id="form.notFound" />
           </span>
         )
       } />
