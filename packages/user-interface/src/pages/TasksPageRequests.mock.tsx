@@ -19,7 +19,7 @@ const getTaken: {
             formulier: {
               formuliertype: "objecturl",
               value:
-                "https://objecten-zgw.test.denhaag.nl/api/v2/objects/168c8f1f-bf9c-426b-bfcd-b1ad3a202c95",
+                "https://objectenurl/api/v2/objects/168c8f1f-bf9c-426b-bfcd-b1ad3a202c95",
               __typename: "TaakFormulier",
             },
             title: "Aanleveren informatie",
@@ -34,7 +34,7 @@ const getTaken: {
             formulier: {
               formuliertype: "objecturl",
               value:
-                "https://objecten-zgw.test.denhaag.nl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
+                "https://objectenurl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
               __typename: "TaakFormulier",
             },
             title: "Aanleveren informatie",
@@ -49,7 +49,7 @@ const getTaken: {
             formulier: {
               formuliertype: "objecturl",
               value:
-                "https://objecten-zgw.test.denhaag.nl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
+                "https://objectenurl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
               __typename: "TaakFormulier",
             },
             title: "Aanleveren informatie",

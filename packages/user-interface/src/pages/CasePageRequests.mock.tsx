@@ -21,7 +21,7 @@ const getZaak: {
     data: {
       getZaak: {
         uuid: "82cb13cf-d2f9-4e3e-ac07-751373035ecb",
-        url: "https://openzaak-zgw.test.denhaag.nl/zaken/api/v1/zaken/82cb13cf-d2f9-4e3e-ac07-751373035ecb",
+        url: "https://openzaakurl/zaken/api/v1/zaken/82cb13cf-d2f9-4e3e-ac07-751373035ecb",
         omschrijving: "",
         identificatie: "ZAAK-2023-0000007947",
         zaaktype: {
@@ -239,7 +239,7 @@ const getZaak: {
               heading: "Kosten nested",
             },
           ],
-          zaak: "https://openzaak-zgw.test.denhaag.nl/zaken/api/v1/zaken/82cb13cf-d2f9-4e3e-ac07-751373035ecb",
+          zaak: "https://openzaakurl/zaken/api/v1/zaken/82cb13cf-d2f9-4e3e-ac07-751373035ecb",
           __typename: "ZaakDetails",
         },
         __typename: "Zaak",
@@ -253,7 +253,7 @@ const getObjectContactMomenten = {
     query: QUERY_GET_OBJECT_CONTACT_MOMENTEN,
     variables: {
       objectUrl:
-        "https://openzaak-zgw.test.denhaag.nl/zaken/api/v1/zaken/82cb13cf-d2f9-4e3e-ac07-751373035ecb",
+        "https://openzaakurl/zaken/api/v1/zaken/82cb13cf-d2f9-4e3e-ac07-751373035ecb",
     },
   },
   result: {
@@ -326,7 +326,7 @@ const getTaken = {
             formulier: {
               formuliertype: "objecturl",
               value:
-                "https://objecten-zgw.test.denhaag.nl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
+                "https://objectenurl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
               __typename: "TaakFormulier",
             },
             title: "Aanleveren informatie",
