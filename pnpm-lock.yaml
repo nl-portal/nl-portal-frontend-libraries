@@ -340,8 +340,8 @@ importers:
         specifier: 0.1.0-alpha.197
         version: 0.1.0-alpha.197(react@18.2.0)
       '@gemeente-denhaag/tab':
-        specifier: 0.2.3-alpha.372
-        version: 0.2.3-alpha.372(react@18.2.0)
+        specifier: 0.2.3-alpha.380
+        version: 0.2.3-alpha.380(react@18.2.0)
       '@gemeente-denhaag/table':
         specifier: 0.1.1-alpha.278
         version: 0.1.1-alpha.278(react@18.2.0)
@@ -2073,6 +2073,15 @@ packages:
 
   /@gemeente-denhaag/tab@0.2.3-alpha.372(react@18.2.0):
     resolution: {integrity: sha512-P7vexl7vzDSJQ95bs5JFW448HUilX51iHX5sJUYHeo6B++bMnDt6JPw1poiFACQUiOT/5vVrkzvwtxqHBsdspQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+      uuid: 9.0.1
+    dev: false
+
+  /@gemeente-denhaag/tab@0.2.3-alpha.380(react@18.2.0):
+    resolution: {integrity: sha512-SIDFXFlqkW0UFPGEQg9eO13KNggIxeYrZIKSRd9RdUPNhK7igNYuIN52YUx04uTncdSunExsFzRFresEhgaQdw==}
     peerDependencies:
       react: ^18.0.0
     dependencies:

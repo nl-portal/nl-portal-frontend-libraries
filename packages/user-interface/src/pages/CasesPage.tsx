@@ -41,6 +41,7 @@ const CasesPage = () => {
                 <CasesList
                   loading={loading}
                   error={Boolean(error)}
+                  showTitle={false}
                   cases={data?.getZaken.filter(
                     (c) => !c.status?.statustype.isEindstatus,
                   )}
@@ -53,6 +54,7 @@ const CasesPage = () => {
                 <CasesList
                   loading={loading}
                   error={Boolean(error)}
+                  showTitle={false}
                   cases={data?.getZaken.filter(
                     (c) => c.status?.statustype.isEindstatus,
                   )}
