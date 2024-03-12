@@ -5,6 +5,8 @@ import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import TableList from "../components/TableList";
+import { useOutletContext } from "react-router-dom";
+import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 interface Props {
   type: string;
@@ -15,11 +17,12 @@ interface Props {
 
 const ThemeOverviewPage = ({
   type,
-  showTasksLength = 3,
+  showTasksLength = 5,
   showCasesLength = 4,
   children,
 }: Props) => {
   const intl = useIntl();
+  const { paths } = useOutletContext<RouterOutletContext>();
   const {
     data: taskData,
     loading: taskLoading,
@@ -46,7 +49,9 @@ const ThemeOverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          cases={caseData?.getZaken.slice(0, showCasesLength)}
+          cases={caseData?.getZaken
+            .filter((c) => !c.status?.statustype.isEindstatus)
+            .slice(0, showCasesLength)}
         />
       )}
       <TableList
@@ -55,19 +60,37 @@ const ThemeOverviewPage = ({
         headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}
         rows={[
           [
-            { children: "Westerstraat 393 Den Haag", href: "/test" },
-            { children: "‘s-Gravenhage AF 2679", href: "/test" },
-            { children: "78435785", href: "/test" },
+            {
+              children: "Westerstraat 393 Den Haag",
+              href: paths.themeDetails(type, "123"),
+            },
+            {
+              children: "‘s-Gravenhage AF 2679",
+              href: paths.themeDetails(type, "123"),
+            },
+            { children: "78435785", href: paths.themeDetails(type, "123") },
           ],
           [
-            { children: "Westerstraat 393 Den Haag", href: "/test" },
-            { children: "‘s-Gravenhage AF 2679", href: "/test" },
-            { children: "78435785", href: "/test" },
+            {
+              children: "Westerstraat 393 Den Haag",
+              href: paths.themeDetails(type, "123"),
+            },
+            {
+              children: "‘s-Gravenhage AF 2679",
+              href: paths.themeDetails(type, "123"),
+            },
+            { children: "78435785", href: paths.themeDetails(type, "123") },
           ],
           [
-            { children: "Westerstraat 393 Den Haag", href: "/test" },
-            { children: "‘s-Gravenhage AF 2679", href: "/test" },
-            { children: "78435785", href: "/test" },
+            {
+              children: "Westerstraat 393 Den Haag",
+              href: paths.themeDetails(type, "123"),
+            },
+            {
+              children: "‘s-Gravenhage AF 2679",
+              href: paths.themeDetails(type, "123"),
+            },
+            { children: "78435785", href: paths.themeDetails(type, "123") },
           ],
         ]}
       />
