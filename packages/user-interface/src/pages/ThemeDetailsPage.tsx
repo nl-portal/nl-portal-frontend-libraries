@@ -7,6 +7,7 @@ import { RouterOutletContext } from "../contexts/RouterOutletContext";
 import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
+import LinksList from "../components/LinksList";
 
 interface Props {
   type: string;
@@ -39,12 +40,26 @@ const ThemeDetailsPage = ({ type }: Props) => {
         tasks={taskData?.getTaken.content}
         showTitle={false}
       />
+      <LinksList
+        loading={loading}
+        links={[
+          { title: "Link 1", href: "https://example.com" },
+          { title: "Link 2", href: "https://example.com" },
+          { title: "Link 3", href: "https://example.com" },
+        ]}
+      />
       <CasesList
         loading={loading}
         error={Boolean(caseError)}
         cases={caseData?.getZaken.filter(
           (c) => !c.status?.statustype.isEindstatus,
         )}
+      />
+      <TasksList
+        loading={loading}
+        error={Boolean(taskError)}
+        tasks={taskData?.getTaken.content}
+        showTitle={false}
       />
     </PageGrid>
   );
