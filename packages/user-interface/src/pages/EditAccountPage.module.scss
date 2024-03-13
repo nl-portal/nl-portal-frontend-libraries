@@ -1,14 +1,5 @@
 @import "../styles/mixins";
 
-.edit-account {
-  display: flex;
-  flex-direction: column;
-}
-
-.edit-account__header {
-  margin-block-end: var(--nlportal-space-block-2xl, 2rem);
-}
-
 .edit-account__buttons {
   display: flex;
   flex-direction: column;

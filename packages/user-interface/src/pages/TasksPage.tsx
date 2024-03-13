@@ -1,92 +1,22 @@
-import * as React from "react";
-import { Fragment, useEffect } from "react";
-import { Heading2, Paragraph } from "@gemeente-denhaag/components-react";
-import { SubjectCard } from "@gemeente-denhaag/card";
-import { FormattedMessage, useIntl } from "react-intl";
-import Skeleton from "react-loading-skeleton";
+import { FormattedMessage } from "react-intl";
 import { useGetTakenQuery } from "@nl-portal/nl-portal-api";
-import styles from "./TasksPage.module.scss";
-import { getTaskUrl } from "../utils/get-task-url";
-import PortalLink from "../components/PortalLink";
+import TasksList from "../components/TasksList";
+import PageHeader from "../components/PageHeader";
+import PageGrid from "../components/PageGrid";
 
 const TasksPage = () => {
-  const intl = useIntl();
-  const { data, loading, error, refetch } = useGetTakenQuery();
-
-  const getTaskCards = () =>
-    data?.getTaken?.content?.map((task) => (
-      <div className={styles.tasks__card} key={task.id}>
-        <SubjectCard
-          title={task.title}
-          date={new Date(task.date)}
-          href={getTaskUrl(
-            task.formulier.formuliertype,
-            task.formulier.value,
-            task.id,
-          )}
-          Link={PortalLink}
-        />
-      </div>
-    )) || [];
-
-  const getNoDataMessage = () => (
-    <Paragraph>
-      <FormattedMessage id="tasks.noOpenTasks" />
-    </Paragraph>
-  );
-
-  const getErrorMessage = () => (
-    <Paragraph>
-      <FormattedMessage id="tasks.fetchError" />
-    </Paragraph>
-  );
-
-  const getContent = () => {
-    const cards = getTaskCards();
-    if (error) {
-      return getErrorMessage();
-    }
-    return cards.length > 0 ? cards : getNoDataMessage();
-  };
-
-  const getSkeleton = () => {
-    const getSkeletonCard = (key: number) => (
-      <div
-        className={styles.tasks__card}
-        key={key}
-        aria-busy
-        aria-disabled
-        aria-label={intl.formatMessage({ id: "element.loading" })}
-      >
-        <Skeleton height={220} />
-      </div>
-    );
-
-    return (
-      <Fragment>
-        {getSkeletonCard(0)}
-        {getSkeletonCard(1)}
-      </Fragment>
-    );
-  };
-
-  useEffect(() => {
-    refetch();
-  }, []);
+  const { data, loading, error } = useGetTakenQuery();
 
   return (
-    <React.Fragment>
-      <section className={styles.tasks}>
-        <header className={styles.tasks__header}>
-          <Heading2>
-            <FormattedMessage id="pageTitles.tasks" />
-          </Heading2>
-        </header>
-        <div className={styles.tasks__cards}>
-          {loading ? getSkeleton() : getContent()}
-        </div>
-      </section>
-    </React.Fragment>
+    <PageGrid>
+      <PageHeader title={<FormattedMessage id="pageTitles.tasks" />} />
+      <TasksList
+        loading={loading}
+        error={Boolean(error)}
+        tasks={data?.getTaken.content}
+        showTitle={false}
+      />
+    </PageGrid>
   );
 };
 

@@ -1,0 +1,7 @@
+@import "../styles/mixins";
+
+.tasks-list {
+  &__pagination {
+    margin-block-start: var(--nlportal-space-block-2xl, 2rem);
+  }
+}
