@@ -5,7 +5,7 @@ const OfflinePage = () => {
   const intl = useIntl();
 
   return (
-    <section>
+    <>
       <Paragraph>
         <FormattedMessage
           id="offline.warning"
@@ -14,7 +14,7 @@ const OfflinePage = () => {
           }}
         />
       </Paragraph>
-    </section>
+    </>
   );
 };
 export default OfflinePage;

@@ -1,102 +1,84 @@
-import * as React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import {
-  Paragraph,
-  Heading2,
-  Heading3,
-} from "@gemeente-denhaag/components-react";
-import { Link } from "@gemeente-denhaag/link";
 import { Alert } from "@gemeente-denhaag/alert";
 import { FormattedMessage, useIntl } from "react-intl";
-import { FC, useContext } from "react";
-import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
+import PageHeader from "../components/PageHeader";
+import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import TasksList from "../components/TasksList";
+import PageGrid from "../components/PageGrid";
 
 interface OverviewPageProps {
-  openFormsFormId?: string;
-  showFormsLink?: string;
-  showIntro?: string;
-  personalizeIntro?: string;
-  showAlert?: string;
+  showAlert?: boolean;
   alertType?: "error" | "info" | "success" | "warning";
-  showCasesPreview?: boolean;
+  showIntro?: boolean;
+  tasksPreviewLength?: number;
   casesPreviewLength?: number;
 }
 
-const OverviewPage: FC<OverviewPageProps> = ({
-  openFormsFormId,
-  showFormsLink = "true",
-  showIntro = "false",
-  personalizeIntro = "false",
-  showAlert = "false",
+const OverviewPage = ({
+  showAlert = false,
   alertType = "warning",
-  showCasesPreview = false,
-  casesPreviewLength = 6,
-}) => {
-  const { hrefLang } = useContext(LocaleContext);
+  showIntro = false,
+  tasksPreviewLength = 6,
+  casesPreviewLength = 4,
+}: OverviewPageProps) => {
   const intl = useIntl();
-
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
+  const {
+    data: taskData,
+    loading: taskLoading,
+    error: taskError,
+  } = useGetTakenQuery();
+  const {
+    data: caseData,
+    loading: caseLoading,
+    error: caseError,
+  } = useGetZakenQuery();
+  const loading = taskLoading || caseLoading;
 
   return (
-    <section>
-      {showAlert === "true" && (
+    <PageGrid>
+      {showAlert && (
         <Alert
           variant={alertType}
           title={intl.formatMessage({ id: "overview.alertTitle" })}
           text={intl.formatMessage({ id: "overview.alertText" })}
         />
       )}
-      {showIntro === "true" && (
-        <React.Fragment>
-          {personalizeIntro ? (
-            <React.Fragment>
-              <Heading2>
-                <FormattedMessage
-                  id="overviewpage.title"
-                  values={{ userName }}
-                />
-              </Heading2>
-              {isVolmachtLogin && (
-                <div>
-                  <Heading3>
-                    <FormattedMessage
-                      id="overviewpage.subtitle"
-                      values={{ volmachtgever }}
-                    />
-                  </Heading3>
-                </div>
-              )}
-              <Paragraph>
-                <FormattedMessage id="overviewpage.paragraph" />
-              </Paragraph>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <Heading2 className="utrecht-heading-2">
-                <FormattedMessage id="overviewpage.title" />
-              </Heading2>
-              <Paragraph>
-                <FormattedMessage id="overviewpage.paragraph" />
-              </Paragraph>
-            </React.Fragment>
-          )}
-        </React.Fragment>
-      )}
-      {showFormsLink === "true" && (
-        <Link
-          component={RouterLink}
-          to={`/formulier/${openFormsFormId}`}
-          hrefLang={hrefLang}
+      {showIntro && (
+        <PageHeader
+          title={
+            <FormattedMessage id="overviewpage.title" values={{ userName }} />
+          }
+          subTitle={
+            isVolmachtLogin && (
+              <FormattedMessage
+                id="overview.subTitle"
+                values={{ volmachtgever }}
+              />
+            )
+          }
         >
-          <FormattedMessage id="overview.defaultFormTitle" />
-        </Link>
+          <FormattedMessage id="overviewpage.paragraph" />
+        </PageHeader>
       )}
-      {showCasesPreview && (
-        <CasesList showHeader numElements={casesPreviewLength} />
+      {tasksPreviewLength && (
+        <TasksList
+          loading={loading}
+          error={Boolean(taskError)}
+          tasks={taskData?.getTaken.content.slice(0, tasksPreviewLength)}
+        />
       )}
-    </section>
+      {casesPreviewLength && (
+        <CasesList
+          loading={loading}
+          error={Boolean(caseError)}
+          cases={caseData?.getZaken
+            .filter((c) => !c.status?.statustype.isEindstatus)
+            .slice(0, casesPreviewLength)}
+        />
+      )}
+    </PageGrid>
   );
 };
 

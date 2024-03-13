@@ -1,6 +1,6 @@
 import * as React from "react";
-import { FC, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useMatches } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Sidenav, SidenavItem, SidenavList } from "@gemeente-denhaag/sidenav";
@@ -8,32 +8,27 @@ import { Heading4, IconButton } from "@gemeente-denhaag/components-react";
 import { CloseIcon } from "@gemeente-denhaag/icons";
 import classNames from "classnames";
 import LayoutContext from "../contexts/LayoutContext";
-import { PortalPage } from "../interfaces/portal-page";
 import styles from "./Menu.module.scss";
 import MenuItem from "./MenuItem";
+import { NavigationItem } from "../interfaces/navigation-item";
+import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 
-interface MenuProps {
-  items: Array<PortalPage>;
+interface Props {
+  items: NavigationItem[][];
   legacy?: boolean;
 }
 
-const Menu: FC<MenuProps> = ({ items, legacy }) => {
-  const location = useLocation();
+const Menu = ({ items, legacy }: Props) => {
   const { hrefLang } = useContext(LocaleContext);
   const { menuOpened, hideMenu } = useContext(LayoutContext);
   const intl = useIntl();
-
-  const getBasePath = (url: string) => {
-    const splitUrl = url.split("/");
-    if (splitUrl.length > 0) {
-      return splitUrl[1];
-    }
-    return url;
-  };
+  const matches = useMatches();
+  const currentNavigationItem =
+    getCurrentNavigationPage(matches, items) || items[0][0];
 
   if (legacy) {
     return (
-      <div
+      <aside
         className={classNames(styles.menu, {
           [styles["menu--hidden"]]: !menuOpened,
         })}
@@ -51,28 +46,31 @@ const Menu: FC<MenuProps> = ({ items, legacy }) => {
             )}
           </header>
           <nav className={styles.menu__items}>
-            {items
-              .filter((item) => item.showInMenu)
-              .map((item) => (
-                <MenuItem key={item.path} item={item} />
-              ))}
+            {items.map((array) =>
+              array.map((item) => (
+                <MenuItem
+                  key={item.path}
+                  item={item}
+                  current={item === currentNavigationItem}
+                />
+              )),
+            )}
           </nav>
         </div>
-      </div>
+      </aside>
     );
   }
 
   return (
     <Sidenav>
-      <SidenavList>
-        {items
-          .filter((item) => item.showInMenu)
-          .map((item) => {
-            const current =
-              getBasePath(location.pathname) === getBasePath(item.path);
+      {items.map((array, index) => (
+        <SidenavList key={`sidenav-list-${index}`}>
+          {array.map((item) => {
+            const current = item === currentNavigationItem;
             const className = `denhaag-sidenav__link ${
               current && "denhaag-sidenav__link--current"
             }`;
+
             return (
               <SidenavItem key={item.path}>
                 <Link className={className} hrefLang={hrefLang} to={item.path}>
@@ -84,7 +82,8 @@ const Menu: FC<MenuProps> = ({ items, legacy }) => {
               </SidenavItem>
             );
           })}
-      </SidenavList>
+        </SidenavList>
+      ))}
     </Sidenav>
   );
 };

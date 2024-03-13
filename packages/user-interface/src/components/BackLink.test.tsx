@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import LinkToParent from "./LinkToParent";
+import LinkToParent from "./BackLink";
 
 describe("LinkToParent", () => {
   it("is truthy", () => {

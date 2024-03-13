@@ -1,150 +1,108 @@
-import { FC, Fragment, useEffect, useContext } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
-import { Link as RouterLink } from "react-router-dom";
+import { useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
-import { useGetZakenQuery } from "@nl-portal/nl-portal-api";
-import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { Heading3, Paragraph } from "@gemeente-denhaag/components-react";
-import { CaseCard } from "@gemeente-denhaag/card";
-import { Link } from "@gemeente-denhaag/link";
-import { ArrowRightIcon } from "@gemeente-denhaag/icons";
-import PortalLink from "./PortalLink";
+import { useOutletContext } from "react-router-dom";
+import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { GetZakenQuery } from "@nl-portal/nl-portal-api";
+import { Paragraph } from "@gemeente-denhaag/components-react";
 import styles from "./CasesList.module.scss";
+import SectionHeader from "./SectionHeader";
+import Case from "./Case";
+import { Pagination } from "@gemeente-denhaag/pagination";
+import classnames from "classnames";
 
-interface CasesListProps {
-  showCaseIdentification?: boolean;
-  numElements?: number;
-  completed?: boolean;
-  showHeader?: boolean;
+interface Props {
+  loading?: boolean;
+  error?: boolean;
+  errorTranslationId?: string;
+  emptyTranslationId?: string;
+  showTitle?: boolean;
+  titleTranslationId?: string;
+  readMoreAmount?: number;
+  readMoreLink?: string;
+  readMoreTranslationId?: string;
+  cases?: GetZakenQuery["getZaken"];
+  index?: number;
+  indexLimit?: number;
+  onChange?: (index: number) => number;
 }
 
-interface CasesListContainerProps {
-  children: React.ReactNode;
-  numCases: number;
-}
+const CasesList = ({
+  loading,
+  error,
+  errorTranslationId = "casesList.fetchError",
+  emptyTranslationId = "casesList.empty",
+  showTitle = true,
+  titleTranslationId = "casesList.title",
+  readMoreAmount,
+  readMoreLink,
+  readMoreTranslationId = "casesList.viewAll",
+  cases,
+  index,
+  indexLimit,
+  onChange,
+}: Props) => {
+  const intl = useIntl();
+  const { paths } = useOutletContext<RouterOutletContext>();
+  const casesPath = readMoreLink || paths.cases;
+  const listView = Boolean(readMoreAmount && readMoreAmount > 8);
+  const title = showTitle
+    ? intl.formatMessage({ id: titleTranslationId })
+    : undefined;
+  const subTitle = readMoreAmount
+    ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
+    : undefined;
+  const errorMessage = intl.formatMessage({ id: errorTranslationId });
+  const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
-const CasesListContainer: FC<CasesListContainerProps> = ({
-  children,
-  numCases,
-}) => {
-  const { hrefLang } = useContext(LocaleContext);
+  if (loading) {
+    return (
+      <section className={styles["cases-list"]}>
+        <SectionHeader title={title} />
+        <div className={styles["cases-list__cases"]}>
+          <Skeleton height={220} />
+          <Skeleton height={220} />
+        </div>
+      </section>
+    );
+  }
+
+  if (error)
+    return (
+      <section className={styles["cases-list"]}>
+        <SectionHeader title={title} />
+        <Paragraph>{errorMessage}</Paragraph>
+      </section>
+    );
+
+  if (!cases || cases.length === 0)
+    return (
+      <section className={styles["cases-list"]}>
+        <SectionHeader title={title} />
+        <Paragraph>{emptyMessage}</Paragraph>
+      </section>
+    );
 
   return (
-    <div className={styles.cases__container}>
-      <div className={styles["cases__container-header"]}>
-        <Heading3>
-          <FormattedMessage id="overview.currentCases" />
-        </Heading3>
-        {numCases > 0 && (
-          <Link
-            component={RouterLink}
-            to="/zaken"
-            icon={<ArrowRightIcon />}
-            iconAlign="end"
-            hrefLang={hrefLang}
-          >
-            <FormattedMessage id="overview.showAllCases" />
-          </Link>
-        )}
-      </div>
-      {children}
-    </div>
-  );
-};
-
-const CasesList: FC<CasesListProps> = ({
-  showCaseIdentification,
-  numElements,
-  completed,
-  showHeader,
-}) => {
-  const { data, loading, error, refetch } = useGetZakenQuery();
-  const intl = useIntl();
-  const getCaseUrl = (id: string) => `/zaken/zaak?id=${id}`;
-
-  useEffect(() => {
-    refetch();
-  }, []);
-
-  const getCaseCards = () =>
-    data?.getZaken
-      .filter((zaak) => {
-        const isEndStatus = zaak?.status?.statustype.isEindstatus;
-        return completed ? isEndStatus : !isEndStatus;
-      })
-      .slice(0, numElements)
-      .map((zaak) => (
-        <div className={styles.cases__card} key={zaak.uuid}>
-          <CaseCard
-            active={!completed}
-            title={intl.formatMessage({
-              id: `case.${zaak.zaaktype.identificatie}.title`,
-            })}
-            subTitle={
-              showCaseIdentification ? zaak.identificatie : zaak.omschrijving
-            }
-            date={new Date(zaak.startdatum)}
-            href={getCaseUrl(zaak.uuid)}
-            Link={PortalLink}
-          />
-        </div>
-      )) || [];
-
-  const getNoDataMessage = () => (
-    <Paragraph>
-      <FormattedMessage
-        id={completed ? "cases.noClosedCases" : "cases.noOpenCases"}
-      />
-    </Paragraph>
-  );
-
-  const getErrorMessage = () => (
-    <Paragraph>
-      <FormattedMessage id="cases.fetchError" />
-    </Paragraph>
-  );
-
-  const getTabContent = (): [JSX.Element | JSX.Element[], number] => {
-    const cards = getCaseCards();
-    if (error) {
-      return [getErrorMessage(), 0];
-    }
-
-    return [cards.length > 0 ? cards : getNoDataMessage(), cards.length];
-  };
-
-  const getSkeleton = () => {
-    const getSkeletonCard = (key: number) => (
+    <section className={styles["cases-list"]}>
+      <SectionHeader title={title} subTitle={subTitle} href={casesPath} />
       <div
-        className={styles.cases__card}
-        key={key}
-        aria-busy
-        aria-disabled
-        aria-label={intl.formatMessage({ id: "element.loading" })}
+        className={classnames(styles["cases-list__cases"], {
+          [styles["cases-list__cases--list"]]: listView,
+        })}
       >
-        <Skeleton height={220} />
+        {cases.map((cs) => (
+          <Case key={cs.uuid} cs={cs} listView={listView} />
+        ))}
       </div>
-    );
-
-    return (
-      <Fragment>
-        {getSkeletonCard(0)}
-        {getSkeletonCard(1)}
-      </Fragment>
-    );
-  };
-
-  const [tabContent, numCases] = getTabContent();
-  const cardList = (
-    <div className={styles.cases__cards}>
-      {loading ? getSkeleton() : tabContent}
-    </div>
-  );
-
-  return showHeader ? (
-    <CasesListContainer numCases={numCases}>{cardList}</CasesListContainer>
-  ) : (
-    cardList
+      {indexLimit && (
+        <Pagination
+          className={`denhaag-pagination--center ${styles["cases-list__pagination"]}`}
+          index={index}
+          indexLimit={indexLimit}
+          onChange={onChange}
+        />
+      )}
+    </section>
   );
 };
 

@@ -1,9 +1,27 @@
 import { gql } from "@apollo/client";
 import EditAccountPage from "./EditAccountPage";
-import TestProvider from "../providers/TestProvider";
+import TestProvider, { testPaths as paths } from "../providers/TestProvider";
 
 export const MockEditAccountPage = () => {
-  const route = "/account/aanpassen?prop=telefoonnummer";
+  const routes = [
+    {
+      path: paths.overview,
+      element: <></>,
+    },
+    {
+      path: paths.account,
+      children: [
+        {
+          index: true,
+          element: <></>,
+        },
+        {
+          path: paths.editAccount,
+          element: <EditAccountPage />,
+        },
+      ],
+    },
+  ];
 
   const EXAMPLE_QUERY = gql`
     mutation SubmitTask($id: UUID!, $submission: JSON!) {
@@ -39,8 +57,15 @@ export const MockEditAccountPage = () => {
   ];
 
   return (
-    <TestProvider mocks={mocks} route={route}>
-      <EditAccountPage />
-    </TestProvider>
+    <TestProvider
+      mocks={mocks}
+      routes={routes}
+      initialIndex={2}
+      initialEntries={[
+        paths.overview,
+        paths.account,
+        `${paths.editAccount}?prop=telefoonnummer`,
+      ]}
+    ></TestProvider>
   );
 };

@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "localization",
+      name: "user-interface",
       fileName: "index",
       formats: ["es"],
     },
@@ -17,6 +17,8 @@ export default defineConfig({
       external: [
         "react",
         "react-dom",
+        "react-intl",
+        "react-router-dom",
         "@nl-portal/nl-portal-api",
         "@nl-portal/nl-portal-authentication",
         "@nl-portal/nl-portal-localization",
@@ -34,5 +36,16 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
+    server: {
+      deps: {
+        inline: [
+          "@gemeente-denhaag/form-field",
+          "@gemeente-denhaag/form-field-error-message",
+          "@gemeente-denhaag/form-label",
+          "@gemeente-denhaag/link-button",
+          "@gemeente-denhaag/text-input",
+        ],
+      },
+    },
   },
 });
