@@ -1,4 +1,3 @@
-import OverviewPage from "./OverviewPage";
 import TestProvider, { testPaths as paths } from "../providers/TestProvider";
 import { mockRequest } from "./CasesPageRequests.mock";
 import CasesPage from "./CasesPage";
