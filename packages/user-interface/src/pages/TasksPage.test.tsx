@@ -1,6 +1,7 @@
 import { MockTasksPage } from "./TasksPage.mock";
 import { describe, it, expect } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
+import { testPaths as paths } from "../providers/TestProvider";
 
 describe("TasksPage", () => {
   const takenAlgemeneInformatie = () =>
@@ -24,9 +25,8 @@ describe("TasksPage", () => {
       expect(taakAanvullendeInformatie()).toBeVisible();
     });
 
-    expect(screen.getByRole("link", {name: "Aanvullende informatie aanleveren"})).toHaveAttribute(
-      "href",
-      "/taken/taak?id=021118b9-bc59-11ee-b651-366634c97df6",
+    expect(screen.getByRole("link", {name: "Aanvullende informatie aanleveren"})).toHaveAttribute(      
+      "href", paths.task("021118b9-bc59-11ee-b651-366634c97df6"),
     );
   });
 });
