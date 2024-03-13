@@ -294,6 +294,9 @@ importers:
       '@gemeente-denhaag/alert':
         specifier: 0.1.1-alpha.342
         version: 0.1.1-alpha.342(react@18.2.0)
+      '@gemeente-denhaag/button-link':
+        specifier: 0.0.1-alpha.1
+        version: 0.0.1-alpha.1(react-dom@18.2.0)(react@18.2.0)
       '@gemeente-denhaag/card':
         specifier: 0.2.3-alpha.372
         version: 0.2.3-alpha.372(react@18.2.0)
@@ -1584,6 +1587,21 @@ packages:
 
   /@gemeente-denhaag/button-group@0.1.1-alpha.241:
     resolution: {integrity: sha512-H71a3/iP53vLIWO7CxBMoJ+sgF0OuEtR1rORtBahpyBARDh4B/8KscCZvROqagIe4Odd3HQWkiUREWmsaGaUvA==}
+    dev: false
+
+  /@gemeente-denhaag/button-link@0.0.1-alpha.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-fpqtHKuQf48Owu56SwjJYWfgTC32GRPLBtyN8uauUM5qlbWj0/LctrWz8BgHVkBZp+rJTwQQ4N/pYHRtLw4J4A==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@utrecht/component-library-react': 3.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@utrecht/components': 3.0.0
+      react: 18.2.0
+    transitivePeerDependencies:
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
     dev: false
 
   /@gemeente-denhaag/button@0.2.3-alpha.372(react@18.2.0):
