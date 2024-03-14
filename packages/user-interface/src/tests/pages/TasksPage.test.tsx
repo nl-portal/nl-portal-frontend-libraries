@@ -25,8 +25,11 @@ describe("TasksPage", () => {
       expect(taakAanvullendeInformatie()).toBeVisible();
     });
 
-    expect(screen.getByRole("link", {name: "Aanvullende informatie aanleveren"})).toHaveAttribute(      
-      "href", paths.task("021118b9-bc59-11ee-b651-366634c97df6"),
+    expect(
+      screen.getByRole("link", { name: "Aanvullende informatie aanleveren" }),
+    ).toHaveAttribute(
+      "href",
+      paths.task("021118b9-bc59-11ee-b651-366634c97df6"),
     );
   });
 });

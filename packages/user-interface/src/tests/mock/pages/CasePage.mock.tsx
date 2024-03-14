@@ -4,7 +4,9 @@ import {
   mocksRequestWithoutContactMomenten,
   mocksRequestWithoutDocuments,
 } from "../data/CasePageRequests.mock";
-import TestProvider, { testPaths as paths } from "../../../providers/TestProvider";
+import TestProvider, {
+  testPaths as paths,
+} from "../../../providers/TestProvider";
 
 const CasePageTestComponent = () => <CasePage showContactTimeline />;
 

@@ -1,5 +1,7 @@
 import AccountPage from "../../../pages/AccountPage";
-import TestProvider, { testPaths as paths } from "../../../providers/TestProvider";
+import TestProvider, {
+  testPaths as paths,
+} from "../../../providers/TestProvider";
 import { mocksRequestBurgerGegevens } from "../data/AccountPageRequests.mock";
 
 const routes = [

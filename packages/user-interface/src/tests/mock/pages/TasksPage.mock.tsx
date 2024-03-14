@@ -1,5 +1,7 @@
 import TasksPage from "../../../pages/TasksPage";
-import TestProvider, { testPaths as paths } from "../../../providers/TestProvider";
+import TestProvider, {
+  testPaths as paths,
+} from "../../../providers/TestProvider";
 import { mockRequest } from "../data/TasksPageRequests.mock";
 
 const route = [

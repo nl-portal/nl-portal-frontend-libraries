@@ -1,6 +1,8 @@
 import { gql } from "@apollo/client";
 import EditAccountPage from "../../../pages/EditAccountPage";
-import TestProvider, { testPaths as paths } from "../../../providers/TestProvider";
+import TestProvider, {
+  testPaths as paths,
+} from "../../../providers/TestProvider";
 
 export const MockEditAccountPage = () => {
   const routes = [

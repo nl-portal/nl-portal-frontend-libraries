@@ -23,7 +23,8 @@ describe("OverviewPage", () => {
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK1.title" }),
     ).toHaveAttribute(
-      "href", paths.case("6f268986-17c2-4045-9340-94101bfad3ca"),
+      "href",
+      paths.case("6f268986-17c2-4045-9340-94101bfad3ca"),
     );
 
     expect(openZaak2()).toBeVisible();
@@ -32,7 +33,8 @@ describe("OverviewPage", () => {
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK2.title" }),
     ).toHaveAttribute(
-      "href", paths.case("009e2451-44b3-4969-91e3-205d8b261fe1"),
+      "href",
+      paths.case("009e2451-44b3-4969-91e3-205d8b261fe1"),
     );
 
     expect(geslotenZaak1()).not.toBeVisible();

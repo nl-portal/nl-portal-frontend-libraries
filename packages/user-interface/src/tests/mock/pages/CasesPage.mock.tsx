@@ -1,5 +1,7 @@
 import CasesPage from "../../../pages/CasesPage";
-import TestProvider, { testPaths as paths } from "../../../providers/TestProvider";
+import TestProvider, {
+  testPaths as paths,
+} from "../../../providers/TestProvider";
 import { mockRequest } from "../data/CasesPageRequests.mock";
 
 const routes = [
