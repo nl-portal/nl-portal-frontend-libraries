@@ -74,6 +74,7 @@ const DocumentLists = ({
 
           return (
             <Document
+              key={document.uuid}
               uuid={document.uuid}
               extension={documentExtension}
               name={documentName}
