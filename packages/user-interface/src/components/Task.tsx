@@ -24,7 +24,7 @@ const Task = ({ task }: Props) => {
         labels={labels}
         dateTime={task.verloopdatum}
         actions={
-          <ButtonLink href={task} target="_blank">
+          <ButtonLink href={link} target="_blank">
             <ChevronRightIcon />
           </ButtonLink>
         }
