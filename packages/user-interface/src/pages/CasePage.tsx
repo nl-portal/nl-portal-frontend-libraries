@@ -27,7 +27,7 @@ import { Link as RouterLink, useParams } from "react-router-dom";
 import ContactTimeline from "@gemeente-denhaag/contact-timeline";
 import styles from "./CasePage.module.scss";
 import "@utrecht/component-library-css";
-import DocumentList from "../components/DocumentList";
+import DocumentList from "../components/DocumentsList";
 import StatusHistory from "../components/StatusHistory";
 import { getTaskUrl } from "../utils/get-task-url";
 import uniqueId from "lodash.uniqueid";

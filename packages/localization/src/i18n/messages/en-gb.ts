@@ -86,5 +86,8 @@ export const EN_GB_MESSAGES: Messages = {
     "task.completed": "Task completed",
     "task.returnMessage": "The task is successfully completed.",
     "linksList.title": "What I can arrange",
+    "documentsList.title": "Documents",
+    "documentsList.fetchError": "There was an error, try again later.",
+    "documentsList.empty": "There are no documents.",
   },
 };
