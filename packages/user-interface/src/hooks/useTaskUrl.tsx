@@ -1,12 +1,10 @@
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
-export const getTaskUrl = (
-  formType: string,
-  formValue: string,
-  taakId: string,
-) => {
-  if (formType === "externalurl") return formValue;
+const useTaskUrl = (formType: string, formValue: string, taskId: string) => {
   const { paths } = useOutletContext<RouterOutletContext>();
-  return paths.task(taakId);
+  if (formType === "externalurl") return formValue;
+  return paths.task(taskId);
 };
+
+export default useTaskUrl;
