@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // @ts-ignore - Formio is not typed, fixed in version 5.3.*, RC now available
 import { Form } from "@formio/react";
 import merge from "lodash.merge";
