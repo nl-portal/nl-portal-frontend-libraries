@@ -42,9 +42,7 @@ describe("Page", () => {
   });
 
   afterEach(() => {
-    const containerElement = container as HTMLElement;
-    unmountComponentAtNode(containerElement);
-    containerElement.remove();
+    document.body.removeChild(container!);
     container = undefined;
   });
 
