@@ -10,3 +10,5 @@ export * from "./queries/get-persoon-data";
 export * from "./queries/get-burger-profiel";
 export * from "./queries/get-zaak";
 export * from "./queries/get-bewoner-aantal.ts";
+export * from "./queries/get-forms.ts";
+export * from "./queries/get-form.ts";
