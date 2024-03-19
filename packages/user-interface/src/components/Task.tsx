@@ -10,11 +10,8 @@ interface Props {
 
 const Task = ({ task }: Props) => {
   const labels = useActionLabels();
-  const taskUrl = useTaskUrl(
-    task.formulier.formuliertype,
-    task.formulier.value,
-    task.id,
-  );
+  const { formuliertype, value } = task.formulier ?? {};
+  const taskUrl = useTaskUrl(formuliertype, value, task.id);
 
   return (
     <Action labels={labels} link={taskUrl} Link={PortalLink}>
