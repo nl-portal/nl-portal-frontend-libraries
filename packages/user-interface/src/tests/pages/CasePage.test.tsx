@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeAll } from "vitest";
 import {
-  Matcher,
   render,
   screen,
   waitForElementToBeRemoved,
