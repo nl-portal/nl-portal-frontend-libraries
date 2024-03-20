@@ -8,7 +8,7 @@ const route = [
     element: <></>,
   },
   {
-    path: paths.cases,
+    path: paths.tasks,
     children: [
       {
         index: true,
@@ -22,6 +22,6 @@ export const MockTasksPage = () => (
     mocks={mockRequest}
     routes={route}
     initialIndex={1}
-    initialEntries={[paths.overview, paths.cases]}
+    initialEntries={[paths.overview, paths.tasks]}
   ></TestProvider>
 );

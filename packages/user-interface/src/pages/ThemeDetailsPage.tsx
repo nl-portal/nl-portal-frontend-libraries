@@ -8,7 +8,7 @@ import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import LinksList from "../components/LinksList";
-import DocumentList from "../components/DocumentsList";
+import DocumentsList from "../components/DocumentsList";
 
 interface Props {
   type: string;
@@ -56,7 +56,11 @@ const ThemeDetailsPage = ({ type }: Props) => {
           (c) => !c.status?.statustype.isEindstatus,
         )}
       />
-      <DocumentList />
+      <DocumentsList
+        loading={loading}
+        error={Boolean(caseError)}
+        documents={caseData?.getZaken[0]?.documents}
+      />
       <TasksList
         loading={loading}
         error={Boolean(taskError)}

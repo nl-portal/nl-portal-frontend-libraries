@@ -17,7 +17,7 @@ interface Props {
   documents?: Array<PortalDocument>;
 }
 
-const DocumentLists = ({
+const DocumentsLists = ({
   loading,
   error,
   errorTranslationId = "documentsList.fetchError",
@@ -64,28 +64,19 @@ const DocumentLists = ({
     <section>
       <SectionHeader title={title} />
       <div className={classnames(styles["documents-list__documents"])}>
-        {documents.map((document) => {
-          const documentName = document?.bestandsnaam || "";
-          const splitName = documentName?.split(".");
-          const documentExtension =
-            splitName && Array.isArray(splitName) && splitName.length > 1
-              ? splitName[splitName.length - 1]
-              : "";
-
-          return (
-            <Document
-              key={document.uuid}
-              uuid={document.uuid}
-              extension={documentExtension}
-              name={documentName}
-              size={document.bestandsomvang || 0}
-              documentapi={document.documentapi}
-            />
-          );
-        })}
+        {documents.map((document) => (
+          <Document
+            key={document.uuid}
+            uuid={document.uuid}
+            extension={document.formaat || ""}
+            name={document?.bestandsnaam || ""}
+            size={document.bestandsomvang || 0}
+            documentapi={document.documentapi}
+          />
+        ))}
       </div>
     </section>
   );
 };
 
-export default DocumentLists;
+export default DocumentsLists;

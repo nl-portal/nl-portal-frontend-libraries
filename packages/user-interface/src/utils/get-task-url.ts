@@ -6,7 +6,7 @@ export const getTaskUrl = (
   formValue: string,
   taakId: string,
 ) => {
-  if (formType === "externalurl") return formValue;
   const { paths } = useOutletContext<RouterOutletContext>();
+  if (formType === "externalurl") return formValue;
   return paths.task(taakId);
 };
