@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { render } from "@testing-library/react";
 import { MockWrapper } from "@nl-portal/nl-portal-localization";
-import { unmountComponentAtNode } from "react-dom";
 import Page from "../../components/PageMetaData";
 import { NavigationItem } from "../../interfaces/navigation-item";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -42,9 +41,7 @@ describe("Page", () => {
   });
 
   afterEach(() => {
-    const containerElement = container as HTMLElement;
-    unmountComponentAtNode(containerElement);
-    containerElement.remove();
+    document.body.removeChild(container!);
     container = undefined;
   });
 

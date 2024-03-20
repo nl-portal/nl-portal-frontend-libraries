@@ -106,7 +106,7 @@ describe("getLocaleDateOfBirth", () => {
 
     render(localeDateOfBirthComponent as ReactElement);
 
-    expect(screen.getByText("January 1, 1980")).toBeTruthy();
+    expect(screen.getByText("1 January 1980")).toBeTruthy();
   });
 });
 
