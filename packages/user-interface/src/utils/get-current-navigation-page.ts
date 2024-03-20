@@ -20,7 +20,6 @@ export const getCurrentNavigationPage = (
     if (!match) continue;
 
     const foundNavItem = navigationItems
-      .map((array) => array)
       .flat()
       .find((item) => item?.path === match.pathname);
 

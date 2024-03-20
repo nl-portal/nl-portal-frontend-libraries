@@ -7,6 +7,7 @@ import {
   TableBody,
 } from "@gemeente-denhaag/table";
 import React from "react";
+import { PortalLink } from "..";
 
 export interface CellObject {
   className?: string;
@@ -42,13 +43,23 @@ const Table = ({ headers, rows }: Props) => {
 
       if (cell.head)
         return (
-          <TableHeader key={key} className={cell.className} href={cell.href}>
+          <TableHeader
+            key={key}
+            className={cell.className}
+            href={cell.href}
+            Link={PortalLink}
+          >
             {cell.children}
           </TableHeader>
         );
 
       return (
-        <TableCell key={key} className={cell.className} href={cell.href}>
+        <TableCell
+          key={key}
+          className={cell.className}
+          href={cell.href}
+          Link={PortalLink}
+        >
           {cell.children}
         </TableCell>
       );
