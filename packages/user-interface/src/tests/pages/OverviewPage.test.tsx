@@ -73,8 +73,6 @@ describe("OverviewPage", () => {
       expect(openZaak1()).toBeVisible();
     });
 
-    screen.debug(undefined, 40000);
-
     expect(openZaak1()).toBeVisible();
     expect(openZaak2Hidden()).not.toBeInTheDocument();
   });
