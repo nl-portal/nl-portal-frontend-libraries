@@ -29,13 +29,16 @@ import styles from "./CasePage.module.scss";
 import "@utrecht/component-library-css";
 import DocumentList from "../components/DocumentList";
 import StatusHistory from "../components/StatusHistory";
-import { getTaskUrl } from "../utils/get-task-url";
+import useTaskUrl from "../hooks/useTaskUrl";
 import uniqueId from "lodash.uniqueid";
 import BackLink, { BackLinkProps } from "../components/BackLink";
 import useActionLabels from "../hooks/useActionLabels";
 
 const Task = ({ task }: { task: any }) => {
   const labels = useActionLabels();
+  const { formuliertype, value } = task?.formulier ?? {};
+  const taskUrl = useTaskUrl(formuliertype, value, task?.id);
+
   if (!task) return null;
 
   return (
@@ -43,11 +46,7 @@ const Task = ({ task }: { task: any }) => {
       <Action
         actions={
           <RouterLink
-            to={getTaskUrl(
-              task.formulier.formuliertype,
-              task.formulier.value,
-              task.id,
-            )}
+            to={taskUrl}
             className="utrecht-button-link utrecht-button-link--html-a"
           >
             Ga naar taak

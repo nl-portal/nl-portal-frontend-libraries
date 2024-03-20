@@ -1,6 +1,6 @@
 import { GetTakenQuery } from "@nl-portal/nl-portal-api";
 import PortalLink from "./PortalLink";
-import { getTaskUrl } from "../utils/get-task-url";
+import useTaskUrl from "../hooks/useTaskUrl";
 import { Action } from "@gemeente-denhaag/action";
 import useActionLabels from "../hooks/useActionLabels";
 
@@ -10,17 +10,11 @@ interface Props {
 
 const Task = ({ task }: Props) => {
   const labels = useActionLabels();
+  const { formuliertype, value } = task.formulier ?? {};
+  const taskUrl = useTaskUrl(formuliertype, value, task.id);
 
   return (
-    <Action
-      labels={labels}
-      link={getTaskUrl(
-        task.formulier.formuliertype,
-        task.formulier.value,
-        task.id,
-      )}
-      Link={PortalLink}
-    >
+    <Action labels={labels} link={taskUrl} Link={PortalLink}>
       {task.title}
     </Action>
   );
