@@ -59,7 +59,7 @@ const ThemeDetailsPage = ({ type }: Props) => {
       <DocumentsList
         loading={loading}
         error={Boolean(caseError)}
-        documents={caseData?.getZaken[0]?.documents}
+        documents={[]} // TODO: Add documents
       />
       <TasksList
         loading={loading}
