@@ -25,7 +25,7 @@
     "preinstall": "npx only-allow pnpm",
     "wait": "wait-on ../api/dist/index.js && wait-on ../authentication/dist/index.js && wait-on ../localization/dist/index.js",
     "test": "vitest run",
-    "test:watch": "vitest --watch"
+    "test:watch": "DEBUG_PRINT_LIMIT=100000 vitest --watch --ui"
   },
   "dependencies": {
     "@apollo/client": "^3.9.2",
@@ -81,6 +81,7 @@
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/ui": "^1.4.0",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",

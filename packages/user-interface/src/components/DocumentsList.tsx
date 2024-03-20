@@ -68,7 +68,6 @@ const DocumentsLists = ({
           <Document
             key={document.uuid}
             uuid={document.uuid}
-            extension={document.formaat || ""}
             name={document?.bestandsnaam || ""}
             size={document.bestandsomvang || 0}
             documentapi={document.documentapi}

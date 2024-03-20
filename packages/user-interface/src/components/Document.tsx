@@ -8,7 +8,7 @@ import { File } from "@gemeente-denhaag/file";
 
 interface Props extends PortalDocument {}
 
-const Document = ({ uuid, name, extension, size, documentapi }: Props) => {
+const Document = ({ uuid, name, size, documentapi }: Props) => {
   const { keycloakToken } = useContext(KeycloakContext);
   const { restUri } = useContext(ApiContext);
   const { hrefLang } = useContext(LocaleContext);
@@ -41,7 +41,7 @@ const Document = ({ uuid, name, extension, size, documentapi }: Props) => {
   return (
     <File
       name={name}
-      href={`${name}.${extension}`}
+      href={name}
       size={prettyBytes(size || 0, { locale: hrefLang })}
       onClick={onClick}
     />
