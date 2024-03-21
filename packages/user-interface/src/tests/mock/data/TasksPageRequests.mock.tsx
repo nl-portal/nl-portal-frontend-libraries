@@ -1,7 +1,7 @@
 import { FetchResult, GraphQLRequest } from "@apollo/client";
 import { QUERY_GET_TAKEN } from "@nl-portal/nl-portal-api";
 
-const getTaken: {
+export const getTaken: {
   request: GraphQLRequest;
   result: FetchResult<Record<string, any>>;
 } = {
@@ -22,7 +22,7 @@ const getTaken: {
                 "https://objectenurl/api/v2/objects/168c8f1f-bf9c-426b-bfcd-b1ad3a202c95",
               __typename: "TaakFormulier",
             },
-            title: "Aanleveren informatie",
+            title: "OPEN TAAK 1",
             status: "OPEN",
             date: "2024-02-07",
             verloopdatum: "2024-02-17T07:52:09.254",
@@ -37,7 +37,7 @@ const getTaken: {
                 "https://objectenurl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
               __typename: "TaakFormulier",
             },
-            title: "Aanleveren informatie",
+            title: "OPEN TAAK 2",
             status: "OPEN",
             date: "2024-02-01",
             verloopdatum: null,
@@ -52,7 +52,7 @@ const getTaken: {
                 "https://objectenurl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
               __typename: "TaakFormulier",
             },
-            title: "Aanleveren informatie",
+            title: "OPEN TAAK 3",
             status: "OPEN",
             date: "2024-01-31",
             verloopdatum: null,
@@ -66,7 +66,7 @@ const getTaken: {
               value: "43381039-c511-4591-bb0c-e2006d65ca9b",
               __typename: "TaakFormulier",
             },
-            title: "Aanvullende informatie aanleveren",
+            title: "OPEN TAAK 4",
             status: "OPEN",
             date: "2024-01-26",
             verloopdatum: null,
