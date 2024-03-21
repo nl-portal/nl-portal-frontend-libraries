@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // @ts-ignore - Formio is not typed, fixed in version 5.3.*, RC now available
 import { Form } from "@formio/react";
 import merge from "lodash.merge";
@@ -34,7 +34,25 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   });
 
   const [submitTask] = useSubmitTaskMutation();
-  const { data: task } = useGetTaakByIdQuery({ variables: { id } });
+  useGetTaakByIdQuery({
+    variables: { id },
+    onCompleted(task) {
+      if (!task) return;
+      transformPrefilledDataToFormioSubmission(task.getTaakById.data);
+
+      if (task.getTaakById.formulier.formuliertype === "portalid") {
+        getFormById({ variables: { id: task.getTaakById.formulier.value } });
+        return;
+      }
+
+      if (task.getTaakById.formulier.formuliertype === "objecturl") {
+        getFormByUrl({ variables: { url: task.getTaakById.formulier.value } });
+        return;
+      }
+
+      setLoading(false);
+    },
+  });
   const [getFormById, { data: formDefinitionId }] =
     useGetFormDefinitionByIdLazyQuery({
       onCompleted: () => setLoading(false),
@@ -66,25 +84,8 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       payload = merge(payload, item);
     });
 
-    setSubmission({ ...submission, data: payload });
+    setSubmission((prevSubmission) => ({ ...prevSubmission, data: payload }));
   };
-
-  useEffect(() => {
-    if (!task) return;
-    transformPrefilledDataToFormioSubmission(task.getTaakById.data);
-
-    if (task.getTaakById.formulier.formuliertype === "portalid") {
-      getFormById({ variables: { id: task.getTaakById.formulier.value } });
-      return;
-    }
-
-    if (task.getTaakById.formulier.formuliertype === "objecturl") {
-      getFormByUrl({ variables: { url: task.getTaakById.formulier.value } });
-      return;
-    }
-
-    setLoading(false);
-  }, [task]);
 
   const setFormSubmission = (formioSubmission: any) => {
     setSubmission({
@@ -138,7 +139,9 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
             formDefinitionId?.getFormDefinitionById?.formDefinition ||
             formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
           }
-          formReady={(form: any) => form.triggerRedraw()} // TODO: here because customConditional don't work, update FormIO
+          formReady={(form: any) => {
+            form.triggerRedraw();
+          }} // TODO: here because customConditional don't work, update FormIO
           submission={submission}
           onChange={setFormSubmission}
           onSubmit={onFormSubmit}

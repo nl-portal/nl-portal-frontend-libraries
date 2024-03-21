@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 
-export interface NavigationItem {
+export type NavigationItem = {
   titleTranslationKey: string;
   path: string;
   icon: ReactNode;
   hasMessagesCount?: boolean;
-}
+};

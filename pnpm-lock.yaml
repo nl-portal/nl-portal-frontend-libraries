@@ -80,7 +80,7 @@ importers:
         version: 3.7.2(typescript@5.3.3)(vite@5.0.12)
       vitest:
         specifier: ^1.2.2
-        version: 1.2.2(jsdom@24.0.0)(sass@1.70.0)
+        version: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -88,8 +88,8 @@ importers:
   packages/app:
     dependencies:
       '@gemeente-denhaag/design-tokens-components':
-        specifier: 0.2.3-alpha.376
-        version: 0.2.3-alpha.376
+        specifier: 0.2.3-alpha.381
+        version: 0.2.3-alpha.381
       '@gemeente-denhaag/icons':
         specifier: 0.2.3-alpha.372
         version: 0.2.3-alpha.372(react@18.2.0)
@@ -153,7 +153,7 @@ importers:
         version: 5.0.12(sass@1.70.0)
       vitest:
         specifier: ^1.2.2
-        version: 1.2.2(jsdom@24.0.0)(sass@1.70.0)
+        version: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -217,7 +217,7 @@ importers:
         version: 3.7.2(typescript@5.3.3)(vite@5.0.12)
       vitest:
         specifier: ^1.2.2
-        version: 1.2.2(jsdom@24.0.0)(sass@1.70.0)
+        version: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
 
   packages/localization:
     dependencies:
@@ -275,7 +275,7 @@ importers:
         version: 3.7.2(typescript@5.3.3)(vite@5.0.12)
       vitest:
         specifier: ^1.2.2
-        version: 1.2.2(jsdom@24.0.0)(sass@1.70.0)
+        version: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
 
   packages/user-interface:
     dependencies:
@@ -294,6 +294,9 @@ importers:
       '@gemeente-denhaag/alert':
         specifier: 0.1.1-alpha.342
         version: 0.1.1-alpha.342(react@18.2.0)
+      '@gemeente-denhaag/button-link':
+        specifier: 0.0.1-alpha.2
+        version: 0.0.1-alpha.2(react-dom@18.2.0)(react@18.2.0)
       '@gemeente-denhaag/card':
         specifier: 0.2.3-alpha.372
         version: 0.2.3-alpha.372(react@18.2.0)
@@ -306,6 +309,9 @@ importers:
       '@gemeente-denhaag/descriptionlist':
         specifier: 0.1.1-alpha.272
         version: 0.1.1-alpha.272
+      '@gemeente-denhaag/file':
+        specifier: 0.1.1-alpha.55
+        version: 0.1.1-alpha.55(react@18.2.0)
       '@gemeente-denhaag/form-field':
         specifier: 0.3.0-alpha.248
         version: 0.3.0-alpha.248(react-dom@18.2.0)(react@18.2.0)
@@ -337,14 +343,14 @@ importers:
         specifier: 0.1.1-alpha.232
         version: 0.1.1-alpha.232
       '@gemeente-denhaag/sidenav':
-        specifier: 0.1.0-alpha.190
-        version: 0.1.0-alpha.190(react@18.2.0)
+        specifier: 0.1.0-alpha.197
+        version: 0.1.0-alpha.197(react@18.2.0)
       '@gemeente-denhaag/tab':
-        specifier: 0.2.3-alpha.372
-        version: 0.2.3-alpha.372(react@18.2.0)
+        specifier: 0.2.3-alpha.380
+        version: 0.2.3-alpha.380(react@18.2.0)
       '@gemeente-denhaag/table':
-        specifier: 0.1.1-alpha.278
-        version: 0.1.1-alpha.278(react@18.2.0)
+        specifier: 0.1.1-alpha.283
+        version: 0.1.1-alpha.283(react@18.2.0)
       '@gemeente-denhaag/text-input':
         specifier: 0.3.0-alpha.372
         version: 0.3.0-alpha.372(react-dom@18.2.0)(react@18.2.0)
@@ -420,7 +426,7 @@ importers:
     devDependencies:
       '@testing-library/jest-dom':
         specifier: ^6.4.1
-        version: 6.4.1(vitest@1.2.2)
+        version: 6.4.2(vitest@1.2.2)
       '@testing-library/react':
         specifier: ^14.2.1
         version: 14.2.1(react-dom@18.2.0)(react@18.2.0)
@@ -451,6 +457,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.2.1
         version: 4.2.1(vite@5.0.12)
+      '@vitest/ui':
+        specifier: ^1.4.0
+        version: 1.4.0(vitest@1.2.2)
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -480,7 +489,7 @@ importers:
         version: 3.7.2(typescript@5.3.3)(vite@5.0.12)
       vitest:
         specifier: ^1.2.2
-        version: 1.2.2(jsdom@24.0.0)(sass@1.70.0)
+        version: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -552,7 +561,7 @@ packages:
       '@babel/core': 7.23.9
       '@babel/generator': 7.23.6
       '@babel/parser': 7.23.9
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.0
       '@babel/traverse': 7.23.9
       '@babel/types': 7.23.9
       babel-preset-fbjs: 3.4.0(@babel/core@7.23.9)
@@ -1120,6 +1129,12 @@ packages:
     dependencies:
       regenerator-runtime: 0.14.1
 
+  /@babel/runtime@7.24.0:
+    resolution: {integrity: sha512-Chk32uHMg6TnQdvw2e9IlqPpFX/6NLuK0Ys2PqLb7/gL5uFn9mXvK715FGLlOLQrcO4qIkNHkvPGktzzXexsFw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
+
   /@babel/template@7.23.9:
     resolution: {integrity: sha512-+xrD2BWLpvHKNmX2QbpdpsBaWnRxahMwJjO+KZk2JOElj5nSmKezyS1B4u+QbHMTX69t4ukm6hh9lsYQ7GHCKA==}
     engines: {node: '>=6.9.0'}
@@ -1586,6 +1601,21 @@ packages:
     resolution: {integrity: sha512-H71a3/iP53vLIWO7CxBMoJ+sgF0OuEtR1rORtBahpyBARDh4B/8KscCZvROqagIe4Odd3HQWkiUREWmsaGaUvA==}
     dev: false
 
+  /@gemeente-denhaag/button-link@0.0.1-alpha.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-g0BFXbklDETgs+g/XjZoypD+X8C73wdOOHD43Kj2cNv6aCpc8iau71z7241qbyzmXQac28Vu00UyElSKuTWmog==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@utrecht/component-library-react': 3.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@utrecht/components': 3.0.0
+      react: 18.2.0
+    transitivePeerDependencies:
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
+    dev: false
+
   /@gemeente-denhaag/button@0.2.3-alpha.372(react@18.2.0):
     resolution: {integrity: sha512-NCnwL5rzqgP7RtdncsXiUI8qrbQFU8cAVuJZqSlt3z8otLZS+5dfj2k/g/i5k7X/RsselFuzVTANZ3cJhyqemQ==}
     peerDependencies:
@@ -1725,8 +1755,8 @@ packages:
     resolution: {integrity: sha512-qmvli3ZhJCF2ai6J6dy15nBzPc9stSqAzhggSbQM7xlapYIofKjpxCd8loOp6lawUH2utv7YnEN5C9taQkgQvA==}
     dev: false
 
-  /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.376:
-    resolution: {integrity: sha512-Z6flaBLBbXplRHZB+fgZafSqKtiW1cLlZhoG6ADBGmIO2A2MWqCEYGaMxXNFJapOZaJqOo6e/NtYmjrtyGOt2A==}
+  /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.381:
+    resolution: {integrity: sha512-eTgm1gxuPoGNSXz4fIAHatVrT/Zj0zoJlLzJ7Ac8BdgcTr8qSEJODGqtLzyI4R1cuhixqDy7GIrR1PhveaSZ0A==}
     dev: false
 
   /@gemeente-denhaag/divider@0.2.3-alpha.372(react@18.2.0):
@@ -1751,6 +1781,14 @@ packages:
     resolution: {integrity: sha512-Q++p31Ut4IW/5EGNU1BNoxYSIIVrnCV1erZ4UywgNjYMpn4c7TDvsJLlhAeXskgG+s6Y7Eb+iFvGdV+NgCmPwA==}
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.372(react@18.2.0)
+    transitivePeerDependencies:
+      - react
+    dev: false
+
+  /@gemeente-denhaag/file@0.1.1-alpha.55(react@18.2.0):
+    resolution: {integrity: sha512-CDVf+nK1umG385vqhrd7LlSihkFn++lNlEdZjbPs59ygx4WoO48HXdPsT7CttQT4Fehb07OVu0cZIbeOEZXsGg==}
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.383(react@18.2.0)
     transitivePeerDependencies:
       - react
     dev: false
@@ -1905,6 +1943,22 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@gemeente-denhaag/icons@0.2.3-alpha.381(react@18.2.0):
+    resolution: {integrity: sha512-yT4cycD7VHjYT5E0J0npk0LebvQYTFlYi4bmH5q1H3TURPSGFDDLp8S+onEAoA+HA7eJesqq3Jbp1g5e5t7VyQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/icons@0.2.3-alpha.383(react@18.2.0):
+    resolution: {integrity: sha512-sOSpkEOUk4KS0yYMZgF0JlN6jhofRhDVIPkzYng059d1/yl00VnY1f1SFlO5F4/SZ5zFNWmU3uHXVDNIAxohqw==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /@gemeente-denhaag/language-switcher@0.2.3-alpha.364(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-+nFZwaR2padw1u0IST/++cJ1mzRS0fG5yV3Y2RQB7aqt2wJIf5+T315zGQTEa600bt7fXcLrs9aZL8mWAF8LGA==}
     peerDependencies:
@@ -1955,6 +2009,15 @@ packages:
       react: ^18.0.0
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.374(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/link@0.2.3-alpha.381(react@18.2.0):
+    resolution: {integrity: sha512-HyEFu1ibqpXIyHXygchyCQkPjwFbmnx4+l3oQ3tQs0vf8FT9zgnXlmeJjSMhdcVDQv4CfGNeqbNL14eref7rqQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.381(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -2047,6 +2110,14 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@gemeente-denhaag/sidenav@0.1.0-alpha.197(react@18.2.0):
+    resolution: {integrity: sha512-iiPxGbsLv53LsuGAYG0RQp3BiZ4Y+UVInruYUp4geOh+fOzkTpmB23tyFueVongS5DQVpRMU02bqXg/uJmrX5g==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /@gemeente-denhaag/step-marker@0.0.1-alpha.73(react@18.2.0):
     resolution: {integrity: sha512-oU+YVrgpLLXbFDI9m8CGdvxE9sts8jeRF1shh282PKuJW5Wp61Uk9iTarFhDx9HMXEBEdgdC3wEV1o7+5/kzBg==}
     peerDependencies:
@@ -2072,6 +2143,15 @@ packages:
       uuid: 9.0.1
     dev: false
 
+  /@gemeente-denhaag/tab@0.2.3-alpha.380(react@18.2.0):
+    resolution: {integrity: sha512-SIDFXFlqkW0UFPGEQg9eO13KNggIxeYrZIKSRd9RdUPNhK7igNYuIN52YUx04uTncdSunExsFzRFresEhgaQdw==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+      uuid: 9.0.1
+    dev: false
+
   /@gemeente-denhaag/table@0.1.1-alpha.274(react@18.2.0):
     resolution: {integrity: sha512-Laj4vAcyHCpWw56/JD03t1WOdgBHnIZxshMiNpgNDX/gfpNuZ4ZiBv4y03CZI0Rgp2/h2YmzEERq7CbNm1LzcQ==}
     peerDependencies:
@@ -2080,11 +2160,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@gemeente-denhaag/table@0.1.1-alpha.278(react@18.2.0):
-    resolution: {integrity: sha512-HZAx34g0L9nzZMgUJ7GWZ5mVk0awq3TofnS3/VYADlzu1OfUQJa051ThEddjuvRJEasugfjU6RGRCCaoXJbEUQ==}
+  /@gemeente-denhaag/table@0.1.1-alpha.283(react@18.2.0):
+    resolution: {integrity: sha512-GMcpgUepWCrIJpzIYiX0/Y1KyQO5ZwVWUmnW80l014BvwDI0Z//LD4fgPXVT+t7soLg/SHHSVMnwBXchDrkj2A==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
+      '@gemeente-denhaag/link': 0.2.3-alpha.381(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -2982,6 +3063,10 @@ packages:
     dev: true
     optional: true
 
+  /@polka/url@1.0.0-next.25:
+    resolution: {integrity: sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==}
+    dev: true
+
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
@@ -3275,8 +3360,8 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/jest-dom@6.4.1(vitest@1.2.2):
-    resolution: {integrity: sha512-Z7qMM3J2Zw5H/nC2/5CYx5YcuaD56JmDFKNIozZ89VIo6o6Y9FMhssics4e2madEKYDNEpZz3+glPGz0yWMOag==}
+  /@testing-library/jest-dom@6.4.2(vitest@1.2.2):
+    resolution: {integrity: sha512-CzqH0AFymEMG48CpzXFriYYkOjk6ZGPCLMhW9e9jg3KMCn5OfJecF8GtGW7yGfR/IgCe3SX8BSwjdzI6BBbZLw==}
     engines: {node: '>=14', npm: '>=6', yarn: '>=1'}
     peerDependencies:
       '@jest/globals': '>= 28'
@@ -3297,14 +3382,14 @@ packages:
         optional: true
     dependencies:
       '@adobe/css-tools': 4.3.3
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.0
       aria-query: 5.3.0
       chalk: 3.0.0
       css.escape: 1.5.1
       dom-accessibility-api: 0.6.3
       lodash: 4.17.21
       redent: 3.0.0
-      vitest: 1.2.2(jsdom@24.0.0)(sass@1.70.0)
+      vitest: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
     dev: true
 
   /@testing-library/react@14.2.1(react-dom@18.2.0)(react@18.2.0):
@@ -3716,8 +3801,32 @@ packages:
       tinyspy: 2.2.0
     dev: true
 
+  /@vitest/ui@1.4.0(vitest@1.2.2):
+    resolution: {integrity: sha512-XC6CMhN1gzYcGbpn6/Oanj4Au2EXwQEX6vpcOeLlZv8dy7g11Ukx8zwtYQbwxs9duK2s9j2o5rbQiCP5DPAcmw==}
+    peerDependencies:
+      vitest: 1.4.0
+    dependencies:
+      '@vitest/utils': 1.4.0
+      fast-glob: 3.3.2
+      fflate: 0.8.2
+      flatted: 3.2.9
+      pathe: 1.1.2
+      picocolors: 1.0.0
+      sirv: 2.0.4
+      vitest: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
+    dev: true
+
   /@vitest/utils@1.2.2:
     resolution: {integrity: sha512-WKITBHLsBHlpjnDQahr+XK6RE7MiAsgrIkr0pGhQ9ygoxBfUeG0lUG5iLlzqjmKSlBv3+j5EGsriBzh+C3Tq9g==}
+    dependencies:
+      diff-sequences: 29.6.3
+      estree-walker: 3.0.3
+      loupe: 2.3.7
+      pretty-format: 29.7.0
+    dev: true
+
+  /@vitest/utils@1.4.0:
+    resolution: {integrity: sha512-mx3Yd1/6e2Vt/PUC98DcqTirtfxUyAZ32uK82r8rZzbtBeBo+nqgnjx/LvqQdWsrvNtm14VmurNgcf4nqY5gJg==}
     dependencies:
       diff-sequences: 29.6.3
       estree-walker: 3.0.3
@@ -4612,7 +4721,7 @@ packages:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.0
     dev: false
 
   /date-fns@3.3.1:
@@ -5180,6 +5289,10 @@ packages:
       - encoding
     dev: false
 
+  /fflate@0.8.2:
+    resolution: {integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==}
+    dev: true
+
   /figures@3.2.0:
     resolution: {integrity: sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg==}
     engines: {node: '>=8'}
@@ -5599,7 +5712,7 @@ packages:
   /i18next@22.4.12:
     resolution: {integrity: sha512-2lE+vRXxQ3lGLub1CVbwgO0IfkLHmUSDVOAVdPh22CsxttMXi+35n2qgxh2wZIkKl6t/NMzPfgFPRDiFQOmiCg==}
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.0
     dev: false
 
   /iconv-lite@0.4.24:
@@ -6431,6 +6544,11 @@ packages:
     resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
     dev: false
 
+  /mrmime@2.0.0:
+    resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==}
+    engines: {node: '>=10'}
+    dev: true
+
   /ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
@@ -7040,7 +7158,7 @@ packages:
   /redux@4.2.1:
     resolution: {integrity: sha512-LAUYz4lc+Do8/g7aeRa8JkyDErK6ekstQaqWQrNRW//MY1TvCEpMtpTWvlQ+FPbWCx+Xixu/6SHt5N0HR+SB4w==}
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.0
     dev: false
 
   /regenerator-runtime@0.10.5:
@@ -7080,7 +7198,7 @@ packages:
   /relay-runtime@12.0.0:
     resolution: {integrity: sha512-QU6JKr1tMsry22DXNy9Whsq5rmvwr3LSZiiWV/9+DFpuTWvp+WFhobWMc8TC4OjKFfNhEZy7mOiqUAn5atQtug==}
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.24.0
       fbjs: 3.0.5
       invariant: 2.2.4
     transitivePeerDependencies:
@@ -7352,6 +7470,15 @@ packages:
     resolution: {integrity: sha512-6+eerH9fEnNmi/hyM1DXcRK3pWdoMQtlkQ+ns0ntzunjKqp5i3sKCc80ym8Fib3iaYhdJUOPdhlJWj1tvge2Ww==}
     dev: true
 
+  /sirv@2.0.4:
+    resolution: {integrity: sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==}
+    engines: {node: '>= 10'}
+    dependencies:
+      '@polka/url': 1.0.0-next.25
+      mrmime: 2.0.0
+      totalist: 3.0.1
+    dev: true
+
   /slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
@@ -7595,6 +7722,11 @@ packages:
     engines: {node: '>=8.0'}
     dependencies:
       is-number: 7.0.0
+    dev: true
+
+  /totalist@3.0.1:
+    resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
+    engines: {node: '>=6'}
     dev: true
 
   /tough-cookie@4.1.3:
@@ -7873,7 +8005,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.2.2(jsdom@24.0.0)(sass@1.70.0):
+  /vitest@1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0):
     resolution: {integrity: sha512-d5Ouvrnms3GD9USIK36KG8OZ5bEvKEkITFtnGv56HFaSlbItJuYr7hv2Lkn903+AvRAgSixiamozUVfORUekjw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -7902,6 +8034,7 @@ packages:
       '@vitest/runner': 1.2.2
       '@vitest/snapshot': 1.2.2
       '@vitest/spy': 1.2.2
+      '@vitest/ui': 1.4.0(vitest@1.2.2)
       '@vitest/utils': 1.2.2
       acorn-walk: 8.3.2
       cac: 6.7.14
