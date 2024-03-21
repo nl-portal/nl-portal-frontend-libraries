@@ -49,7 +49,10 @@ const TasksList = ({
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
   const subTitle = readMoreAmount
-    ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
+    ? intl.formatMessage(
+        { id: readMoreTranslationId },
+        { total: readMoreAmount },
+      )
     : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });

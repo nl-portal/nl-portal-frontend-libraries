@@ -54,7 +54,10 @@ export type ContactMomentPage = {
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
   totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
 };
 
 export type Document = {
@@ -284,7 +287,7 @@ export type Query = {
   /** Gets a zaak by id */
   getZaak: Zaak;
   /** Gets all zaken for the user */
-  getZaken: Array<Zaak>;
+  getZaken: ZaakPage;
 };
 
 
@@ -402,7 +405,6 @@ export type TaakPage = {
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  results: Array<Taak>;
   size: Scalars['Int']['output'];
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
@@ -435,6 +437,18 @@ export type ZaakDetails = {
   __typename?: 'ZaakDetails';
   data: Array<Scalars['JSON']['output']>;
   zaak: Scalars['String']['output'];
+};
+
+export type ZaakPage = {
+  __typename?: 'ZaakPage';
+  content: Array<Zaak>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
 };
 
 export type ZaakStatus = {
@@ -570,10 +584,12 @@ export type GetZaakQueryVariables = Exact<{
 
 export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: string | null }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
 
-export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetZakenQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']['input']>;
+}>;
 
 
-export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> };
+export type GetZakenQuery = { __typename?: 'Query', getZaken: { __typename?: 'ZaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> } };
 
 export const FormulierFieldsFragmentDoc = gql`
     fragment FormulierFields on TaakFormulier {
@@ -1413,20 +1429,24 @@ export type GetZaakLazyQueryHookResult = ReturnType<typeof useGetZaakLazyQuery>;
 export type GetZaakSuspenseQueryHookResult = ReturnType<typeof useGetZaakSuspenseQuery>;
 export type GetZaakQueryResult = Apollo.QueryResult<GetZaakQuery, GetZaakQueryVariables>;
 export const GetZakenDocument = gql`
-    query GetZaken {
-  getZaken {
-    uuid
-    omschrijving
-    identificatie
-    zaaktype {
+    query GetZaken($page: Int) {
+  getZaken(page: $page) {
+    content {
+      uuid
+      omschrijving
       identificatie
-    }
-    startdatum
-    status {
-      statustype {
-        isEindstatus
+      zaaktype {
+        identificatie
+      }
+      startdatum
+      status {
+        statustype {
+          isEindstatus
+        }
       }
     }
+    totalElements
+    totalPages
   }
 }
     `;
@@ -1443,6 +1463,7 @@ export const GetZakenDocument = gql`
  * @example
  * const { data, loading, error } = useGetZakenQuery({
  *   variables: {
+ *      page: // value for 'page'
  *   },
  * });
  */

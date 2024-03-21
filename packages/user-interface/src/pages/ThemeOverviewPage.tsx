@@ -43,15 +43,25 @@ const ThemeOverviewPage = ({
           loading={loading}
           error={Boolean(taskError)}
           tasks={taskData?.getTaken.content}
+          readMoreAmount={
+            taskData?.getTaken.totalElements > showTasksLength
+              ? taskData?.getTaken.totalElements
+              : undefined
+          }
         />
       )}
       {showCasesLength && (
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          cases={caseData?.getZaken
+          cases={caseData?.getZaken.content
             .filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, showCasesLength)}
+          readMoreAmount={
+            caseData?.getZaken.totalElements > showCasesLength
+              ? caseData?.getZaken.totalElements
+              : undefined
+          }
         />
       )}
       <TableList

@@ -19,7 +19,7 @@ const OverviewPage = ({
   showAlert = false,
   alertType = "warning",
   showIntro = false,
-  tasksPreviewLength = 3,
+  tasksPreviewLength = 5,
   casesPreviewLength = 4,
 }: OverviewPageProps) => {
   const intl = useIntl();
@@ -67,15 +67,25 @@ const OverviewPage = ({
           loading={loading}
           error={Boolean(taskError)}
           tasks={taskData?.getTaken.content}
+          readMoreAmount={
+            taskData?.getTaken.totalElements > tasksPreviewLength
+              ? taskData?.getTaken.totalElements
+              : undefined
+          }
         />
       )}
       {casesPreviewLength && (
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          cases={caseData?.getZaken
+          cases={caseData?.getZaken.content
             .filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, casesPreviewLength)}
+          readMoreAmount={
+            caseData?.getZaken.totalElements > casesPreviewLength
+              ? caseData?.getZaken.totalElements
+              : undefined
+          }
         />
       )}
     </PageGrid>
