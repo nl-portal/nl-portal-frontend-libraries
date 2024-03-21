@@ -20,7 +20,7 @@ interface Props {
   readMoreAmount?: number;
   readMoreLink?: string;
   readMoreTranslationId?: string;
-  cases?: GetZakenQuery["getZaken"];
+  cases?: GetZakenQuery["getZaken"]["content"];
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;

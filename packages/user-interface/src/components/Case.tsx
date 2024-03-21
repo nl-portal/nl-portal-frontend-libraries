@@ -8,7 +8,7 @@ import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 interface Props {
-  cs: GetZakenQuery["getZaken"][0];
+  cs: GetZakenQuery["getZaken"]["content"][0];
   listView?: boolean;
 }
 

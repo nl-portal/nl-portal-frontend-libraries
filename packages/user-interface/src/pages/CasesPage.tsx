@@ -42,7 +42,7 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   showTitle={false}
-                  cases={data?.getZaken.filter(
+                  cases={data?.getZaken.content.filter(
                     (c) => !c.status?.statustype.isEindstatus,
                   )}
                 />
@@ -55,7 +55,7 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   showTitle={false}
-                  cases={data?.getZaken.filter(
+                  cases={data?.getZaken.content.filter(
                     (c) => c.status?.statustype.isEindstatus,
                   )}
                 />
