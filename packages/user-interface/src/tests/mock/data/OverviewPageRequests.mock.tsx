@@ -1,4 +1,3 @@
-import { getZaken } from "./CasesPageRequests.mock";
-import { getTaken } from "./TasksPageRequests.mock";
+import { getTaken, getZaken } from "./AllRequests.mock";
 
 export const mockRequest = [getZaken, getTaken];
