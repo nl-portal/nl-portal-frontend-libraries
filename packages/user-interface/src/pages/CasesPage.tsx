@@ -19,15 +19,16 @@ const CasesPage = () => {
   const queryTab = Number(query.get(TAB_QUERY_PARAM));
   const { data, loading, error } = useGetZakenQuery();
 
+  //TODO: check the two useEffects below
   useEffect(() => {
     if (queryTab === tabNumber) return;
     navigate(`${location.pathname}?${TAB_QUERY_PARAM}=${tabNumber}`);
-  }, [tabNumber]);
+  }, [tabNumber]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (queryTab === tabNumber) return;
     setTabNumber(queryTab);
-  }, [queryTab]);
+  }, [queryTab]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <PageGrid className={styles.cases}>

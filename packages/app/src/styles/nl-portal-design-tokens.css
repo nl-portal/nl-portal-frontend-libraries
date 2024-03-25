@@ -72,12 +72,11 @@
   --nlportal-status-history-border-color: var(--denhaag-color-grey-2);
   --nlportal-status-history-border-radius: 2px;
   --nlportal-status-history-facet-height: 8px;
-  --nlportal-status-history-box-shadow: 0px 4px 4px 0px hsla(0, 0%, 0%, 0.1);
+  --nlportal-status-history-box-shadow: 0px 4px 4px 0px hsla(0 0% 0% / 10%);
   --nlportal-skeleton-step-padding: var(--denhaag-timeline-step-padding);
   --nlportal-skeleton-step-circle-padding: var(
     --denhaag-timeline-step-icon-padding
   );
-  --nlportal-focus-border: var(--denhaag-focus-border);
   --nlportal-document-border-width: 1px;
   --nlportal-document-border-style: solid;
   --nlportal-document-border-color: var(--denhaag-color-grey-2);

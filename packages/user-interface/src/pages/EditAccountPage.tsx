@@ -38,7 +38,7 @@ const EditAccountPage = () => {
   const [value, setValue] = useState(defaultValue || "");
   const [mutating, setMutationStatus] = useState(false);
 
-  const navigateToAccountPage = (): void => {
+  const navigateToAccountPage = () => {
     navigate(paths.account);
   };
 
@@ -51,8 +51,9 @@ const EditAccountPage = () => {
     if (regex) {
       setValidity(regex.test(value));
     }
-  }, [value]);
+  }, [value, regex]);
 
+  // TODO: check the useEffect below, because maybe loading does the same as mutating
   useEffect(() => {
     if (mutating && !loading) {
       if (!error) {
@@ -60,7 +61,7 @@ const EditAccountPage = () => {
       }
       setMutationStatus(false);
     }
-  }, [loading]);
+  }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const invalid = !valid && `${value}`.length >= 1;
   const inputId = propTranslation.toLowerCase();

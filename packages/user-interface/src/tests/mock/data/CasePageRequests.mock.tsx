@@ -1,5 +1,6 @@
-import { FetchResult, GraphQLRequest } from "@apollo/client";
+import { GraphQLRequest } from "@apollo/client";
 import {
+  GetZaakQuery,
   QUERY_GET_OBJECT_CONTACT_MOMENTEN,
   QUERY_GET_PERSOON,
   QUERY_GET_TAKEN,
@@ -7,9 +8,12 @@ import {
 } from "@nl-portal/nl-portal-api";
 import cloneDeep from "lodash.clonedeep";
 
+type GetZaakResult = { data: GetZaakQuery };
+
 const getZaak: {
   request: GraphQLRequest;
-  result: FetchResult<Record<string, any>>;
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  result: GetZaakResult;
 } = {
   request: {
     query: QUERY_GET_ZAAK,

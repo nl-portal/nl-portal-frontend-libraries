@@ -78,7 +78,7 @@ const Header = ({
     if (height !== headerHeight) {
       setHeaderHeight(height);
     }
-  }, [height]);
+  }, [height, headerHeight]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const scrollDown = previousScrollY < scrollY;
@@ -108,7 +108,7 @@ const Header = ({
     }
 
     setPreviousScrollY(scrollY);
-  }, [scrollY]);
+  }, [scrollY, headerFixed, headerMarginTop]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (menuOpened || mobileMenuOpened) {
@@ -119,7 +119,7 @@ const Header = ({
     if (headerFixed) {
       setHeaderMarginTop(MOBILE_HEADER_HEIGHT);
     }
-  }, [isTablet]);
+  }, [isTablet, headerFixed, menuOpened, mobileMenuOpened]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div

@@ -3,7 +3,11 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PageHeader from "../components/PageHeader";
-import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import {
+  Taak,
+  useGetTakenQuery,
+  useGetZakenQuery,
+} from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
 
@@ -25,7 +29,7 @@ const OverviewPage = ({
   const intl = useIntl();
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
   const {
-    data: taskData,
+    data: tasksDataResult,
     loading: taskLoading,
     error: taskError,
   } = useGetTakenQuery();
@@ -35,6 +39,8 @@ const OverviewPage = ({
     error: caseError,
   } = useGetZakenQuery();
   const loading = taskLoading || caseLoading;
+
+  const tasksData = tasksDataResult?.getTaken.content as Taak[] | undefined;
 
   return (
     <PageGrid>
@@ -66,7 +72,7 @@ const OverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          tasks={taskData?.getTaken.content.slice(0, tasksPreviewLength)}
+          tasks={tasksData?.slice(0, tasksPreviewLength)}
         />
       )}
       {casesPreviewLength && (

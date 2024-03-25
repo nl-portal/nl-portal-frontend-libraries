@@ -37,7 +37,7 @@ export const useUserInfo = () => {
         loadGemachtigde();
       }
     }
-  }, [decodedToken]);
+  }, [decodedToken]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const name = getNameString(persoonData?.getPersoon?.naam);
@@ -46,7 +46,7 @@ export const useUserInfo = () => {
     } else {
       setUserName(name);
     }
-  }, [persoonData]);
+  }, [persoonData, decodedToken?.gemachtigde]);
 
   useEffect(() => {
     const name = bedrijfData?.getBedrijf?.naam || "";
@@ -55,7 +55,7 @@ export const useUserInfo = () => {
     } else {
       setUserName(name);
     }
-  }, [bedrijfData]);
+  }, [bedrijfData, decodedToken?.gemachtigde]);
 
   useEffect(() => {
     if (gemachtigdeData?.getGemachtigde?.persoon) {

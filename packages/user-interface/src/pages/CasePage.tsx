@@ -33,8 +33,10 @@ import useTaskUrl from "../hooks/useTaskUrl";
 import uniqueId from "lodash.uniqueid";
 import BackLink, { BackLinkProps } from "../components/BackLink";
 import useActionLabels from "../hooks/useActionLabels";
+import { Taak } from "@nl-portal/nl-portal-api";
+import { ContactMoment } from "@nl-portal/nl-portal-api";
 
-const Task = ({ task }: { task: any }) => {
+const Task = ({ task }: { task: Taak }) => {
   const labels = useActionLabels();
   const { formuliertype, value } = task?.formulier ?? {};
   const taskUrl = useTaskUrl(formuliertype, value, task?.id);
@@ -82,9 +84,12 @@ const CasePage = ({
   });
   const [getMomenten, { data: contacten }] =
     useGetObjectContactMomentenLazyQuery();
-  const { data: taken } = useGetTakenQuery({ variables: { zaakId: id } });
+  const { data: tasksDataResult } = useGetTakenQuery({
+    variables: { zaakId: id },
+  });
+  const tasksData = tasksDataResult?.getTaken.content as Taak[] | undefined;
 
-  const firstTask = taken?.getTaken?.content[0];
+  const firstTask = tasksData?.[0];
   const details = React.useMemo(() => {
     if (!zaak?.getZaak) return [];
 
@@ -106,19 +111,18 @@ const CasePage = ({
       });
 
     return array;
-  }, [zaak]);
+  }, [zaak]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const contactItems = React.useMemo(() => {
     if (!contacten?.getObjectContactMomenten) return [];
-
-    return contacten?.getObjectContactMomenten?.content.map(
-      (contact: any, index: number) => ({
-        id: index,
-        title: contact.tekst,
-        channel: contact.kanaal,
-        isoDate: contact.registratiedatum,
-      }),
-    );
+    const contactenContent = contacten?.getObjectContactMomenten
+      ?.content as ContactMoment[];
+    return contactenContent.map((contact: ContactMoment, index: number) => ({
+      id: index,
+      title: contact.tekst,
+      channel: contact.kanaal,
+      isoDate: contact.registratiedatum,
+    }));
   }, [contacten]);
 
   const contactLabels = {
@@ -129,7 +133,7 @@ const CasePage = ({
   React.useEffect(() => {
     if (!zaak) return;
     getMomenten({ variables: { objectUrl: zaak.getZaak.url } });
-  }, [zaak]);
+  }, [zaak]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={styles.case}>
@@ -153,7 +157,7 @@ const CasePage = ({
               )}
             </Heading2>
           </header>
-          <Task task={firstTask} />
+          {firstTask && <Task task={firstTask} />}
           <div className={styles.case__article}>
             <Heading3 className={styles["case__sub-header"]}>
               <FormattedMessage id="case.statusHeader" />
@@ -174,6 +178,7 @@ const CasePage = ({
               <DescriptionList items={details} />
             </div>
           )}
+          {/* eslint-disable @typescript-eslint/no-explicit-any */}
           {zaak?.getZaak.zaakdetails.data.map((section: any) => {
             const listItems = section.waarde.filter(
               (i: any) => i.type !== "table",
@@ -226,6 +231,7 @@ const CasePage = ({
                                 ))}
                               </TableRow>
                             ))}
+                            {/* eslint-enable @typescript-eslint/no-explicit-any */}
                           </TableBody>
                         )}
                       </Table>
@@ -250,7 +256,7 @@ const CasePage = ({
               <ContactTimeline items={contactItems} labels={contactLabels} />
             </div>
           )}
-          <Task task={firstTask} />
+          {firstTask && <Task task={firstTask} />}
         </Fragment>
       ) : (
         <Paragraph>
