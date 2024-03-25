@@ -7,7 +7,7 @@ const getTaken: {
 } = {
   request: {
     query: QUERY_GET_TAKEN,
-    variables: {},
+    variables: { pageSize: 10 },
   },
   result: {
     data: {
@@ -75,6 +75,8 @@ const getTaken: {
         ],
         __typename: "TaakPage",
       },
+      totalElements: 3,
+      totalPages: 1,
     },
   },
 };
