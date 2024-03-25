@@ -94,14 +94,14 @@ const CasesList = ({
           <Case key={cs.uuid} cs={cs} listView={listView} />
         ))}
       </div>
-      {indexLimit && (
+      {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["cases-list__pagination"]}`}
           index={index}
           indexLimit={indexLimit}
           onChange={onChange}
         />
-      )}
+      ) : null}
     </section>
   );
 };

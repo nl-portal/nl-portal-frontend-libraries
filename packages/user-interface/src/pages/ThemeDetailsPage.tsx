@@ -47,12 +47,6 @@ const ThemeDetailsPage = ({
           error={Boolean(taskError)}
           showTitle={false}
           tasks={taskData?.getTaken.content}
-          readMoreAmount={
-            taskData?.getTaken.totalElements &&
-            taskData?.getTaken.totalElements > showTasksLength
-              ? taskData?.getTaken.totalElements
-              : undefined
-          }
         />
       )}
       <LinksList
@@ -89,12 +83,6 @@ const ThemeDetailsPage = ({
           error={Boolean(taskError)}
           showTitle={false}
           tasks={taskData?.getTaken.content}
-          readMoreAmount={
-            taskData?.getTaken.totalElements &&
-            taskData?.getTaken.totalElements > showTasksLength
-              ? taskData?.getTaken.totalElements
-              : undefined
-          }
         />
       )}
     </PageGrid>

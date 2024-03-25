@@ -23,7 +23,7 @@ const TasksPage = () => {
         showTitle={false}
         tasks={data?.getTaken.content}
         onChange={onPageChange}
-        indexLimit={data?.getTaken.totalPages}
+        indexLimit={data?.getTaken.totalPages && data?.getTaken.totalPages - 1}
       />
     </PageGrid>
   );
