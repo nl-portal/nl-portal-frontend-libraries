@@ -307,8 +307,8 @@ importers:
         specifier: 0.1.1-alpha.30
         version: 0.1.1-alpha.30(react@18.2.0)
       '@gemeente-denhaag/descriptionlist':
-        specifier: 0.1.1-alpha.272
-        version: 0.1.1-alpha.272
+        specifier: 0.1.1-alpha.283
+        version: 0.1.1-alpha.283
       '@gemeente-denhaag/file':
         specifier: 0.1.1-alpha.55
         version: 0.1.1-alpha.55(react@18.2.0)
@@ -1745,6 +1745,10 @@ packages:
 
   /@gemeente-denhaag/descriptionlist@0.1.1-alpha.272:
     resolution: {integrity: sha512-jIZ6R1IzHgCcSbri2OTDloGRwnuoHzRzO9h4BMp3IlxkbNX9LrFQ+VbgxU+KVxZ/p/v6lWsZzfMkK/WIEsF8Zw==}
+    dev: false
+
+  /@gemeente-denhaag/descriptionlist@0.1.1-alpha.283:
+    resolution: {integrity: sha512-mpxVUomd6RICcx8Kvj6dBMBJJ5dRXRuVI80kmvi62+Wuq6yDYTXzRZb9eDWGY37kUTrE6omy0FpDvDle2/cK9w==}
     dev: false
 
   /@gemeente-denhaag/design-tokens-common@0.2.3-alpha.374:
