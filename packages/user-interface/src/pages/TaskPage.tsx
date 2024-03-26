@@ -7,6 +7,7 @@ import {
   useGetTaakByIdQuery,
   useGetFormDefinitionByIdLazyQuery,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
+  TaakStatus,
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
@@ -45,6 +46,13 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
     variables: { id },
     onCompleted(task) {
       if (!task) return;
+
+      if (task.getTaakById?.status !== TaakStatus.Open) {
+        setSubmitted(true);
+        setLoading(false);
+        return;
+      }
+
       transformPrefilledDataToFormioSubmission(task.getTaakById.data);
 
       if (task.getTaakById.formulier.formuliertype === "portalid") {
@@ -116,22 +124,22 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
     return null;
   }
 
-  if (!formDefinitionId && !formDefinitionUrl) {
-    return (
-      <Alert
-        variant="error"
-        title={intl.formatMessage({ id: "task.fetchError" })}
-        text=""
-      />
-    );
-  }
-
   if (submitted) {
     return (
       <Alert
         variant="success"
         title={intl.formatMessage({ id: "task.completeTitle" })}
         text={intl.formatMessage({ id: "task.completeDescription" })}
+      />
+    );
+  }
+
+  if (!formDefinitionId && !formDefinitionUrl) {
+    return (
+      <Alert
+        variant="error"
+        title={intl.formatMessage({ id: "task.fetchError" })}
+        text=""
       />
     );
   }
