@@ -37,7 +37,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   });
 
   const [submitTask] = useSubmitTaskMutation({
-    onComplete: () => {
+    onCompleted: () => {
       setSubmitted(true);
       client.cache.reset();
     },
