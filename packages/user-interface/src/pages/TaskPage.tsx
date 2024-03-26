@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 import BackLink, { BackLinkProps } from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
+import { useApolloClient } from "@apollo/client";
 
 Formio.use(ProtectedEval);
 
@@ -27,13 +28,19 @@ interface TaskPageProps {
 const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const { id } = useParams();
   const intl = useIntl();
+  const client = useApolloClient();
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState({
     data: {},
   });
 
-  const [submitTask] = useSubmitTaskMutation();
+  const [submitTask] = useSubmitTaskMutation({
+    onComplete: () => {
+      setSubmitted(true);
+      client.cache.reset();
+    },
+  });
   useGetTaakByIdQuery({
     variables: { id },
     onCompleted(task) {
@@ -101,7 +108,6 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
           id,
           submission: formioSubmission.data,
         },
-        onCompleted: () => setSubmitted(true),
       });
     }
   };
