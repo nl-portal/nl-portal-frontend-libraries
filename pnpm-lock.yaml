@@ -376,8 +376,8 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0(keycloak-js@23.0.6)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
       '@utrecht/component-library-css':
-        specifier: 3.0.1-alpha.12
-        version: 3.0.1-alpha.12
+        specifier: 3.0.1-alpha.27
+        version: 3.0.1-alpha.27
       bootstrap:
         specifier: ^4.6.2
         version: 4.6.2(jquery@3.7.1)(popper.js@1.16.1)
@@ -3723,8 +3723,8 @@ packages:
     resolution: {integrity: sha512-g4DUnyGqkpg0f307tYbg+KZHHvvIllm4svK8u9TEIcHbXsa86wc+T4ncBZqLbNik4EPOX+g4nDEnePVmFgPS/A==}
     dev: false
 
-  /@utrecht/component-library-css@3.0.1-alpha.12:
-    resolution: {integrity: sha512-X/vHfxzfrf72lM5VnHvfEa5DaFFZr00EKUjlA3ZY3vMUQvRujiP3uG1ogkEkjtq7Np4WtuO3rOhEvirviB1dFg==}
+  /@utrecht/component-library-css@3.0.1-alpha.27:
+    resolution: {integrity: sha512-ZmdkJkUCaY3Y+hX4ubOqq2ci74r0DDxWrVMHK9zHy5D100bq9Uy5koEFYT8J+iEXIGtFA16iJ3UKcrioeJPXKg==}
     dev: false
 
   /@utrecht/component-library-react@3.0.0(react-dom@18.2.0)(react@18.2.0):
