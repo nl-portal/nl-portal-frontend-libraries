@@ -292,8 +292,8 @@ importers:
         specifier: 0.1.1-alpha.40
         version: 0.1.1-alpha.40(react@18.2.0)
       '@gemeente-denhaag/alert':
-        specifier: 0.1.1-alpha.342
-        version: 0.1.1-alpha.342(react@18.2.0)
+        specifier: 0.1.1-alpha.353
+        version: 0.1.1-alpha.353(react@18.2.0)
       '@gemeente-denhaag/button-link':
         specifier: 0.0.1-alpha.2
         version: 0.0.1-alpha.2(react-dom@18.2.0)(react@18.2.0)
@@ -1577,6 +1577,18 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@gemeente-denhaag/alert@0.1.1-alpha.353(react@18.2.0):
+    resolution: {integrity: sha512-U9nuRB6LOeVqkugtTKEPxpzh5KTGTC3fsn4+dtyiYZirVtep4uHImHp/ebNmg1pLs3LCcHRM2c5Rr61eC6EybA==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@gemeente-denhaag/button': 0.2.3-alpha.383(react@18.2.0)
+      '@gemeente-denhaag/iconbutton': 0.2.3-alpha.383(react@18.2.0)
+      '@gemeente-denhaag/icons': 0.2.3-alpha.383(react@18.2.0)
+      '@gemeente-denhaag/typography': 0.2.3-alpha.383(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
   /@gemeente-denhaag/badge-counter@0.1.1-alpha.372(react@18.2.0):
     resolution: {integrity: sha512-y2KlpRGAdYLRXUUjUIZp4YnbaccKGR+Yyw1YXPWa/85Wpdi8T3FjnqA0clpUAw2NIDy2KbO34p2li/vE3QsJKg==}
     peerDependencies:
@@ -1631,6 +1643,15 @@ packages:
       react: ^18.0.0
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.374(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/button@0.2.3-alpha.383(react@18.2.0):
+    resolution: {integrity: sha512-N9JkjB6GDniLiS2/eNYn/qN52VEDPKu4Lit+hlVQ+H0CzbwaukefdpJiFBLARoOHf20J4SIMq7aj0xwgcmyQNA==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.383(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -1751,12 +1772,20 @@ packages:
     resolution: {integrity: sha512-iVaHPGpffYfvVwZwX7GZ5zC380ZGk9kRv7Fxt7hVr9S5XHhNsw9jz/QCVpjoC4H2Z79t7jrveEo0+tNzGv71Sg==}
     dev: false
 
+  /@gemeente-denhaag/design-tokens-common@0.2.3-alpha.385:
+    resolution: {integrity: sha512-qu5sksvkhIS6c7FC4FkUOPKopuhXPZwa1sN9WHhxDLj1JuEbImedImJ4C3s/NmqCXhacctPWi6Cx/fJfbGbZbw==}
+    dev: false
+
   /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.374:
     resolution: {integrity: sha512-qmvli3ZhJCF2ai6J6dy15nBzPc9stSqAzhggSbQM7xlapYIofKjpxCd8loOp6lawUH2utv7YnEN5C9taQkgQvA==}
     dev: false
 
   /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.381:
     resolution: {integrity: sha512-eTgm1gxuPoGNSXz4fIAHatVrT/Zj0zoJlLzJ7Ac8BdgcTr8qSEJODGqtLzyI4R1cuhixqDy7GIrR1PhveaSZ0A==}
+    dev: false
+
+  /@gemeente-denhaag/design-tokens-components@0.2.3-alpha.385:
+    resolution: {integrity: sha512-wzwwG5GdhVdNAG6T03tFoi/Ky7qRcIneguqUnS+e/SwDR0KbyyC0RGskYQfNK1DHNGrVWs1JnscUINCVJRZhXQ==}
     dev: false
 
   /@gemeente-denhaag/divider@0.2.3-alpha.372(react@18.2.0):
@@ -1921,6 +1950,14 @@ packages:
 
   /@gemeente-denhaag/iconbutton@0.2.3-alpha.372(react@18.2.0):
     resolution: {integrity: sha512-QTdxJYZFN/ILXZZjxz5Y2E6XAiz+FirQhCFlym6pOO0Y1Am7CMPvEPxlP68n3FA+JlxoVbAXopywWaarHmxUDQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/iconbutton@0.2.3-alpha.383(react@18.2.0):
+    resolution: {integrity: sha512-mfTyN5Q28qDx7mSvg1emV9U2i3+vL3yytWd6sLphcn58YL1wRuv7LPYT0b3ZHbS4GRhjiKFCzv/fsWe5wJFC8Q==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
@@ -2206,6 +2243,17 @@ packages:
     dependencies:
       '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.374
       '@gemeente-denhaag/design-tokens-components': 0.2.3-alpha.374
+      '@utrecht/components': 3.0.0
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/typography@0.2.3-alpha.383(react@18.2.0):
+    resolution: {integrity: sha512-c4VOgxrRe3ExGRwGBMGROuITWGKn97AU9jlY2OKXW+Hs0qMTC2ORsn5V4aNJXOesGRhZ0EhEOo+ifoPc9aJBrA==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.385
+      '@gemeente-denhaag/design-tokens-components': 0.2.3-alpha.385
       '@utrecht/components': 3.0.0
       react: 18.2.0
     dev: false
