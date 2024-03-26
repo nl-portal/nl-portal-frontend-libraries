@@ -3,7 +3,12 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PageHeader from "../components/PageHeader";
-import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import {
+  Taak,
+  Zaak,
+  useGetTakenQuery,
+  useGetZakenQuery,
+} from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
 
@@ -35,6 +40,8 @@ const OverviewPage = ({
     error: caseError,
   } = useGetZakenQuery();
   const loading = taskLoading || caseLoading;
+  const tasks = taskData?.getTaken.content as Taak[];
+  const cases = caseData?.getZaken.content as Zaak[];
 
   return (
     <PageGrid>
@@ -66,7 +73,7 @@ const OverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          tasks={taskData?.getTaken.content}
+          tasks={tasks}
           readMoreAmount={
             taskData?.getTaken.totalElements &&
             taskData?.getTaken.totalElements > tasksPreviewLength
@@ -79,7 +86,7 @@ const OverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          cases={caseData?.getZaken.content
+          cases={cases
             .filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, casesPreviewLength)}
           readMoreAmount={

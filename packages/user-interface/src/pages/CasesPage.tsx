@@ -6,7 +6,7 @@ import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import useQuery from "../hooks/useQuery";
 import PageHeader from "../components/PageHeader";
-import { useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import { Zaak, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import PageGrid from "../components/PageGrid";
 
 const CasesPage = () => {
@@ -18,6 +18,7 @@ const CasesPage = () => {
   const query = useQuery();
   const queryTab = Number(query.get(TAB_QUERY_PARAM));
   const { data, loading, error } = useGetZakenQuery();
+  const cases = data?.getZaken.content as Zaak[];
 
   useEffect(() => {
     if (queryTab === tabNumber) return;
@@ -42,7 +43,7 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   showTitle={false}
-                  cases={data?.getZaken.content.filter(
+                  cases={cases.filter(
                     (c) => !c.status?.statustype.isEindstatus,
                   )}
                 />
@@ -55,9 +56,7 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   showTitle={false}
-                  cases={data?.getZaken.content.filter(
-                    (c) => c.status?.statustype.isEindstatus,
-                  )}
+                  cases={cases.filter((c) => c.status?.statustype.isEindstatus)}
                 />
               ),
             },

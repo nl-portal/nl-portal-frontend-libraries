@@ -3,7 +3,12 @@ import CasesList from "../components/CasesList";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
-import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import {
+  Taak,
+  Zaak,
+  useGetTakenQuery,
+  useGetZakenQuery,
+} from "@nl-portal/nl-portal-api";
 import TableList from "../components/TableList";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
@@ -34,6 +39,8 @@ const ThemeOverviewPage = ({
     error: caseError,
   } = useGetZakenQuery();
   const loading = taskLoading || caseLoading;
+  const tasks = taskData?.getTaken.content as Taak[];
+  const cases = caseData?.getZaken.content as Zaak[];
 
   return (
     <PageGrid>
@@ -42,7 +49,7 @@ const ThemeOverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          tasks={taskData?.getTaken.content}
+          tasks={tasks}
           readMoreAmount={
             taskData?.getTaken.totalElements &&
             taskData?.getTaken.totalElements > showTasksLength
@@ -55,7 +62,7 @@ const ThemeOverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          cases={caseData?.getZaken.content
+          cases={cases
             .filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, showCasesLength)}
           readMoreAmount={

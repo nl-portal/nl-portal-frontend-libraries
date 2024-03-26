@@ -1,5 +1,5 @@
 import { FormattedMessage } from "react-intl";
-import { useGetTakenQuery } from "@nl-portal/nl-portal-api";
+import { Taak, useGetTakenQuery } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
@@ -21,7 +21,7 @@ const TasksPage = () => {
         loading={loading}
         error={Boolean(error)}
         showTitle={false}
-        tasks={data?.getTaken.content}
+        tasks={data?.getTaken.content as Taak[]}
         onChange={onPageChange}
         indexLimit={data?.getTaken.totalPages && data?.getTaken.totalPages - 1}
       />

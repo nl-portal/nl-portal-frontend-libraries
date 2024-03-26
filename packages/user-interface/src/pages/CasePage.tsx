@@ -3,6 +3,7 @@ import {
   useGetZaakQuery,
   useGetTakenQuery,
   useGetObjectContactMomentenLazyQuery,
+  Taak,
 } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/components-react";
 import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
@@ -124,7 +125,7 @@ const CasePage = ({
         loading={loading}
         showEmpty={false}
         showTitle={false}
-        tasks={taskData?.getTaken?.content}
+        tasks={taskData?.getTaken.content as Taak[]}
       />
       <div>
         <SectionHeader
@@ -215,7 +216,7 @@ const CasePage = ({
         loading={loading}
         showEmpty={false}
         showTitle={false}
-        tasks={taskData?.getTaken?.content}
+        tasks={taskData?.getTaken.content as Taak[]}
       />
     </PageGrid>
   );
