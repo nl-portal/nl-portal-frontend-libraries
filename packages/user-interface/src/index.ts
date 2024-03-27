@@ -21,3 +21,4 @@ export { default as TaskPage } from "./pages/TaskPage";
 export { default as FormsPage } from "./pages/FormsPage";
 export { default as FormPage } from "./pages/FormPage";
 export { default as ThemeOverviewPage } from "./pages/ThemeOverviewPage";
+export { default as ThemeDetailsPage } from "./pages/ThemeDetailsPage";

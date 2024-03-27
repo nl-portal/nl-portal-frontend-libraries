@@ -10,6 +10,7 @@ import {
   FormsPage,
   FormPage,
   ThemeOverviewPage,
+  ThemeDetailsPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "../constants/paths";
 import { config } from "../constants/config";
@@ -56,14 +57,17 @@ export const routes = [
     element: <NotificationsPage />,
   },
   {
-    path: paths.themeOverview(),
-    element: (
-      <ThemeOverviewPage
-        type="erfpacht"
-        showTasksLength={3}
-        showCasesLength={4}
-      />
-    ),
+    path: paths.themeOverview("erfpacht"),
+    children: [
+      {
+        index: true,
+        element: <ThemeOverviewPage type="erfpacht" />,
+      },
+      {
+        path: paths.themeDetails("erfpacht"),
+        element: <ThemeDetailsPage type="erfpacht" />,
+      },
+    ],
   },
   {
     path: paths.account,

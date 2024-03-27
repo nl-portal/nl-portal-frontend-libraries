@@ -19,7 +19,7 @@ const OverviewPage = ({
   showAlert = false,
   alertType = "warning",
   showIntro = false,
-  tasksPreviewLength = 6,
+  tasksPreviewLength = 5,
   casesPreviewLength = 4,
 }: OverviewPageProps) => {
   const intl = useIntl();
@@ -73,7 +73,9 @@ const OverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          cases={caseData?.getZaken.slice(0, casesPreviewLength)}
+          cases={caseData?.getZaken
+            .filter((c) => !c.status?.statustype.isEindstatus)
+            .slice(0, casesPreviewLength)}
         />
       )}
     </PageGrid>

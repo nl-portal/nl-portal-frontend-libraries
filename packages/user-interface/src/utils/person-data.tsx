@@ -5,6 +5,7 @@ import {
 } from "@nl-portal/nl-portal-api";
 import { ReactElement } from "react";
 import LocaleDate from "../components/LocaleDate";
+import { MockWrapper } from "@nl-portal/nl-portal-localization";
 
 const getNationalitiesString = (
   nationalities: Array<PersoonNationaliteiten> | undefined | null,
@@ -66,11 +67,13 @@ const getLocaleDateOfBirth = (
 ): string | ReactElement => {
   if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
     return (
-      <LocaleDate
-        date={
-          new Date(dateOfBirth.jaar, dateOfBirth.maand - 1, dateOfBirth.dag)
-        }
-      />
+      <MockWrapper>
+        <LocaleDate
+          date={
+            new Date(dateOfBirth.jaar, dateOfBirth.maand - 1, dateOfBirth.dag)
+          }
+        />
+      </MockWrapper>
     );
   }
 

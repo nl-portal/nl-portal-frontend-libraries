@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
+import { MockWrapper } from "@nl-portal/nl-portal-localization";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import {
   createMemoryRouter,
@@ -32,13 +32,13 @@ const TestContent = ({
   mocks: MockedResponse<Record<string, any>>[];
   paths: Paths;
 }) => (
-  <LocalizationProvider>
+  <MockWrapper>
     <UserInformationProvider>
       <MockedProvider mocks={mocks} addTypename={false}>
         <Outlet context={{ paths }} />
       </MockedProvider>
     </UserInformationProvider>
-  </LocalizationProvider>
+  </MockWrapper>
 );
 
 const TestProvider = ({

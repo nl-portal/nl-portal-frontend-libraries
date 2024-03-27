@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // @ts-ignore - Formio is not typed, fixed in version 5.3.*, RC now available
 import { Form } from "@formio/react";
 import merge from "lodash.merge";
@@ -7,6 +7,7 @@ import {
   useGetTaakByIdQuery,
   useGetFormDefinitionByIdLazyQuery,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
+  TaakStatus,
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
@@ -17,6 +18,7 @@ import { useParams } from "react-router-dom";
 import BackLink, { BackLinkProps } from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
+import { useApolloClient } from "@apollo/client";
 
 Formio.use(ProtectedEval);
 
@@ -27,14 +29,45 @@ interface TaskPageProps {
 const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const { id } = useParams();
   const intl = useIntl();
+  const client = useApolloClient();
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState({
     data: {},
   });
 
-  const [submitTask] = useSubmitTaskMutation();
-  const { data: task } = useGetTaakByIdQuery({ variables: { id } });
+  const [submitTask] = useSubmitTaskMutation({
+    onCompleted: () => {
+      setSubmitted(true);
+      client.cache.reset();
+    },
+  });
+  useGetTaakByIdQuery({
+    variables: { id },
+    onCompleted(task) {
+      if (!task) return;
+
+      if (task.getTaakById?.status !== TaakStatus.Open) {
+        setSubmitted(true);
+        setLoading(false);
+        return;
+      }
+
+      transformPrefilledDataToFormioSubmission(task.getTaakById.data);
+
+      if (task.getTaakById.formulier.formuliertype === "portalid") {
+        getFormById({ variables: { id: task.getTaakById.formulier.value } });
+        return;
+      }
+
+      if (task.getTaakById.formulier.formuliertype === "objecturl") {
+        getFormByUrl({ variables: { url: task.getTaakById.formulier.value } });
+        return;
+      }
+
+      setLoading(false);
+    },
+  });
   const [getFormById, { data: formDefinitionId }] =
     useGetFormDefinitionByIdLazyQuery({
       onCompleted: () => setLoading(false),
@@ -66,25 +99,8 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       payload = merge(payload, item);
     });
 
-    setSubmission({ ...submission, data: payload });
+    setSubmission((prevSubmission) => ({ ...prevSubmission, data: payload }));
   };
-
-  useEffect(() => {
-    if (!task) return;
-    transformPrefilledDataToFormioSubmission(task.getTaakById.data);
-
-    if (task.getTaakById.formulier.formuliertype === "portalid") {
-      getFormById({ variables: { id: task.getTaakById.formulier.value } });
-      return;
-    }
-
-    if (task.getTaakById.formulier.formuliertype === "objecturl") {
-      getFormByUrl({ variables: { url: task.getTaakById.formulier.value } });
-      return;
-    }
-
-    setLoading(false);
-  }, [task]);
 
   const setFormSubmission = (formioSubmission: any) => {
     setSubmission({
@@ -100,7 +116,6 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
           id,
           submission: formioSubmission.data,
         },
-        onCompleted: () => setSubmitted(true),
       });
     }
   };
@@ -109,22 +124,22 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
     return null;
   }
 
-  if (!formDefinitionId && !formDefinitionUrl) {
-    return (
-      <Alert
-        variant="error"
-        title={intl.formatMessage({ id: "task.fetchError" })}
-        text=""
-      />
-    );
-  }
-
   if (submitted) {
     return (
       <Alert
         variant="success"
         title={intl.formatMessage({ id: "task.completeTitle" })}
         text={intl.formatMessage({ id: "task.completeDescription" })}
+      />
+    );
+  }
+
+  if (!formDefinitionId && !formDefinitionUrl) {
+    return (
+      <Alert
+        variant="error"
+        title={intl.formatMessage({ id: "task.fetchError" })}
+        text=""
       />
     );
   }
@@ -138,7 +153,9 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
             formDefinitionId?.getFormDefinitionById?.formDefinition ||
             formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
           }
-          formReady={(form: any) => form.triggerRedraw()} // TODO: here because customConditional don't work, update FormIO
+          formReady={(form: any) => {
+            form.triggerRedraw();
+          }} // TODO: here because customConditional don't work, update FormIO
           submission={submission}
           onChange={setFormSubmission}
           onSubmit={onFormSubmit}
