@@ -40,8 +40,8 @@ const OverviewPage = ({
     error: caseError,
   } = useGetZakenQuery();
   const loading = taskLoading || caseLoading;
-  const tasks = taskData?.getTaken.content as Taak[];
-  const cases = caseData?.getZaken.content as Zaak[];
+  const tasks = taskData?.getTaken.content as Taak[] | undefined;
+  const cases = caseData?.getZaken.content as Zaak[] | undefined;
 
   return (
     <PageGrid>
@@ -87,7 +87,7 @@ const OverviewPage = ({
           loading={loading}
           error={Boolean(caseError)}
           cases={cases
-            .filter((c) => !c.status?.statustype.isEindstatus)
+            ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, casesPreviewLength)}
           readMoreAmount={
             caseData?.getZaken.totalElements &&

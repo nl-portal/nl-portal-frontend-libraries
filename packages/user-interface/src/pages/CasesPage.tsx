@@ -18,7 +18,7 @@ const CasesPage = () => {
   const query = useQuery();
   const queryTab = Number(query.get(TAB_QUERY_PARAM));
   const { data, loading, error } = useGetZakenQuery();
-  const cases = data?.getZaken.content as Zaak[];
+  const cases = data?.getZaken.content as Zaak[] | undefined;
 
   useEffect(() => {
     if (queryTab === tabNumber) return;
@@ -43,7 +43,7 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   showTitle={false}
-                  cases={cases.filter(
+                  cases={cases?.filter(
                     (c) => !c.status?.statustype.isEindstatus,
                   )}
                 />
@@ -56,7 +56,9 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   showTitle={false}
-                  cases={cases.filter((c) => c.status?.statustype.isEindstatus)}
+                  cases={cases?.filter(
+                    (c) => c.status?.statustype.isEindstatus,
+                  )}
                 />
               ),
             },
