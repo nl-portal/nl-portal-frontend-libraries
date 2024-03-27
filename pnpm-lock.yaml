@@ -300,7 +300,7 @@ importers:
   packages/user-interface:
     dependencies:
       '@apollo/client':
-        specifier: ^3.9.9
+        specifier: 3.9.9
         version: 3.9.9(@types/react@18.2.53)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@formio/protected-eval':
         specifier: ^1.2.2
