@@ -6,10 +6,6 @@ import { mockRequest } from "../data/TasksPageRequests.mock";
 
 const route = [
   {
-    path: paths.overview,
-    element: <></>,
-  },
-  {
     path: paths.tasks,
     children: [
       {
@@ -24,6 +20,6 @@ export const MockTasksPage = () => (
     mocks={mockRequest}
     routes={route}
     initialIndex={1}
-    initialEntries={[paths.overview, paths.tasks]}
+    initialEntries={[paths.tasks]}
   ></TestProvider>
 );

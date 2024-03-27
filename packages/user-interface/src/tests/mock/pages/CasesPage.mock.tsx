@@ -6,10 +6,6 @@ import { mockRequest } from "../data/CasesPageRequests.mock";
 
 const routes = [
   {
-    path: paths.overview,
-    element: <></>,
-  },
-  {
     path: paths.cases,
     children: [
       {
@@ -24,7 +20,7 @@ export const MockCasesPage = () => (
   <TestProvider
     mocks={mockRequest}
     routes={routes}
-    initialIndex={1}
-    initialEntries={[paths.overview, paths.cases]}
+    initialIndex={0}
+    initialEntries={[paths.cases]}
   ></TestProvider>
 );

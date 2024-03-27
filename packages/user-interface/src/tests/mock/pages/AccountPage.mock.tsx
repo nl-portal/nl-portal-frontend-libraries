@@ -6,10 +6,6 @@ import { mocksRequestBurgerGegevens } from "../data/AccountPageRequests.mock";
 
 const routes = [
   {
-    path: paths.overview,
-    element: <></>,
-  },
-  {
     path: paths.account,
     children: [
       {
@@ -24,7 +20,7 @@ export const MockAccountPage = () => (
   <TestProvider
     mocks={mocksRequestBurgerGegevens}
     routes={routes}
-    initialIndex={1}
-    initialEntries={[paths.overview, paths.account]}
+    initialIndex={0}
+    initialEntries={[paths.account]}
   ></TestProvider>
 );

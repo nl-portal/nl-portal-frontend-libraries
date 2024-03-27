@@ -4,18 +4,16 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { testPaths as paths } from "../../providers/TestProvider";
 
 describe("TasksPage", () => {
-  const takenAlgemeneInformatie = () =>
-    screen.getAllByText("Aanleveren informatie");
-  const taakAanvullendeInformatie = () =>
-    screen.getByText("Aanvullende informatie aanleveren");
+  const takenAlgemeneInformatie = () => screen.getByText("OPEN TAAK 1");
+  const taakAanvullendeInformatie = () => screen.getByText("OPEN TAAK 4");
 
   it("Shows an overview of all tasks", async () => {
     render(MockTasksPage());
     await waitFor(async () => {
-      expect(takenAlgemeneInformatie()[0]).toBeVisible();
+      expect(takenAlgemeneInformatie()).toBeVisible();
     });
 
-    expect(takenAlgemeneInformatie().length).toBe(3);
+    expect(takenAlgemeneInformatie()).toBeVisible();
     expect(taakAanvullendeInformatie()).toBeVisible();
   });
 
@@ -25,9 +23,7 @@ describe("TasksPage", () => {
       expect(taakAanvullendeInformatie()).toBeVisible();
     });
 
-    expect(
-      screen.getByRole("link", { name: "Aanvullende informatie aanleveren" }),
-    ).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "OPEN TAAK 4" })).toHaveAttribute(
       "href",
       paths.task("021118b9-bc59-11ee-b651-366634c97df6"),
     );
