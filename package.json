@@ -15,7 +15,8 @@
     "prettier:fix": "prettier --write .",
     "publish": "lerna publish from-package",
     "release": "lerna version prerelease --no-changelog --no-private --no-commit-hooks",
-    "test": "pnpm run --recursive --parallel test"
+    "test": "pnpm run --recursive --parallel test",
+    "typecheck": "pnpm run --recursive --parallel typecheck"
   },
   "devDependencies": {
     "prettier": "^3.2.5",

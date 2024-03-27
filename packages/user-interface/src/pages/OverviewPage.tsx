@@ -3,7 +3,12 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PageHeader from "../components/PageHeader";
-import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import {
+  Taak,
+  Zaak,
+  useGetTakenQuery,
+  useGetZakenQuery,
+} from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
 
@@ -28,13 +33,15 @@ const OverviewPage = ({
     data: taskData,
     loading: taskLoading,
     error: taskError,
-  } = useGetTakenQuery();
+  } = useGetTakenQuery({ variables: { pageSize: tasksPreviewLength } });
   const {
     data: caseData,
     loading: caseLoading,
     error: caseError,
   } = useGetZakenQuery();
   const loading = taskLoading || caseLoading;
+  const tasks = taskData?.getTaken.content as Taak[] | undefined;
+  const cases = caseData?.getZaken.content as Zaak[] | undefined;
 
   return (
     <PageGrid>
@@ -66,16 +73,28 @@ const OverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          tasks={taskData?.getTaken.content.slice(0, tasksPreviewLength)}
+          tasks={tasks}
+          readMoreAmount={
+            taskData?.getTaken.totalElements &&
+            taskData?.getTaken.totalElements > tasksPreviewLength
+              ? taskData?.getTaken.totalElements
+              : undefined
+          }
         />
       )}
       {casesPreviewLength && (
         <CasesList
           loading={loading}
           error={Boolean(caseError)}
-          cases={caseData?.getZaken
-            .filter((c) => !c.status?.statustype.isEindstatus)
+          cases={cases
+            ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, casesPreviewLength)}
+          readMoreAmount={
+            caseData?.getZaken.totalElements &&
+            caseData?.getZaken.totalElements > casesPreviewLength
+              ? caseData?.getZaken.totalElements
+              : undefined
+          }
         />
       )}
     </PageGrid>

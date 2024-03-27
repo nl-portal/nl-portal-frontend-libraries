@@ -1,4 +1,4 @@
-import { GetTakenQuery } from "@nl-portal/nl-portal-api";
+import { Taak } from "@nl-portal/nl-portal-api";
 import PortalLink from "./PortalLink";
 import { ActionMulti, ActionSingle } from "@gemeente-denhaag/action";
 import useTaskUrl from "../hooks/useTaskUrl";
@@ -7,7 +7,7 @@ import { ButtonLink } from "@gemeente-denhaag/button-link";
 import { ChevronRightIcon } from "@gemeente-denhaag/icons";
 
 interface Props {
-  task: GetTakenQuery["getTaken"]["content"][0];
+  task: Taak;
 }
 
 const Task = ({ task }: Props) => {

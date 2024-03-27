@@ -11,6 +11,7 @@ describe("TasksPage", () => {
 
   it("Shows an overview of all tasks", async () => {
     render(MockTasksPage());
+
     await waitFor(async () => {
       expect(takenAlgemeneInformatie()[0]).toBeVisible();
     });
@@ -21,6 +22,7 @@ describe("TasksPage", () => {
 
   it("Allows me to continue to a task", async () => {
     render(MockTasksPage());
+
     await waitFor(async () => {
       expect(taakAanvullendeInformatie()).toBeVisible();
     });

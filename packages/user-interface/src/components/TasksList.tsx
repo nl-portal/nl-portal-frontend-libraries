@@ -2,7 +2,7 @@ import { useIntl } from "react-intl";
 import styles from "./TasksList.module.scss";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
-import { GetTakenQuery } from "@nl-portal/nl-portal-api";
+import { Taak } from "@nl-portal/nl-portal-api";
 import Task from "./Task";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import SectionHeader from "./SectionHeader";
@@ -20,7 +20,7 @@ interface Props {
   readMoreAmount?: number;
   readMoreLink?: string;
   readMoreTranslationId?: string;
-  tasks?: GetTakenQuery["getTaken"]["content"];
+  tasks?: Taak[];
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
@@ -49,7 +49,10 @@ const TasksList = ({
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
   const subTitle = readMoreAmount
-    ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
+    ? intl.formatMessage(
+        { id: readMoreTranslationId },
+        { total: readMoreAmount },
+      )
     : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
@@ -89,14 +92,14 @@ const TasksList = ({
       {tasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}
-      {indexLimit && (
+      {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["tasks-list__pagination"]}`}
           index={index}
           indexLimit={indexLimit}
           onChange={onChange}
         />
-      )}
+      ) : null}
     </section>
   );
 };
