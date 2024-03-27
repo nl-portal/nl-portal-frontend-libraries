@@ -119,7 +119,7 @@ const Header = ({
     if (headerFixed) {
       setHeaderMarginTop(MOBILE_HEADER_HEIGHT);
     }
-  }, [isTablet, headerFixed, menuOpened, mobileMenuOpened]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isTablet, headerFixed]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
