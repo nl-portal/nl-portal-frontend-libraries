@@ -10,6 +10,7 @@ import {
 import UserInformationProvider from "./UserInformationProvider";
 import { Paths } from "../interfaces/paths";
 
+//eslint-disable-next-line react-refresh/only-export-components
 export const testPaths: Paths = {
   overview: "/",
   cases: "/zaken",
@@ -27,6 +28,7 @@ const TestContent = ({
   mocks,
   paths,
 }: {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   mocks: MockedResponse<Record<string, any>>[];
   paths: Paths;
 }) => (
@@ -46,6 +48,7 @@ const TestProvider = ({
   initialEntries,
   initialIndex,
 }: {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   mocks: MockedResponse<Record<string, any>>[];
   paths?: Paths;
   routes: RouteObject[];

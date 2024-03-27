@@ -1,15 +1,16 @@
 @import "../styles/mixins";
 
 .footer {
+  --utrecht-heading-color: var(
+    --nlportal-footer-header-color,
+    hsl(208 76% 92%)
+  );
+
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: var(--nlportal-footer-background-color, hsl(207 87% 27%));
-  --utrecht-heading-color: var(
-    --nlportal-footer-header-color,
-    hsl(208 76% 92%)
-  );
 }
 
 .footer__inner {

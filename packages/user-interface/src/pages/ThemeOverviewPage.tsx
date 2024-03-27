@@ -3,7 +3,11 @@ import CasesList from "../components/CasesList";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
-import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import {
+  Taak,
+  useGetTakenQuery,
+  useGetZakenQuery,
+} from "@nl-portal/nl-portal-api";
 import TableList from "../components/TableList";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
@@ -24,7 +28,7 @@ const ThemeOverviewPage = ({
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const {
-    data: taskData,
+    data: tasksDataResult,
     loading: taskLoading,
     error: taskError,
   } = useGetTakenQuery();
@@ -33,6 +37,7 @@ const ThemeOverviewPage = ({
     loading: caseLoading,
     error: caseError,
   } = useGetZakenQuery();
+  const tasksData = tasksDataResult?.getTaken.content as Taak[] | undefined;
   const loading = taskLoading || caseLoading;
 
   return (
@@ -42,7 +47,7 @@ const ThemeOverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          tasks={taskData?.getTaken.content.slice(0, showTasksLength)}
+          tasks={tasksData?.slice(0, showTasksLength)}
         />
       )}
       {showCasesLength && (

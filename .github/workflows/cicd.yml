@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: "18.x"
 
-      - name: intall
+      - name: install
         run: |
           npm install -g pnpm
           npm install -g lerna@7.4.2

@@ -25,18 +25,19 @@
 
   .current-page-indicator__heading {
     --utrecht-space-around: 0;
+
     color: var(--nlportal-heading-5-color, hsl(207 80% 35%));
   }
 }
 
-.current-page-indicator:focus:after {
+.current-page-indicator:focus::after {
   content: "";
   display: block;
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   border: var(--nlportal-focus-border, 2px dashed hsl(47 100% 40%));
   border-radius: var(--nlportal-border-radius, 3px);
 }

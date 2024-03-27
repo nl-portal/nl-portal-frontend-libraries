@@ -1,5 +1,4 @@
 import { useState } from "react";
-// @ts-ignore - Formio is not typed, fixed in version 5.3.*, RC now available
 import { Form } from "@formio/react";
 import merge from "lodash.merge";
 import {
@@ -77,6 +76,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       onCompleted: () => setLoading(false),
     });
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
     const keys = Object.keys(submissionData);
     let prefillData: any = {};
@@ -119,6 +119,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       });
     }
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   if (loading) {
     return null;
@@ -153,6 +154,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
             formDefinitionId?.getFormDefinitionById?.formDefinition ||
             formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
           }
+          //eslint-disable-next-line @typescript-eslint/no-explicit-any
           formReady={(form: any) => {
             form.triggerRedraw();
           }} // TODO: here because customConditional don't work, update FormIO
