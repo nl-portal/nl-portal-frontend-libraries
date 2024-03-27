@@ -8,12 +8,9 @@ import {
 } from "@nl-portal/nl-portal-api";
 import cloneDeep from "lodash.clonedeep";
 
-type GetZaakResult = { data: GetZaakQuery };
-
 const getZaak: {
   request: GraphQLRequest;
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  result: GetZaakResult;
+  result: { data: GetZaakQuery };
 } = {
   request: {
     query: QUERY_GET_ZAAK,

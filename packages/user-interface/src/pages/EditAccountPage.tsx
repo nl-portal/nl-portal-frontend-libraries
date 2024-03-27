@@ -36,15 +36,12 @@ const EditAccountPage = () => {
 
   const [valid, setValidity] = useState(true);
   const [value, setValue] = useState(defaultValue || "");
-  const [mutating, setMutationStatus] = useState(false);
-
-  const navigateToAccountPage = () => {
-    navigate(paths.account);
-  };
 
   const onSave = (): void => {
-    setMutationStatus(true);
-    mutateFunction({ variables: { klant: { [`${prop}`]: `${value}` } } });
+    mutateFunction({
+      variables: { klant: { [`${prop}`]: `${value}` } },
+      onCompleted: () => !error && navigate(paths.account),
+    });
   };
 
   useEffect(() => {
@@ -52,16 +49,6 @@ const EditAccountPage = () => {
       setValidity(regex.test(value));
     }
   }, [value, regex]);
-
-  // TODO: check the useEffect below, because maybe loading does the same as mutating
-  useEffect(() => {
-    if (mutating && !loading) {
-      if (!error) {
-        navigateToAccountPage();
-      }
-      setMutationStatus(false);
-    }
-  }, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const invalid = !valid && `${value}`.length >= 1;
   const inputId = propTranslation.toLowerCase();
@@ -106,7 +93,7 @@ const EditAccountPage = () => {
           <Button
             variant="secondary-action"
             className={styles["edit-account__button"]}
-            onClick={navigateToAccountPage}
+            onClick={() => navigate(paths.account)}
             disabled={loading}
           >
             <FormattedMessage id="account.cancel" />
