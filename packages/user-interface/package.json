@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-user-interface",
-  "version": "0.1.1-alpha.66",
+  "version": "0.1.1-alpha.67",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -29,7 +29,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@apollo/client": "^3.9.2",
     "@formio/protected-eval": "^1.2.2",
     "@formio/react": "^5.3.0",
     "@gemeente-denhaag/action": "0.1.1-alpha.40",
@@ -96,6 +95,7 @@
     "wait-on": "^7.2.0"
   },
   "peerDependencies": {
+    "@apollo/client": "^3.9.9",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
