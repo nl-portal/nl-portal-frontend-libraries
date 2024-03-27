@@ -23,7 +23,7 @@ const OverviewPage = ({
   showAlert = false,
   alertType = "warning",
   showIntro = false,
-  tasksPreviewLength = 6,
+  tasksPreviewLength = 5,
   casesPreviewLength = 4,
 }: OverviewPageProps) => {
   const intl = useIntl();
@@ -38,9 +38,8 @@ const OverviewPage = ({
     loading: caseLoading,
     error: caseError,
   } = useGetZakenQuery();
-  const loading = taskLoading || caseLoading;
-
   const tasksData = tasksDataResult?.getTaken.content as Taak[] | undefined;
+  const loading = taskLoading || caseLoading;
 
   return (
     <PageGrid>

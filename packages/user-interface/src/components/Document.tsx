@@ -1,58 +1,50 @@
-import { FC, useContext } from "react";
-import { DocumentIcon } from "@gemeente-denhaag/icons";
-import { Paragraph } from "@gemeente-denhaag/components-react";
-import classNames from "classnames";
-import Skeleton from "react-loading-skeleton";
-import { useIntl } from "react-intl";
+import { useContext } from "react";
 import prettyBytes from "pretty-bytes";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { PortalDocument } from "../interfaces/portal-document";
-import styles from "./Document.module.scss";
-import useMediaQuery from "../hooks/useMediaQuery";
-import { BREAKPOINTS } from "../constants/breakpoints";
-import DocumentDownload from "./DocumentDownload";
+import { ApiContext } from "@nl-portal/nl-portal-api";
+import { KeycloakContext } from "@nl-portal/nl-portal-authentication";
+import { File } from "@gemeente-denhaag/file";
 
-type DocumentProps = Partial<PortalDocument>;
+interface Props extends PortalDocument {}
 
-const Document: FC<DocumentProps> = ({
-  uuid,
-  extension,
-  name,
-  size,
-  documentapi,
-}) => {
-  const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
+const Document = ({ uuid, name, size, documentapi }: Props) => {
+  const { keycloakToken } = useContext(KeycloakContext);
+  const { restUri } = useContext(ApiContext);
   const { hrefLang } = useContext(LocaleContext);
-  const intl = useIntl();
+  const downloadLink = `${restUri}/documentapi/${documentapi}/document/${uuid}/content`;
+
+  const onClick = async (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+
+    const result = await fetch(downloadLink, {
+      headers: { Authorization: `Bearer ${keycloakToken}` },
+    });
+    const blob = await result.blob();
+    const href = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = href;
+    link.download = `${name}`;
+    document.body.appendChild(link);
+    link.dispatchEvent(
+      new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+      }),
+    );
+    link.remove();
+    window.URL.revokeObjectURL(link.href);
+  };
 
   return (
-    <div className={styles.document}>
-      <div className={styles["document__icon-container"]}>
-        <DocumentIcon className={styles.document__icon} />
-      </div>
-      <div
-        className={classNames(styles.document__content, {
-          [styles["document__content--desktop"]]: isDesktop,
-        })}
-      >
-        <Paragraph className={styles["document__file-name"]}>
-          {name ? (
-            `${name} (${extension}, ${prettyBytes(size || 0, {
-              locale: hrefLang,
-            })})`
-          ) : (
-            <span
-              aria-busy
-              aria-disabled
-              aria-label={intl.formatMessage({ id: "element.loading" })}
-            >
-              <Skeleton width={250} />
-            </span>
-          )}
-        </Paragraph>
-        <DocumentDownload uuid={uuid!} name={name} documentapi={documentapi!} />
-      </div>
-    </div>
+    <File
+      name={name}
+      href={name}
+      size={prettyBytes(size || 0, { locale: hrefLang })}
+      onClick={onClick}
+    />
   );
 };
 

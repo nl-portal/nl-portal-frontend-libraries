@@ -6,6 +6,7 @@ import {
   useGetTaakByIdQuery,
   useGetFormDefinitionByIdLazyQuery,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
+  TaakStatus,
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
@@ -16,6 +17,7 @@ import { useParams } from "react-router-dom";
 import BackLink, { BackLinkProps } from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
+import { useApolloClient } from "@apollo/client";
 
 Formio.use(ProtectedEval);
 
@@ -26,17 +28,30 @@ interface TaskPageProps {
 const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const { id } = useParams();
   const intl = useIntl();
+  const client = useApolloClient();
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState({
     data: {},
   });
 
-  const [submitTask] = useSubmitTaskMutation();
+  const [submitTask] = useSubmitTaskMutation({
+    onCompleted: () => {
+      setSubmitted(true);
+      client.cache.reset();
+    },
+  });
   useGetTaakByIdQuery({
     variables: { id },
     onCompleted(task) {
       if (!task) return;
+
+      if (task.getTaakById?.status !== TaakStatus.Open) {
+        setSubmitted(true);
+        setLoading(false);
+        return;
+      }
+
       transformPrefilledDataToFormioSubmission(task.getTaakById.data);
 
       if (task.getTaakById.formulier.formuliertype === "portalid") {
@@ -101,7 +116,6 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
           id,
           submission: formioSubmission.data,
         },
-        onCompleted: () => setSubmitted(true),
       });
     }
   };
@@ -111,22 +125,22 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
     return null;
   }
 
-  if (!formDefinitionId && !formDefinitionUrl) {
-    return (
-      <Alert
-        variant="error"
-        title={intl.formatMessage({ id: "task.fetchError" })}
-        text=""
-      />
-    );
-  }
-
   if (submitted) {
     return (
       <Alert
         variant="success"
         title={intl.formatMessage({ id: "task.completeTitle" })}
         text={intl.formatMessage({ id: "task.completeDescription" })}
+      />
+    );
+  }
+
+  if (!formDefinitionId && !formDefinitionUrl) {
+    return (
+      <Alert
+        variant="error"
+        title={intl.formatMessage({ id: "task.fetchError" })}
+        text=""
       />
     );
   }

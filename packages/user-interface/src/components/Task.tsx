@@ -1,8 +1,10 @@
 import { Taak } from "@nl-portal/nl-portal-api";
 import PortalLink from "./PortalLink";
+import { ActionMulti, ActionSingle } from "@gemeente-denhaag/action";
 import useTaskUrl from "../hooks/useTaskUrl";
-import { Action } from "@gemeente-denhaag/action";
 import useActionLabels from "../hooks/useActionLabels";
+import { ButtonLink } from "@gemeente-denhaag/button-link";
+import { ChevronRightIcon } from "@gemeente-denhaag/icons";
 
 interface Props {
   task: Taak;
@@ -13,10 +15,30 @@ const Task = ({ task }: Props) => {
   const { formuliertype, value } = task.formulier ?? {};
   const taskUrl = useTaskUrl(formuliertype, value, task.id);
 
+  if (task.formulier.formuliertype === "externalurl")
+    return (
+      <ActionMulti
+        labels={labels}
+        dateTime={task.verloopdatum}
+        actions={
+          <ButtonLink href={taskUrl} target="_blank">
+            <ChevronRightIcon />
+          </ButtonLink>
+        }
+      >
+        {task.title}
+      </ActionMulti>
+    );
+
   return (
-    <Action labels={labels} link={taskUrl} Link={PortalLink}>
+    <ActionSingle
+      labels={labels}
+      dateTime={task.verloopdatum}
+      link={taskUrl}
+      Link={PortalLink}
+    >
       {task.title}
-    </Action>
+    </ActionSingle>
   );
 };
 

@@ -13,6 +13,7 @@ interface Props {
   loading?: boolean;
   error?: boolean;
   errorTranslationId?: string;
+  showEmpty?: boolean;
   emptyTranslationId?: string;
   showTitle?: boolean;
   titleTranslationId?: string;
@@ -29,6 +30,7 @@ const TasksList = ({
   loading,
   error,
   errorTranslationId = "tasksList.fetchError",
+  showEmpty = true,
   emptyTranslationId = "tasksList.empty",
   showTitle = true,
   titleTranslationId = "tasksList.title",
@@ -71,13 +73,15 @@ const TasksList = ({
       </section>
     );
 
-  if (!tasks || tasks.length === 0)
+  if (!tasks || tasks.length === 0) {
+    if (!showEmpty) return null;
     return (
       <section className={styles["tasks-list"]}>
         <SectionHeader title={title} />
         <Paragraph>{emptyMessage}</Paragraph>
       </section>
     );
+  }
 
   return (
     <section className={styles["tasks-list"]}>

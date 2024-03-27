@@ -65,7 +65,7 @@ const getTaken = {
             title: "Aanvullende informatie aanleveren",
             status: "OPEN",
             date: "2024-01-26",
-            verloopdatum: "2024-01-31T14:41:36.800006896",
+            verloopdatum: null,
             __typename: "Taak",
           },
         ],
