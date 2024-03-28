@@ -18,7 +18,7 @@
     "release": "lerna version prerelease --no-changelog --no-private --no-commit-hooks",
     "test": "pnpm run --recursive --parallel test",
     "typecheck": "pnpm run --recursive --parallel typecheck",
-    "prepare": "husky"
+    "postinstall": "husky"
   },
   "devDependencies": {
     "@commitlint/cli": "19.2.1",
