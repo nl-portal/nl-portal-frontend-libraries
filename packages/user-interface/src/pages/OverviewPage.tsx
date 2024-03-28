@@ -3,7 +3,12 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PageHeader from "../components/PageHeader";
-import { useGetTakenQuery, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import {
+  Taak,
+  Zaak,
+  useGetTakenQuery,
+  useGetZakenQuery,
+} from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
 
@@ -25,16 +30,18 @@ const OverviewPage = ({
   const intl = useIntl();
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
   const {
-    data: taskData,
-    loading: taskLoading,
-    error: taskError,
-  } = useGetTakenQuery();
+    data: tasksData,
+    loading: tasksLoading,
+    error: tasksError,
+  } = useGetTakenQuery({ variables: { pageSize: tasksPreviewLength } });
   const {
-    data: caseData,
-    loading: caseLoading,
-    error: caseError,
+    data: casesData,
+    loading: casesLoading,
+    error: casesError,
   } = useGetZakenQuery();
-  const loading = taskLoading || caseLoading;
+  const loading = tasksLoading || casesLoading;
+  const tasks = tasksData?.getTaken.content as Taak[] | undefined;
+  const cases = casesData?.getZaken.content as Zaak[] | undefined;
 
   return (
     <PageGrid>
@@ -65,17 +72,29 @@ const OverviewPage = ({
       {tasksPreviewLength && (
         <TasksList
           loading={loading}
-          error={Boolean(taskError)}
-          tasks={taskData?.getTaken.content.slice(0, tasksPreviewLength)}
+          error={Boolean(tasksError)}
+          tasks={tasks}
+          readMoreAmount={
+            tasksData?.getTaken.totalElements &&
+            tasksData?.getTaken.totalElements > tasksPreviewLength
+              ? tasksData?.getTaken.totalElements
+              : undefined
+          }
         />
       )}
       {casesPreviewLength && (
         <CasesList
           loading={loading}
-          error={Boolean(caseError)}
-          cases={caseData?.getZaken
-            .filter((c) => !c.status?.statustype.isEindstatus)
+          error={Boolean(casesError)}
+          cases={cases
+            ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, casesPreviewLength)}
+          readMoreAmount={
+            casesData?.getZaken.totalElements &&
+            casesData?.getZaken.totalElements > casesPreviewLength
+              ? casesData?.getZaken.totalElements
+              : undefined
+          }
         />
       )}
     </PageGrid>

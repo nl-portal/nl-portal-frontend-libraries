@@ -100,14 +100,14 @@ const TableList = ({
     <section className={styles["table-list"]}>
       <SectionHeader title={title} subTitle={subTitle} href={readMoreLink} />
       <Table headers={headers} rows={rows} />
-      {indexLimit && (
+      {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["table-list__pagination"]}`}
           index={index}
           indexLimit={indexLimit}
           onChange={onChange}
         />
-      )}
+      ) : null}
     </section>
   );
 };

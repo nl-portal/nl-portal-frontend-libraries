@@ -2,10 +2,11 @@
 
 .cases-list {
   &__cases {
+    --denhaag-card-width: 100%;
+
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--nlportal-space-inline-xl, 1.5rem);
-    --denhaag-card-width: 100%;
 
     @include breakpoint(desktop) {
       grid-template-columns: 1fr 1fr;

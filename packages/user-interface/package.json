@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-user-interface",
-  "version": "0.1.1-alpha.67",
+  "version": "0.1.1-alpha.70",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -25,7 +25,8 @@
     "preinstall": "npx only-allow pnpm",
     "wait": "wait-on ../api/dist/index.js && wait-on ../authentication/dist/index.js && wait-on ../localization/dist/index.js",
     "test": "vitest run",
-    "test:watch": "DEBUG_PRINT_LIMIT=100000 vitest --watch --ui"
+    "test:watch": "DEBUG_PRINT_LIMIT=100000 vitest --watch --ui",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@formio/protected-eval": "^1.2.2",
@@ -94,7 +95,7 @@
     "wait-on": "^7.2.0"
   },
   "peerDependencies": {
-    "@apollo/client": "^3.9.9",
+    "@apollo/client": "3.9.9",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
