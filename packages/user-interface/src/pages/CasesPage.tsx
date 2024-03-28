@@ -3,12 +3,13 @@ import { FormattedMessage, useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import PageHeader from "../components/PageHeader";
-import { useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import { Zaak, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import PageGrid from "../components/PageGrid";
 
 const CasesPage = () => {
   const intl = useIntl();
   const { data, loading, error } = useGetZakenQuery();
+  const cases = data?.getZaken.content as Zaak[] | undefined;
 
   return (
     <PageGrid className={styles.cases}>
@@ -23,7 +24,7 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   showTitle={false}
-                  cases={data?.getZaken.filter(
+                  cases={cases?.filter(
                     (c) => !c.status?.statustype.isEindstatus,
                   )}
                 />
@@ -36,7 +37,7 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   showTitle={false}
-                  cases={data?.getZaken.filter(
+                  cases={cases?.filter(
                     (c) => c.status?.statustype.isEindstatus,
                   )}
                 />

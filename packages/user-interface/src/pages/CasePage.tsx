@@ -54,7 +54,6 @@ const CasePage = ({
   });
 
   const loading = caseLoading || taskLoading || momentsLoading;
-
   const tasks = tasksResult?.getTaken.content as Taak[] | undefined;
 
   const details = React.useMemo(() => {

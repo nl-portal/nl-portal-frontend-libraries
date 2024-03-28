@@ -13,6 +13,7 @@ describe("OverviewPage", () => {
 
   it("should show several active cases", async () => {
     render(MockCasesPage());
+
     await waitFor(() => {
       expect(openZaak1()).toBeVisible();
     });

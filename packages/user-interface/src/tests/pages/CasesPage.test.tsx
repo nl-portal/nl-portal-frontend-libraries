@@ -19,6 +19,7 @@ describe("The CasesPage", () => {
 
   it("should render several active cases", async () => {
     render(MockCasesPage());
+
     await waitFor(() => {
       expect(openZaak1()).toBeVisible();
     });
@@ -52,6 +53,7 @@ describe("The CasesPage", () => {
 
   it("should allow me to go to the overview of closed cases", async () => {
     render(MockCasesPage());
+
     fireEvent.click(tabAfgerondeZaken());
     await waitFor(() => {
       expect(geslotenZaak1()).toBeVisible();

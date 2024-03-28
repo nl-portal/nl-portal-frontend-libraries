@@ -2,7 +2,7 @@ import { useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
-import { GetZakenQuery } from "@nl-portal/nl-portal-api";
+import { Zaak } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/components-react";
 import styles from "./CasesList.module.scss";
 import SectionHeader from "./SectionHeader";
@@ -20,7 +20,7 @@ interface Props {
   readMoreAmount?: number;
   readMoreLink?: string;
   readMoreTranslationId?: string;
-  cases?: GetZakenQuery["getZaken"];
+  cases?: Zaak[];
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
@@ -94,14 +94,14 @@ const CasesList = ({
           <Case key={cs.uuid} cs={cs} listView={listView} />
         ))}
       </div>
-      {indexLimit && (
+      {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["cases-list__pagination"]}`}
           index={index}
           indexLimit={indexLimit}
           onChange={onChange}
         />
-      )}
+      ) : null}
     </section>
   );
 };

@@ -1,13 +1,19 @@
 import { FormattedMessage } from "react-intl";
-import { useGetTakenQuery } from "@nl-portal/nl-portal-api";
+import { Taak, useGetTakenQuery } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
-import { Taak } from "@nl-portal/nl-portal-api";
 
 const TasksPage = () => {
-  const { data, loading, error } = useGetTakenQuery();
-  const tasksData = data?.getTaken.content as Taak[] | undefined;
+  const { data, loading, error, refetch } = useGetTakenQuery({
+    variables: { pageSize: 10 },
+  });
+  const tasks = data?.getTaken.content as Taak[] | undefined;
+
+  const onPageChange = (index: number) => {
+    refetch({ pageNumber: index + 1 });
+    return index;
+  };
 
   return (
     <PageGrid>
@@ -15,8 +21,10 @@ const TasksPage = () => {
       <TasksList
         loading={loading}
         error={Boolean(error)}
-        tasks={tasksData}
         showTitle={false}
+        tasks={tasks}
+        onChange={onPageChange}
+        indexLimit={data?.getTaken.totalPages && data?.getTaken.totalPages - 1}
       />
     </PageGrid>
   );

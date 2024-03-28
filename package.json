@@ -17,6 +17,7 @@
     "publish": "lerna publish from-package",
     "release": "lerna version prerelease --no-changelog --no-private --no-commit-hooks",
     "test": "pnpm run --recursive --parallel test",
+    "typecheck": "pnpm run --recursive --parallel typecheck",
     "postinstall": "husky"
   },
   "devDependencies": {

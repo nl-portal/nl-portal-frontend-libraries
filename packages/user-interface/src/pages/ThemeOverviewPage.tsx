@@ -5,6 +5,7 @@ import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import {
   Taak,
+  Zaak,
   useGetTakenQuery,
   useGetZakenQuery,
 } from "@nl-portal/nl-portal-api";
@@ -28,17 +29,18 @@ const ThemeOverviewPage = ({
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const {
-    data: tasksDataResult,
+    data: tasksData,
     loading: taskLoading,
     error: taskError,
-  } = useGetTakenQuery();
+  } = useGetTakenQuery({ variables: { pageSize: showTasksLength } });
   const {
-    data: caseData,
-    loading: caseLoading,
-    error: caseError,
+    data: casesData,
+    loading: casesLoading,
+    error: casesError,
   } = useGetZakenQuery();
-  const tasksData = tasksDataResult?.getTaken.content as Taak[] | undefined;
-  const loading = taskLoading || caseLoading;
+  const loading = taskLoading || casesLoading;
+  const tasks = tasksData?.getTaken.content as Taak[] | undefined;
+  const cases = casesData?.getZaken.content as Zaak[] | undefined;
 
   return (
     <PageGrid>
@@ -47,16 +49,28 @@ const ThemeOverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
-          tasks={tasksData?.slice(0, showTasksLength)}
+          tasks={tasks}
+          readMoreAmount={
+            tasksData?.getTaken.totalElements &&
+            tasksData?.getTaken.totalElements > showTasksLength
+              ? tasksData?.getTaken.totalElements
+              : undefined
+          }
         />
       )}
       {showCasesLength && (
         <CasesList
           loading={loading}
-          error={Boolean(caseError)}
-          cases={caseData?.getZaken
-            .filter((c) => !c.status?.statustype.isEindstatus)
+          error={Boolean(casesError)}
+          cases={cases
+            ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, showCasesLength)}
+          readMoreAmount={
+            casesData?.getZaken.totalElements &&
+            casesData?.getZaken.totalElements > showCasesLength
+              ? casesData?.getZaken.totalElements
+              : undefined
+          }
         />
       )}
       <TableList
