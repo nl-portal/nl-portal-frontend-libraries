@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import {
   ApolloClient,
   ApolloLink,
@@ -24,17 +24,19 @@ const ApiWrapper = ({ children, graphqlUri, restUri }: ApiWrapperProps) => {
   const formattedGraphqlUri = formatUrlTrailingSlash(graphqlUri, false);
   const formattedRestUri = formatUrlTrailingSlash(restUri, false);
   const { keycloakToken } = useContext(KeycloakContext);
-  const httpLink = new HttpLink({ uri: formattedGraphqlUri });
 
-  const getLink = (authToken: string) =>
-    new ApolloLink((operation, forward) => {
-      operation.setContext({
-        headers: {
-          authorization: `Bearer ${authToken}`,
-        },
-      });
-      return forward(operation);
-    }).concat(httpLink);
+  const getLink = useCallback(
+    (authToken: string) =>
+      new ApolloLink((operation, forward) => {
+        operation.setContext({
+          headers: {
+            authorization: `Bearer ${authToken}`,
+          },
+        });
+        return forward(operation);
+      }).concat(new HttpLink({ uri: formattedGraphqlUri })),
+    [formattedGraphqlUri],
+  );
 
   const [client] = useState(
     () =>
@@ -48,7 +50,7 @@ const ApiWrapper = ({ children, graphqlUri, restUri }: ApiWrapperProps) => {
   useEffect(() => {
     client.setLink(getLink(keycloakToken));
     TOKEN_OBJECT[TOKEN_KEY] = keycloakToken;
-  }, [keycloakToken]);
+  }, [keycloakToken, client, getLink]);
 
   sessionStorage.setItem(LOCAL_STORAGE_REST_URI_KEY, formattedRestUri);
 

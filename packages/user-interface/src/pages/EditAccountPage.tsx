@@ -36,31 +36,19 @@ const EditAccountPage = () => {
 
   const [valid, setValidity] = useState(true);
   const [value, setValue] = useState(defaultValue || "");
-  const [mutating, setMutationStatus] = useState(false);
-
-  const navigateToAccountPage = (): void => {
-    navigate(paths.account);
-  };
 
   const onSave = (): void => {
-    setMutationStatus(true);
-    mutateFunction({ variables: { klant: { [`${prop}`]: `${value}` } } });
+    mutateFunction({
+      variables: { klant: { [`${prop}`]: `${value}` } },
+      onCompleted: () => !error && navigate(paths.account),
+    });
   };
 
   useEffect(() => {
     if (regex) {
       setValidity(regex.test(value));
     }
-  }, [value]);
-
-  useEffect(() => {
-    if (mutating && !loading) {
-      if (!error) {
-        navigateToAccountPage();
-      }
-      setMutationStatus(false);
-    }
-  }, [loading]);
+  }, [value, regex]);
 
   const invalid = !valid && `${value}`.length >= 1;
   const inputId = propTranslation.toLowerCase();
@@ -105,7 +93,7 @@ const EditAccountPage = () => {
           <Button
             variant="secondary-action"
             className={styles["edit-account__button"]}
-            onClick={navigateToAccountPage}
+            onClick={() => navigate(paths.account)}
             disabled={loading}
           >
             <FormattedMessage id="account.cancel" />

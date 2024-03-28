@@ -9,6 +9,7 @@ import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import LinksList from "../components/LinksList";
 import DocumentsList from "../components/DocumentsList";
+import { Taak } from "@nl-portal/nl-portal-api";
 
 interface Props {
   type: string;
@@ -18,7 +19,7 @@ const ThemeDetailsPage = ({ type }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const {
-    data: taskData,
+    data: tasksDataResult,
     loading: taskLoading,
     error: taskError,
   } = useGetTakenQuery();
@@ -27,6 +28,7 @@ const ThemeDetailsPage = ({ type }: Props) => {
     loading: caseLoading,
     error: caseError,
   } = useGetZakenQuery();
+  const tasksData = tasksDataResult?.getTaken.content as Taak[] | undefined;
   const loading = taskLoading || caseLoading;
 
   return (
@@ -38,7 +40,7 @@ const ThemeDetailsPage = ({ type }: Props) => {
       <TasksList
         loading={loading}
         error={Boolean(taskError)}
-        tasks={taskData?.getTaken.content}
+        tasks={tasksData}
         showTitle={false}
       />
       <LinksList
@@ -64,7 +66,7 @@ const ThemeDetailsPage = ({ type }: Props) => {
       <TasksList
         loading={loading}
         error={Boolean(taskError)}
-        tasks={taskData?.getTaken.content}
+        tasks={tasksData}
         showTitle={false}
       />
     </PageGrid>
