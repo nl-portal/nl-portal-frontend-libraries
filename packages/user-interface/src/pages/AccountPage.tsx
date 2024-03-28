@@ -62,7 +62,7 @@ const AccountPage = ({
     contactRefetch();
     personRefetch();
     bewonersAantalRefetch();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <PageGrid>

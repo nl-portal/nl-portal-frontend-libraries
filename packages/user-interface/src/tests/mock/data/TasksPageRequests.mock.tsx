@@ -1,10 +1,6 @@
-import { FetchResult, GraphQLRequest } from "@apollo/client";
 import { QUERY_GET_TAKEN } from "@nl-portal/nl-portal-api";
 
-const getTaken: {
-  request: GraphQLRequest;
-  result: FetchResult<Record<string, any>>;
-} = {
+const getTaken = {
   request: {
     query: QUERY_GET_TAKEN,
     variables: { pageSize: 10 },

@@ -4,6 +4,7 @@ import {
   useGetTakenQuery,
   useGetObjectContactMomentenLazyQuery,
   Taak,
+  ContactMoment,
 } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/components-react";
 import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
@@ -48,10 +49,12 @@ const CasePage = ({
   });
   const [getMomenten, { data: momentsData, loading: momentsLoading }] =
     useGetObjectContactMomentenLazyQuery();
-  const { data: taskData, loading: taskLoading } = useGetTakenQuery({
+  const { data: tasksResult, loading: taskLoading } = useGetTakenQuery({
     variables: { zaakId: id },
   });
+
   const loading = caseLoading || taskLoading || momentsLoading;
+  const tasks = tasksResult?.getTaken.content as Taak[] | undefined;
 
   const details = React.useMemo(() => {
     if (!caseData?.getZaak) return [];
@@ -74,13 +77,13 @@ const CasePage = ({
       });
 
     return array;
-  }, [caseData]);
+  }, [caseData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const contactItems = React.useMemo(() => {
     if (!momentsData?.getObjectContactMomenten) return [];
 
     return momentsData?.getObjectContactMomenten?.content.map(
-      (contact: any, index: number) => ({
+      (contact: ContactMoment, index: number) => ({
         id: index,
         title: contact.tekst,
         channel: contact.kanaal,
@@ -97,7 +100,7 @@ const CasePage = ({
   React.useEffect(() => {
     if (!caseData) return;
     getMomenten({ variables: { objectUrl: caseData.getZaak.url } });
-  }, [caseData]);
+  }, [caseData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!caseError) {
     <div>
@@ -125,7 +128,7 @@ const CasePage = ({
         loading={loading}
         showEmpty={false}
         showTitle={false}
-        tasks={taskData?.getTaken.content as Taak[]}
+        tasks={tasks}
       />
       <div>
         <SectionHeader
@@ -147,6 +150,7 @@ const CasePage = ({
           <DescriptionList items={details} />
         </div>
       )}
+      {/* eslint-disable @typescript-eslint/no-explicit-any */}
       {caseData?.getZaak.zaakdetails.data.map((section: any) => {
         const listItems = section.waarde.filter((i: any) => i.type !== "table");
         const tables = section.waarde.filter((i: any) => i.type === "table");
@@ -199,6 +203,7 @@ const CasePage = ({
           </React.Fragment>
         );
       })}
+      {/* eslint-enable @typescript-eslint/no-explicit-any */}
       <DocumentsList
         loading={loading}
         error={Boolean(caseError)}
@@ -216,7 +221,7 @@ const CasePage = ({
         loading={loading}
         showEmpty={false}
         showTitle={false}
-        tasks={taskData?.getTaken.content as Taak[]}
+        tasks={tasks}
       />
     </PageGrid>
   );

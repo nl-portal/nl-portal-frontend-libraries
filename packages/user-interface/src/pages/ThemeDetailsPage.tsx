@@ -29,18 +29,18 @@ const ThemeDetailsPage = ({
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const {
-    data: taskData,
-    loading: taskLoading,
-    error: taskError,
+    data: tasksData,
+    loading: tasksLoading,
+    error: tasksError,
   } = useGetTakenQuery();
   const {
-    data: caseData,
-    loading: caseLoading,
-    error: caseError,
+    data: casesData,
+    loading: casesLoading,
+    error: casesError,
   } = useGetZakenQuery();
-  const loading = taskLoading || caseLoading;
-  const tasks = taskData?.getTaken.content as Taak[] | undefined;
-  const cases = caseData?.getZaken.content as Zaak[] | undefined;
+  const loading = tasksLoading || casesLoading;
+  const tasks = tasksData?.getTaken.content as Taak[] | undefined;
+  const cases = casesData?.getZaken.content as Zaak[] | undefined;
 
   return (
     <PageGrid>
@@ -51,7 +51,7 @@ const ThemeDetailsPage = ({
       {showTasksLength && (
         <TasksList
           loading={loading}
-          error={Boolean(taskError)}
+          error={Boolean(tasksError)}
           showTitle={false}
           tasks={tasks}
         />
@@ -67,27 +67,27 @@ const ThemeDetailsPage = ({
       {showCasesLength && (
         <CasesList
           loading={loading}
-          error={Boolean(caseError)}
+          error={Boolean(casesError)}
           cases={cases
             ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, showCasesLength)}
           readMoreAmount={
-            caseData?.getZaken.totalElements &&
-            caseData?.getZaken.totalElements > showCasesLength
-              ? caseData?.getZaken.totalElements
+            casesData?.getZaken.totalElements &&
+            casesData?.getZaken.totalElements > showCasesLength
+              ? casesData?.getZaken.totalElements
               : undefined
           }
         />
       )}
       <DocumentsList
         loading={loading}
-        error={Boolean(caseError)}
+        error={Boolean(casesError)}
         documents={[]} // TODO: Add documents
       />
       {showTasksLength && (
         <TasksList
           loading={loading}
-          error={Boolean(taskError)}
+          error={Boolean(tasksError)}
           showTitle={false}
           tasks={tasks}
         />

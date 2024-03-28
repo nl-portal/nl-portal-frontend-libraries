@@ -29,18 +29,18 @@ const ThemeOverviewPage = ({
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const {
-    data: taskData,
+    data: tasksData,
     loading: taskLoading,
     error: taskError,
   } = useGetTakenQuery({ variables: { pageSize: showTasksLength } });
   const {
-    data: caseData,
-    loading: caseLoading,
-    error: caseError,
+    data: casesData,
+    loading: casesLoading,
+    error: casesError,
   } = useGetZakenQuery();
-  const loading = taskLoading || caseLoading;
-  const tasks = taskData?.getTaken.content as Taak[] | undefined;
-  const cases = caseData?.getZaken.content as Zaak[] | undefined;
+  const loading = taskLoading || casesLoading;
+  const tasks = tasksData?.getTaken.content as Taak[] | undefined;
+  const cases = casesData?.getZaken.content as Zaak[] | undefined;
 
   return (
     <PageGrid>
@@ -51,9 +51,9 @@ const ThemeOverviewPage = ({
           error={Boolean(taskError)}
           tasks={tasks}
           readMoreAmount={
-            taskData?.getTaken.totalElements &&
-            taskData?.getTaken.totalElements > showTasksLength
-              ? taskData?.getTaken.totalElements
+            tasksData?.getTaken.totalElements &&
+            tasksData?.getTaken.totalElements > showTasksLength
+              ? tasksData?.getTaken.totalElements
               : undefined
           }
         />
@@ -61,14 +61,14 @@ const ThemeOverviewPage = ({
       {showCasesLength && (
         <CasesList
           loading={loading}
-          error={Boolean(caseError)}
+          error={Boolean(casesError)}
           cases={cases
             ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, showCasesLength)}
           readMoreAmount={
-            caseData?.getZaken.totalElements &&
-            caseData?.getZaken.totalElements > showCasesLength
-              ? caseData?.getZaken.totalElements
+            casesData?.getZaken.totalElements &&
+            casesData?.getZaken.totalElements > showCasesLength
+              ? casesData?.getZaken.totalElements
               : undefined
           }
         />

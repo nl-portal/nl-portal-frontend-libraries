@@ -30,18 +30,18 @@ const OverviewPage = ({
   const intl = useIntl();
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
   const {
-    data: taskData,
-    loading: taskLoading,
-    error: taskError,
+    data: tasksData,
+    loading: tasksLoading,
+    error: tasksError,
   } = useGetTakenQuery({ variables: { pageSize: tasksPreviewLength } });
   const {
-    data: caseData,
-    loading: caseLoading,
-    error: caseError,
+    data: casesData,
+    loading: casesLoading,
+    error: casesError,
   } = useGetZakenQuery();
-  const loading = taskLoading || caseLoading;
-  const tasks = taskData?.getTaken.content as Taak[] | undefined;
-  const cases = caseData?.getZaken.content as Zaak[] | undefined;
+  const loading = tasksLoading || casesLoading;
+  const tasks = tasksData?.getTaken.content as Taak[] | undefined;
+  const cases = casesData?.getZaken.content as Zaak[] | undefined;
 
   return (
     <PageGrid>
@@ -72,12 +72,12 @@ const OverviewPage = ({
       {tasksPreviewLength && (
         <TasksList
           loading={loading}
-          error={Boolean(taskError)}
+          error={Boolean(tasksError)}
           tasks={tasks}
           readMoreAmount={
-            taskData?.getTaken.totalElements &&
-            taskData?.getTaken.totalElements > tasksPreviewLength
-              ? taskData?.getTaken.totalElements
+            tasksData?.getTaken.totalElements &&
+            tasksData?.getTaken.totalElements > tasksPreviewLength
+              ? tasksData?.getTaken.totalElements
               : undefined
           }
         />
@@ -85,14 +85,14 @@ const OverviewPage = ({
       {casesPreviewLength && (
         <CasesList
           loading={loading}
-          error={Boolean(caseError)}
+          error={Boolean(casesError)}
           cases={cases
             ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, casesPreviewLength)}
           readMoreAmount={
-            caseData?.getZaken.totalElements &&
-            caseData?.getZaken.totalElements > casesPreviewLength
-              ? caseData?.getZaken.totalElements
+            casesData?.getZaken.totalElements &&
+            casesData?.getZaken.totalElements > casesPreviewLength
+              ? casesData?.getZaken.totalElements
               : undefined
           }
         />

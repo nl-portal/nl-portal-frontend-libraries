@@ -348,6 +348,7 @@ export type QueryGetZaakArgs = {
 
 export type QueryGetZakenArgs = {
   page?: InputMaybe<Scalars['Int']['input']>;
+  zaakTypeUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SbiActiviteit = {

@@ -8,6 +8,7 @@ const TasksPage = () => {
   const { data, loading, error, refetch } = useGetTakenQuery({
     variables: { pageSize: 10 },
   });
+  const tasks = data?.getTaken.content as Taak[] | undefined;
 
   const onPageChange = (index: number) => {
     refetch({ pageNumber: index + 1 });
@@ -21,7 +22,7 @@ const TasksPage = () => {
         loading={loading}
         error={Boolean(error)}
         showTitle={false}
-        tasks={data?.getTaken.content as Taak[]}
+        tasks={tasks}
         onChange={onPageChange}
         indexLimit={data?.getTaken.totalPages && data?.getTaken.totalPages - 1}
       />
