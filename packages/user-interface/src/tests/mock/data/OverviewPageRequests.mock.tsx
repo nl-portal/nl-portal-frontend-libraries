@@ -1,3 +1,5 @@
 import { getTaken, getZaken } from "./AllRequests.mock";
 
-export const mockRequest = [getZaken, getTaken];
+export const mockRequestDefault = [getZaken, getTaken(5)];
+
+export const mockRequestTwoTasks = [getZaken, getTaken(2)];

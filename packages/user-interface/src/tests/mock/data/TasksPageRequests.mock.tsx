@@ -1,3 +1,3 @@
 import { getTaken } from "./AllRequests.mock";
 
-export const mockRequest = [getTaken];
+export const mockRequest = [getTaken(10)];

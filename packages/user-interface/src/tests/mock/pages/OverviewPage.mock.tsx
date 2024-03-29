@@ -1,7 +1,10 @@
 import TestProvider, {
   testPaths as paths,
 } from "../../../providers/TestProvider";
-import { mockRequest } from "../data/OverviewPageRequests.mock";
+import {
+  mockRequestDefault,
+  mockRequestTwoTasks,
+} from "../data/OverviewPageRequests.mock";
 import { OverviewPage } from "../../..";
 
 const route = [
@@ -42,7 +45,7 @@ const routeShowLessCases = [
 
 export const MockOverviewPage = () => (
   <TestProvider
-    mocks={mockRequest}
+    mocks={mockRequestDefault}
     routes={route}
     initialIndex={0}
     initialEntries={[paths.overview]}
@@ -51,7 +54,7 @@ export const MockOverviewPage = () => (
 
 export const MockOverviewPageLessTasks = () => (
   <TestProvider
-    mocks={mockRequest}
+    mocks={mockRequestTwoTasks}
     routes={routeShowLessTasks}
     initialIndex={0}
     initialEntries={[paths.overview]}
@@ -60,7 +63,7 @@ export const MockOverviewPageLessTasks = () => (
 
 export const MockOverviewPageLessCases = () => (
   <TestProvider
-    mocks={mockRequest}
+    mocks={mockRequestDefault}
     routes={routeShowLessCases}
     initialIndex={0}
     initialEntries={[paths.overview]}
