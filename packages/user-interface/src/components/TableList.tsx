@@ -64,7 +64,10 @@ const TableList = ({
     : undefined;
   const subTitle =
     readMoreAmount && readMoreLink
-      ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
+      ? intl.formatMessage(
+          { id: readMoreTranslationId },
+          { total: readMoreAmount },
+        )
       : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
