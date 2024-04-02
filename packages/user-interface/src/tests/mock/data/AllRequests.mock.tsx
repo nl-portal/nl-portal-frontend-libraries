@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
   QUERY_GET_BURGER_PROFIEL,
   QUERY_GET_PERSOON_DATA,
@@ -106,7 +105,7 @@ export const getBewonersAantal = {
 
 export const getZaak: {
   request: GraphQLRequest;
-  result: FetchResult<Record<string, any>>;
+  result: FetchResult;
 } = {
   request: {
     query: QUERY_GET_ZAAK,
@@ -493,7 +492,7 @@ export const getTakenWithId = {
 
 export const getZaken: {
   request: GraphQLRequest;
-  result: FetchResult<Record<string, any>>;
+  result: FetchResult;
 } = {
   request: {
     query: QUERY_GET_ZAKEN,
@@ -652,7 +651,7 @@ export const getTaken = (
   pageSizeRequest: number,
 ): {
   request: GraphQLRequest;
-  result: FetchResult<Record<string, any>>;
+  result: FetchResult;
 } => {
   const contentSliced = getContent(pageSizeRequest);
 
