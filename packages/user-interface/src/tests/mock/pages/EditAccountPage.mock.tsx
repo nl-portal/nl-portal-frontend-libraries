@@ -7,16 +7,8 @@ import TestProvider, {
 export const MockEditAccountPage = () => {
   const routes = [
     {
-      path: paths.overview,
-      element: <></>,
-    },
-    {
       path: paths.account,
       children: [
-        {
-          index: true,
-          element: <></>,
-        },
         {
           path: paths.editAccount,
           element: <EditAccountPage />,
@@ -62,9 +54,8 @@ export const MockEditAccountPage = () => {
     <TestProvider
       mocks={mocks}
       routes={routes}
-      initialIndex={2}
+      initialIndex={1}
       initialEntries={[
-        paths.overview,
         paths.account,
         `${paths.editAccount}?prop=telefoonnummer`,
       ]}
