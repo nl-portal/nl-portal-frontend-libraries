@@ -6,8 +6,10 @@ import TasksList from "../components/TasksList";
 import {
   Taak,
   Zaak,
+  ContractBeperkt,
   useGetTakenQuery,
   useGetZakenQuery,
+  useGetErfpachtContractenQuery,
 } from "@nl-portal/nl-portal-api";
 import TableList from "../components/TableList";
 import { useOutletContext } from "react-router-dom";
@@ -38,9 +40,19 @@ const ThemeOverviewPage = ({
     loading: casesLoading,
     error: casesError,
   } = useGetZakenQuery();
-  const loading = taskLoading || casesLoading;
+  const {
+    data: contractsData,
+    loading: contractsLoading,
+    error: contractsError,
+  } = useGetErfpachtContractenQuery();
+  const loading = taskLoading || casesLoading || contractsLoading;
   const tasks = tasksData?.getTaken.content as Taak[] | undefined;
   const cases = casesData?.getZaken.content as Zaak[] | undefined;
+  const contracts = contractsData?.getErfpachtContracten.content as
+    | ContractBeperkt[]
+    | undefined;
+
+  console.log(contracts);
 
   return (
     <PageGrid>
@@ -75,43 +87,52 @@ const ThemeOverviewPage = ({
       )}
       <TableList
         loading={loading}
-        titleTranslationId="theme.erfpacht.listTitle"
-        headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}
-        rows={[
-          [
-            {
-              children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails(type, "123"),
-            },
-            {
-              children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails(type, "123"),
-            },
-            { children: "78435785", href: paths.themeDetails(type, "123") },
-          ],
-          [
-            {
-              children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails(type, "123"),
-            },
-            {
-              children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails(type, "123"),
-            },
-            { children: "78435785", href: paths.themeDetails(type, "123") },
-          ],
-          [
-            {
-              children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails(type, "123"),
-            },
-            {
-              children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails(type, "123"),
-            },
-            { children: "78435785", href: paths.themeDetails(type, "123") },
-          ],
-        ]}
+        error={Boolean(contractsError)}
+        titleTranslationId={`theme.${type}.listTitle`}
+        headers={["Adres", "Contractnummer"]}
+        rows={contracts?.map((contract) => {
+          const href = paths.themeDetails(type, contract.id);
+          const { straatnaam, huisnummer, woonplaats } = contract.adressen[0];
+          return [
+            { children: `${straatnaam} ${huisnummer} ${woonplaats}`, href },
+            { children: contract.id, href },
+          ];
+        })}
+        // rows={[
+        //   [
+        //     {
+        //       children: "Westerstraat 393 Den Haag",
+        //       href: paths.themeDetails(type, "123"),
+        //     },
+        //     {
+        //       children: "‘s-Gravenhage AF 2679",
+        //       href: paths.themeDetails(type, "123"),
+        //     },
+        //     { children: "78435785", href: paths.themeDetails(type, "123") },
+        //   ],
+        //   [
+        //     {
+        //       children: "Westerstraat 393 Den Haag",
+        //       href: paths.themeDetails(type, "123"),
+        //     },
+        //     {
+        //       children: "‘s-Gravenhage AF 2679",
+        //       href: paths.themeDetails(type, "123"),
+        //     },
+        //     { children: "78435785", href: paths.themeDetails(type, "123") },
+        //   ],
+        //   [
+        //     {
+        //       children: "Westerstraat 393 Den Haag",
+        //       href: paths.themeDetails(type, "123"),
+        //     },
+        //     {
+        //       children: "‘s-Gravenhage AF 2679",
+        //       href: paths.themeDetails(type, "123"),
+        //     },
+        //     { children: "78435785", href: paths.themeDetails(type, "123") },
+        //   ],
+        // ]}
       />
       {children}
     </PageGrid>
