@@ -2,6 +2,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 export { default as Layout } from "./components/Layout";
 export { default as PortalLink } from "./components/PortalLink";
+export { default as TableList } from "./components/TableList";
 
 export * from "./interfaces/navigation-item";
 export * from "./interfaces/paths";

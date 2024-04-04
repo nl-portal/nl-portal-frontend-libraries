@@ -7,12 +7,12 @@ import {
   OverviewPage,
   TasksPage,
   TaskPage,
-  ThemeOverviewPage,
   ThemeDetailsPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "../constants/paths";
 import { config } from "../constants/config";
 import { Navigate } from "react-router-dom";
+import ErfpachtOverview from "../components/ErfpachtOverview";
 
 export const routes = [
   {
@@ -58,7 +58,7 @@ export const routes = [
     children: [
       {
         index: true,
-        element: <ThemeOverviewPage type="erfpacht" />,
+        element: <ErfpachtOverview />,
       },
       {
         path: paths.themeDetails("erfpacht"),
