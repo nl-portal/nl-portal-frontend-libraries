@@ -25,14 +25,17 @@ export const useUserInfo = () => {
 
   useEffect(() => {
     if (decodedToken && authenticationMethods) {
-      if (authenticationMethods.person?.includes(decodedToken.middel)) {
+      const authenticationMethod = decodedToken.middel || "";
+      if (authenticationMethods.person?.includes(authenticationMethod)) {
         setIsPerson(true);
         loadPersoon();
-      } else if (authenticationMethods.company?.includes(decodedToken.middel)) {
+      } else if (
+        authenticationMethods.company?.includes(authenticationMethod)
+      ) {
         setIsPerson(false);
         loadBedrijf();
       }
-      if (authenticationMethods.proxy?.includes(decodedToken.middel)) {
+      if (authenticationMethods.proxy?.includes(authenticationMethod)) {
         setisVolmachtLogin(true);
         loadGemachtigde();
       }
@@ -41,7 +44,8 @@ export const useUserInfo = () => {
 
   useEffect(() => {
     const name = getNameString(persoonData?.getPersoon?.naam);
-    if (authenticationMethods?.proxy?.includes(decodedToken?.middel)) {
+    const authenticationMethod = decodedToken?.middel || "";
+    if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
       setVolmachtgever(name);
     } else {
       setUserName(name);
@@ -50,7 +54,8 @@ export const useUserInfo = () => {
 
   useEffect(() => {
     const name = bedrijfData?.getBedrijf?.naam || "";
-    if (authenticationMethods?.proxy?.includes(decodedToken?.middel)) {
+    const authenticationMethod = decodedToken?.middel || "";
+    if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
       setVolmachtgever(name);
     } else {
       setUserName(name);
