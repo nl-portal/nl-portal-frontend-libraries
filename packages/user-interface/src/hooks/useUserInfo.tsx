@@ -20,19 +20,19 @@ export const useUserInfo = () => {
     loadGemachtigde,
     { loading: gemachtigdeLoading, data: gemachtigdeData },
   ] = useGetGemachtigdeLazyQuery();
-  const { decodedToken } = useContext(KeycloakContext);
+  const { decodedToken, authenticationMethods } = useContext(KeycloakContext);
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
 
   useEffect(() => {
-    if (decodedToken) {
-      if (decodedToken.aanvrager?.bsn) {
+    if (decodedToken && authenticationMethods) {
+      if (authenticationMethods.person?.includes(decodedToken.middel)) {
         setIsPerson(true);
         loadPersoon();
-      } else if (decodedToken.aanvrager?.kvk) {
+      } else if (authenticationMethods.company?.includes(decodedToken.middel)) {
         setIsPerson(false);
         loadBedrijf();
       }
-      if (decodedToken.gemachtigde) {
+      if (authenticationMethods.proxy?.includes(decodedToken.middel)) {
         setisVolmachtLogin(true);
         loadGemachtigde();
       }
@@ -41,21 +41,21 @@ export const useUserInfo = () => {
 
   useEffect(() => {
     const name = getNameString(persoonData?.getPersoon?.naam);
-    if (decodedToken?.gemachtigde) {
+    if (authenticationMethods?.proxy?.includes(decodedToken?.middel)) {
       setVolmachtgever(name);
     } else {
       setUserName(name);
     }
-  }, [persoonData, decodedToken?.gemachtigde]);
+  }, [persoonData, decodedToken?.middel, authenticationMethods?.proxy]);
 
   useEffect(() => {
     const name = bedrijfData?.getBedrijf?.naam || "";
-    if (decodedToken?.gemachtigde) {
+    if (authenticationMethods?.proxy?.includes(decodedToken?.middel)) {
       setVolmachtgever(name);
     } else {
       setUserName(name);
     }
-  }, [bedrijfData, decodedToken?.gemachtigde]);
+  }, [bedrijfData, decodedToken?.middel, authenticationMethods?.proxy]);
 
   useEffect(() => {
     if (gemachtigdeData?.getGemachtigde?.persoon) {
