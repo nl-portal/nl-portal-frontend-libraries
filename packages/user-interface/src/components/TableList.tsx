@@ -12,8 +12,7 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   emptyTranslationId?: string;
-  showTitle?: boolean;
-  titleTranslationId?: string;
+  titleTranslationId?: string | false;
   readMoreAmount?: number;
   readMoreLink?: string;
   readMoreTranslationId?: string;
@@ -29,7 +28,6 @@ const TableList = ({
   error,
   errorTranslationId = "tableList.fetchError",
   emptyTranslationId = "tableList.empty",
-  showTitle = true,
   titleTranslationId = "tableList.title",
   readMoreAmount,
   readMoreLink,
@@ -59,7 +57,7 @@ const TableList = ({
         ),
       },
     ]);
-  const title = showTitle
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
   const subTitle =

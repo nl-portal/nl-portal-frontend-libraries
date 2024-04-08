@@ -12,7 +12,8 @@ import {
 import { paths } from "../constants/paths";
 import { config } from "../constants/config";
 import { Navigate } from "react-router-dom";
-import ErfpachtOverview from "../components/ErfpachtOverview";
+import ErfpachtOverviewPage from "../pages/ErfpachtOverviewPage";
+import ErfpachtListPage from "../pages/ErfpachtListPage";
 
 export const routes = [
   {
@@ -58,7 +59,11 @@ export const routes = [
     children: [
       {
         index: true,
-        element: <ErfpachtOverview />,
+        element: <ErfpachtOverviewPage />,
+      },
+      {
+        path: paths.themeList("erfpacht"),
+        element: <ErfpachtListPage />,
       },
       {
         path: paths.themeDetails("erfpacht"),

@@ -9,7 +9,7 @@ import {
 import { paths } from "../constants/paths";
 import { FormattedMessage } from "react-intl";
 
-const ErfpachtOverview = () => {
+const ErfpachtOverviewPage = () => {
   const type = "erfpacht";
   const contractsLength = 5;
   const { data, loading, error } = useGetErfpachtContractenQuery({
@@ -51,4 +51,4 @@ const ErfpachtOverview = () => {
   );
 };
 
-export default ErfpachtOverview;
+export default ErfpachtOverviewPage;

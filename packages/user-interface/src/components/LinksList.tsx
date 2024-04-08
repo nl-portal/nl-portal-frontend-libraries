@@ -7,20 +7,18 @@ import PortalLink from "./PortalLink";
 
 interface Props {
   loading?: boolean;
-  showTitle?: boolean;
-  titleTranslationId?: string;
+  titleTranslationId?: string | false;
   links: { title: string; href: string }[];
 }
 
 const LinksList = ({
   loading,
-  showTitle = true,
   titleTranslationId = "linksList.title",
   links,
 }: Props) => {
   const intl = useIntl();
   const labels = useActionLabels();
-  const title = showTitle
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
 

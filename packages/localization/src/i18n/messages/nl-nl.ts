@@ -108,6 +108,7 @@ export const NL_NL_MESSAGES: Messages = {
     "theme.erfpacht.listAdres": "Adres",
     "theme.erfpacht.listContractnummer": "Contractnummer",
     "theme.erfpacht.listViewAll": "Bekijk alle erfpachtcontracten ({total})",
+    "theme.erfpacht.listPageHeader": "Erfpachtcontracten",
     "tableList.viewAll": "Bekijk alle items ({total})",
     "tableList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
