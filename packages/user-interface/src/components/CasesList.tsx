@@ -48,10 +48,12 @@ const CasesList = ({
   const title = showTitle
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
+
+  //TODO: remove Math.min once cases api offers pagination
   const subTitle = readMoreAmount
     ? intl.formatMessage(
         { id: readMoreTranslationId },
-        { total: readMoreAmount },
+        { total: Math.min(100, readMoreAmount) },
       )
     : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
