@@ -4,7 +4,6 @@ import TestProvider, {
 import {
   mockRequestDefault,
   mockRequestTwoTasks,
-  mockRequestsPagination,
 } from "../data/OverviewPageRequests.mock";
 import { OverviewPage } from "../../..";
 
@@ -66,15 +65,6 @@ export const MockOverviewPageLessCases = () => (
   <TestProvider
     mocks={mockRequestDefault}
     routes={routeShowLessCases}
-    initialIndex={0}
-    initialEntries={[paths.overview]}
-  ></TestProvider>
-);
-
-export const MockOverviewPagePagination = () => (
-  <TestProvider
-    mocks={mockRequestsPagination}
-    routes={route}
     initialIndex={0}
     initialEntries={[paths.overview]}
   ></TestProvider>

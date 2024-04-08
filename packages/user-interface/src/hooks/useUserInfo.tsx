@@ -20,22 +20,19 @@ export const useUserInfo = () => {
     loadGemachtigde,
     { loading: gemachtigdeLoading, data: gemachtigdeData },
   ] = useGetGemachtigdeLazyQuery();
-  const { decodedToken, authenticationMethods } = useContext(KeycloakContext);
+  const { decodedToken } = useContext(KeycloakContext);
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
 
   useEffect(() => {
-    if (decodedToken && authenticationMethods) {
-      const authenticationMethod = decodedToken.middel || "";
-      if (authenticationMethods.person?.includes(authenticationMethod)) {
+    if (decodedToken) {
+      if (decodedToken.aanvrager?.bsn) {
         setIsPerson(true);
         loadPersoon();
-      } else if (
-        authenticationMethods.company?.includes(authenticationMethod)
-      ) {
+      } else if (decodedToken.aanvrager?.kvk) {
         setIsPerson(false);
         loadBedrijf();
       }
-      if (authenticationMethods.proxy?.includes(authenticationMethod)) {
+      if (decodedToken.gemachtigde) {
         setisVolmachtLogin(true);
         loadGemachtigde();
       }
@@ -44,23 +41,21 @@ export const useUserInfo = () => {
 
   useEffect(() => {
     const name = getNameString(persoonData?.getPersoon?.naam);
-    const authenticationMethod = decodedToken?.middel || "";
-    if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
+    if (decodedToken?.gemachtigde) {
       setVolmachtgever(name);
     } else {
       setUserName(name);
     }
-  }, [persoonData, decodedToken?.middel, authenticationMethods?.proxy]);
+  }, [persoonData, decodedToken?.gemachtigde]);
 
   useEffect(() => {
     const name = bedrijfData?.getBedrijf?.naam || "";
-    const authenticationMethod = decodedToken?.middel || "";
-    if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
+    if (decodedToken?.gemachtigde) {
       setVolmachtgever(name);
     } else {
       setUserName(name);
     }
-  }, [bedrijfData, decodedToken?.middel, authenticationMethods?.proxy]);
+  }, [bedrijfData, decodedToken?.gemachtigde]);
 
   useEffect(() => {
     if (gemachtigdeData?.getGemachtigde?.persoon) {

@@ -15,12 +15,6 @@ import React from "react";
 import { menuItems } from "./constants/menu-items";
 import { paths } from "./constants/paths";
 
-const authenticationMethods = {
-  person: ["digid", "machtigen"],
-  company: ["eherkenning", "bewindvoering"],
-  proxy: ["machtigen", "bewindvoering"],
-};
-
 const App = () => {
   if (!config.KEYCLOAK_CLIENT_ID) {
     console.log("KEYCLOAK_CLIENT_ID is not set");
@@ -59,7 +53,6 @@ const App = () => {
         realm={config.KEYCLOAK_REALM}
         url={config.KEYCLOAK_URL}
         redirectUri={config.KEYCLOAK_REDIRECT_URI}
-        authenticationMethods={authenticationMethods}
       >
         {/* TODO: Moved StrictMode, because of Keycloak - React 18: https://github.com/react-keycloak/react-keycloak/issues/182 */}
         <React.StrictMode>

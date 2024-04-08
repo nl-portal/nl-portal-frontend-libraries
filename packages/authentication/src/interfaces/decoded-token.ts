@@ -1,3 +1,4 @@
 export interface DecodedToken {
-  middel?: string;
+  aanvrager?: { kvk?: string; bsn?: string };
+  gemachtigde?: { kvk?: string; bsn?: string };
 }

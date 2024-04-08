@@ -147,35 +147,6 @@ by default. Possible configuration values are specified in the
 These values are set to the window object by [config.js](./packages/app/public/config.js), which
 also contains the default values for local development.
 
-Another configuration option is the authentication methods, which must include the mapping for the 'middel' claim in the JWT token, and the type of login (person, company, proxy). Example snippet for in the implementation:
-
-```
-...
-const authenticationMethods = {
-  person: ["digid", "machtigen"],
-  company: ["eherkenning", "bewindvoering"],
-  proxy: ["machtigen", "bewindvoering"],
-};
-...
-const App = () => {
-...
-return (
-    <div className={config.THEME_CLASS}>
-      <KeycloakWrapper
-        clientId={config.KEYCLOAK_CLIENT_ID}
-        realm={config.KEYCLOAK_REALM}
-        url={config.KEYCLOAK_URL}
-        redirectUri={config.KEYCLOAK_REDIRECT_URI}
-        authenticationMethods={authenticationMethods}
-      >
-      ...
-      </KeycloakWrapper>
-    </div>
-  );
-};
-...
-```
-
 When starting the app through Docker, these values can be optionally overridden, i.e.:
 
 ```

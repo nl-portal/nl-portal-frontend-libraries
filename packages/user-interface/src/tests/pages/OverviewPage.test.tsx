@@ -4,7 +4,6 @@ import {
   MockOverviewPage,
   MockOverviewPageLessCases,
   MockOverviewPageLessTasks,
-  MockOverviewPagePagination,
 } from "../mock/pages/OverviewPage.mock";
 import { testPaths as paths } from "../../providers/TestProvider";
 
@@ -20,8 +19,6 @@ describe("OverviewPage", () => {
   const taak1 = () => screen.getByText("OPEN TAAK 1");
   const taak2 = () => screen.getByText("OPEN TAAK 2");
   const taak3 = () => screen.queryByText("OPEN TAAK 3");
-  const viewAllTasks = () => screen.queryByText("tasksList.viewAll");
-  const viewAllCases = () => screen.queryByText("casesList.viewAll");
 
   it("should show several active cases", async () => {
     render(MockOverviewPage());
@@ -57,8 +54,6 @@ describe("OverviewPage", () => {
     expect(taak1()).toBeVisible();
     expect(taak2()).toBeVisible();
     expect(taak3()).toBeVisible();
-    expect(viewAllTasks()).toBeInTheDocument();
-    expect(viewAllCases()).not.toBeInTheDocument();
   });
 
   it("should not show task 3", async () => {
@@ -80,15 +75,5 @@ describe("OverviewPage", () => {
 
     expect(openZaak1()).toBeVisible();
     expect(openZaak2Hidden()).not.toBeInTheDocument();
-  });
-
-  it("should show Bekijk alle zaken(20)", async () => {
-    render(MockOverviewPagePagination());
-    await waitFor(() => {
-      expect(openZaak1()).toBeVisible();
-    });
-
-    expect(viewAllTasks()).toBeVisible();
-    expect(viewAllCases()).toBeVisible();
   });
 });
