@@ -92,5 +92,6 @@ export const EN_GB_MESSAGES: Messages = {
     "theme.erfpacht.listTitle": "Leasehold contracts",
     "theme.erfpacht.listAdres": "Address",
     "theme.erfpacht.listContractnummer": "Contract number",
+    "theme.erfpacht.listViewAll": "View all leasehold contracts ({total})",
   },
 };

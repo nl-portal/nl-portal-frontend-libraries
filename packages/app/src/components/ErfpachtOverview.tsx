@@ -11,7 +11,10 @@ import { FormattedMessage } from "react-intl";
 
 const ErfpachtOverview = () => {
   const type = "erfpacht";
-  const { data, loading, error } = useGetErfpachtContractenQuery();
+  const contractsLength = 5;
+  const { data, loading, error } = useGetErfpachtContractenQuery({
+    variables: { pageSize: contractsLength },
+  });
   const contracts = data?.getErfpachtContracten.content as
     | ContractBeperkt[]
     | undefined;
@@ -22,6 +25,14 @@ const ErfpachtOverview = () => {
         loading={loading}
         error={Boolean(error)}
         titleTranslationId={`theme.${type}.listTitle`}
+        readMoreTranslationId={`theme.${type}.listViewAll`}
+        readMoreLink={paths.themeList(type)}
+        readMoreAmount={
+          data?.getErfpachtContracten.totalElements &&
+          data?.getErfpachtContracten.totalElements > contractsLength
+            ? data?.getErfpachtContracten.totalElements
+            : undefined
+        }
         headers={[
           <FormattedMessage id={`theme.${type}.listAdres`} />,
           <FormattedMessage id={`theme.${type}.listContractnummer`} />,

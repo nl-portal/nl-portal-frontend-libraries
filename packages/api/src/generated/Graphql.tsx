@@ -695,6 +695,7 @@ export type GetDocumentenQuery = { __typename?: 'Query', getZaak: { __typename?:
 
 export type GetErfpachtContractenQueryVariables = Exact<{
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -1031,8 +1032,8 @@ export type GetDocumentenLazyQueryHookResult = ReturnType<typeof useGetDocumente
 export type GetDocumentenSuspenseQueryHookResult = ReturnType<typeof useGetDocumentenSuspenseQuery>;
 export type GetDocumentenQueryResult = Apollo.QueryResult<GetDocumentenQuery, GetDocumentenQueryVariables>;
 export const GetErfpachtContractenDocument = gql`
-    query GetErfpachtContracten($pageNumber: Int) {
-  getErfpachtContracten(pageNumber: $pageNumber) {
+    query GetErfpachtContracten($pageNumber: Int, $pageSize: Int) {
+  getErfpachtContracten(pageNumber: $pageNumber, pageSize: $pageSize) {
     content {
       id
       adressen {
@@ -1061,6 +1062,7 @@ export const GetErfpachtContractenDocument = gql`
  * const { data, loading, error } = useGetErfpachtContractenQuery({
  *   variables: {
  *      pageNumber: // value for 'pageNumber'
+ *      pageSize: // value for 'pageSize'
  *   },
  * });
  */
