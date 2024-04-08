@@ -156,12 +156,20 @@ export type MaterieleRegistratie = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Create payment with hash and fields */
+  generatePayment: Payment;
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
   submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
+};
+
+
+export type MutationGeneratePaymentArgs = {
+  paymentProfileIdentifier: Scalars['String']['input'];
+  paymentRequest: PaymentRequestInput;
 };
 
 
@@ -179,6 +187,28 @@ export type MutationSubmitTaskArgs = {
 
 export type MutationUpdateBurgerProfielArgs = {
   klant: KlantUpdateInput;
+};
+
+export type Payment = {
+  __typename?: 'Payment';
+  formAction: Scalars['String']['output'];
+  formFields: Array<PaymentField>;
+};
+
+export type PaymentField = {
+  __typename?: 'PaymentField';
+  name: Scalars['String']['output'];
+  value: Scalars['String']['output'];
+};
+
+export type PaymentRequestInput = {
+  amount: Scalars['Float']['input'];
+  failureUrl?: InputMaybe<Scalars['String']['input']>;
+  langId?: InputMaybe<Scalars['String']['input']>;
+  orderId: Scalars['String']['input'];
+  reference: Scalars['String']['input'];
+  successUrl?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Persoon = {
@@ -472,6 +502,20 @@ export type ZaakType = {
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
 
+export type GeneratePaymentMutationVariables = Exact<{
+  paymentProfileIdentifier: Scalars['String']['input'];
+  amount: Scalars['Float']['input'];
+  orderId: Scalars['String']['input'];
+  reference: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+  langId: Scalars['String']['input'];
+  successUrl: Scalars['String']['input'];
+  failureUrl: Scalars['String']['input'];
+}>;
+
+
+export type GeneratePaymentMutation = { __typename?: 'Mutation', generatePayment: { __typename?: 'Payment', formAction: string, formFields: Array<{ __typename?: 'PaymentField', name: string, value: string }> } };
+
 export type SubmitTaskMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
@@ -598,6 +642,53 @@ export const FormulierFieldsFragmentDoc = gql`
   value
 }
     `;
+export const GeneratePaymentDocument = gql`
+    mutation GeneratePayment($paymentProfileIdentifier: String!, $amount: Float!, $orderId: String!, $reference: String!, $title: String!, $langId: String!, $successUrl: String!, $failureUrl: String!) {
+  generatePayment(
+    paymentProfileIdentifier: $paymentProfileIdentifier
+    paymentRequest: {amount: $amount, orderId: $orderId, reference: $reference, title: $title, langId: $langId, successUrl: $successUrl, failureUrl: $failureUrl}
+  ) {
+    formAction
+    formFields {
+      name
+      value
+    }
+  }
+}
+    `;
+export type GeneratePaymentMutationFn = Apollo.MutationFunction<GeneratePaymentMutation, GeneratePaymentMutationVariables>;
+
+/**
+ * __useGeneratePaymentMutation__
+ *
+ * To run a mutation, you first call `useGeneratePaymentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGeneratePaymentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [generatePaymentMutation, { data, loading, error }] = useGeneratePaymentMutation({
+ *   variables: {
+ *      paymentProfileIdentifier: // value for 'paymentProfileIdentifier'
+ *      amount: // value for 'amount'
+ *      orderId: // value for 'orderId'
+ *      reference: // value for 'reference'
+ *      title: // value for 'title'
+ *      langId: // value for 'langId'
+ *      successUrl: // value for 'successUrl'
+ *      failureUrl: // value for 'failureUrl'
+ *   },
+ * });
+ */
+export function useGeneratePaymentMutation(baseOptions?: Apollo.MutationHookOptions<GeneratePaymentMutation, GeneratePaymentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<GeneratePaymentMutation, GeneratePaymentMutationVariables>(GeneratePaymentDocument, options);
+      }
+export type GeneratePaymentMutationHookResult = ReturnType<typeof useGeneratePaymentMutation>;
+export type GeneratePaymentMutationResult = Apollo.MutationResult<GeneratePaymentMutation>;
+export type GeneratePaymentMutationOptions = Apollo.BaseMutationOptions<GeneratePaymentMutation, GeneratePaymentMutationVariables>;
 export const SubmitTaskDocument = gql`
     mutation SubmitTask($id: UUID!, $submission: JSON!) {
   submitTask(id: $id, submission: $submission) {
@@ -823,7 +914,7 @@ export const GetDocumentenDocument = gql`
  *   },
  * });
  */
-export function useGetDocumentenQuery(baseOptions: Apollo.QueryHookOptions<GetDocumentenQuery, GetDocumentenQueryVariables>) {
+export function useGetDocumentenQuery(baseOptions: Apollo.QueryHookOptions<GetDocumentenQuery, GetDocumentenQueryVariables> & ({ variables: GetDocumentenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetDocumentenQuery, GetDocumentenQueryVariables>(GetDocumentenDocument, options);
       }
@@ -863,7 +954,7 @@ export const GetFormDefinitionByIdDocument = gql`
  *   },
  * });
  */
-export function useGetFormDefinitionByIdQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>) {
+export function useGetFormDefinitionByIdQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables> & ({ variables: GetFormDefinitionByIdQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>(GetFormDefinitionByIdDocument, options);
       }
@@ -903,7 +994,7 @@ export const GetFormDefinitionByObjectenApiUrlDocument = gql`
  *   },
  * });
  */
-export function useGetFormDefinitionByObjectenApiUrlQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>) {
+export function useGetFormDefinitionByObjectenApiUrlQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables> & ({ variables: GetFormDefinitionByObjectenApiUrlQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>(GetFormDefinitionByObjectenApiUrlDocument, options);
       }
@@ -943,7 +1034,7 @@ export const GetFormDefinitionByNameDocument = gql`
  *   },
  * });
  */
-export function useGetFormDefinitionByNameQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>) {
+export function useGetFormDefinitionByNameQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables> & ({ variables: GetFormDefinitionByNameQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>(GetFormDefinitionByNameDocument, options);
       }
@@ -1118,7 +1209,7 @@ export const GetObjectContactMomentenDocument = gql`
  *   },
  * });
  */
-export function useGetObjectContactMomentenQuery(baseOptions: Apollo.QueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
+export function useGetObjectContactMomentenQuery(baseOptions: Apollo.QueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables> & ({ variables: GetObjectContactMomentenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
       }
@@ -1280,7 +1371,7 @@ export const GetTaakByIdDocument = gql`
  *   },
  * });
  */
-export function useGetTaakByIdQuery(baseOptions: Apollo.QueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
+export function useGetTaakByIdQuery(baseOptions: Apollo.QueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables> & ({ variables: GetTaakByIdQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
       }
@@ -1413,7 +1504,7 @@ export const GetZaakDocument = gql`
  *   },
  * });
  */
-export function useGetZaakQuery(baseOptions: Apollo.QueryHookOptions<GetZaakQuery, GetZaakQueryVariables>) {
+export function useGetZaakQuery(baseOptions: Apollo.QueryHookOptions<GetZaakQuery, GetZaakQueryVariables> & ({ variables: GetZaakQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetZaakQuery, GetZaakQueryVariables>(GetZaakDocument, options);
       }
