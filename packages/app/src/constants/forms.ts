@@ -1,4 +1,6 @@
 export const forms: string[] = [
-  'aanvraag-1',
-  'aanvraag-2'
+  'bezwaar',
+  'person',
+  'test',
+  'upload-legitimatiebewijs-form'
 ];

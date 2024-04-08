@@ -25,7 +25,7 @@
     "preinstall": "npx only-allow pnpm",
     "wait": "wait-on ../api/dist/index.js && wait-on ../authentication/dist/index.js && wait-on ../localization/dist/index.js",
     "test": "vitest run",
-    "test:watch": "DEBUG_PRINT_LIMIT=100000 vitest --watch --ui"
+    "test:watch": "DEBUG_PRINT_LIMIT=100000 vitest --watch --ui",
     "test:ui": "vitest --ui"
   },
   "dependencies": {

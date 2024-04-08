@@ -12,5 +12,5 @@ export const paths: Paths = {
   account: "/account",
   editAccount: "/account/aanpassen",
   forms: "/formulieren",
-  form: (id = ":id") => `/formulieren/formulier/${id}`,
+  form: (name = ":name") => `/formulieren/${name}`,
 };

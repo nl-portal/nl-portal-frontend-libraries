@@ -5,8 +5,16 @@ import { Link } from "@gemeente-denhaag/link";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 import { Forms } from "../interfaces/forms";
 import { Heading3 } from "@gemeente-denhaag/components-react";
+import { useGetFormsQuery } from "@nl-portal/nl-portal-api";
 
 const FormsPage = ({ forms }: Forms) => {
+  const {
+    data,
+    loading,
+    error
+  } = useGetFormsQuery();
+  console.log(data, loading, error);
+
   return (
     <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.forms" />}>
@@ -25,7 +33,7 @@ const FormsPage = ({ forms }: Forms) => {
             {forms.map((form) => {
               return (
                 <li className="denhaag-link-group__list-item" key={`${form}`}>
-                  <Link href={`/formulieren/formulier/${form}`}
+                  <Link href={`/formulieren/${form}`}
                         icon={<ArrowRightIcon />}
                         iconAlign="start">
                     <span data-testid={`forms-item-${form}`}>

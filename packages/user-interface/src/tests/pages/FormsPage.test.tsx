@@ -1,11 +1,15 @@
 import { describe, it, expect } from "vitest";
-import FormsPage from "./FormsPage.tsx";
+import FormsPage from "../../pages/FormsPage.tsx";
 import { render, screen } from "@testing-library/react";
 import { IntlProvider } from "react-intl";
 
 describe("FormsPage", () => {
   it("is truthy", () => {
     expect(FormsPage).toBeTruthy();
+  });
+
+  it("should run query get-forms", () => {
+
   });
 
   it("should render empty states", () => {

@@ -18,8 +18,8 @@ importers:
   packages/api:
     dependencies:
       '@apollo/client':
-        specifier: ^3.9.2
-        version: 3.9.2(@types/react@18.2.53)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^3.9.9
+        version: 3.9.9(@types/react@18.2.53)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@nl-portal/nl-portal-authentication':
         specifier: workspace:*
         version: link:../authentication
@@ -80,7 +80,7 @@ importers:
         version: 3.7.2(typescript@5.3.3)(vite@5.0.12)
       vitest:
         specifier: ^1.2.2
-        version: 1.2.2(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.70.0)
+        version: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -153,7 +153,7 @@ importers:
         version: 5.0.12(sass@1.70.0)
       vitest:
         specifier: ^1.2.2
-        version: 1.2.2(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.70.0)
+        version: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -217,7 +217,7 @@ importers:
         version: 3.7.2(typescript@5.3.3)(vite@5.0.12)
       vitest:
         specifier: ^1.2.2
-        version: 1.2.2(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.70.0)
+        version: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
 
   packages/localization:
     dependencies:
@@ -275,13 +275,13 @@ importers:
         version: 3.7.2(typescript@5.3.3)(vite@5.0.12)
       vitest:
         specifier: ^1.2.2
-        version: 1.2.2(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.70.0)
+        version: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
 
   packages/user-interface:
     dependencies:
       '@apollo/client':
-        specifier: ^3.9.2
-        version: 3.9.2(@types/react@18.2.53)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^3.9.9
+        version: 3.9.9(@types/react@18.2.53)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@formio/protected-eval':
         specifier: ^1.2.2
         version: 1.2.2(formiojs@4.18.1)
@@ -294,6 +294,9 @@ importers:
       '@gemeente-denhaag/alert':
         specifier: 0.1.1-alpha.342
         version: 0.1.1-alpha.342(react@18.2.0)
+      '@gemeente-denhaag/button-link':
+        specifier: 0.0.1-alpha.2
+        version: 0.0.1-alpha.2(react-dom@18.2.0)(react@18.2.0)
       '@gemeente-denhaag/card':
         specifier: 0.2.3-alpha.372
         version: 0.2.3-alpha.372(react@18.2.0)
@@ -306,6 +309,9 @@ importers:
       '@gemeente-denhaag/descriptionlist':
         specifier: 0.1.1-alpha.272
         version: 0.1.1-alpha.272
+      '@gemeente-denhaag/file':
+        specifier: 0.1.1-alpha.55
+        version: 0.1.1-alpha.55(react@18.2.0)
       '@gemeente-denhaag/form-field':
         specifier: 0.3.0-alpha.248
         version: 0.3.0-alpha.248(react-dom@18.2.0)(react@18.2.0)
@@ -340,11 +346,11 @@ importers:
         specifier: 0.1.0-alpha.197
         version: 0.1.0-alpha.197(react@18.2.0)
       '@gemeente-denhaag/tab':
-        specifier: 0.2.3-alpha.372
-        version: 0.2.3-alpha.372(react@18.2.0)
+        specifier: 0.2.3-alpha.380
+        version: 0.2.3-alpha.380(react@18.2.0)
       '@gemeente-denhaag/table':
-        specifier: 0.1.1-alpha.278
-        version: 0.1.1-alpha.278(react@18.2.0)
+        specifier: 0.1.1-alpha.283
+        version: 0.1.1-alpha.283(react@18.2.0)
       '@gemeente-denhaag/text-input':
         specifier: 0.3.0-alpha.372
         version: 0.3.0-alpha.372(react-dom@18.2.0)(react@18.2.0)
@@ -452,8 +458,8 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1(vite@5.0.12)
       '@vitest/ui':
-        specifier: ^1.3.1
-        version: 1.3.1(vitest@1.2.2)
+        specifier: ^1.4.0
+        version: 1.4.0(vitest@1.2.2)
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -483,7 +489,7 @@ importers:
         version: 3.7.2(typescript@5.3.3)(vite@5.0.12)
       vitest:
         specifier: ^1.2.2
-        version: 1.2.2(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.70.0)
+        version: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -507,8 +513,8 @@ packages:
       '@jridgewell/trace-mapping': 0.3.22
     dev: true
 
-  /@apollo/client@3.9.2(@types/react@18.2.53)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Zw9WvXjqhpbgkvAvnj52vstOWwM0iedKWtn1hSq1cODQyoe1CF2uFwMYFI7l56BrAY9CzLi6MQA0AhxpgJgvxw==}
+  /@apollo/client@3.9.9(@types/react@18.2.53)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-/sMecU/M0WK9knrguts1lSLV8xFKzIgOMVb4mi6MOxgJXjliDB8PvOtmXhTqh2cVMMR4TzXgOnb+af/690zlQw==}
     peerDependencies:
       graphql: ^15.0.0 || ^16.0.0
       graphql-ws: ^5.5.5
@@ -536,7 +542,7 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      rehackt: 0.0.3(@types/react@18.2.53)(react@18.2.0)
+      rehackt: 0.0.6(@types/react@18.2.53)(react@18.2.0)
       response-iterator: 0.2.6
       symbol-observable: 4.0.0
       ts-invariant: 0.10.3
@@ -1589,6 +1595,21 @@ packages:
     resolution: {integrity: sha512-H71a3/iP53vLIWO7CxBMoJ+sgF0OuEtR1rORtBahpyBARDh4B/8KscCZvROqagIe4Odd3HQWkiUREWmsaGaUvA==}
     dev: false
 
+  /@gemeente-denhaag/button-link@0.0.1-alpha.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-g0BFXbklDETgs+g/XjZoypD+X8C73wdOOHD43Kj2cNv6aCpc8iau71z7241qbyzmXQac28Vu00UyElSKuTWmog==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@utrecht/component-library-react': 3.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@utrecht/components': 3.0.0
+      react: 18.2.0
+    transitivePeerDependencies:
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
+    dev: false
+
   /@gemeente-denhaag/button@0.2.3-alpha.372(react@18.2.0):
     resolution: {integrity: sha512-NCnwL5rzqgP7RtdncsXiUI8qrbQFU8cAVuJZqSlt3z8otLZS+5dfj2k/g/i5k7X/RsselFuzVTANZ3cJhyqemQ==}
     peerDependencies:
@@ -1758,6 +1779,14 @@ packages:
       - react
     dev: false
 
+  /@gemeente-denhaag/file@0.1.1-alpha.55(react@18.2.0):
+    resolution: {integrity: sha512-CDVf+nK1umG385vqhrd7LlSihkFn++lNlEdZjbPs59ygx4WoO48HXdPsT7CttQT4Fehb07OVu0cZIbeOEZXsGg==}
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.383(react@18.2.0)
+    transitivePeerDependencies:
+      - react
+    dev: false
+
   /@gemeente-denhaag/footer@0.1.1-alpha.231(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-WBsj3Z3QUdaxsbl0RGQn349ZaofT/LMcfzsoiMrkN0oZwqwLUdxqlmC+F+hh2p/XtEIFwP5+eWFKudOzlVh2rA==}
     dependencies:
@@ -1908,6 +1937,22 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@gemeente-denhaag/icons@0.2.3-alpha.381(react@18.2.0):
+    resolution: {integrity: sha512-yT4cycD7VHjYT5E0J0npk0LebvQYTFlYi4bmH5q1H3TURPSGFDDLp8S+onEAoA+HA7eJesqq3Jbp1g5e5t7VyQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/icons@0.2.3-alpha.383(react@18.2.0):
+    resolution: {integrity: sha512-sOSpkEOUk4KS0yYMZgF0JlN6jhofRhDVIPkzYng059d1/yl00VnY1f1SFlO5F4/SZ5zFNWmU3uHXVDNIAxohqw==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /@gemeente-denhaag/language-switcher@0.2.3-alpha.364(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-+nFZwaR2padw1u0IST/++cJ1mzRS0fG5yV3Y2RQB7aqt2wJIf5+T315zGQTEa600bt7fXcLrs9aZL8mWAF8LGA==}
     peerDependencies:
@@ -1958,6 +2003,15 @@ packages:
       react: ^18.0.0
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.374(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
+  /@gemeente-denhaag/link@0.2.3-alpha.381(react@18.2.0):
+    resolution: {integrity: sha512-HyEFu1ibqpXIyHXygchyCQkPjwFbmnx4+l3oQ3tQs0vf8FT9zgnXlmeJjSMhdcVDQv4CfGNeqbNL14eref7rqQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.381(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -2083,6 +2137,15 @@ packages:
       uuid: 9.0.1
     dev: false
 
+  /@gemeente-denhaag/tab@0.2.3-alpha.380(react@18.2.0):
+    resolution: {integrity: sha512-SIDFXFlqkW0UFPGEQg9eO13KNggIxeYrZIKSRd9RdUPNhK7igNYuIN52YUx04uTncdSunExsFzRFresEhgaQdw==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      react: 18.2.0
+      uuid: 9.0.1
+    dev: false
+
   /@gemeente-denhaag/table@0.1.1-alpha.274(react@18.2.0):
     resolution: {integrity: sha512-Laj4vAcyHCpWw56/JD03t1WOdgBHnIZxshMiNpgNDX/gfpNuZ4ZiBv4y03CZI0Rgp2/h2YmzEERq7CbNm1LzcQ==}
     peerDependencies:
@@ -2091,11 +2154,12 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@gemeente-denhaag/table@0.1.1-alpha.278(react@18.2.0):
-    resolution: {integrity: sha512-HZAx34g0L9nzZMgUJ7GWZ5mVk0awq3TofnS3/VYADlzu1OfUQJa051ThEddjuvRJEasugfjU6RGRCCaoXJbEUQ==}
+  /@gemeente-denhaag/table@0.1.1-alpha.283(react@18.2.0):
+    resolution: {integrity: sha512-GMcpgUepWCrIJpzIYiX0/Y1KyQO5ZwVWUmnW80l014BvwDI0Z//LD4fgPXVT+t7soLg/SHHSVMnwBXchDrkj2A==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
+      '@gemeente-denhaag/link': 0.2.3-alpha.381(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -2632,7 +2696,7 @@ packages:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       graphql: 16.8.1
-      tslib: 2.5.3
+      tslib: 2.6.2
     dev: true
 
   /@graphql-tools/prisma-loader@8.0.2(graphql@16.8.1):
@@ -2691,7 +2755,7 @@ packages:
       '@ardatan/relay-compiler': 12.0.0(graphql@16.8.1)
       '@graphql-tools/utils': 10.0.13(graphql@16.8.1)
       graphql: 16.8.1
-      tslib: 2.5.3
+      tslib: 2.6.2
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -3319,7 +3383,7 @@ packages:
       dom-accessibility-api: 0.6.3
       lodash: 4.17.21
       redent: 3.0.0
-      vitest: 1.2.2(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.70.0)
+      vitest: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
     dev: true
 
   /@testing-library/react@14.2.1(react-dom@18.2.0)(react@18.2.0):
@@ -3731,19 +3795,19 @@ packages:
       tinyspy: 2.2.0
     dev: true
 
-  /@vitest/ui@1.3.1(vitest@1.2.2):
-    resolution: {integrity: sha512-2UrFLJ62c/eJGPHcclstMKlAR7E1WB1ITe1isuowEPJJHi3HfqofvsUqQ1cGrEF7kitG1DJuwURUA3HLDtQkXA==}
+  /@vitest/ui@1.4.0(vitest@1.2.2):
+    resolution: {integrity: sha512-XC6CMhN1gzYcGbpn6/Oanj4Au2EXwQEX6vpcOeLlZv8dy7g11Ukx8zwtYQbwxs9duK2s9j2o5rbQiCP5DPAcmw==}
     peerDependencies:
-      vitest: 1.3.1
+      vitest: 1.4.0
     dependencies:
-      '@vitest/utils': 1.3.1
+      '@vitest/utils': 1.4.0
       fast-glob: 3.3.2
       fflate: 0.8.2
       flatted: 3.2.9
       pathe: 1.1.2
       picocolors: 1.0.0
       sirv: 2.0.4
-      vitest: 1.2.2(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.70.0)
+      vitest: 1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0)
     dev: true
 
   /@vitest/utils@1.2.2:
@@ -3755,8 +3819,8 @@ packages:
       pretty-format: 29.7.0
     dev: true
 
-  /@vitest/utils@1.3.1:
-    resolution: {integrity: sha512-d3Waie/299qqRyHTm2DjADeTaNdNSVsnwHPWrs20JMpjh6eiVq7ggggweO8rc4arhf6rRkWuHKwvxGvejUXZZQ==}
+  /@vitest/utils@1.4.0:
+    resolution: {integrity: sha512-mx3Yd1/6e2Vt/PUC98DcqTirtfxUyAZ32uK82r8rZzbtBeBo+nqgnjx/LvqQdWsrvNtm14VmurNgcf4nqY5gJg==}
     dependencies:
       diff-sequences: 29.6.3
       estree-walker: 3.0.3
@@ -7110,8 +7174,8 @@ packages:
       define-properties: 1.2.1
       set-function-name: 2.0.1
 
-  /rehackt@0.0.3(@types/react@18.2.53)(react@18.2.0):
-    resolution: {integrity: sha512-aBRHudKhOWwsTvCbSoinzq+Lej/7R8e8UoPvLZo5HirZIIBLGAgdG7SL9QpdcBoQ7+3QYPi3lRLknAzXBlhZ7g==}
+  /rehackt@0.0.6(@types/react@18.2.53)(react@18.2.0):
+    resolution: {integrity: sha512-l3WEzkt4ntlEc/IB3/mF6SRgNHA6zfQR7BlGOgBTOmx7IJJXojDASav+NsgXHFjHn+6RmwqsGPFgZpabWpeOdw==}
     peerDependencies:
       '@types/react': '*'
       react: '*'
@@ -7935,7 +7999,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.2.2(@vitest/ui@1.3.1)(jsdom@24.0.0)(sass@1.70.0):
+  /vitest@1.2.2(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.70.0):
     resolution: {integrity: sha512-d5Ouvrnms3GD9USIK36KG8OZ5bEvKEkITFtnGv56HFaSlbItJuYr7hv2Lkn903+AvRAgSixiamozUVfORUekjw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -7964,7 +8028,7 @@ packages:
       '@vitest/runner': 1.2.2
       '@vitest/snapshot': 1.2.2
       '@vitest/spy': 1.2.2
-      '@vitest/ui': 1.3.1(vitest@1.2.2)
+      '@vitest/ui': 1.4.0(vitest@1.2.2)
       '@vitest/utils': 1.2.2
       acorn-walk: 8.3.2
       cac: 6.7.14
