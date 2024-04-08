@@ -59,7 +59,6 @@ const TableList = ({
         ),
       },
     ]);
-  console.log(readMoreAmount, readMoreLink);
   const title = showTitle
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
