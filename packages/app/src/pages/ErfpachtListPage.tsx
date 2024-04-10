@@ -14,12 +14,17 @@ import {
 const ErfpachtListPage = () => {
   const type = "erfpacht";
   const contractsLength = 10;
-  const { data, loading, error } = useGetErfpachtContractenQuery({
+  const { data, loading, error, refetch } = useGetErfpachtContractenQuery({
     variables: { pageSize: contractsLength },
   });
   const contracts = data?.getErfpachtContracten.content as
     | ContractBeperkt[]
     | undefined;
+
+  const onPageChange = (index: number) => {
+    refetch({ pageNumber: index + 1 });
+    return index;
+  };
 
   return (
     <PageGrid>
@@ -46,6 +51,11 @@ const ErfpachtListPage = () => {
             { children: contract.id, href },
           ];
         })}
+        onChange={onPageChange}
+        indexLimit={
+          data?.getErfpachtContracten.totalPages &&
+          data?.getErfpachtContracten.totalPages - 1
+        }
       />
     </PageGrid>
   );
