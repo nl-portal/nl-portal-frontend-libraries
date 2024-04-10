@@ -68,6 +68,7 @@ const ThemeDetailsPage = ({
         <CasesList
           loading={loading}
           error={Boolean(casesError)}
+          listView={false}
           cases={cases
             ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, showCasesLength)}

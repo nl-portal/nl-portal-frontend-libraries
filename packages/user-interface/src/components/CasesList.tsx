@@ -23,6 +23,7 @@ interface Props {
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
+  listView?: boolean;
 }
 
 const CasesList = ({
@@ -38,11 +39,11 @@ const CasesList = ({
   index,
   indexLimit,
   onChange,
+  listView = Boolean(readMoreAmount && readMoreAmount > 8),
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const casesPath = readMoreLink || paths.cases;
-  const listView = Boolean(readMoreAmount && readMoreAmount > 8);
   const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
