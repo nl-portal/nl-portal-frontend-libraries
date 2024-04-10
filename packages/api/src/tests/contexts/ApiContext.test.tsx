@@ -1,4 +1,4 @@
-import { ApiProvider } from "./ApiContext";
+import { ApiProvider } from "../../contexts/ApiContext";
 
 describe("ApiProvider", () => {
   it("is truthy", () => {
