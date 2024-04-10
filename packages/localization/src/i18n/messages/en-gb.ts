@@ -89,5 +89,10 @@ export const EN_GB_MESSAGES: Messages = {
     "documentsList.title": "Documents",
     "documentsList.fetchError": "There was an error, try again later.",
     "documentsList.empty": "There are no documents.",
+    "theme.erfpacht.listTitle": "Leasehold contracts",
+    "theme.erfpacht.listAdres": "Address",
+    "theme.erfpacht.listContractnummer": "Contract number",
+    "theme.erfpacht.listViewAll": "View all leasehold contracts ({total})",
+    "theme.erfpacht.listPageHeader": "Leasehold contracts",
   },
 };

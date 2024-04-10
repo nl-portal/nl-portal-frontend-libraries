@@ -9,9 +9,6 @@ import {
   useGetTakenQuery,
   useGetZakenQuery,
 } from "@nl-portal/nl-portal-api";
-import TableList from "../components/TableList";
-import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 interface Props {
   type: string;
@@ -27,7 +24,7 @@ const ThemeOverviewPage = ({
   children,
 }: Props) => {
   const intl = useIntl();
-  const { paths } = useOutletContext<RouterOutletContext>();
+
   const {
     data: tasksData,
     loading: taskLoading,
@@ -74,46 +71,6 @@ const ThemeOverviewPage = ({
           }
         />
       )}
-      <TableList
-        loading={loading}
-        titleTranslationId="theme.erfpacht.listTitle"
-        headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}
-        rows={[
-          [
-            {
-              children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails(type, "123"),
-            },
-            {
-              children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails(type, "123"),
-            },
-            { children: "78435785", href: paths.themeDetails(type, "123") },
-          ],
-          [
-            {
-              children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails(type, "123"),
-            },
-            {
-              children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails(type, "123"),
-            },
-            { children: "78435785", href: paths.themeDetails(type, "123") },
-          ],
-          [
-            {
-              children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails(type, "123"),
-            },
-            {
-              children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails(type, "123"),
-            },
-            { children: "78435785", href: paths.themeDetails(type, "123") },
-          ],
-        ]}
-      />
       {children}
     </PageGrid>
   );

@@ -12,8 +12,7 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   emptyTranslationId?: string;
-  showTitle?: boolean;
-  titleTranslationId?: string;
+  titleTranslationId?: string | false;
   documents?: Array<PortalDocument>;
 }
 
@@ -22,12 +21,11 @@ const DocumentsLists = ({
   error,
   errorTranslationId = "documentsList.fetchError",
   emptyTranslationId = "documentsList.empty",
-  showTitle = true,
   titleTranslationId = "documentsList.title",
   documents,
 }: Props) => {
   const intl = useIntl();
-  const title = showTitle
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });

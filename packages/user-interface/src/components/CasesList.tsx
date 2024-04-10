@@ -15,8 +15,7 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   emptyTranslationId?: string;
-  showTitle?: boolean;
-  titleTranslationId?: string;
+  titleTranslationId?: string | false;
   readMoreAmount?: number;
   readMoreLink?: string;
   readMoreTranslationId?: string;
@@ -32,7 +31,6 @@ const CasesList = ({
   error,
   errorTranslationId = "casesList.fetchError",
   emptyTranslationId = "casesList.empty",
-  showTitle = true,
   titleTranslationId = "casesList.title",
   readMoreAmount,
   readMoreLink,
@@ -46,7 +44,7 @@ const CasesList = ({
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const casesPath = readMoreLink || paths.cases;
-  const title = showTitle
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
 
