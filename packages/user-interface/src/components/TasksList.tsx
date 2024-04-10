@@ -15,8 +15,7 @@ interface Props {
   errorTranslationId?: string;
   showEmpty?: boolean;
   emptyTranslationId?: string;
-  showTitle?: boolean;
-  titleTranslationId?: string;
+  titleTranslationId?: string | false;
   readMoreAmount?: number;
   readMoreLink?: string;
   readMoreTranslationId?: string;
@@ -32,7 +31,6 @@ const TasksList = ({
   errorTranslationId = "tasksList.fetchError",
   showEmpty = true,
   emptyTranslationId = "tasksList.empty",
-  showTitle = true,
   titleTranslationId = "tasksList.title",
   readMoreAmount,
   readMoreLink,
@@ -45,7 +43,7 @@ const TasksList = ({
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const tasksPath = readMoreLink || paths.tasks;
-  const title = showTitle
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
   const subTitle = readMoreAmount
