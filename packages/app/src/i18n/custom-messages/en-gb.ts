@@ -30,5 +30,10 @@ export const EN_GB_MESSAGES: Messages = {
     "footerLinks.accessibility": "Accessibility declaration",
     "footerLinks.dataProtection": "Data Protection Declaration",
     "footerLinks.proclaimer": "Proclaimer",
+    "theme.erfpacht.listTitle": "Leasehold contracts",
+    "theme.erfpacht.listAdres": "Address",
+    "theme.erfpacht.listContractnummer": "Contract number",
+    "theme.erfpacht.listViewAll": "View all leasehold contracts ({total})",
+    "theme.erfpacht.listPageHeader": "Leasehold contracts",
   },
 };

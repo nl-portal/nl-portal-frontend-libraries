@@ -31,5 +31,10 @@ export const NL_NL_MESSAGES: Messages = {
     "footerLinks.accessibility": "Toegankelijkheidsverklaring",
     "footerLinks.dataProtection": "Verklaring inzake Gegevensbescherming",
     "footerLinks.proclaimer": "Proclaimer",
+    "theme.erfpacht.listTitle": "Erfpachtcontracten",
+    "theme.erfpacht.listAdres": "Adres",
+    "theme.erfpacht.listContractnummer": "Contractnummer",
+    "theme.erfpacht.listViewAll": "Bekijk alle erfpachtcontracten ({total})",
+    "theme.erfpacht.listPageHeader": "Erfpachtcontracten",
   },
 };
