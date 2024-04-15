@@ -9,8 +9,8 @@ import {
   TaskPage,
   ThemeDetailsPage,
 } from "@nl-portal/nl-portal-user-interface";
-import { paths } from "../constants/paths";
-import { config } from "../constants/config";
+import { paths } from "./paths";
+import { config } from "./config";
 import { Navigate } from "react-router-dom";
 import ErfpachtOverviewPage from "../pages/ErfpachtOverviewPage";
 import ErfpachtListPage from "../pages/ErfpachtListPage";

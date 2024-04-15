@@ -693,14 +693,6 @@ export type GetDocumentenQueryVariables = Exact<{
 
 export type GetDocumentenQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', zaaktype: { __typename?: 'ZaakType', identificatie: string }, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }> } };
 
-export type GetErfpachtContractenQueryVariables = Exact<{
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type GetErfpachtContractenQuery = { __typename?: 'Query', getErfpachtContracten: { __typename?: 'ContractBeperktPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'ContractBeperkt', id: number, adressen: Array<{ __typename?: 'NeaAdres', straatnaam?: string | null, huisnummer?: number | null, woonplaats?: string | null, nummeraanduidingId?: string | null }> }> } };
-
 export type GetFormDefinitionByIdQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
@@ -1031,57 +1023,6 @@ export type GetDocumentenQueryHookResult = ReturnType<typeof useGetDocumentenQue
 export type GetDocumentenLazyQueryHookResult = ReturnType<typeof useGetDocumentenLazyQuery>;
 export type GetDocumentenSuspenseQueryHookResult = ReturnType<typeof useGetDocumentenSuspenseQuery>;
 export type GetDocumentenQueryResult = Apollo.QueryResult<GetDocumentenQuery, GetDocumentenQueryVariables>;
-export const GetErfpachtContractenDocument = gql`
-    query GetErfpachtContracten($pageNumber: Int, $pageSize: Int) {
-  getErfpachtContracten(pageNumber: $pageNumber, pageSize: $pageSize) {
-    content {
-      id
-      adressen {
-        straatnaam
-        huisnummer
-        woonplaats
-        nummeraanduidingId
-      }
-    }
-    totalElements
-    totalPages
-  }
-}
-    `;
-
-/**
- * __useGetErfpachtContractenQuery__
- *
- * To run a query within a React component, call `useGetErfpachtContractenQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetErfpachtContractenQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetErfpachtContractenQuery({
- *   variables: {
- *      pageNumber: // value for 'pageNumber'
- *      pageSize: // value for 'pageSize'
- *   },
- * });
- */
-export function useGetErfpachtContractenQuery(baseOptions?: Apollo.QueryHookOptions<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>(GetErfpachtContractenDocument, options);
-      }
-export function useGetErfpachtContractenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>(GetErfpachtContractenDocument, options);
-        }
-export function useGetErfpachtContractenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>(GetErfpachtContractenDocument, options);
-        }
-export type GetErfpachtContractenQueryHookResult = ReturnType<typeof useGetErfpachtContractenQuery>;
-export type GetErfpachtContractenLazyQueryHookResult = ReturnType<typeof useGetErfpachtContractenLazyQuery>;
-export type GetErfpachtContractenSuspenseQueryHookResult = ReturnType<typeof useGetErfpachtContractenSuspenseQuery>;
-export type GetErfpachtContractenQueryResult = Apollo.QueryResult<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>;
 export const GetFormDefinitionByIdDocument = gql`
     query GetFormDefinitionById($id: String!) {
   getFormDefinitionById(id: $id) {
