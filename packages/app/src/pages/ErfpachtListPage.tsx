@@ -37,7 +37,7 @@ const ErfpachtListPage = () => {
       <TableList
         loading={loading}
         error={Boolean(error)}
-        titleTranslationId={false}
+        titleTranslationId={null}
         headers={[
           <FormattedMessage id={`theme.${type}.listAdres`} />,
           <FormattedMessage id={`theme.${type}.listContractnummer`} />,

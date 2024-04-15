@@ -127,7 +127,7 @@ const CasePage = ({
       <TasksList
         loading={loading}
         showEmpty={false}
-        titleTranslationId={false}
+        titleTranslationId={null}
         tasks={tasks}
       />
       <div>
@@ -220,7 +220,7 @@ const CasePage = ({
       <TasksList
         loading={loading}
         showEmpty={false}
-        titleTranslationId={false}
+        titleTranslationId={null}
         tasks={tasks}
       />
     </PageGrid>

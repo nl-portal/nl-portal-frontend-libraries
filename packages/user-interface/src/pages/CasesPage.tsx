@@ -23,7 +23,7 @@ const CasesPage = () => {
                 <CasesList
                   loading={loading}
                   error={Boolean(error)}
-                  titleTranslationId={false}
+                  titleTranslationId={null}
                   cases={cases?.filter(
                     (c) => !c.status?.statustype.isEindstatus,
                   )}
@@ -36,7 +36,7 @@ const CasesPage = () => {
                 <CasesList
                   loading={loading}
                   error={Boolean(error)}
-                  titleTranslationId={false}
+                  titleTranslationId={null}
                   cases={cases?.filter(
                     (c) => c.status?.statustype.isEindstatus,
                   )}

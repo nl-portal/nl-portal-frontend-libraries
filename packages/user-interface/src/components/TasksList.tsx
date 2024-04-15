@@ -15,7 +15,7 @@ interface Props {
   errorTranslationId?: string;
   showEmpty?: boolean;
   emptyTranslationId?: string;
-  titleTranslationId?: string | false;
+  titleTranslationId?: string | null;
   readMoreAmount?: number;
   readMoreLink?: string;
   readMoreTranslationId?: string;

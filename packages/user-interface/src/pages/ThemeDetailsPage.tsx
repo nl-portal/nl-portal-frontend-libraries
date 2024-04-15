@@ -52,7 +52,7 @@ const ThemeDetailsPage = ({
         <TasksList
           loading={loading}
           error={Boolean(tasksError)}
-          titleTranslationId={false}
+          titleTranslationId={null}
           tasks={tasks}
         />
       )}
@@ -89,7 +89,7 @@ const ThemeDetailsPage = ({
         <TasksList
           loading={loading}
           error={Boolean(tasksError)}
-          titleTranslationId={false}
+          titleTranslationId={null}
           tasks={tasks}
         />
       )}

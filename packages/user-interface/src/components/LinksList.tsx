@@ -7,7 +7,7 @@ import PortalLink from "./PortalLink";
 
 interface Props {
   loading?: boolean;
-  titleTranslationId?: string | false;
+  titleTranslationId?: string | null;
   links: { title: string; href: string }[];
 }
 
