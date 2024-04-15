@@ -16,12 +16,13 @@ describe("OverviewPage", () => {
   const openZaak2Date = "2024-01-02";
   const geslotenZaak1 = () => screen.queryByText("case.GESLOTENZAAK1.title");
   const geslotenZaak2 = () => screen.queryByText("case.GESLOTENZAAK2.title");
-  const taskFetchError = () => screen.queryByText("tasksList.fetchError");
+  const taskFetchError = () =>
+    screen.queryByText("There was an error, try again later.");
   const taak1 = () => screen.getByText("OPEN TAAK 1");
   const taak2 = () => screen.getByText("OPEN TAAK 2");
   const taak3 = () => screen.queryByText("OPEN TAAK 3");
-  const viewAllTasks = () => screen.queryByText("tasksList.viewAll");
-  const viewAllCases = () => screen.queryByText("casesList.viewAll");
+  const viewAllTasks = () => screen.queryByText("View all tasks (6)");
+  const viewAllCases = () => screen.queryByText("View all cases (20)");
 
   it("should show several active cases", async () => {
     render(MockOverviewPage());
