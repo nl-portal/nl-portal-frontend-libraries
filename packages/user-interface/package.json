@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-user-interface",
-  "version": "0.1.1-alpha.67",
+  "version": "0.1.1-alpha.77",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -26,6 +26,7 @@
     "wait": "wait-on ../api/dist/index.js && wait-on ../authentication/dist/index.js && wait-on ../localization/dist/index.js",
     "test": "vitest run",
     "test:watch": "DEBUG_PRINT_LIMIT=100000 vitest --watch --ui",
+    "typecheck": "tsc --noEmit",
     "test:ui": "vitest --ui"
   },
   "dependencies": {
@@ -95,7 +96,7 @@
     "wait-on": "^7.2.0"
   },
   "peerDependencies": {
-    "@apollo/client": "^3.9.9",
+    "@apollo/client": "3.9.9",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",

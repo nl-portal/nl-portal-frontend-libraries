@@ -12,8 +12,7 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   emptyTranslationId?: string;
-  showTitle?: boolean;
-  titleTranslationId?: string;
+  titleTranslationId?: string | false;
   readMoreAmount?: number;
   readMoreLink?: string;
   readMoreTranslationId?: string;
@@ -29,7 +28,6 @@ const TableList = ({
   error,
   errorTranslationId = "tableList.fetchError",
   emptyTranslationId = "tableList.empty",
-  showTitle = true,
   titleTranslationId = "tableList.title",
   readMoreAmount,
   readMoreLink,
@@ -59,12 +57,15 @@ const TableList = ({
         ),
       },
     ]);
-  const title = showTitle
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
   const subTitle =
     readMoreAmount && readMoreLink
-      ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
+      ? intl.formatMessage(
+          { id: readMoreTranslationId },
+          { total: readMoreAmount },
+        )
       : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
@@ -100,14 +101,14 @@ const TableList = ({
     <section className={styles["table-list"]}>
       <SectionHeader title={title} subTitle={subTitle} href={readMoreLink} />
       <Table headers={headers} rows={rows} />
-      {indexLimit && (
+      {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["table-list__pagination"]}`}
           index={index}
           indexLimit={indexLimit}
           onChange={onChange}
         />
-      )}
+      ) : null}
     </section>
   );
 };

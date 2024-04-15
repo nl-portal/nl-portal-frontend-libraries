@@ -7,9 +7,11 @@ export interface Paths {
   notifications: string;
   themeOverview: (type?: string) => string;
   themeDetails: (type?: string, id?: string | number) => string;
+  themeList: (type?: string) => string;
   account: string;
   editAccount: string;
   forms: string;
   form: (id?: string | number) => string;
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: ((...args: any[]) => string) | string | undefined;
 }

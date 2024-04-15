@@ -1,13 +1,12 @@
 @import "../styles/mixins";
 
 .back-link {
-  margin-bottom: var(--nlportal-space-block-3xl, 2.5rem);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  margin-block-end: var(--nlportal-space-block-sm, 0.875rem);
 
-  @media (max-width: 479px) {
+  @media (width <= 479px) {
     display: none;
-  }
-
-  @include breakpoint(tablet) {
-    margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
   }
 }

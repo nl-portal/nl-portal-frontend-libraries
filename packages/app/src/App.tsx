@@ -3,7 +3,7 @@ import "@nl-portal/nl-portal-user-interface/style.css";
 import "./styles/nl-portal-design-tokens.css";
 import { KeycloakWrapper } from "@nl-portal/nl-portal-authentication";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
-import { ApiWrapper } from "@nl-portal/nl-portal-api";
+import { ApiProvider } from "@nl-portal/nl-portal-api";
 import { Layout } from "@nl-portal/nl-portal-user-interface";
 import { CUSTOM_MESSAGES } from "./i18n/custom-messages/custom-messages";
 import HeaderLogo from "./assets/header-logo.svg";
@@ -14,6 +14,12 @@ import { config } from "./constants/config";
 import React from "react";
 import { menuItems } from "./constants/menu-items";
 import { paths } from "./constants/paths";
+
+const authenticationMethods = {
+  person: ["digid", "machtigen"],
+  company: ["eherkenning", "bewindvoering"],
+  proxy: ["machtigen", "bewindvoering"],
+};
 
 const App = () => {
   if (!config.KEYCLOAK_CLIENT_ID) {
@@ -53,10 +59,14 @@ const App = () => {
         realm={config.KEYCLOAK_REALM}
         url={config.KEYCLOAK_URL}
         redirectUri={config.KEYCLOAK_REDIRECT_URI}
+        authenticationMethods={authenticationMethods}
       >
         {/* TODO: Moved StrictMode, because of Keycloak - React 18: https://github.com/react-keycloak/react-keycloak/issues/182 */}
         <React.StrictMode>
-          <ApiWrapper graphqlUri={config.GRAPHQL_URI} restUri={config.REST_URI}>
+          <ApiProvider
+            graphqlUri={config.GRAPHQL_URI}
+            restUri={config.REST_URI}
+          >
             <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
               <Layout
                 navigationItems={menuItems}
@@ -67,7 +77,7 @@ const App = () => {
                 footer={footerData}
               />
             </LocalizationProvider>
-          </ApiWrapper>
+          </ApiProvider>
         </React.StrictMode>
       </KeycloakWrapper>
     </div>

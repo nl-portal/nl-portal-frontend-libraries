@@ -21,6 +21,47 @@ export type Scalars = {
   UUID: { input: any; output: any; }
 };
 
+export type Adres = {
+  __typename?: 'Adres';
+  huisnummer: Scalars['Int']['output'];
+  indAfgeschermd: Scalars['String']['output'];
+  land: Scalars['String']['output'];
+  plaats: Scalars['String']['output'];
+  postbusnummer: Scalars['Int']['output'];
+  postcode: Scalars['String']['output'];
+  straatnaam: Scalars['String']['output'];
+  type: Scalars['String']['output'];
+  volledigAdres: Scalars['String']['output'];
+};
+
+export type CaseCreated = {
+  __typename?: 'CaseCreated';
+  caseId: Scalars['UUID']['output'];
+};
+
+export type CaseDefinition = {
+  __typename?: 'CaseDefinition';
+  id: Scalars['String']['output'];
+  schema: Scalars['JSON']['output'];
+  statusDefinition: Array<Scalars['String']['output']>;
+};
+
+export type CaseInstance = {
+  __typename?: 'CaseInstance';
+  caseDefinitionId: Scalars['String']['output'];
+  createdOn: Scalars['String']['output'];
+  externalId?: Maybe<Scalars['String']['output']>;
+  id: Scalars['UUID']['output'];
+  status?: Maybe<Status>;
+  statusHistory?: Maybe<Array<HistoricStatus>>;
+  submission: Scalars['JSON']['output'];
+  userId: Scalars['String']['output'];
+};
+
+export type CaseInstanceOrderingInput = {
+  createdOn: Sort;
+};
+
 export type ContactMoment = {
   __typename?: 'ContactMoment';
   bronorganisatie?: Maybe<Scalars['String']['output']>;
@@ -41,7 +82,39 @@ export type ContactMomentPage = {
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
   totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type Contract = {
+  __typename?: 'Contract';
+  beginDatum: Scalars['String']['output'];
+  eindDatum?: Maybe<Scalars['String']['output']>;
+  id: Scalars['Int']['output'];
+  klanten: Array<NeaKlant>;
+  taken: Array<Taak>;
+  zakelijkRechten: Array<ZakelijkRecht>;
+  zaken: Array<Zaak>;
+};
+
+export type ContractBeperkt = {
+  __typename?: 'ContractBeperkt';
+  adressen: Array<NeaAdres>;
+  id: Scalars['Int']['output'];
+};
+
+export type ContractBeperktPage = {
+  __typename?: 'ContractBeperktPage';
+  content: Array<ContractBeperkt>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
 };
 
 export type Document = {
@@ -61,6 +134,19 @@ export type DocumentContent = {
   content: Scalars['String']['output'];
 };
 
+export type Eigenaar = {
+  __typename?: 'Eigenaar';
+  rechtsvorm: Scalars['String']['output'];
+  rsin?: Maybe<Scalars['String']['output']>;
+  uitgebreideRechtsvorm: Scalars['String']['output'];
+};
+
+export type Embedded = {
+  __typename?: 'Embedded';
+  eigenaar: Eigenaar;
+  hoofdvestiging: Hoofdvestiging;
+};
+
 export type Form = {
   __typename?: 'Form';
   name: Scalars['String']['output'];
@@ -78,6 +164,36 @@ export type Gemachtigde = {
   persoon?: Maybe<PersoonNaam>;
 };
 
+export type HandelsNaam = {
+  __typename?: 'HandelsNaam';
+  naam: Scalars['String']['output'];
+  volgorde: Scalars['Int']['output'];
+};
+
+export type HistoricStatus = {
+  __typename?: 'HistoricStatus';
+  createdOn: Scalars['String']['output'];
+  status: Status;
+};
+
+export type Hoofdvestiging = {
+  __typename?: 'Hoofdvestiging';
+  adressen?: Maybe<Array<Adres>>;
+  eersteHandelsnaam: Scalars['String']['output'];
+  indCommercieleVestiging: Scalars['String']['output'];
+  indHoofdvestiging: Scalars['String']['output'];
+  kvkNummer: Scalars['String']['output'];
+  totaalWerkzamePersonen: Scalars['Int']['output'];
+  vestigingsnummer: Scalars['String']['output'];
+};
+
+export type KadastraalObject = {
+  __typename?: 'KadastraalObject';
+  aanduiding: Scalars['String']['output'];
+  adressen: Array<NeaAdres>;
+  identificatie: Scalars['String']['output'];
+};
+
 export type Klant = {
   __typename?: 'Klant';
   emailadres?: Maybe<Scalars['String']['output']>;
@@ -91,17 +207,40 @@ export type KlantUpdateInput = {
 
 export type MaatschappelijkeActiviteit = {
   __typename?: 'MaatschappelijkeActiviteit';
+  embedded?: Maybe<Embedded>;
+  formeleRegistratiedatum?: Maybe<Scalars['String']['output']>;
+  handelsnamen?: Maybe<Array<HandelsNaam>>;
+  indNonMailing?: Maybe<Scalars['String']['output']>;
+  kvkNummer: Scalars['String']['output'];
+  materieleRegistratie?: Maybe<MaterieleRegistratie>;
   naam: Scalars['String']['output'];
+  sbiActiviteiten?: Maybe<Array<SbiActiviteit>>;
+  statutaireNaam?: Maybe<Scalars['String']['output']>;
+  totaalWerkzamePersonen?: Maybe<Scalars['Int']['output']>;
+};
+
+export type MaterieleRegistratie = {
+  __typename?: 'MaterieleRegistratie';
+  datumAanvang: Scalars['String']['output'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Convert submission to json return resulting data */
+  processSubmission: CaseCreated;
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
   submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
+};
+
+
+export type MutationProcessSubmissionArgs = {
+  caseDefinitionId: Scalars['String']['input'];
+  initialStatus?: InputMaybe<Scalars['String']['input']>;
+  submission: Scalars['JSON']['input'];
 };
 
 
@@ -119,6 +258,61 @@ export type MutationSubmitTaskArgs = {
 
 export type MutationUpdateBurgerProfielArgs = {
   klant: KlantUpdateInput;
+};
+
+export type NeaAdres = {
+  __typename?: 'NeaAdres';
+  adresBuitenland?: Maybe<NeaAdresBuitenland>;
+  adresseerbaarObjectId?: Maybe<Scalars['String']['output']>;
+  huisletter?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['Int']['output']>;
+  huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
+  land?: Maybe<Scalars['String']['output']>;
+  nummeraanduidingId?: Maybe<Scalars['String']['output']>;
+  postbusnummer?: Maybe<Scalars['String']['output']>;
+  postcode?: Maybe<Scalars['String']['output']>;
+  straatnaam?: Maybe<Scalars['String']['output']>;
+  woonplaats?: Maybe<Scalars['String']['output']>;
+};
+
+export type NeaAdresBuitenland = {
+  __typename?: 'NeaAdresBuitenland';
+  land?: Maybe<Scalars['String']['output']>;
+  postcodeWoonplaats?: Maybe<Scalars['String']['output']>;
+  regio?: Maybe<Scalars['String']['output']>;
+  straatnaamHuisnummer?: Maybe<Scalars['String']['output']>;
+};
+
+export type NeaKlant = {
+  __typename?: 'NeaKlant';
+  organisatie?: Maybe<Organisatie>;
+  persoon?: Maybe<NeaPersoon>;
+};
+
+export type NeaPersoon = {
+  __typename?: 'NeaPersoon';
+  achterNaam: Scalars['String']['output'];
+  correspondentieAdres?: Maybe<NeaAdres>;
+  emailAdres?: Maybe<Scalars['String']['output']>;
+  klantnummer: Scalars['Int']['output'];
+  subjectId: Scalars['Int']['output'];
+  telefoonNummer?: Maybe<Scalars['String']['output']>;
+  verblijfAdres: NeaAdres;
+  volledigeNaam: Scalars['String']['output'];
+  voorNaam?: Maybe<Scalars['String']['output']>;
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voorvoegselAchternaam?: Maybe<Scalars['String']['output']>;
+};
+
+export type Organisatie = {
+  __typename?: 'Organisatie';
+  bezoekAdres: NeaAdres;
+  correspondentieAdres?: Maybe<NeaAdres>;
+  klantnummer: Scalars['Int']['output'];
+  kvkNummer?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  rsin?: Maybe<Scalars['String']['output']>;
+  vestigingsnummer?: Maybe<Scalars['String']['output']>;
 };
 
 export type Persoon = {
@@ -183,6 +377,10 @@ export type PersoonVerblijfplaats = {
 
 export type Query = {
   __typename?: 'Query';
+  /** retrieves all available case definitions */
+  allCaseDefinitions: Array<CaseDefinition>;
+  /** retrieves all available case instances */
+  allCaseInstances: Array<CaseInstance>;
   /**
    * find all form definitions from repository
    * @deprecated This method is not used by the NL Portal frontend and is not being replaced.
@@ -194,8 +392,14 @@ export type Query = {
   getBewonersAantal?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
   getBurgerProfiel?: Maybe<Klant>;
+  /** retrieves single case instance from repository */
+  getCaseInstance?: Maybe<CaseInstance>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
+  /** Get erfpacht contract by UUID */
+  getErfpachtContract: Contract;
+  /** Gets all erfpacht contracten of user or rsin */
+  getErfpachtContracten: ContractBeperktPage;
   /**
    * find single form definition from repository or Objecten API
    * @deprecated Replaced by getFormDefinitionByName and getFormDefinitionByObjectenApiUrl, replace with getFormDefinitionByName or getFormDefinitionByObjectenApiUrl
@@ -227,13 +431,35 @@ export type Query = {
   /** Gets a zaak by id */
   getZaak: Zaak;
   /** Gets all zaken for the user */
-  getZaken: Array<Zaak>;
+  getZaken: ZaakPage;
+};
+
+
+export type QueryAllCaseInstancesArgs = {
+  orderBy: CaseInstanceOrderingInput;
+};
+
+
+export type QueryGetCaseInstanceArgs = {
+  id: Scalars['UUID']['input'];
 };
 
 
 export type QueryGetDocumentContentArgs = {
   documentApi: Scalars['String']['input'];
   id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetErfpachtContractArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type QueryGetErfpachtContractenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  rsin?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -288,6 +514,25 @@ export type QueryGetZaakArgs = {
 
 export type QueryGetZakenArgs = {
   page?: InputMaybe<Scalars['Int']['input']>;
+  zaakTypeUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SbiActiviteit = {
+  __typename?: 'SbiActiviteit';
+  indHoofdactiviteit: Scalars['String']['output'];
+  sbiCode: Scalars['String']['output'];
+  sbiOmschrijving: Scalars['String']['output'];
+};
+
+export enum Sort {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
+export type Status = {
+  __typename?: 'Status';
+  createdOn: Scalars['String']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type StatusType = {
@@ -338,7 +583,6 @@ export type TaakPage = {
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  results: Array<Taak>;
   size: Scalars['Int']['output'];
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
@@ -373,6 +617,18 @@ export type ZaakDetails = {
   zaak: Scalars['String']['output'];
 };
 
+export type ZaakPage = {
+  __typename?: 'ZaakPage';
+  content: Array<Zaak>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
 export type ZaakStatus = {
   __typename?: 'ZaakStatus';
   datumStatusGezet: Scalars['String']['output'];
@@ -389,6 +645,13 @@ export type ZaakType = {
   __typename?: 'ZaakType';
   identificatie: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
+};
+
+export type ZakelijkRecht = {
+  __typename?: 'ZakelijkRecht';
+  id: Scalars['Int']['output'];
+  kadastraalObjecten: Array<KadastraalObject>;
+  naam: Scalars['String']['output'];
 };
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
@@ -429,6 +692,14 @@ export type GetDocumentenQueryVariables = Exact<{
 
 
 export type GetDocumentenQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', zaaktype: { __typename?: 'ZaakType', identificatie: string }, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }> } };
+
+export type GetErfpachtContractenQueryVariables = Exact<{
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetErfpachtContractenQuery = { __typename?: 'Query', getErfpachtContracten: { __typename?: 'ContractBeperktPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'ContractBeperkt', id: number, adressen: Array<{ __typename?: 'NeaAdres', straatnaam?: string | null, huisnummer?: number | null, woonplaats?: string | null, nummeraanduidingId?: string | null }> }> } };
 
 export type GetFormDefinitionByIdQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -492,10 +763,12 @@ export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename
 
 export type GetTakenQueryVariables = Exact<{
   zaakId?: InputMaybe<Scalars['UUID']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -504,10 +777,12 @@ export type GetZaakQueryVariables = Exact<{
 
 export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: string | null }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
 
-export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetZakenQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']['input']>;
+}>;
 
 
-export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> };
+export type GetZakenQuery = { __typename?: 'Query', getZaken: { __typename?: 'ZaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> } };
 
 export const FormulierFieldsFragmentDoc = gql`
     fragment FormulierFields on TaakFormulier {
@@ -740,7 +1015,7 @@ export const GetDocumentenDocument = gql`
  *   },
  * });
  */
-export function useGetDocumentenQuery(baseOptions: Apollo.QueryHookOptions<GetDocumentenQuery, GetDocumentenQueryVariables>) {
+export function useGetDocumentenQuery(baseOptions: Apollo.QueryHookOptions<GetDocumentenQuery, GetDocumentenQueryVariables> & ({ variables: GetDocumentenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetDocumentenQuery, GetDocumentenQueryVariables>(GetDocumentenDocument, options);
       }
@@ -756,6 +1031,57 @@ export type GetDocumentenQueryHookResult = ReturnType<typeof useGetDocumentenQue
 export type GetDocumentenLazyQueryHookResult = ReturnType<typeof useGetDocumentenLazyQuery>;
 export type GetDocumentenSuspenseQueryHookResult = ReturnType<typeof useGetDocumentenSuspenseQuery>;
 export type GetDocumentenQueryResult = Apollo.QueryResult<GetDocumentenQuery, GetDocumentenQueryVariables>;
+export const GetErfpachtContractenDocument = gql`
+    query GetErfpachtContracten($pageNumber: Int, $pageSize: Int) {
+  getErfpachtContracten(pageNumber: $pageNumber, pageSize: $pageSize) {
+    content {
+      id
+      adressen {
+        straatnaam
+        huisnummer
+        woonplaats
+        nummeraanduidingId
+      }
+    }
+    totalElements
+    totalPages
+  }
+}
+    `;
+
+/**
+ * __useGetErfpachtContractenQuery__
+ *
+ * To run a query within a React component, call `useGetErfpachtContractenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetErfpachtContractenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetErfpachtContractenQuery({
+ *   variables: {
+ *      pageNumber: // value for 'pageNumber'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useGetErfpachtContractenQuery(baseOptions?: Apollo.QueryHookOptions<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>(GetErfpachtContractenDocument, options);
+      }
+export function useGetErfpachtContractenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>(GetErfpachtContractenDocument, options);
+        }
+export function useGetErfpachtContractenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>(GetErfpachtContractenDocument, options);
+        }
+export type GetErfpachtContractenQueryHookResult = ReturnType<typeof useGetErfpachtContractenQuery>;
+export type GetErfpachtContractenLazyQueryHookResult = ReturnType<typeof useGetErfpachtContractenLazyQuery>;
+export type GetErfpachtContractenSuspenseQueryHookResult = ReturnType<typeof useGetErfpachtContractenSuspenseQuery>;
+export type GetErfpachtContractenQueryResult = Apollo.QueryResult<GetErfpachtContractenQuery, GetErfpachtContractenQueryVariables>;
 export const GetFormDefinitionByIdDocument = gql`
     query GetFormDefinitionById($id: String!) {
   getFormDefinitionById(id: $id) {
@@ -780,7 +1106,7 @@ export const GetFormDefinitionByIdDocument = gql`
  *   },
  * });
  */
-export function useGetFormDefinitionByIdQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>) {
+export function useGetFormDefinitionByIdQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables> & ({ variables: GetFormDefinitionByIdQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>(GetFormDefinitionByIdDocument, options);
       }
@@ -820,7 +1146,7 @@ export const GetFormDefinitionByObjectenApiUrlDocument = gql`
  *   },
  * });
  */
-export function useGetFormDefinitionByObjectenApiUrlQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>) {
+export function useGetFormDefinitionByObjectenApiUrlQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables> & ({ variables: GetFormDefinitionByObjectenApiUrlQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>(GetFormDefinitionByObjectenApiUrlDocument, options);
       }
@@ -860,7 +1186,7 @@ export const GetFormDefinitionByNameDocument = gql`
  *   },
  * });
  */
-export function useGetFormDefinitionByNameQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>) {
+export function useGetFormDefinitionByNameQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables> & ({ variables: GetFormDefinitionByNameQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>(GetFormDefinitionByNameDocument, options);
       }
@@ -1035,7 +1361,7 @@ export const GetObjectContactMomentenDocument = gql`
  *   },
  * });
  */
-export function useGetObjectContactMomentenQuery(baseOptions: Apollo.QueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
+export function useGetObjectContactMomentenQuery(baseOptions: Apollo.QueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables> & ({ variables: GetObjectContactMomentenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
       }
@@ -1197,7 +1523,7 @@ export const GetTaakByIdDocument = gql`
  *   },
  * });
  */
-export function useGetTaakByIdQuery(baseOptions: Apollo.QueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
+export function useGetTaakByIdQuery(baseOptions: Apollo.QueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables> & ({ variables: GetTaakByIdQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
       }
@@ -1214,8 +1540,8 @@ export type GetTaakByIdLazyQueryHookResult = ReturnType<typeof useGetTaakByIdLaz
 export type GetTaakByIdSuspenseQueryHookResult = ReturnType<typeof useGetTaakByIdSuspenseQuery>;
 export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaakByIdQueryVariables>;
 export const GetTakenDocument = gql`
-    query GetTaken($zaakId: UUID) {
-  getTaken(zaakUUID: $zaakId) {
+    query GetTaken($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
+  getTaken(zaakUUID: $zaakId, pageNumber: $pageNumber, pageSize: $pageSize) {
     content {
       id
       objectId
@@ -1227,6 +1553,8 @@ export const GetTakenDocument = gql`
       date
       verloopdatum
     }
+    totalElements
+    totalPages
   }
 }
     ${FormulierFieldsFragmentDoc}`;
@@ -1244,6 +1572,8 @@ export const GetTakenDocument = gql`
  * const { data, loading, error } = useGetTakenQuery({
  *   variables: {
  *      zaakId: // value for 'zaakId'
+ *      pageNumber: // value for 'pageNumber'
+ *      pageSize: // value for 'pageSize'
  *   },
  * });
  */
@@ -1326,7 +1656,7 @@ export const GetZaakDocument = gql`
  *   },
  * });
  */
-export function useGetZaakQuery(baseOptions: Apollo.QueryHookOptions<GetZaakQuery, GetZaakQueryVariables>) {
+export function useGetZaakQuery(baseOptions: Apollo.QueryHookOptions<GetZaakQuery, GetZaakQueryVariables> & ({ variables: GetZaakQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetZaakQuery, GetZaakQueryVariables>(GetZaakDocument, options);
       }
@@ -1343,20 +1673,24 @@ export type GetZaakLazyQueryHookResult = ReturnType<typeof useGetZaakLazyQuery>;
 export type GetZaakSuspenseQueryHookResult = ReturnType<typeof useGetZaakSuspenseQuery>;
 export type GetZaakQueryResult = Apollo.QueryResult<GetZaakQuery, GetZaakQueryVariables>;
 export const GetZakenDocument = gql`
-    query GetZaken {
-  getZaken {
-    uuid
-    omschrijving
-    identificatie
-    zaaktype {
+    query GetZaken($page: Int) {
+  getZaken(page: $page) {
+    content {
+      uuid
+      omschrijving
       identificatie
-    }
-    startdatum
-    status {
-      statustype {
-        isEindstatus
+      zaaktype {
+        identificatie
+      }
+      startdatum
+      status {
+        statustype {
+          isEindstatus
+        }
       }
     }
+    totalElements
+    totalPages
   }
 }
     `;
@@ -1373,6 +1707,7 @@ export const GetZakenDocument = gql`
  * @example
  * const { data, loading, error } = useGetZakenQuery({
  *   variables: {
+ *      page: // value for 'page'
  *   },
  * });
  */

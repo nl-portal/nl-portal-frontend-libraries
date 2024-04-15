@@ -9,12 +9,13 @@ import {
   TaskPage,
   FormsPage,
   FormPage,
-  ThemeOverviewPage,
   ThemeDetailsPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "../constants/paths";
 import { config } from "../constants/config";
 import { Navigate } from "react-router-dom";
+import ErfpachtOverviewPage from "../pages/ErfpachtOverviewPage";
+import ErfpachtListPage from "../pages/ErfpachtListPage";
 import { forms } from "../constants/forms";
 
 export const routes = [
@@ -61,7 +62,11 @@ export const routes = [
     children: [
       {
         index: true,
-        element: <ThemeOverviewPage type="erfpacht" />,
+        element: <ErfpachtOverviewPage />,
+      },
+      {
+        path: paths.themeList("erfpacht"),
+        element: <ErfpachtListPage />,
       },
       {
         path: paths.themeDetails("erfpacht"),

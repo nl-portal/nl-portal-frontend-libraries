@@ -20,42 +20,47 @@ export const useUserInfo = () => {
     loadGemachtigde,
     { loading: gemachtigdeLoading, data: gemachtigdeData },
   ] = useGetGemachtigdeLazyQuery();
-  const { decodedToken } = useContext(KeycloakContext);
+  const { decodedToken, authenticationMethods } = useContext(KeycloakContext);
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
 
   useEffect(() => {
-    if (decodedToken) {
-      if (decodedToken.aanvrager?.bsn) {
+    if (decodedToken && authenticationMethods) {
+      const authenticationMethod = decodedToken.middel || "";
+      if (authenticationMethods.person?.includes(authenticationMethod)) {
         setIsPerson(true);
         loadPersoon();
-      } else if (decodedToken.aanvrager?.kvk) {
+      } else if (
+        authenticationMethods.company?.includes(authenticationMethod)
+      ) {
         setIsPerson(false);
         loadBedrijf();
       }
-      if (decodedToken.gemachtigde) {
+      if (authenticationMethods.proxy?.includes(authenticationMethod)) {
         setisVolmachtLogin(true);
         loadGemachtigde();
       }
     }
-  }, [decodedToken]);
+  }, [decodedToken]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const name = getNameString(persoonData?.getPersoon?.naam);
-    if (decodedToken?.gemachtigde) {
+    const authenticationMethod = decodedToken?.middel || "";
+    if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
       setVolmachtgever(name);
     } else {
       setUserName(name);
     }
-  }, [persoonData]);
+  }, [persoonData, decodedToken?.middel, authenticationMethods?.proxy]);
 
   useEffect(() => {
     const name = bedrijfData?.getBedrijf?.naam || "";
-    if (decodedToken?.gemachtigde) {
+    const authenticationMethod = decodedToken?.middel || "";
+    if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
       setVolmachtgever(name);
     } else {
       setUserName(name);
     }
-  }, [bedrijfData]);
+  }, [bedrijfData, decodedToken?.middel, authenticationMethods?.proxy]);
 
   useEffect(() => {
     if (gemachtigdeData?.getGemachtigde?.persoon) {

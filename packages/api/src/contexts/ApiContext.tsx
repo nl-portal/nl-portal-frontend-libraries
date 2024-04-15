@@ -1,4 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import {
   ApolloClient,
   ApolloLink,
@@ -10,31 +16,39 @@ import {
   KeycloakContext,
   formatUrlTrailingSlash,
 } from "@nl-portal/nl-portal-authentication";
-import ApiContext from "../contexts/ApiContext";
 import { TOKEN_KEY, TOKEN_OBJECT } from "../constants/token";
+import React from "react";
 
-interface ApiWrapperProps {
+interface ContextProps {
+  restUri: string;
+}
+
+const ApiContext = createContext({} as ContextProps);
+
+interface Props {
   children: React.ReactNode;
   graphqlUri: string;
   restUri: string;
 }
 
-const ApiWrapper = ({ children, graphqlUri, restUri }: ApiWrapperProps) => {
+export const ApiProvider = ({ children, graphqlUri, restUri }: Props) => {
   const LOCAL_STORAGE_REST_URI_KEY = "REST_URI";
   const formattedGraphqlUri = formatUrlTrailingSlash(graphqlUri, false);
   const formattedRestUri = formatUrlTrailingSlash(restUri, false);
   const { keycloakToken } = useContext(KeycloakContext);
-  const httpLink = new HttpLink({ uri: formattedGraphqlUri });
 
-  const getLink = (authToken: string) =>
-    new ApolloLink((operation, forward) => {
-      operation.setContext({
-        headers: {
-          authorization: `Bearer ${authToken}`,
-        },
-      });
-      return forward(operation);
-    }).concat(httpLink);
+  const getLink = useCallback(
+    (keycloakToken: string) =>
+      new ApolloLink((operation, forward) => {
+        operation.setContext({
+          headers: {
+            authorization: `Bearer ${keycloakToken}`,
+          },
+        });
+        return forward(operation);
+      }).concat(new HttpLink({ uri: formattedGraphqlUri })),
+    [formattedGraphqlUri],
+  );
 
   const [client] = useState(
     () =>
@@ -48,15 +62,17 @@ const ApiWrapper = ({ children, graphqlUri, restUri }: ApiWrapperProps) => {
   useEffect(() => {
     client.setLink(getLink(keycloakToken));
     TOKEN_OBJECT[TOKEN_KEY] = keycloakToken;
-  }, [keycloakToken]);
+  }, [keycloakToken, client, getLink]);
 
   sessionStorage.setItem(LOCAL_STORAGE_REST_URI_KEY, formattedRestUri);
 
-  return keycloakToken ? (
+  if (!keycloakToken) null;
+
+  return (
     <ApiContext.Provider value={{ restUri: formattedRestUri }}>
       <ApolloProvider client={client}>{children}</ApolloProvider>
     </ApiContext.Provider>
-  ) : null;
+  );
 };
 
-export default ApiWrapper;
+export default ApiContext;

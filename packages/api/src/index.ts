@@ -1,5 +1,4 @@
-export { default as ApiWrapper } from "./components/ApiWrapper";
-export { default as ApiContext } from "./contexts/ApiContext";
+export { default as ApiContext, ApiProvider } from "./contexts/ApiContext";
 export * from "./constants/token";
 export * from "./generated/Graphql";
 export * from "./queries/get-taken";
@@ -12,3 +11,4 @@ export * from "./queries/get-zaak";
 export * from "./queries/get-bewoner-aantal.ts";
 export * from "./queries/get-forms.ts";
 export * from "./queries/get-form.ts";
+export * from "./queries/get-erfpacht-contracten";

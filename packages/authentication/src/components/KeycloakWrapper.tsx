@@ -13,6 +13,12 @@ import { formatUrlTrailingSlash } from "../utils/format-url-trailing-slash";
 import KeycloakContext from "../contexts/KeycloakContext";
 import { DecodedToken } from "../interfaces/decoded-token";
 
+export type AuthenticationMethods = {
+  person?: string[];
+  company?: string[];
+  proxy?: string[];
+};
+
 interface KeycloakWrapperProps extends KeycloakConfig {
   children: React.ReactNode;
   redirectUri: string;
@@ -21,6 +27,7 @@ interface KeycloakWrapperProps extends KeycloakConfig {
   idleTimeoutMinutes?: number;
   minValiditySeconds?: number;
   onLoad?: KeycloakOnLoad;
+  authenticationMethods?: AuthenticationMethods;
 }
 
 interface IdleTimerProps {
@@ -74,7 +81,7 @@ const IdleTimer = ({ idleTimeoutMinutes, onTimerReset }: IdleTimerProps) => {
         });
       }
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return null;
 };
@@ -166,6 +173,7 @@ const KeycloakWrapper: FC<KeycloakWrapperProps> = (props) => {
         setKeycloakToken,
         decodedToken,
         setDecodedToken,
+        authenticationMethods: props.authenticationMethods,
       }}
     >
       <KeycloakProvider {...props} />

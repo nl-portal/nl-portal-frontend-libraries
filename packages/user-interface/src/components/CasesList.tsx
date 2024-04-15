@@ -2,7 +2,7 @@ import { useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
-import { GetZakenQuery } from "@nl-portal/nl-portal-api";
+import { Zaak } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/components-react";
 import styles from "./CasesList.module.scss";
 import SectionHeader from "./SectionHeader";
@@ -15,15 +15,15 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   emptyTranslationId?: string;
-  showTitle?: boolean;
-  titleTranslationId?: string;
+  titleTranslationId?: string | false;
   readMoreAmount?: number;
   readMoreLink?: string;
   readMoreTranslationId?: string;
-  cases?: GetZakenQuery["getZaken"];
+  cases?: Zaak[];
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
+  listView?: boolean;
 }
 
 const CasesList = ({
@@ -31,7 +31,6 @@ const CasesList = ({
   error,
   errorTranslationId = "casesList.fetchError",
   emptyTranslationId = "casesList.empty",
-  showTitle = true,
   titleTranslationId = "casesList.title",
   readMoreAmount,
   readMoreLink,
@@ -40,16 +39,21 @@ const CasesList = ({
   index,
   indexLimit,
   onChange,
+  listView = Boolean(readMoreAmount && readMoreAmount > 8),
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const casesPath = readMoreLink || paths.cases;
-  const listView = Boolean(readMoreAmount && readMoreAmount > 8);
-  const title = showTitle
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
+
+  //TODO: remove Math.min once cases api offers pagination
   const subTitle = readMoreAmount
-    ? intl.formatMessage({ id: readMoreTranslationId }, { readMoreAmount })
+    ? intl.formatMessage(
+        { id: readMoreTranslationId },
+        { total: Math.min(100, readMoreAmount) },
+      )
     : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
@@ -94,14 +98,14 @@ const CasesList = ({
           <Case key={cs.uuid} cs={cs} listView={listView} />
         ))}
       </div>
-      {indexLimit && (
+      {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["cases-list__pagination"]}`}
           index={index}
           indexLimit={indexLimit}
           onChange={onChange}
         />
-      )}
+      ) : null}
     </section>
   );
 };
