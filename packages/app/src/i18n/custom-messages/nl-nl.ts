@@ -3,6 +3,7 @@ import { DEFAULT_LOCALES, Messages } from "@nl-portal/nl-portal-localization";
 export const NL_NL_MESSAGES: Messages = {
   [DEFAULT_LOCALES.DUTCH]: {
     "app.appName": "MijnDenHaag",
+    "pageTitles.sample": "Thema voorbeeld",
     "case.bezwaar-behandelen.title": "Bezwaarschrift",
     "case.bezwaar-behandelen.status.intake-afgerond": "Intake afgerond",
     "case.bezwaar-behandelen.status.indieningsvereisten-getoetst":
@@ -31,10 +32,10 @@ export const NL_NL_MESSAGES: Messages = {
     "footerLinks.accessibility": "Toegankelijkheidsverklaring",
     "footerLinks.dataProtection": "Verklaring inzake Gegevensbescherming",
     "footerLinks.proclaimer": "Proclaimer",
-    "theme.erfpacht.listTitle": "Erfpachtcontracten",
-    "theme.erfpacht.listAdres": "Adres",
-    "theme.erfpacht.listContractnummer": "Contractnummer",
-    "theme.erfpacht.listViewAll": "Bekijk alle erfpachtcontracten ({total})",
-    "theme.erfpacht.listPageHeader": "Erfpachtcontracten",
+    "theme.sample.listTitle": "Voorbeeldcontracten",
+    "theme.sample.listAdres": "Adres",
+    "theme.sample.listContractnummer": "Contractnummer",
+    "theme.sample.listViewAll": "Bekijk alle voorbeeldcontracten ({total})",
+    "theme.sample.listPageHeader": "Voorbeeldcontracten",
   },
 };

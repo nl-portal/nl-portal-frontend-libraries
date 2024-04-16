@@ -17,7 +17,6 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.forms": "Formulieren",
     "pageTitles.tasks": "Mijn Taken",
     "pageTitles.task": "Taak",
-    "pageTitles.erfpacht": "Erfpacht",
     "backlink.back": "Terug",
     "header.logout": "Uitloggen",
     "header.welcome": "Welkom",

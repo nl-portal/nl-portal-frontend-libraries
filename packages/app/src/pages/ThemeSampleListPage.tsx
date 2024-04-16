@@ -6,14 +6,14 @@ import {
   TableList,
 } from "@nl-portal/nl-portal-user-interface";
 
-const ErfpachtListPage = () => {
-  const type = "erfpacht";
+const ThemeSampleListPage = () => {
+  const type = "sample";
 
   return (
     <PageGrid>
       <div>
         <BackLink routePath={paths.themeOverview(type)} />
-        <PageHeader title="Erfpachtcontracten" />
+        <PageHeader title="Voorbeeldcontracten" />
       </div>
       <TableList
         titleTranslationId={null}
@@ -22,43 +22,43 @@ const ErfpachtListPage = () => {
           [
             {
               children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails("erfpacht", "123"),
+              href: paths.themeDetails("sample", "123"),
             },
             {
               children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails("erfpacht", "123"),
+              href: paths.themeDetails("sample", "123"),
             },
             {
               children: "78435785",
-              href: paths.themeDetails("erfpacht", "123"),
+              href: paths.themeDetails("sample", "123"),
             },
           ],
           [
             {
               children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails("erfpacht", "123"),
+              href: paths.themeDetails("sample", "123"),
             },
             {
               children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails("erfpacht", "123"),
+              href: paths.themeDetails("sample", "123"),
             },
             {
               children: "78435785",
-              href: paths.themeDetails("erfpacht", "123"),
+              href: paths.themeDetails("sample", "123"),
             },
           ],
           [
             {
               children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails("erfpacht", "123"),
+              href: paths.themeDetails("sample", "123"),
             },
             {
               children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails("erfpacht", "123"),
+              href: paths.themeDetails("sample", "123"),
             },
             {
               children: "78435785",
-              href: paths.themeDetails("erfpacht", "123"),
+              href: paths.themeDetails("sample", "123"),
             },
           ],
         ]}
@@ -68,4 +68,4 @@ const ErfpachtListPage = () => {
   );
 };
 
-export default ErfpachtListPage;
+export default ThemeSampleListPage;
