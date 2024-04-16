@@ -47,7 +47,7 @@ const ThemeOverviewPage = ({
           loading={loading}
           error={Boolean(taskError)}
           tasks={tasks}
-          readMoreAmount={
+          totalAmount={
             tasksData?.getTaken.totalElements &&
             tasksData?.getTaken.totalElements > showTasksLength
               ? tasksData?.getTaken.totalElements
@@ -63,7 +63,7 @@ const ThemeOverviewPage = ({
           cases={cases
             ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, showCasesLength)}
-          readMoreAmount={
+          totalAmount={
             casesData?.getZaken.totalElements &&
             casesData?.getZaken.totalElements > showCasesLength
               ? casesData?.getZaken.totalElements

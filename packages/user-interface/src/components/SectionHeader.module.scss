@@ -9,4 +9,14 @@
   &--small {
     margin-block-end: var(--nlportal-space-block-lg, 1rem);
   }
+
+  &__link {
+    --denhaag-link-text-decoration: none;
+
+    span {
+      display: flex;
+      justify-content: center;
+      gap: var(--denhaag-space-inline-xs, 0.25rem);
+    }
+  }
 }

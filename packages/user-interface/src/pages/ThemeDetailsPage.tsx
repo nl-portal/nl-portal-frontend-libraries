@@ -52,7 +52,7 @@ const ThemeDetailsPage = ({
         <TasksList
           loading={loading}
           error={Boolean(tasksError)}
-          titleTranslationId={false}
+          titleTranslationId={null}
           tasks={tasks}
         />
       )}
@@ -72,7 +72,7 @@ const ThemeDetailsPage = ({
           cases={cases
             ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, showCasesLength)}
-          readMoreAmount={
+          totalAmount={
             casesData?.getZaken.totalElements &&
             casesData?.getZaken.totalElements > showCasesLength
               ? casesData?.getZaken.totalElements
@@ -89,7 +89,7 @@ const ThemeDetailsPage = ({
         <TasksList
           loading={loading}
           error={Boolean(tasksError)}
-          titleTranslationId={false}
+          titleTranslationId={null}
           tasks={tasks}
         />
       )}

@@ -9,11 +9,11 @@ import {
   TaskPage,
   ThemeDetailsPage,
 } from "@nl-portal/nl-portal-user-interface";
-import { paths } from "../constants/paths";
-import { config } from "../constants/config";
+import { paths } from "./paths";
+import { config } from "./config";
 import { Navigate } from "react-router-dom";
-import ErfpachtOverviewPage from "../pages/ErfpachtOverviewPage";
-import ErfpachtListPage from "../pages/ErfpachtListPage";
+import ThemeSampleOverviewPage from "../pages/ThemeSampleOverviewPage";
+import ThemeSampleListPage from "../pages/ThemeSampleListPage";
 
 export const routes = [
   {
@@ -55,19 +55,19 @@ export const routes = [
     element: <NotificationsPage />,
   },
   {
-    path: paths.themeOverview("erfpacht"),
+    path: paths.themeOverview("sample"),
     children: [
       {
         index: true,
-        element: <ErfpachtOverviewPage />,
+        element: <ThemeSampleOverviewPage />,
       },
       {
-        path: paths.themeList("erfpacht"),
-        element: <ErfpachtListPage />,
+        path: paths.themeList("sample"),
+        element: <ThemeSampleListPage />,
       },
       {
-        path: paths.themeDetails("erfpacht"),
-        element: <ThemeDetailsPage type="erfpacht" />,
+        path: paths.themeDetails("sample"),
+        element: <ThemeDetailsPage type="sample" />,
       },
     ],
   },

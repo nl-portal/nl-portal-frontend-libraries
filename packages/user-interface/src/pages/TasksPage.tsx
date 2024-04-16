@@ -21,7 +21,7 @@ const TasksPage = () => {
       <TasksList
         loading={loading}
         error={Boolean(error)}
-        titleTranslationId={false}
+        titleTranslationId={null}
         tasks={tasks}
         onChange={onPageChange}
         indexLimit={data?.getTaken.totalPages && data?.getTaken.totalPages - 1}

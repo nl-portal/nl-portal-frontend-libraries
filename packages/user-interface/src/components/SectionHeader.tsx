@@ -3,6 +3,7 @@ import styles from "./SectionHeader.module.scss";
 import PortalLink from "./PortalLink";
 import Link from "@gemeente-denhaag/link";
 import classnames from "classnames";
+import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 
 interface Props {
   title?: string;
@@ -22,7 +23,12 @@ const SectionHeader = ({ title, small, href, subTitle }: Props) => {
     >
       {small ? <Heading4>{title}</Heading4> : <Heading3>{title}</Heading3>}
       {href && subTitle && (
-        <Link href={href} Link={PortalLink}>
+        <Link
+          className={styles["section-header__link"]}
+          href={href}
+          Link={PortalLink}
+          icon={<ArrowRightIcon />}
+        >
           {subTitle}
         </Link>
       )}

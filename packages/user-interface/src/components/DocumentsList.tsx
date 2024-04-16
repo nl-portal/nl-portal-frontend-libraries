@@ -12,7 +12,7 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   emptyTranslationId?: string;
-  titleTranslationId?: string | false;
+  titleTranslationId?: string | null;
   documents?: Array<PortalDocument>;
 }
 

@@ -74,7 +74,7 @@ const OverviewPage = ({
           loading={loading}
           error={Boolean(tasksError)}
           tasks={tasks}
-          readMoreAmount={
+          totalAmount={
             tasksData?.getTaken.totalElements &&
             tasksData?.getTaken.totalElements > tasksPreviewLength
               ? tasksData?.getTaken.totalElements
@@ -90,7 +90,7 @@ const OverviewPage = ({
           cases={cases
             ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, casesPreviewLength)}
-          readMoreAmount={
+          totalAmount={
             casesData?.getZaken.totalElements &&
             casesData?.getZaken.totalElements > casesPreviewLength
               ? casesData?.getZaken.totalElements
