@@ -72,7 +72,7 @@ const ThemeDetailsPage = ({
           cases={cases
             ?.filter((c) => !c.status?.statustype.isEindstatus)
             .slice(0, showCasesLength)}
-          readMoreAmount={
+          totalAmount={
             casesData?.getZaken.totalElements &&
             casesData?.getZaken.totalElements > showCasesLength
               ? casesData?.getZaken.totalElements

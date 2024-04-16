@@ -16,9 +16,9 @@ interface Props {
   errorTranslationId?: string;
   emptyTranslationId?: string;
   titleTranslationId?: string | null;
-  readMoreAmount?: number;
   readMoreLink?: string;
-  readMoreTranslationId?: string;
+  readMoreTranslationId?: string | null;
+  totalAmount?: number;
   cases?: Zaak[];
   index?: number;
   indexLimit?: number;
@@ -32,14 +32,14 @@ const CasesList = ({
   errorTranslationId = "casesList.fetchError",
   emptyTranslationId = "casesList.empty",
   titleTranslationId = "casesList.title",
-  readMoreAmount,
   readMoreLink,
   readMoreTranslationId = "casesList.viewAll",
+  totalAmount,
   cases,
   index,
   indexLimit,
   onChange,
-  listView = Boolean(readMoreAmount && readMoreAmount > 8),
+  listView = Boolean(totalAmount && totalAmount > 8),
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
@@ -49,12 +49,13 @@ const CasesList = ({
     : undefined;
 
   //TODO: remove Math.min once cases api offers pagination
-  const subTitle = readMoreAmount
-    ? intl.formatMessage(
-        { id: readMoreTranslationId },
-        { total: Math.min(100, readMoreAmount) },
-      )
-    : undefined;
+  const subTitle =
+    totalAmount && readMoreTranslationId
+      ? intl.formatMessage(
+          { id: readMoreTranslationId },
+          { total: Math.min(100, totalAmount) },
+        )
+      : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
@@ -85,6 +86,8 @@ const CasesList = ({
         <Paragraph>{emptyMessage}</Paragraph>
       </section>
     );
+
+  console.log(title, subTitle, casesPath);
 
   return (
     <section className={styles["cases-list"]}>

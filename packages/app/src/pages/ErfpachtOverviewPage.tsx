@@ -15,7 +15,7 @@ const ErfpachtOverviewPage = () => {
         titleTranslationId={`theme.${type}.listTitle`}
         readMoreTranslationId={`theme.${type}.listViewAll`}
         readMoreLink={paths.themeList(type)}
-        readMoreAmount={
+        totalAmount={
           contractsTotal > contractsLength ? contractsTotal : undefined
         }
         headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}

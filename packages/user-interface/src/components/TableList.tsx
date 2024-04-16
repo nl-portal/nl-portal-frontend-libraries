@@ -13,9 +13,9 @@ interface Props {
   errorTranslationId?: string;
   emptyTranslationId?: string;
   titleTranslationId?: string | null;
-  readMoreAmount?: number;
   readMoreLink?: string;
-  readMoreTranslationId?: string;
+  readMoreTranslationId?: string | null;
+  totalAmount?: number;
   headers?: Cell[];
   rows?: CellObject[][];
   index?: number;
@@ -29,9 +29,9 @@ const TableList = ({
   errorTranslationId = "tableList.fetchError",
   emptyTranslationId = "tableList.empty",
   titleTranslationId = "tableList.title",
-  readMoreAmount,
   readMoreLink,
   readMoreTranslationId = "tableList.viewAll",
+  totalAmount,
   headers: hdrs,
   rows: rws,
   index,
@@ -61,10 +61,10 @@ const TableList = ({
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
   const subTitle =
-    readMoreAmount && readMoreLink
+    totalAmount && readMoreTranslationId
       ? intl.formatMessage(
           { id: readMoreTranslationId },
-          { total: readMoreAmount },
+          { total: totalAmount },
         )
       : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });

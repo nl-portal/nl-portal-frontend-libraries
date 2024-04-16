@@ -16,9 +16,9 @@ interface Props {
   showEmpty?: boolean;
   emptyTranslationId?: string;
   titleTranslationId?: string | null;
-  readMoreAmount?: number;
   readMoreLink?: string;
-  readMoreTranslationId?: string;
+  readMoreTranslationId?: string | null;
+  totalAmount?: number;
   tasks?: Taak[];
   index?: number;
   indexLimit?: number;
@@ -32,9 +32,9 @@ const TasksList = ({
   showEmpty = true,
   emptyTranslationId = "tasksList.empty",
   titleTranslationId = "tasksList.title",
-  readMoreAmount,
   readMoreLink,
   readMoreTranslationId = "tasksList.viewAll",
+  totalAmount,
   tasks,
   index,
   indexLimit,
@@ -46,12 +46,13 @@ const TasksList = ({
   const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
-  const subTitle = readMoreAmount
-    ? intl.formatMessage(
-        { id: readMoreTranslationId },
-        { total: readMoreAmount },
-      )
-    : undefined;
+  const subTitle =
+    totalAmount && readMoreTranslationId
+      ? intl.formatMessage(
+          { id: readMoreTranslationId },
+          { total: totalAmount },
+        )
+      : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 

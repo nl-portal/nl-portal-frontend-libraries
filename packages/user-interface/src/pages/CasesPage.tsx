@@ -24,6 +24,7 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   titleTranslationId={null}
+                  totalAmount={data?.getZaken.totalElements}
                   cases={cases?.filter(
                     (c) => !c.status?.statustype.isEindstatus,
                   )}
@@ -37,6 +38,7 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   titleTranslationId={null}
+                  totalAmount={data?.getZaken.totalElements}
                   cases={cases?.filter(
                     (c) => c.status?.statustype.isEindstatus,
                   )}
