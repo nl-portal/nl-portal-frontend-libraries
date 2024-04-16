@@ -87,8 +87,6 @@ const CasesList = ({
       </section>
     );
 
-  console.log(title, subTitle, casesPath);
-
   return (
     <section className={styles["cases-list"]}>
       <SectionHeader title={title} subTitle={subTitle} href={casesPath} />
