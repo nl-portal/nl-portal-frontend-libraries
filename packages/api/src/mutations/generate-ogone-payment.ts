@@ -1,26 +1,26 @@
 import { gql } from "@apollo/client";
 
 export const MUTATION_GENERATE_PAYMENT = gql`
-  mutation GeneratePayment(
-    $paymentProfileIdentifier: String!
+  mutation GenerateOgonePayment(
     $amount: Float!
-    $orderId: String!
-    $reference: String!
-    $title: String!
-    $langId: String!
-    $successUrl: String!
     $failureUrl: String!
+    $langId: String!
+    $orderId: String!
+    $pspId: String!
+    $reference: String!
+    $successUrl: String!
+    $title: String!
   ) {
-    generatePayment(
-      paymentProfileIdentifier: $paymentProfileIdentifier
+    generateOgonePayment(
       paymentRequest: {
         amount: $amount
-        orderId: $orderId
-        reference: $reference
-        title: $title
-        langId: $langId
-        successUrl: $successUrl
         failureUrl: $failureUrl
+        langId: $langId
+        orderId: $orderId
+        pspId: $pspId
+        reference: $reference
+        successUrl: $successUrl
+        title: $title
       }
     ) {
       formAction

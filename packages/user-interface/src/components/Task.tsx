@@ -5,7 +5,7 @@ import useTaskUrl from "../hooks/useTaskUrl";
 import useActionLabels from "../hooks/useActionLabels";
 import { ButtonLink } from "@gemeente-denhaag/button-link";
 import { ChevronRightIcon } from "@gemeente-denhaag/icons";
-import usePayment from "../hooks/usePayment";
+import useOgonePayment from "../hooks/useOgonePayment";
 
 interface Props {
   task: Taak;
@@ -16,7 +16,7 @@ const Task = ({ task }: Props) => {
   const { formuliertype, value } = task.formulier ?? {};
   const taskUrl = useTaskUrl(formuliertype, value, task.id);
   const { startPayment, renderPaymentRedirectForm, showPaymentRedirectForm } =
-    usePayment();
+    useOgonePayment();
 
   if (showPaymentRedirectForm) {
     return renderPaymentRedirectForm();
@@ -27,15 +27,14 @@ const Task = ({ task }: Props) => {
   if (testingPayment) {
     const paymentRequestPayload = {
       amount: 100.25,
-      orderId: "123456321-412",
+      orderId: "17021072517",
       reference: "12345",
-      title: "Gemeente belastingen 2024",
+      pspId: "TAX",
+      title: "Belastingzaken",
       langId: "nl_NL",
-      successUrl: "https://klantportaal-zgw.test.denhaag.nl?return=success",
-      failureUrl: "https://klantportaal-zgw.test.denhaag.nl?return=failure",
+      successUrl: "https://mijn-a.acc.denhaag.nl?return=success",
+      failureUrl: "https://mijn-a.acc.denhaag.nl?return=failure",
     };
-
-    const paymentProfileIdentifier = "belastingzaken";
 
     return (
       <>
@@ -47,9 +46,7 @@ const Task = ({ task }: Props) => {
               <ChevronRightIcon />
             </ButtonLink>
           }
-          onClick={() =>
-            startPayment(paymentProfileIdentifier, paymentRequestPayload)
-          }
+          onClick={() => startPayment(paymentRequestPayload)}
         >
           {task.title}
         </ActionMulti>

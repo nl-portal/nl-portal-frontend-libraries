@@ -157,7 +157,7 @@ export type MaterieleRegistratie = {
 export type Mutation = {
   __typename?: 'Mutation';
   /** Create payment with hash and fields */
-  generatePayment: Payment;
+  generateOgonePayment: OgonePayment;
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
@@ -167,9 +167,8 @@ export type Mutation = {
 };
 
 
-export type MutationGeneratePaymentArgs = {
-  paymentProfileIdentifier: Scalars['String']['input'];
-  paymentRequest: PaymentRequestInput;
+export type MutationGenerateOgonePaymentArgs = {
+  paymentRequest: OgonePaymentRequestInput;
 };
 
 
@@ -189,26 +188,27 @@ export type MutationUpdateBurgerProfielArgs = {
   klant: KlantUpdateInput;
 };
 
-export type Payment = {
-  __typename?: 'Payment';
+export type OgonePayment = {
+  __typename?: 'OgonePayment';
   formAction: Scalars['String']['output'];
   formFields: Array<PaymentField>;
+};
+
+export type OgonePaymentRequestInput = {
+  amount: Scalars['Float']['input'];
+  failureUrl?: InputMaybe<Scalars['String']['input']>;
+  langId?: InputMaybe<Scalars['String']['input']>;
+  orderId: Scalars['String']['input'];
+  pspId: Scalars['String']['input'];
+  reference: Scalars['String']['input'];
+  successUrl?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PaymentField = {
   __typename?: 'PaymentField';
   name: Scalars['String']['output'];
   value: Scalars['String']['output'];
-};
-
-export type PaymentRequestInput = {
-  amount: Scalars['Float']['input'];
-  failureUrl?: InputMaybe<Scalars['String']['input']>;
-  langId?: InputMaybe<Scalars['String']['input']>;
-  orderId: Scalars['String']['input'];
-  reference: Scalars['String']['input'];
-  successUrl?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Persoon = {
@@ -502,19 +502,19 @@ export type ZaakType = {
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
 
-export type GeneratePaymentMutationVariables = Exact<{
-  paymentProfileIdentifier: Scalars['String']['input'];
+export type GenerateOgonePaymentMutationVariables = Exact<{
   amount: Scalars['Float']['input'];
-  orderId: Scalars['String']['input'];
-  reference: Scalars['String']['input'];
-  title: Scalars['String']['input'];
-  langId: Scalars['String']['input'];
-  successUrl: Scalars['String']['input'];
   failureUrl: Scalars['String']['input'];
+  langId: Scalars['String']['input'];
+  orderId: Scalars['String']['input'];
+  pspId: Scalars['String']['input'];
+  reference: Scalars['String']['input'];
+  successUrl: Scalars['String']['input'];
+  title: Scalars['String']['input'];
 }>;
 
 
-export type GeneratePaymentMutation = { __typename?: 'Mutation', generatePayment: { __typename?: 'Payment', formAction: string, formFields: Array<{ __typename?: 'PaymentField', name: string, value: string }> } };
+export type GenerateOgonePaymentMutation = { __typename?: 'Mutation', generateOgonePayment: { __typename?: 'OgonePayment', formAction: string, formFields: Array<{ __typename?: 'PaymentField', name: string, value: string }> } };
 
 export type SubmitTaskMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -642,11 +642,10 @@ export const FormulierFieldsFragmentDoc = gql`
   value
 }
     `;
-export const GeneratePaymentDocument = gql`
-    mutation GeneratePayment($paymentProfileIdentifier: String!, $amount: Float!, $orderId: String!, $reference: String!, $title: String!, $langId: String!, $successUrl: String!, $failureUrl: String!) {
-  generatePayment(
-    paymentProfileIdentifier: $paymentProfileIdentifier
-    paymentRequest: {amount: $amount, orderId: $orderId, reference: $reference, title: $title, langId: $langId, successUrl: $successUrl, failureUrl: $failureUrl}
+export const GenerateOgonePaymentDocument = gql`
+    mutation GenerateOgonePayment($amount: Float!, $failureUrl: String!, $langId: String!, $orderId: String!, $pspId: String!, $reference: String!, $successUrl: String!, $title: String!) {
+  generateOgonePayment(
+    paymentRequest: {amount: $amount, failureUrl: $failureUrl, langId: $langId, orderId: $orderId, pspId: $pspId, reference: $reference, successUrl: $successUrl, title: $title}
   ) {
     formAction
     formFields {
@@ -656,39 +655,39 @@ export const GeneratePaymentDocument = gql`
   }
 }
     `;
-export type GeneratePaymentMutationFn = Apollo.MutationFunction<GeneratePaymentMutation, GeneratePaymentMutationVariables>;
+export type GenerateOgonePaymentMutationFn = Apollo.MutationFunction<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>;
 
 /**
- * __useGeneratePaymentMutation__
+ * __useGenerateOgonePaymentMutation__
  *
- * To run a mutation, you first call `useGeneratePaymentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useGeneratePaymentMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useGenerateOgonePaymentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGenerateOgonePaymentMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [generatePaymentMutation, { data, loading, error }] = useGeneratePaymentMutation({
+ * const [generateOgonePaymentMutation, { data, loading, error }] = useGenerateOgonePaymentMutation({
  *   variables: {
- *      paymentProfileIdentifier: // value for 'paymentProfileIdentifier'
  *      amount: // value for 'amount'
- *      orderId: // value for 'orderId'
- *      reference: // value for 'reference'
- *      title: // value for 'title'
- *      langId: // value for 'langId'
- *      successUrl: // value for 'successUrl'
  *      failureUrl: // value for 'failureUrl'
+ *      langId: // value for 'langId'
+ *      orderId: // value for 'orderId'
+ *      pspId: // value for 'pspId'
+ *      reference: // value for 'reference'
+ *      successUrl: // value for 'successUrl'
+ *      title: // value for 'title'
  *   },
  * });
  */
-export function useGeneratePaymentMutation(baseOptions?: Apollo.MutationHookOptions<GeneratePaymentMutation, GeneratePaymentMutationVariables>) {
+export function useGenerateOgonePaymentMutation(baseOptions?: Apollo.MutationHookOptions<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<GeneratePaymentMutation, GeneratePaymentMutationVariables>(GeneratePaymentDocument, options);
+        return Apollo.useMutation<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>(GenerateOgonePaymentDocument, options);
       }
-export type GeneratePaymentMutationHookResult = ReturnType<typeof useGeneratePaymentMutation>;
-export type GeneratePaymentMutationResult = Apollo.MutationResult<GeneratePaymentMutation>;
-export type GeneratePaymentMutationOptions = Apollo.BaseMutationOptions<GeneratePaymentMutation, GeneratePaymentMutationVariables>;
+export type GenerateOgonePaymentMutationHookResult = ReturnType<typeof useGenerateOgonePaymentMutation>;
+export type GenerateOgonePaymentMutationResult = Apollo.MutationResult<GenerateOgonePaymentMutation>;
+export type GenerateOgonePaymentMutationOptions = Apollo.BaseMutationOptions<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>;
 export const SubmitTaskDocument = gql`
     mutation SubmitTask($id: UUID!, $submission: JSON!) {
   submitTask(id: $id, submission: $submission) {
