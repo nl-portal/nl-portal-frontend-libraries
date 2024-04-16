@@ -34,34 +34,6 @@ export type Adres = {
   volledigAdres: Scalars['String']['output'];
 };
 
-export type CaseCreated = {
-  __typename?: 'CaseCreated';
-  caseId: Scalars['UUID']['output'];
-};
-
-export type CaseDefinition = {
-  __typename?: 'CaseDefinition';
-  id: Scalars['String']['output'];
-  schema: Scalars['JSON']['output'];
-  statusDefinition: Array<Scalars['String']['output']>;
-};
-
-export type CaseInstance = {
-  __typename?: 'CaseInstance';
-  caseDefinitionId: Scalars['String']['output'];
-  createdOn: Scalars['String']['output'];
-  externalId?: Maybe<Scalars['String']['output']>;
-  id: Scalars['UUID']['output'];
-  status?: Maybe<Status>;
-  statusHistory?: Maybe<Array<HistoricStatus>>;
-  submission: Scalars['JSON']['output'];
-  userId: Scalars['String']['output'];
-};
-
-export type CaseInstanceOrderingInput = {
-  createdOn: Sort;
-};
-
 export type ContactMoment = {
   __typename?: 'ContactMoment';
   bronorganisatie?: Maybe<Scalars['String']['output']>;
@@ -79,35 +51,6 @@ export type ContactMoment = {
 export type ContactMomentPage = {
   __typename?: 'ContactMomentPage';
   content: Array<ContactMoment>;
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  size: Scalars['Int']['output'];
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type Contract = {
-  __typename?: 'Contract';
-  beginDatum: Scalars['String']['output'];
-  eindDatum?: Maybe<Scalars['String']['output']>;
-  id: Scalars['Int']['output'];
-  klanten: Array<NeaKlant>;
-  taken: Array<Taak>;
-  zakelijkRechten: Array<ZakelijkRecht>;
-  zaken: Array<Zaak>;
-};
-
-export type ContractBeperkt = {
-  __typename?: 'ContractBeperkt';
-  adressen: Array<NeaAdres>;
-  id: Scalars['Int']['output'];
-};
-
-export type ContractBeperktPage = {
-  __typename?: 'ContractBeperktPage';
-  content: Array<ContractBeperkt>;
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
@@ -170,12 +113,6 @@ export type HandelsNaam = {
   volgorde: Scalars['Int']['output'];
 };
 
-export type HistoricStatus = {
-  __typename?: 'HistoricStatus';
-  createdOn: Scalars['String']['output'];
-  status: Status;
-};
-
 export type Hoofdvestiging = {
   __typename?: 'Hoofdvestiging';
   adressen?: Maybe<Array<Adres>>;
@@ -185,13 +122,6 @@ export type Hoofdvestiging = {
   kvkNummer: Scalars['String']['output'];
   totaalWerkzamePersonen: Scalars['Int']['output'];
   vestigingsnummer: Scalars['String']['output'];
-};
-
-export type KadastraalObject = {
-  __typename?: 'KadastraalObject';
-  aanduiding: Scalars['String']['output'];
-  adressen: Array<NeaAdres>;
-  identificatie: Scalars['String']['output'];
 };
 
 export type Klant = {
@@ -226,21 +156,12 @@ export type MaterieleRegistratie = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  /** Convert submission to json return resulting data */
-  processSubmission: CaseCreated;
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
   submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
-};
-
-
-export type MutationProcessSubmissionArgs = {
-  caseDefinitionId: Scalars['String']['input'];
-  initialStatus?: InputMaybe<Scalars['String']['input']>;
-  submission: Scalars['JSON']['input'];
 };
 
 
@@ -258,61 +179,6 @@ export type MutationSubmitTaskArgs = {
 
 export type MutationUpdateBurgerProfielArgs = {
   klant: KlantUpdateInput;
-};
-
-export type NeaAdres = {
-  __typename?: 'NeaAdres';
-  adresBuitenland?: Maybe<NeaAdresBuitenland>;
-  adresseerbaarObjectId?: Maybe<Scalars['String']['output']>;
-  huisletter?: Maybe<Scalars['String']['output']>;
-  huisnummer?: Maybe<Scalars['Int']['output']>;
-  huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
-  land?: Maybe<Scalars['String']['output']>;
-  nummeraanduidingId?: Maybe<Scalars['String']['output']>;
-  postbusnummer?: Maybe<Scalars['String']['output']>;
-  postcode?: Maybe<Scalars['String']['output']>;
-  straatnaam?: Maybe<Scalars['String']['output']>;
-  woonplaats?: Maybe<Scalars['String']['output']>;
-};
-
-export type NeaAdresBuitenland = {
-  __typename?: 'NeaAdresBuitenland';
-  land?: Maybe<Scalars['String']['output']>;
-  postcodeWoonplaats?: Maybe<Scalars['String']['output']>;
-  regio?: Maybe<Scalars['String']['output']>;
-  straatnaamHuisnummer?: Maybe<Scalars['String']['output']>;
-};
-
-export type NeaKlant = {
-  __typename?: 'NeaKlant';
-  organisatie?: Maybe<Organisatie>;
-  persoon?: Maybe<NeaPersoon>;
-};
-
-export type NeaPersoon = {
-  __typename?: 'NeaPersoon';
-  achterNaam: Scalars['String']['output'];
-  correspondentieAdres?: Maybe<NeaAdres>;
-  emailAdres?: Maybe<Scalars['String']['output']>;
-  klantnummer: Scalars['Int']['output'];
-  subjectId: Scalars['Int']['output'];
-  telefoonNummer?: Maybe<Scalars['String']['output']>;
-  verblijfAdres: NeaAdres;
-  volledigeNaam: Scalars['String']['output'];
-  voorNaam?: Maybe<Scalars['String']['output']>;
-  voorletters?: Maybe<Scalars['String']['output']>;
-  voorvoegselAchternaam?: Maybe<Scalars['String']['output']>;
-};
-
-export type Organisatie = {
-  __typename?: 'Organisatie';
-  bezoekAdres: NeaAdres;
-  correspondentieAdres?: Maybe<NeaAdres>;
-  klantnummer: Scalars['Int']['output'];
-  kvkNummer?: Maybe<Scalars['String']['output']>;
-  naam: Scalars['String']['output'];
-  rsin?: Maybe<Scalars['String']['output']>;
-  vestigingsnummer?: Maybe<Scalars['String']['output']>;
 };
 
 export type Persoon = {
@@ -377,10 +243,6 @@ export type PersoonVerblijfplaats = {
 
 export type Query = {
   __typename?: 'Query';
-  /** retrieves all available case definitions */
-  allCaseDefinitions: Array<CaseDefinition>;
-  /** retrieves all available case instances */
-  allCaseInstances: Array<CaseInstance>;
   /**
    * find all form definitions from repository
    * @deprecated This method is not used by the NL Portal frontend and is not being replaced.
@@ -392,14 +254,8 @@ export type Query = {
   getBewonersAantal?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
   getBurgerProfiel?: Maybe<Klant>;
-  /** retrieves single case instance from repository */
-  getCaseInstance?: Maybe<CaseInstance>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
-  /** Get erfpacht contract by UUID */
-  getErfpachtContract: Contract;
-  /** Gets all erfpacht contracten of user or rsin */
-  getErfpachtContracten: ContractBeperktPage;
   /**
    * find single form definition from repository or Objecten API
    * @deprecated Replaced by getFormDefinitionByName and getFormDefinitionByObjectenApiUrl, replace with getFormDefinitionByName or getFormDefinitionByObjectenApiUrl
@@ -435,31 +291,9 @@ export type Query = {
 };
 
 
-export type QueryAllCaseInstancesArgs = {
-  orderBy: CaseInstanceOrderingInput;
-};
-
-
-export type QueryGetCaseInstanceArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
 export type QueryGetDocumentContentArgs = {
   documentApi: Scalars['String']['input'];
   id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetErfpachtContractArgs = {
-  id: Scalars['String']['input'];
-};
-
-
-export type QueryGetErfpachtContractenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-  rsin?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -522,17 +356,6 @@ export type SbiActiviteit = {
   indHoofdactiviteit: Scalars['String']['output'];
   sbiCode: Scalars['String']['output'];
   sbiOmschrijving: Scalars['String']['output'];
-};
-
-export enum Sort {
-  Asc = 'ASC',
-  Desc = 'DESC'
-}
-
-export type Status = {
-  __typename?: 'Status';
-  createdOn: Scalars['String']['output'];
-  name: Scalars['String']['output'];
 };
 
 export type StatusType = {
@@ -645,13 +468,6 @@ export type ZaakType = {
   __typename?: 'ZaakType';
   identificatie: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
-};
-
-export type ZakelijkRecht = {
-  __typename?: 'ZakelijkRecht';
-  id: Scalars['Int']['output'];
-  kadastraalObjecten: Array<KadastraalObject>;
-  naam: Scalars['String']['output'];
 };
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
