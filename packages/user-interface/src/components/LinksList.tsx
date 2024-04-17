@@ -37,7 +37,12 @@ const LinksList = ({
     <section>
       <SectionHeader title={title} />
       {links.map((link) => (
-        <ActionSingle labels={labels} link={link.href} Link={PortalLink}>
+        <ActionSingle
+          key={link.title}
+          labels={labels}
+          link={link.href}
+          Link={PortalLink}
+        >
           {link.title}
         </ActionSingle>
       ))}

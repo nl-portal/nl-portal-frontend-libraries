@@ -7,13 +7,13 @@ import {
   OverviewPage,
   TasksPage,
   TaskPage,
-  ThemeDetailsPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "./paths";
 import { config } from "./config";
 import { Navigate } from "react-router-dom";
 import ThemeSampleOverviewPage from "../pages/ThemeSampleOverviewPage";
 import ThemeSampleListPage from "../pages/ThemeSampleListPage";
+import ThemeSampleDetailPage from "../pages/ThemeSampleDetailPage";
 
 export const routes = [
   {
@@ -67,7 +67,7 @@ export const routes = [
       },
       {
         path: paths.themeDetails("sample"),
-        element: <ThemeDetailsPage type="sample" />,
+        element: <ThemeSampleDetailPage />,
       },
     ],
   },

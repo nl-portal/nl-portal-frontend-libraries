@@ -17,14 +17,18 @@ import DocumentsList from "../components/DocumentsList";
 
 interface Props {
   type: string;
+  titleTranslationId?: string;
   showTasksLength?: number;
   showCasesLength?: number;
+  children?: React.ReactNode;
 }
 
 const ThemeDetailsPage = ({
   type,
+  titleTranslationId = `pageTitles.${type}`,
   showTasksLength = 5,
   showCasesLength = 4,
+  children,
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
@@ -46,7 +50,7 @@ const ThemeDetailsPage = ({
     <PageGrid>
       <div>
         <BackLink routePath={paths.themeOverview(type)} />
-        <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}` })} />
+        <PageHeader title={intl.formatMessage({ id: titleTranslationId })} />
       </div>
       {showTasksLength && (
         <TasksList
@@ -85,6 +89,7 @@ const ThemeDetailsPage = ({
         error={Boolean(casesError)}
         documents={[]} // TODO: Add documents
       />
+      {children}
       {showTasksLength && (
         <TasksList
           loading={loading}

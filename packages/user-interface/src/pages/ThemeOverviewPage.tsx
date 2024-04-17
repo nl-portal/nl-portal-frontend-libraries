@@ -24,7 +24,6 @@ const ThemeOverviewPage = ({
   children,
 }: Props) => {
   const intl = useIntl();
-
   const {
     data: tasksData,
     loading: taskLoading,

@@ -21,5 +21,6 @@ export { default as NotificationsPage } from "./pages/NotificationsPage";
 export { default as OverviewPage } from "./pages/OverviewPage";
 export { default as TasksPage } from "./pages/TasksPage";
 export { default as TaskPage } from "./pages/TaskPage";
-export { default as ThemeOverviewPage } from "./pages/ThemeOverviewPage";
 export { default as ThemeDetailsPage } from "./pages/ThemeDetailsPage";
+export { default as ThemeOverviewPage } from "./pages/ThemeOverviewPage";
+export { default as ThemeSubPage } from "./pages/ThemeSubPage";
