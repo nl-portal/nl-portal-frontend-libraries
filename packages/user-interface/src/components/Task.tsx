@@ -11,6 +11,17 @@ interface Props {
   task: Taak;
 }
 
+// TODO: move to custom hook with more logic
+const registerPayment = async (queryParams: URLSearchParams) => {
+  const response = await fetch(
+    `http://localhost:8090/api/payment/ogone/postsale?${queryParams.toString()}`,
+  );
+  console.log(response);
+  const data = await response.text();
+  console.log(data);
+  return null;
+};
+
 const Task = ({ task }: Props) => {
   const labels = useActionLabels();
   const { formuliertype, value } = task.formulier ?? {};
@@ -22,18 +33,31 @@ const Task = ({ task }: Props) => {
     return renderPaymentRedirectForm();
   }
 
+  // TODO register payment in development
+  const queryParams = new URLSearchParams(location.search);
+  const type = queryParams.get("type");
+  const isSuccessful = queryParams.get("success");
+
+  console.log(type, isSuccessful);
+  if (type === "ogone" && isSuccessful) {
+    queryParams.delete("type");
+    queryParams.delete("success");
+    console.log("url", queryParams.toString());
+    registerPayment(queryParams);
+  }
+
   const testingPayment = true;
 
   if (testingPayment) {
     const paymentRequestPayload = {
       amount: 100.25,
-      orderId: "17021072517",
+      orderId: "17021072517-10",
       reference: "12345",
       pspId: "TAX",
       title: "Belastingzaken",
       langId: "nl_NL",
-      successUrl: "https://mijn-a.acc.denhaag.nl?return=success",
-      failureUrl: "https://mijn-a.acc.denhaag.nl?return=failure",
+      successUrl: "https://localhost:3000/taken?type=ogone&success=true",
+      failureUrl: "https://localhost:3000/taken?type=ogone",
     };
 
     return (
