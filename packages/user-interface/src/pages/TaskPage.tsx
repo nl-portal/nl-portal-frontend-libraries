@@ -12,7 +12,7 @@ import {
 import "font-awesome/css/font-awesome.min.css";
 import { Alert } from "@gemeente-denhaag/components-react";
 import { useIntl } from "react-intl";
-import "./TaskPage.module.scss";
+import styles from "./TaskPage.module.scss";
 import { useParams } from "react-router-dom";
 import BackLink, { BackLinkProps } from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
@@ -148,7 +148,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   return (
     <>
       {backlink && <BackLink {...backlink} />}
-      <div className="bootstrap">
+      <div className={styles.bootstrap}>
         <Form
           form={
             formDefinitionId?.getFormDefinitionById?.formDefinition ||
