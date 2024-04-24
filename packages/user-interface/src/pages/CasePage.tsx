@@ -7,7 +7,6 @@ import {
   ContactMoment,
 } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/components-react";
-import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
 import {
   Table,
   TableBody,
@@ -28,6 +27,7 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import SectionHeader from "../components/SectionHeader";
+import DescriptionList from "../components/DescriptionList";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -143,12 +143,10 @@ const CasePage = ({
         />
       </div>
       {details.length > 0 && (
-        <div>
-          <SectionHeader
-            title={intl.formatMessage({ id: "case.detailsHeader" })}
-          />
-          <DescriptionList items={details} />
-        </div>
+        <DescriptionList
+          title={intl.formatMessage({ id: "case.detailsHeader" })}
+          items={details}
+        />
       )}
       {/* eslint-disable @typescript-eslint/no-explicit-any */}
       {caseData?.getZaak.zaakdetails.data.map((section: any) => {
@@ -158,15 +156,13 @@ const CasePage = ({
         return (
           <React.Fragment key={section.heading}>
             {listItems.length > 0 && (
-              <div>
-                <SectionHeader title={section.heading} />
-                <DescriptionList
-                  items={listItems.map((item: any) => ({
-                    title: item.key,
-                    detail: item.waarde,
-                  }))}
-                />
-              </div>
+              <DescriptionList
+                title={section.heading}
+                items={listItems.map((item: any) => ({
+                  title: item.key,
+                  detail: item.waarde,
+                }))}
+              />
             )}
             {tables.length > 0 &&
               tables.map((table: any) => (

@@ -1,12 +1,13 @@
 import "react-loading-skeleton/dist/skeleton.css";
 
 export { default as BackLink } from "./components/BackLink";
+export { default as DescriptionList } from "./components/DescriptionList";
+export { default as DocumentsList } from "./components/DocumentsList";
 export { default as Layout } from "./components/Layout";
 export { default as PageHeader } from "./components/PageHeader";
 export { default as PageGrid } from "./components/PageGrid";
 export { default as PortalLink } from "./components/PortalLink";
 export { default as TableList } from "./components/TableList";
-export { default as DocumentsList } from "./components/DocumentsList";
 
 export * from "./interfaces/navigation-item";
 export * from "./interfaces/paths";
