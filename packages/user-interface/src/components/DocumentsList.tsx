@@ -16,7 +16,7 @@ interface Props {
   documents?: Array<PortalDocument>;
 }
 
-const DocumentsLists = ({
+const DocumentsList = ({
   loading,
   error,
   errorTranslationId = "documentsList.fetchError",
@@ -63,17 +63,11 @@ const DocumentsLists = ({
       <SectionHeader title={title} />
       <div className={classnames(styles["documents-list__documents"])}>
         {documents.map((document) => (
-          <Document
-            key={document.uuid}
-            uuid={document.uuid}
-            name={document?.bestandsnaam || ""}
-            size={document.bestandsomvang || 0}
-            documentapi={document.documentapi}
-          />
+          <Document key={document.uuid} document={document} />
         ))}
       </div>
     </section>
   );
 };
 
-export default DocumentsLists;
+export default DocumentsList;

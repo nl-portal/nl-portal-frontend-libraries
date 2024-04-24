@@ -1,18 +1,22 @@
 import { useContext } from "react";
 import prettyBytes from "pretty-bytes";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { PortalDocument } from "../interfaces/portal-document";
-import { ApiContext } from "@nl-portal/nl-portal-api";
+import {
+  ApiContext,
+  Document as PortalDocument,
+} from "@nl-portal/nl-portal-api";
 import { KeycloakContext } from "@nl-portal/nl-portal-authentication";
 import { File } from "@gemeente-denhaag/file";
 
-interface Props extends PortalDocument {}
+interface Props {
+  document: PortalDocument;
+}
 
-const Document = ({ uuid, name, size, documentapi }: Props) => {
+const Document = ({ document: doc }: Props) => {
   const { keycloakToken } = useContext(KeycloakContext);
   const { restUri } = useContext(ApiContext);
   const { hrefLang } = useContext(LocaleContext);
-  const downloadLink = `${restUri}/documentapi/${documentapi}/document/${uuid}/content`;
+  const downloadLink = `${restUri}/documentapi/${doc.documentapi}/document/${doc.uuid}/content`;
 
   const onClick = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -40,9 +44,9 @@ const Document = ({ uuid, name, size, documentapi }: Props) => {
 
   return (
     <File
-      name={name}
-      href={name}
-      size={prettyBytes(size || 0, { locale: hrefLang })}
+      name={doc.bestandsnaam || ""}
+      href={doc.bestandsnaam || ""}
+      size={prettyBytes(doc.bestandsomvang || 0, { locale: hrefLang })}
       onClick={onClick}
     />
   );

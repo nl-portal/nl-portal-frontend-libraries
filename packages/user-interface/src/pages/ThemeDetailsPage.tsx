@@ -13,10 +13,10 @@ import {
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import LinksList from "../components/LinksList";
-import DocumentsList from "../components/DocumentsList";
 
 interface Props {
   type: string;
+  loading: boolean;
   titleTranslationId?: string;
   showTasksLength?: number;
   showCasesLength?: number;
@@ -25,6 +25,7 @@ interface Props {
 
 const ThemeDetailsPage = ({
   type,
+  loading: loadingProp,
   titleTranslationId = `pageTitles.${type}`,
   showTasksLength = 5,
   showCasesLength = 4,
@@ -42,7 +43,7 @@ const ThemeDetailsPage = ({
     loading: casesLoading,
     error: casesError,
   } = useGetZakenQuery();
-  const loading = tasksLoading || casesLoading;
+  const loading = loadingProp || tasksLoading || casesLoading;
   const tasks = tasksData?.getTaken.content as Taak[] | undefined;
   const cases = casesData?.getZaken.content as Zaak[] | undefined;
 
@@ -84,11 +85,6 @@ const ThemeDetailsPage = ({
           }
         />
       )}
-      <DocumentsList
-        loading={loading}
-        error={Boolean(casesError)}
-        documents={[]} // TODO: Add documents
-      />
       {children}
       {showTasksLength && (
         <TasksList

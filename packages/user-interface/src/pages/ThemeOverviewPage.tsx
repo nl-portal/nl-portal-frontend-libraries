@@ -12,6 +12,7 @@ import {
 
 interface Props {
   type: string;
+  loading: boolean;
   showTasksLength?: number;
   showCasesLength?: number;
   children?: React.ReactNode;
@@ -19,6 +20,7 @@ interface Props {
 
 const ThemeOverviewPage = ({
   type,
+  loading: loadingProp,
   showTasksLength = 5,
   showCasesLength = 4,
   children,
@@ -34,7 +36,7 @@ const ThemeOverviewPage = ({
     loading: casesLoading,
     error: casesError,
   } = useGetZakenQuery();
-  const loading = taskLoading || casesLoading;
+  const loading = loadingProp || taskLoading || casesLoading;
   const tasks = tasksData?.getTaken.content as Taak[] | undefined;
   const cases = casesData?.getZaken.content as Zaak[] | undefined;
 
