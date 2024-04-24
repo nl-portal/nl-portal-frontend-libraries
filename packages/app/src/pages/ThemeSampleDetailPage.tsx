@@ -1,7 +1,8 @@
-import { DescriptionList } from "@nl-portal/nl-portal-user-interface";
 import {
   DocumentsList,
   ThemeDetailsPage,
+  TableList,
+  DescriptionList,
 } from "@nl-portal/nl-portal-user-interface";
 
 const ThemeSampleDetailPage = () => {
@@ -52,6 +53,40 @@ const ThemeSampleDetailPage = () => {
             title: "E-mailadres",
             detail: "b.smilede@gmail.com",
           },
+        ]}
+      />
+      <TableList
+        titleTranslationId="Financiele gegevens"
+        headers={["Soort finanacien", "Bedrag", "Periode", "Factuurwijze"]}
+        rows={[
+          [
+            {
+              children: "Canon oude rechten",
+            },
+            {
+              children: "€ 6,32",
+            },
+            {
+              children: "halfjaarlijks",
+            },
+            {
+              children: "Achteraf",
+            },
+          ],
+          [
+            {
+              children: "Canon oude rechten",
+            },
+            {
+              children: "€ 6,32",
+            },
+            {
+              children: "halfjaarlijks",
+            },
+            {
+              children: "Achteraf",
+            },
+          ],
         ]}
       />
     </ThemeDetailsPage>
