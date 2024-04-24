@@ -7,27 +7,19 @@ import {
   ContactMoment,
 } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/components-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@gemeente-denhaag/table";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
 import ContactTimeline from "@gemeente-denhaag/contact-timeline";
 import "@utrecht/component-library-css";
 import DocumentsList from "../components/DocumentsList";
 import StatusHistory from "../components/StatusHistory";
-import uniqueId from "lodash.uniqueid";
 import BackLink, { BackLinkProps } from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import SectionHeader from "../components/SectionHeader";
 import DescriptionList from "../components/DescriptionList";
+import TableList from "../components/TableList";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -166,35 +158,16 @@ const CasePage = ({
             )}
             {tables.length > 0 &&
               tables.map((table: any) => (
-                <div key={table.heading}>
-                  <SectionHeader title={table.heading} small />
-                  <Table>
-                    {table.waarde.headers.length > 0 && (
-                      <TableHead>
-                        <TableRow>
-                          {table.waarde.headers?.map((header: any) => (
-                            <TableHeader key={`${uniqueId(header.waarde)}`}>
-                              {header.waarde}
-                            </TableHeader>
-                          ))}
-                        </TableRow>
-                      </TableHead>
-                    )}
-                    {table.waarde.rows.length > 0 && (
-                      <TableBody>
-                        {table.waarde.rows.map((row: any) => (
-                          <TableRow key={`${uniqueId("TableRow")}`}>
-                            {row.map((cell: { waarde: string }) => (
-                              <TableCell key={`${uniqueId(cell.waarde)}`}>
-                                {cell.waarde}
-                              </TableCell>
-                            ))}
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    )}
-                  </Table>
-                </div>
+                <TableList
+                  key={table.heading}
+                  titleTranslationId={table.heading}
+                  headers={table.waarde.headers?.map(
+                    (head: any) => head.waarde,
+                  )}
+                  rows={table.waarde.rows.map((row: any) =>
+                    row.map((cell: any) => cell.waarde),
+                  )}
+                />
               ))}
           </React.Fragment>
         );
