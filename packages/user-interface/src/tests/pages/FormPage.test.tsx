@@ -9,15 +9,13 @@ describe("FormPage", () => {
     expect(FormPage).toBeTruthy();
   });
 
-  it("should run query get-form", () => {
-
-  });
+  it("should run query get-form", () => {});
 
   it("should render form not found", () => {
     render(
       <IntlProvider locale={"nl"}>
-        <FormPage forms={[]} />
-      </IntlProvider>
+        <FormPage />
+      </IntlProvider>,
     );
     expect(screen.getByTestId("form-not-found")).toBeInTheDocument();
   });
@@ -28,11 +26,10 @@ describe("FormPage", () => {
       <IntlProvider locale={"nl"}>
         <MemoryRouter initialEntries={[`/formulieren/${formId}`]}>
           <Routes>
-            <Route path="/formulieren/:name"
-                   element={<FormPage forms={[`${formId}`]} />} />
+            <Route path="/formulieren/:name" element={<FormPage />} />
           </Routes>
         </MemoryRouter>
-      </IntlProvider>
+      </IntlProvider>,
     );
     expect(screen.getByTestId(`form-${formId}`)).toBeInTheDocument();
   });

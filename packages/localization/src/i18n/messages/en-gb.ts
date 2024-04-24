@@ -112,5 +112,9 @@ export const EN_GB_MESSAGES: Messages = {
     "theme.erfpacht.listContractnummer": "Contract number",
     "theme.erfpacht.listViewAll": "View all leasehold contracts ({total})",
     "theme.erfpacht.listPageHeader": "Leasehold contracts",
+    "forms.parkeervergunning": "Parking permit",
+    "start-form.completeTitle": "Form {name} completed",
+    "start-form.completeDescription":
+      "The form {name} is successfully completed.",
   },
 };

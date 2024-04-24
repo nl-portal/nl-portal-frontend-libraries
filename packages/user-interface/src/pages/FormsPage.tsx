@@ -3,41 +3,44 @@ import PageHeader from "../components/PageHeader";
 import { FormattedMessage } from "react-intl";
 import { Link } from "@gemeente-denhaag/link";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
-import { Forms } from "../interfaces/forms";
 import { Heading3 } from "@gemeente-denhaag/components-react";
 import { useGetFormsQuery } from "@nl-portal/nl-portal-api";
 
-const FormsPage = ({ forms }: Forms) => {
-  const {
-    data,
-    loading,
-    error
-  } = useGetFormsQuery();
-  console.log(data, loading, error);
+const FormsPage = () => {
+  const { data, loading, error } = useGetFormsQuery();
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.forms" />}>
-        {forms && !forms.length && (
+        {error && data?.allStartForms && !data?.allStartForms.length && (
           <span data-testid={"empty-forms"}>
             <FormattedMessage id="formsList.empty" />
           </span>
         )}
       </PageHeader>
-      {forms && forms.length > 0 && (
+      {!error && data?.allStartForms && data?.allStartForms.length > 0 && (
         <section data-testid={"list-forms"}>
           <Heading3>
             <FormattedMessage id={`forms.listSubHeader`} />
           </Heading3>
           <ul className="utrecht-link-list utrecht-link-list--html-ul denhaag-link-group__list">
-            {forms.map((form) => {
+            {data?.allStartForms.map((form) => {
               return (
-                <li className="denhaag-link-group__list-item" key={`${form}`}>
-                  <Link href={`/formulieren/${form}`}
-                        icon={<ArrowRightIcon />}
-                        iconAlign="start">
-                    <span data-testid={`forms-item-${form}`}>
-                      <FormattedMessage id={`forms.${form}`} />
+                <li
+                  className="denhaag-link-group__list-item"
+                  key={`${form.name}`}
+                >
+                  <Link
+                    href={`/formulieren/${form.name}`}
+                    icon={<ArrowRightIcon />}
+                    iconAlign="start"
+                  >
+                    <span data-testid={`forms-item-${form.name}`}>
+                      <FormattedMessage id={`forms.${form.name}`} />
                     </span>
                   </Link>
                 </li>

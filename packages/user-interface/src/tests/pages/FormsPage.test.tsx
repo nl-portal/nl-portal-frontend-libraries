@@ -8,15 +8,13 @@ describe("FormsPage", () => {
     expect(FormsPage).toBeTruthy();
   });
 
-  it("should run query get-forms", () => {
-
-  });
+  it("should run query get-forms", () => {});
 
   it("should render empty states", () => {
     render(
       <IntlProvider locale={"nl"}>
-        <FormsPage forms={[]} />
-      </IntlProvider>
+        <FormsPage />
+      </IntlProvider>,
     );
     expect(screen.getByTestId("empty-forms")).toBeInTheDocument();
   });
@@ -24,8 +22,8 @@ describe("FormsPage", () => {
   it("should render forms list", () => {
     render(
       <IntlProvider locale={"nl"}>
-        <FormsPage forms={["form-1", "form-2"]} />
-      </IntlProvider>
+        <FormsPage />
+      </IntlProvider>,
     );
     expect(screen.getByTestId("list-forms")).toBeInTheDocument();
     expect(screen.getByTestId("forms-item-form-1")).toBeInTheDocument();

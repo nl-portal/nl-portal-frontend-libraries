@@ -120,5 +120,9 @@ export const NL_NL_MESSAGES: Messages = {
     "documentsList.empty": "Er zijn geen documenten beschikbaar.",
     "formsList.empty": "Er zijn geen formulieren beschikbaar.",
     "form.notFound": "Formulier niet gevonden",
+    "forms.parkeervergunning": "Parkeervergunning",
+    "start-form.completeTitle": "Formulier {name} is afgerond",
+    "start-form.completeDescription":
+      "Het formulier {name} is succesvol voltooid.",
   },
 };
