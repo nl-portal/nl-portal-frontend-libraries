@@ -39,24 +39,32 @@ const TableList = ({
   onChange,
 }: Props) => {
   const intl = useIntl();
-  const headers = hdrs && [
-    ...hdrs,
-    { className: styles["table-list__icon"], children: undefined },
-  ];
+  const hasLink = Boolean(rws?.flat().find((r) => r.href));
+  const headers =
+    hasLink && hdrs
+      ? [
+          ...hdrs,
+          { className: styles["table-list__icon"], children: undefined },
+        ]
+      : [...(hdrs || [])];
   const rows =
     rws &&
-    rws.map((row) => [
-      ...row,
-      {
-        href: row[0].href,
-        className: styles["table-list__icon"],
-        children: (
-          <div className={styles["table-list__arrow"]}>
-            <ArrowRightIcon />
-          </div>
-        ),
-      },
-    ]);
+    rws.map((row) =>
+      row.find((r) => r.href)
+        ? [
+            ...row,
+            {
+              href: row[0].href,
+              className: styles["table-list__icon"],
+              children: (
+                <div className={styles["table-list__arrow"]}>
+                  <ArrowRightIcon />
+                </div>
+              ),
+            },
+          ]
+        : row,
+    );
   const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;

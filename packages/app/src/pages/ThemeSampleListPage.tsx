@@ -1,20 +1,11 @@
 import { paths } from "../constants/paths";
-import {
-  PageGrid,
-  PageHeader,
-  BackLink,
-  TableList,
-} from "@nl-portal/nl-portal-user-interface";
+import { TableList, ThemeSubPage } from "@nl-portal/nl-portal-user-interface";
 
 const ThemeSampleListPage = () => {
   const type = "sample";
 
   return (
-    <PageGrid>
-      <div>
-        <BackLink routePath={paths.themeOverview(type)} />
-        <PageHeader title="Voorbeeldcontracten" />
-      </div>
+    <ThemeSubPage type={type} titleTranslationId="Voorbeeldcontracten">
       <TableList
         titleTranslationId={null}
         headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}
@@ -64,7 +55,7 @@ const ThemeSampleListPage = () => {
         ]}
         indexLimit={2}
       />
-    </PageGrid>
+    </ThemeSubPage>
   );
 };
 

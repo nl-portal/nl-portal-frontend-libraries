@@ -6,12 +6,14 @@ import { paths } from "../constants/paths";
 
 const ThemeSampleOverviewPage = () => {
   const type = "sample";
+  const loading = false;
   const contractsLength = 5;
   const contractsTotal = 12;
 
   return (
-    <ThemeOverviewPage type={type}>
+    <ThemeOverviewPage type={type} loading={loading}>
       <TableList
+        loading={loading}
         titleTranslationId={`theme.${type}.listTitle`}
         readMoreTranslationId={`theme.${type}.listViewAll`}
         readMoreLink={paths.themeList(type)}

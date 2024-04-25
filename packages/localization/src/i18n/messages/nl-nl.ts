@@ -9,7 +9,6 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.overview": "Overzicht",
     "pageTitles.cases": "Mijn lopende zaken",
     "pageTitles.notifications": "Mijn berichten",
-    "pageTitles.themeOverview": "Thema",
     "pageTitles.documents": "Documenten",
     "pageTitles.offline": "Geen internetverbinding",
     "pageTitles.form": "Formulier",

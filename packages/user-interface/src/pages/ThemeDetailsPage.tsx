@@ -13,18 +13,23 @@ import {
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import LinksList from "../components/LinksList";
-import DocumentsList from "../components/DocumentsList";
 
 interface Props {
   type: string;
+  loading: boolean;
+  titleTranslationId?: string;
   showTasksLength?: number;
   showCasesLength?: number;
+  children?: React.ReactNode;
 }
 
 const ThemeDetailsPage = ({
   type,
+  loading: loadingProp,
+  titleTranslationId = `pageTitles.${type}`,
   showTasksLength = 5,
   showCasesLength = 4,
+  children,
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
@@ -38,7 +43,7 @@ const ThemeDetailsPage = ({
     loading: casesLoading,
     error: casesError,
   } = useGetZakenQuery();
-  const loading = tasksLoading || casesLoading;
+  const loading = loadingProp || tasksLoading || casesLoading;
   const tasks = tasksData?.getTaken.content as Taak[] | undefined;
   const cases = casesData?.getZaken.content as Zaak[] | undefined;
 
@@ -46,7 +51,7 @@ const ThemeDetailsPage = ({
     <PageGrid>
       <div>
         <BackLink routePath={paths.themeOverview(type)} />
-        <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}` })} />
+        <PageHeader title={intl.formatMessage({ id: titleTranslationId })} />
       </div>
       {showTasksLength && (
         <TasksList
@@ -80,11 +85,7 @@ const ThemeDetailsPage = ({
           }
         />
       )}
-      <DocumentsList
-        loading={loading}
-        error={Boolean(casesError)}
-        documents={[]} // TODO: Add documents
-      />
+      {children}
       {showTasksLength && (
         <TasksList
           loading={loading}
