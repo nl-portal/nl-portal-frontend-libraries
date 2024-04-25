@@ -373,8 +373,8 @@ importers:
         specifier: 0.2.3-alpha.380
         version: 0.2.3-alpha.380(react@18.2.0)
       '@gemeente-denhaag/table':
-        specifier: 0.1.1-alpha.283
-        version: 0.1.1-alpha.283(react@18.2.0)
+        specifier: 0.1.1-alpha.289
+        version: 0.1.1-alpha.289(react@18.2.0)
       '@gemeente-denhaag/text-input':
         specifier: 0.3.0-alpha.372
         version: 0.3.0-alpha.372(date-fns@3.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -1307,13 +1307,13 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
-  '@gemeente-denhaag/icons@0.2.3-alpha.381':
-    resolution: {integrity: sha512-yT4cycD7VHjYT5E0J0npk0LebvQYTFlYi4bmH5q1H3TURPSGFDDLp8S+onEAoA+HA7eJesqq3Jbp1g5e5t7VyQ==}
+  '@gemeente-denhaag/icons@0.2.3-alpha.383':
+    resolution: {integrity: sha512-sOSpkEOUk4KS0yYMZgF0JlN6jhofRhDVIPkzYng059d1/yl00VnY1f1SFlO5F4/SZ5zFNWmU3uHXVDNIAxohqw==}
     peerDependencies:
       react: ^18.0.0
 
-  '@gemeente-denhaag/icons@0.2.3-alpha.383':
-    resolution: {integrity: sha512-sOSpkEOUk4KS0yYMZgF0JlN6jhofRhDVIPkzYng059d1/yl00VnY1f1SFlO5F4/SZ5zFNWmU3uHXVDNIAxohqw==}
+  '@gemeente-denhaag/icons@0.2.3-alpha.387':
+    resolution: {integrity: sha512-DSwO9f758+PshF9upshVNtftnlAws2Z9mr7M5/QYKzOHZRygngUdlRCZ38+sfbaO6i4CXH9FzRQ9ZuXroj+2PQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1340,8 +1340,8 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
-  '@gemeente-denhaag/link@0.2.3-alpha.381':
-    resolution: {integrity: sha512-HyEFu1ibqpXIyHXygchyCQkPjwFbmnx4+l3oQ3tQs0vf8FT9zgnXlmeJjSMhdcVDQv4CfGNeqbNL14eref7rqQ==}
+  '@gemeente-denhaag/link@0.2.3-alpha.387':
+    resolution: {integrity: sha512-5EZ6roVw4mFzBXBB/4frZUEJYgzmFYc1h7ofY/AKaS3cV1SzEU+VLw7BrPlCp02FNyJHDgyyn6oPR8LbgxYxqw==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1416,8 +1416,8 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
-  '@gemeente-denhaag/table@0.1.1-alpha.283':
-    resolution: {integrity: sha512-GMcpgUepWCrIJpzIYiX0/Y1KyQO5ZwVWUmnW80l014BvwDI0Z//LD4fgPXVT+t7soLg/SHHSVMnwBXchDrkj2A==}
+  '@gemeente-denhaag/table@0.1.1-alpha.289':
+    resolution: {integrity: sha512-AlmM6ufRZz/9yUGyQkYfiYMDy5KnafPtvy2VHwVAfwK4b2M6Hqe8ZijUOm/PVhvZXn0N+3v/7vb2AJrokZrnzQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -6280,11 +6280,11 @@ snapshots:
     dependencies:
       react: 18.2.0
 
-  '@gemeente-denhaag/icons@0.2.3-alpha.381(react@18.2.0)':
+  '@gemeente-denhaag/icons@0.2.3-alpha.383(react@18.2.0)':
     dependencies:
       react: 18.2.0
 
-  '@gemeente-denhaag/icons@0.2.3-alpha.383(react@18.2.0)':
+  '@gemeente-denhaag/icons@0.2.3-alpha.387(react@18.2.0)':
     dependencies:
       react: 18.2.0
 
@@ -6323,9 +6323,9 @@ snapshots:
       '@gemeente-denhaag/icons': 0.2.3-alpha.374(react@18.2.0)
       react: 18.2.0
 
-  '@gemeente-denhaag/link@0.2.3-alpha.381(react@18.2.0)':
+  '@gemeente-denhaag/link@0.2.3-alpha.387(react@18.2.0)':
     dependencies:
-      '@gemeente-denhaag/icons': 0.2.3-alpha.381(react@18.2.0)
+      '@gemeente-denhaag/icons': 0.2.3-alpha.387(react@18.2.0)
       react: 18.2.0
 
   '@gemeente-denhaag/list@0.2.3-alpha.372(react@18.2.0)':
@@ -6411,9 +6411,9 @@ snapshots:
     dependencies:
       react: 18.2.0
 
-  '@gemeente-denhaag/table@0.1.1-alpha.283(react@18.2.0)':
+  '@gemeente-denhaag/table@0.1.1-alpha.289(react@18.2.0)':
     dependencies:
-      '@gemeente-denhaag/link': 0.2.3-alpha.381(react@18.2.0)
+      '@gemeente-denhaag/link': 0.2.3-alpha.387(react@18.2.0)
       react: 18.2.0
 
   '@gemeente-denhaag/text-input@0.3.0-alpha.372(date-fns@3.3.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
