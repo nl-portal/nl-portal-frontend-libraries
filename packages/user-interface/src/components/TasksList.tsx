@@ -17,6 +17,7 @@ interface Props {
   emptyTranslationId?: string;
   showTitle?: boolean;
   titleTranslationId?: string;
+  openInContext?: boolean;
   readMoreAmount?: number;
   readMoreLink?: string;
   readMoreTranslationId?: string;
@@ -34,6 +35,7 @@ const TasksList = ({
   emptyTranslationId = "tasksList.empty",
   showTitle = true,
   titleTranslationId = "tasksList.title",
+  openInContext,
   readMoreAmount,
   readMoreLink,
   readMoreTranslationId = "tasksList.viewAll",
@@ -90,7 +92,7 @@ const TasksList = ({
     <section className={styles["tasks-list"]}>
       <SectionHeader title={title} subTitle={subTitle} href={tasksPath} />
       {tasks.map((task) => (
-        <Task key={task.id} task={task} />
+        <Task key={task.id} task={task} openInContext={openInContext} />
       ))}
       {indexLimit ? (
         <Pagination

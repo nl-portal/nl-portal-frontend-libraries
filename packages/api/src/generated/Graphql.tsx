@@ -156,7 +156,7 @@ export type MaterieleRegistratie = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  /** Create payment with hash and fields */
+  /** Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
   /** Submit a task */
   submitTaak: Taak;
@@ -611,7 +611,7 @@ export type GetTaakByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } } };
+export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, status: TaakStatus, date: string, data: any, zaak?: string | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } } };
 
 export type GetTakenQueryVariables = Exact<{
   zaakId?: InputMaybe<Scalars['UUID']['input']>;
@@ -620,7 +620,7 @@ export type GetTakenQueryVariables = Exact<{
 }>;
 
 
-export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
+export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, data: any, zaak?: string | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1350,6 +1350,7 @@ export const GetTaakByIdDocument = gql`
     status
     date
     data
+    zaak
   }
 }
     ${FormulierFieldsFragmentDoc}`;
@@ -1399,6 +1400,8 @@ export const GetTakenDocument = gql`
       status
       date
       verloopdatum
+      data
+      zaak
     }
     totalElements
     totalPages

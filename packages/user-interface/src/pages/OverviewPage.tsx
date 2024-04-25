@@ -74,6 +74,7 @@ const OverviewPage = ({
           loading={loading}
           error={Boolean(tasksError)}
           tasks={tasks}
+          openInContext={true}
           readMoreAmount={
             tasksData?.getTaken.totalElements &&
             tasksData?.getTaken.totalElements > tasksPreviewLength

@@ -6,26 +6,20 @@ import useActionLabels from "../hooks/useActionLabels";
 import { ButtonLink } from "@gemeente-denhaag/button-link";
 import { ChevronRightIcon } from "@gemeente-denhaag/icons";
 import useOgonePayment from "../hooks/useOgonePayment";
+import { Button } from "@gemeente-denhaag/components-react";
+import { useContext } from "react";
+import { LocaleContext } from "@nl-portal/nl-portal-localization";
 
 interface Props {
   task: Taak;
+  openInContext?: boolean;
 }
 
-// TODO: move to custom hook with more logic
-const registerPayment = async (queryParams: URLSearchParams) => {
-  const response = await fetch(
-    `http://localhost:8090/api/payment/ogone/postsale?${queryParams.toString()}`,
-  );
-  console.log(response);
-  const data = await response.text();
-  console.log(data);
-  return null;
-};
-
-const Task = ({ task }: Props) => {
+const Task = ({ task, openInContext }: Props) => {
   const labels = useActionLabels();
+  const { currentLocale } = useContext(LocaleContext);
   const { formuliertype, value } = task.formulier ?? {};
-  const taskUrl = useTaskUrl(formuliertype, value, task.id);
+  const taskUrl = useTaskUrl(formuliertype, value, task, openInContext);
   const { startPayment, renderPaymentRedirectForm, showPaymentRedirectForm } =
     useOgonePayment();
 
@@ -33,61 +27,44 @@ const Task = ({ task }: Props) => {
     return renderPaymentRedirectForm();
   }
 
-  // TODO register payment in development
-  const queryParams = new URLSearchParams(location.search);
-  const type = queryParams.get("type");
-  const isSuccessful = queryParams.get("success");
+  const getActions = () => {
+    if (task.data?.type === "betaaltaak") {
+      let currentUrl = window.location.href;
+      const separator = currentUrl.indexOf("?") !== -1 ? "&" : "?";
+      currentUrl += `${separator}type=ogone`;
 
-  console.log(type, isSuccessful);
-  if (type === "ogone" && isSuccessful) {
-    queryParams.delete("type");
-    queryParams.delete("success");
-    console.log("url", queryParams.toString());
-    registerPayment(queryParams);
-  }
+      const paymentRequestPayload = {
+        amount: task.data.amount,
+        orderId: task.id,
+        reference: task.data.reference,
+        pspId: task.data.pspId,
+        title: task.title,
+        langId: currentLocale.replace("-", "_"),
+        successUrl: `${currentUrl}&success=true`,
+        failureUrl: currentUrl,
+      };
 
-  const testingPayment = true;
+      return (
+        <Button onClick={() => startPayment(paymentRequestPayload)}>
+          Betalen
+        </Button>
+      );
+    }
+    if (task.formulier.formuliertype === "externalurl") {
+      return (
+        <ButtonLink href={taskUrl} target="_blank">
+          <ChevronRightIcon />
+        </ButtonLink>
+      );
+    }
+  };
 
-  if (testingPayment) {
-    const paymentRequestPayload = {
-      amount: 100.25,
-      orderId: "17021072517-10",
-      reference: "12345",
-      pspId: "TAX",
-      title: "Belastingzaken",
-      langId: "nl_NL",
-      successUrl: "https://localhost:3000/taken?type=ogone&success=true",
-      failureUrl: "https://localhost:3000/taken?type=ogone",
-    };
-
-    return (
-      <>
-        <ActionMulti
-          labels={labels}
-          dateTime={task.verloopdatum}
-          actions={
-            <ButtonLink href={taskUrl} target="_blank">
-              <ChevronRightIcon />
-            </ButtonLink>
-          }
-          onClick={() => startPayment(paymentRequestPayload)}
-        >
-          {task.title}
-        </ActionMulti>
-      </>
-    );
-  }
-
-  if (task.formulier.formuliertype === "externalurl")
+  if (!openInContext)
     return (
       <ActionMulti
         labels={labels}
         dateTime={task.verloopdatum}
-        actions={
-          <ButtonLink href={taskUrl} target="_blank">
-            <ChevronRightIcon />
-          </ButtonLink>
-        }
+        actions={getActions()}
       >
         {task.title}
       </ActionMulti>

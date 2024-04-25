@@ -17,6 +17,7 @@ const useOgonePayment = () => {
     mutateFunction({
       variables: { ...paymentRequestPayload },
       onCompleted: (data) => {
+        console.log(data);
         setPaymentData(data.generateOgonePayment);
         setShowPaymentRedirectForm(true);
       },
@@ -27,7 +28,11 @@ const useOgonePayment = () => {
     return paymentData && <OgonePaymentForm {...paymentData} />;
   };
 
-  return { startPayment, renderPaymentRedirectForm, showPaymentRedirectForm };
+  return {
+    startPayment,
+    renderPaymentRedirectForm,
+    showPaymentRedirectForm,
+  };
 };
 
 export default useOgonePayment;

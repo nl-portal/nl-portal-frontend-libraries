@@ -6,7 +6,7 @@ import {
   Taak,
   ContactMoment,
 } from "@nl-portal/nl-portal-api";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { Alert, Paragraph } from "@gemeente-denhaag/components-react";
 import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
 import {
   Table,
@@ -28,6 +28,9 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import SectionHeader from "../components/SectionHeader";
+import useOgonePaymentRegistration, {
+  PaymentStatus,
+} from "../hooks/useOgonePaymentRegistration";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -52,6 +55,7 @@ const CasePage = ({
   const { data: tasksResult, loading: taskLoading } = useGetTakenQuery({
     variables: { zaakId: id },
   });
+  const { paymentStatus } = useOgonePaymentRegistration();
 
   const loading = caseLoading || taskLoading || momentsLoading;
   const tasks = tasksResult?.getTaken.content as Taak[] | undefined;
@@ -112,6 +116,11 @@ const CasePage = ({
 
   return (
     <PageGrid>
+      {paymentStatus === PaymentStatus.SUCCESS && (
+        <div>
+          <Alert title="Success" text="test" variant="success" />
+        </div>
+      )}
       <div>
         {backlink && <BackLink {...backlink} />}
         <PageHeader
