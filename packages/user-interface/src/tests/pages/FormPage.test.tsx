@@ -1,36 +1,22 @@
 import { describe, it, expect } from "vitest";
-import FormPage from "../../pages/FormPage.tsx";
-import { render, screen } from "@testing-library/react";
-import { IntlProvider } from "react-intl";
-import { Routes, Route, MemoryRouter } from "react-router-dom";
+import {
+  MockFormPage,
+  MockFormPageEmpty,
+} from "../mock/pages/FormPage.mock.tsx";
+import { render, screen, waitFor } from "@testing-library/react";
 
 describe("FormPage", () => {
-  it("is truthy", () => {
-    expect(FormPage).toBeTruthy();
+  it("should render the get-forms query and show empty result", async () => {
+    render(MockFormPageEmpty());
+    await waitFor(() => {});
+    expect(screen.getByTestId(`form-not-found-title`)).toBeInTheDocument();
+    expect(screen.getByTestId(`form-not-found`)).toBeInTheDocument();
   });
 
-  it("should run query get-form", () => {});
-
-  it("should render form not found", () => {
-    render(
-      <IntlProvider locale={"nl"}>
-        <FormPage />
-      </IntlProvider>,
-    );
-    expect(screen.getByTestId("form-not-found")).toBeInTheDocument();
-  });
-
-  it("should render form", () => {
-    const formId = "form-1";
-    render(
-      <IntlProvider locale={"nl"}>
-        <MemoryRouter initialEntries={[`/formulieren/${formId}`]}>
-          <Routes>
-            <Route path="/formulieren/:name" element={<FormPage />} />
-          </Routes>
-        </MemoryRouter>
-      </IntlProvider>,
-    );
-    expect(screen.getByTestId(`form-${formId}`)).toBeInTheDocument();
+  it("should render the get-forms query", async () => {
+    render(MockFormPage());
+    await waitFor(() => {});
+    expect(screen.getByTestId(`form-title`)).toBeInTheDocument();
+    expect(screen.getByTestId(`form-rendered`)).toBeInTheDocument();
   });
 });

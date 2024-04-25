@@ -17,8 +17,7 @@ const FormPage = () => {
   const intl = useIntl();
   const client = useApolloClient();
   const [submitted, setSubmitted] = useState(false);
-
-  const { data, loading, error } = useGetFormDefinitionByNameQuery({
+  const { data, loading } = useGetFormDefinitionByNameQuery({
     variables: {
       name: safeName,
     },
@@ -36,7 +35,6 @@ const FormPage = () => {
     state: string;
     data: object;
   }) => {
-    console.log(formioSubmission);
     if (formioSubmission?.state === "submitted") {
       await submitStartForm({
         variables: {
@@ -71,19 +69,19 @@ const FormPage = () => {
     <PageGrid>
       <PageHeader
         title={
-          !error ? (
-            <span data-testid={`form-${safeName}`}>
+          data?.getFormDefinitionByName?.formDefinition?.components ? (
+            <span data-testid={`form-title`}>
               <FormattedMessage id={`forms.${safeName}`} />
             </span>
           ) : (
-            <span data-testid={`form-not-found`}>
+            <span data-testid={`form-not-found-title`}>
               <FormattedMessage id="form.notFound" />
             </span>
           )
         }
       />
-      {data?.getFormDefinitionByName?.formDefinition ? (
-        <div className="bootstrap">
+      {data?.getFormDefinitionByName?.formDefinition?.components ? (
+        <div className="bootstrap" data-testid={`form-rendered`}>
           <Form
             form={data?.getFormDefinitionByName?.formDefinition}
             onSubmit={onFormSubmit}

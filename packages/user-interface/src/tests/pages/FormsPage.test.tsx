@@ -17,7 +17,7 @@ describe("FormsPage", () => {
     expect(screen.getByTestId(`forms-item-start3`)).toBeInTheDocument();
   });
 
-  it("should render the get-forms query and show empty", async () => {
+  it("should render the get-forms query and show empty result", async () => {
     render(MockFormsPageEmpty());
     await waitFor(() => {
       expect(screen.getByText("Forms")).toBeInTheDocument();
