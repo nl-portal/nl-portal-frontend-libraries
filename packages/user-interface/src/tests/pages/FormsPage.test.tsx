@@ -1,34 +1,27 @@
 import { describe, it, expect } from "vitest";
-import FormsPage from "../../pages/FormsPage.tsx";
-import { render, screen } from "@testing-library/react";
-import { IntlProvider } from "react-intl";
+import { render, screen, waitFor } from "@testing-library/react";
+import {
+  MockFormsPage,
+  MockFormsPageEmpty,
+} from "../mock/pages/FormsPage.mock.tsx";
 
 describe("FormsPage", () => {
-  it("is truthy", () => {
-    expect(FormsPage).toBeTruthy();
+  it("should render the get-forms query", async () => {
+    render(MockFormsPage());
+    await waitFor(() => {
+      expect(screen.getByText("Forms")).toBeInTheDocument();
+    });
+    expect(screen.getByText("Available forms")).toBeInTheDocument();
+    expect(screen.getByTestId(`forms-item-start1`)).toBeInTheDocument();
+    expect(screen.getByTestId(`forms-item-start2`)).toBeInTheDocument();
+    expect(screen.getByTestId(`forms-item-start3`)).toBeInTheDocument();
   });
 
-  it("should run query get-forms", () => {});
-
-  it("should render empty states", () => {
-    render(
-      <IntlProvider locale={"nl"}>
-        <FormsPage />
-      </IntlProvider>,
-    );
-    expect(screen.getByTestId("empty-forms")).toBeInTheDocument();
-  });
-
-  it("should render forms list", () => {
-    render(
-      <IntlProvider locale={"nl"}>
-        <FormsPage />
-      </IntlProvider>,
-    );
-    expect(screen.getByTestId("list-forms")).toBeInTheDocument();
-    expect(screen.getByTestId("forms-item-form-1")).toBeInTheDocument();
-    expect(screen.getByTestId("forms-item-form-2")).toBeInTheDocument();
-    expect(screen.getByText("forms.form-1")).toBeVisible();
-    expect(screen.getByText("forms.form-2")).toBeVisible();
+  it("should render the get-forms query and show empty", async () => {
+    render(MockFormsPageEmpty());
+    await waitFor(() => {
+      expect(screen.getByText("Forms")).toBeInTheDocument();
+    });
+    expect(screen.getByTestId(`empty-forms`)).toBeInTheDocument();
   });
 });

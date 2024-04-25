@@ -16,7 +16,7 @@ const FormsPage = () => {
   return (
     <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.forms" />}>
-        {error && data?.allStartForms && !data?.allStartForms.length && (
+        {(error || (data?.allStartForms && !data?.allStartForms.length)) && (
           <span data-testid={"empty-forms"}>
             <FormattedMessage id="formsList.empty" />
           </span>
