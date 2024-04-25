@@ -7,7 +7,6 @@ import { useState } from "react";
 import OgonePaymentForm from "../components/OgonePaymentForm";
 
 const useOgonePayment = () => {
-  const [showPaymentRedirectForm, setShowPaymentRedirectForm] = useState(false);
   const [paymentData, setPaymentData] = useState<OgonePayment>();
   const [mutateFunction] = useGenerateOgonePaymentMutation();
 
@@ -19,7 +18,6 @@ const useOgonePayment = () => {
       onCompleted: (data) => {
         console.log(data);
         setPaymentData(data.generateOgonePayment);
-        setShowPaymentRedirectForm(true);
       },
     });
   };
@@ -31,7 +29,6 @@ const useOgonePayment = () => {
   return {
     startPayment,
     renderPaymentRedirectForm,
-    showPaymentRedirectForm,
   };
 };
 

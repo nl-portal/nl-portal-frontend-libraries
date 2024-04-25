@@ -20,11 +20,11 @@ const Task = ({ task, openInContext }: Props) => {
   const { currentLocale } = useContext(LocaleContext);
   const { formuliertype, value } = task.formulier ?? {};
   const taskUrl = useTaskUrl(formuliertype, value, task, openInContext);
-  const { startPayment, renderPaymentRedirectForm, showPaymentRedirectForm } =
-    useOgonePayment();
+  const { startPayment, renderPaymentRedirectForm } = useOgonePayment();
 
-  if (showPaymentRedirectForm) {
-    return renderPaymentRedirectForm();
+  const paymentForm = renderPaymentRedirectForm();
+  if (paymentForm) {
+    return paymentForm;
   }
 
   const getActions = () => {
