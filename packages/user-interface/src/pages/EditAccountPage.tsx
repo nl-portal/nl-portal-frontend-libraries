@@ -15,6 +15,7 @@ import { REGEX_PATTERNS } from "../constants/regex-patterns";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import BackLink from "../components/BackLink";
 
 const EditAccountPage = () => {
   const { currentLocale } = useContext(LocaleContext);
@@ -55,17 +56,20 @@ const EditAccountPage = () => {
 
   return (
     <PageGrid>
-      <PageHeader
-        title={
-          currentLocale.toLowerCase().includes("nl")
-            ? `${propTranslation} ${intl
-                .formatMessage({ id: "account.edit" })
-                .toLowerCase()}`
-            : `${intl.formatMessage({
-                id: "account.edit",
-              })} ${propTranslation.toLowerCase()}`
-        }
-      />
+      <div>
+        <BackLink routePath={paths.account} />
+        <PageHeader
+          title={
+            currentLocale.toLowerCase().includes("nl")
+              ? `${propTranslation} ${intl
+                  .formatMessage({ id: "account.edit" })
+                  .toLowerCase()}`
+              : `${intl.formatMessage({
+                  id: "account.edit",
+                })} ${propTranslation.toLowerCase()}`
+          }
+        />
+      </div>
       <div>
         <div className={styles["edit-account__text-field-container"]}>
           <FormField invalid={invalid} type="text">
