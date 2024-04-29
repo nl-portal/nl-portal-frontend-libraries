@@ -20,7 +20,7 @@ export const testPaths: Paths = {
   notifications: "/berichten",
   themeOverview: (type = ":type") => `/${type}`,
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
-  themeList: (type = ":type") => `/${type}/lijst`,
+  themeSub: (type = ":type", slug = ":slug") => `/${type}/${slug}`,
   account: "/account",
   editAccount: "/account/aanpassen",
 };

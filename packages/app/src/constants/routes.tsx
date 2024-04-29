@@ -62,7 +62,7 @@ export const routes = [
         element: <ThemeSampleOverviewPage />,
       },
       {
-        path: paths.themeList("sample"),
+        path: paths.themeList("sample", "contracten"),
         element: <ThemeSampleListPage />,
       },
       {
