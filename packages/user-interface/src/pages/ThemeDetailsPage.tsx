@@ -16,7 +16,7 @@ import LinksList from "../components/LinksList";
 
 interface Props {
   type: string;
-  loading: boolean;
+  loading?: boolean;
   titleTranslationId?: string;
   showTasksLength?: number;
   showCasesLength?: number;
