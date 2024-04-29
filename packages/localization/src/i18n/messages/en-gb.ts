@@ -85,6 +85,12 @@ export const EN_GB_MESSAGES: Messages = {
     "tasks.fetchError": "There was an error, try again later.",
     "task.completed": "Task completed",
     "task.returnMessage": "The task is successfully completed.",
+    "task.paymentFailureText":
+      "Unfortunately the payment was not successful. Try again later.",
+    "task.paymentFailureTitle": "Payment failed",
+    "task.paymentSuccessText":
+      "You will receive a confirmation email as soon as possible.",
+    "task.paymentSuccessTitle": "Success, you have paid.",
     "linksList.title": "What I can arrange",
     "documentsList.title": "Documents",
     "documentsList.fetchError": "There was an error, try again later.",

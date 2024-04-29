@@ -118,7 +118,20 @@ const CasePage = ({
     <PageGrid>
       {paymentStatus === PaymentStatus.SUCCESS && (
         <div>
-          <Alert title="Success" text="test" variant="success" />
+          <Alert
+            variant="success"
+            title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
+            text={intl.formatMessage({ id: "task.paymentSuccessText" })}
+          />
+        </div>
+      )}
+      {paymentStatus === PaymentStatus.FAILURE && (
+        <div>
+          <Alert
+            variant="error"
+            title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
+            text={intl.formatMessage({ id: "task.paymentFailureText" })}
+          />
         </div>
       )}
       <div>

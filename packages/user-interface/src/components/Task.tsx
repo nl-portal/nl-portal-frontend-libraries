@@ -59,7 +59,7 @@ const Task = ({ task, openInContext }: Props) => {
     }
   };
 
-  if (!openInContext)
+  if (!openInContext) {
     return (
       <ActionMulti
         labels={labels}
@@ -69,6 +69,7 @@ const Task = ({ task, openInContext }: Props) => {
         {task.title}
       </ActionMulti>
     );
+  }
 
   return (
     <ActionSingle

@@ -37,7 +37,7 @@ const useOgonePaymentRegistration = () => {
           setSearchParams(newSearchParams);
         });
     }
-  }, [type, paymentStatus]);
+  }, [type, paymentStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { paymentStatus };
 };
