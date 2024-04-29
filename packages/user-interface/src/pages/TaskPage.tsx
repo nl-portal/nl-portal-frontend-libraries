@@ -127,21 +127,27 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
 
   if (submitted) {
     return (
-      <Alert
-        variant="success"
-        title={intl.formatMessage({ id: "task.completeTitle" })}
-        text={intl.formatMessage({ id: "task.completeDescription" })}
-      />
+      <>
+        {backlink && <BackLink {...backlink} />}
+        <Alert
+          variant="success"
+          title={intl.formatMessage({ id: "task.completeTitle" })}
+          text={intl.formatMessage({ id: "task.completeDescription" })}
+        />
+      </>
     );
   }
 
   if (!formDefinitionId && !formDefinitionUrl) {
     return (
-      <Alert
-        variant="error"
-        title={intl.formatMessage({ id: "task.fetchError" })}
-        text=""
-      />
+      <>
+        {backlink && <BackLink {...backlink} />}
+        <Alert
+          variant="error"
+          title={intl.formatMessage({ id: "task.fetchError" })}
+          text=""
+        />
+      </>
     );
   }
 
