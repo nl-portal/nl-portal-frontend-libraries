@@ -16,7 +16,7 @@ import LinksList from "../components/LinksList";
 
 interface Props {
   type: string;
-  loading: boolean;
+  loading?: boolean;
   titleTranslationId?: string;
   showTasksLength?: number;
   showCasesLength?: number;
@@ -51,7 +51,10 @@ const ThemeDetailsPage = ({
     <PageGrid>
       <div>
         <BackLink routePath={paths.themeOverview(type)} />
-        <PageHeader title={intl.formatMessage({ id: titleTranslationId })} />
+        <PageHeader
+          loading={loading}
+          title={intl.formatMessage({ id: titleTranslationId })}
+        />
       </div>
       {showTasksLength && (
         <TasksList

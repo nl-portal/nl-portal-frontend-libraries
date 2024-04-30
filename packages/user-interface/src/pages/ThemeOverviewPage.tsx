@@ -12,7 +12,7 @@ import {
 
 interface Props {
   type: string;
-  loading: boolean;
+  loading?: boolean;
   showTasksLength?: number;
   showCasesLength?: number;
   children?: React.ReactNode;

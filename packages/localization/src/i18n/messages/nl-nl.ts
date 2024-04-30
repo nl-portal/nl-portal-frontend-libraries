@@ -111,5 +111,9 @@ export const NL_NL_MESSAGES: Messages = {
     "documentsList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "documentsList.empty": "Er zijn geen documenten beschikbaar.",
+    "descriptionList.title": "Details",
+    "descriptionList.fetchError":
+      "Er is een fout opgetreden, probeer het later nogmaals.",
+    "descriptionList.empty": "Er zijn geen details beschikbaar.",
   },
 };
