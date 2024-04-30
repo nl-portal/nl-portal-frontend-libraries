@@ -1,4 +1,4 @@
-import { getForms } from "./AllRequests.mock.tsx";
+import { getStartForms } from "./AllRequests.mock.tsx";
 
-export const mockRequestEmpty = [getForms()];
-export const mockRequest = [getForms(3)];
+export const mockRequestEmpty = [getStartForms()];
+export const mockRequest = [getStartForms(3)];

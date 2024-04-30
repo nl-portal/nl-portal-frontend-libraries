@@ -6,7 +6,7 @@ import {
   QUERY_GET_OBJECT_CONTACT_MOMENTEN,
   QUERY_GET_ZAAK,
   QUERY_GET_ZAKEN,
-  QUERY_GET_FORMS,
+  QUERY_GET_START_FORMS,
   QUERY_GET_FORM,
 } from "@nl-portal/nl-portal-api";
 import { FetchResult, GraphQLRequest } from "@apollo/client";
@@ -1109,7 +1109,7 @@ const arrayForms = [
   },
 ];
 
-export const getForms = (
+export const getStartForms = (
   pageSizeRequest?: number,
 ): {
   request: GraphQLRequest;
@@ -1122,7 +1122,7 @@ export const getForms = (
 
   return {
     request: {
-      query: QUERY_GET_FORMS,
+      query: QUERY_GET_START_FORMS,
       variables: {},
     },
     result: {

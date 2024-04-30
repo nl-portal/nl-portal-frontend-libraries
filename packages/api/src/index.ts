@@ -12,3 +12,4 @@ export * from "./queries/get-bewoner-aantal.ts";
 export * from "./queries/get-forms.ts";
 export * from "./queries/get-form.ts";
 export * from "./queries/get-erfpacht-contracten";
+export * from "./queries/get-start-forms.ts";

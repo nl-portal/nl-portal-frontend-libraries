@@ -4,10 +4,10 @@ import { FormattedMessage } from "react-intl";
 import { Link } from "@gemeente-denhaag/link";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 import { Heading3 } from "@gemeente-denhaag/components-react";
-import { useGetFormsQuery } from "@nl-portal/nl-portal-api";
+import { useGetStartFormsQuery } from "@nl-portal/nl-portal-api";
 
 const FormsPage = () => {
-  const { data, loading, error } = useGetFormsQuery();
+  const { data, loading, error } = useGetStartFormsQuery();
 
   if (loading) {
     return null;

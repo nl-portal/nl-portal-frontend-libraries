@@ -6,7 +6,7 @@ import {
 } from "../mock/pages/FormsPage.mock.tsx";
 
 describe("FormsPage", () => {
-  it("should render the get-forms query", async () => {
+  it("should render the get-start-forms query", async () => {
     render(MockFormsPage());
     await waitFor(() => {
       expect(screen.getByText("Forms")).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe("FormsPage", () => {
     expect(screen.getByTestId(`forms-item-start3`)).toBeInTheDocument();
   });
 
-  it("should render the get-forms query and show empty result", async () => {
+  it("should render the get-start-forms query and show empty result", async () => {
     render(MockFormsPageEmpty());
     await waitFor(() => {
       expect(screen.getByText("Forms")).toBeInTheDocument();
