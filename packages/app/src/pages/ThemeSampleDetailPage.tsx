@@ -35,7 +35,8 @@ const ThemeSampleDetailPage = () => {
         ]}
       />
       <DescriptionList
-        title="Gegevens contactpersoon"
+        loading={loading}
+        titleTranslationId="Gegevens contactpersoon"
         items={[
           {
             title: "Naam",
@@ -56,6 +57,7 @@ const ThemeSampleDetailPage = () => {
         ]}
       />
       <TableList
+        loading={loading}
         titleTranslationId="Financiele gegevens"
         headers={["Soort finanacien", "Bedrag", "Periode", "Factuurwijze"]}
         rows={[

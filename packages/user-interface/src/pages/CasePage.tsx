@@ -136,7 +136,7 @@ const CasePage = ({
       </div>
       {details.length > 0 && (
         <DescriptionList
-          title={intl.formatMessage({ id: "case.detailsHeader" })}
+          titleTranslationId="case.detailsHeader"
           items={details}
         />
       )}
@@ -149,7 +149,7 @@ const CasePage = ({
           <React.Fragment key={section.heading}>
             {listItems.length > 0 && (
               <DescriptionList
-                title={section.heading}
+                titleTranslationId={section.heading}
                 items={listItems.map((item: any) => ({
                   title: item.key,
                   detail: item.waarde,

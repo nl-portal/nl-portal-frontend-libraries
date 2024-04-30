@@ -104,5 +104,8 @@ export const EN_GB_MESSAGES: Messages = {
     "documentsList.title": "Documents",
     "documentsList.fetchError": "There was an error, try again later.",
     "documentsList.empty": "There are no documents.",
+    "descriptionList.title": "Details",
+    "descriptionList.fetchError": "There was an error, try again later.",
+    "descriptionList.empty": "There are no details available.",
   },
 };
