@@ -51,7 +51,10 @@ const ThemeDetailsPage = ({
     <PageGrid>
       <div>
         <BackLink routePath={paths.themeOverview(type)} />
-        <PageHeader title={intl.formatMessage({ id: titleTranslationId })} />
+        <PageHeader
+          loading={loading}
+          title={intl.formatMessage({ id: titleTranslationId })}
+        />
       </div>
       {showTasksLength && (
         <TasksList
