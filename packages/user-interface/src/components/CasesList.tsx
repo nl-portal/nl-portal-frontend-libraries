@@ -48,7 +48,7 @@ const CasesList = ({
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
 
-  //TODO: remove Math.min once cases api offers pagination
+  //TODO: remove Math.min once cases api offers pagination, we dont offer pagination for now because of the lack of support in the api
   const subTitle =
     totalAmount && readMoreTranslationId
       ? intl.formatMessage(
