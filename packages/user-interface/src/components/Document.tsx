@@ -29,7 +29,7 @@ const Document = ({ document: doc }: Props) => {
     const link = document.createElement("a");
 
     link.href = href;
-    link.download = `${name}`;
+    link.download = `${doc.bestandsnaam}.${doc.formaat}`;
     document.body.appendChild(link);
     link.dispatchEvent(
       new MouseEvent("click", {
