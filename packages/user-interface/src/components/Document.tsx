@@ -16,6 +16,7 @@ const Document = ({ document: doc }: Props) => {
   const { keycloakToken } = useContext(KeycloakContext);
   const { restUri } = useContext(ApiContext);
   const { hrefLang } = useContext(LocaleContext);
+  const fileName = doc.bestandsnaam || "";
   const downloadLink = `${restUri}/documentapi/${doc.documentapi}/document/${doc.uuid}/content`;
 
   const onClick = async (event: React.MouseEvent<HTMLElement>) => {
@@ -29,7 +30,7 @@ const Document = ({ document: doc }: Props) => {
     const link = document.createElement("a");
 
     link.href = href;
-    link.download = `${doc.bestandsnaam}.${doc.formaat}`;
+    link.download = fileName;
     document.body.appendChild(link);
     link.dispatchEvent(
       new MouseEvent("click", {
@@ -44,8 +45,8 @@ const Document = ({ document: doc }: Props) => {
 
   return (
     <File
-      name={doc.bestandsnaam || ""}
-      href={doc.bestandsnaam || ""}
+      name={fileName}
+      href={fileName}
       size={prettyBytes(doc.bestandsomvang || 0, { locale: hrefLang })}
       onClick={onClick}
     />
