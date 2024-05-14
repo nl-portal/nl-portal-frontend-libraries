@@ -46,11 +46,8 @@ const Document = ({ document: doc }: Props) => {
     <File
       name={
         doc.bestandsnaam && doc.bestandsnaam?.lastIndexOf(".") >= 0
-          ? doc.bestandsnaam?.substring(
-              0,
-              doc.bestandsnaam.lastIndexOf(".") - 1,
-            )
-          : ""
+          ? doc.bestandsnaam?.substring(0, doc.bestandsnaam.lastIndexOf("."))
+          : doc.bestandsnaam || ""
       }
       href={doc.bestandsnaam || ""}
       size={prettyBytes(doc.bestandsomvang || 0, { locale: hrefLang })}
