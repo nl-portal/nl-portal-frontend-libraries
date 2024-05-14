@@ -32,7 +32,7 @@ describe("CasePage", () => {
 
     await waitForElementToBeRemoved(() => screen.getAllByLabelText("Loading"));
 
-    expect(screen.getByText("Certificaat WWJB.pdf")).toBeVisible();
+    expect(screen.getByText("Certificaat WWJB")).toBeVisible();
     expect(screen.getByText("case.B0756.title")).toBeVisible();
     expect(screen.getByText("ZAAK-2023-0000007947")).toBeVisible();
     expect(screen.getByRole("table")).toBeVisible();
@@ -45,7 +45,7 @@ describe("CasePage", () => {
 
     await waitForElementToBeRemoved(() => screen.getAllByLabelText("Loading"));
 
-    expect(screen.queryByText("Certificaat WWJB.pdf")).toBeNull();
+    expect(screen.queryByText("Certificaat WWJB")).toBeNull();
     expect(screen.queryByText("There are no documents.")).toBeVisible();
     expect(screen.queryByText("Previous contact moments")).toBeVisible();
   });
@@ -56,7 +56,7 @@ describe("CasePage", () => {
     await waitForElementToBeRemoved(() => screen.getAllByLabelText("Loading"));
 
     expect(screen.getByText("Documents"));
-    expect(screen.getByText("Certificaat WWJB.pdf")).toBeVisible();
+    expect(screen.getByText("Certificaat WWJB")).toBeVisible();
     expect(screen.queryByText("Previous contact moments")).toBeNull();
   });
 });
