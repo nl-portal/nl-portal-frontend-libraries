@@ -26,16 +26,21 @@ const ThemeOverviewPage = ({
   children,
 }: Props) => {
   const intl = useIntl();
+  const showTasks = showTasksLength > 0;
+  const taskQueryParams = showTasks
+    ? { variables: { pageSize: showTasksLength } }
+    : { skip: true };
   const {
     data: tasksData,
     loading: taskLoading,
     error: taskError,
-  } = useGetTakenQuery({ variables: { pageSize: showTasksLength } });
+  } = useGetTakenQuery(taskQueryParams);
   const {
     data: casesData,
     loading: casesLoading,
     error: casesError,
   } = useGetZakenQuery();
+
   const loading = loadingProp || taskLoading || casesLoading;
   const tasks = tasksData?.getTaken.content as Taak[] | undefined;
   const cases = casesData?.getZaken.content as Zaak[] | undefined;
@@ -43,7 +48,7 @@ const ThemeOverviewPage = ({
   return (
     <PageGrid>
       <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}` })} />
-      {showTasksLength && (
+      {showTasks && (
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
