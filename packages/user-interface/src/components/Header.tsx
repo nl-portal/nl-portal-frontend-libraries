@@ -6,11 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import useSize from "@react-hook/size";
 import useScrollPosition from "@react-hook/window-scroll";
-import {
-  Heading3,
-  Heading4,
-  IconButton,
-} from "@gemeente-denhaag/components-react";
+import { IconButton } from "@gemeente-denhaag/components-react";
 import { CloseIcon } from "@gemeente-denhaag/icons";
 import ResponsiveContent from "@gemeente-denhaag/responsive-content";
 import Skeleton from "react-loading-skeleton";
@@ -24,6 +20,7 @@ import { BREAKPOINTS } from "../constants/breakpoints";
 import CurrentPageIndicator from "./CurrentPageIndicator";
 import MenuToggleButton from "./MenuToggleButton";
 import { NavigationItem } from "../interfaces/navigation-item";
+import Heading from "./Heading";
 
 interface HeaderProps {
   logo: ReactElement;
@@ -184,13 +181,13 @@ const Header = ({
             {fullscreenForm && (
               <div className={styles["header__elements-fullscreen-form"]}>
                 {isTablet ? (
-                  <Heading3>
+                  <Heading as="h3">
                     {currentFormTitle || <Skeleton width={250} />}
-                  </Heading3>
+                  </Heading>
                 ) : (
-                  <Heading4>
+                  <Heading as="h4">
                     {currentFormTitle || <Skeleton width={150} />}
-                  </Heading4>
+                  </Heading>
                 )}
                 {React.cloneElement(
                   <IconButton

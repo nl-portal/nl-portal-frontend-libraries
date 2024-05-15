@@ -1,13 +1,14 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { FC, ReactElement, useContext } from "react";
-import { Heading4, Link } from "@gemeente-denhaag/components-react";
+import { Link } from "@gemeente-denhaag/components-react";
 import { ExternalLinkIcon } from "@gemeente-denhaag/icons";
 import ResponsiveContent from "@gemeente-denhaag/responsive-content";
 import classNames from "classnames";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { PortalFooter } from "../interfaces/portal-footer";
 import styles from "./Footer.module.scss";
+import Heading from "./Heading";
 
 interface FooterProps {
   footer: PortalFooter;
@@ -38,11 +39,11 @@ const Footer: FC<FooterProps> = ({ footer, facet }) => {
               })}
               key={column.titleTranslationKey}
             >
-              <Heading4>
+              <Heading as="h4">
                 <FormattedMessage
                   id={`footerColumns.${column.titleTranslationKey}`}
                 />
-              </Heading4>
+              </Heading>
               {column.links
                 .filter((link) => link.hrefLang === hrefLang)
                 .map((link) => (

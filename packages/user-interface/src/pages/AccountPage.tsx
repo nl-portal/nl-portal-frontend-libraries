@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Button, Heading3 } from "@gemeente-denhaag/components-react";
+import { Button } from "@gemeente-denhaag/components-react";
 import { FormattedMessage } from "react-intl";
 import {
   useGetBewonersAantalQuery,
@@ -17,6 +17,7 @@ import {
 } from "../utils/person-data";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
+import Heading from "../components/Heading";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
@@ -68,9 +69,9 @@ const AccountPage = ({
     <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
       <div>
-        <Heading3 className={styles["account__sub-header"]}>
+        <Heading as="h3" className={styles["account__sub-header"]}>
           <FormattedMessage id="account.contactHeader" />
-        </Heading3>
+        </Heading>
         <DetailList
           details={[
             {
@@ -90,9 +91,9 @@ const AccountPage = ({
       </div>
       {showNotificationSubSection && (
         <div className={styles["account__sub-section"]}>
-          <Heading3 className={styles["account__sub-header"]}>
+          <Heading as="h3" className={styles["account__sub-header"]}>
             <FormattedMessage id="account.notificationsHeader" />
-          </Heading3>
+          </Heading>
           <DetailList
             details={[
               {
@@ -109,9 +110,9 @@ const AccountPage = ({
         </div>
       )}
       <div>
-        <Heading3 className={styles["account__sub-header"]}>
+        <Heading as="h3" className={styles["account__sub-header"]}>
           <FormattedMessage id="account.detailsHeader" />
-        </Heading3>
+        </Heading>
         <DetailList
           details={[
             {
@@ -157,9 +158,9 @@ const AccountPage = ({
         />
       </div>
       <div>
-        <Heading3 className={styles["account__sub-header"]}>
+        <Heading as="h3" className={styles["account__sub-header"]}>
           <FormattedMessage id="account.addressHeader" />
-        </Heading3>
+        </Heading>
         <DetailList
           details={[
             {
@@ -185,9 +186,9 @@ const AccountPage = ({
       </div>
       {showInhabitantAmount === "true" && (
         <div>
-          <Heading3 className={styles["account__sub-header"]}>
+          <Heading as="h3" className={styles["account__sub-header"]}>
             <FormattedMessage id="account.inhabitantAmountHeader" />
-          </Heading3>
+          </Heading>
           <DetailList
             details={[
               {
