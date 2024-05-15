@@ -90,12 +90,6 @@ export type Embedded = {
   hoofdvestiging: Hoofdvestiging;
 };
 
-export type Form = {
-  __typename?: 'Form';
-  name: Scalars['String']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
 export type FormDefinition = {
   __typename?: 'FormDefinition';
   formDefinition: Scalars['JSON']['output'];
@@ -156,12 +150,21 @@ export type MaterieleRegistratie = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Create Ogone payment with hash and fields */
+  generateOgonePayment: OgonePayment;
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
   submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
+  /** Update product verbruiks object */
+  updateProductVerbruiksObject: ProductVerbruiksObject;
+};
+
+
+export type MutationGenerateOgonePaymentArgs = {
+  paymentRequest: OgonePaymentRequestInput;
 };
 
 
@@ -179,6 +182,35 @@ export type MutationSubmitTaskArgs = {
 
 export type MutationUpdateBurgerProfielArgs = {
   klant: KlantUpdateInput;
+};
+
+
+export type MutationUpdateProductVerbruiksObjectArgs = {
+  id: Scalars['UUID']['input'];
+  submission: Scalars['JSON']['input'];
+};
+
+export type OgonePayment = {
+  __typename?: 'OgonePayment';
+  formAction: Scalars['String']['output'];
+  formFields: Array<PaymentField>;
+};
+
+export type OgonePaymentRequestInput = {
+  amount: Scalars['Float']['input'];
+  failureUrl?: InputMaybe<Scalars['String']['input']>;
+  langId?: InputMaybe<Scalars['String']['input']>;
+  orderId: Scalars['String']['input'];
+  pspId: Scalars['String']['input'];
+  reference: Scalars['String']['input'];
+  successUrl?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PaymentField = {
+  __typename?: 'PaymentField';
+  name: Scalars['String']['output'];
+  value: Scalars['String']['output'];
 };
 
 export type Persoon = {
@@ -241,6 +273,57 @@ export type PersoonVerblijfplaats = {
   woonplaats?: Maybe<Scalars['String']['output']>;
 };
 
+export type Product = {
+  __typename?: 'Product';
+  documenten: Array<Scalars['String']['output']>;
+  eigenschappen: Scalars['JSON']['output'];
+  geldigTot?: Maybe<Scalars['Date']['output']>;
+  geldigVan: Scalars['Date']['output'];
+  id?: Maybe<Scalars['UUID']['output']>;
+  naam: Scalars['String']['output'];
+  productDetails?: Maybe<ProductDetails>;
+  productType?: Maybe<ProductType>;
+  status: Scalars['String']['output'];
+  taken: Array<Taak>;
+  verbruiksobjecten: Array<ProductVerbruiksObject>;
+  zaken: Array<Zaak>;
+};
+
+export type ProductDetails = {
+  __typename?: 'ProductDetails';
+  data: Array<Scalars['JSON']['output']>;
+  id?: Maybe<Scalars['UUID']['output']>;
+  productInstantie: Scalars['UUID']['output'];
+};
+
+export type ProductPage = {
+  __typename?: 'ProductPage';
+  content: Array<Product>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type ProductType = {
+  __typename?: 'ProductType';
+  id?: Maybe<Scalars['UUID']['output']>;
+  naam: Scalars['String']['output'];
+  omschrijving?: Maybe<Scalars['String']['output']>;
+  zaaktypen: Array<Scalars['UUID']['output']>;
+};
+
+export type ProductVerbruiksObject = {
+  __typename?: 'ProductVerbruiksObject';
+  category?: Maybe<Scalars['String']['output']>;
+  data?: Maybe<Scalars['JSON']['output']>;
+  id?: Maybe<Scalars['UUID']['output']>;
+  productInstantie: Scalars['String']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
   /**
@@ -265,8 +348,6 @@ export type Query = {
   getFormDefinitionByName?: Maybe<FormDefinition>;
   /** find single form definition from the Objecten API */
   getFormDefinitionByObjectenApiUrl?: Maybe<FormDefinition>;
-  /** Gets the forms available to the user */
-  getFormList: Array<Form>;
   /** Gets the data of the gemachtigde */
   getGemachtigde: Gemachtigde;
   /** Gets the contactmomenten of a klant */
@@ -275,6 +356,18 @@ export type Query = {
   getObjectContactMomenten?: Maybe<ContactMomentPage>;
   /** Gets the persoon data */
   getPersoon?: Maybe<Persoon>;
+  /** Get product by id */
+  getProduct: Product;
+  /** Get list of taken by product name  */
+  getProductTaken: Array<Taak>;
+  /** Get productType by name */
+  getProductType: ProductType;
+  /** Get list of verbruiksobjecten of product  */
+  getProductVerbruiksObjecten: Array<ProductVerbruiksObject>;
+  /** Get list of zaken by product name  */
+  getProductZaken: Array<Zaak>;
+  /** Get list of products by product name */
+  getProducten: ProductPage;
   /** Get task by id */
   getTaakById: Taak;
   /** Get a list of tasks. Optional filter for zaak */
@@ -320,6 +413,40 @@ export type QueryGetKlantContactMomentenArgs = {
 export type QueryGetObjectContactMomentenArgs = {
   objectUrl: Scalars['String']['input'];
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetProductArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetProductTakenArgs = {
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  productName: Scalars['String']['input'];
+};
+
+
+export type QueryGetProductTypeArgs = {
+  productName: Scalars['String']['input'];
+};
+
+
+export type QueryGetProductVerbruiksObjectenArgs = {
+  productId: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetProductZakenArgs = {
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  productName: Scalars['String']['input'];
+};
+
+
+export type QueryGetProductenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  productName: Scalars['String']['input'];
 };
 
 
@@ -530,11 +657,6 @@ export type GetFormDefinitionByNameQueryVariables = Exact<{
 
 export type GetFormDefinitionByNameQuery = { __typename?: 'Query', getFormDefinitionByName?: { __typename?: 'FormDefinition', formDefinition: any } | null };
 
-export type GetFormsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetFormsQuery = { __typename?: 'Query', getFormList: Array<{ __typename?: 'Form', name: string, uuid: any }> };
-
 export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -561,6 +683,22 @@ export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', naam?: { __typename?: 'PersoonNaam', voornamen?: string | null, voorvoegsel?: string | null, geslachtsnaam?: string | null } | null } | null };
+
+export type GetProductQueryVariables = Exact<{
+  id: Scalars['UUID']['input'];
+}>;
+
+
+export type GetProductQuery = { __typename?: 'Query', getProduct: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, productType?: { __typename?: 'ProductType', id?: any | null, naam: string, zaaktypen: Array<any> } | null, taken: Array<{ __typename?: 'Taak', id: any }> } };
+
+export type GetProductenQueryVariables = Exact<{
+  productName: Scalars['String']['input'];
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetProductenQuery = { __typename?: 'Query', getProducten: { __typename?: 'ProductPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, productType?: { __typename?: 'ProductType', id?: any | null, naam: string, zaaktypen: Array<any> } | null }> } };
 
 export type GetTaakByIdQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -959,46 +1097,6 @@ export type GetFormDefinitionByNameQueryHookResult = ReturnType<typeof useGetFor
 export type GetFormDefinitionByNameLazyQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameLazyQuery>;
 export type GetFormDefinitionByNameSuspenseQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameSuspenseQuery>;
 export type GetFormDefinitionByNameQueryResult = Apollo.QueryResult<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>;
-export const GetFormsDocument = gql`
-    query GetForms {
-  getFormList {
-    name
-    uuid
-  }
-}
-    `;
-
-/**
- * __useGetFormsQuery__
- *
- * To run a query within a React component, call `useGetFormsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetFormsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetFormsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetFormsQuery(baseOptions?: Apollo.QueryHookOptions<GetFormsQuery, GetFormsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetFormsQuery, GetFormsQueryVariables>(GetFormsDocument, options);
-      }
-export function useGetFormsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetFormsQuery, GetFormsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetFormsQuery, GetFormsQueryVariables>(GetFormsDocument, options);
-        }
-export function useGetFormsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormsQuery, GetFormsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetFormsQuery, GetFormsQueryVariables>(GetFormsDocument, options);
-        }
-export type GetFormsQueryHookResult = ReturnType<typeof useGetFormsQuery>;
-export type GetFormsLazyQueryHookResult = ReturnType<typeof useGetFormsLazyQuery>;
-export type GetFormsSuspenseQueryHookResult = ReturnType<typeof useGetFormsSuspenseQuery>;
-export type GetFormsQueryResult = Apollo.QueryResult<GetFormsQuery, GetFormsQueryVariables>;
 export const GetGemachtigdeDocument = gql`
     query GetGemachtigde {
   getGemachtigde {
@@ -1250,6 +1348,117 @@ export type GetPersoonQueryHookResult = ReturnType<typeof useGetPersoonQuery>;
 export type GetPersoonLazyQueryHookResult = ReturnType<typeof useGetPersoonLazyQuery>;
 export type GetPersoonSuspenseQueryHookResult = ReturnType<typeof useGetPersoonSuspenseQuery>;
 export type GetPersoonQueryResult = Apollo.QueryResult<GetPersoonQuery, GetPersoonQueryVariables>;
+export const GetProductDocument = gql`
+    query GetProduct($id: UUID!) {
+  getProduct(id: $id) {
+    id
+    productType {
+      id
+      naam
+      zaaktypen
+    }
+    naam
+    status
+    geldigVan
+    geldigTot
+    taken {
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetProductQuery__
+ *
+ * To run a query within a React component, call `useGetProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetProductQuery(baseOptions: Apollo.QueryHookOptions<GetProductQuery, GetProductQueryVariables> & ({ variables: GetProductQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, options);
+      }
+export function useGetProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, options);
+        }
+export function useGetProductSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, options);
+        }
+export type GetProductQueryHookResult = ReturnType<typeof useGetProductQuery>;
+export type GetProductLazyQueryHookResult = ReturnType<typeof useGetProductLazyQuery>;
+export type GetProductSuspenseQueryHookResult = ReturnType<typeof useGetProductSuspenseQuery>;
+export type GetProductQueryResult = Apollo.QueryResult<GetProductQuery, GetProductQueryVariables>;
+export const GetProductenDocument = gql`
+    query GetProducten($productName: String!, $pageNumber: Int, $pageSize: Int) {
+  getProducten(
+    productName: $productName
+    pageNumber: $pageNumber
+    pageSize: $pageSize
+  ) {
+    content {
+      id
+      productType {
+        id
+        naam
+        zaaktypen
+      }
+      naam
+      status
+      geldigVan
+      geldigTot
+    }
+    totalElements
+    totalPages
+  }
+}
+    `;
+
+/**
+ * __useGetProductenQuery__
+ *
+ * To run a query within a React component, call `useGetProductenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductenQuery({
+ *   variables: {
+ *      productName: // value for 'productName'
+ *      pageNumber: // value for 'pageNumber'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useGetProductenQuery(baseOptions: Apollo.QueryHookOptions<GetProductenQuery, GetProductenQueryVariables> & ({ variables: GetProductenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProductenQuery, GetProductenQueryVariables>(GetProductenDocument, options);
+      }
+export function useGetProductenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProductenQuery, GetProductenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProductenQuery, GetProductenQueryVariables>(GetProductenDocument, options);
+        }
+export function useGetProductenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductenQuery, GetProductenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetProductenQuery, GetProductenQueryVariables>(GetProductenDocument, options);
+        }
+export type GetProductenQueryHookResult = ReturnType<typeof useGetProductenQuery>;
+export type GetProductenLazyQueryHookResult = ReturnType<typeof useGetProductenLazyQuery>;
+export type GetProductenSuspenseQueryHookResult = ReturnType<typeof useGetProductenSuspenseQuery>;
+export type GetProductenQueryResult = Apollo.QueryResult<GetProductenQuery, GetProductenQueryVariables>;
 export const GetTaakByIdDocument = gql`
     query GetTaakById($id: UUID!) {
   getTaakById(id: $id) {
