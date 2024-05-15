@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { Heading5 } from "@gemeente-denhaag/components-react";
 import { ChevronDownIcon } from "@gemeente-denhaag/icons";
 import LayoutContext from "../contexts/LayoutContext";
 import styles from "./CurrentPageIndicator.module.scss";
 import { NavigationItem } from "../interfaces/navigation-item";
 import { useMatches } from "react-router-dom";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
+import Heading from "./Heading";
 
 interface CurrentPageIndicatorProps {
   navigationItems: NavigationItem[][];
@@ -37,11 +37,11 @@ const CurrentPageIndicator = ({
             {currentPage.icon}
           </div>
         )}
-        <Heading5 className={styles["current-page-indicator__heading"]}>
+        <Heading as="h5" className={styles["current-page-indicator__heading"]}>
           <FormattedMessage
             id={`pageTitles.${currentPage?.titleTranslationKey}`}
           />
-        </Heading5>
+        </Heading>
       </header>
       <div className={styles["current-page-indicator__chevron-down"]}>
         <ChevronDownIcon />
