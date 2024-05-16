@@ -8,6 +8,7 @@ export { default as PageHeader } from "./components/PageHeader";
 export { default as PageGrid } from "./components/PageGrid";
 export { default as PortalLink } from "./components/PortalLink";
 export { default as TableList } from "./components/TableList";
+export { default as SectionHeader } from "./components/SectionHeader";
 
 export * from "./interfaces/navigation-item";
 export * from "./interfaces/paths";
