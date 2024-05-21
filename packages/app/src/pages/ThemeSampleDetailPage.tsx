@@ -14,6 +14,11 @@ const ThemeSampleDetailPage = () => {
       type={type}
       loading={loading}
       titleTranslationId="Keukenhoflaan 133"
+      links={[
+        { title: "Link 1", href: "https://example.com" },
+        { title: "Link 2", href: "https://example.com" },
+        { title: "Link 3", href: "https://example.com" },
+      ]}
     >
       <DocumentsList
         loading={loading}

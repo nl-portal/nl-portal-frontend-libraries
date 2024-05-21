@@ -20,6 +20,7 @@ interface Props {
   titleTranslationId?: string;
   showTasksLength?: number;
   showCasesLength?: number;
+  links?: { title: string; href: string }[];
   children?: React.ReactNode;
 }
 
@@ -29,6 +30,7 @@ const ThemeDetailsPage = ({
   titleTranslationId = `pageTitles.${type}`,
   showTasksLength = 5,
   showCasesLength = 4,
+  links,
   children,
 }: Props) => {
   const intl = useIntl();
@@ -64,14 +66,7 @@ const ThemeDetailsPage = ({
           tasks={tasks}
         />
       )}
-      <LinksList
-        loading={loading}
-        links={[
-          { title: "Link 1", href: "https://example.com" },
-          { title: "Link 2", href: "https://example.com" },
-          { title: "Link 3", href: "https://example.com" },
-        ]}
-      />
+      {links && <LinksList loading={loading} links={links} />}
       {showCasesLength && (
         <CasesList
           loading={loading}
