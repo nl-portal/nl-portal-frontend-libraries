@@ -51,7 +51,7 @@
     "@gemeente-denhaag/responsive-content": "0.1.1-alpha.248",
     "@gemeente-denhaag/sidenav": "0.1.0-alpha.206",
     "@gemeente-denhaag/tab": "0.2.3-alpha.388",
-    "@gemeente-denhaag/table": "0.1.1-alpha.290",
+    "@gemeente-denhaag/table": "0.1.1-alpha.292",
     "@gemeente-denhaag/text-input": "0.3.0-alpha.388",
     "@gemeente-denhaag/typography": "0.2.3-alpha.388",
     "@react-hook/size": "^2.1.2",
