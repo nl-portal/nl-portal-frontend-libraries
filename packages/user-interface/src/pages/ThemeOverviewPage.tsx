@@ -13,37 +13,42 @@ import {
 interface Props {
   type: string;
   loading?: boolean;
-  showTasksLength?: number;
-  showCasesLength?: number;
+  showTasks?: boolean;
+  fetchTasksLength?: number;
+  showCases?: boolean;
+  fetchCasesLength?: number;
   children?: React.ReactNode;
 }
 
 const ThemeOverviewPage = ({
   type,
   loading: loadingProp,
-  showTasksLength = 5,
-  showCasesLength = 4,
+  showTasks = true,
+  fetchTasksLength = showTasks ? 5 : 0,
+  showCases = true,
+  fetchCasesLength = showCases ? 4 : 0,
   children,
 }: Props) => {
   const intl = useIntl();
-  const showTasks = showTasksLength > 0;
-  const taskQueryParams = showTasks
-    ? { variables: { pageSize: showTasksLength } }
-    : { skip: true };
   const {
     data: tasksData,
     loading: taskLoading,
     error: taskError,
-  } = useGetTakenQuery(taskQueryParams);
+  } = useGetTakenQuery({
+    variables: { pageSize: fetchTasksLength },
+    skip: !fetchTasksLength,
+  });
   const {
     data: casesData,
     loading: casesLoading,
     error: casesError,
-  } = useGetZakenQuery();
+  } = useGetZakenQuery({ skip: !fetchCasesLength });
 
   const loading = loadingProp || taskLoading || casesLoading;
   const tasks = tasksData?.getTaken.content as Taak[] | undefined;
-  const cases = casesData?.getZaken.content as Zaak[] | undefined;
+  const cases = casesData?.getZaken.content
+    ?.filter((c) => !c.status?.statustype.isEindstatus)
+    .slice(0, fetchCasesLength) as Zaak[] | undefined;
 
   return (
     <PageGrid>
@@ -55,23 +60,21 @@ const ThemeOverviewPage = ({
           tasks={tasks}
           totalAmount={
             tasksData?.getTaken.totalElements &&
-            tasksData?.getTaken.totalElements > showTasksLength
+            tasksData?.getTaken.totalElements > fetchTasksLength
               ? tasksData?.getTaken.totalElements
               : undefined
           }
         />
       )}
-      {showCasesLength && (
+      {fetchCasesLength && (
         <CasesList
           loading={loading}
           error={Boolean(casesError)}
           listView={false}
-          cases={cases
-            ?.filter((c) => !c.status?.statustype.isEindstatus)
-            .slice(0, showCasesLength)}
+          cases={cases}
           totalAmount={
             casesData?.getZaken.totalElements &&
-            casesData?.getZaken.totalElements > showCasesLength
+            casesData?.getZaken.totalElements > fetchCasesLength
               ? casesData?.getZaken.totalElements
               : undefined
           }
