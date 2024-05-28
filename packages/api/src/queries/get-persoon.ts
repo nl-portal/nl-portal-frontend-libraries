@@ -8,6 +8,7 @@ export const QUERY_GET_PERSOON = gql`
         voorvoegsel
         geslachtsnaam
       }
+      bewonersAantal
     }
   }
 `;

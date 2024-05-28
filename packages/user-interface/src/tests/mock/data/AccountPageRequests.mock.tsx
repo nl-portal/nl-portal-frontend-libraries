@@ -1,11 +1,3 @@
-import {
-  getBewonersAantal,
-  getBurgerProfiel,
-  getPersoon,
-} from "./AllRequests.mock";
+import { getBurgerProfiel, getPersoon } from "./AllRequests.mock";
 
-export const mocksRequestBurgerGegevens = [
-  getPersoon,
-  getBurgerProfiel,
-  getBewonersAantal,
-];
+export const mocksRequestBurgerGegevens = [getPersoon, getBurgerProfiel];

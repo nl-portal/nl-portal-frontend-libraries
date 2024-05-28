@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Button } from "@gemeente-denhaag/components-react";
 import { FormattedMessage } from "react-intl";
 import {
-  useGetBewonersAantalQuery,
+  Persoon,
   useGetBurgerProfielQuery,
   useGetPersoonDataQuery,
 } from "@nl-portal/nl-portal-api";
@@ -44,11 +44,7 @@ const AccountPage = ({
     refetch: personRefetch,
   } = useGetPersoonDataQuery();
 
-  const {
-    data: bewonerAantalData,
-    loading: bewonersAantalLoading,
-    refetch: bewonersAantalRefetch,
-  } = useGetBewonersAantalQuery();
+  const person = personData?.getPersoon as Persoon | undefined;
 
   const openAddressInvestigation = (): void => {
     const newWindow = window.open(
@@ -62,7 +58,6 @@ const AccountPage = ({
   useEffect(() => {
     contactRefetch();
     personRefetch();
-    bewonersAantalRefetch();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -117,41 +112,37 @@ const AccountPage = ({
           details={[
             {
               translationKey: "firstNames",
-              value: getNameString(personData?.getPersoon?.naam, "firstNames"),
+              value: getNameString(person?.naam, "firstNames"),
               loading: personLoading,
             },
             {
               translationKey: "lastName",
-              value: getNameString(personData?.getPersoon?.naam, "lastName"),
+              value: getNameString(person?.naam, "lastName"),
               loading: personLoading,
             },
             {
               translationKey: "gender",
-              value: personData?.getPersoon?.geslachtsaanduiding,
+              value: person?.geslachtsaanduiding,
               loading: personLoading,
             },
             {
               translationKey: "citizenServiceNumber",
-              value: personData?.getPersoon?.burgerservicenummer,
+              value: person?.burgerservicenummer,
               loading: personLoading,
             },
             {
               translationKey: "dateOfBirth",
-              value: getLocaleDateOfBirth(
-                personData?.getPersoon?.geboorte?.datum,
-              ),
+              value: getLocaleDateOfBirth(person?.geboorte?.datum),
               loading: personLoading,
             },
             {
               translationKey: "countryOfBirth",
-              value: personData?.getPersoon?.geboorte?.land?.omschrijving,
+              value: person?.geboorte?.land?.omschrijving,
               loading: personLoading,
             },
             {
               translationKey: "nationality",
-              value: getNationalitiesString(
-                personData?.getPersoon?.nationaliteiten,
-              ),
+              value: getNationalitiesString(person?.nationaliteiten),
               loading: personLoading,
             },
           ]}
@@ -166,18 +157,18 @@ const AccountPage = ({
             {
               translationKey: "street",
               value: getStreetString(
-                personData?.getPersoon?.verblijfplaats?.straat,
-                personData?.getPersoon?.verblijfplaats?.huisnummer,
-                personData?.getPersoon?.verblijfplaats?.huisletter,
-                personData?.getPersoon?.verblijfplaats?.huisnummertoevoeging,
+                person?.verblijfplaats?.straat,
+                person?.verblijfplaats?.huisnummer,
+                person?.verblijfplaats?.huisletter,
+                person?.verblijfplaats?.huisnummertoevoeging,
               ),
               loading: personLoading,
             },
             {
               translationKey: "postalCodeAndCity",
               value: getPostalCodeCityString(
-                personData?.getPersoon?.verblijfplaats?.postcode,
-                personData?.getPersoon?.verblijfplaats?.woonplaats,
+                person?.verblijfplaats?.postcode,
+                person?.verblijfplaats?.woonplaats,
               ),
               loading: personLoading,
             },
@@ -193,8 +184,8 @@ const AccountPage = ({
             details={[
               {
                 translationKey: "inhabitantAmount",
-                value: bewonerAantalData?.getBewonersAantal?.toString(),
-                loading: bewonersAantalLoading,
+                value: person?.bewonersAantal?.toString() || "-",
+                loading: personLoading,
               },
             ]}
           />

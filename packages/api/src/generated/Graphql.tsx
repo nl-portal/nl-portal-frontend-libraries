@@ -215,6 +215,7 @@ export type PaymentField = {
 
 export type Persoon = {
   __typename?: 'Persoon';
+  bewonersAantal?: Maybe<Scalars['Int']['output']>;
   burgerservicenummer?: Maybe<Scalars['String']['output']>;
   geboorte?: Maybe<PersoonGeboorte>;
   geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
@@ -265,6 +266,7 @@ export type PersoonNationaliteiten = {
 
 export type PersoonVerblijfplaats = {
   __typename?: 'PersoonVerblijfplaats';
+  adresseerbaarObjectIdentificatie?: Maybe<Scalars['String']['output']>;
   huisletter?: Maybe<Scalars['String']['output']>;
   huisnummer?: Maybe<Scalars['String']['output']>;
   huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
@@ -282,6 +284,7 @@ export type Product = {
   id?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
   productDetails?: Maybe<ProductDetails>;
+  productSubType?: Maybe<Scalars['String']['output']>;
   productType?: Maybe<ProductType>;
   status: Scalars['String']['output'];
   taken: Array<Taak>;
@@ -313,15 +316,16 @@ export type ProductType = {
   id?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
   omschrijving?: Maybe<Scalars['String']['output']>;
+  productSubType?: Maybe<Scalars['String']['output']>;
   zaaktypen: Array<Scalars['UUID']['output']>;
 };
 
 export type ProductVerbruiksObject = {
   __typename?: 'ProductVerbruiksObject';
-  category?: Maybe<Scalars['String']['output']>;
   data?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['UUID']['output']>;
   productInstantie: Scalars['String']['output'];
+  soort?: Maybe<Scalars['String']['output']>;
 };
 
 export type Query = {
@@ -333,7 +337,7 @@ export type Query = {
   allFormDefinitions: Array<FormDefinition>;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
-  /** Gets the number of people living in the same house as the person that makes the requests */
+  /** Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
   getBewonersAantal?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
   getBurgerProfiel?: Maybe<Klant>;
@@ -357,11 +361,13 @@ export type Query = {
   /** Gets the persoon data */
   getPersoon?: Maybe<Persoon>;
   /** Get product by id */
-  getProduct: Product;
+  getProduct?: Maybe<Product>;
   /** Get list of taken by product name  */
   getProductTaken: Array<Taak>;
   /** Get productType by name */
-  getProductType: ProductType;
+  getProductType?: Maybe<ProductType>;
+  /** Get productTypes where the user has products */
+  getProductTypes: Array<ProductType>;
   /** Get list of verbruiksobjecten of product  */
   getProductVerbruiksObjecten: Array<ProductVerbruiksObject>;
   /** Get list of zaken by product name  */
@@ -381,6 +387,11 @@ export type Query = {
   getZaak: Zaak;
   /** Gets all zaken for the user */
   getZaken: ZaakPage;
+};
+
+
+export type QueryGetBewonersAantalArgs = {
+  adresseerbaarObjectIdentificatie: Scalars['String']['input'];
 };
 
 
@@ -424,11 +435,14 @@ export type QueryGetProductArgs = {
 export type QueryGetProductTakenArgs = {
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   productName: Scalars['String']['input'];
+  productSubType?: InputMaybe<Scalars['String']['input']>;
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
 };
 
 
 export type QueryGetProductTypeArgs = {
   productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
 };
 
 
@@ -440,6 +454,7 @@ export type QueryGetProductVerbruiksObjectenArgs = {
 export type QueryGetProductZakenArgs = {
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
 };
 
 
@@ -447,6 +462,8 @@ export type QueryGetProductenArgs = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  subProductType?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -619,11 +636,6 @@ export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null };
 
-export type GetBewonersAantalQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetBewonersAantalQuery = { __typename?: 'Query', getBewonersAantal?: number | null };
-
 export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -682,14 +694,14 @@ export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typen
 export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', naam?: { __typename?: 'PersoonNaam', voornamen?: string | null, voorvoegsel?: string | null, geslachtsnaam?: string | null } | null } | null };
+export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', bewonersAantal?: number | null, naam?: { __typename?: 'PersoonNaam', voornamen?: string | null, voorvoegsel?: string | null, geslachtsnaam?: string | null } | null } | null };
 
 export type GetProductQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
 }>;
 
 
-export type GetProductQuery = { __typename?: 'Query', getProduct: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, productType?: { __typename?: 'ProductType', id?: any | null, naam: string, zaaktypen: Array<any> } | null, taken: Array<{ __typename?: 'Taak', id: any }> } };
+export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, productType?: { __typename?: 'ProductType', id?: any | null, naam: string, zaaktypen: Array<any> } | null, taken: Array<{ __typename?: 'Taak', id: any }> } | null };
 
 export type GetProductenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -848,43 +860,6 @@ export type GetBedrijfQueryHookResult = ReturnType<typeof useGetBedrijfQuery>;
 export type GetBedrijfLazyQueryHookResult = ReturnType<typeof useGetBedrijfLazyQuery>;
 export type GetBedrijfSuspenseQueryHookResult = ReturnType<typeof useGetBedrijfSuspenseQuery>;
 export type GetBedrijfQueryResult = Apollo.QueryResult<GetBedrijfQuery, GetBedrijfQueryVariables>;
-export const GetBewonersAantalDocument = gql`
-    query GetBewonersAantal {
-  getBewonersAantal
-}
-    `;
-
-/**
- * __useGetBewonersAantalQuery__
- *
- * To run a query within a React component, call `useGetBewonersAantalQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetBewonersAantalQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetBewonersAantalQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetBewonersAantalQuery(baseOptions?: Apollo.QueryHookOptions<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>(GetBewonersAantalDocument, options);
-      }
-export function useGetBewonersAantalLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>(GetBewonersAantalDocument, options);
-        }
-export function useGetBewonersAantalSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>(GetBewonersAantalDocument, options);
-        }
-export type GetBewonersAantalQueryHookResult = ReturnType<typeof useGetBewonersAantalQuery>;
-export type GetBewonersAantalLazyQueryHookResult = ReturnType<typeof useGetBewonersAantalLazyQuery>;
-export type GetBewonersAantalSuspenseQueryHookResult = ReturnType<typeof useGetBewonersAantalSuspenseQuery>;
-export type GetBewonersAantalQueryResult = Apollo.QueryResult<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>;
 export const GetBurgerProfielDocument = gql`
     query GetBurgerProfiel {
   getBurgerProfiel {
@@ -1313,6 +1288,7 @@ export const GetPersoonDocument = gql`
       voorvoegsel
       geslachtsnaam
     }
+    bewonersAantal
   }
 }
     `;

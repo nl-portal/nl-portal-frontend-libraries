@@ -1,7 +1,6 @@
 import {
   QUERY_GET_BURGER_PROFIEL,
   QUERY_GET_PERSOON_DATA,
-  QUERY_GET_BEWONER_AANTAL,
   QUERY_GET_TAKEN,
   QUERY_GET_OBJECT_CONTACT_MOMENTEN,
   QUERY_GET_ZAAK,
@@ -87,18 +86,6 @@ export const getBurgerProfiel = {
         telefoonnummer: "0629751475",
         __typename: "Klant",
       },
-    },
-  },
-};
-
-export const getBewonersAantal = {
-  request: {
-    query: QUERY_GET_BEWONER_AANTAL,
-    variables: {},
-  },
-  result: {
-    data: {
-      getBewonersAantal: null,
     },
   },
 };
