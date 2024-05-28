@@ -17,20 +17,30 @@ import LinksList from "../components/LinksList";
 interface Props {
   type: string;
   loading?: boolean;
+  error?: boolean;
   titleTranslationId?: string;
-  showTasksLength?: number;
-  showCasesLength?: number;
+  showTasks?: boolean;
+  tasks?: Taak[];
+  fetchTasksLength?: number;
   links?: { title: string; href: string }[];
+  showCases?: boolean;
+  cases?: Zaak[];
+  fetchCasesLength?: number;
   children?: React.ReactNode;
 }
 
 const ThemeDetailsPage = ({
   type,
   loading: loadingProp,
+  error: errorProp,
   titleTranslationId = `pageTitles.${type}`,
-  showTasksLength = 5,
-  showCasesLength = 4,
+  showTasks = true,
+  tasks: tasksProp,
+  fetchTasksLength = showTasks ? 5 : 0,
   links,
+  showCases = true,
+  cases: casesProp,
+  fetchCasesLength = showCases ? 4 : 0,
   children,
 }: Props) => {
   const intl = useIntl();
@@ -39,15 +49,23 @@ const ThemeDetailsPage = ({
     data: tasksData,
     loading: tasksLoading,
     error: tasksError,
-  } = useGetTakenQuery();
+  } = useGetTakenQuery({
+    variables: { pageSize: fetchTasksLength },
+    skip: !fetchTasksLength,
+  });
   const {
     data: casesData,
     loading: casesLoading,
     error: casesError,
-  } = useGetZakenQuery();
+  } = useGetZakenQuery({ skip: !fetchCasesLength });
   const loading = loadingProp || tasksLoading || casesLoading;
-  const tasks = tasksData?.getTaken.content as Taak[] | undefined;
-  const cases = casesData?.getZaken.content as Zaak[] | undefined;
+  const tasks =
+    tasksProp || (tasksData?.getTaken.content as Taak[] | undefined);
+  const cases =
+    casesProp ||
+    (casesData?.getZaken.content
+      ?.filter((c) => !c.status?.statustype.isEindstatus)
+      .slice(0, fetchCasesLength) as Zaak[] | undefined);
 
   return (
     <PageGrid>
@@ -58,36 +76,28 @@ const ThemeDetailsPage = ({
           title={intl.formatMessage({ id: titleTranslationId })}
         />
       </div>
-      {showTasksLength && (
+      {showTasks && (
         <TasksList
           loading={loading}
-          error={Boolean(tasksError)}
+          error={errorProp || Boolean(tasksError)}
           titleTranslationId={null}
           tasks={tasks}
         />
       )}
       {links && <LinksList loading={loading} links={links} />}
-      {showCasesLength && (
+      {showCases && (
         <CasesList
           loading={loading}
-          error={Boolean(casesError)}
+          error={errorProp || Boolean(casesError)}
           listView={false}
-          cases={cases
-            ?.filter((c) => !c.status?.statustype.isEindstatus)
-            .slice(0, showCasesLength)}
-          totalAmount={
-            casesData?.getZaken.totalElements &&
-            casesData?.getZaken.totalElements > showCasesLength
-              ? casesData?.getZaken.totalElements
-              : undefined
-          }
+          cases={cases}
         />
       )}
       {children}
-      {showTasksLength && (
+      {showTasks && (
         <TasksList
           loading={loading}
-          error={Boolean(tasksError)}
+          error={errorProp || Boolean(tasksError)}
           titleTranslationId={null}
           tasks={tasks}
         />
