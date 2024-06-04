@@ -11,6 +11,7 @@ import {
 } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
+import { Paragraph } from "@gemeente-denhaag/typography";
 
 interface OverviewPageProps {
   showAlert?: boolean;
@@ -66,7 +67,9 @@ const OverviewPage = ({
             )
           }
         >
-          <FormattedMessage id="overviewpage.paragraph" />
+          <Paragraph>
+            <FormattedMessage id="overviewpage.paragraph" />
+          </Paragraph>
         </PageHeader>
       )}
       {tasksPreviewLength && (

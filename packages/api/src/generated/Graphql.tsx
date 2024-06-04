@@ -631,6 +631,14 @@ export type UpdateBurgerProfielMutationVariables = Exact<{
 
 export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null } | null };
 
+export type UpdateProductVerbruiksObjectMutationVariables = Exact<{
+  id: Scalars['UUID']['input'];
+  submission: Scalars['JSON']['input'];
+}>;
+
+
+export type UpdateProductVerbruiksObjectMutation = { __typename?: 'Mutation', updateProductVerbruiksObject: { __typename?: 'ProductVerbruiksObject', id?: any | null, data?: any | null, productInstantie: string, soort?: string | null } };
+
 export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -701,7 +709,7 @@ export type GetProductQueryVariables = Exact<{
 }>;
 
 
-export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, productType?: { __typename?: 'ProductType', id?: any | null, naam: string, zaaktypen: Array<any> } | null, taken: Array<{ __typename?: 'Taak', id: any }> } | null };
+export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null }>, productType?: { __typename?: 'ProductType', id?: any | null, naam: string, zaaktypen: Array<any> } | null, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, taken: Array<{ __typename?: 'Taak', id: any }> } | null };
 
 export type GetProductenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -821,6 +829,43 @@ export function useUpdateBurgerProfielMutation(baseOptions?: Apollo.MutationHook
 export type UpdateBurgerProfielMutationHookResult = ReturnType<typeof useUpdateBurgerProfielMutation>;
 export type UpdateBurgerProfielMutationResult = Apollo.MutationResult<UpdateBurgerProfielMutation>;
 export type UpdateBurgerProfielMutationOptions = Apollo.BaseMutationOptions<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>;
+export const UpdateProductVerbruiksObjectDocument = gql`
+    mutation UpdateProductVerbruiksObject($id: UUID!, $submission: JSON!) {
+  updateProductVerbruiksObject(id: $id, submission: $submission) {
+    id
+    data
+    productInstantie
+    soort
+  }
+}
+    `;
+export type UpdateProductVerbruiksObjectMutationFn = Apollo.MutationFunction<UpdateProductVerbruiksObjectMutation, UpdateProductVerbruiksObjectMutationVariables>;
+
+/**
+ * __useUpdateProductVerbruiksObjectMutation__
+ *
+ * To run a mutation, you first call `useUpdateProductVerbruiksObjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProductVerbruiksObjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProductVerbruiksObjectMutation, { data, loading, error }] = useUpdateProductVerbruiksObjectMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      submission: // value for 'submission'
+ *   },
+ * });
+ */
+export function useUpdateProductVerbruiksObjectMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProductVerbruiksObjectMutation, UpdateProductVerbruiksObjectMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateProductVerbruiksObjectMutation, UpdateProductVerbruiksObjectMutationVariables>(UpdateProductVerbruiksObjectDocument, options);
+      }
+export type UpdateProductVerbruiksObjectMutationHookResult = ReturnType<typeof useUpdateProductVerbruiksObjectMutation>;
+export type UpdateProductVerbruiksObjectMutationResult = Apollo.MutationResult<UpdateProductVerbruiksObjectMutation>;
+export type UpdateProductVerbruiksObjectMutationOptions = Apollo.BaseMutationOptions<UpdateProductVerbruiksObjectMutation, UpdateProductVerbruiksObjectMutationVariables>;
 export const GetBedrijfDocument = gql`
     query GetBedrijf {
   getBedrijf {
@@ -1328,10 +1373,18 @@ export const GetProductDocument = gql`
     query GetProduct($id: UUID!) {
   getProduct(id: $id) {
     id
+    verbruiksobjecten {
+      id
+      soort
+    }
     productType {
       id
       naam
       zaaktypen
+    }
+    productDetails {
+      id
+      data
     }
     naam
     status
