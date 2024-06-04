@@ -79,6 +79,7 @@ const ThemeDetailsPage = ({
       {showTasks && (
         <TasksList
           loading={loading}
+          showEmpty={false}
           error={errorProp || Boolean(tasksError)}
           titleTranslationId={null}
           tasks={tasks}
@@ -97,6 +98,7 @@ const ThemeDetailsPage = ({
       {showTasks && (
         <TasksList
           loading={loading}
+          showEmpty={false}
           error={errorProp || Boolean(tasksError)}
           titleTranslationId={null}
           tasks={tasks}
