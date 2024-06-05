@@ -107,6 +107,7 @@ export const NL_NL_MESSAGES: Messages = {
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "tableList.empty": "Er zijn geen items beschikbaar.",
     "linksList.title": "Wat ik kan regelen",
+    "linksList.empty": "Er zijn geen opties beschikbaar.",
     "documentsList.title": "Documenten",
     "documentsList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",

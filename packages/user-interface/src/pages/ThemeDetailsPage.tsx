@@ -53,7 +53,7 @@ const ThemeDetailsPage = ({
           tasks={tasks}
         />
       )}
-      {links && <LinksList loading={loading} links={links} />}
+      {links && <LinksList loading={loading} showEmpty={false} links={links} />}
       {cases && (
         <CasesList
           loading={loading}
