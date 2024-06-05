@@ -8,7 +8,7 @@ import PortalLink from "./PortalLink";
 interface Props {
   loading?: boolean;
   titleTranslationId?: string | null;
-  links: { title: string; href: string }[];
+  links?: { title: string; href: string }[];
 }
 
 const LinksList = ({
@@ -31,6 +31,10 @@ const LinksList = ({
         <Skeleton height={60} />
       </section>
     );
+  }
+
+  if (!links || links.length === 0) {
+    return null;
   }
 
   return (

@@ -122,7 +122,7 @@ const CasePage = ({
         titleTranslationId={null}
         tasks={tasks}
       />
-      <div>
+      <section>
         <SectionHeader
           title={intl.formatMessage({ id: "case.statusHeader" })}
         />
@@ -133,7 +133,7 @@ const CasePage = ({
           statuses={caseData?.getZaak.statussen}
           status={caseData?.getZaak.status}
         />
-      </div>
+      </section>
       {details.length > 0 && (
         <DescriptionList
           titleTranslationId="case.detailsHeader"
@@ -179,12 +179,12 @@ const CasePage = ({
         documents={caseData?.getZaak.documenten}
       />
       {showContactTimeline && contactItems.length > 0 && (
-        <div>
+        <section>
           <SectionHeader
             title={intl.formatMessage({ id: "case.contactHeader" })}
           />
           <ContactTimeline items={contactItems} labels={contactLabels} />
-        </div>
+        </section>
       )}
       <TasksList
         loading={loading}
