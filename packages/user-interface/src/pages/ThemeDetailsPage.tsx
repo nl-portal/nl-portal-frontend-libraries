@@ -44,34 +44,28 @@ const ThemeDetailsPage = ({
           title={intl.formatMessage({ id: titleTranslationId })}
         />
       </div>
-      {tasks && (
-        <TasksList
-          loading={loading}
-          showEmpty={false}
-          error={tasksError}
-          titleTranslationId={null}
-          tasks={tasks}
-        />
-      )}
-      {links && <LinksList loading={loading} showEmpty={false} links={links} />}
-      {cases && (
-        <CasesList
-          loading={loading}
-          error={casesError}
-          listView={false}
-          cases={cases}
-        />
-      )}
+      <TasksList
+        loading={loading}
+        showEmpty={false}
+        error={tasksError}
+        titleTranslationId={null}
+        tasks={tasks}
+      />
+      <LinksList loading={loading} links={links} />
+      <CasesList
+        loading={loading}
+        error={casesError}
+        listView={false}
+        cases={cases}
+      />
       {children}
-      {tasks && (
-        <TasksList
-          loading={loading}
-          showEmpty={false}
-          error={tasksError}
-          titleTranslationId={null}
-          tasks={tasks}
-        />
-      )}
+      <TasksList
+        loading={loading}
+        showEmpty={false}
+        error={tasksError}
+        titleTranslationId={null}
+        tasks={tasks}
+      />
     </PageGrid>
   );
 };

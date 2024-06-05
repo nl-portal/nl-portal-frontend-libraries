@@ -101,7 +101,6 @@ export const EN_GB_MESSAGES: Messages = {
     "tableList.fetchError": "There was an error, try again later.",
     "tableList.empty": "There are no items available.",
     "linksList.title": "What I can arrange",
-    "linksList.empty": "There are no options available.",
     "documentsList.title": "Documents",
     "documentsList.fetchError": "There was an error, try again later.",
     "documentsList.empty": "There are no documents.",
