@@ -5,6 +5,7 @@ import styles from "./CasesPage.module.scss";
 import PageHeader from "../components/PageHeader";
 import { Zaak, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import PageGrid from "../components/PageGrid";
+import Filter from "../components/Filter";
 
 const CasesPage = () => {
   const intl = useIntl();
@@ -15,6 +16,7 @@ const CasesPage = () => {
     <PageGrid className={styles.cases}>
       <PageHeader title={<FormattedMessage id="pageTitles.cases" />} />
       <div>
+        <Filter />
         <Tabs
           tabData={[
             {

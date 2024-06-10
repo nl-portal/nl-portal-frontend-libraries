@@ -1,0 +1,17 @@
+@import "../styles/mixins";
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nlportal-space-block-md, 1rem);
+  margin-block-end: var(--denhaag-space-block-2xl, 2rem);
+
+  &__top {
+    display: flex;
+    gap: var(--nlportal-space-block-md, 1rem);
+
+    button {
+      flex-shrink: 0;
+    }
+  }
+}

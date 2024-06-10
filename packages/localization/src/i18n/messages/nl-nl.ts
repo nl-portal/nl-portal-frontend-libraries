@@ -115,5 +115,7 @@ export const NL_NL_MESSAGES: Messages = {
     "descriptionList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "descriptionList.empty": "Er zijn geen details beschikbaar.",
+    "filter.queryPlaceholder": "Zoeken",
+    "filter.filterButton": "Filter",
   },
 };
