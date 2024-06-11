@@ -47,7 +47,9 @@ const ThemeOverviewPage = ({
 
   const loading = loadingProp || taskLoading || casesLoading;
   const tasks = tasksData?.getProductTaken as Taak[] | undefined;
-  const cases = casesData?.getProductZaken as Zaak[] | undefined;
+  const cases = casesData?.getProductZaken.filter(
+    (c) => !c.status?.statustype.isEindstatus,
+  ) as Zaak[] | undefined;
 
   return (
     <PageGrid>
