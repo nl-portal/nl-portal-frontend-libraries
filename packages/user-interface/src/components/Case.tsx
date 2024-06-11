@@ -32,7 +32,7 @@ const Case = ({ cs, listView }: Props) => {
       active={!cs.status?.statustype.isEindstatus}
       title={title}
       subTitle={cs.omschrijving}
-      date={new Date(cs.startdatum)}
+      date={cs.startdatum}
       href={paths.case(cs.uuid)}
       Link={PortalLink}
     />

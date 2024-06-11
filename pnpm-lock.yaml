@@ -313,20 +313,20 @@ importers:
         specifier: ^5.3.0
         version: 5.3.0(formiojs@4.20.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/action':
-        specifier: 0.1.1-alpha.54
-        version: 0.1.1-alpha.54(react@18.3.1)
+        specifier: 0.1.1-alpha.60
+        version: 0.1.1-alpha.60(react@18.3.1)
       '@gemeente-denhaag/alert':
         specifier: 0.1.1-alpha.358
         version: 0.1.1-alpha.358(react@18.3.1)
       '@gemeente-denhaag/button-link':
         specifier: 0.0.1-alpha.7
-        version: 0.0.1-alpha.7(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.0.1-alpha.7(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/card':
-        specifier: 0.2.3-alpha.388
-        version: 0.2.3-alpha.388(react@18.3.1)
+        specifier: 0.2.3-alpha.394
+        version: 0.2.3-alpha.394(react@18.3.1)
       '@gemeente-denhaag/components-react':
         specifier: 0.1.1-alpha.330
-        version: 0.1.1-alpha.330(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.1.1-alpha.330(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/contact-timeline':
         specifier: 0.1.1-alpha.46
         version: 0.1.1-alpha.46(react@18.3.1)
@@ -338,13 +338,13 @@ importers:
         version: 0.1.1-alpha.60(react@18.3.1)
       '@gemeente-denhaag/form-field':
         specifier: 0.3.0-alpha.264
-        version: 0.3.0-alpha.264(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.3.0-alpha.264(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/form-field-error-message':
         specifier: 0.3.0-alpha.21
         version: 0.3.0-alpha.21(react@18.3.1)
       '@gemeente-denhaag/form-label':
         specifier: 0.3.0-alpha.21
-        version: 0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/icons':
         specifier: 0.2.3-alpha.388
         version: 0.2.3-alpha.388(react@18.3.1)
@@ -353,7 +353,7 @@ importers:
         version: 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/link-button':
         specifier: 0.0.1-alpha.15
-        version: 0.0.1-alpha.15(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.0.1-alpha.15(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/page':
         specifier: 0.1.1-alpha.248
         version: 0.1.1-alpha.248
@@ -377,7 +377,7 @@ importers:
         version: 0.1.1-alpha.292(react@18.3.1)
       '@gemeente-denhaag/text-input':
         specifier: 0.3.0-alpha.388
-        version: 0.3.0-alpha.388(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 0.3.0-alpha.388(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/typography':
         specifier: 0.2.3-alpha.388
         version: 0.2.3-alpha.388(react@18.3.1)
@@ -1167,6 +1167,9 @@ packages:
   '@gemeente-denhaag/action@0.1.1-alpha.54':
     resolution: {integrity: sha512-JxL+YDAxaVzgWq/TesBi/lCN5tyVBLZC2jQfP/t/Bt/3NSwu0tEnq/k6Y3R0572P2+sdbYFniynWTLZN/h02eQ==}
 
+  '@gemeente-denhaag/action@0.1.1-alpha.60':
+    resolution: {integrity: sha512-S4CUbXXGsbDU+08OsPRcuGXmJhrDtkf263j0C93mStDCSCeC1Eh2OU+81yVXgp1cPtJGsHRKASI1vdXavrmnjg==}
+
   '@gemeente-denhaag/alert@0.1.1-alpha.358':
     resolution: {integrity: sha512-rlArjvq0l7dWGlb4tr1mhqqlmmmfCE+du10WsyZ7+nA7iAWkcSGyouF+ywNcGNj+rIyuxBruAOB6MZKreDUohA==}
     peerDependencies:
@@ -1195,6 +1198,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/button@0.2.3-alpha.394':
+    resolution: {integrity: sha512-6kzpUp+rUDs3/sQwF073trwzjPxc4DWCESxFboWjYxOpPGM883ygZbohxagh1Ix6wALL13xxa9kpla+xqT7Rew==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/card-authentication@0.1.1-alpha.117':
     resolution: {integrity: sha512-U6PgbpZw71mT45dZ4siQuWoKBGgkfrdo8o+bwWB4fDAOOHT/h4ljYWRDP7HhDdrxDmH+xXtjSIcpSHKOBjiSfw==}
 
@@ -1203,6 +1211,11 @@ packages:
 
   '@gemeente-denhaag/card@0.2.3-alpha.388':
     resolution: {integrity: sha512-7AqQLIdIrhvvsT+dbeE28WU2BmzffgsUbVcnytr1acy975uESFhZ0bXaPf4AJnMkJ8eVmWEWTrZmDm5sfRVDPg==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/card@0.2.3-alpha.394':
+    resolution: {integrity: sha512-4Bb3pH6oqKY0jB7U1zlLsO4djokoE7BhCKnMV2jichzB/KVVpczuhCvhlez+wfVMSag3ljn6sG1WqvSjkhyZkw==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1225,8 +1238,14 @@ packages:
   '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.390':
     resolution: {integrity: sha512-OmZpqMTBxffnfkbzljOokLwpL5paJtyY8w8V8MQbuxOcSfwKagHKA78oitoaKITHc9nSynaSLc0s7EoWT9uQrw==}
 
+  '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.396':
+    resolution: {integrity: sha512-0eF3thpTOYYEwOQMALAuuvtlqQytAEALlJ9zb5Z2e1XRz9K1ypuN3GrEXmMLYxsYt6kfFrrBE7IMkxl6kyIsCQ==}
+
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.390':
     resolution: {integrity: sha512-D1b4paXwnd0KS1or54Cw9iMmmnvfoDiZU78czSmXd+FVB/BjTBdJvJRriizYAzFGAiu8JcDvONxQC+z2N0CsUQ==}
+
+  '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.396':
+    resolution: {integrity: sha512-FN29xVLA6s+BxZe2satpuLob4tYh7QwcoMqj8m/UoY9elp1ZtcXMYUEXol0AcXcuQs1IPRjmCwAYxyvJFJwxdw==}
 
   '@gemeente-denhaag/divider@0.2.3-alpha.388':
     resolution: {integrity: sha512-NbsqaeuClaKZJxNFY0O4lE8yk1TaSlvftXEui0SLUKlMw7cFb60XQu4NojucydDb07GsvxZA7qA0pGSS1pwXTw==}
@@ -1297,6 +1316,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/icons@0.2.3-alpha.394':
+    resolution: {integrity: sha512-px2awoHcxzn44ON2PPeqGcWAUtJ8KTjH0q45Wn2LA7Q0LQjk5l6Qpmch/VvH/wrfCFVXsddqEQ28hP8uyVlnHQ==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/language-switcher@0.2.3-alpha.380':
     resolution: {integrity: sha512-YBbhhGMmne8YnbrBr5EToJggR1ETVTOME9vT9fESVLt2f/KXfh3v55NOMQ5whL+CRSTaGXdpZPA3Myo0kVqDmw==}
     peerDependencies:
@@ -1317,6 +1341,11 @@ packages:
 
   '@gemeente-denhaag/link@0.2.3-alpha.390':
     resolution: {integrity: sha512-Q5YtrgEfmM8ei07BNo//ByhBwYziFD0Mtq5+lNpKoPhjOoQWQX3cYUQA853k4ggNqdqUpCgdsUA5OEjR71k/yQ==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/link@0.2.3-alpha.394':
+    resolution: {integrity: sha512-thehPnJgXs1kIeFv0aZyeaR9nwaLpfaQCP3e19GkEpqmLUS4b3SU5ZCmm0PC+FPWL3bzW/2VzX4OZ0uOt3Rhaw==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1401,8 +1430,18 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/typography@0.2.3-alpha.394':
+    resolution: {integrity: sha512-PSFhdsT/wHaL3gZbjdtJUID9lhc6LoH7UKWJ/T/4BlM+Cbf69tyqCm/BV7jw2/yWw+g5j5zg2CQWc9N5iOdbxw==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/utils@0.2.3-alpha.387':
     resolution: {integrity: sha512-xsXm8ejcPJK9X/+wiEcpO6XGw0Vy/Ng/f9BRXbWbWTDnGnL4P7YQWwLAbvgqwzK3JBBNkWVumCsrQ7xaXXua3A==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/utils@0.2.3-alpha.393':
+    resolution: {integrity: sha512-NrddWBbDjvUmz/qbys4Bce7X13yi1OBV4+VnHuvwfaSVt9ZmI2ej2jaYemRlXBI6uxdJNHvN7RWR4FPxB7r1Hg==}
     peerDependencies:
       react: ^18.0.0
 
@@ -2189,6 +2228,9 @@ packages:
   '@utrecht/components@3.0.0':
     resolution: {integrity: sha512-TO39Ti6Af50l+I2gt4S3iacGVuVoxBK/+G/bsK9wvii53fO35NYJul7xB98/IYSBmewaN4GtmyWGphVDdFMt1A==}
 
+  '@utrecht/components@4.0.0':
+    resolution: {integrity: sha512-vpw8p5FEU/yrSGL5JU+x6bDXIreEPU6WPEagOkcdqbFGMovWS8uUHNWmv+PY1xJIOjOb98RebSsbFDoA4zllVQ==}
+
   '@vitejs/plugin-react@4.2.1':
     resolution: {integrity: sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -2764,6 +2806,9 @@ packages:
 
   date-fns@3.3.1:
     resolution: {integrity: sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==}
+
+  date-fns@3.6.0:
+    resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
 
   de-indent@1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}
@@ -5975,6 +6020,16 @@ snapshots:
     transitivePeerDependencies:
       - react
 
+  '@gemeente-denhaag/action@0.1.1-alpha.60(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/button': 0.2.3-alpha.394(react@18.3.1)
+      '@gemeente-denhaag/icons': 0.2.3-alpha.394(react@18.3.1)
+      '@gemeente-denhaag/link': 0.2.3-alpha.394(react@18.3.1)
+      '@gemeente-denhaag/utils': 0.2.3-alpha.393(react@18.3.1)
+      date-fns: 3.6.0
+    transitivePeerDependencies:
+      - react
+
   '@gemeente-denhaag/alert@0.1.1-alpha.358(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/button': 0.2.3-alpha.388(react@18.3.1)
@@ -5997,9 +6052,9 @@ snapshots:
 
   '@gemeente-denhaag/button-group@0.1.1-alpha.257': {}
 
-  '@gemeente-denhaag/button-link@0.0.1-alpha.7(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/button-link@0.0.1-alpha.7(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 3.0.0
       react: 18.3.1
     transitivePeerDependencies:
@@ -6011,6 +6066,11 @@ snapshots:
   '@gemeente-denhaag/button@0.2.3-alpha.388(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.388(react@18.3.1)
+      react: 18.3.1
+
+  '@gemeente-denhaag/button@0.2.3-alpha.394(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.394(react@18.3.1)
       react: 18.3.1
 
   '@gemeente-denhaag/card-authentication@0.1.1-alpha.117(react@18.3.1)':
@@ -6035,9 +6095,17 @@ snapshots:
       '@gemeente-denhaag/typography': 0.2.3-alpha.388(react@18.3.1)
       react: 18.3.1
 
-  '@gemeente-denhaag/checkbox@0.3.0-alpha.388(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/card@0.2.3-alpha.394(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/icons': 0.2.3-alpha.394(react@18.3.1)
+      '@gemeente-denhaag/link': 0.2.3-alpha.394(react@18.3.1)
+      '@gemeente-denhaag/typography': 0.2.3-alpha.394(react@18.3.1)
+      '@gemeente-denhaag/utils': 0.2.3-alpha.393(react@18.3.1)
+      react: 18.3.1
+
+  '@gemeente-denhaag/checkbox@0.3.0-alpha.388(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 3.0.0
       react: 18.3.1
     transitivePeerDependencies:
@@ -6046,7 +6114,7 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/components-react@0.1.1-alpha.330(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/components-react@0.1.1-alpha.330(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/accordion': 0.2.3-alpha.388
       '@gemeente-denhaag/action': 0.1.1-alpha.54(react@18.3.1)
@@ -6055,37 +6123,37 @@ snapshots:
       '@gemeente-denhaag/button': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/card': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/card-group': 0.1.1-alpha.117(react@18.3.1)
-      '@gemeente-denhaag/checkbox': 0.3.0-alpha.388(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/checkbox': 0.3.0-alpha.388(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/contact-timeline': 0.1.1-alpha.46(react@18.3.1)
       '@gemeente-denhaag/descriptionlist': 0.1.1-alpha.288
       '@gemeente-denhaag/divider': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/file': 0.1.1-alpha.60(react@18.3.1)
-      '@gemeente-denhaag/footer': 0.1.1-alpha.247(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@gemeente-denhaag/form-field': 0.3.0-alpha.264(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@gemeente-denhaag/form-field-description': 0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/footer': 0.1.1-alpha.247(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/form-field': 0.3.0-alpha.264(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/form-field-description': 0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/form-field-error-message': 0.3.0-alpha.21(react@18.3.1)
-      '@gemeente-denhaag/form-fieldset': 0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@gemeente-denhaag/form-label': 0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/form-fieldset': 0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/form-label': 0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/form-progress': 0.1.1-alpha.263(react@18.3.1)
-      '@gemeente-denhaag/header': 0.1.1-alpha.248(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/header': 0.1.1-alpha.248(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/iconbutton': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/icons': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/link': 0.2.3-alpha.388(react@18.3.1)
-      '@gemeente-denhaag/link-button': 0.0.1-alpha.15(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/link-button': 0.0.1-alpha.15(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/list': 0.2.3-alpha.388(react@18.3.1)
-      '@gemeente-denhaag/menu': 0.2.3-alpha.388(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/menu': 0.2.3-alpha.388(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/page': 0.1.1-alpha.248
       '@gemeente-denhaag/pagination': 0.1.1-alpha.315(react@18.3.1)
       '@gemeente-denhaag/process-steps': 0.1.0-alpha.217(react@18.3.1)
-      '@gemeente-denhaag/radio-button': 0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/radio-button': 0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/responsive-content': 0.1.1-alpha.248
       '@gemeente-denhaag/sheet': 0.1.0-alpha.184(react@18.3.1)
       '@gemeente-denhaag/sidenav': 0.1.0-alpha.206(react@18.3.1)
       '@gemeente-denhaag/stylesprovider': 0.1.1-alpha.388(react@18.3.1)
       '@gemeente-denhaag/tab': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/table': 0.1.1-alpha.290(react@18.3.1)
-      '@gemeente-denhaag/text-input': 0.3.0-alpha.388(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@gemeente-denhaag/textarea': 0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/text-input': 0.3.0-alpha.388(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/textarea': 0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/typography': 0.2.3-alpha.388(react@18.3.1)
       react: 18.3.1
     transitivePeerDependencies:
@@ -6110,7 +6178,11 @@ snapshots:
 
   '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.390': {}
 
+  '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.396': {}
+
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.390': {}
+
+  '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.396': {}
 
   '@gemeente-denhaag/divider@0.2.3-alpha.388(react@18.3.1)':
     dependencies:
@@ -6128,7 +6200,7 @@ snapshots:
     transitivePeerDependencies:
       - react
 
-  '@gemeente-denhaag/footer@0.1.1-alpha.247(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/footer@0.1.1-alpha.247(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/button-group': 0.1.1-alpha.257
       '@gemeente-denhaag/icons': 0.2.3-alpha.388(react@18.3.1)
@@ -6137,7 +6209,7 @@ snapshots:
       '@gemeente-denhaag/list': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/responsive-content': 0.1.1-alpha.248
       '@utrecht/component-library-css': 3.0.0
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - date-fns
       - react
@@ -6145,9 +6217,9 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/form-field-description@0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/form-field-description@0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 3.0.0
       react: 18.3.1
     transitivePeerDependencies:
@@ -6160,9 +6232,9 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@gemeente-denhaag/form-field@0.3.0-alpha.264(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/form-field@0.3.0-alpha.264(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 3.0.0
       react: 18.3.1
     transitivePeerDependencies:
@@ -6171,9 +6243,9 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/form-fieldset@0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/form-fieldset@0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 3.0.0
       react: 18.3.1
     transitivePeerDependencies:
@@ -6182,9 +6254,9 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/form-label@0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/form-label@0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 3.0.0
       react: 18.3.1
     transitivePeerDependencies:
@@ -6201,17 +6273,17 @@ snapshots:
 
   '@gemeente-denhaag/header-logo@0.1.1-alpha.248': {}
 
-  '@gemeente-denhaag/header@0.1.1-alpha.248(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/header@0.1.1-alpha.248(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/breadcrumb': 0.1.1-alpha.316(react@18.3.1)
       '@gemeente-denhaag/button': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/header-logo': 0.1.1-alpha.248
       '@gemeente-denhaag/iconbutton': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/icons': 0.2.3-alpha.388(react@18.3.1)
-      '@gemeente-denhaag/language-switcher': 0.2.3-alpha.380(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/language-switcher': 0.2.3-alpha.380(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/link': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/link-group': 0.1.3-alpha.249
-      '@gemeente-denhaag/menu': 0.2.3-alpha.388(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/menu': 0.2.3-alpha.388(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/responsive-content': 0.1.1-alpha.248
       '@gemeente-denhaag/sheet': 0.1.0-alpha.184(react@18.3.1)
       '@gemeente-denhaag/typography': 0.2.3-alpha.388(react@18.3.1)
@@ -6234,11 +6306,15 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@gemeente-denhaag/language-switcher@0.2.3-alpha.380(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/icons@0.2.3-alpha.394(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+
+  '@gemeente-denhaag/language-switcher@0.2.3-alpha.380(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/link': 0.2.3-alpha.388(react@18.3.1)
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
     transitivePeerDependencies:
       - date-fns
@@ -6246,9 +6322,9 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/link-button@0.0.1-alpha.15(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/link-button@0.0.1-alpha.15(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 3.0.0
       react: 18.3.1
     transitivePeerDependencies:
@@ -6269,17 +6345,22 @@ snapshots:
       '@gemeente-denhaag/icons': 0.2.3-alpha.390(react@18.3.1)
       react: 18.3.1
 
+  '@gemeente-denhaag/link@0.2.3-alpha.394(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.394(react@18.3.1)
+      react: 18.3.1
+
   '@gemeente-denhaag/list@0.2.3-alpha.388(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/iconbutton': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/icons': 0.2.3-alpha.388(react@18.3.1)
       react: 18.3.1
 
-  '@gemeente-denhaag/menu@0.2.3-alpha.388(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/menu@0.2.3-alpha.388(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/button': 0.2.3-alpha.388(react@18.3.1)
       '@gemeente-denhaag/icons': 0.2.3-alpha.388(react@18.3.1)
-      '@gemeente-denhaag/language-switcher': 0.2.3-alpha.380(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/language-switcher': 0.2.3-alpha.380(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/sheet': 0.1.0-alpha.184(react@18.3.1)
       '@types/uuid': 9.0.8
       '@utrecht/component-library-css': 3.0.0
@@ -6305,9 +6386,9 @@ snapshots:
       '@gemeente-denhaag/typography': 0.2.3-alpha.388(react@18.3.1)
       react: 18.3.1
 
-  '@gemeente-denhaag/radio-button@0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/radio-button@0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 3.0.0
       react: 18.3.1
     transitivePeerDependencies:
@@ -6349,9 +6430,9 @@ snapshots:
       '@gemeente-denhaag/link': 0.2.3-alpha.390(react@18.3.1)
       react: 18.3.1
 
-  '@gemeente-denhaag/text-input@0.3.0-alpha.388(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/text-input@0.3.0-alpha.388(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 3.0.0
       react: 18.3.1
     transitivePeerDependencies:
@@ -6360,9 +6441,9 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/textarea@0.3.0-alpha.21(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/textarea@0.3.0-alpha.21(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/component-library-react': 3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 3.0.0
       react: 18.3.1
     transitivePeerDependencies:
@@ -6378,9 +6459,21 @@ snapshots:
       '@utrecht/components': 3.0.0
       react: 18.3.1
 
+  '@gemeente-denhaag/typography@0.2.3-alpha.394(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.396
+      '@gemeente-denhaag/design-tokens-components': 0.2.3-alpha.396
+      '@utrecht/components': 4.0.0
+      react: 18.3.1
+
   '@gemeente-denhaag/utils@0.2.3-alpha.387(react@18.3.1)':
     dependencies:
       date-fns: 3.3.1
+      react: 18.3.1
+
+  '@gemeente-denhaag/utils@0.2.3-alpha.393(react@18.3.1)':
+    dependencies:
+      date-fns: 3.6.0
       react: 18.3.1
 
   '@graphql-codegen/add@5.0.2(graphql@16.8.1)':
@@ -7454,16 +7547,20 @@ snapshots:
 
   '@utrecht/component-library-css@3.0.1-alpha.34': {}
 
-  '@utrecht/component-library-react@3.0.0(date-fns@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@utrecht/component-library-react@3.0.0(date-fns@3.6.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       clsx: 1.2.1
       lodash.chunk: 4.2.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     optionalDependencies:
-      date-fns: 3.3.1
+      date-fns: 3.6.0
 
   '@utrecht/components@3.0.0':
+    dependencies:
+      clsx: 1.2.1
+
+  '@utrecht/components@4.0.0':
     dependencies:
       clsx: 1.2.1
 
@@ -8152,6 +8249,8 @@ snapshots:
   dataloader@2.2.2: {}
 
   date-fns@3.3.1: {}
+
+  date-fns@3.6.0: {}
 
   de-indent@1.0.2: {}
 
