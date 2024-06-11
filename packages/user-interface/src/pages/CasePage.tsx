@@ -5,6 +5,7 @@ import {
   useGetObjectContactMomentenLazyQuery,
   Taak,
   ContactMoment,
+  ZaakStatus,
 } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/components-react";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -129,9 +130,11 @@ const CasePage = ({
         <StatusHistory
           loading={loading}
           caseId={caseData?.getZaak.zaaktype.identificatie}
-          statusHistory={caseData?.getZaak.statusGeschiedenis}
+          statusHistory={
+            caseData?.getZaak.statusGeschiedenis as ZaakStatus[] | undefined
+          }
           statuses={caseData?.getZaak.statussen}
-          status={caseData?.getZaak.status}
+          status={caseData?.getZaak.status as ZaakStatus | undefined}
         />
       </section>
       {details.length > 0 && (
