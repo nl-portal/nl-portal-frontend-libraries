@@ -7,11 +7,7 @@ export const QUERY_GET_PRODUCTEN = gql`
       verbruiksobjecten {
         id
         soort
-      }
-      productType {
-        id
-        naam
-        zaaktypen
+        data
       }
       productDetails {
         id
@@ -21,8 +17,30 @@ export const QUERY_GET_PRODUCTEN = gql`
       status
       geldigVan
       geldigTot
+      zaken {
+        uuid
+        omschrijving
+        identificatie
+        zaaktype {
+          identificatie
+        }
+        startdatum
+        status {
+          statustype {
+            isEindstatus
+          }
+        }
+      }
       taken {
         id
+        objectId
+        formulier {
+          ...FormulierFields
+        }
+        title
+        status
+        date
+        verloopdatum
       }
     }
   }

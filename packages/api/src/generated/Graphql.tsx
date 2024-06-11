@@ -279,8 +279,8 @@ export type Product = {
   __typename?: 'Product';
   documenten: Array<Scalars['String']['output']>;
   eigenschappen: Scalars['JSON']['output'];
-  geldigTot?: Maybe<Scalars['Date']['output']>;
-  geldigVan: Scalars['Date']['output'];
+  geldigTot?: Maybe<Scalars['LocalDateTime']['output']>;
+  geldigVan: Scalars['LocalDateTime']['output'];
   id?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
   productDetails?: Maybe<ProductDetails>;
@@ -368,7 +368,7 @@ export type Query = {
   getProductType?: Maybe<ProductType>;
   /** Get productTypes where the user has products */
   getProductTypes: Array<ProductType>;
-  /** Get list of verbruiksobjecten of product  */
+  /** Get list of verbruiksobjecten of product */
   getProductVerbruiksObjecten: Array<ProductVerbruiksObject>;
   /** Get list of zaken by product name  */
   getProductZaken: Array<Zaak>;
@@ -600,6 +600,7 @@ export type ZaakStatus = {
   __typename?: 'ZaakStatus';
   datumStatusGezet: Scalars['String']['output'];
   statustype: ZaakStatusType;
+  uuid: Scalars['UUID']['output'];
 };
 
 export type ZaakStatusType = {
@@ -712,6 +713,13 @@ export type GetProductTakenQueryVariables = Exact<{
 
 export type GetProductTakenQuery = { __typename?: 'Query', getProductTaken: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> };
 
+export type GetProductVerbruiksObjectenQueryVariables = Exact<{
+  productId: Scalars['UUID']['input'];
+}>;
+
+
+export type GetProductVerbruiksObjectenQuery = { __typename?: 'Query', getProductVerbruiksObjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, productInstantie: string, data?: any | null }> };
+
 export type GetProductZakenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
@@ -725,7 +733,7 @@ export type GetProductQueryVariables = Exact<{
 }>;
 
 
-export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null }>, productType?: { __typename?: 'ProductType', id?: any | null, naam: string, zaaktypen: Array<any> } | null, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, taken: Array<{ __typename?: 'Taak', id: any }> } | null };
+export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } | null };
 
 export type GetProductenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -1434,6 +1442,49 @@ export type GetProductTakenQueryHookResult = ReturnType<typeof useGetProductTake
 export type GetProductTakenLazyQueryHookResult = ReturnType<typeof useGetProductTakenLazyQuery>;
 export type GetProductTakenSuspenseQueryHookResult = ReturnType<typeof useGetProductTakenSuspenseQuery>;
 export type GetProductTakenQueryResult = Apollo.QueryResult<GetProductTakenQuery, GetProductTakenQueryVariables>;
+export const GetProductVerbruiksObjectenDocument = gql`
+    query GetProductVerbruiksObjecten($productId: UUID!) {
+  getProductVerbruiksObjecten(productId: $productId) {
+    id
+    soort
+    productInstantie
+    data
+  }
+}
+    `;
+
+/**
+ * __useGetProductVerbruiksObjectenQuery__
+ *
+ * To run a query within a React component, call `useGetProductVerbruiksObjectenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductVerbruiksObjectenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductVerbruiksObjectenQuery({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useGetProductVerbruiksObjectenQuery(baseOptions: Apollo.QueryHookOptions<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables> & ({ variables: GetProductVerbruiksObjectenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>(GetProductVerbruiksObjectenDocument, options);
+      }
+export function useGetProductVerbruiksObjectenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>(GetProductVerbruiksObjectenDocument, options);
+        }
+export function useGetProductVerbruiksObjectenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>(GetProductVerbruiksObjectenDocument, options);
+        }
+export type GetProductVerbruiksObjectenQueryHookResult = ReturnType<typeof useGetProductVerbruiksObjectenQuery>;
+export type GetProductVerbruiksObjectenLazyQueryHookResult = ReturnType<typeof useGetProductVerbruiksObjectenLazyQuery>;
+export type GetProductVerbruiksObjectenSuspenseQueryHookResult = ReturnType<typeof useGetProductVerbruiksObjectenSuspenseQuery>;
+export type GetProductVerbruiksObjectenQueryResult = Apollo.QueryResult<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>;
 export const GetProductZakenDocument = gql`
     query GetProductZaken($productName: String!, $pageSize: Int) {
   getProductZaken(productName: $productName, pageSize: $pageSize) {
@@ -1493,11 +1544,7 @@ export const GetProductDocument = gql`
     verbruiksobjecten {
       id
       soort
-    }
-    productType {
-      id
-      naam
-      zaaktypen
+      data
     }
     productDetails {
       id
@@ -1507,12 +1554,34 @@ export const GetProductDocument = gql`
     status
     geldigVan
     geldigTot
+    zaken {
+      uuid
+      omschrijving
+      identificatie
+      zaaktype {
+        identificatie
+      }
+      startdatum
+      status {
+        statustype {
+          isEindstatus
+        }
+      }
+    }
     taken {
       id
+      objectId
+      formulier {
+        ...FormulierFields
+      }
+      title
+      status
+      date
+      verloopdatum
     }
   }
 }
-    `;
+    ${FormulierFieldsFragmentDoc}`;
 
 /**
  * __useGetProductQuery__
