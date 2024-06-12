@@ -18,6 +18,7 @@ const Task = ({ task }: Props) => {
   if (task.formulier.formuliertype === "externalurl")
     return (
       <ActionMulti
+        relativeDate
         labels={labels}
         dateTime={task.verloopdatum}
         actions={
@@ -32,6 +33,7 @@ const Task = ({ task }: Props) => {
 
   return (
     <ActionSingle
+      relativeDate
       labels={labels}
       dateTime={task.verloopdatum}
       link={taskUrl}
