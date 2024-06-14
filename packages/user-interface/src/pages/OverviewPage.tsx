@@ -43,7 +43,7 @@ const OverviewPage = ({
     loading: casesLoading,
     error: casesError,
   } = useGetZakenQuery({
-    variables: { isOpen: false },
+    variables: { isOpen: true },
     skip: !fetchCasesLength,
   });
   const loading = tasksLoading || casesLoading;
