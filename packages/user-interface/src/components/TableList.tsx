@@ -58,6 +58,7 @@ const TableList = ({
               className: styles["table-list__icon"],
               children: (
                 <div className={styles["table-list__arrow"]}>
+                  <span className={styles["table-list__link-label"]}>Link</span>
                   <ArrowRightIcon />
                 </div>
               ),

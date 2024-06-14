@@ -155,6 +155,8 @@ export type Mutation = {
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
+  submitTaakV2: TaakV2;
+  /** Submit a task */
   submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
@@ -174,6 +176,12 @@ export type MutationSubmitTaakArgs = {
 };
 
 
+export type MutationSubmitTaakV2Args = {
+  id: Scalars['UUID']['input'];
+  submission: Scalars['JSON']['input'];
+};
+
+
 export type MutationSubmitTaskArgs = {
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
@@ -188,6 +196,13 @@ export type MutationUpdateBurgerProfielArgs = {
 export type MutationUpdateProductVerbruiksObjectArgs = {
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
+};
+
+export type OgoneBetaling = {
+  __typename?: 'OgoneBetaling';
+  bedrag: Scalars['Float']['output'];
+  betaalkenmerk: Scalars['String']['output'];
+  pspid: Scalars['String']['output'];
 };
 
 export type OgonePayment = {
@@ -370,14 +385,30 @@ export type Query = {
   getProductTypes: Array<ProductType>;
   /** Get list of verbruiksobjecten of product */
   getProductVerbruiksObjecten: Array<ProductVerbruiksObject>;
-  /** Get list of zaken by product name  */
+  /**
+   *
+   *         Get list of zaken by product name or productTypeId
+   *         isOpen is optional, when not available, all zaken will be returned
+   *         isOpen is true, only zaken without enddate will be returned
+   *         isOpen is false, only zaken with an enddate will be returned
+   *
+   */
   getProductZaken: Array<Zaak>;
-  /** Get list of products by product name */
+  /**
+   *
+   *         Get list of products by product name or productTypeId
+   *         subProductType, is optional. It search for the subProductType in the products
+   *
+   */
   getProducten: ProductPage;
   /** Get task by id */
   getTaakById: Taak;
+  /** Get task by id V2 */
+  getTaakByIdV2: TaakV2;
   /** Get a list of tasks. Optional filter for zaak */
   getTaken: TaakPage;
+  /** Get a list of tasks. Optional filter for zaak V2 */
+  getTakenV2: TaakPageV2;
   /**
    * Get a list of tasks
    * @deprecated Replaced by getTaken
@@ -385,7 +416,14 @@ export type Query = {
   getTasks: TaakPage;
   /** Gets a zaak by id */
   getZaak: Zaak;
-  /** Gets all zaken for the user */
+  /**
+   *
+   *         Gets all zaken for the user
+   *         isOpen is optional, when not available, all zaken will be returned
+   *         isOpen is true, only zaken without enddate will be returned
+   *         isOpen is false, only zaken with an enddate will be returned
+   *
+   */
   getZaken: ZaakPage;
 };
 
@@ -452,6 +490,7 @@ export type QueryGetProductVerbruiksObjectenArgs = {
 
 
 export type QueryGetProductZakenArgs = {
+  isOpen?: InputMaybe<Scalars['Boolean']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   productName: Scalars['String']['input'];
   productTypeId?: InputMaybe<Scalars['UUID']['input']>;
@@ -472,7 +511,19 @@ export type QueryGetTaakByIdArgs = {
 };
 
 
+export type QueryGetTaakByIdV2Args = {
+  id: Scalars['UUID']['input'];
+};
+
+
 export type QueryGetTakenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  zaakUUID?: InputMaybe<Scalars['UUID']['input']>;
+};
+
+
+export type QueryGetTakenV2Args = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   zaakUUID?: InputMaybe<Scalars['UUID']['input']>;
@@ -491,6 +542,7 @@ export type QueryGetZaakArgs = {
 
 
 export type QueryGetZakenArgs = {
+  isOpen?: InputMaybe<Scalars['Boolean']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   zaakTypeUrl?: InputMaybe<Scalars['String']['input']>;
 };
@@ -524,6 +576,12 @@ export type Taak = {
   zaak?: Maybe<Scalars['String']['output']>;
 };
 
+export type TaakForm = {
+  __typename?: 'TaakForm';
+  data: Scalars['JSON']['output'];
+  formulier: Scalars['String']['output'];
+};
+
 export type TaakFormulier = {
   __typename?: 'TaakFormulier';
   /** @deprecated To support old formulier types */
@@ -544,9 +602,32 @@ export type TaakIdentificatie = {
   value: Scalars['String']['output'];
 };
 
+export type TaakKoppeling = {
+  __typename?: 'TaakKoppeling';
+  registratie: TaakKoppelingRegistratie;
+  uuid: Scalars['UUID']['output'];
+};
+
+export enum TaakKoppelingRegistratie {
+  Product = 'PRODUCT',
+  Zaak = 'ZAAK'
+}
+
 export type TaakPage = {
   __typename?: 'TaakPage';
   content: Array<Taak>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type TaakPageV2 = {
+  __typename?: 'TaakPageV2';
+  content: Array<TaakV2>;
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
@@ -562,6 +643,25 @@ export enum TaakStatus {
   Open = 'OPEN',
   Verwerkt = 'VERWERKT'
 }
+
+export type TaakUrl = {
+  __typename?: 'TaakUrl';
+  uri: Scalars['String']['output'];
+};
+
+export type TaakV2 = {
+  __typename?: 'TaakV2';
+  formtaak?: Maybe<TaakForm>;
+  id: Scalars['UUID']['output'];
+  identificatie: TaakIdentificatie;
+  koppeling: TaakKoppeling;
+  ogonebetaling?: Maybe<OgoneBetaling>;
+  soort: Scalars['String']['output'];
+  status: TaakStatus;
+  titel: Scalars['String']['output'];
+  url?: Maybe<TaakUrl>;
+  verloopdatum?: Maybe<Scalars['LocalDateTime']['output']>;
+};
 
 export type Zaak = {
   __typename?: 'Zaak';
@@ -723,6 +823,7 @@ export type GetProductVerbruiksObjectenQuery = { __typename?: 'Query', getProduc
 export type GetProductZakenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  isOpen?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
@@ -769,6 +870,7 @@ export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak
 
 export type GetZakenQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
+  isOpen?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
@@ -1486,8 +1588,8 @@ export type GetProductVerbruiksObjectenLazyQueryHookResult = ReturnType<typeof u
 export type GetProductVerbruiksObjectenSuspenseQueryHookResult = ReturnType<typeof useGetProductVerbruiksObjectenSuspenseQuery>;
 export type GetProductVerbruiksObjectenQueryResult = Apollo.QueryResult<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>;
 export const GetProductZakenDocument = gql`
-    query GetProductZaken($productName: String!, $pageSize: Int) {
-  getProductZaken(productName: $productName, pageSize: $pageSize) {
+    query GetProductZaken($productName: String!, $pageSize: Int, $isOpen: Boolean) {
+  getProductZaken(productName: $productName, pageSize: $pageSize, isOpen: $isOpen) {
     uuid
     omschrijving
     identificatie
@@ -1518,6 +1620,7 @@ export const GetProductZakenDocument = gql`
  *   variables: {
  *      productName: // value for 'productName'
  *      pageSize: // value for 'pageSize'
+ *      isOpen: // value for 'isOpen'
  *   },
  * });
  */
@@ -1854,8 +1957,8 @@ export type GetZaakLazyQueryHookResult = ReturnType<typeof useGetZaakLazyQuery>;
 export type GetZaakSuspenseQueryHookResult = ReturnType<typeof useGetZaakSuspenseQuery>;
 export type GetZaakQueryResult = Apollo.QueryResult<GetZaakQuery, GetZaakQueryVariables>;
 export const GetZakenDocument = gql`
-    query GetZaken($page: Int) {
-  getZaken(page: $page) {
+    query GetZaken($page: Int, $isOpen: Boolean) {
+  getZaken(page: $page, isOpen: $isOpen) {
     content {
       uuid
       omschrijving
@@ -1889,6 +1992,7 @@ export const GetZakenDocument = gql`
  * const { data, loading, error } = useGetZakenQuery({
  *   variables: {
  *      page: // value for 'page'
+ *      isOpen: // value for 'isOpen'
  *   },
  * });
  */

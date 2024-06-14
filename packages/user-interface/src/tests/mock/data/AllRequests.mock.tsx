@@ -569,13 +569,69 @@ export const getZaken: {
   },
 };
 
+export const getOpenZaken: {
+  request: GraphQLRequest;
+  result: FetchResult;
+} = {
+  request: {
+    query: QUERY_GET_ZAKEN,
+    variables: { isOpen: true },
+  },
+  result: {
+    data: {
+      getZaken: {
+        content: [
+          {
+            uuid: "6f268986-17c2-4045-9340-94101bfad3ca",
+            omschrijving: "",
+            identificatie: "ZAAK-2024-0000001317",
+            zaaktype: {
+              identificatie: "OPENZAAK1",
+              __typename: "ZaakType",
+            },
+            startdatum: "2024-01-01",
+            status: {
+              statustype: {
+                isEindstatus: false,
+                __typename: "ZaakStatusType",
+              },
+              __typename: "ZaakStatus",
+            },
+            __typename: "Zaak",
+          },
+          {
+            uuid: "009e2451-44b3-4969-91e3-205d8b261fe1",
+            omschrijving: "",
+            identificatie: "ZAAK-2024-0000001263",
+            zaaktype: {
+              identificatie: "OPENZAAK2",
+              __typename: "ZaakType",
+            },
+            startdatum: "2024-01-02",
+            status: {
+              statustype: {
+                isEindstatus: false,
+                __typename: "ZaakStatusType",
+              },
+              __typename: "ZaakStatus",
+            },
+            __typename: "Zaak",
+          },
+        ],
+        totalElements: 2,
+        totalPages: 1,
+      },
+    },
+  },
+};
+
 export const getZakenPagination: {
   request: GraphQLRequest;
   result: FetchResult;
 } = {
   request: {
     query: QUERY_GET_ZAKEN,
-    variables: {},
+    variables: { isOpen: true },
   },
   result: {
     data: {
