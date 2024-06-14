@@ -16,7 +16,7 @@ const ThemeSampleOverviewPage = () => {
         loading={loading}
         titleTranslationId={`theme.${type}.listTitle`}
         readMoreTranslationId={`theme.${type}.listViewAll`}
-        readMoreLink={paths.themeSub(type)}
+        readMoreLink={paths.themeSub(type, "contracten")}
         totalAmount={
           contractsTotal > contractsLength ? contractsTotal : undefined
         }
