@@ -26,7 +26,7 @@ const routeShowLessTasks = [
     children: [
       {
         index: true,
-        element: <OverviewPage showIntro={true} tasksPreviewLength={2} />,
+        element: <OverviewPage showIntro={true} fetchTasksLength={2} />,
       },
     ],
   },
@@ -38,7 +38,7 @@ const routeShowLessCases = [
     children: [
       {
         index: true,
-        element: <OverviewPage showIntro={true} casesPreviewLength={1} />,
+        element: <OverviewPage showIntro={true} fetchCasesLength={1} />,
       },
     ],
   },

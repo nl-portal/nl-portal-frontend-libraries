@@ -41,23 +41,21 @@ const ThemeOverviewPage = ({
     loading: casesLoading,
     error: casesError,
   } = useGetProductZakenQuery({
-    variables: { productName: type, pageSize: fetchCasesLength },
+    variables: { productName: type, pageSize: fetchCasesLength, isOpen: false },
     skip: !fetchCasesLength,
   });
 
   const loading = loadingProp || taskLoading || casesLoading;
   const tasks = tasksData?.getProductTaken as Taak[] | undefined;
-  const cases = casesData?.getProductZaken.filter(
-    (c) => !c.status?.statustype.isEindstatus,
-  ) as Zaak[] | undefined;
+  const cases = casesData?.getProductZaken as Zaak[] | undefined;
 
   return (
     <PageGrid>
       <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}` })} />
-      {fetchTasksLength && (
+      {Boolean(fetchTasksLength) && (
         <TasksList loading={loading} error={Boolean(taskError)} tasks={tasks} />
       )}
-      {fetchCasesLength && (
+      {Boolean(fetchCasesLength) && (
         <CasesList
           loading={loading}
           error={Boolean(casesError)}
