@@ -43,7 +43,11 @@ const ThemeOverviewPage = ({
     loading: casesLoading,
     error: casesError,
   } = useGetProductZakenQuery({
-    variables: { productName: productType, pageSize: fetchCasesLength },
+    variables: {
+      productName: productType,
+      pageSize: fetchCasesLength,
+      isOpen: true,
+    },
     skip: !fetchCasesLength,
   });
 
