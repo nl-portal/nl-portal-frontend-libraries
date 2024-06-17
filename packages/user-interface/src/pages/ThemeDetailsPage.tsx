@@ -10,7 +10,7 @@ import CasesList from "../components/CasesList";
 import LinksList from "../components/LinksList";
 
 interface Props {
-  type: string;
+  slug: string;
   loading?: boolean;
   titleTranslationId?: string;
   tasks?: Taak[];
@@ -22,9 +22,9 @@ interface Props {
 }
 
 const ThemeDetailsPage = ({
-  type,
+  slug,
   loading,
-  titleTranslationId = `pageTitles.${type}`,
+  titleTranslationId = `pageTitles.${slug}`,
   tasks,
   tasksError,
   links,
@@ -38,7 +38,7 @@ const ThemeDetailsPage = ({
   return (
     <PageGrid>
       <div>
-        <BackLink routePath={paths.themeOverview(type)} />
+        <BackLink routePath={paths.themeOverview(slug)} />
         <PageHeader
           loading={loading}
           title={intl.formatMessage({ id: titleTranslationId })}
