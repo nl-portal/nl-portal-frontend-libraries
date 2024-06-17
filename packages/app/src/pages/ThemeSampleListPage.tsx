@@ -2,10 +2,10 @@ import { paths } from "../constants/paths";
 import { TableList, ThemeSubPage } from "@nl-portal/nl-portal-user-interface";
 
 const ThemeSampleListPage = () => {
-  const type = "sample";
+  const slug = "sample";
 
   return (
-    <ThemeSubPage type={type} titleTranslationId="Voorbeeldcontracten">
+    <ThemeSubPage slug={slug} titleTranslationId="Voorbeeldcontracten">
       <TableList
         titleTranslationId={null}
         headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}
