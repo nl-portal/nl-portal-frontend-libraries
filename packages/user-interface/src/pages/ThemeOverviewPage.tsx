@@ -11,7 +11,8 @@ import {
 } from "@nl-portal/nl-portal-api";
 
 interface Props {
-  type: string;
+  slug: string;
+  productType: string;
   loading?: boolean;
   showTasks?: boolean;
   fetchTasksLength?: number;
@@ -21,7 +22,8 @@ interface Props {
 }
 
 const ThemeOverviewPage = ({
-  type,
+  slug,
+  productType,
   loading: loadingProp,
   fetchTasksLength = 5,
   fetchCasesLength = 4,
@@ -33,7 +35,7 @@ const ThemeOverviewPage = ({
     loading: taskLoading,
     error: taskError,
   } = useGetProductTakenQuery({
-    variables: { productName: type, pageSize: fetchTasksLength },
+    variables: { productName: productType, pageSize: fetchTasksLength },
     skip: !fetchTasksLength,
   });
   const {
@@ -41,7 +43,11 @@ const ThemeOverviewPage = ({
     loading: casesLoading,
     error: casesError,
   } = useGetProductZakenQuery({
-    variables: { productName: type, pageSize: fetchCasesLength, isOpen: true },
+    variables: {
+      productName: productType,
+      pageSize: fetchCasesLength,
+      isOpen: true,
+    },
     skip: !fetchCasesLength,
   });
 
@@ -51,7 +57,7 @@ const ThemeOverviewPage = ({
 
   return (
     <PageGrid>
-      <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}` })} />
+      <PageHeader title={intl.formatMessage({ id: `pageTitles.${slug}` })} />
       {Boolean(fetchTasksLength) && (
         <TasksList loading={loading} error={Boolean(taskError)} tasks={tasks} />
       )}
