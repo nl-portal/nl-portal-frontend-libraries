@@ -1,5 +1,5 @@
 import { Document as PortalDocument } from "@nl-portal/nl-portal-api";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import { useIntl } from "react-intl";
 import styles from "./DocumentsList.module.scss";
 import Document from "./Document";

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FC, ReactElement } from "react";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "react-loading-skeleton";
 import classNames from "classnames";
 import { useIntl } from "react-intl";

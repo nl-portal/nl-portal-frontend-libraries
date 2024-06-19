@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import { useIntl } from "react-intl";
 import classNames from "classnames";
 import Skeleton from "react-loading-skeleton";
