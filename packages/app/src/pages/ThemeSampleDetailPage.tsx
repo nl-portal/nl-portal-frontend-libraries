@@ -6,12 +6,12 @@ import {
 } from "@nl-portal/nl-portal-user-interface";
 
 const ThemeSampleDetailPage = () => {
-  const type = "sample";
+  const slug = "sample";
   const loading = false;
 
   return (
     <ThemeDetailsPage
-      type={type}
+      slug={slug}
       loading={loading}
       titleTranslationId="Keukenhoflaan 133"
       links={[

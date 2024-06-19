@@ -5,10 +5,10 @@ import { Link } from "@gemeente-denhaag/link";
 import { ExternalLinkIcon } from "@gemeente-denhaag/icons";
 
 const ThemeSampleListPage = () => {
-  const type = "sample";
+  const slug = "sample";
 
   return (
-    <ThemeSubPage type={type} titleTranslationId="Voorbeeldcontracten">
+    <ThemeSubPage slug={slug} titleTranslationId="Voorbeeldcontracten">
       <TableList
         titleTranslationId={null}
         headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}

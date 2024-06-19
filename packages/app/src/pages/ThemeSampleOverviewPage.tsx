@@ -5,18 +5,19 @@ import {
 import { paths } from "../constants/paths";
 
 const ThemeSampleOverviewPage = () => {
-  const type = "sample";
+  const slug = "sample";
+  const productType = "erfpacht";
   const loading = false;
   const contractsLength = 5;
   const contractsTotal = 12;
 
   return (
-    <ThemeOverviewPage type={type} loading={loading}>
+    <ThemeOverviewPage slug={slug} productType={productType} loading={loading}>
       <TableList
         loading={loading}
-        titleTranslationId={`theme.${type}.listTitle`}
-        readMoreTranslationId={`theme.${type}.listViewAll`}
-        readMoreLink={paths.themeSub(type, "contracten")}
+        titleTranslationId={`theme.${slug}.listTitle`}
+        readMoreTranslationId={`theme.${slug}.listViewAll`}
+        readMoreLink={paths.themeSub(slug, "contracten")}
         totalAmount={
           contractsTotal > contractsLength ? contractsTotal : undefined
         }

@@ -6,14 +6,14 @@ import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 interface Props {
-  type: string;
+  slug: string;
   titleTranslationId?: string;
   children?: React.ReactNode;
 }
 
 const ThemeSubPage = ({
-  type,
-  titleTranslationId = `pageTitles.${type}`,
+  slug,
+  titleTranslationId = `pageTitles.${slug}`,
   children,
 }: Props) => {
   const intl = useIntl();
@@ -22,7 +22,7 @@ const ThemeSubPage = ({
   return (
     <PageGrid>
       <div>
-        <BackLink routePath={paths.themeOverview(type)} />
+        <BackLink routePath={paths.themeOverview(slug)} />
         <PageHeader title={intl.formatMessage({ id: titleTranslationId })} />
       </div>
       {children}
