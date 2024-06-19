@@ -21,6 +21,7 @@ interface Props {
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
+  children?: React.ReactNode;
 }
 
 const TableList = ({
@@ -37,6 +38,7 @@ const TableList = ({
   index,
   indexLimit,
   onChange,
+  children,
 }: Props) => {
   const intl = useIntl();
   const hasLink = Boolean(rws?.flat().find((r) => r.href));
@@ -118,6 +120,7 @@ const TableList = ({
           onChange={onChange}
         />
       ) : null}
+      <div className={styles["table-list__children"]}>{children}</div>
     </section>
   );
 };

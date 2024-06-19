@@ -7,7 +7,7 @@ import {
   ContactMoment,
   ZaakStatus,
 } from "@nl-portal/nl-portal-api";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
 import ContactTimeline from "@gemeente-denhaag/contact-timeline";
