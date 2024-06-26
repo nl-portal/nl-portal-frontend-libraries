@@ -192,13 +192,13 @@ importers:
     dependencies:
       '@react-keycloak/web':
         specifier: ^3.4.0
-        version: 3.4.0(keycloak-js@23.0.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)
+        version: 3.4.0(keycloak-js@25.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)
       jwt-decode:
         specifier: ^4.0.0
         version: 4.0.0
       keycloak-js:
-        specifier: ^23.0.7
-        version: 23.0.7
+        specifier: 25.0.1
+        version: 25.0.1
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -404,7 +404,7 @@ importers:
         version: 1.3.0(react@18.3.1)
       '@react-keycloak/web':
         specifier: ^3.4.0
-        version: 3.4.0(keycloak-js@23.0.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)
+        version: 3.4.0(keycloak-js@25.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)
       '@utrecht/component-library-css':
         specifier: 3.0.1-alpha.34
         version: 3.0.1-alpha.34
@@ -3696,8 +3696,8 @@ packages:
     resolution: {tarball: https://codeload.github.com/formio/JS-Interpreter/tar.gz/0ed5007ada500c12d797ab867a15cfab736e9b25}
     version: 1.1.0-formio.2
 
-  js-sha256@0.10.1:
-    resolution: {integrity: sha512-5obBtsz9301ULlsgggLg542s/jqtddfOpV5KJc4hajc9JV8GeY2gZHSVpYBn4nWqAUTJ9v+xwtbJ1mIBgIH5Vw==}
+  js-sha256@0.11.0:
+    resolution: {integrity: sha512-6xNlKayMZvds9h1Y1VWc0fQHQ82BxTXizWPEtEeGvmOUYpBRy4gbWroHLpzowe6xiQhHpelCQiE7HEdznyBL9Q==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -3777,8 +3777,8 @@ packages:
     resolution: {integrity: sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==}
     engines: {node: '>=18'}
 
-  keycloak-js@23.0.7:
-    resolution: {integrity: sha512-OmszsKzBhhm5yP4W1q/tMd+nNnKpOAdeVYcoGhphlv8Fj1bNk4wRTYzp7pn5BkvueLz7fhvKHz7uOc33524YrA==}
+  keycloak-js@25.0.1:
+    resolution: {integrity: sha512-ns5sKQ5Iz3UyVGIKq2XBBXNZTlTCg9bzybR+JB2Vn+fDHIo9EGgAY4kzrBWMwbeFuegY+qJwGs05N+W9jgY9tg==}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -7164,12 +7164,12 @@ snapshots:
       react: 18.3.1
       react-fast-compare: 3.2.2
 
-  '@react-keycloak/web@3.4.0(keycloak-js@23.0.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)':
+  '@react-keycloak/web@3.4.0(keycloak-js@25.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)':
     dependencies:
       '@babel/runtime': 7.23.9
       '@react-keycloak/core': 3.2.0(react@18.3.1)
       hoist-non-react-statics: 3.3.2
-      keycloak-js: 23.0.7
+      keycloak-js: 25.0.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     optionalDependencies:
@@ -9249,7 +9249,7 @@ snapshots:
     dependencies:
       acorn: 8.11.3
 
-  js-sha256@0.10.1: {}
+  js-sha256@0.11.0: {}
 
   js-tokens@4.0.0: {}
 
@@ -9331,10 +9331,9 @@ snapshots:
 
   jwt-decode@4.0.0: {}
 
-  keycloak-js@23.0.7:
+  keycloak-js@25.0.1:
     dependencies:
-      base64-js: 1.5.1
-      js-sha256: 0.10.1
+      js-sha256: 0.11.0
       jwt-decode: 4.0.0
 
   keyv@4.5.4:
