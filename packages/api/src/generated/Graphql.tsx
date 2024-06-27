@@ -60,6 +60,18 @@ export type ContactMomentPage = {
   totalPages: Scalars['Int']['output'];
 };
 
+export type DmnResponse = {
+  __typename?: 'DmnResponse';
+  result: DmnResult;
+};
+
+export type DmnResult = {
+  __typename?: 'DmnResult';
+  type: Scalars['String']['output'];
+  value: Scalars['String']['output'];
+  valueInfo?: Maybe<Scalars['String']['output']>;
+};
+
 export type Document = {
   __typename?: 'Document';
   bestandsnaam?: Maybe<Scalars['String']['output']>;
@@ -152,6 +164,8 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
+  /** Prefill data to start a form */
+  prefill: PrefillResponse;
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
@@ -170,6 +184,15 @@ export type MutationGenerateOgonePaymentArgs = {
 };
 
 
+export type MutationPrefillArgs = {
+  formulier: Scalars['String']['input'];
+  parameters: Scalars['JSON']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  staticData?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+
 export type MutationSubmitTaakArgs = {
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
@@ -179,6 +202,7 @@ export type MutationSubmitTaakArgs = {
 export type MutationSubmitTaakV2Args = {
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
+  version: Scalars['String']['input'];
 };
 
 
@@ -290,6 +314,13 @@ export type PersoonVerblijfplaats = {
   woonplaats?: Maybe<Scalars['String']['output']>;
 };
 
+export type PrefillResponse = {
+  __typename?: 'PrefillResponse';
+  formulierUrl: Scalars['String']['output'];
+  hash: Scalars['String']['output'];
+  objectId: Scalars['UUID']['output'];
+};
+
 export type Product = {
   __typename?: 'Product';
   documenten: Array<Scalars['String']['output']>;
@@ -328,9 +359,11 @@ export type ProductPage = {
 
 export type ProductType = {
   __typename?: 'ProductType';
+  beslistabellen?: Maybe<Array<Scalars['String']['output']>>;
   id?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
   omschrijving?: Maybe<Scalars['String']['output']>;
+  prefillFormulieren?: Maybe<Array<Scalars['String']['output']>>;
   productSubType?: Maybe<Scalars['String']['output']>;
   zaaktypen: Array<Scalars['UUID']['output']>;
 };
@@ -377,6 +410,8 @@ export type Query = {
   getPersoon?: Maybe<Persoon>;
   /** Get product by id */
   getProduct?: Maybe<Product>;
+  /** Get Product Decision by key */
+  getProductDecision: Array<DmnResponse>;
   /** Get list of taken by product name  */
   getProductTaken: Array<Taak>;
   /** Get productType by name */
@@ -467,6 +502,12 @@ export type QueryGetObjectContactMomentenArgs = {
 
 export type QueryGetProductArgs = {
   id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetProductDecisionArgs = {
+  key: Scalars['String']['input'];
+  productId: Scalars['UUID']['input'];
 };
 
 
@@ -661,11 +702,13 @@ export type TaakV2 = {
   titel: Scalars['String']['output'];
   url?: Maybe<TaakUrl>;
   verloopdatum?: Maybe<Scalars['LocalDateTime']['output']>;
+  version?: Maybe<Scalars['String']['output']>;
 };
 
 export type Zaak = {
   __typename?: 'Zaak';
   documenten: Array<Document>;
+  einddatum?: Maybe<Scalars['Date']['output']>;
   identificatie: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
   startdatum: Scalars['Date']['output'];
@@ -743,7 +786,7 @@ export type UpdateProductVerbruiksObjectMutation = { __typename?: 'Mutation', up
 export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null };
+export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string, kvkNummer: string, embedded?: { __typename?: 'Embedded', eigenaar: { __typename?: 'Eigenaar', rechtsvorm: string }, hoofdvestiging: { __typename?: 'Hoofdvestiging', adressen?: Array<{ __typename?: 'Adres', straatnaam: string, huisnummer: number, postcode: string, plaats: string }> | null } } | null } | null };
 
 export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -996,6 +1039,20 @@ export const GetBedrijfDocument = gql`
     query GetBedrijf {
   getBedrijf {
     naam
+    kvkNummer
+    embedded {
+      eigenaar {
+        rechtsvorm
+      }
+      hoofdvestiging {
+        adressen {
+          straatnaam
+          huisnummer
+          postcode
+          plaats
+        }
+      }
+    }
   }
 }
     `;
