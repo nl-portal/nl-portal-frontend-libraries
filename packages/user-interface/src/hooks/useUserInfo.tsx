@@ -8,7 +8,7 @@ import { KeycloakContext } from "@nl-portal/nl-portal-authentication";
 import { getNameString } from "../utils/person-data";
 
 export const useUserInfo = () => {
-  const [isPerson, setIsPerson] = useState(false);
+  const [isPerson, setIsPerson] = useState(true);
   const [isVolmachtLogin, setisVolmachtLogin] = useState(false);
   const [userName, setUserName] = useState("");
   const [volmachtgever, setVolmachtgever] = useState("");

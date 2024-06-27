@@ -5,6 +5,7 @@ export const QUERY_GET_PERSOON_DATA = gql`
     getPersoon {
       burgerservicenummer
       geslachtsaanduiding
+      bewonersAantal
       naam {
         aanhef
         voorletters

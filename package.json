@@ -7,6 +7,7 @@
   "scripts": {
     "build": "pnpm clean && pnpm run --recursive --parallel build",
     "clean": "pnpm run --recursive clean",
+    "codegen": "pnpm run --recursive --parallel codegen",
     "dev": "pnpm clean && pnpm run --recursive --parallel dev",
     "lint": "eslint \"packages/**/*.{js,jsx,ts,tsx}\"",
     "lint:css": "stylelint \"**/*.{css,scss}\"",
