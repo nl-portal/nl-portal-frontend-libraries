@@ -7,7 +7,6 @@ import {
   RouterProvider,
   RouteObject,
 } from "react-router-dom";
-import UserInformationProvider from "./UserInformationProvider";
 import { Paths } from "../interfaces/paths";
 
 //eslint-disable-next-line react-refresh/only-export-components
@@ -34,11 +33,9 @@ const TestContent = ({
   paths: Paths;
 }) => (
   <MockWrapper>
-    <UserInformationProvider>
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Outlet context={{ paths }} />
-      </MockedProvider>
-    </UserInformationProvider>
+    <MockedProvider mocks={mocks} addTypename={false}>
+      <Outlet context={{ paths }} />
+    </MockedProvider>
   </MockWrapper>
 );
 

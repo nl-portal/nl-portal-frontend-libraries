@@ -12,7 +12,6 @@ import Menu from "./Menu";
 import { PortalFooter } from "../interfaces/portal-footer";
 import Footer from "./Footer";
 import LayoutProvider from "../providers/LayoutProvider";
-import UserInformationProvider from "../providers/UserInformationProvider";
 import FormIoUploader from "./FormIoUploader";
 import styles from "./Layout.module.scss";
 import { HelmetProvider } from "react-helmet-async";
@@ -101,21 +100,19 @@ const Layout: FC<LayoutComponentProps> = ({
 }) => (
   <StylesProvider>
     <LayoutProvider>
-      <UserInformationProvider>
-        <HelmetProvider>
-          <LayoutComponent
-            navigationItems={navigationItems}
-            paths={paths}
-            customHeader={customHeader}
-            headerLogo={headerLogo}
-            headerLogoSmall={headerLogoSmall}
-            footer={footer}
-            customFooter={customFooter}
-            facet={facet}
-            offline={offline}
-          />
-        </HelmetProvider>
-      </UserInformationProvider>
+      <HelmetProvider>
+        <LayoutComponent
+          navigationItems={navigationItems}
+          paths={paths}
+          customHeader={customHeader}
+          headerLogo={headerLogo}
+          headerLogoSmall={headerLogoSmall}
+          footer={footer}
+          customFooter={customFooter}
+          facet={facet}
+          offline={offline}
+        />
+      </HelmetProvider>
     </LayoutProvider>
   </StylesProvider>
 );
