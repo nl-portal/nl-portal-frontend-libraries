@@ -322,8 +322,8 @@ importers:
         specifier: 0.1.1-alpha.60
         version: 0.1.1-alpha.60(react@18.3.1)
       '@gemeente-denhaag/alert':
-        specifier: 0.1.1-alpha.358
-        version: 0.1.1-alpha.358(react@18.3.1)
+        specifier: 0.1.1-alpha.365
+        version: 0.1.1-alpha.365(react@18.3.1)
       '@gemeente-denhaag/button-link':
         specifier: 0.0.1-alpha.7
         version: 0.0.1-alpha.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1181,6 +1181,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/alert@0.1.1-alpha.365':
+    resolution: {integrity: sha512-xZBoG8LninsXFOwdVaX963BSluzXkjFRluT9UGhyg1GBd3MU0k5rfdxa+T8takycVR3QGgUCSLNE7sjASF+Tpw==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/badge-counter@0.1.1-alpha.388':
     resolution: {integrity: sha512-Hf3KedfaD7J2kdSz3XYaxxF0dS6meRrbO9+UNmrk7F4Jp7Iw2SkBUh6fdImuXE/eau58KFcSTzAYz4iNmdYSXg==}
     peerDependencies:
@@ -1206,6 +1211,11 @@ packages:
 
   '@gemeente-denhaag/button@0.2.3-alpha.394':
     resolution: {integrity: sha512-6kzpUp+rUDs3/sQwF073trwzjPxc4DWCESxFboWjYxOpPGM883ygZbohxagh1Ix6wALL13xxa9kpla+xqT7Rew==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/button@0.2.3-alpha.395':
+    resolution: {integrity: sha512-+r1IZotBiedt92QaEQbnXY+H+7zAgGlrQKry2WM48oJkAVpZBlVP/tSxvlpC6TwWhRTtpGTU/biF1KzXzr8UCQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1247,11 +1257,17 @@ packages:
   '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.396':
     resolution: {integrity: sha512-0eF3thpTOYYEwOQMALAuuvtlqQytAEALlJ9zb5Z2e1XRz9K1ypuN3GrEXmMLYxsYt6kfFrrBE7IMkxl6kyIsCQ==}
 
+  '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.397':
+    resolution: {integrity: sha512-ooagxCmrYjTULJnTIEfwcAxngEMqyePxeUEQ+umUpioms37PFBGWB5FePIcBgYQOSwWBwzzisEAOo/m9PqB79w==}
+
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.390':
     resolution: {integrity: sha512-D1b4paXwnd0KS1or54Cw9iMmmnvfoDiZU78czSmXd+FVB/BjTBdJvJRriizYAzFGAiu8JcDvONxQC+z2N0CsUQ==}
 
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.396':
     resolution: {integrity: sha512-FN29xVLA6s+BxZe2satpuLob4tYh7QwcoMqj8m/UoY9elp1ZtcXMYUEXol0AcXcuQs1IPRjmCwAYxyvJFJwxdw==}
+
+  '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.397':
+    resolution: {integrity: sha512-Cc/20VJzAY9sLeuMnYhWUiEbZRj6cUY4gOs2eDVNaRVMIyVjYZhtA1yP/xiNN7dDrOs4NRgE6xs0r2IWFdnxfw==}
 
   '@gemeente-denhaag/divider@0.2.3-alpha.388':
     resolution: {integrity: sha512-NbsqaeuClaKZJxNFY0O4lE8yk1TaSlvftXEui0SLUKlMw7cFb60XQu4NojucydDb07GsvxZA7qA0pGSS1pwXTw==}
@@ -1312,6 +1328,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/iconbutton@0.2.3-alpha.395':
+    resolution: {integrity: sha512-68/c6//cBLUi98LzHtPAbczSSVnloQFV4je0GJ17Cao+RVXPUcfKViTVQFNBXOQzb1l38J6oV5cGb8jHu7lxBQ==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/icons@0.2.3-alpha.388':
     resolution: {integrity: sha512-FdTNAxgC9Ft6lOTEhji8TRKmcmRxD7vJSkmcWWYBtWe1b/CMMcwNnenOpPLFi2A1YM36EQQB36RQRL7p8KUJtA==}
     peerDependencies:
@@ -1324,6 +1345,11 @@ packages:
 
   '@gemeente-denhaag/icons@0.2.3-alpha.394':
     resolution: {integrity: sha512-px2awoHcxzn44ON2PPeqGcWAUtJ8KTjH0q45Wn2LA7Q0LQjk5l6Qpmch/VvH/wrfCFVXsddqEQ28hP8uyVlnHQ==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/icons@0.2.3-alpha.395':
+    resolution: {integrity: sha512-kt8ZrX2nGKvqABWaCIHKNC9Ajv7s/WOS904OW+3xoupI/aU6yRbTQxt7cOyQevejJ6KRZDlzRkw/e80zrbuySw==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1438,6 +1464,11 @@ packages:
 
   '@gemeente-denhaag/typography@0.2.3-alpha.394':
     resolution: {integrity: sha512-PSFhdsT/wHaL3gZbjdtJUID9lhc6LoH7UKWJ/T/4BlM+Cbf69tyqCm/BV7jw2/yWw+g5j5zg2CQWc9N5iOdbxw==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/typography@0.2.3-alpha.395':
+    resolution: {integrity: sha512-KLA7xjuttTW6aefW4rJLh3AToV6QpJrv3X8B7GA5aw1GqUnohHct9EN7KYMA5QiAdmOexl3I1iX/8VaaRSaPDg==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1711,6 +1742,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -1718,6 +1750,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.2':
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
+    deprecated: Use @eslint/object-schema instead
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -3270,6 +3303,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-directory@4.0.1:
     resolution: {integrity: sha512-wHTUcDUoZ1H5/0iVqEudYW4/kAlN5cZ3j/bXn0Dpbizl9iaUVeWSHqiOjsgk6OW2bkLclbBjzewBz6weQ1zA2Q==}
@@ -3460,6 +3494,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -4548,6 +4583,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@5.0.7:
@@ -6044,6 +6080,14 @@ snapshots:
       '@gemeente-denhaag/typography': 0.2.3-alpha.388(react@18.3.1)
       react: 18.3.1
 
+  '@gemeente-denhaag/alert@0.1.1-alpha.365(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/button': 0.2.3-alpha.395(react@18.3.1)
+      '@gemeente-denhaag/iconbutton': 0.2.3-alpha.395(react@18.3.1)
+      '@gemeente-denhaag/icons': 0.2.3-alpha.395(react@18.3.1)
+      '@gemeente-denhaag/typography': 0.2.3-alpha.395(react@18.3.1)
+      react: 18.3.1
+
   '@gemeente-denhaag/badge-counter@0.1.1-alpha.388(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/dotindicator': 0.1.1-alpha.388(react@18.3.1)
@@ -6077,6 +6121,11 @@ snapshots:
   '@gemeente-denhaag/button@0.2.3-alpha.394(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.394(react@18.3.1)
+      react: 18.3.1
+
+  '@gemeente-denhaag/button@0.2.3-alpha.395(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.395(react@18.3.1)
       react: 18.3.1
 
   '@gemeente-denhaag/card-authentication@0.1.1-alpha.117(react@18.3.1)':
@@ -6186,9 +6235,13 @@ snapshots:
 
   '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.396': {}
 
+  '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.397': {}
+
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.390': {}
 
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.396': {}
+
+  '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.397': {}
 
   '@gemeente-denhaag/divider@0.2.3-alpha.388(react@18.3.1)':
     dependencies:
@@ -6304,6 +6357,10 @@ snapshots:
     dependencies:
       react: 18.3.1
 
+  '@gemeente-denhaag/iconbutton@0.2.3-alpha.395(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+
   '@gemeente-denhaag/icons@0.2.3-alpha.388(react@18.3.1)':
     dependencies:
       react: 18.3.1
@@ -6313,6 +6370,10 @@ snapshots:
       react: 18.3.1
 
   '@gemeente-denhaag/icons@0.2.3-alpha.394(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+
+  '@gemeente-denhaag/icons@0.2.3-alpha.395(react@18.3.1)':
     dependencies:
       react: 18.3.1
 
@@ -6469,6 +6530,13 @@ snapshots:
     dependencies:
       '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.396
       '@gemeente-denhaag/design-tokens-components': 0.2.3-alpha.396
+      '@utrecht/components': 4.0.0
+      react: 18.3.1
+
+  '@gemeente-denhaag/typography@0.2.3-alpha.395(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.397
+      '@gemeente-denhaag/design-tokens-components': 0.2.3-alpha.397
       '@utrecht/components': 4.0.0
       react: 18.3.1
 
