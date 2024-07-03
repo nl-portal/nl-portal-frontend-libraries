@@ -6,6 +6,7 @@ import {
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
   TaakStatus,
   useGetTaakByIdV2Query,
+  useGetFormDefinitionByIdLazyQuery,
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
@@ -43,7 +44,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   useGetTaakByIdV2Query({
     variables: { id },
     onCompleted(task) {
-      if (!task) return;
+      if (!task || !task.getTaakByIdV2 || !task.getTaakByIdV2.formtaak) return;
 
       if (task.getTaakByIdV2?.status !== TaakStatus.Open) {
         setSubmitted(true);
@@ -52,16 +53,19 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       }
 
       transformPrefilledDataToFormioSubmission(
-        task.getTaakByIdV2.formtaak?.data,
+        task.getTaakByIdV2.formtaak.data,
       );
 
-      // TODO: checken op formulier soort
-      if (
-        task.getTaakByIdV2.soort === "formtaak" &&
-        task.getTaakByIdV2.formtaak?.formulier.value
-      ) {
+      if (task.getTaakByIdV2.formtaak.formulier.soort === "url") {
         getFormByUrl({
           variables: { url: task.getTaakByIdV2.formtaak?.formulier.value },
+        });
+        return;
+      }
+
+      if (task.getTaakByIdV2.formtaak.formulier.soort === "id") {
+        getFormById({
+          variables: { id: task.getTaakByIdV2.formtaak?.formulier.value },
         });
         return;
       }
@@ -75,10 +79,10 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       onCompleted: () => setLoading(false),
     });
 
-  // const [getFormById, { data: formDefinitionUrl }] =
-  // useGetFormDefinitionByIdLazyQuery({
-  //   onCompleted: () => setLoading(false),
-  // });
+  const [getFormById, { data: formDefinitionId }] =
+    useGetFormDefinitionByIdLazyQuery({
+      onCompleted: () => setLoading(false),
+    });
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
@@ -142,7 +146,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
     );
   }
 
-  if (!formDefinitionUrl) {
+  if (!formDefinitionUrl || !formDefinitionId) {
     return (
       <>
         {backlink && <BackLink {...backlink} />}
@@ -161,7 +165,9 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       <div className={styles.bootstrap}>
         <Form
           form={
-            formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
+            formDefinitionUrl.getFormDefinitionByObjectenApiUrl
+              ?.formDefinition ||
+            formDefinitionId.getFormDefinitionById?.formDefinition
           }
           //eslint-disable-next-line @typescript-eslint/no-explicit-any
           formReady={(form: any) => {
