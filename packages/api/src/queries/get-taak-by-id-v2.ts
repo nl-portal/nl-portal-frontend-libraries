@@ -1,8 +1,10 @@
 import { gql } from "@apollo/client";
+import { FORMULIER_FIELDS } from "../fragments/formulier";
 
-export const QUERY_GET_PRODUCT_TAKEN = gql`
-  query GetProductTaken($productName: String!, $pageSize: Int) {
-    getProductTaken(productName: $productName, pageSize: $pageSize) {
+export const QUERY_GET_TAAK_BY_ID = gql`
+  ${FORMULIER_FIELDS}
+  query GetTaakByIdV2($id: UUID!) {
+    getTaakByIdV2(id: $id) {
       id
       soort
       koppeling {
@@ -17,6 +19,7 @@ export const QUERY_GET_PRODUCT_TAKEN = gql`
           soort
           value
         }
+        data
       }
       titel
       status

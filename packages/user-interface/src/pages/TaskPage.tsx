@@ -3,10 +3,9 @@ import { Form } from "@formio/react";
 import merge from "lodash.merge";
 import {
   useSubmitTaskMutation,
-  useGetTaakByIdQuery,
-  useGetFormDefinitionByIdLazyQuery,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
   TaakStatus,
+  useGetTaakByIdV2Query,
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
@@ -41,40 +40,45 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       client.cache.reset();
     },
   });
-  useGetTaakByIdQuery({
+  useGetTaakByIdV2Query({
     variables: { id },
     onCompleted(task) {
       if (!task) return;
 
-      if (task.getTaakById?.status !== TaakStatus.Open) {
+      if (task.getTaakByIdV2?.status !== TaakStatus.Open) {
         setSubmitted(true);
         setLoading(false);
         return;
       }
 
-      transformPrefilledDataToFormioSubmission(task.getTaakById.data);
+      transformPrefilledDataToFormioSubmission(
+        task.getTaakByIdV2.formtaak?.data,
+      );
 
-      if (task.getTaakById.formulier.formuliertype === "portalid") {
-        getFormById({ variables: { id: task.getTaakById.formulier.value } });
-        return;
-      }
-
-      if (task.getTaakById.formulier.formuliertype === "objecturl") {
-        getFormByUrl({ variables: { url: task.getTaakById.formulier.value } });
+      // TODO: checken op formulier soort
+      if (
+        task.getTaakByIdV2.soort === "formtaak" &&
+        task.getTaakByIdV2.formtaak?.formulier.value
+      ) {
+        getFormByUrl({
+          variables: { url: task.getTaakByIdV2.formtaak?.formulier.value },
+        });
         return;
       }
 
       setLoading(false);
     },
   });
-  const [getFormById, { data: formDefinitionId }] =
-    useGetFormDefinitionByIdLazyQuery({
-      onCompleted: () => setLoading(false),
-    });
+
   const [getFormByUrl, { data: formDefinitionUrl }] =
     useGetFormDefinitionByObjectenApiUrlLazyQuery({
       onCompleted: () => setLoading(false),
     });
+
+  // const [getFormById, { data: formDefinitionUrl }] =
+  // useGetFormDefinitionByIdLazyQuery({
+  //   onCompleted: () => setLoading(false),
+  // });
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
@@ -138,7 +142,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
     );
   }
 
-  if (!formDefinitionId && !formDefinitionUrl) {
+  if (!formDefinitionUrl) {
     return (
       <>
         {backlink && <BackLink {...backlink} />}
@@ -157,7 +161,6 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       <div className={styles.bootstrap}>
         <Form
           form={
-            formDefinitionId?.getFormDefinitionById?.formDefinition ||
             formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
           }
           //eslint-disable-next-line @typescript-eslint/no-explicit-any

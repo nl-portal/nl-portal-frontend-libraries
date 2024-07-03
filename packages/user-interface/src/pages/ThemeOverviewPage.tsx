@@ -4,7 +4,7 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import {
-  Taak,
+  TaakV2,
   Zaak,
   useGetProductTakenQuery,
   useGetProductZakenQuery,
@@ -52,7 +52,7 @@ const ThemeOverviewPage = ({
   });
 
   const loading = loadingProp || taskLoading || casesLoading;
-  const tasks = tasksData?.getProductTaken as Taak[] | undefined;
+  const tasks = tasksData?.getProductTaken as TaakV2[] | undefined;
   const cases = casesData?.getProductZaken as Zaak[] | undefined;
 
   return (

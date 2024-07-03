@@ -1,9 +1,9 @@
 import * as React from "react";
 import {
   useGetZaakQuery,
-  useGetTakenQuery,
+  useGetTakenV2Query,
   useGetObjectContactMomentenLazyQuery,
-  Taak,
+  TaakV2,
   ContactMoment,
   ZaakStatus,
 } from "@nl-portal/nl-portal-api";
@@ -42,12 +42,12 @@ const CasePage = ({
   });
   const [getMomenten, { data: momentsData, loading: momentsLoading }] =
     useGetObjectContactMomentenLazyQuery();
-  const { data: tasksResult, loading: taskLoading } = useGetTakenQuery({
+  const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
 
   const loading = caseLoading || taskLoading || momentsLoading;
-  const tasks = tasksResult?.getTaken.content as Taak[] | undefined;
+  const tasks = tasksResult?.getTakenV2.content as TaakV2[] | undefined;
 
   const details = React.useMemo(() => {
     if (!caseData?.getZaak) return [];

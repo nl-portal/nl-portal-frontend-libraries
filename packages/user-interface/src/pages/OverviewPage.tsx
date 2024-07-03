@@ -4,9 +4,9 @@ import { useUserInfo } from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PageHeader from "../components/PageHeader";
 import {
-  Taak,
+  TaakV2,
   Zaak,
-  useGetTakenQuery,
+  useGetTakenV2Query,
   useGetZakenQuery,
 } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
@@ -34,7 +34,7 @@ const OverviewPage = ({
     data: tasksData,
     loading: tasksLoading,
     error: tasksError,
-  } = useGetTakenQuery({
+  } = useGetTakenV2Query({
     variables: { pageSize: fetchTasksLength },
     skip: !fetchTasksLength,
   });
@@ -47,7 +47,7 @@ const OverviewPage = ({
     skip: !fetchCasesLength,
   });
   const loading = tasksLoading || casesLoading;
-  const tasks = tasksData?.getTaken.content as Taak[] | undefined;
+  const tasks = tasksData?.getTakenV2.content as TaakV2[] | undefined;
   const cases = casesData?.getZaken.content.slice(0, fetchCasesLength) as
     | Zaak[]
     | undefined;
@@ -86,9 +86,9 @@ const OverviewPage = ({
           error={Boolean(tasksError)}
           tasks={tasks}
           totalAmount={
-            tasksData?.getTaken.totalElements &&
-            tasksData?.getTaken.totalElements > fetchTasksLength
-              ? tasksData?.getTaken.totalElements
+            tasksData?.getTakenV2.totalElements &&
+            tasksData?.getTakenV2.totalElements > fetchTasksLength
+              ? tasksData?.getTakenV2.totalElements
               : undefined
           }
         />

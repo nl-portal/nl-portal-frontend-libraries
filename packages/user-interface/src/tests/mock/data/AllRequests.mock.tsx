@@ -41,7 +41,7 @@ export const getPersoon = {
             jaar: 2003,
             maand: 3,
             dag: 3,
-            __typename: "PersoonGeboorteDatum",
+            __typename: "PersoonDatum",
           },
           land: {
             code: "6030",
