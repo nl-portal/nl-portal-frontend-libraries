@@ -1,4 +1,4 @@
-import { TaakV2 } from "@nl-portal/nl-portal-api";
+import { TaakSoort, TaakV2 } from "@nl-portal/nl-portal-api";
 import PortalLink from "./PortalLink";
 import { ActionMulti, ActionSingle } from "@gemeente-denhaag/action";
 import useTaskUrl from "../hooks/useTaskUrl";
@@ -12,10 +12,9 @@ interface Props {
 
 const Task = ({ task }: Props) => {
   const labels = useActionLabels();
-  const { soort, value } = task.formtaak?.formulier ?? {};
-  const taskUrl = useTaskUrl(soort, value, task.id);
+  const taskUrl = useTaskUrl(task);
 
-  if (task.soort === "url")
+  if (task.soort === TaakSoort.Url)
     return (
       <ActionMulti
         relativeDate

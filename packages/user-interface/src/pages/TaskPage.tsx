@@ -146,7 +146,8 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
     );
   }
 
-  if (!formDefinitionUrl || !formDefinitionId) {
+  if (!formDefinitionUrl && !formDefinitionId) {
+    console.log(formDefinitionUrl);
     return (
       <>
         {backlink && <BackLink {...backlink} />}
@@ -165,9 +166,9 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       <div className={styles.bootstrap}>
         <Form
           form={
-            formDefinitionUrl.getFormDefinitionByObjectenApiUrl
+            formDefinitionUrl?.getFormDefinitionByObjectenApiUrl
               ?.formDefinition ||
-            formDefinitionId.getFormDefinitionById?.formDefinition
+            formDefinitionId?.getFormDefinitionById?.formDefinition
           }
           //eslint-disable-next-line @typescript-eslint/no-explicit-any
           formReady={(form: any) => {
