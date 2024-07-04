@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import { FORMULIER_FIELDS } from "../fragments/formulier";
 
-export const QUERY_GET_TAKEN = gql`
+export const QUERY_GET_TAKEN_V2 = gql`
   query GetTakenV2($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
     getTakenV2(
       zaakUUID: $zaakId
