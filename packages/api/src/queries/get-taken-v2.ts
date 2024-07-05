@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import { FORMULIER_FIELDS } from "../fragments/formulier";
 
 export const QUERY_GET_TAKEN_V2 = gql`
   query GetTakenV2($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
@@ -33,5 +32,4 @@ export const QUERY_GET_TAKEN_V2 = gql`
       totalPages
     }
   }
-  ${FORMULIER_FIELDS}
 `;

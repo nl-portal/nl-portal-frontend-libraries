@@ -24,6 +24,7 @@ describe("OverviewPage", () => {
 
   it("should show several active cases", async () => {
     render(MockOverviewPage());
+
     await waitFor(() => {
       expect(openZaak1()).toBeVisible();
     });
@@ -71,6 +72,7 @@ describe("OverviewPage", () => {
 
   it("should not show zaak 2", async () => {
     render(MockOverviewPageLessCases());
+
     await waitFor(() => {
       expect(openZaak1()).toBeVisible();
     });
@@ -81,6 +83,7 @@ describe("OverviewPage", () => {
 
   it("should show Bekijk alle zaken(20)", async () => {
     render(MockOverviewPagePagination());
+
     await waitFor(() => {
       expect(openZaak1()).toBeVisible();
     });
