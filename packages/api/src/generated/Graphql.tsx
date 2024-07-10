@@ -1035,6 +1035,15 @@ export type ZakelijkRecht = {
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
 
+export type SubmitTaakV2MutationVariables = Exact<{
+  id: Scalars['UUID']['input'];
+  submission: Scalars['JSON']['input'];
+  version: TaakVersion;
+}>;
+
+
+export type SubmitTaakV2Mutation = { __typename?: 'Mutation', submitTaakV2: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
+
 export type SubmitTaskMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
@@ -1216,6 +1225,53 @@ export const FormulierFieldsFragmentDoc = gql`
   value
 }
     `;
+export const SubmitTaakV2Document = gql`
+    mutation SubmitTaakV2($id: UUID!, $submission: JSON!, $version: TaakVersion!) {
+  submitTaakV2(id: $id, submission: $submission, version: $version) {
+    id
+    soort
+    formtaak {
+      formulier {
+        soort
+        value
+      }
+      data
+    }
+    titel
+    status
+    verloopdatum
+    version
+  }
+}
+    `;
+export type SubmitTaakV2MutationFn = Apollo.MutationFunction<SubmitTaakV2Mutation, SubmitTaakV2MutationVariables>;
+
+/**
+ * __useSubmitTaakV2Mutation__
+ *
+ * To run a mutation, you first call `useSubmitTaakV2Mutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSubmitTaakV2Mutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [submitTaakV2Mutation, { data, loading, error }] = useSubmitTaakV2Mutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      submission: // value for 'submission'
+ *      version: // value for 'version'
+ *   },
+ * });
+ */
+export function useSubmitTaakV2Mutation(baseOptions?: Apollo.MutationHookOptions<SubmitTaakV2Mutation, SubmitTaakV2MutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SubmitTaakV2Mutation, SubmitTaakV2MutationVariables>(SubmitTaakV2Document, options);
+      }
+export type SubmitTaakV2MutationHookResult = ReturnType<typeof useSubmitTaakV2Mutation>;
+export type SubmitTaakV2MutationResult = Apollo.MutationResult<SubmitTaakV2Mutation>;
+export type SubmitTaakV2MutationOptions = Apollo.BaseMutationOptions<SubmitTaakV2Mutation, SubmitTaakV2MutationVariables>;
 export const SubmitTaskDocument = gql`
     mutation SubmitTask($id: UUID!, $submission: JSON!) {
   submitTask(id: $id, submission: $submission) {

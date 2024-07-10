@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Form } from "@formio/react";
 import merge from "lodash.merge";
 import {
-  useSubmitTaskMutation,
+  useSubmitTaakV2Mutation,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
   TaakStatus,
   useGetTaakByIdV2Query,
   useGetFormDefinitionByIdLazyQuery,
+  TaakVersion,
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
@@ -34,8 +35,9 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const [submission, setSubmission] = useState({
     data: {},
   });
+  const [taakVersion, setTaakVersion] = useState(TaakVersion.V2);
 
-  const [submitTask] = useSubmitTaskMutation({
+  const [submitTaak] = useSubmitTaakV2Mutation({
     onCompleted: () => {
       setSubmitted(true);
       client.cache.reset();
@@ -44,13 +46,21 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   useGetTaakByIdV2Query({
     variables: { id },
     onCompleted(task) {
-      if (!task || !task.getTaakByIdV2 || !task.getTaakByIdV2.formtaak) return;
+      if (
+        !task ||
+        !task.getTaakByIdV2 ||
+        !task.getTaakByIdV2.formtaak ||
+        !task.getTaakByIdV2.version
+      )
+        return;
 
       if (task.getTaakByIdV2?.status !== TaakStatus.Open) {
         setSubmitted(true);
         setLoading(false);
         return;
       }
+
+      setTaakVersion(task.getTaakByIdV2.version);
 
       transformPrefilledDataToFormioSubmission(
         task.getTaakByIdV2.formtaak.data,
@@ -119,10 +129,11 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
 
   const onFormSubmit = async (formioSubmission: any) => {
     if (formioSubmission?.state === "submitted") {
-      await submitTask({
+      await submitTaak({
         variables: {
           id,
           submission: formioSubmission.data,
+          version: taakVersion,
         },
       });
     }
