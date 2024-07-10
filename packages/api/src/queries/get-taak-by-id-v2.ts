@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const QUERY_GET_PRODUCT_TAKEN = gql`
-  query GetProductTaken($productName: String!, $pageSize: Int) {
-    getProductTaken(productName: $productName, pageSize: $pageSize) {
+export const QUERY_GET_TAAK_BY_ID_V2 = gql`
+  query GetTaakByIdV2($id: UUID!) {
+    getTaakByIdV2(id: $id) {
       id
       soort
       koppeling {
@@ -17,6 +17,7 @@ export const QUERY_GET_PRODUCT_TAKEN = gql`
           soort
           value
         }
+        data
       }
       titel
       status

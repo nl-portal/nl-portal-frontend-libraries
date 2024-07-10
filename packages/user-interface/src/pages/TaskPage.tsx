@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Form } from "@formio/react";
 import merge from "lodash.merge";
 import {
-  useSubmitTaskMutation,
-  useGetTaakByIdQuery,
-  useGetFormDefinitionByIdLazyQuery,
+  useSubmitTaakV2Mutation,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
   TaakStatus,
+  useGetFormDefinitionByIdLazyQuery,
+  TaakVersion,
+  useGetFormTaakByIdV2Query,
+  GetFormTaakByIdV2Document,
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
@@ -17,7 +19,6 @@ import { useParams } from "react-router-dom";
 import BackLink, { BackLinkProps } from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
-import { useApolloClient } from "@apollo/client";
 
 Formio.use(ProtectedEval);
 
@@ -28,51 +29,76 @@ interface TaskPageProps {
 const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const { id } = useParams();
   const intl = useIntl();
-  const client = useApolloClient();
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState({
     data: {},
   });
+  const [taakVersion, setTaakVersion] = useState(TaakVersion.V2);
 
-  const [submitTask] = useSubmitTaskMutation({
+  const [submitTaak] = useSubmitTaakV2Mutation({
+    update: (cache, { data }) => {
+      cache.writeQuery({
+        query: GetFormTaakByIdV2Document,
+        data: {
+          getTaakByIdV2: {
+            ...data?.submitTaakV2,
+          },
+        },
+      });
+    },
     onCompleted: () => {
       setSubmitted(true);
-      client.cache.reset();
     },
   });
-  useGetTaakByIdQuery({
+  useGetFormTaakByIdV2Query({
     variables: { id },
     onCompleted(task) {
-      if (!task) return;
+      if (
+        !task ||
+        !task.getTaakByIdV2 ||
+        !task.getTaakByIdV2.formtaak ||
+        !task.getTaakByIdV2.version
+      )
+        return;
 
-      if (task.getTaakById?.status !== TaakStatus.Open) {
+      if (task.getTaakByIdV2?.status !== TaakStatus.Open) {
         setSubmitted(true);
         setLoading(false);
         return;
       }
 
-      transformPrefilledDataToFormioSubmission(task.getTaakById.data);
+      setTaakVersion(task.getTaakByIdV2.version);
 
-      if (task.getTaakById.formulier.formuliertype === "portalid") {
-        getFormById({ variables: { id: task.getTaakById.formulier.value } });
+      transformPrefilledDataToFormioSubmission(
+        task.getTaakByIdV2.formtaak.data,
+      );
+
+      if (task.getTaakByIdV2.formtaak.formulier.soort === "url") {
+        getFormByUrl({
+          variables: { url: task.getTaakByIdV2.formtaak?.formulier.value },
+        });
         return;
       }
 
-      if (task.getTaakById.formulier.formuliertype === "objecturl") {
-        getFormByUrl({ variables: { url: task.getTaakById.formulier.value } });
+      if (task.getTaakByIdV2.formtaak.formulier.soort === "id") {
+        getFormById({
+          variables: { id: task.getTaakByIdV2.formtaak?.formulier.value },
+        });
         return;
       }
 
       setLoading(false);
     },
   });
-  const [getFormById, { data: formDefinitionId }] =
-    useGetFormDefinitionByIdLazyQuery({
-      onCompleted: () => setLoading(false),
-    });
+
   const [getFormByUrl, { data: formDefinitionUrl }] =
     useGetFormDefinitionByObjectenApiUrlLazyQuery({
+      onCompleted: () => setLoading(false),
+    });
+
+  const [getFormById, { data: formDefinitionId }] =
+    useGetFormDefinitionByIdLazyQuery({
       onCompleted: () => setLoading(false),
     });
 
@@ -111,10 +137,11 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
 
   const onFormSubmit = async (formioSubmission: any) => {
     if (formioSubmission?.state === "submitted") {
-      await submitTask({
+      await submitTaak({
         variables: {
           id,
           submission: formioSubmission.data,
+          version: taakVersion,
         },
       });
     }
@@ -138,7 +165,8 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
     );
   }
 
-  if (!formDefinitionId && !formDefinitionUrl) {
+  if (!formDefinitionUrl && !formDefinitionId) {
+    console.log(formDefinitionUrl);
     return (
       <>
         {backlink && <BackLink {...backlink} />}
@@ -157,8 +185,9 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       <div className={styles.bootstrap}>
         <Form
           form={
-            formDefinitionId?.getFormDefinitionById?.formDefinition ||
-            formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition
+            formDefinitionUrl?.getFormDefinitionByObjectenApiUrl
+              ?.formDefinition ||
+            formDefinitionId?.getFormDefinitionById?.formDefinition
           }
           //eslint-disable-next-line @typescript-eslint/no-explicit-any
           formReady={(form: any) => {

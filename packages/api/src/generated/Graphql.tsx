@@ -34,6 +34,41 @@ export type Adres = {
   volledigAdres: Scalars['String']['output'];
 };
 
+export type AutomatischIncassoResponse = {
+  __typename?: 'AutomatischIncassoResponse';
+  iban?: Maybe<Scalars['String']['output']>;
+  klantnummer?: Maybe<Scalars['Int']['output']>;
+  message?: Maybe<Scalars['String']['output']>;
+};
+
+export type CaseCreated = {
+  __typename?: 'CaseCreated';
+  caseId: Scalars['UUID']['output'];
+};
+
+export type CaseDefinition = {
+  __typename?: 'CaseDefinition';
+  id: Scalars['String']['output'];
+  schema: Scalars['JSON']['output'];
+  statusDefinition: Array<Scalars['String']['output']>;
+};
+
+export type CaseInstance = {
+  __typename?: 'CaseInstance';
+  caseDefinitionId: Scalars['String']['output'];
+  createdOn: Scalars['String']['output'];
+  externalId?: Maybe<Scalars['String']['output']>;
+  id: Scalars['UUID']['output'];
+  status?: Maybe<Status>;
+  statusHistory?: Maybe<Array<HistoricStatus>>;
+  submission: Scalars['JSON']['output'];
+  userId: Scalars['String']['output'];
+};
+
+export type CaseInstanceOrderingInput = {
+  createdOn: Sort;
+};
+
 export type ContactMoment = {
   __typename?: 'ContactMoment';
   bronorganisatie?: Maybe<Scalars['String']['output']>;
@@ -51,6 +86,36 @@ export type ContactMoment = {
 export type ContactMomentPage = {
   __typename?: 'ContactMomentPage';
   content: Array<ContactMoment>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type Contract = {
+  __typename?: 'Contract';
+  automatischeIncasso: Array<AutomatischIncassoResponse>;
+  beginDatum: Scalars['String']['output'];
+  eindDatum?: Maybe<Scalars['String']['output']>;
+  id: Scalars['Int']['output'];
+  klanten: Array<NeaKlant>;
+  taken: Array<TaakV2>;
+  zakelijkRechten: Array<ZakelijkRecht>;
+  zaken: Array<Zaak>;
+};
+
+export type ContractBeperkt = {
+  __typename?: 'ContractBeperkt';
+  adressen: Array<NeaAdres>;
+  id: Scalars['Int']['output'];
+};
+
+export type ContractBeperktPage = {
+  __typename?: 'ContractBeperktPage';
+  content: Array<ContractBeperkt>;
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
@@ -102,6 +167,12 @@ export type Embedded = {
   hoofdvestiging: Hoofdvestiging;
 };
 
+export type Form = {
+  __typename?: 'Form';
+  name: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
 export type FormDefinition = {
   __typename?: 'FormDefinition';
   formDefinition: Scalars['JSON']['output'];
@@ -119,6 +190,12 @@ export type HandelsNaam = {
   volgorde: Scalars['Int']['output'];
 };
 
+export type HistoricStatus = {
+  __typename?: 'HistoricStatus';
+  createdOn: Scalars['String']['output'];
+  status: Status;
+};
+
 export type Hoofdvestiging = {
   __typename?: 'Hoofdvestiging';
   adressen?: Maybe<Array<Adres>>;
@@ -128,6 +205,13 @@ export type Hoofdvestiging = {
   kvkNummer: Scalars['String']['output'];
   totaalWerkzamePersonen: Scalars['Int']['output'];
   vestigingsnummer: Scalars['String']['output'];
+};
+
+export type KadastraalObject = {
+  __typename?: 'KadastraalObject';
+  aanduiding: Scalars['String']['output'];
+  adressen: Array<NeaAdres>;
+  identificatie: Scalars['String']['output'];
 };
 
 export type Klant = {
@@ -164,8 +248,10 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
-  /** Prefill data to start a form */
+  /** Prefill data to start a form. Don't use it till it is configured in ProductType */
   prefill: PrefillResponse;
+  /** Convert submission to json return resulting data */
+  processSubmission: CaseCreated;
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
@@ -193,6 +279,13 @@ export type MutationPrefillArgs = {
 };
 
 
+export type MutationProcessSubmissionArgs = {
+  caseDefinitionId: Scalars['String']['input'];
+  initialStatus?: InputMaybe<Scalars['String']['input']>;
+  submission: Scalars['JSON']['input'];
+};
+
+
 export type MutationSubmitTaakArgs = {
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
@@ -202,7 +295,7 @@ export type MutationSubmitTaakArgs = {
 export type MutationSubmitTaakV2Args = {
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
-  version: Scalars['String']['input'];
+  version: TaakVersion;
 };
 
 
@@ -220,6 +313,50 @@ export type MutationUpdateBurgerProfielArgs = {
 export type MutationUpdateProductVerbruiksObjectArgs = {
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
+};
+
+export type NeaAdres = {
+  __typename?: 'NeaAdres';
+  adresBuitenland?: Maybe<NeaAdresBuitenland>;
+  adresseerbaarObjectId?: Maybe<Scalars['String']['output']>;
+  huisletter?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['Int']['output']>;
+  huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
+  land?: Maybe<Scalars['String']['output']>;
+  nummeraanduidingId?: Maybe<Scalars['String']['output']>;
+  postbusnummer?: Maybe<Scalars['String']['output']>;
+  postcode?: Maybe<Scalars['String']['output']>;
+  straatnaam?: Maybe<Scalars['String']['output']>;
+  woonplaats?: Maybe<Scalars['String']['output']>;
+};
+
+export type NeaAdresBuitenland = {
+  __typename?: 'NeaAdresBuitenland';
+  land?: Maybe<Scalars['String']['output']>;
+  postcodeWoonplaats?: Maybe<Scalars['String']['output']>;
+  regio?: Maybe<Scalars['String']['output']>;
+  straatnaamHuisnummer?: Maybe<Scalars['String']['output']>;
+};
+
+export type NeaKlant = {
+  __typename?: 'NeaKlant';
+  organisatie?: Maybe<Organisatie>;
+  persoon?: Maybe<NeaPersoon>;
+};
+
+export type NeaPersoon = {
+  __typename?: 'NeaPersoon';
+  achterNaam: Scalars['String']['output'];
+  correspondentieAdres?: Maybe<NeaAdres>;
+  emailAdres?: Maybe<Scalars['String']['output']>;
+  klantnummer: Scalars['Int']['output'];
+  subjectId: Scalars['Int']['output'];
+  telefoonNummer?: Maybe<Scalars['String']['output']>;
+  verblijfAdres: NeaAdres;
+  volledigeNaam: Scalars['String']['output'];
+  voorNaam?: Maybe<Scalars['String']['output']>;
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voorvoegselAchternaam?: Maybe<Scalars['String']['output']>;
 };
 
 export type OgoneBetaling = {
@@ -246,6 +383,17 @@ export type OgonePaymentRequestInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type Organisatie = {
+  __typename?: 'Organisatie';
+  bezoekAdres: NeaAdres;
+  correspondentieAdres?: Maybe<NeaAdres>;
+  klantnummer: Scalars['Int']['output'];
+  kvkNummer?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  rsin?: Maybe<Scalars['String']['output']>;
+  vestigingsnummer?: Maybe<Scalars['String']['output']>;
+};
+
 export type PaymentField = {
   __typename?: 'PaymentField';
   name: Scalars['String']['output'];
@@ -256,31 +404,46 @@ export type Persoon = {
   __typename?: 'Persoon';
   bewonersAantal?: Maybe<Scalars['Int']['output']>;
   burgerservicenummer?: Maybe<Scalars['String']['output']>;
-  geboorte?: Maybe<PersoonGeboorte>;
+  geboorte?: Maybe<PersoonDatumLandPlaats>;
+  geheimhoudingPersoonsgegevens?: Maybe<Scalars['Boolean']['output']>;
   geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
+  kinderen?: Maybe<Array<PersoonKind>>;
   naam?: Maybe<PersoonNaam>;
   nationaliteiten?: Maybe<Array<PersoonNationaliteiten>>;
+  opschortingBijhouding?: Maybe<PersoonOpschortingBijhouding>;
+  ouders?: Maybe<Array<PersoonOuder>>;
+  partners?: Maybe<Array<PersoonPartner>>;
+  reisdocumentnummers?: Maybe<Array<Scalars['String']['output']>>;
   verblijfplaats?: Maybe<PersoonVerblijfplaats>;
 };
 
-export type PersoonGeboorte = {
-  __typename?: 'PersoonGeboorte';
-  datum?: Maybe<PersoonGeboorteDatum>;
-  land?: Maybe<PersoonGeboorteLand>;
+export type PersoonCodeOmschrijving = {
+  __typename?: 'PersoonCodeOmschrijving';
+  code?: Maybe<Scalars['String']['output']>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
 };
 
-export type PersoonGeboorteDatum = {
-  __typename?: 'PersoonGeboorteDatum';
+export type PersoonDatum = {
+  __typename?: 'PersoonDatum';
   dag?: Maybe<Scalars['Int']['output']>;
   datum?: Maybe<Scalars['String']['output']>;
   jaar?: Maybe<Scalars['Int']['output']>;
   maand?: Maybe<Scalars['Int']['output']>;
 };
 
-export type PersoonGeboorteLand = {
-  __typename?: 'PersoonGeboorteLand';
-  code?: Maybe<Scalars['String']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
+export type PersoonDatumLandPlaats = {
+  __typename?: 'PersoonDatumLandPlaats';
+  datum?: Maybe<PersoonDatum>;
+  land?: Maybe<PersoonCodeOmschrijving>;
+  plaats?: Maybe<PersoonCodeOmschrijving>;
+};
+
+export type PersoonKind = {
+  __typename?: 'PersoonKind';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  geboorte?: Maybe<PersoonDatumLandPlaats>;
+  leeftijd?: Maybe<Scalars['Int']['output']>;
+  naam?: Maybe<PersoonNaam>;
 };
 
 export type PersoonNaam = {
@@ -303,9 +466,40 @@ export type PersoonNationaliteiten = {
   nationaliteit?: Maybe<PersoonNationaliteit>;
 };
 
+export type PersoonOpschortingBijhouding = {
+  __typename?: 'PersoonOpschortingBijhouding';
+  datum?: Maybe<PersoonDatum>;
+  reden?: Maybe<Scalars['String']['output']>;
+};
+
+export type PersoonOuder = {
+  __typename?: 'PersoonOuder';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  datumIngangFamilierechtelijkeBetrekking?: Maybe<PersoonDatum>;
+  geboorte?: Maybe<PersoonDatumLandPlaats>;
+  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<PersoonNaam>;
+  ouderAanduiding?: Maybe<Scalars['String']['output']>;
+};
+
+export type PersoonPartner = {
+  __typename?: 'PersoonPartner';
+  aangaanHuwelijkPartnerschap?: Maybe<PersoonDatumLandPlaats>;
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  datumIngangFamilierechtelijkeBetrekking?: Maybe<PersoonDatum>;
+  geboorte?: Maybe<PersoonDatumLandPlaats>;
+  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<PersoonNaam>;
+  soortVerbintenis?: Maybe<Scalars['String']['output']>;
+};
+
 export type PersoonVerblijfplaats = {
   __typename?: 'PersoonVerblijfplaats';
   adresseerbaarObjectIdentificatie?: Maybe<Scalars['String']['output']>;
+  datumAanvangAdreshouding?: Maybe<PersoonDatum>;
+  datumIngangGeldigheid?: Maybe<PersoonDatum>;
+  datumInschrijvingInGemeente?: Maybe<PersoonDatum>;
+  datumVestigingInNederland?: Maybe<PersoonDatum>;
   huisletter?: Maybe<Scalars['String']['output']>;
   huisnummer?: Maybe<Scalars['String']['output']>;
   huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
@@ -316,7 +510,7 @@ export type PersoonVerblijfplaats = {
 
 export type PrefillResponse = {
   __typename?: 'PrefillResponse';
-  formulierUrl: Scalars['String']['output'];
+  formulierUrl?: Maybe<Scalars['String']['output']>;
   hash: Scalars['String']['output'];
   objectId: Scalars['UUID']['output'];
 };
@@ -324,16 +518,17 @@ export type PrefillResponse = {
 export type Product = {
   __typename?: 'Product';
   documenten: Array<Scalars['String']['output']>;
-  eigenschappen: Scalars['JSON']['output'];
+  eigenschappen?: Maybe<Scalars['JSON']['output']>;
   geldigTot?: Maybe<Scalars['LocalDateTime']['output']>;
   geldigVan: Scalars['LocalDateTime']['output'];
   id?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
+  parameters?: Maybe<Scalars['JSON']['output']>;
   productDetails?: Maybe<ProductDetails>;
   productSubType?: Maybe<Scalars['String']['output']>;
   productType?: Maybe<ProductType>;
   status: Scalars['String']['output'];
-  taken: Array<Taak>;
+  taken: Array<TaakV2>;
   verbruiksobjecten: Array<ProductVerbruiksObject>;
   zaken: Array<Zaak>;
 };
@@ -359,11 +554,15 @@ export type ProductPage = {
 
 export type ProductType = {
   __typename?: 'ProductType';
+  /** Get list of available beslistabellen */
   beslistabellen?: Maybe<Array<Scalars['String']['output']>>;
+  eigenschappen?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
   omschrijving?: Maybe<Scalars['String']['output']>;
-  prefillFormulieren?: Maybe<Array<Scalars['String']['output']>>;
+  parameters?: Maybe<Scalars['JSON']['output']>;
+  /** Get list of available forms to prefill, with their object configurations */
+  prefillFormulieren?: Maybe<Scalars['JSON']['output']>;
   productSubType?: Maybe<Scalars['String']['output']>;
   zaaktypen: Array<Scalars['UUID']['output']>;
 };
@@ -378,19 +577,31 @@ export type ProductVerbruiksObject = {
 
 export type Query = {
   __typename?: 'Query';
+  /** retrieves all available case definitions */
+  allCaseDefinitions: Array<CaseDefinition>;
+  /** retrieves all available case instances */
+  allCaseInstances: Array<CaseInstance>;
   /**
    * find all form definitions from repository
    * @deprecated This method is not used by the NL Portal frontend and is not being replaced.
    */
   allFormDefinitions: Array<FormDefinition>;
+  /** Check automatische incasso by klantnummer */
+  getAutomatischeIncasso: AutomatischIncassoResponse;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
   /** Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
   getBewonersAantal?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
   getBurgerProfiel?: Maybe<Klant>;
+  /** retrieves single case instance from repository */
+  getCaseInstance?: Maybe<CaseInstance>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
+  /** Get erfpacht contract by UUID */
+  getErfpachtContract: Contract;
+  /** Gets all erfpacht contracten of user or rsin */
+  getErfpachtContracten: ContractBeperktPage;
   /**
    * find single form definition from repository or Objecten API
    * @deprecated Replaced by getFormDefinitionByName and getFormDefinitionByObjectenApiUrl, replace with getFormDefinitionByName or getFormDefinitionByObjectenApiUrl
@@ -400,6 +611,8 @@ export type Query = {
   getFormDefinitionByName?: Maybe<FormDefinition>;
   /** find single form definition from the Objecten API */
   getFormDefinitionByObjectenApiUrl?: Maybe<FormDefinition>;
+  /** Gets the forms available to the user */
+  getFormList: Array<Form>;
   /** Gets the data of the gemachtigde */
   getGemachtigde: Gemachtigde;
   /** Gets the contactmomenten of a klant */
@@ -410,10 +623,10 @@ export type Query = {
   getPersoon?: Maybe<Persoon>;
   /** Get product by id */
   getProduct?: Maybe<Product>;
-  /** Get Product Decision by key */
+  /** Get Product Decision by key. Don't use it till it is configured in ProductType */
   getProductDecision: Array<DmnResponse>;
   /** Get list of taken by product name  */
-  getProductTaken: Array<Taak>;
+  getProductTaken: Array<TaakV2>;
   /** Get productType by name */
   getProductType?: Maybe<ProductType>;
   /** Get productTypes where the user has products */
@@ -463,14 +676,41 @@ export type Query = {
 };
 
 
+export type QueryAllCaseInstancesArgs = {
+  orderBy: CaseInstanceOrderingInput;
+};
+
+
+export type QueryGetAutomatischeIncassoArgs = {
+  klantnummer?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
 export type QueryGetBewonersAantalArgs = {
   adresseerbaarObjectIdentificatie: Scalars['String']['input'];
+};
+
+
+export type QueryGetCaseInstanceArgs = {
+  id: Scalars['UUID']['input'];
 };
 
 
 export type QueryGetDocumentContentArgs = {
   documentApi: Scalars['String']['input'];
   id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetErfpachtContractArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type QueryGetErfpachtContractenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  rsin?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -595,6 +835,17 @@ export type SbiActiviteit = {
   sbiOmschrijving: Scalars['String']['output'];
 };
 
+export enum Sort {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
+export type Status = {
+  __typename?: 'Status';
+  createdOn: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
 export type StatusType = {
   __typename?: 'StatusType';
   isEindstatus?: Maybe<Scalars['Boolean']['output']>;
@@ -620,7 +871,7 @@ export type Taak = {
 export type TaakForm = {
   __typename?: 'TaakForm';
   data: Scalars['JSON']['output'];
-  formulier: Scalars['String']['output'];
+  formulier: TaakFormulierV2;
 };
 
 export type TaakFormulier = {
@@ -637,6 +888,12 @@ export type TaakFormulierConvertFormulierTypeArgs = {
   formuliertype: Scalars['String']['input'];
 };
 
+export type TaakFormulierV2 = {
+  __typename?: 'TaakFormulierV2';
+  soort: Scalars['String']['output'];
+  value: Scalars['String']['output'];
+};
+
 export type TaakIdentificatie = {
   __typename?: 'TaakIdentificatie';
   type: Scalars['String']['output'];
@@ -646,7 +903,7 @@ export type TaakIdentificatie = {
 export type TaakKoppeling = {
   __typename?: 'TaakKoppeling';
   registratie: TaakKoppelingRegistratie;
-  uuid: Scalars['UUID']['output'];
+  uuid?: Maybe<Scalars['UUID']['output']>;
 };
 
 export enum TaakKoppelingRegistratie {
@@ -678,6 +935,12 @@ export type TaakPageV2 = {
   totalPages: Scalars['Int']['output'];
 };
 
+export enum TaakSoort {
+  Formtaak = 'FORMTAAK',
+  Ogonebetaling = 'OGONEBETALING',
+  Url = 'URL'
+}
+
 export enum TaakStatus {
   Gesloten = 'GESLOTEN',
   Ingediend = 'INGEDIEND',
@@ -692,23 +955,28 @@ export type TaakUrl = {
 
 export type TaakV2 = {
   __typename?: 'TaakV2';
+  eigenaar: Scalars['String']['output'];
   formtaak?: Maybe<TaakForm>;
   id: Scalars['UUID']['output'];
   identificatie: TaakIdentificatie;
   koppeling: TaakKoppeling;
   ogonebetaling?: Maybe<OgoneBetaling>;
-  soort: Scalars['String']['output'];
+  soort: TaakSoort;
   status: TaakStatus;
   titel: Scalars['String']['output'];
   url?: Maybe<TaakUrl>;
   verloopdatum?: Maybe<Scalars['LocalDateTime']['output']>;
-  version?: Maybe<Scalars['String']['output']>;
+  version?: Maybe<TaakVersion>;
 };
+
+export enum TaakVersion {
+  V1 = 'V1',
+  V2 = 'V2'
+}
 
 export type Zaak = {
   __typename?: 'Zaak';
   documenten: Array<Document>;
-  einddatum?: Maybe<Scalars['Date']['output']>;
   identificatie: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
   startdatum: Scalars['Date']['output'];
@@ -758,7 +1026,23 @@ export type ZaakType = {
   omschrijving: Scalars['String']['output'];
 };
 
+export type ZakelijkRecht = {
+  __typename?: 'ZakelijkRecht';
+  id: Scalars['Int']['output'];
+  kadastraalObjecten: Array<KadastraalObject>;
+  naam: Scalars['String']['output'];
+};
+
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
+
+export type SubmitTaakV2MutationVariables = Exact<{
+  id: Scalars['UUID']['input'];
+  submission: Scalars['JSON']['input'];
+  version: TaakVersion;
+}>;
+
+
+export type SubmitTaakV2Mutation = { __typename?: 'Mutation', submitTaakV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
 
 export type SubmitTaskMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -821,6 +1105,13 @@ export type GetFormDefinitionByNameQueryVariables = Exact<{
 
 export type GetFormDefinitionByNameQuery = { __typename?: 'Query', getFormDefinitionByName?: { __typename?: 'FormDefinition', formDefinition: any } | null };
 
+export type GetFormTaakByIdV2QueryVariables = Exact<{
+  id: Scalars['UUID']['input'];
+}>;
+
+
+export type GetFormTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
+
 export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -841,7 +1132,7 @@ export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectCon
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', burgerservicenummer?: string | null, geslachtsaanduiding?: string | null, bewonersAantal?: number | null, naam?: { __typename?: 'PersoonNaam', aanhef?: string | null, voorletters?: string | null, voornamen?: string | null, voorvoegsel?: string | null, geslachtsnaam?: string | null } | null, verblijfplaats?: { __typename?: 'PersoonVerblijfplaats', straat?: string | null, huisnummer?: string | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, geboorte?: { __typename?: 'PersoonGeboorte', datum?: { __typename?: 'PersoonGeboorteDatum', datum?: string | null, jaar?: number | null, maand?: number | null, dag?: number | null } | null, land?: { __typename?: 'PersoonGeboorteLand', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten?: Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: { __typename?: 'PersoonNationaliteit', code?: string | null, omschrijving?: string | null } | null }> | null } | null };
+export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', burgerservicenummer?: string | null, geslachtsaanduiding?: string | null, bewonersAantal?: number | null, naam?: { __typename?: 'PersoonNaam', aanhef?: string | null, voorletters?: string | null, voornamen?: string | null, voorvoegsel?: string | null, geslachtsnaam?: string | null } | null, verblijfplaats?: { __typename?: 'PersoonVerblijfplaats', straat?: string | null, huisnummer?: string | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, geboorte?: { __typename?: 'PersoonDatumLandPlaats', datum?: { __typename?: 'PersoonDatum', datum?: string | null, jaar?: number | null, maand?: number | null, dag?: number | null } | null, land?: { __typename?: 'PersoonCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten?: Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: { __typename?: 'PersoonNationaliteit', code?: string | null, omschrijving?: string | null } | null }> | null } | null };
 
 export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -854,7 +1145,7 @@ export type GetProductTakenQueryVariables = Exact<{
 }>;
 
 
-export type GetProductTakenQuery = { __typename?: 'Query', getProductTaken: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> };
+export type GetProductTakenQuery = { __typename?: 'Query', getProductTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, formtaak?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
 
 export type GetProductVerbruiksObjectenQueryVariables = Exact<{
   productId: Scalars['UUID']['input'];
@@ -877,7 +1168,7 @@ export type GetProductQueryVariables = Exact<{
 }>;
 
 
-export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } | null };
+export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, formtaak?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> } | null };
 
 export type GetProductenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -888,12 +1179,28 @@ export type GetProductenQueryVariables = Exact<{
 
 export type GetProductenQuery = { __typename?: 'Query', getProducten: { __typename?: 'ProductPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, productType?: { __typename?: 'ProductType', id?: any | null, naam: string, zaaktypen: Array<any> } | null }> } };
 
+export type GetTaakByIdV2QueryVariables = Exact<{
+  id: Scalars['UUID']['input'];
+}>;
+
+
+export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
+
 export type GetTaakByIdQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
 }>;
 
 
 export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, status: TaakStatus, date: string, data: any, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } } };
+
+export type GetTakenV2QueryVariables = Exact<{
+  zaakId?: InputMaybe<Scalars['UUID']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetTakenV2Query = { __typename?: 'Query', getTakenV2: { __typename?: 'TaakPageV2', totalElements: number, totalPages: number, content: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, formtaak?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> } };
 
 export type GetTakenQueryVariables = Exact<{
   zaakId?: InputMaybe<Scalars['UUID']['input']>;
@@ -925,6 +1232,52 @@ export const FormulierFieldsFragmentDoc = gql`
   value
 }
     `;
+export const SubmitTaakV2Document = gql`
+    mutation SubmitTaakV2($id: UUID!, $submission: JSON!, $version: TaakVersion!) {
+  submitTaakV2(id: $id, submission: $submission, version: $version) {
+    id
+    formtaak {
+      formulier {
+        soort
+        value
+      }
+      data
+    }
+    titel
+    status
+    verloopdatum
+    version
+  }
+}
+    `;
+export type SubmitTaakV2MutationFn = Apollo.MutationFunction<SubmitTaakV2Mutation, SubmitTaakV2MutationVariables>;
+
+/**
+ * __useSubmitTaakV2Mutation__
+ *
+ * To run a mutation, you first call `useSubmitTaakV2Mutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSubmitTaakV2Mutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [submitTaakV2Mutation, { data, loading, error }] = useSubmitTaakV2Mutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      submission: // value for 'submission'
+ *      version: // value for 'version'
+ *   },
+ * });
+ */
+export function useSubmitTaakV2Mutation(baseOptions?: Apollo.MutationHookOptions<SubmitTaakV2Mutation, SubmitTaakV2MutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SubmitTaakV2Mutation, SubmitTaakV2MutationVariables>(SubmitTaakV2Document, options);
+      }
+export type SubmitTaakV2MutationHookResult = ReturnType<typeof useSubmitTaakV2Mutation>;
+export type SubmitTaakV2MutationResult = Apollo.MutationResult<SubmitTaakV2Mutation>;
+export type SubmitTaakV2MutationOptions = Apollo.BaseMutationOptions<SubmitTaakV2Mutation, SubmitTaakV2MutationVariables>;
 export const SubmitTaskDocument = gql`
     mutation SubmitTask($id: UUID!, $submission: JSON!) {
   submitTask(id: $id, submission: $submission) {
@@ -1300,6 +1653,57 @@ export type GetFormDefinitionByNameQueryHookResult = ReturnType<typeof useGetFor
 export type GetFormDefinitionByNameLazyQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameLazyQuery>;
 export type GetFormDefinitionByNameSuspenseQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameSuspenseQuery>;
 export type GetFormDefinitionByNameQueryResult = Apollo.QueryResult<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>;
+export const GetFormTaakByIdV2Document = gql`
+    query GetFormTaakByIdV2($id: UUID!) {
+  getTaakByIdV2(id: $id) {
+    id
+    formtaak {
+      formulier {
+        soort
+        value
+      }
+      data
+    }
+    titel
+    status
+    verloopdatum
+    version
+  }
+}
+    `;
+
+/**
+ * __useGetFormTaakByIdV2Query__
+ *
+ * To run a query within a React component, call `useGetFormTaakByIdV2Query` and pass it any options that fit your needs.
+ * When your component renders, `useGetFormTaakByIdV2Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFormTaakByIdV2Query({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetFormTaakByIdV2Query(baseOptions: Apollo.QueryHookOptions<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables> & ({ variables: GetFormTaakByIdV2QueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>(GetFormTaakByIdV2Document, options);
+      }
+export function useGetFormTaakByIdV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>(GetFormTaakByIdV2Document, options);
+        }
+export function useGetFormTaakByIdV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>(GetFormTaakByIdV2Document, options);
+        }
+export type GetFormTaakByIdV2QueryHookResult = ReturnType<typeof useGetFormTaakByIdV2Query>;
+export type GetFormTaakByIdV2LazyQueryHookResult = ReturnType<typeof useGetFormTaakByIdV2LazyQuery>;
+export type GetFormTaakByIdV2SuspenseQueryHookResult = ReturnType<typeof useGetFormTaakByIdV2SuspenseQuery>;
+export type GetFormTaakByIdV2QueryResult = Apollo.QueryResult<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>;
 export const GetGemachtigdeDocument = gql`
     query GetGemachtigde {
   getGemachtigde {
@@ -1556,17 +1960,27 @@ export const GetProductTakenDocument = gql`
     query GetProductTaken($productName: String!, $pageSize: Int) {
   getProductTaken(productName: $productName, pageSize: $pageSize) {
     id
-    objectId
-    formulier {
-      ...FormulierFields
+    soort
+    koppeling {
+      registratie
+      uuid
     }
-    title
+    url {
+      uri
+    }
+    formtaak {
+      formulier {
+        soort
+        value
+      }
+    }
+    titel
     status
-    date
     verloopdatum
+    version
   }
 }
-    ${FormulierFieldsFragmentDoc}`;
+    `;
 
 /**
  * __useGetProductTakenQuery__
@@ -1730,18 +2144,28 @@ export const GetProductDocument = gql`
     }
     taken {
       id
-      objectId
-      formulier {
-        ...FormulierFields
+      soort
+      koppeling {
+        registratie
+        uuid
       }
-      title
+      url {
+        uri
+      }
+      formtaak {
+        formulier {
+          soort
+          value
+        }
+      }
+      titel
       status
-      date
       verloopdatum
+      version
     }
   }
 }
-    ${FormulierFieldsFragmentDoc}`;
+    `;
 
 /**
  * __useGetProductQuery__
@@ -1834,6 +2258,65 @@ export type GetProductenQueryHookResult = ReturnType<typeof useGetProductenQuery
 export type GetProductenLazyQueryHookResult = ReturnType<typeof useGetProductenLazyQuery>;
 export type GetProductenSuspenseQueryHookResult = ReturnType<typeof useGetProductenSuspenseQuery>;
 export type GetProductenQueryResult = Apollo.QueryResult<GetProductenQuery, GetProductenQueryVariables>;
+export const GetTaakByIdV2Document = gql`
+    query GetTaakByIdV2($id: UUID!) {
+  getTaakByIdV2(id: $id) {
+    id
+    soort
+    koppeling {
+      registratie
+      uuid
+    }
+    url {
+      uri
+    }
+    formtaak {
+      formulier {
+        soort
+        value
+      }
+      data
+    }
+    titel
+    status
+    verloopdatum
+    version
+  }
+}
+    `;
+
+/**
+ * __useGetTaakByIdV2Query__
+ *
+ * To run a query within a React component, call `useGetTaakByIdV2Query` and pass it any options that fit your needs.
+ * When your component renders, `useGetTaakByIdV2Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTaakByIdV2Query({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetTaakByIdV2Query(baseOptions: Apollo.QueryHookOptions<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables> & ({ variables: GetTaakByIdV2QueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>(GetTaakByIdV2Document, options);
+      }
+export function useGetTaakByIdV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>(GetTaakByIdV2Document, options);
+        }
+export function useGetTaakByIdV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>(GetTaakByIdV2Document, options);
+        }
+export type GetTaakByIdV2QueryHookResult = ReturnType<typeof useGetTaakByIdV2Query>;
+export type GetTaakByIdV2LazyQueryHookResult = ReturnType<typeof useGetTaakByIdV2LazyQuery>;
+export type GetTaakByIdV2SuspenseQueryHookResult = ReturnType<typeof useGetTaakByIdV2SuspenseQuery>;
+export type GetTaakByIdV2QueryResult = Apollo.QueryResult<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>;
 export const GetTaakByIdDocument = gql`
     query GetTaakById($id: UUID!) {
   getTaakById(id: $id) {
@@ -1880,6 +2363,70 @@ export type GetTaakByIdQueryHookResult = ReturnType<typeof useGetTaakByIdQuery>;
 export type GetTaakByIdLazyQueryHookResult = ReturnType<typeof useGetTaakByIdLazyQuery>;
 export type GetTaakByIdSuspenseQueryHookResult = ReturnType<typeof useGetTaakByIdSuspenseQuery>;
 export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaakByIdQueryVariables>;
+export const GetTakenV2Document = gql`
+    query GetTakenV2($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
+  getTakenV2(zaakUUID: $zaakId, pageNumber: $pageNumber, pageSize: $pageSize) {
+    content {
+      id
+      soort
+      koppeling {
+        registratie
+        uuid
+      }
+      url {
+        uri
+      }
+      formtaak {
+        formulier {
+          soort
+          value
+        }
+      }
+      titel
+      status
+      verloopdatum
+      version
+    }
+    totalElements
+    totalPages
+  }
+}
+    `;
+
+/**
+ * __useGetTakenV2Query__
+ *
+ * To run a query within a React component, call `useGetTakenV2Query` and pass it any options that fit your needs.
+ * When your component renders, `useGetTakenV2Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTakenV2Query({
+ *   variables: {
+ *      zaakId: // value for 'zaakId'
+ *      pageNumber: // value for 'pageNumber'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useGetTakenV2Query(baseOptions?: Apollo.QueryHookOptions<GetTakenV2Query, GetTakenV2QueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTakenV2Query, GetTakenV2QueryVariables>(GetTakenV2Document, options);
+      }
+export function useGetTakenV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTakenV2Query, GetTakenV2QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTakenV2Query, GetTakenV2QueryVariables>(GetTakenV2Document, options);
+        }
+export function useGetTakenV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTakenV2Query, GetTakenV2QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetTakenV2Query, GetTakenV2QueryVariables>(GetTakenV2Document, options);
+        }
+export type GetTakenV2QueryHookResult = ReturnType<typeof useGetTakenV2Query>;
+export type GetTakenV2LazyQueryHookResult = ReturnType<typeof useGetTakenV2LazyQuery>;
+export type GetTakenV2SuspenseQueryHookResult = ReturnType<typeof useGetTakenV2SuspenseQuery>;
+export type GetTakenV2QueryResult = Apollo.QueryResult<GetTakenV2Query, GetTakenV2QueryVariables>;
 export const GetTakenDocument = gql`
     query GetTaken($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
   getTaken(zaakUUID: $zaakId, pageNumber: $pageNumber, pageSize: $pageSize) {

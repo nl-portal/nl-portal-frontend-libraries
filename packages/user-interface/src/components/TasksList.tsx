@@ -2,7 +2,7 @@ import { useIntl } from "react-intl";
 import styles from "./TasksList.module.scss";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
-import { Taak } from "@nl-portal/nl-portal-api";
+import { TaakV2 } from "@nl-portal/nl-portal-api";
 import Task from "./Task";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import SectionHeader from "./SectionHeader";
@@ -19,7 +19,7 @@ interface Props {
   readMoreLink?: string;
   readMoreTranslationId?: string | null;
   totalAmount?: number;
-  tasks?: Taak[];
+  tasks?: TaakV2[];
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;

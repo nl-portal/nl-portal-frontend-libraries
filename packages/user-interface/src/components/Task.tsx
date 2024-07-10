@@ -1,4 +1,4 @@
-import { Taak } from "@nl-portal/nl-portal-api";
+import { TaakSoort, TaakV2 } from "@nl-portal/nl-portal-api";
 import PortalLink from "./PortalLink";
 import { ActionMulti, ActionSingle } from "@gemeente-denhaag/action";
 import useTaskUrl from "../hooks/useTaskUrl";
@@ -7,15 +7,14 @@ import { ButtonLink } from "@gemeente-denhaag/button-link";
 import { ChevronRightIcon } from "@gemeente-denhaag/icons";
 
 interface Props {
-  task: Taak;
+  task: TaakV2;
 }
 
 const Task = ({ task }: Props) => {
   const labels = useActionLabels();
-  const { formuliertype, value } = task.formulier ?? {};
-  const taskUrl = useTaskUrl(formuliertype, value, task.id);
+  const taskUrl = useTaskUrl(task);
 
-  if (task.formulier.formuliertype === "externalurl")
+  if (task.soort === TaakSoort.Url)
     return (
       <ActionMulti
         relativeDate
@@ -27,7 +26,7 @@ const Task = ({ task }: Props) => {
           </ButtonLink>
         }
       >
-        {task.title}
+        {task.titel}
       </ActionMulti>
     );
 
@@ -36,10 +35,10 @@ const Task = ({ task }: Props) => {
       relativeDate
       labels={labels}
       dateTime={task.verloopdatum}
-      link={taskUrl}
+      link={taskUrl ?? ""}
       Link={PortalLink}
     >
-      {task.title}
+      {task.titel}
     </ActionSingle>
   );
 };

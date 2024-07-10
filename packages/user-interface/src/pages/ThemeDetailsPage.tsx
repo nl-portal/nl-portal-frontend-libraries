@@ -4,7 +4,7 @@ import PageHeader from "../components/PageHeader";
 import BackLink from "../components/BackLink";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
-import { Taak, Zaak } from "@nl-portal/nl-portal-api";
+import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import LinksList from "../components/LinksList";
@@ -15,7 +15,7 @@ interface Props {
   loading?: boolean;
   titleTranslationId?: string;
   alert?: AlertProps;
-  tasks?: Taak[];
+  tasks?: TaakV2[];
   tasksError?: boolean;
   links?: { title: string; href: string }[];
   cases?: Zaak[];

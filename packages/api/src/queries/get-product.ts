@@ -33,14 +33,24 @@ export const QUERY_GET_PRODUCTEN = gql`
       }
       taken {
         id
-        objectId
-        formulier {
-          ...FormulierFields
+        soort
+        koppeling {
+          registratie
+          uuid
         }
-        title
+        url {
+          uri
+        }
+        formtaak {
+          formulier {
+            soort
+            value
+          }
+        }
+        titel
         status
-        date
         verloopdatum
+        version
       }
     }
   }
