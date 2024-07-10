@@ -8,11 +8,13 @@ import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import LinksList from "../components/LinksList";
+import Alert, { AlertProps } from "@gemeente-denhaag/alert";
 
 interface Props {
   slug: string;
   loading?: boolean;
   titleTranslationId?: string;
+  alert?: AlertProps;
   tasks?: TaakV2[];
   tasksError?: boolean;
   links?: { title: string; href: string }[];
@@ -25,6 +27,7 @@ const ThemeDetailsPage = ({
   slug,
   loading,
   titleTranslationId = `pageTitles.${slug}`,
+  alert,
   tasks,
   tasksError,
   links,
@@ -44,6 +47,7 @@ const ThemeDetailsPage = ({
           title={intl.formatMessage({ id: titleTranslationId })}
         />
       </div>
+      {alert && <Alert {...alert} />}
       <TasksList
         loading={loading}
         showEmpty={false}
