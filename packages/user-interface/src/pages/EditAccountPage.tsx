@@ -28,7 +28,18 @@ const EditAccountPage = () => {
   const intl = useIntl();
   const navigate = useNavigate();
   const [mutateFunction, { loading: loadingMutation, error }] =
-    useUpdateBurgerProfielMutation();
+    useUpdateBurgerProfielMutation({
+      update: (cache, { data }) => {
+        cache.writeQuery({
+          query: GetBurgerProfielDocument,
+          data: {
+            getBurgerProfiel: {
+              ...data?.updateBurgerProfiel,
+            },
+          },
+        });
+      },
+    });
 
   const prop = query.get("prop") as "telefoonnummer" | "emailadres";
   const propTranslation = intl.formatMessage({ id: `account.detail.${prop}` });
@@ -45,16 +56,6 @@ const EditAccountPage = () => {
   const onSave = (): void => {
     mutateFunction({
       variables: { klant: { [prop]: value } },
-      update: (cache, { data }) => {
-        cache.writeQuery({
-          query: GetBurgerProfielDocument,
-          data: {
-            getBurgerProfiel: {
-              ...data?.updateBurgerProfiel,
-            },
-          },
-        });
-      },
       onCompleted: () => {
         if (error) return;
         navigate(paths.account);

@@ -1042,7 +1042,7 @@ export type SubmitTaakV2MutationVariables = Exact<{
 }>;
 
 
-export type SubmitTaakV2Mutation = { __typename?: 'Mutation', submitTaakV2: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
+export type SubmitTaakV2Mutation = { __typename?: 'Mutation', submitTaakV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
 
 export type SubmitTaskMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1104,6 +1104,13 @@ export type GetFormDefinitionByNameQueryVariables = Exact<{
 
 
 export type GetFormDefinitionByNameQuery = { __typename?: 'Query', getFormDefinitionByName?: { __typename?: 'FormDefinition', formDefinition: any } | null };
+
+export type GetFormTaakByIdV2QueryVariables = Exact<{
+  id: Scalars['UUID']['input'];
+}>;
+
+
+export type GetFormTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
 
 export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1229,7 +1236,6 @@ export const SubmitTaakV2Document = gql`
     mutation SubmitTaakV2($id: UUID!, $submission: JSON!, $version: TaakVersion!) {
   submitTaakV2(id: $id, submission: $submission, version: $version) {
     id
-    soort
     formtaak {
       formulier {
         soort
@@ -1647,6 +1653,57 @@ export type GetFormDefinitionByNameQueryHookResult = ReturnType<typeof useGetFor
 export type GetFormDefinitionByNameLazyQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameLazyQuery>;
 export type GetFormDefinitionByNameSuspenseQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameSuspenseQuery>;
 export type GetFormDefinitionByNameQueryResult = Apollo.QueryResult<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>;
+export const GetFormTaakByIdV2Document = gql`
+    query GetFormTaakByIdV2($id: UUID!) {
+  getTaakByIdV2(id: $id) {
+    id
+    formtaak {
+      formulier {
+        soort
+        value
+      }
+      data
+    }
+    titel
+    status
+    verloopdatum
+    version
+  }
+}
+    `;
+
+/**
+ * __useGetFormTaakByIdV2Query__
+ *
+ * To run a query within a React component, call `useGetFormTaakByIdV2Query` and pass it any options that fit your needs.
+ * When your component renders, `useGetFormTaakByIdV2Query` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFormTaakByIdV2Query({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetFormTaakByIdV2Query(baseOptions: Apollo.QueryHookOptions<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables> & ({ variables: GetFormTaakByIdV2QueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>(GetFormTaakByIdV2Document, options);
+      }
+export function useGetFormTaakByIdV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>(GetFormTaakByIdV2Document, options);
+        }
+export function useGetFormTaakByIdV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>(GetFormTaakByIdV2Document, options);
+        }
+export type GetFormTaakByIdV2QueryHookResult = ReturnType<typeof useGetFormTaakByIdV2Query>;
+export type GetFormTaakByIdV2LazyQueryHookResult = ReturnType<typeof useGetFormTaakByIdV2LazyQuery>;
+export type GetFormTaakByIdV2SuspenseQueryHookResult = ReturnType<typeof useGetFormTaakByIdV2SuspenseQuery>;
+export type GetFormTaakByIdV2QueryResult = Apollo.QueryResult<GetFormTaakByIdV2Query, GetFormTaakByIdV2QueryVariables>;
 export const GetGemachtigdeDocument = gql`
     query GetGemachtigde {
   getGemachtigde {
