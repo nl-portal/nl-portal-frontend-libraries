@@ -37,6 +37,16 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const [taakVersion, setTaakVersion] = useState(TaakVersion.V2);
 
   const [submitTaak] = useSubmitTaakV2Mutation({
+    update: (cache, { data }) => {
+      cache.writeQuery({
+        query: GetFormTaakByIdV2Document,
+        data: {
+          getTaakByIdV2: {
+            ...data?.submitTaakV2,
+          },
+        },
+      });
+    },
     onCompleted: () => {
       setSubmitted(true);
     },
@@ -132,16 +142,6 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
           id,
           submission: formioSubmission.data,
           version: taakVersion,
-        },
-        update: (cache, { data }) => {
-          cache.writeQuery({
-            query: GetFormTaakByIdV2Document,
-            data: {
-              getTaakByIdV2: {
-                ...data?.submitTaakV2,
-              },
-            },
-          });
         },
       });
     }
