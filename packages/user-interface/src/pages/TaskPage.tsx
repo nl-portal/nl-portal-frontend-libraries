@@ -5,9 +5,10 @@ import {
   useSubmitTaakV2Mutation,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
   TaakStatus,
-  useGetTaakByIdV2Query,
   useGetFormDefinitionByIdLazyQuery,
   TaakVersion,
+  useGetFormTaakByIdV2Query,
+  GetFormTaakByIdV2Document,
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
@@ -18,7 +19,6 @@ import { useParams } from "react-router-dom";
 import BackLink, { BackLinkProps } from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
-import { useApolloClient } from "@apollo/client";
 
 Formio.use(ProtectedEval);
 
@@ -29,7 +29,6 @@ interface TaskPageProps {
 const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const { id } = useParams();
   const intl = useIntl();
-  const client = useApolloClient();
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [submission, setSubmission] = useState({
@@ -40,10 +39,9 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const [submitTaak] = useSubmitTaakV2Mutation({
     onCompleted: () => {
       setSubmitted(true);
-      client.cache.reset();
     },
   });
-  useGetTaakByIdV2Query({
+  useGetFormTaakByIdV2Query({
     variables: { id },
     onCompleted(task) {
       if (
@@ -134,6 +132,16 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
           id,
           submission: formioSubmission.data,
           version: taakVersion,
+        },
+        update: (cache, { data }) => {
+          cache.writeQuery({
+            query: GetFormTaakByIdV2Document,
+            data: {
+              getTaakByIdV2: {
+                ...data?.submitTaakV2,
+              },
+            },
+          });
         },
       });
     }
