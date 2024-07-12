@@ -2,7 +2,7 @@ import { useIntl } from "react-intl";
 import styles from "./TasksList.module.scss";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
-import { Taak } from "@nl-portal/nl-portal-api";
+import { TaakV2 } from "@nl-portal/nl-portal-api";
 import Task from "./Task";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import SectionHeader from "./SectionHeader";
@@ -14,14 +14,13 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   showEmpty?: boolean;
-  emptyTranslationId?: string;
-  showTitle?: boolean;
-  titleTranslationId?: string;
   openInContext?: boolean;
-  readMoreAmount?: number;
+  emptyTranslationId?: string;
+  titleTranslationId?: string | null;
   readMoreLink?: string;
-  readMoreTranslationId?: string;
-  tasks?: Taak[];
+  readMoreTranslationId?: string | null;
+  totalAmount?: number;
+  tasks?: TaakV2[];
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
@@ -33,12 +32,11 @@ const TasksList = ({
   errorTranslationId = "tasksList.fetchError",
   showEmpty = true,
   emptyTranslationId = "tasksList.empty",
-  showTitle = true,
   titleTranslationId = "tasksList.title",
   openInContext,
-  readMoreAmount,
   readMoreLink,
   readMoreTranslationId = "tasksList.viewAll",
+  totalAmount,
   tasks,
   index,
   indexLimit,
@@ -47,15 +45,16 @@ const TasksList = ({
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const tasksPath = readMoreLink || paths.tasks;
-  const title = showTitle
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
-  const subTitle = readMoreAmount
-    ? intl.formatMessage(
-        { id: readMoreTranslationId },
-        { total: readMoreAmount },
-      )
-    : undefined;
+  const subTitle =
+    totalAmount && readMoreTranslationId
+      ? intl.formatMessage(
+          { id: readMoreTranslationId },
+          { total: totalAmount },
+        )
+      : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 

@@ -1,7 +1,7 @@
-import { getTaken, getZaken, getZakenPagination } from "./AllRequests.mock";
+import { getTaken, getOpenZaken, getZakenPagination } from "./AllRequests.mock";
 
-export const mockRequestDefault = [getZaken, getTaken(5)];
+export const mockRequestDefault = [getOpenZaken, getTaken(5)];
 
-export const mockRequestTwoTasks = [getZaken, getTaken(2)];
+export const mockRequestTwoTasks = [getOpenZaken, getTaken(2)];
 
 export const mockRequestsPagination = [getZakenPagination, getTaken(5)];

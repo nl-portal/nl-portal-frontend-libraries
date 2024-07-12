@@ -4,115 +4,71 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import {
-  Taak,
+  TaakV2,
   Zaak,
-  useGetTakenQuery,
-  useGetZakenQuery,
+  useGetProductTakenQuery,
+  useGetProductZakenQuery,
 } from "@nl-portal/nl-portal-api";
-import TableList from "../components/TableList";
-import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
 
 interface Props {
-  type: string;
-  showTasksLength?: number;
-  showCasesLength?: number;
+  slug: string;
+  productType: string;
+  loading?: boolean;
+  showTasks?: boolean;
+  fetchTasksLength?: number;
+  showCases?: boolean;
+  fetchCasesLength?: number;
   children?: React.ReactNode;
 }
 
 const ThemeOverviewPage = ({
-  type,
-  showTasksLength = 5,
-  showCasesLength = 4,
+  slug,
+  productType,
+  loading: loadingProp,
+  fetchTasksLength = 5,
+  fetchCasesLength = 4,
   children,
 }: Props) => {
   const intl = useIntl();
-  const { paths } = useOutletContext<RouterOutletContext>();
   const {
     data: tasksData,
     loading: taskLoading,
     error: taskError,
-  } = useGetTakenQuery({ variables: { pageSize: showTasksLength } });
+  } = useGetProductTakenQuery({
+    variables: { productName: productType, pageSize: fetchTasksLength },
+    skip: !fetchTasksLength,
+  });
   const {
     data: casesData,
     loading: casesLoading,
     error: casesError,
-  } = useGetZakenQuery();
-  const loading = taskLoading || casesLoading;
-  const tasks = tasksData?.getTaken.content as Taak[] | undefined;
-  const cases = casesData?.getZaken.content as Zaak[] | undefined;
+  } = useGetProductZakenQuery({
+    variables: {
+      productName: productType,
+      pageSize: fetchCasesLength,
+      isOpen: true,
+    },
+    skip: !fetchCasesLength,
+  });
+
+  const loading = loadingProp || taskLoading || casesLoading;
+  const tasks = tasksData?.getProductTaken as TaakV2[] | undefined;
+  const cases = casesData?.getProductZaken as Zaak[] | undefined;
 
   return (
     <PageGrid>
-      <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}` })} />
-      {showTasksLength && (
-        <TasksList
-          loading={loading}
-          error={Boolean(taskError)}
-          tasks={tasks}
-          readMoreAmount={
-            tasksData?.getTaken.totalElements &&
-            tasksData?.getTaken.totalElements > showTasksLength
-              ? tasksData?.getTaken.totalElements
-              : undefined
-          }
-        />
+      <PageHeader title={intl.formatMessage({ id: `pageTitles.${slug}` })} />
+      {Boolean(fetchTasksLength) && (
+        <TasksList loading={loading} error={Boolean(taskError)} tasks={tasks} />
       )}
-      {showCasesLength && (
+      {Boolean(fetchCasesLength) && (
         <CasesList
           loading={loading}
           error={Boolean(casesError)}
-          cases={cases
-            ?.filter((c) => !c.status?.statustype.isEindstatus)
-            .slice(0, showCasesLength)}
-          readMoreAmount={
-            casesData?.getZaken.totalElements &&
-            casesData?.getZaken.totalElements > showCasesLength
-              ? casesData?.getZaken.totalElements
-              : undefined
-          }
+          listView={false}
+          cases={cases}
         />
       )}
-      <TableList
-        loading={loading}
-        titleTranslationId="theme.erfpacht.listTitle"
-        headers={["Adres", "Kadastrale gegevens", "Contractnummer"]}
-        rows={[
-          [
-            {
-              children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails(type, "123"),
-            },
-            {
-              children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails(type, "123"),
-            },
-            { children: "78435785", href: paths.themeDetails(type, "123") },
-          ],
-          [
-            {
-              children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails(type, "123"),
-            },
-            {
-              children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails(type, "123"),
-            },
-            { children: "78435785", href: paths.themeDetails(type, "123") },
-          ],
-          [
-            {
-              children: "Westerstraat 393 Den Haag",
-              href: paths.themeDetails(type, "123"),
-            },
-            {
-              children: "‘s-Gravenhage AF 2679",
-              href: paths.themeDetails(type, "123"),
-            },
-            { children: "78435785", href: paths.themeDetails(type, "123") },
-          ],
-        ]}
-      />
       {children}
     </PageGrid>
   );

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MockEditAccountPage } from "../mock/pages/EditAccountPage.mock";
 
 describe("EditAccountPage", () => {
@@ -21,6 +21,7 @@ describe("EditAccountPage", () => {
     expect(inputField()).not.toBeNull();
 
     fireEvent.change(inputField(), { target: { value: "hoiDitIsNietGeldig" } });
+
     expect(errorTextP()).toBeVisible();
     expect(saveButton().closest("button")).toBeDisabled();
   });
@@ -30,19 +31,21 @@ describe("EditAccountPage", () => {
     expect(inputField()).not.toBeNull();
 
     fireEvent.change(inputField(), { target: { value: "12345678910" } });
+
     expect(errorTextP()).toBeVisible();
     expect(saveButton().closest("button")).toBeDisabled();
   });
 
-  it("should not give an error msg when 10 numbers are entered", () => {
+  it("should not give an error msg when 10 numbers are entered", async () => {
     expect(errorTextP()).toBeNull();
-
     expect(inputField()).not.toBeNull();
 
     fireEvent.change(inputField(), { target: { value: "0123456789" } });
 
-    expect(errorTextP()).toBeNull();
-    expect(saveButton().closest("button")).toBeEnabled();
+    await waitFor(() => {
+      expect(errorTextP()).toBeNull();
+      expect(saveButton().closest("button")).toBeEnabled();
+    });
   });
 
   it("should give an error msg when a special character is entered", () => {

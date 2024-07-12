@@ -7,7 +7,6 @@ import {
   RouterProvider,
   RouteObject,
 } from "react-router-dom";
-import UserInformationProvider from "./UserInformationProvider";
 import { Paths } from "../interfaces/paths";
 
 //eslint-disable-next-line react-refresh/only-export-components
@@ -20,6 +19,7 @@ export const testPaths: Paths = {
   notifications: "/berichten",
   themeOverview: (type = ":type") => `/${type}`,
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
+  themeSub: (type = ":type", slug = ":slug") => `/${type}/${slug}`,
   account: "/account",
   editAccount: "/account/aanpassen",
 };
@@ -33,11 +33,9 @@ const TestContent = ({
   paths: Paths;
 }) => (
   <MockWrapper>
-    <UserInformationProvider>
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Outlet context={{ paths }} />
-      </MockedProvider>
-    </UserInformationProvider>
+    <MockedProvider mocks={mocks} addTypename={false}>
+      <Outlet context={{ paths }} />
+    </MockedProvider>
   </MockWrapper>
 );
 

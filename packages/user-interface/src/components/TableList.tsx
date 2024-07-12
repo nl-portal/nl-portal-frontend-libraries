@@ -12,16 +12,16 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   emptyTranslationId?: string;
-  showTitle?: boolean;
-  titleTranslationId?: string;
-  readMoreAmount?: number;
+  titleTranslationId?: string | null;
   readMoreLink?: string;
-  readMoreTranslationId?: string;
+  readMoreTranslationId?: string | null;
+  totalAmount?: number;
   headers?: Cell[];
   rows?: CellObject[][];
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
+  children?: React.ReactNode;
 }
 
 const TableList = ({
@@ -29,44 +29,53 @@ const TableList = ({
   error,
   errorTranslationId = "tableList.fetchError",
   emptyTranslationId = "tableList.empty",
-  showTitle = true,
   titleTranslationId = "tableList.title",
-  readMoreAmount,
   readMoreLink,
   readMoreTranslationId = "tableList.viewAll",
+  totalAmount,
   headers: hdrs,
   rows: rws,
   index,
   indexLimit,
   onChange,
+  children,
 }: Props) => {
   const intl = useIntl();
-  const headers = hdrs && [
-    ...hdrs,
-    { className: styles["table-list__icon"], children: undefined },
-  ];
+  const hasLink = Boolean(rws?.flat().find((r) => r.href));
+  const headers =
+    hasLink && hdrs
+      ? [
+          ...hdrs,
+          { className: styles["table-list__icon"], children: undefined },
+        ]
+      : [...(hdrs || [])];
   const rows =
     rws &&
-    rws.map((row) => [
-      ...row,
-      {
-        href: row[0].href,
-        className: styles["table-list__icon"],
-        children: (
-          <div className={styles["table-list__arrow"]}>
-            <ArrowRightIcon />
-          </div>
-        ),
-      },
-    ]);
-  const title = showTitle
+    rws.map((row) =>
+      row.find((r) => r.href)
+        ? [
+            ...row,
+            {
+              href: row[0].href,
+              className: styles["table-list__icon"],
+              children: (
+                <div className={styles["table-list__arrow"]}>
+                  <span className={styles["table-list__link-label"]}>Link</span>
+                  <ArrowRightIcon />
+                </div>
+              ),
+            },
+          ]
+        : row,
+    );
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
   const subTitle =
-    readMoreAmount && readMoreLink
+    totalAmount && readMoreTranslationId
       ? intl.formatMessage(
           { id: readMoreTranslationId },
-          { total: readMoreAmount },
+          { total: totalAmount },
         )
       : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
@@ -88,6 +97,7 @@ const TableList = ({
       <section className={styles["table-list"]}>
         <SectionHeader title={title} />
         <Paragraph>{errorMessage}</Paragraph>
+        <div className={styles["table-list__children"]}>{children}</div>
       </section>
     );
 
@@ -96,6 +106,7 @@ const TableList = ({
       <section className={styles["table-list"]}>
         <SectionHeader title={title} />
         <Paragraph>{emptyMessage}</Paragraph>
+        <div className={styles["table-list__children"]}>{children}</div>
       </section>
     );
 
@@ -111,6 +122,7 @@ const TableList = ({
           onChange={onChange}
         />
       ) : null}
+      <div className={styles["table-list__children"]}>{children}</div>
     </section>
   );
 };

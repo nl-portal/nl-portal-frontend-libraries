@@ -4,94 +4,72 @@ import PageHeader from "../components/PageHeader";
 import BackLink from "../components/BackLink";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
-import {
-  Taak,
-  Zaak,
-  useGetTakenQuery,
-  useGetZakenQuery,
-} from "@nl-portal/nl-portal-api";
+import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import LinksList from "../components/LinksList";
-import DocumentsList from "../components/DocumentsList";
+import Alert, { AlertProps } from "@gemeente-denhaag/alert";
 
 interface Props {
-  type: string;
-  showTasksLength?: number;
-  showCasesLength?: number;
+  slug: string;
+  loading?: boolean;
+  titleTranslationId?: string;
+  alert?: AlertProps;
+  tasks?: TaakV2[];
+  tasksError?: boolean;
+  links?: { title: string; href: string }[];
+  cases?: Zaak[];
+  casesError?: boolean;
+  children?: React.ReactNode;
 }
 
 const ThemeDetailsPage = ({
-  type,
-  showTasksLength = 5,
-  showCasesLength = 4,
+  slug,
+  loading,
+  titleTranslationId = `pageTitles.${slug}`,
+  alert,
+  tasks,
+  tasksError,
+  links,
+  cases,
+  casesError,
+  children,
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
-  const {
-    data: tasksData,
-    loading: tasksLoading,
-    error: tasksError,
-  } = useGetTakenQuery();
-  const {
-    data: casesData,
-    loading: casesLoading,
-    error: casesError,
-  } = useGetZakenQuery();
-  const loading = tasksLoading || casesLoading;
-  const tasks = tasksData?.getTaken.content as Taak[] | undefined;
-  const cases = casesData?.getZaken.content as Zaak[] | undefined;
 
   return (
     <PageGrid>
       <div>
-        <BackLink routePath={paths.themeOverview(type)} />
-        <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}` })} />
+        <BackLink routePath={paths.themeOverview(slug)} />
+        <PageHeader
+          loading={loading}
+          title={intl.formatMessage({ id: titleTranslationId })}
+        />
       </div>
-      {showTasksLength && (
-        <TasksList
-          loading={loading}
-          error={Boolean(tasksError)}
-          showTitle={false}
-          tasks={tasks}
-        />
-      )}
-      <LinksList
+      {alert && <Alert {...alert} />}
+      <TasksList
         loading={loading}
-        links={[
-          { title: "Link 1", href: "https://example.com" },
-          { title: "Link 2", href: "https://example.com" },
-          { title: "Link 3", href: "https://example.com" },
-        ]}
+        showEmpty={false}
+        error={tasksError}
+        titleTranslationId={null}
+        tasks={tasks}
       />
-      {showCasesLength && (
-        <CasesList
-          loading={loading}
-          error={Boolean(casesError)}
-          cases={cases
-            ?.filter((c) => !c.status?.statustype.isEindstatus)
-            .slice(0, showCasesLength)}
-          readMoreAmount={
-            casesData?.getZaken.totalElements &&
-            casesData?.getZaken.totalElements > showCasesLength
-              ? casesData?.getZaken.totalElements
-              : undefined
-          }
-        />
-      )}
-      <DocumentsList
+      <LinksList loading={loading} links={links} />
+      <CasesList
         loading={loading}
-        error={Boolean(casesError)}
-        documents={[]} // TODO: Add documents
+        error={casesError}
+        listView={false}
+        cases={cases}
       />
-      {showTasksLength && (
-        <TasksList
-          loading={loading}
-          error={Boolean(tasksError)}
-          showTitle={false}
-          tasks={tasks}
-        />
-      )}
+      {children}
+      <TasksList
+        loading={loading}
+        showEmpty={false}
+        error={tasksError}
+        titleTranslationId={null}
+        tasks={tasks}
+      />
     </PageGrid>
   );
 };

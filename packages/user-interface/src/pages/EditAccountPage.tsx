@@ -7,40 +7,59 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useContext, useEffect, useState } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { useUpdateBurgerProfielMutation } from "@nl-portal/nl-portal-api";
+import {
+  useGetBurgerProfielQuery,
+  useUpdateBurgerProfielMutation,
+  GetBurgerProfielDocument,
+} from "@nl-portal/nl-portal-api";
 import useQuery from "../hooks/useQuery";
 import styles from "./EditAccountPage.module.scss";
-import UserInformationContext from "../contexts/UserInformationContext";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import BackLink from "../components/BackLink";
 
 const EditAccountPage = () => {
   const { currentLocale } = useContext(LocaleContext);
-  const { userInformation } = useContext(UserInformationContext);
   const { paths } = useOutletContext<RouterOutletContext>();
+  const { data, loading: loadingBurger } = useGetBurgerProfielQuery();
   const query = useQuery();
   const intl = useIntl();
   const navigate = useNavigate();
-  const [mutateFunction, { loading, error }] = useUpdateBurgerProfielMutation();
+  const [mutateFunction, { loading: loadingMutation, error }] =
+    useUpdateBurgerProfielMutation({
+      update: (cache, { data }) => {
+        cache.writeQuery({
+          query: GetBurgerProfielDocument,
+          data: {
+            getBurgerProfiel: {
+              ...data?.updateBurgerProfiel,
+            },
+          },
+        });
+      },
+    });
 
-  const prop = query.get("prop");
+  const prop = query.get("prop") as "telefoonnummer" | "emailadres";
   const propTranslation = intl.formatMessage({ id: `account.detail.${prop}` });
   const errorTranslation = intl.formatMessage({
     id: `account.detail.${prop}.error`,
   });
 
-  const defaultValue = userInformation[`${prop}`];
-  const regex = REGEX_PATTERNS[`${prop}`];
+  const defaultValue = data?.getBurgerProfiel?.[prop];
+  const regex = REGEX_PATTERNS[prop];
 
   const [valid, setValidity] = useState(true);
   const [value, setValue] = useState(defaultValue || "");
 
   const onSave = (): void => {
     mutateFunction({
-      variables: { klant: { [`${prop}`]: `${value}` } },
-      onCompleted: () => !error && navigate(paths.account),
+      variables: { klant: { [prop]: value } },
+      onCompleted: () => {
+        if (error) return;
+        navigate(paths.account);
+      },
     });
   };
 
@@ -52,20 +71,24 @@ const EditAccountPage = () => {
 
   const invalid = !valid && `${value}`.length >= 1;
   const inputId = propTranslation.toLowerCase();
+  const loading = loadingBurger || loadingMutation;
 
   return (
     <PageGrid>
-      <PageHeader
-        title={
-          currentLocale.toLowerCase().includes("nl")
-            ? `${propTranslation} ${intl
-                .formatMessage({ id: "account.edit" })
-                .toLowerCase()}`
-            : `${intl.formatMessage({
-                id: "account.edit",
-              })} ${propTranslation.toLowerCase()}`
-        }
-      />
+      <div>
+        <BackLink routePath={paths.account} />
+        <PageHeader
+          title={
+            currentLocale.toLowerCase().includes("nl")
+              ? `${propTranslation} ${intl
+                  .formatMessage({ id: "account.edit" })
+                  .toLowerCase()}`
+              : `${intl.formatMessage({
+                  id: "account.edit",
+                })} ${propTranslation.toLowerCase()}`
+          }
+        />
+      </div>
       <div>
         <div className={styles["edit-account__text-field-container"]}>
           <FormField invalid={invalid} type="text">

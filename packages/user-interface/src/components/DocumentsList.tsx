@@ -1,5 +1,5 @@
 import { Document as PortalDocument } from "@nl-portal/nl-portal-api";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import { useIntl } from "react-intl";
 import styles from "./DocumentsList.module.scss";
 import Document from "./Document";
@@ -12,22 +12,20 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   emptyTranslationId?: string;
-  showTitle?: boolean;
-  titleTranslationId?: string;
+  titleTranslationId?: string | null;
   documents?: Array<PortalDocument>;
 }
 
-const DocumentsLists = ({
+const DocumentsList = ({
   loading,
   error,
   errorTranslationId = "documentsList.fetchError",
   emptyTranslationId = "documentsList.empty",
-  showTitle = true,
   titleTranslationId = "documentsList.title",
   documents,
 }: Props) => {
   const intl = useIntl();
-  const title = showTitle
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
@@ -65,17 +63,11 @@ const DocumentsLists = ({
       <SectionHeader title={title} />
       <div className={classnames(styles["documents-list__documents"])}>
         {documents.map((document) => (
-          <Document
-            key={document.uuid}
-            uuid={document.uuid}
-            name={document?.bestandsnaam || ""}
-            size={document.bestandsomvang || 0}
-            documentapi={document.documentapi}
-          />
+          <Document key={document.uuid} document={document} />
         ))}
       </div>
     </section>
   );
 };
 
-export default DocumentsLists;
+export default DocumentsList;

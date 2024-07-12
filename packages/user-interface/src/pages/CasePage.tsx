@@ -1,28 +1,20 @@
 import * as React from "react";
 import {
   useGetZaakQuery,
-  useGetTakenQuery,
+  useGetTakenV2Query,
   useGetObjectContactMomentenLazyQuery,
-  Taak,
+  TaakV2,
   ContactMoment,
+  ZaakStatus,
 } from "@nl-portal/nl-portal-api";
-import { Alert, Paragraph } from "@gemeente-denhaag/components-react";
-import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@gemeente-denhaag/table";
+import { Alert } from "@gemeente-denhaag/components-react";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
 import ContactTimeline from "@gemeente-denhaag/contact-timeline";
 import "@utrecht/component-library-css";
 import DocumentsList from "../components/DocumentsList";
 import StatusHistory from "../components/StatusHistory";
-import uniqueId from "lodash.uniqueid";
 import BackLink, { BackLinkProps } from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
@@ -31,6 +23,8 @@ import SectionHeader from "../components/SectionHeader";
 import useOgonePaymentRegistration, {
   PaymentStatus,
 } from "../hooks/useOgonePaymentRegistration";
+import DescriptionList from "../components/DescriptionList";
+import TableList from "../components/TableList";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -52,13 +46,13 @@ const CasePage = ({
   });
   const [getMomenten, { data: momentsData, loading: momentsLoading }] =
     useGetObjectContactMomentenLazyQuery();
-  const { data: tasksResult, loading: taskLoading } = useGetTakenQuery({
+  const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
   const { paymentStatus } = useOgonePaymentRegistration();
 
   const loading = caseLoading || taskLoading || momentsLoading;
-  const tasks = tasksResult?.getTaken.content as Taak[] | undefined;
+  const tasks = tasksResult?.getTakenV2.content as TaakV2[] | undefined;
 
   const details = React.useMemo(() => {
     if (!caseData?.getZaak) return [];
@@ -149,28 +143,28 @@ const CasePage = ({
       <TasksList
         loading={loading}
         showEmpty={false}
-        showTitle={false}
+        titleTranslationId={null}
         tasks={tasks}
       />
-      <div>
+      <section>
         <SectionHeader
           title={intl.formatMessage({ id: "case.statusHeader" })}
         />
         <StatusHistory
           loading={loading}
           caseId={caseData?.getZaak.zaaktype.identificatie}
-          statusHistory={caseData?.getZaak.statusGeschiedenis}
+          statusHistory={
+            caseData?.getZaak.statusGeschiedenis as ZaakStatus[] | undefined
+          }
           statuses={caseData?.getZaak.statussen}
-          status={caseData?.getZaak.status}
+          status={caseData?.getZaak.status as ZaakStatus | undefined}
         />
-      </div>
+      </section>
       {details.length > 0 && (
-        <div>
-          <SectionHeader
-            title={intl.formatMessage({ id: "case.detailsHeader" })}
-          />
-          <DescriptionList items={details} />
-        </div>
+        <DescriptionList
+          titleTranslationId="case.detailsHeader"
+          items={details}
+        />
       )}
       {/* eslint-disable @typescript-eslint/no-explicit-any */}
       {caseData?.getZaak.zaakdetails.data.map((section: any) => {
@@ -180,47 +174,26 @@ const CasePage = ({
         return (
           <React.Fragment key={section.heading}>
             {listItems.length > 0 && (
-              <div>
-                <SectionHeader title={section.heading} />
-                <DescriptionList
-                  items={listItems.map((item: any) => ({
-                    title: item.key,
-                    detail: item.waarde,
-                  }))}
-                />
-              </div>
+              <DescriptionList
+                titleTranslationId={section.heading}
+                items={listItems.map((item: any) => ({
+                  title: item.key,
+                  detail: item.waarde,
+                }))}
+              />
             )}
             {tables.length > 0 &&
               tables.map((table: any) => (
-                <div key={table.heading}>
-                  <SectionHeader title={table.heading} small />
-                  <Table>
-                    {table.waarde.headers.length > 0 && (
-                      <TableHead>
-                        <TableRow>
-                          {table.waarde.headers?.map((header: any) => (
-                            <TableHeader key={`${uniqueId(header.waarde)}`}>
-                              {header.waarde}
-                            </TableHeader>
-                          ))}
-                        </TableRow>
-                      </TableHead>
-                    )}
-                    {table.waarde.rows.length > 0 && (
-                      <TableBody>
-                        {table.waarde.rows.map((row: any) => (
-                          <TableRow key={`${uniqueId("TableRow")}`}>
-                            {row.map((cell: { waarde: string }) => (
-                              <TableCell key={`${uniqueId(cell.waarde)}`}>
-                                {cell.waarde}
-                              </TableCell>
-                            ))}
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    )}
-                  </Table>
-                </div>
+                <TableList
+                  key={table.heading}
+                  titleTranslationId={table.heading}
+                  headers={table.waarde.headers?.map(
+                    (head: any) => head.waarde,
+                  )}
+                  rows={table.waarde.rows.map((row: any) =>
+                    row.map((cell: any) => cell.waarde),
+                  )}
+                />
               ))}
           </React.Fragment>
         );
@@ -232,17 +205,17 @@ const CasePage = ({
         documents={caseData?.getZaak.documenten}
       />
       {showContactTimeline && contactItems.length > 0 && (
-        <div>
+        <section>
           <SectionHeader
             title={intl.formatMessage({ id: "case.contactHeader" })}
           />
           <ContactTimeline items={contactItems} labels={contactLabels} />
-        </div>
+        </section>
       )}
       <TasksList
         loading={loading}
         showEmpty={false}
-        showTitle={false}
+        titleTranslationId={null}
         tasks={tasks}
       />
     </PageGrid>

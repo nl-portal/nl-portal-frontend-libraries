@@ -37,14 +37,12 @@ const Table = ({ headers, rows }: Props) => {
     );
   };
 
-  const renderCell = (index: number, cell: Cell, head?: boolean) => {
+  const renderCell = (keyString: string, cell: Cell, head?: boolean) => {
     if (isObject(cell)) {
-      const key = cell.children ? cell?.children.toString() : index;
-
       if (cell.head)
         return (
           <TableHeader
-            key={key}
+            key={keyString}
             className={cell.className}
             href={cell.href}
             Link={PortalLink}
@@ -55,7 +53,7 @@ const Table = ({ headers, rows }: Props) => {
 
       return (
         <TableCell
-          key={key}
+          key={keyString}
           className={cell.className}
           href={cell.href}
           Link={PortalLink}
@@ -65,9 +63,8 @@ const Table = ({ headers, rows }: Props) => {
       );
     }
 
-    const key = cell?.toString();
-    if (head) return <TableHeader key={key}>{cell}</TableHeader>;
-    return <TableCell key={key}>{cell}</TableCell>;
+    if (head) return <TableHeader key={keyString}>{cell}</TableHeader>;
+    return <TableCell key={keyString}>{cell}</TableCell>;
   };
 
   return (
@@ -75,7 +72,9 @@ const Table = ({ headers, rows }: Props) => {
       {headers && (
         <TableHead>
           <TableRow>
-            {headers.map((head, index) => renderCell(index, head, true))}
+            {headers.map((head, index) =>
+              renderCell(`header-${index}`, head, true),
+            )}
           </TableRow>
         </TableHead>
       )}
@@ -83,7 +82,9 @@ const Table = ({ headers, rows }: Props) => {
         <TableBody>
           {rows.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
-              {row.map((cell, cellIndex) => renderCell(cellIndex, cell))}
+              {row.map((cell, cellIndex) =>
+                renderCell(`row-${rowIndex}-${cellIndex}`, cell),
+              )}
             </TableRow>
           ))}
         </TableBody>

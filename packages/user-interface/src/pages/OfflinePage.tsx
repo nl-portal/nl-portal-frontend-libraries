@@ -1,5 +1,5 @@
 import { FormattedMessage, useIntl } from "react-intl";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { Paragraph } from "@gemeente-denhaag/typography";
 
 const OfflinePage = () => {
   const intl = useIntl();

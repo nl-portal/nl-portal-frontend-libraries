@@ -1,18 +1,19 @@
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
-import { Taak } from "@nl-portal/nl-portal-api";
 
-const useTaskUrl = (
-  formType: string,
-  formValue: string,
-  task: Taak,
-  openInContext?: boolean,
-) => {
+import {
+  TaakKoppelingRegistratie,
+  TaakSoort,
+  TaakV2,
+} from "@nl-portal/nl-portal-api";
+
+const useTaskUrl = (task: TaakV2, openInContext?: boolean) => {
   const { paths } = useOutletContext<RouterOutletContext>();
-  if (openInContext && task.zaak) {
-    return paths.case(task.zaak.split("/").pop());
+  if (openInContext && task.koppeling) {
+    if (task.koppeling.registratie === TaakKoppelingRegistratie.Zaak)
+      return paths.case(task.koppeling.uuid);
   }
-  if (formType === "externalurl") return formValue;
+  if (task.soort === TaakSoort.Url) return task.url?.uri;
   return paths.task(task.id);
 };
 

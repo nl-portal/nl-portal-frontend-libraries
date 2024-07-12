@@ -1,4 +1,4 @@
-import { Taak } from "@nl-portal/nl-portal-api";
+import { TaakSoort, TaakV2 } from "@nl-portal/nl-portal-api";
 import PortalLink from "./PortalLink";
 import { ActionMulti, ActionSingle } from "@gemeente-denhaag/action";
 import useTaskUrl from "../hooks/useTaskUrl";
@@ -11,74 +11,73 @@ import { useContext } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 
 interface Props {
-  task: Taak;
+  task: TaakV2;
   openInContext?: boolean;
 }
 
 const Task = ({ task, openInContext }: Props) => {
   const labels = useActionLabels();
   const { currentLocale } = useContext(LocaleContext);
-  const { formuliertype, value } = task.formulier ?? {};
-  const taskUrl = useTaskUrl(formuliertype, value, task, openInContext);
   const { startPayment, renderPaymentRedirectForm } = useOgonePayment();
+  const taskUrl = useTaskUrl(task, openInContext);
 
-  const paymentForm = renderPaymentRedirectForm();
-  if (paymentForm) {
-    return paymentForm;
-  }
-
-  const getActions = () => {
-    if (task.data?.type === "betaaltaak") {
-      let currentUrl = window.location.href;
-      const separator = currentUrl.indexOf("?") !== -1 ? "&" : "?";
-      currentUrl += `${separator}type=ogone`;
-
-      const paymentRequestPayload = {
-        amount: task.data.amount,
-        orderId: task.id,
-        reference: task.data.reference,
-        pspId: task.data.pspId,
-        title: task.title,
-        langId: currentLocale.replace("-", "_"),
-        successUrl: `${currentUrl}&success=true`,
-        failureUrl: currentUrl,
-      };
-
-      return (
-        <Button onClick={() => startPayment(paymentRequestPayload)}>
-          Betalen
-        </Button>
-      );
+  if (task.soort === TaakSoort.Ogonebetaling) {
+    if (!task.ogonebetaling) {
+      return;
     }
-    if (task.formulier.formuliertype === "externalurl") {
-      return (
-        <ButtonLink href={taskUrl} target="_blank">
-          <ChevronRightIcon />
-        </ButtonLink>
-      );
-    }
-  };
 
-  if (!openInContext) {
+    const paymentForm = renderPaymentRedirectForm();
+    if (paymentForm) {
+      return paymentForm;
+    }
+
+    let currentUrl = window.location.href;
+    const separator = currentUrl.indexOf("?") !== -1 ? "&" : "?";
+    currentUrl += `${separator}type=ogone`;
+
+    const paymentRequestPayload = {
+      amount: task.ogonebetaling?.bedrag,
+      orderId: task.id,
+      reference: "",
+      pspId: task.ogonebetaling.pspid,
+      title: task.titel,
+      langId: currentLocale.replace("-", "_"),
+      successUrl: `${currentUrl}&success=true`,
+      failureUrl: currentUrl,
+    };
+
     return (
-      <ActionMulti
-        labels={labels}
-        dateTime={task.verloopdatum}
-        actions={getActions()}
-      >
-        {task.title}
-      </ActionMulti>
+      <Button onClick={() => startPayment(paymentRequestPayload)}>
+        Betalen
+      </Button>
     );
   }
 
+  if (task.soort === TaakSoort.Url) {
+    return (
+      <ActionMulti
+        relativeDate
+        labels={labels}
+        dateTime={task.verloopdatum}
+        actions={
+          <ButtonLink href={taskUrl} target="_blank">
+            <ChevronRightIcon />
+          </ButtonLink>
+        }
+      >
+        {task.titel}
+      </ActionMulti>
+    );
+  }
   return (
     <ActionSingle
+      relativeDate
       labels={labels}
       dateTime={task.verloopdatum}
-      link={taskUrl}
+      link={taskUrl ?? ""}
       Link={PortalLink}
     >
-      {task.title}
+      {task.titel}
     </ActionSingle>
   );
 };

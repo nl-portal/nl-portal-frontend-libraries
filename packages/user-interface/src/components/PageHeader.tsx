@@ -1,6 +1,6 @@
-import { Heading2, Heading3, Paragraph } from "@gemeente-denhaag/typography";
 import styles from "./PageHeader.module.scss";
 import Skeleton from "./Skeleton";
+import Heading from "./Heading";
 
 interface Props {
   loading?: boolean;
@@ -15,9 +15,9 @@ const PageHeader = ({ loading, title, subTitle, children }: Props) => {
 
   return (
     <header className={styles["page-header"]}>
-      {title && <Heading2>{title}</Heading2>}
-      {subTitle && <Heading3>{subTitle}</Heading3>}
-      {children && <Paragraph>{children}</Paragraph>}
+      {title && <Heading size="h2">{title}</Heading>}
+      {subTitle && <Heading as="h3">{subTitle}</Heading>}
+      {children}
     </header>
   );
 };

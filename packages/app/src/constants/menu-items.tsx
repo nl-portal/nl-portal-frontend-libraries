@@ -37,8 +37,8 @@ export const menuItems: NavigationItem[][] = [
   ],
   [
     {
-      titleTranslationKey: "erfpacht",
-      path: paths.themeOverview("erfpacht"),
+      titleTranslationKey: "sample",
+      path: paths.themeOverview("sample"),
       icon: <DocumentIcon />,
     },
   ],

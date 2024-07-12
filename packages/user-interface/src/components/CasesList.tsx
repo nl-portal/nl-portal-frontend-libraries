@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
 import { Zaak } from "@nl-portal/nl-portal-api";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import styles from "./CasesList.module.scss";
 import SectionHeader from "./SectionHeader";
 import Case from "./Case";
@@ -15,15 +15,15 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   emptyTranslationId?: string;
-  showTitle?: boolean;
-  titleTranslationId?: string;
-  readMoreAmount?: number;
+  titleTranslationId?: string | null;
   readMoreLink?: string;
-  readMoreTranslationId?: string;
+  readMoreTranslationId?: string | null;
+  totalAmount?: number;
   cases?: Zaak[];
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
+  listView?: boolean;
 }
 
 const CasesList = ({
@@ -31,31 +31,31 @@ const CasesList = ({
   error,
   errorTranslationId = "casesList.fetchError",
   emptyTranslationId = "casesList.empty",
-  showTitle = true,
   titleTranslationId = "casesList.title",
-  readMoreAmount,
   readMoreLink,
   readMoreTranslationId = "casesList.viewAll",
+  totalAmount,
   cases,
   index,
   indexLimit,
   onChange,
+  listView = Boolean(totalAmount && totalAmount > 8),
 }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const casesPath = readMoreLink || paths.cases;
-  const listView = Boolean(readMoreAmount && readMoreAmount > 8);
-  const title = showTitle
+  const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
 
-  //TODO: remove Math.min once cases api offers pagination
-  const subTitle = readMoreAmount
-    ? intl.formatMessage(
-        { id: readMoreTranslationId },
-        { total: Math.min(100, readMoreAmount) },
-      )
-    : undefined;
+  //TODO: remove Math.min once cases api offers pagination, we dont offer pagination for now because of the lack of support in the api
+  const subTitle =
+    totalAmount && readMoreTranslationId
+      ? intl.formatMessage(
+          { id: readMoreTranslationId },
+          { total: Math.min(100, totalAmount) },
+        )
+      : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 

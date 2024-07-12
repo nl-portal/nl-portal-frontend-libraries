@@ -1,5 +1,5 @@
 import {
-  PersoonGeboorteDatum,
+  PersoonDatum,
   PersoonNaam,
   PersoonNationaliteiten,
 } from "@nl-portal/nl-portal-api";
@@ -63,7 +63,7 @@ const getPostalCodeCityString = (
 };
 
 const getLocaleDateOfBirth = (
-  dateOfBirth: PersoonGeboorteDatum | null | undefined,
+  dateOfBirth: PersoonDatum | null | undefined,
 ): string | ReactElement => {
   if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
     return (
