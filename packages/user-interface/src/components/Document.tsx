@@ -16,7 +16,7 @@ const Document = ({ document: doc }: Props) => {
   const { keycloakToken } = useContext(KeycloakContext);
   const { restUri } = useContext(ApiContext);
   const { hrefLang } = useContext(LocaleContext);
-  const downloadLink = `${restUri}/documentapi/${doc.documentapi}/document/${doc.uuid}/content`;
+  const downloadLink = `${restUri}/zakenapi/zaakdocument/${doc.identificatie}/content`;
 
   const onClick = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
