@@ -24,7 +24,7 @@ export const menuItems: NavigationItem[][] = [
       icon: <CheckCircleIcon />,
     },
     {
-      titleTranslationKey: "notifications",
+      titleTranslationKey: "messages",
       path: paths.messages,
       icon: <InboxIcon />,
       hasMessagesCount: true,

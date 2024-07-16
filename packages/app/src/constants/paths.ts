@@ -7,6 +7,7 @@ export const paths: Paths = {
   tasks: "/taken",
   task: (id = ":id") => `/taken/taak/${id}`,
   messages: "/berichten",
+  message: (id = ":id") => `/berichten/bericht/${id}`,
   themeOverview: (type = ":type") => `/${type}`,
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
   themeSub: (type = ":type", slug = ":slug") => `/${type}/${slug}`,
