@@ -1,12 +1,12 @@
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 
-const NotificationsPage = () => {
+const MessagesPage = () => {
   return (
     <PageGrid>
-      <PageHeader title="Notifications" />
+      <PageHeader title="Messages" />
     </PageGrid>
   );
 };
 
-export default NotificationsPage;
+export default MessagesPage;

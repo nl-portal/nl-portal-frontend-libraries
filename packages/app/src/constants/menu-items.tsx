@@ -25,7 +25,7 @@ export const menuItems: NavigationItem[][] = [
     },
     {
       titleTranslationKey: "notifications",
-      path: paths.notifications,
+      path: paths.messages,
       icon: <InboxIcon />,
       hasMessagesCount: true,
     },

@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
-import NotificationsPage from "../../pages/NotificationsPage";
+import MessagesPage from "../../pages/MessagesPage";
 
-describe("NotificationsPage", () => {
+describe("MessagesPage", () => {
   it("is truthy", () => {
-    expect(NotificationsPage).toBeTruthy();
+    expect(MessagesPage).toBeTruthy();
   });
 });

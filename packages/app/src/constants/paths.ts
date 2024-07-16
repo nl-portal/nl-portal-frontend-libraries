@@ -6,7 +6,7 @@ export const paths: Paths = {
   case: (id = ":id") => `/zaken/zaak/${id}`,
   tasks: "/taken",
   task: (id = ":id") => `/taken/taak/${id}`,
-  notifications: "/berichten",
+  messages: "/berichten",
   themeOverview: (type = ":type") => `/${type}`,
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
   themeSub: (type = ":type", slug = ":slug") => `/${type}/${slug}`,
