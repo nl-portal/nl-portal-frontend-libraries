@@ -14,6 +14,8 @@ export const QUERY_GET_TAKEN = gql`
         status
         date
         verloopdatum
+        data
+        zaak
       }
       totalElements
       totalPages

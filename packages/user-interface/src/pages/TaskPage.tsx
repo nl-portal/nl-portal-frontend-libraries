@@ -166,7 +166,6 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   }
 
   if (!formDefinitionUrl && !formDefinitionId) {
-    console.log(formDefinitionUrl);
     return (
       <>
         {backlink && <BackLink {...backlink} />}

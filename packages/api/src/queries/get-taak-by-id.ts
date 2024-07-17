@@ -12,6 +12,7 @@ export const QUERY_GET_TAAK_BY_ID = gql`
       status
       date
       data
+      zaak
     }
   }
 `;

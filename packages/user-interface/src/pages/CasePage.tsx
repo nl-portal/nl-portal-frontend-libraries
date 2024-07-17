@@ -7,6 +7,7 @@ import {
   ContactMoment,
   ZaakStatus,
 } from "@nl-portal/nl-portal-api";
+import { Alert } from "@gemeente-denhaag/components-react";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -19,6 +20,9 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import SectionHeader from "../components/SectionHeader";
+import useOgonePaymentRegistration, {
+  PaymentStatus,
+} from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
 import TableList from "../components/TableList";
 
@@ -45,6 +49,7 @@ const CasePage = ({
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
+  const { paymentStatus } = useOgonePaymentRegistration();
 
   const loading = caseLoading || taskLoading || momentsLoading;
   const tasks = tasksResult?.getTakenV2.content as TaakV2[] | undefined;
@@ -105,6 +110,20 @@ const CasePage = ({
 
   return (
     <PageGrid>
+      {paymentStatus === PaymentStatus.SUCCESS && (
+        <Alert
+          variant="success"
+          title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
+          text={intl.formatMessage({ id: "task.paymentSuccessText" })}
+        />
+      )}
+      {paymentStatus === PaymentStatus.FAILURE && (
+        <Alert
+          variant="error"
+          title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
+          text={intl.formatMessage({ id: "task.paymentFailureText" })}
+        />
+      )}
       <div>
         {backlink && <BackLink {...backlink} />}
         <PageHeader
