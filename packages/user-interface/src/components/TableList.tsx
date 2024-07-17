@@ -97,7 +97,6 @@ const TableList = ({
       <section className={styles["table-list"]}>
         <SectionHeader title={title} />
         <Paragraph>{errorMessage}</Paragraph>
-        <div className={styles["table-list__children"]}>{children}</div>
       </section>
     );
 
@@ -106,7 +105,9 @@ const TableList = ({
       <section className={styles["table-list"]}>
         <SectionHeader title={title} />
         <Paragraph>{emptyMessage}</Paragraph>
-        <div className={styles["table-list__children"]}>{children}</div>
+        {children && (
+          <div className={styles["table-list__children"]}>{children}</div>
+        )}
       </section>
     );
 
@@ -122,7 +123,9 @@ const TableList = ({
           onChange={onChange}
         />
       ) : null}
-      <div className={styles["table-list__children"]}>{children}</div>
+      {children && (
+        <div className={styles["table-list__children"]}>{children}</div>
+      )}
     </section>
   );
 };
