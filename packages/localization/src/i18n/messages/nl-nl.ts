@@ -95,6 +95,8 @@ export const NL_NL_MESSAGES: Messages = {
     "tasksList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "tasksList.empty": "Er zijn geen openstaande taken.",
+    "task.formtaak.button": "Informatie geven",
+    "task.ogonebetaling.button": "Betalen",
     "task.fetchError": "Er is een fout opgetreden, probeer het later nogmaals.",
     "task.completeTitle": "Taak is afgerond",
     "task.completeDescription": "De taak is succesvol voltooid.",

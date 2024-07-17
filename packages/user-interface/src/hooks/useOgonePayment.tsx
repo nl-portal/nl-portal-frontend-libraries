@@ -16,7 +16,6 @@ const useOgonePayment = () => {
     mutateFunction({
       variables: { ...paymentRequestPayload },
       onCompleted: (data) => {
-        console.log(data);
         setPaymentData(data.generateOgonePayment);
       },
     });

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { ApiContext } from "@nl-portal/nl-portal-api";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export enum PaymentStatus {
@@ -9,6 +10,7 @@ export enum PaymentStatus {
 
 const useOgonePaymentRegistration = () => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
+  const { restUri } = useContext(ApiContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
 
@@ -16,9 +18,7 @@ const useOgonePaymentRegistration = () => {
     if (type === "ogone" && typeof paymentStatus === "undefined") {
       setPaymentStatus(PaymentStatus.IN_PROGRESS);
       searchParams.delete("type");
-      fetch(
-        `http://localhost:8090/api/payment/ogone/postsale?${searchParams.toString()}`,
-      )
+      fetch(`${restUri}/payment/ogone/postsale?${searchParams.toString()}`)
         .then((response) => {
           if (response.ok) {
             setPaymentStatus(PaymentStatus.SUCCESS);

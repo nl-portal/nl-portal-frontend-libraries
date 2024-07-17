@@ -54,6 +54,7 @@ const ThemeDetailsPage = ({
         error={tasksError}
         titleTranslationId={null}
         tasks={tasks}
+        openInContext={true}
       />
       <LinksList loading={loading} links={links} />
       <CasesList
@@ -69,6 +70,7 @@ const ThemeDetailsPage = ({
         error={tasksError}
         titleTranslationId={null}
         tasks={tasks}
+        openInContext={true}
       />
     </PageGrid>
   );
