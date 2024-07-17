@@ -376,8 +376,8 @@ importers:
         specifier: 0.1.0-alpha.206
         version: 0.1.0-alpha.206(react@18.3.1)
       '@gemeente-denhaag/status-badge':
-        specifier: 0.3.0-alpha.5
-        version: 0.3.0-alpha.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.3.0-alpha.6
+        version: 0.3.0-alpha.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/tab':
         specifier: 0.2.3-alpha.388
         version: 0.2.3-alpha.388(react@18.3.1)
@@ -1402,8 +1402,8 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
-  '@gemeente-denhaag/status-badge@0.3.0-alpha.5':
-    resolution: {integrity: sha512-8LKkCjX8G0wEUjyZvYQP4yUinmjyEmL6GVJyglAoY/5qMomVZtRN+HeIreW1EbreIHQ0z7xqwWrMjCJhqWYhrg==}
+  '@gemeente-denhaag/status-badge@0.3.0-alpha.6':
+    resolution: {integrity: sha512-eXqNSAFGiKUNjIbuhj7P9ofZC98sfwFj57AzgjrFAN+NhdWQjg5MQHdQDO7mJKaqkAKsBIPEJHcMtQnrihuYZA==}
 
   '@gemeente-denhaag/step-marker@0.0.1-alpha.89':
     resolution: {integrity: sha512-KtEcSpC/FnuL6kFD5Ngzchiir2egJjHoIn/fZMGHy16sOhSevtOdX5kQN2ii7YoGpZwcb19hYhoJUlwuWwAFjQ==}
@@ -6440,7 +6440,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@gemeente-denhaag/status-badge@0.3.0-alpha.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/status-badge@0.3.0-alpha.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@utrecht/component-library-react': 3.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 4.0.0
