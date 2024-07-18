@@ -16,7 +16,7 @@
     "test:watch": "vitest --watch"
   },
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.390",
+    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.401",
     "@gemeente-denhaag/icons": "0.2.3-alpha.388",
     "@gemeente-denhaag/link": "0.2.3-alpha.388",
     "@gemeente-denhaag/typography": "0.2.3-alpha.388",

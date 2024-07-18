@@ -3,7 +3,8 @@ import {
   CasePage,
   CasesPage,
   EditAccountPage,
-  NotificationsPage,
+  MessagesPage,
+  MessagePage,
   OverviewPage,
   TasksPage,
   TaskPage,
@@ -51,8 +52,17 @@ export const routes = [
     ],
   },
   {
-    path: paths.notifications,
-    element: <NotificationsPage />,
+    path: paths.messages,
+    children: [
+      {
+        index: true,
+        element: <MessagesPage />,
+      },
+      {
+        path: paths.message(),
+        element: <MessagePage />,
+      },
+    ],
   },
   {
     path: paths.themeOverview("sample"),

@@ -8,7 +8,7 @@ export const NL_NL_MESSAGES: Messages = {
     "locales.nl-NL": "Nederlands",
     "pageTitles.overview": "Overzicht",
     "pageTitles.cases": "Mijn lopende zaken",
-    "pageTitles.notifications": "Mijn berichten",
+    "pageTitles.messages": "Mijn Berichten",
     "pageTitles.documents": "Documenten",
     "pageTitles.offline": "Geen internetverbinding",
     "pageTitles.form": "Formulier",
@@ -120,5 +120,10 @@ export const NL_NL_MESSAGES: Messages = {
     "descriptionList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "descriptionList.empty": "Er zijn geen details beschikbaar.",
+    "messagesList.fetchError": "Er is een fout opgetreden.",
+    "messagesList.empty": "Er zijn geen berichten.",
+    "messagesList.subject": "Onderwerp",
+    "messagesList.date": "Datum bericht",
+    "messagesList.new": "Nieuw",
   },
 };
