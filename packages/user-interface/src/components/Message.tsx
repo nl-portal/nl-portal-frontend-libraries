@@ -13,6 +13,7 @@ export interface MessageType {
   titel: string;
   verloopdatum: string;
   read: boolean;
+  bericht: React.ReactNode;
 }
 
 interface Props {

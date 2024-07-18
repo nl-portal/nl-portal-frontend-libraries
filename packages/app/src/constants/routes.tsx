@@ -4,6 +4,7 @@ import {
   CasesPage,
   EditAccountPage,
   MessagesPage,
+  MessagePage,
   OverviewPage,
   TasksPage,
   TaskPage,
@@ -52,7 +53,16 @@ export const routes = [
   },
   {
     path: paths.messages,
-    element: <MessagesPage />,
+    children: [
+      {
+        index: true,
+        element: <MessagesPage />,
+      },
+      {
+        path: paths.message(),
+        element: <MessagePage />,
+      },
+    ],
   },
   {
     path: paths.themeOverview("sample"),
