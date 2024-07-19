@@ -1,22 +1,18 @@
 import { useContext } from "react";
 import prettyBytes from "pretty-bytes";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import {
-  ApiContext,
-  Document as PortalDocument,
-} from "@nl-portal/nl-portal-api";
+import { Document as PortalDocument } from "@nl-portal/nl-portal-api";
 import { KeycloakContext } from "@nl-portal/nl-portal-authentication";
 import { File } from "@gemeente-denhaag/file";
 
 interface Props {
   document: PortalDocument;
+  downloadLink: string;
 }
 
-const Document = ({ document: doc }: Props) => {
+const Document = ({ document: doc, downloadLink: downloadLink }: Props) => {
   const { keycloakToken } = useContext(KeycloakContext);
-  const { restUri } = useContext(ApiContext);
   const { hrefLang } = useContext(LocaleContext);
-  const downloadLink = `${restUri}/zakenapi/zaakdocument/${doc.identificatie}/content`;
 
   const onClick = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
