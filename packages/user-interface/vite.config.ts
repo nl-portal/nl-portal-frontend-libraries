@@ -46,6 +46,7 @@ export default defineConfig({
           "@gemeente-denhaag/link-button",
           "@gemeente-denhaag/text-input",
           "@gemeente-denhaag/button-link",
+          "@gemeente-denhaag/status-badge",
         ],
       },
     },
