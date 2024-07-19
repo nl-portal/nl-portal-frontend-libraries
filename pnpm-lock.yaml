@@ -104,7 +104,7 @@ importers:
         version: 3.9.1(@types/node@20.11.10)(rollup@4.17.2)(typescript@5.4.5)(vite@5.2.11(@types/node@20.11.10)(sass@1.77.1))
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.77.1)
+        version: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -183,7 +183,7 @@ importers:
         version: 5.2.11(@types/node@20.11.10)(sass@1.77.1)
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.77.1)
+        version: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -247,7 +247,7 @@ importers:
         version: 3.9.1(@types/node@20.11.10)(rollup@4.17.2)(typescript@5.4.5)(vite@5.2.11(@types/node@20.11.10)(sass@1.77.1))
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.77.1)
+        version: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1)
 
   packages/localization:
     dependencies:
@@ -256,13 +256,13 @@ importers:
         version: 4.3.1
       react:
         specifier: ^18.2.0
-        version: 18.2.0
+        version: 18.3.1
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-intl:
         specifier: ^6.6.6
-        version: 6.6.6(react@18.2.0)(typescript@5.4.5)
+        version: 6.6.6(react@18.3.1)(typescript@5.4.5)
     devDependencies:
       '@types/jest':
         specifier: ^29.5.12
@@ -305,7 +305,7 @@ importers:
         version: 3.9.1(@types/node@20.11.10)(rollup@4.17.2)(typescript@5.4.5)(vite@5.2.11(@types/node@20.11.10)(sass@1.77.1))
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.77.1)
+        version: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1)
 
   packages/user-interface:
     dependencies:
@@ -456,7 +456,7 @@ importers:
     devDependencies:
       '@testing-library/jest-dom':
         specifier: ^6.4.5
-        version: 6.4.5(@types/jest@29.5.12)(vitest@1.6.0(@types/node@20.11.10)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.77.1))
+        version: 6.4.5(@types/jest@29.5.12)(vitest@1.6.0(@types/node@20.11.10)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1))
       '@testing-library/react':
         specifier: ^15.0.7
         version: 15.0.7(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -486,7 +486,7 @@ importers:
         version: 4.2.1(vite@5.2.11(@types/node@20.11.10)(sass@1.77.1))
       '@vitest/ui':
         specifier: ^1.4.0
-        version: 1.4.0(vitest@1.6.0)
+        version: 1.6.0(vitest@1.6.0)
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -516,7 +516,7 @@ importers:
         version: 3.9.1(@types/node@20.11.10)(rollup@4.17.2)(typescript@5.4.5)(vite@5.2.11(@types/node@20.11.10)(sass@1.77.1))
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.77.1)
+        version: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1)
       wait-on:
         specifier: ^7.2.0
         version: 7.2.0
@@ -1720,6 +1720,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -1727,6 +1728,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.2':
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
+    deprecated: Use @eslint/object-schema instead
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -2280,13 +2282,10 @@ packages:
   '@vitest/spy@1.6.0':
     resolution: {integrity: sha512-leUTap6B/cqi/bQkXUu6bQV5TZPx7pmMBKBQiI0rJA8c3pB56ZsaTbREnF7CJfmvAS4V2cXIBAh/3rVwrrCYgw==}
 
-  '@vitest/ui@1.4.0':
-    resolution: {integrity: sha512-XC6CMhN1gzYcGbpn6/Oanj4Au2EXwQEX6vpcOeLlZv8dy7g11Ukx8zwtYQbwxs9duK2s9j2o5rbQiCP5DPAcmw==}
+  '@vitest/ui@1.6.0':
+    resolution: {integrity: sha512-k3Lyo+ONLOgylctiGovRKy7V4+dIN2yxstX3eY5cWFXH6WP+ooVX79YSyi0GagdTQzLmT43BF27T0s6dOIPBXA==}
     peerDependencies:
-      vitest: 1.4.0
-
-  '@vitest/utils@1.4.0':
-    resolution: {integrity: sha512-mx3Yd1/6e2Vt/PUC98DcqTirtfxUyAZ32uK82r8rZzbtBeBo+nqgnjx/LvqQdWsrvNtm14VmurNgcf4nqY5gJg==}
+      vitest: 1.6.0
 
   '@vitest/utils@1.6.0':
     resolution: {integrity: sha512-21cPiuGMoMZwiOHa2i4LXkMkMkCGzA+MVFV70jRwHo95dL4x/ts5GZhML1QWuy7yfp3WzK3lRvZi3JnXTYqrBw==}
@@ -2376,6 +2375,11 @@ packages:
 
   acorn@8.11.3:
     resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.12.1:
+    resolution: {integrity: sha512-tcpGyI9zbizT9JbV6oYE477V6mTlXvvi0T0G3SNIYE2apm/G5huBa1+K89VGeovbg+jycCrfhl3ADxErOuO6Jg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -2532,6 +2536,10 @@ packages:
 
   braces@3.0.2:
     resolution: {integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==}
+    engines: {node: '>=8'}
+
+  braces@3.0.3:
+    resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
   browser-cookies@1.2.0:
@@ -3181,6 +3189,10 @@ packages:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
     engines: {node: '>=8'}
 
+  fill-range@7.1.1:
+    resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
+    engines: {node: '>=8'}
+
   find-up@4.1.0:
     resolution: {integrity: sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw==}
     engines: {node: '>=8'}
@@ -3201,8 +3213,8 @@ packages:
     resolution: {integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==}
     engines: {node: '>=16'}
 
-  flatted@3.2.9:
-    resolution: {integrity: sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==}
+  flatted@3.3.1:
+    resolution: {integrity: sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==}
 
   follow-redirects@1.15.5:
     resolution: {integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==}
@@ -3295,6 +3307,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-directory@4.0.1:
     resolution: {integrity: sha512-wHTUcDUoZ1H5/0iVqEudYW4/kAlN5cZ3j/bXn0Dpbizl9iaUVeWSHqiOjsgk6OW2bkLclbBjzewBz6weQ1zA2Q==}
@@ -3485,6 +3498,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -4002,6 +4016,10 @@ packages:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
     engines: {node: '>=8.6'}
 
+  micromatch@4.0.7:
+    resolution: {integrity: sha512-LPP/3KorzCwBxfeUuZmaR6bG2kdeHSbe0P2tY3FLRU4vYrjYz5hI4QZwV0njUx3jeuKe67YukQ1LSPZBKDqO/Q==}
+    engines: {node: '>=8.6'}
+
   mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
     engines: {node: '>= 0.6'}
@@ -4283,6 +4301,9 @@ packages:
 
   picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
+
+  picocolors@1.0.1:
+    resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
 
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
@@ -4573,6 +4594,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@5.0.7:
@@ -7328,7 +7350,7 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/jest-dom@6.4.5(@types/jest@29.5.12)(vitest@1.6.0(@types/node@20.11.10)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.77.1))':
+  '@testing-library/jest-dom@6.4.5(@types/jest@29.5.12)(vitest@1.6.0(@types/node@20.11.10)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1))':
     dependencies:
       '@adobe/css-tools': 4.3.3
       '@babel/runtime': 7.24.0
@@ -7340,7 +7362,7 @@ snapshots:
       redent: 3.0.0
     optionalDependencies:
       '@types/jest': 29.5.12
-      vitest: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.77.1)
+      vitest: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1)
 
   '@testing-library/react@15.0.7(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -7646,23 +7668,16 @@ snapshots:
     dependencies:
       tinyspy: 2.2.0
 
-  '@vitest/ui@1.4.0(vitest@1.6.0)':
+  '@vitest/ui@1.6.0(vitest@1.6.0)':
     dependencies:
-      '@vitest/utils': 1.4.0
+      '@vitest/utils': 1.6.0
       fast-glob: 3.3.2
       fflate: 0.8.2
-      flatted: 3.2.9
+      flatted: 3.3.1
       pathe: 1.1.2
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       sirv: 2.0.4
-      vitest: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.77.1)
-
-  '@vitest/utils@1.4.0':
-    dependencies:
-      diff-sequences: 29.6.3
-      estree-walker: 3.0.3
-      loupe: 2.3.7
-      pretty-format: 29.7.0
+      vitest: 1.6.0(@types/node@20.11.10)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1)
 
   '@vitest/utils@1.6.0':
     dependencies:
@@ -7780,6 +7795,8 @@ snapshots:
   acorn-walk@8.3.2: {}
 
   acorn@8.11.3: {}
+
+  acorn@8.12.1: {}
 
   agent-base@7.1.0:
     dependencies:
@@ -7961,6 +7978,10 @@ snapshots:
   braces@3.0.2:
     dependencies:
       fill-range: 7.0.1
+
+  braces@3.0.3:
+    dependencies:
+      fill-range: 7.1.1
 
   browser-cookies@1.2.0: {}
 
@@ -8645,7 +8666,7 @@ snapshots:
       '@nodelib/fs.walk': 1.2.8
       glob-parent: 5.1.2
       merge2: 1.4.1
-      micromatch: 4.0.5
+      micromatch: 4.0.7
 
   fast-json-patch@3.1.1: {}
 
@@ -8709,6 +8730,10 @@ snapshots:
     dependencies:
       to-regex-range: 5.0.1
 
+  fill-range@7.1.1:
+    dependencies:
+      to-regex-range: 5.0.1
+
   find-up@4.1.0:
     dependencies:
       locate-path: 5.0.0
@@ -8727,16 +8752,16 @@ snapshots:
 
   flat-cache@3.2.0:
     dependencies:
-      flatted: 3.2.9
+      flatted: 3.3.1
       keyv: 4.5.4
       rimraf: 3.0.2
 
   flat-cache@4.0.1:
     dependencies:
-      flatted: 3.2.9
+      flatted: 3.3.1
       keyv: 4.5.4
 
-  flatted@3.2.9: {}
+  flatted@3.3.1: {}
 
   follow-redirects@1.15.5: {}
 
@@ -9292,7 +9317,7 @@ snapshots:
 
   js-interpreter@https://codeload.github.com/formio/JS-Interpreter/tar.gz/0ed5007ada500c12d797ab867a15cfab736e9b25:
     dependencies:
-      acorn: 8.11.3
+      acorn: 8.12.1
 
   js-sha256@0.10.1: {}
 
@@ -9568,6 +9593,11 @@ snapshots:
       braces: 3.0.2
       picomatch: 2.3.1
 
+  micromatch@4.0.7:
+    dependencies:
+      braces: 3.0.3
+      picomatch: 2.3.1
+
   mime-db@1.52.0: {}
 
   mime-types@2.1.35:
@@ -9827,6 +9857,8 @@ snapshots:
 
   picocolors@1.0.0: {}
 
+  picocolors@1.0.1: {}
+
   picomatch@2.3.1: {}
 
   pidtree@0.6.0: {}
@@ -9871,7 +9903,7 @@ snapshots:
   postcss@8.4.33:
     dependencies:
       nanoid: 3.3.7
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       source-map-js: 1.0.2
 
   postcss@8.4.38:
@@ -9961,22 +9993,6 @@ snapshots:
       react: 18.3.1
       react-fast-compare: 3.2.2
       shallowequal: 1.1.0
-
-  react-intl@6.6.6(react@18.2.0)(typescript@5.4.5):
-    dependencies:
-      '@formatjs/ecma402-abstract': 1.18.2
-      '@formatjs/icu-messageformat-parser': 2.7.6
-      '@formatjs/intl': 2.10.2(typescript@5.4.5)
-      '@formatjs/intl-displaynames': 6.6.6
-      '@formatjs/intl-listformat': 7.5.5
-      '@types/hoist-non-react-statics': 3.3.5
-      '@types/react': 18.3.2
-      hoist-non-react-statics: 3.3.2
-      intl-messageformat: 10.5.12
-      react: 18.2.0
-      tslib: 2.6.2
-    optionalDependencies:
-      typescript: 5.4.5
 
   react-intl@6.6.6(react@18.3.1)(typescript@5.4.5):
     dependencies:
@@ -10599,7 +10615,7 @@ snapshots:
     dependencies:
       browserslist: 4.22.3
       escalade: 3.1.1
-      picocolors: 1.0.0
+      picocolors: 1.0.1
 
   upper-case-first@2.0.2:
     dependencies:
@@ -10683,7 +10699,7 @@ snapshots:
       fsevents: 2.3.3
       sass: 1.77.1
 
-  vitest@1.6.0(@types/node@20.11.10)(@vitest/ui@1.4.0)(jsdom@24.0.0)(sass@1.77.1):
+  vitest@1.6.0(@types/node@20.11.10)(@vitest/ui@1.6.0)(jsdom@24.0.0)(sass@1.77.1):
     dependencies:
       '@vitest/expect': 1.6.0
       '@vitest/runner': 1.6.0
@@ -10707,7 +10723,7 @@ snapshots:
       why-is-node-running: 2.2.2
     optionalDependencies:
       '@types/node': 20.11.10
-      '@vitest/ui': 1.4.0(vitest@1.6.0)
+      '@vitest/ui': 1.6.0(vitest@1.6.0)
       jsdom: 24.0.0
     transitivePeerDependencies:
       - less
