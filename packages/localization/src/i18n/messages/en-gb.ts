@@ -117,5 +117,6 @@ export const EN_GB_MESSAGES: Messages = {
     "messagesList.subject": "Subject",
     "messagesList.date": "Message date",
     "messagesList.new": "New",
+    "messagePage.fetchError": "Message not available.",
   },
 };

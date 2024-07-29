@@ -43,9 +43,10 @@ const MessagePage = () => {
     );
   }
 
-  if (messageError) {
+  if (messageError || !message) {
     return (
       <div>
+        <BackLink routePath={paths.messages} />
         <Paragraph>
           <FormattedMessage id="messagePage.fetchError" />
         </Paragraph>
