@@ -12,8 +12,8 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
-import styles from "./MessagePage.module.scss";
 import Skeleton from "../components/Skeleton.tsx";
+import MessageContent from "../components/MessageContent.tsx";
 
 const MessagePage = () => {
   const { id } = useParams();
@@ -28,12 +28,8 @@ const MessagePage = () => {
   } = useGetBerichtQuery({
     variables: { id: id },
   });
-  const tasks: TaakV2[] | undefined = tasksData?.getTakenV2.content as
-    | TaakV2[]
-    | undefined;
-  const message: Bericht | undefined = messageData?.getBericht as
-    | Bericht
-    | undefined;
+  const tasks = tasksData?.getTakenV2.content as TaakV2[] | undefined;
+  const message = messageData?.getBericht as Bericht | undefined;
 
   if (messageLoading) {
     return (
@@ -69,9 +65,7 @@ const MessagePage = () => {
         titleTranslationId={null}
         tasks={tasks}
       />
-      <div className={styles["message__content-text"]}>
-        <Paragraph>{message?.berichtTekst}</Paragraph>
-      </div>
+      <MessageContent messageText={message.berichtTekst} />
     </PageGrid>
   );
 };
