@@ -3,11 +3,14 @@ name: Build and Publish npm
 on:
   push:
     branches:
+      - "master"
       - 'feature/**'
-      - master
+      - "version/**"
   pull_request:
     branches:
-      - master
+      - "master"
+      - "feature/**"
+      - "version/**"
 
 jobs:
   build:
