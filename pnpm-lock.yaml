@@ -34,7 +34,7 @@ importers:
         version: 6.0.4(stylelint@16.5.0(typescript@5.4.5))
       stylelint-selector-bem-pattern:
         specifier: 4.0.0
-        version: 4.0.0(@typescript-eslint/eslint-plugin@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(stylelint@16.5.0(typescript@5.4.5))(typescript@5.4.5)
+        version: 4.0.0(@typescript-eslint/eslint-plugin@7.9.0(@typescript-eslint/parser@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(stylelint@16.5.0(typescript@5.4.5))(typescript@5.4.5)
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -337,8 +337,8 @@ importers:
         specifier: 0.1.1-alpha.46
         version: 0.1.1-alpha.46(react@18.3.1)
       '@gemeente-denhaag/descriptionlist':
-        specifier: 0.1.1-alpha.288
-        version: 0.1.1-alpha.288
+        specifier: 0.1.1-alpha.302
+        version: 0.1.1-alpha.302
       '@gemeente-denhaag/file':
         specifier: 0.1.1-alpha.60
         version: 0.1.1-alpha.60(react@18.3.1)
@@ -1244,6 +1244,9 @@ packages:
   '@gemeente-denhaag/descriptionlist@0.1.1-alpha.288':
     resolution: {integrity: sha512-gD/xklGAj2o1oIx09vrt9Jf+y14zmyEspBfx6IAIhz3H2wVYlJxGPYqw2z96MSjsMiPR1rXWsp9ERBe07oXksw==}
 
+  '@gemeente-denhaag/descriptionlist@0.1.1-alpha.302':
+    resolution: {integrity: sha512-QukDyhEb9yIk5kkaiu2ik01MJ6CCCothdToRRx0+qAGVu+E0ioYRRJNKBPcJly+WXUoXLxxN418K+Xkh2upksg==}
+
   '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.390':
     resolution: {integrity: sha512-OmZpqMTBxffnfkbzljOokLwpL5paJtyY8w8V8MQbuxOcSfwKagHKA78oitoaKITHc9nSynaSLc0s7EoWT9uQrw==}
 
@@ -1720,6 +1723,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -1727,6 +1731,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.2':
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
+    deprecated: Use @eslint/object-schema instead
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -3295,6 +3300,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-directory@4.0.1:
     resolution: {integrity: sha512-wHTUcDUoZ1H5/0iVqEudYW4/kAlN5cZ3j/bXn0Dpbizl9iaUVeWSHqiOjsgk6OW2bkLclbBjzewBz6weQ1zA2Q==}
@@ -3485,6 +3491,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -4573,6 +4580,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@5.0.7:
@@ -6206,6 +6214,8 @@ snapshots:
       - react
 
   '@gemeente-denhaag/descriptionlist@0.1.1-alpha.288': {}
+
+  '@gemeente-denhaag/descriptionlist@0.1.1-alpha.302': {}
 
   '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.390': {}
 
@@ -8498,7 +8508,7 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5):
+  eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.9.0(@typescript-eslint/parser@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5):
     dependencies:
       '@typescript-eslint/utils': 5.62.0(eslint@8.56.0)(typescript@5.4.5)
       eslint: 8.56.0
@@ -10397,9 +10407,9 @@ snapshots:
       postcss-value-parser: 4.2.0
       stylelint: 16.5.0(typescript@5.4.5)
 
-  stylelint-selector-bem-pattern@4.0.0(@typescript-eslint/eslint-plugin@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(stylelint@16.5.0(typescript@5.4.5))(typescript@5.4.5):
+  stylelint-selector-bem-pattern@4.0.0(@typescript-eslint/eslint-plugin@7.9.0(@typescript-eslint/parser@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(stylelint@16.5.0(typescript@5.4.5))(typescript@5.4.5):
     dependencies:
-      eslint-plugin-jest: 27.9.0(@typescript-eslint/eslint-plugin@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5)
+      eslint-plugin-jest: 27.9.0(@typescript-eslint/eslint-plugin@7.9.0(@typescript-eslint/parser@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5)
       lodash: 4.17.21
       postcss: 8.4.33
       postcss-bem-linter: 4.0.1(postcss@8.4.33)
