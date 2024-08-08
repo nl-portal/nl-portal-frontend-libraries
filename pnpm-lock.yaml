@@ -34,7 +34,7 @@ importers:
         version: 6.0.4(stylelint@16.5.0(typescript@5.4.5))
       stylelint-selector-bem-pattern:
         specifier: 4.0.0
-        version: 4.0.0(@typescript-eslint/eslint-plugin@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(stylelint@16.5.0(typescript@5.4.5))(typescript@5.4.5)
+        version: 4.0.0(@typescript-eslint/eslint-plugin@7.9.0(@typescript-eslint/parser@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(stylelint@16.5.0(typescript@5.4.5))(typescript@5.4.5)
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -322,8 +322,8 @@ importers:
         specifier: 0.1.1-alpha.60
         version: 0.1.1-alpha.60(react@18.3.1)
       '@gemeente-denhaag/alert':
-        specifier: 0.1.1-alpha.358
-        version: 0.1.1-alpha.358(react@18.3.1)
+        specifier: 0.1.1-alpha.372
+        version: 0.1.1-alpha.372(react@18.3.1)
       '@gemeente-denhaag/button-link':
         specifier: 0.0.1-alpha.7
         version: 0.0.1-alpha.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1184,6 +1184,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/alert@0.1.1-alpha.372':
+    resolution: {integrity: sha512-fE72Par1nwF1HSgBIdK/NUlwuAan+PrvV8hxy2Z1MTfM4vP3H5pKd8Ko7S8DCbmZ48QyaFjVYo6NjLIytx/+Aw==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/badge-counter@0.1.1-alpha.388':
     resolution: {integrity: sha512-Hf3KedfaD7J2kdSz3XYaxxF0dS6meRrbO9+UNmrk7F4Jp7Iw2SkBUh6fdImuXE/eau58KFcSTzAYz4iNmdYSXg==}
     peerDependencies:
@@ -1209,6 +1214,11 @@ packages:
 
   '@gemeente-denhaag/button@0.2.3-alpha.394':
     resolution: {integrity: sha512-6kzpUp+rUDs3/sQwF073trwzjPxc4DWCESxFboWjYxOpPGM883ygZbohxagh1Ix6wALL13xxa9kpla+xqT7Rew==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/button@0.2.3-alpha.402':
+    resolution: {integrity: sha512-4SIBwhTPFqBiu70RXx882pHFethb/5/P6c94ATcYSDVRZvzEQ0vu7mCgCFcO2Qgszdk19Khn1wC/cjZF3lwJXQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1250,6 +1260,9 @@ packages:
   '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.396':
     resolution: {integrity: sha512-0eF3thpTOYYEwOQMALAuuvtlqQytAEALlJ9zb5Z2e1XRz9K1ypuN3GrEXmMLYxsYt6kfFrrBE7IMkxl6kyIsCQ==}
 
+  '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.404':
+    resolution: {integrity: sha512-WnxQca8JDccuWB7i/OI/1htX9zNm2Bcxu1A2VIZmlXRaM/cxY1rYRbw7niZ7dTLpFPLIc0l2Zso+T/jiHIohNg==}
+
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.390':
     resolution: {integrity: sha512-D1b4paXwnd0KS1or54Cw9iMmmnvfoDiZU78czSmXd+FVB/BjTBdJvJRriizYAzFGAiu8JcDvONxQC+z2N0CsUQ==}
 
@@ -1258,6 +1271,9 @@ packages:
 
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.401':
     resolution: {integrity: sha512-+7T82bbllZCB7CHnVooMAfcxE/yJsbiw4CGe2+eKbWRa5O1QQ7IyYCHSniMvZVPrzl2HYvSh8eaODstDyWWTjg==}
+
+  '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.404':
+    resolution: {integrity: sha512-PtCylJvwzYPcqaoFlK2X/yT4JbeDRAQ4jxXDK/wOTonjGbuUXayhNo70Pnjc8DCmUzwRzlKS+vXTR/X51+ymtw==}
 
   '@gemeente-denhaag/divider@0.2.3-alpha.388':
     resolution: {integrity: sha512-NbsqaeuClaKZJxNFY0O4lE8yk1TaSlvftXEui0SLUKlMw7cFb60XQu4NojucydDb07GsvxZA7qA0pGSS1pwXTw==}
@@ -1318,6 +1334,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/iconbutton@0.2.3-alpha.402':
+    resolution: {integrity: sha512-pDOFzNPbtnX0YssQ7SwbxXxjbI6HWvNXvXhRjvmWI8uHsTbpJ0BX1ql+QWKrsobt/gvPFEV11KjBE52NzLS/IQ==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/icons@0.2.3-alpha.388':
     resolution: {integrity: sha512-FdTNAxgC9Ft6lOTEhji8TRKmcmRxD7vJSkmcWWYBtWe1b/CMMcwNnenOpPLFi2A1YM36EQQB36RQRL7p8KUJtA==}
     peerDependencies:
@@ -1330,6 +1351,11 @@ packages:
 
   '@gemeente-denhaag/icons@0.2.3-alpha.394':
     resolution: {integrity: sha512-px2awoHcxzn44ON2PPeqGcWAUtJ8KTjH0q45Wn2LA7Q0LQjk5l6Qpmch/VvH/wrfCFVXsddqEQ28hP8uyVlnHQ==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/icons@0.2.3-alpha.402':
+    resolution: {integrity: sha512-frHvr65o1JKpcGeEpnHOa4EtE1Z5U1QL1BZro6pLA37ZD2jJKAVxX/ZQeqx8f9s1QlccEU2zUleemtbN8adIJA==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1447,6 +1473,11 @@ packages:
 
   '@gemeente-denhaag/typography@0.2.3-alpha.394':
     resolution: {integrity: sha512-PSFhdsT/wHaL3gZbjdtJUID9lhc6LoH7UKWJ/T/4BlM+Cbf69tyqCm/BV7jw2/yWw+g5j5zg2CQWc9N5iOdbxw==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/typography@0.2.3-alpha.402':
+    resolution: {integrity: sha512-lc2X2E/pc8sGCUSqOuRRKlECjWa2T7MXFoTf737NCUVSx6+hMtoR8sqG6fC8SxoKBPl76ybQuBq+5J2qvgrbhQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1720,6 +1751,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -1727,6 +1759,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.2':
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
+    deprecated: Use @eslint/object-schema instead
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -2262,6 +2295,9 @@ packages:
   '@utrecht/components@4.0.0':
     resolution: {integrity: sha512-vpw8p5FEU/yrSGL5JU+x6bDXIreEPU6WPEagOkcdqbFGMovWS8uUHNWmv+PY1xJIOjOb98RebSsbFDoA4zllVQ==}
 
+  '@utrecht/components@6.1.0':
+    resolution: {integrity: sha512-4EXubBfxuRgO7jNiI5/E4Tk2BZGiWS3JwuYCDZf7QPMQ0fMtrHDh9SEm0UErJd+CxVVG7Bcy/fQvYXh1ormCNA==}
+
   '@vitejs/plugin-react@4.2.1':
     resolution: {integrity: sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -2674,6 +2710,10 @@ packages:
 
   clsx@2.1.0:
     resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
+    engines: {node: '>=6'}
+
+  clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
 
   color-convert@1.9.3:
@@ -3295,6 +3335,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-directory@4.0.1:
     resolution: {integrity: sha512-wHTUcDUoZ1H5/0iVqEudYW4/kAlN5cZ3j/bXn0Dpbizl9iaUVeWSHqiOjsgk6OW2bkLclbBjzewBz6weQ1zA2Q==}
@@ -3485,6 +3526,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -4573,6 +4615,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@5.0.7:
@@ -6069,6 +6112,14 @@ snapshots:
       '@gemeente-denhaag/typography': 0.2.3-alpha.388(react@18.3.1)
       react: 18.3.1
 
+  '@gemeente-denhaag/alert@0.1.1-alpha.372(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/button': 0.2.3-alpha.402(react@18.3.1)
+      '@gemeente-denhaag/iconbutton': 0.2.3-alpha.402(react@18.3.1)
+      '@gemeente-denhaag/icons': 0.2.3-alpha.402(react@18.3.1)
+      '@gemeente-denhaag/typography': 0.2.3-alpha.402(react@18.3.1)
+      react: 18.3.1
+
   '@gemeente-denhaag/badge-counter@0.1.1-alpha.388(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/dotindicator': 0.1.1-alpha.388(react@18.3.1)
@@ -6102,6 +6153,11 @@ snapshots:
   '@gemeente-denhaag/button@0.2.3-alpha.394(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.394(react@18.3.1)
+      react: 18.3.1
+
+  '@gemeente-denhaag/button@0.2.3-alpha.402(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.402(react@18.3.1)
       react: 18.3.1
 
   '@gemeente-denhaag/card-authentication@0.1.1-alpha.117(react@18.3.1)':
@@ -6211,11 +6267,15 @@ snapshots:
 
   '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.396': {}
 
+  '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.404': {}
+
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.390': {}
 
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.396': {}
 
   '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.401': {}
+
+  '@gemeente-denhaag/design-tokens-components@0.2.3-alpha.404': {}
 
   '@gemeente-denhaag/divider@0.2.3-alpha.388(react@18.3.1)':
     dependencies:
@@ -6331,6 +6391,10 @@ snapshots:
     dependencies:
       react: 18.3.1
 
+  '@gemeente-denhaag/iconbutton@0.2.3-alpha.402(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+
   '@gemeente-denhaag/icons@0.2.3-alpha.388(react@18.3.1)':
     dependencies:
       react: 18.3.1
@@ -6340,6 +6404,10 @@ snapshots:
       react: 18.3.1
 
   '@gemeente-denhaag/icons@0.2.3-alpha.394(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+
+  '@gemeente-denhaag/icons@0.2.3-alpha.402(react@18.3.1)':
     dependencies:
       react: 18.3.1
 
@@ -6508,6 +6576,13 @@ snapshots:
       '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.396
       '@gemeente-denhaag/design-tokens-components': 0.2.3-alpha.396
       '@utrecht/components': 4.0.0
+      react: 18.3.1
+
+  '@gemeente-denhaag/typography@0.2.3-alpha.402(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.404
+      '@gemeente-denhaag/design-tokens-components': 0.2.3-alpha.404
+      '@utrecht/components': 6.1.0
       react: 18.3.1
 
   '@gemeente-denhaag/utils@0.2.3-alpha.387(react@18.3.1)':
@@ -7613,6 +7688,10 @@ snapshots:
     dependencies:
       clsx: 1.2.1
 
+  '@utrecht/components@6.1.0':
+    dependencies:
+      clsx: 2.1.1
+
   '@vitejs/plugin-react@4.2.1(vite@5.2.11(@types/node@20.11.10)(sass@1.77.1))':
     dependencies:
       '@babel/core': 7.23.9
@@ -8148,6 +8227,8 @@ snapshots:
 
   clsx@2.1.0: {}
 
+  clsx@2.1.1: {}
+
   color-convert@1.9.3:
     dependencies:
       color-name: 1.1.3
@@ -8498,7 +8579,7 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5):
+  eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.9.0(@typescript-eslint/parser@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5):
     dependencies:
       '@typescript-eslint/utils': 5.62.0(eslint@8.56.0)(typescript@5.4.5)
       eslint: 8.56.0
@@ -10397,9 +10478,9 @@ snapshots:
       postcss-value-parser: 4.2.0
       stylelint: 16.5.0(typescript@5.4.5)
 
-  stylelint-selector-bem-pattern@4.0.0(@typescript-eslint/eslint-plugin@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(stylelint@16.5.0(typescript@5.4.5))(typescript@5.4.5):
+  stylelint-selector-bem-pattern@4.0.0(@typescript-eslint/eslint-plugin@7.9.0(@typescript-eslint/parser@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(stylelint@16.5.0(typescript@5.4.5))(typescript@5.4.5):
     dependencies:
-      eslint-plugin-jest: 27.9.0(@typescript-eslint/eslint-plugin@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5)
+      eslint-plugin-jest: 27.9.0(@typescript-eslint/eslint-plugin@7.9.0(@typescript-eslint/parser@7.9.0(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5)
       lodash: 4.17.21
       postcss: 8.4.33
       postcss-bem-linter: 4.0.1(postcss@8.4.33)
