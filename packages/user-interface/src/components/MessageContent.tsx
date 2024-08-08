@@ -7,7 +7,7 @@ interface Props {
 
 const MessageContent = ({ messageText }: Props) => {
   return (
-    <div className={styles["message__content-text"]}>
+    <div className={styles["message-content"]}>
       <Paragraph>{messageText}</Paragraph>
     </div>
   );
