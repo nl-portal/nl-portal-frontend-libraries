@@ -125,5 +125,6 @@ export const NL_NL_MESSAGES: Messages = {
     "messagesList.subject": "Onderwerp",
     "messagesList.date": "Datum bericht",
     "messagesList.new": "Nieuw",
+    "messageDetailPage.fetchError": "Bericht niet beschikbaar.",
   },
 };

@@ -3,11 +3,11 @@ import {
   CasePage,
   CasesPage,
   EditAccountPage,
-  MessagesPage,
-  MessagePage,
+  MessageDetailPage,
   OverviewPage,
   TasksPage,
   TaskPage,
+  MessagesPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "./paths";
 import { config } from "./config";
@@ -60,7 +60,7 @@ export const routes = [
       },
       {
         path: paths.message(),
-        element: <MessagePage />,
+        element: <MessageDetailPage />,
       },
     ],
   },
