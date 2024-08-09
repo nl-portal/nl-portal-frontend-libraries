@@ -9,7 +9,7 @@ import { RouterOutletContext } from "../contexts/RouterOutletContext";
 import Skeleton from "../components/Skeleton.tsx";
 import MessageContent from "../components/MessageContent.tsx";
 
-const MessagePage = () => {
+const MessageDetailPage = () => {
   const { id } = useParams();
   const { paths } = useOutletContext<RouterOutletContext>();
   const {
@@ -34,7 +34,7 @@ const MessagePage = () => {
       <div>
         <BackLink routePath={paths.messages} />
         <Paragraph>
-          <FormattedMessage id="messagePage.fetchError" />
+          <FormattedMessage id="messageDetailPage.fetchError" />
         </Paragraph>
       </div>
     );
@@ -51,4 +51,4 @@ const MessagePage = () => {
   );
 };
 
-export default MessagePage;
+export default MessageDetailPage;
