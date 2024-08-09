@@ -24,7 +24,7 @@ const MessagePage = () => {
   if (messageLoading) {
     return (
       <div>
-        <Skeleton />
+        <Skeleton height={60} />
       </div>
     );
   }
@@ -44,10 +44,7 @@ const MessagePage = () => {
     <PageGrid>
       <div>
         <BackLink routePath={paths.messages} />
-        <PageHeader
-          loading={messageLoading}
-          title={!messageLoading && message?.onderwerp}
-        />
+        <PageHeader title={message.onderwerp} />
       </div>
       <MessageContent messageText={message.berichtTekst} />
     </PageGrid>
