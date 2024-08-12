@@ -66,7 +66,7 @@ const Task = ({ task, openInContext }: Props) => {
 
           const paymentRequestPayload = {
             amount: task.ogonebetaling.bedrag,
-            orderId: task.ogonebetaling.betaalkenmerk,
+            orderId: task.id,
             reference: task.ogonebetaling.betaalkenmerk,
             pspId: task.ogonebetaling.pspid,
             title: task.titel,
