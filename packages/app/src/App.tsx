@@ -14,6 +14,7 @@ import { config } from "./constants/config";
 import React from "react";
 import { menuItems } from "./constants/menu-items";
 import { paths } from "./constants/paths";
+import { ScrollRestoration } from "react-router-dom";
 
 const authenticationMethods = {
   person: ["digid", "machtigen"],
@@ -80,6 +81,7 @@ const App = () => {
           </ApiProvider>
         </React.StrictMode>
       </KeycloakWrapper>
+      <ScrollRestoration />
     </div>
   );
 };

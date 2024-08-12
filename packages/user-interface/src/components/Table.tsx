@@ -72,8 +72,8 @@ const Table = ({ headers, rows }: Props) => {
       {headers && (
         <TableHead>
           <TableRow>
-            {headers.map((head, index) =>
-              renderCell(`header-${index}`, head, true),
+            {headers.map((cell, index) =>
+              renderCell(`header-${index}`, cell, true),
             )}
           </TableRow>
         </TableHead>
