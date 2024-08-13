@@ -1,10 +1,10 @@
-import globals from 'globals';
-import importPlugin from 'eslint-plugin-import';
-import reactPlugin from 'eslint-plugin-react';
+import globals from "globals";
+import importPlugin from "eslint-plugin-import";
+import reactPlugin from "eslint-plugin-react";
 //import hooksPlugin from 'eslint-plugin-react-hooks';
-import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
-import typescriptParser from '@typescript-eslint/parser';
-import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
+import typescriptParser from "@typescript-eslint/parser";
+import typescriptPlugin from "@typescript-eslint/eslint-plugin";
 
 // Add eslint-plugin-react-hooks back when this issue is solved: https://github.com/facebook/react/issues/28313
 
@@ -16,17 +16,17 @@ const reactRule = {
 export default [
   {
     ignores: [
-      '**/node_modules/',
-      '**/build/',
-      '**/dist/',
-      '**/coverage/',
-      '**/generated/',
+      "**/node_modules/",
+      "**/build/",
+      "**/dist/",
+      "**/coverage/",
+      "**/generated/",
     ],
   },
   {
     languageOptions: {
       ecmaVersion: 2020,
-      sourceType: 'module',
+      sourceType: "module",
       globals: {
         ...globals.browser,
         ...globals.node,
@@ -34,16 +34,16 @@ export default [
     },
   },
   {
-    files: ['**/*.js', '**/*.jsx', '**/*.mjs'],
+    files: ["**/*.js", "**/*.jsx", "**/*.mjs"],
     plugins: {
       import: importPlugin,
       react: reactPlugin,
       //'react-hooks': hooksPlugin,
-      'jsx-a11y': jsxA11yPlugin,
+      "jsx-a11y": jsxA11yPlugin,
     },
     settings: {
       react: {
-        version: 'detect',
+        version: "detect",
       },
     },
     rules: {
@@ -54,20 +54,20 @@ export default [
     },
   },
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ["**/*.ts", "**/*.tsx"],
     plugins: {
-      '@typescript-eslint': typescriptPlugin,
+      "@typescript-eslint": typescriptPlugin,
       import: importPlugin,
       react: reactPlugin,
       //'react-hooks': hooksPlugin,
-      'jsx-a11y': jsxA11yPlugin,
+      "jsx-a11y": jsxA11yPlugin,
     },
     languageOptions: {
       parser: typescriptParser,
     },
     settings: {
       react: {
-        version: 'detect',
+        version: "detect",
       },
     },
     rules: {
@@ -75,7 +75,7 @@ export default [
       ...reactPlugin.configs.recommended.rules,
       //...hooksPlugin.configs.recommended.rules,
       ...typescriptPlugin.configs.recommended.rules,
-      ...reactRule
+      ...reactRule,
     },
   },
 ];

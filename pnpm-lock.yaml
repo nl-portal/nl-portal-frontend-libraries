@@ -2386,11 +2386,6 @@ packages:
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
 
-  acorn@8.11.3:
-    resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
-
   acorn@8.12.1:
     resolution: {integrity: sha512-tcpGyI9zbizT9JbV6oYE477V6mTlXvvi0T0G3SNIYE2apm/G5huBa1+K89VGeovbg+jycCrfhl3ADxErOuO6Jg==}
     engines: {node: '>=0.4.0'}
@@ -8410,8 +8405,6 @@ snapshots:
     dependencies:
       acorn: 8.12.1
 
-  acorn@8.11.3: {}
-
   acorn@8.12.1: {}
 
   agent-base@7.1.0:
@@ -10353,7 +10346,7 @@ snapshots:
 
   js-interpreter@https://codeload.github.com/formio/JS-Interpreter/tar.gz/0ed5007ada500c12d797ab867a15cfab736e9b25:
     dependencies:
-      acorn: 8.11.3
+      acorn: 8.12.1
 
   js-sha256@0.10.1: {}
 
