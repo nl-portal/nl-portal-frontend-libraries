@@ -26,7 +26,7 @@ const MessageDetailsPage = () => {
       </div>
       <MessageContent
         loading={messageLoading}
-        error={!!messageError}
+        error={Boolean(messageError)}
         messageText={message?.berichtTekst}
       />
     </PageGrid>
