@@ -22,7 +22,7 @@ const MessageContent = ({ loading, error, messageText }: Props) => {
     return (
       <div>
         <Paragraph>
-          <FormattedMessage id="message.fetchError" />
+          <FormattedMessage id="messageContent.fetchError" />
         </Paragraph>
       </div>
     );

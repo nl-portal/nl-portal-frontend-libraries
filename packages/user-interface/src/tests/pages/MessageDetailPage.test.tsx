@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import MessageDetailPage from "../../pages/MessageDetailPage";
+import MessageDetailsPage from "../../pages/MessageDetailsPage.tsx";
 
-describe("MessageDetailPage", () => {
+describe("MessageDetailsPage", () => {
   it("is truthy", () => {
-    expect(MessageDetailPage).toBeTruthy();
+    expect(MessageDetailsPage).toBeTruthy();
   });
 });

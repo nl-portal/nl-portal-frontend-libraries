@@ -6,7 +6,7 @@ import PageHeader from "../components/PageHeader";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
 import MessageContent from "../components/MessageContent.tsx";
 
-const MessageDetailPage = () => {
+const MessageDetailsPage = () => {
   const { id } = useParams();
   const { paths } = useOutletContext<RouterOutletContext>();
   const {
@@ -33,4 +33,4 @@ const MessageDetailPage = () => {
   );
 };
 
-export default MessageDetailPage;
+export default MessageDetailsPage;
