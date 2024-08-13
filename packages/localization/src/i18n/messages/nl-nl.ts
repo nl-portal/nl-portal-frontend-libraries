@@ -35,20 +35,21 @@ export const NL_NL_MESSAGES: Messages = {
     "casesList.noClosedCases": "Er zijn geen zaken.",
     "casesList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
-    "case.caseNumber": "Zaaknummer",
-    "case.description": "Omschrijving",
-    "case.creationDate": "Aanvraagdatum",
-    "case.status": "status",
-    "case.documents": "documenten",
-    "case.statusHeader": "Status",
-    "case.detailsHeader": "Details",
-    "case.contactHeader": "Eerdere contactmomenten",
-    "case.documentsHeader": "Documenten",
-    "case.showAllDocuments": "Toon alle documenten",
-    "case.fetchError": "Er is een fout opgetreden, probeer het later nogmaals.",
-    "case.statusUnknown": "niet beschikbaar",
-    "case.contacttimeline.today": "vandaag",
-    "case.contacttimeline.yesterday": "gisteren",
+    "caseDetails.caseNumber": "Zaaknummer",
+    "caseDetails.description": "Omschrijving",
+    "caseDetails.creationDate": "Aanvraagdatum",
+    "caseDetails.status": "status",
+    "caseDetails.documents": "documenten",
+    "caseDetails.statusHeader": "Status",
+    "caseDetails.detailsHeader": "Details",
+    "caseDetails.contactHeader": "Eerdere contactmomenten",
+    "caseDetails.documentsHeader": "Documenten",
+    "caseDetails.showAllDocuments": "Toon alle documenten",
+    "caseDetails.fetchError":
+      "Er is een fout opgetreden, probeer het later nogmaals.",
+    "caseDetails.statusUnknown": "niet beschikbaar",
+    "caseDetails.contacttimeline.today": "vandaag",
+    "caseDetails.contacttimeline.yesterday": "gisteren",
     "documents.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "documents.noDocuments": "Er zijn geen documenten.",
@@ -95,9 +96,10 @@ export const NL_NL_MESSAGES: Messages = {
     "tasksList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "tasksList.empty": "Er zijn geen openstaande taken.",
-    "task.fetchError": "Er is een fout opgetreden, probeer het later nogmaals.",
-    "task.completeTitle": "Taak is afgerond",
-    "task.completeDescription": "De taak is succesvol voltooid.",
+    "taskDetails.fetchError":
+      "Er is een fout opgetreden, probeer het later nogmaals.",
+    "taskDetails.completeTitle": "Taak is afgerond",
+    "taskDetails.completeDescription": "De taak is succesvol voltooid.",
     "overviewpage.title": "Welkom {userName}",
     "overview.subTitle": "Gemachtigd voor {volmachtgever}",
     "overviewpage.paragraph":
@@ -125,5 +127,7 @@ export const NL_NL_MESSAGES: Messages = {
     "messagesList.subject": "Onderwerp",
     "messagesList.date": "Datum bericht",
     "messagesList.new": "Nieuw",
+    "messageContent.fetchError":
+      "Er is een fout opgetreden, probeer het later nogmaals.",
   },
 };

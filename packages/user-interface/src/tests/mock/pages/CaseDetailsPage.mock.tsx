@@ -1,14 +1,16 @@
-import CasePage from "../../../pages/CasePage";
+import CaseDetailsPage from "../../../pages/CaseDetailsPage.tsx";
 import {
   mocksRequestWithAll,
   mocksRequestWithoutContactMomenten,
   mocksRequestWithoutDocuments,
-} from "../data/CasePageRequests.mock";
+} from "../data/CaseDetailsPageRequests.mock";
 import TestProvider, {
   testPaths as paths,
 } from "../../../providers/TestProvider";
 
-const CasePageTestComponent = () => <CasePage showContactTimeline />;
+const CaseDetailsPageTestComponent = () => (
+  <CaseDetailsPage showContactTimeline />
+);
 
 const caseId = "82cb13cf-d2f9-4e3e-ac07-751373035ecb";
 
@@ -18,13 +20,13 @@ const routes = [
     children: [
       {
         path: paths.case(),
-        element: <CasePageTestComponent />,
+        element: <CaseDetailsPageTestComponent />,
       },
     ],
   },
 ];
 
-export const MockCasePage = () => (
+export const MockCaseDetailsPage = () => (
   <TestProvider
     mocks={mocksRequestWithAll}
     routes={routes}
@@ -33,7 +35,7 @@ export const MockCasePage = () => (
   ></TestProvider>
 );
 
-export const MockCasePageWithoutDocuments = () => (
+export const MockCaseDetailsPageWithoutDocuments = () => (
   <TestProvider
     mocks={mocksRequestWithoutDocuments}
     routes={routes}
@@ -42,7 +44,7 @@ export const MockCasePageWithoutDocuments = () => (
   ></TestProvider>
 );
 
-export const MockCasePageWithoutContactMoments = () => (
+export const MockCaseDetailsPageWithoutContactMoments = () => (
   <TestProvider
     mocks={mocksRequestWithoutContactMomenten}
     routes={routes}

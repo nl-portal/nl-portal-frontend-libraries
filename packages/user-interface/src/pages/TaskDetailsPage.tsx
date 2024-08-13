@@ -26,7 +26,7 @@ interface TaskPageProps {
   backlink?: BackLinkProps;
 }
 
-const TaskPage = ({ backlink = {} }: TaskPageProps) => {
+const TaskDetailsPage = ({ backlink = {} }: TaskPageProps) => {
   const { id } = useParams();
   const intl = useIntl();
   const [loading, setLoading] = useState(true);
@@ -158,8 +158,8 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
         {backlink && <BackLink {...backlink} />}
         <Alert
           variant="success"
-          title={intl.formatMessage({ id: "task.completeTitle" })}
-          text={intl.formatMessage({ id: "task.completeDescription" })}
+          title={intl.formatMessage({ id: "taskDetails.completeTitle" })}
+          text={intl.formatMessage({ id: "taskDetails.completeDescription" })}
         />
       </>
     );
@@ -172,7 +172,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
         {backlink && <BackLink {...backlink} />}
         <Alert
           variant="error"
-          title={intl.formatMessage({ id: "task.fetchError" })}
+          title={intl.formatMessage({ id: "taskDetails.fetchError" })}
           text=""
         />
       </>
@@ -203,4 +203,4 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   );
 };
 
-export default TaskPage;
+export default TaskDetailsPage;
