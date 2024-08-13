@@ -81,7 +81,7 @@ const IdleTimer = ({ idleTimeoutMinutes, onTimerReset }: IdleTimerProps) => {
         });
       }
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return null;
 };

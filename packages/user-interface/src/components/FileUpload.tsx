@@ -62,7 +62,7 @@ const FileUpload: FC<FileUploadProps> = ({
 
   useEffect(() => {
     onChange(fileList);
-  }, [fileList]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fileList]);
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {

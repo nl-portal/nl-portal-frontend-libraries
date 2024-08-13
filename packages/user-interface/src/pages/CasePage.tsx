@@ -70,7 +70,7 @@ const CasePage = ({
       });
 
     return array;
-  }, [caseData]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [caseData]);
 
   const contactItems = React.useMemo(() => {
     if (!momentsData?.getObjectContactMomenten) return [];
@@ -93,7 +93,7 @@ const CasePage = ({
   React.useEffect(() => {
     if (!caseData) return;
     getMomenten({ variables: { objectUrl: caseData.getZaak.url } });
-  }, [caseData]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [caseData]);
 
   if (!caseError) {
     <div>
