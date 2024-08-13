@@ -7,7 +7,6 @@ import { BadgeCounter } from "@gemeente-denhaag/components-react";
 import styles from "./MenuItem.module.scss";
 import LayoutContext from "../contexts/LayoutContext";
 import { NavigationItem } from "../interfaces/navigation-item";
-import { useGetBerichtenQuery } from "@nl-portal/nl-portal-api";
 
 interface MenuItemProps {
   item: NavigationItem;
@@ -16,15 +15,7 @@ interface MenuItemProps {
 
 const MenuItem = ({ item, current = false }: MenuItemProps) => {
   const { hrefLang } = useContext(LocaleContext);
-  const { hideMenu, messagesCount, setMessagesCount } =
-    useContext(LayoutContext);
-
-  useGetBerichtenQuery({
-    skip: !item.hasMessagesCount,
-    onCompleted: (data: { getBerichten: { totalElements: number } }) => {
-      setMessagesCount(data?.getBerichten?.totalElements || 0);
-    },
-  });
+  const { hideMenu, messagesCount } = useContext(LayoutContext);
 
   if (!item) return null;
 
