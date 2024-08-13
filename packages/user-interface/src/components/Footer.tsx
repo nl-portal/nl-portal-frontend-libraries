@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { FC, ReactElement, useContext } from "react";
-import { Link } from "@gemeente-denhaag/components-react";
+import { Link } from "@gemeente-denhaag/link";
 import { ExternalLinkIcon } from "@gemeente-denhaag/icons";
 import ResponsiveContent from "@gemeente-denhaag/responsive-content";
 import classNames from "classnames";

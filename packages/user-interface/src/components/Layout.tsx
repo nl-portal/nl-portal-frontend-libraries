@@ -1,5 +1,5 @@
 import { FC, ReactElement, useEffect } from "react";
-import { StylesProvider } from "@gemeente-denhaag/components-react";
+import { StylesProvider } from "@gemeente-denhaag/stylesprovider";
 import {
   Page as PageWrapper,
   PageHeader,

@@ -12,7 +12,7 @@ import {
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
-import { Alert } from "@gemeente-denhaag/components-react";
+import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
 import styles from "./TaskPage.module.scss";
 import { useParams } from "react-router-dom";

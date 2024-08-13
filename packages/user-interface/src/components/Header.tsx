@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import useSize from "@react-hook/size";
 import useScrollPosition from "@react-hook/window-scroll";
-import { IconButton } from "@gemeente-denhaag/components-react";
+import { IconButton } from "@gemeente-denhaag/iconbutton";
 import { CloseIcon } from "@gemeente-denhaag/icons";
 import ResponsiveContent from "@gemeente-denhaag/responsive-content";
 import Skeleton from "react-loading-skeleton";

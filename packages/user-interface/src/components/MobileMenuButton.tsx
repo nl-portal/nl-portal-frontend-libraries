@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@gemeente-denhaag/components-react";
+import { Button, ButtonProps } from "@gemeente-denhaag/button";
 import styles from "./MobileMenuButton.module.scss";
 
 const MobileMenuButton = (props: ButtonProps) => (
