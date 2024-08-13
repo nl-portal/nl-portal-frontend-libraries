@@ -1,12 +1,12 @@
 import {
   AccountPage,
-  CasePage,
+  CaseDetailsPage,
   CasesPage,
   EditAccountPage,
-  MessageDetailPage,
+  MessageDetailsPage,
   OverviewPage,
   TasksPage,
-  TaskPage,
+  TaskDetailsPage,
   MessagesPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "./paths";
@@ -34,7 +34,7 @@ export const routes = [
       },
       {
         path: paths.case(),
-        element: <CasePage showContactTimeline />,
+        element: <CaseDetailsPage showContactTimeline />,
       },
     ],
   },
@@ -47,7 +47,7 @@ export const routes = [
       },
       {
         path: paths.task(),
-        element: <TaskPage />,
+        element: <TaskDetailsPage />,
       },
     ],
   },
@@ -60,7 +60,7 @@ export const routes = [
       },
       {
         path: paths.message(),
-        element: <MessageDetailPage />,
+        element: <MessageDetailsPage />,
       },
     ],
   },
