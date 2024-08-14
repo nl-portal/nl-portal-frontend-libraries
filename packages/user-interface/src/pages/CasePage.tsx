@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import {
   useGetZaakQuery,
   useGetTakenV2Query,
@@ -7,6 +7,7 @@ import {
   ContactMoment,
   ZaakStatus,
 } from "@nl-portal/nl-portal-api";
+import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -33,6 +34,7 @@ const CasePage = ({
 }: CasePageProps) => {
   const intl = useIntl();
   const { id } = useParams();
+  const { currentLocale } = useContext(LocaleContext);
   const {
     data: caseData,
     loading: caseLoading,
@@ -70,7 +72,7 @@ const CasePage = ({
       });
 
     return array;
-  }, [caseData]);
+  }, [caseData, currentLocale]);
 
   const contactItems = React.useMemo(() => {
     if (!momentsData?.getObjectContactMomenten) return [];
