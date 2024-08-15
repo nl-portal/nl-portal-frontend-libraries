@@ -92,9 +92,17 @@ export const EN_GB_MESSAGES: Messages = {
     "tasksList.viewAll": "View all tasks ({total})",
     "tasksList.fetchError": "There was an error, try again later.",
     "tasksList.empty": "There are no open tasks.",
+    "task.formtaak.button": "Provide information",
+    "task.ogonebetaling.button": "Pay",
     "task.fetchError": "There was an error, try again later.",
     "task.completeTitle": "Task completed",
     "task.completeDescription": "The task is successfully completed.",
+    "task.paymentFailureText":
+      "Unfortunately the payment was not successful. Try again later.",
+    "task.paymentFailureTitle": "Payment failed",
+    "task.paymentSuccessText":
+      "You will receive a confirmation email as soon as possible.",
+    "task.paymentSuccessTitle": "Success, you have paid.",
     "overviewpage.title": "Welcome {userName}",
     "overview.subTitle": "Authorised for {volmachtgever}",
     "actionLabels.today": "today",

@@ -85,6 +85,7 @@ const OverviewPage = ({
           loading={loading}
           error={Boolean(tasksError)}
           tasks={tasks}
+          openInContext={true}
           totalAmount={
             tasksData?.getTakenV2.totalElements &&
             tasksData?.getTakenV2.totalElements > fetchTasksLength
