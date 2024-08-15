@@ -23,6 +23,11 @@ export const QUERY_GET_TAKEN_V2 = gql`
             value
           }
         }
+        ogonebetaling {
+          bedrag
+          betaalkenmerk
+          pspid
+        }
         titel
         status
         verloopdatum
