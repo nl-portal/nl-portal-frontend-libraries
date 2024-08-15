@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-authentication",
-  "version": "0.1.1-alpha.110",
+  "version": "0.1.1-alpha.112",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -31,19 +31,14 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
-    "@types/react": "^18.3.2",
+    "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.9.0",
-    "@typescript-eslint/parser": "^7.9.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
-    "rimraf": "^5.0.7",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.11",
+    "@vitejs/plugin-react": "^4.3.1",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.5",
     "vite-plugin-dts": "^3.9.1",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.4"
   },
   "peerDependencies": {
     "@react-keycloak/web": "^3.4.0",

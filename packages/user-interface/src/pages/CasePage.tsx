@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import {
   useGetZaakQuery,
   useGetTakenV2Query,
@@ -8,6 +8,7 @@ import {
   ZaakStatus,
 } from "@nl-portal/nl-portal-api";
 import { Alert } from "@gemeente-denhaag/components-react";
+import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -37,6 +38,7 @@ const CasePage = ({
 }: CasePageProps) => {
   const intl = useIntl();
   const { id } = useParams();
+  const { currentLocale } = useContext(LocaleContext);
   const {
     data: caseData,
     loading: caseLoading,
@@ -75,7 +77,7 @@ const CasePage = ({
       });
 
     return array;
-  }, [caseData]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [caseData, currentLocale]);
 
   const contactItems = React.useMemo(() => {
     if (!momentsData?.getObjectContactMomenten) return [];
@@ -98,7 +100,7 @@ const CasePage = ({
   React.useEffect(() => {
     if (!caseData) return;
     getMomenten({ variables: { objectUrl: caseData.getZaak.url } });
-  }, [caseData]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [caseData]);
 
   if (!caseError) {
     <div>

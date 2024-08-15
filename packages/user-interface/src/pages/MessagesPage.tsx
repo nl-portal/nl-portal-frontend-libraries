@@ -23,7 +23,7 @@ export const messages = [
         <br />
         <br />
         Bent u het niet eens met deze parkeerbon? Dan kunt u bezwaar maken. Vul
-        het formulier <a href="#">Bezwaar maken tegen een parkeerbon</a> in.
+        het formulier <a href="#test">Bezwaar maken tegen een parkeerbon</a> in.
         <br />
         <br />
         Met vriendelijke groet,
@@ -50,7 +50,7 @@ export const messages = [
         <br />
         <br />
         Bent u het niet eens met deze parkeerbon? Dan kunt u bezwaar maken. Vul
-        het formulier <a href="#">Bezwaar maken tegen een parkeerbon</a> in.
+        het formulier <a href="#test">Bezwaar maken tegen een parkeerbon</a> in.
         <br />
         <br />
         Met vriendelijke groet,
