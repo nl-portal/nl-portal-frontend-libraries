@@ -6,7 +6,7 @@ import useActionLabels from "../hooks/useActionLabels";
 import { ButtonLink } from "@gemeente-denhaag/button-link";
 import { ChevronRightIcon } from "@gemeente-denhaag/icons";
 import useOgonePayment from "../hooks/useOgonePayment";
-import { Button } from "@gemeente-denhaag/components-react";
+import { Button } from "@gemeente-denhaag/button";
 import { useContext } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useLinkClickHandler } from "react-router-dom";

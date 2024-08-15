@@ -7,7 +7,7 @@ import {
   ContactMoment,
   ZaakStatus,
 } from "@nl-portal/nl-portal-api";
-import { Alert } from "@gemeente-denhaag/components-react";
+import { Alert } from "@gemeente-denhaag/alert";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
