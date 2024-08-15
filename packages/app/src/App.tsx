@@ -71,6 +71,7 @@ const App = () => {
             <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
               <Layout
                 navigationItems={menuItems}
+                menuPollingInterval={config.MENU_POLLING_INTERVAL}
                 paths={paths}
                 headerLogo={<img src={HeaderLogo} alt="logo" />}
                 headerLogoSmall={<img src={HeaderLogoSmall} alt="logo-small" />}

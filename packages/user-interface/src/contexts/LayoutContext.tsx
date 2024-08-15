@@ -4,6 +4,8 @@ interface LayoutContextInterface {
   menuOpened: boolean;
   hideMenu: () => void;
   showMenu: () => void;
+  menuPollingInterval: number;
+  setMenuPollingInterval: (value: number) => void;
   messagesCount: number;
   setMessagesCount: (value: number) => void;
   mobileMenuOpened: boolean;

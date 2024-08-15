@@ -14,6 +14,7 @@ interface Config {
   OVERVIEW_SHOW_CURRENT_CASES_PREVIEW?: string;
   OVERVIEW_CURRENT_CASES_PREVIEW_LENGTH?: string;
   THEME_CLASS?: string;
+  MENU_POLLING_INTERVAL?: string;
 }
 
 export const config: Config = {
@@ -35,4 +36,5 @@ export const config: Config = {
   OVERVIEW_CURRENT_CASES_PREVIEW_LENGTH:
     window.OVERVIEW_CURRENT_CASES_PREVIEW_LENGTH,
   THEME_CLASS: window.THEME_CLASS,
+  MENU_POLLING_INTERVAL: window.MENU_POLLING_INTERVAL,
 };

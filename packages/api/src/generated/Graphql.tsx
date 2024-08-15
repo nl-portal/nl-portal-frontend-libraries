@@ -18,7 +18,6 @@ export type Scalars = {
   Date: { input: any; output: any; }
   JSON: { input: any; output: any; }
   LocalDateTime: { input: any; output: any; }
-  Long: { input: any; output: any; }
   UUID: { input: any; output: any; }
 };
 
@@ -483,12 +482,10 @@ export type Query = {
   allFormDefinitions: Array<FormDefinition>;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
-  /** Query a single Bericht by Id */
+  /** Gets a single Bericht by Id */
   getBericht?: Maybe<Bericht>;
   /** Returns a paginated list of all Berichten */
   getBerichten: BerichtenPage;
-  /** Returns an amount of Berichten */
-  getBerichtenCount: Scalars['Long']['output'];
   /** Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
   getBewonersAantal?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
@@ -553,6 +550,8 @@ export type Query = {
    * @deprecated Replaced by getTaken
    */
   getTasks: TaakPage;
+  /** Returns the total amount of unopened Berichten */
+  getUnopenedBerichtenCount: Scalars['Int']['output'];
   /** Gets a zaak by id */
   getZaak: Zaak;
   /**
@@ -573,12 +572,6 @@ export type QueryGetBerichtArgs = {
 
 
 export type QueryGetBerichtenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetBerichtenCountArgs = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -812,6 +805,7 @@ export enum TaakSoort {
 }
 
 export enum TaakStatus {
+  Afgerond = 'AFGEROND',
   Gesloten = 'GESLOTEN',
   Ingediend = 'INGEDIEND',
   Open = 'OPEN',
@@ -931,11 +925,6 @@ export type UpdateProductVerbruiksObjectMutationVariables = Exact<{
 
 export type UpdateProductVerbruiksObjectMutation = { __typename?: 'Mutation', updateProductVerbruiksObject: { __typename?: 'ProductVerbruiksObject', id?: any | null, data?: any | null, productInstantie: string, soort?: string | null } };
 
-export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string, kvkNummer: string, embedded?: { __typename?: 'Embedded', eigenaar: { __typename?: 'Eigenaar', rechtsvorm: string }, hoofdvestiging: { __typename?: 'Hoofdvestiging', adressen?: Array<{ __typename?: 'Adres', straatnaam: string, huisnummer: number, postcode: string, plaats: string }> | null } } | null } | null };
-
 export type GetBerichtQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
 }>;
@@ -950,6 +939,16 @@ export type GetBerichtenQueryVariables = Exact<{
 
 
 export type GetBerichtenQuery = { __typename?: 'Query', getBerichten: { __typename?: 'BerichtenPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Bericht', id?: any | null, einddatumHandelingstermijn: any, geopend: boolean, onderwerp: string }> } };
+
+export type GetUnopenedBerichtenCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUnopenedBerichtenCountQuery = { __typename?: 'Query', getUnopenedBerichtenCount: number };
+
+export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string, kvkNummer: string, embedded?: { __typename?: 'Embedded', eigenaar: { __typename?: 'Eigenaar', rechtsvorm: string }, hoofdvestiging: { __typename?: 'Hoofdvestiging', adressen?: Array<{ __typename?: 'Adres', straatnaam: string, huisnummer: number, postcode: string, plaats: string }> | null } } | null } | null };
 
 export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1267,59 +1266,6 @@ export function useUpdateProductVerbruiksObjectMutation(baseOptions?: Apollo.Mut
 export type UpdateProductVerbruiksObjectMutationHookResult = ReturnType<typeof useUpdateProductVerbruiksObjectMutation>;
 export type UpdateProductVerbruiksObjectMutationResult = Apollo.MutationResult<UpdateProductVerbruiksObjectMutation>;
 export type UpdateProductVerbruiksObjectMutationOptions = Apollo.BaseMutationOptions<UpdateProductVerbruiksObjectMutation, UpdateProductVerbruiksObjectMutationVariables>;
-export const GetBedrijfDocument = gql`
-    query GetBedrijf {
-  getBedrijf {
-    naam
-    kvkNummer
-    embedded {
-      eigenaar {
-        rechtsvorm
-      }
-      hoofdvestiging {
-        adressen {
-          straatnaam
-          huisnummer
-          postcode
-          plaats
-        }
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useGetBedrijfQuery__
- *
- * To run a query within a React component, call `useGetBedrijfQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetBedrijfQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetBedrijfQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetBedrijfQuery(baseOptions?: Apollo.QueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
-      }
-export function useGetBedrijfLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
-        }
-export function useGetBedrijfSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
-        }
-export type GetBedrijfQueryHookResult = ReturnType<typeof useGetBedrijfQuery>;
-export type GetBedrijfLazyQueryHookResult = ReturnType<typeof useGetBedrijfLazyQuery>;
-export type GetBedrijfSuspenseQueryHookResult = ReturnType<typeof useGetBedrijfSuspenseQuery>;
-export type GetBedrijfQueryResult = Apollo.QueryResult<GetBedrijfQuery, GetBedrijfQueryVariables>;
 export const GetBerichtDocument = gql`
     query GetBericht($id: UUID!) {
   getBericht(id: $id) {
@@ -1421,6 +1367,96 @@ export type GetBerichtenQueryHookResult = ReturnType<typeof useGetBerichtenQuery
 export type GetBerichtenLazyQueryHookResult = ReturnType<typeof useGetBerichtenLazyQuery>;
 export type GetBerichtenSuspenseQueryHookResult = ReturnType<typeof useGetBerichtenSuspenseQuery>;
 export type GetBerichtenQueryResult = Apollo.QueryResult<GetBerichtenQuery, GetBerichtenQueryVariables>;
+export const GetUnopenedBerichtenCountDocument = gql`
+    query GetUnopenedBerichtenCount {
+  getUnopenedBerichtenCount
+}
+    `;
+
+/**
+ * __useGetUnopenedBerichtenCountQuery__
+ *
+ * To run a query within a React component, call `useGetUnopenedBerichtenCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUnopenedBerichtenCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUnopenedBerichtenCountQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUnopenedBerichtenCountQuery(baseOptions?: Apollo.QueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
+      }
+export function useGetUnopenedBerichtenCountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
+        }
+export function useGetUnopenedBerichtenCountSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
+        }
+export type GetUnopenedBerichtenCountQueryHookResult = ReturnType<typeof useGetUnopenedBerichtenCountQuery>;
+export type GetUnopenedBerichtenCountLazyQueryHookResult = ReturnType<typeof useGetUnopenedBerichtenCountLazyQuery>;
+export type GetUnopenedBerichtenCountSuspenseQueryHookResult = ReturnType<typeof useGetUnopenedBerichtenCountSuspenseQuery>;
+export type GetUnopenedBerichtenCountQueryResult = Apollo.QueryResult<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>;
+export const GetBedrijfDocument = gql`
+    query GetBedrijf {
+  getBedrijf {
+    naam
+    kvkNummer
+    embedded {
+      eigenaar {
+        rechtsvorm
+      }
+      hoofdvestiging {
+        adressen {
+          straatnaam
+          huisnummer
+          postcode
+          plaats
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetBedrijfQuery__
+ *
+ * To run a query within a React component, call `useGetBedrijfQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBedrijfQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBedrijfQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetBedrijfQuery(baseOptions?: Apollo.QueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
+      }
+export function useGetBedrijfLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
+        }
+export function useGetBedrijfSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
+        }
+export type GetBedrijfQueryHookResult = ReturnType<typeof useGetBedrijfQuery>;
+export type GetBedrijfLazyQueryHookResult = ReturnType<typeof useGetBedrijfLazyQuery>;
+export type GetBedrijfSuspenseQueryHookResult = ReturnType<typeof useGetBedrijfSuspenseQuery>;
+export type GetBedrijfQueryResult = Apollo.QueryResult<GetBedrijfQuery, GetBedrijfQueryVariables>;
 export const GetBurgerProfielDocument = gql`
     query GetBurgerProfiel {
   getBurgerProfiel {
