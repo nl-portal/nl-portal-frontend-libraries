@@ -25,6 +25,12 @@ export const EN_GB_MESSAGES: Messages = {
     "menu.open": "Open menu",
     "titles.currentCases": "Current cases",
     "titles.completedCases": "Closed cases",
+    "noMatchPage.title": "Page not found",
+    "noMatchPage.text":
+      "The page you were looking for could not be found. It may have been deleted, renamed, or did not exist. You can search for information via the search function at the top or via the homepage. <link>Go to the overview.</link>",
+    "noMatchPage.contact.title": "Contact the editors",
+    "noMatchPage.contact.text":
+      "Do you believe that the information is not on the website, but that it should be? Then send a <link>message to the municipality.</link>",
     "overview.defaultFormTitle": "Lodge an objection",
     "overview.showAllCases": "View all cases",
     "overview.currentCases": "My current cases",

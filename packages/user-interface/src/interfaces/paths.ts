@@ -1,4 +1,5 @@
 export interface Paths {
+  noMatch: string;
   overview: string;
   cases: string;
   case: (id?: string | number) => string;
