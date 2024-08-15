@@ -4,7 +4,7 @@ import { Link, useMatches } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Sidenav, SidenavItem, SidenavList } from "@gemeente-denhaag/sidenav";
-import { IconButton } from "@gemeente-denhaag/components-react";
+import { IconButton } from "@gemeente-denhaag/iconbutton";
 import { CloseIcon } from "@gemeente-denhaag/icons";
 import classNames from "classnames";
 import LayoutContext from "../contexts/LayoutContext";
