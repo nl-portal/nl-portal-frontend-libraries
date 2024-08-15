@@ -24,8 +24,7 @@ const Menu = ({ items, legacy }: Props) => {
   const { menuOpened, hideMenu } = useContext(LayoutContext);
   const intl = useIntl();
   const matches = useMatches();
-  const currentNavigationItem =
-    getCurrentNavigationPage(matches, items) || items[0][0];
+  const currentNavigationItem = getCurrentNavigationPage(matches, items);
 
   if (legacy) {
     return (
