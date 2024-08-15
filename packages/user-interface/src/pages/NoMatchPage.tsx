@@ -10,7 +10,7 @@ import { FormattedMessage } from "react-intl";
 import { AnchorHTMLAttributes } from "react";
 
 interface Props {
-  contactLink: AnchorHTMLAttributes<HTMLAnchorElement>;
+  contactLink?: AnchorHTMLAttributes<HTMLAnchorElement>;
 }
 
 const NoMatchPage = ({ contactLink }: Props) => {
