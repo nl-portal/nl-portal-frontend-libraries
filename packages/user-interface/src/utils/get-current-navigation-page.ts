@@ -15,12 +15,13 @@ export const getCurrentNavigationPage = (
   navigationItems: NavigationItem[][],
 ) => {
   const matchesCopy = [...matches];
+  const matchesIndexSize = matchesCopy.length - 1;
 
   for (let i = 0; i < matchesCopy.length - 1; i++) {
     const match = matches.pop();
 
     if (!match) continue;
-    if (i === matchesCopy.length - 1 && match.pathname === "/") continue;
+    if (i === matchesIndexSize && match.pathname === "/") continue;
 
     const foundNavItem = navigationItems
       .flat()
