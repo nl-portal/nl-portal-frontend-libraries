@@ -34,7 +34,7 @@ const MessageDetailsPage = () => {
       <div>
         <BackLink routePath={paths.messages} />
         <Paragraph>
-          <FormattedMessage id="messageDetailPage.fetchError" />
+          <FormattedMessage id="messageDetails.fetchError" />
         </Paragraph>
       </div>
     );

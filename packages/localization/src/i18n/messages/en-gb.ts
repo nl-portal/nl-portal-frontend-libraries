@@ -118,6 +118,8 @@ export const EN_GB_MESSAGES: Messages = {
     "messagesList.subject": "Subject",
     "messagesList.date": "Message date",
     "messagesList.new": "New",
+    "messageDetails.fetchError":
+      "Something went wrong, please try again later.",
     "messageContent.fetchError":
       "Something went wrong, please try again later.",
   },
