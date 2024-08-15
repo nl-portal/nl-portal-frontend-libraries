@@ -29,7 +29,13 @@ const MessageContent = ({ loading, error, messageText }: Props) => {
   }
 
   if (!messageText) {
-    return null;
+    return (
+      <div>
+        <Paragraph>
+          <FormattedMessage id="messageContent.fetchError" />
+        </Paragraph>
+      </div>
+    );
   }
 
   return (

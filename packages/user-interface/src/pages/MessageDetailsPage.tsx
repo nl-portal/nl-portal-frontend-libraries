@@ -5,9 +5,6 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
 import MessageContent from "../components/MessageContent.tsx";
-import Skeleton from "react-loading-skeleton";
-import { Paragraph } from "@gemeente-denhaag/typography";
-import { FormattedMessage } from "react-intl";
 
 const MessageDetailsPage = () => {
   const { id } = useParams();
@@ -20,25 +17,6 @@ const MessageDetailsPage = () => {
     variables: { id: id },
   });
   const message = messageData?.getBericht as Bericht | undefined;
-
-  if (messageLoading) {
-    return (
-      <div>
-        <Skeleton height={60} />
-      </div>
-    );
-  }
-
-  if (messageError || !message) {
-    return (
-      <div>
-        <BackLink routePath={paths.messages} />
-        <Paragraph>
-          <FormattedMessage id="messageDetails.fetchError" />
-        </Paragraph>
-      </div>
-    );
-  }
 
   return (
     <PageGrid>

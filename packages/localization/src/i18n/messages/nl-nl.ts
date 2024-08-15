@@ -127,8 +127,6 @@ export const NL_NL_MESSAGES: Messages = {
     "messagesList.subject": "Onderwerp",
     "messagesList.date": "Datum bericht",
     "messagesList.new": "Nieuw",
-    "messageDetails.fetchError":
-      "Er is een fout opgetreden, probeer het later nogmaals.",
     "messageContent.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
   },
