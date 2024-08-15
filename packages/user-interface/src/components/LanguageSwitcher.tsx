@@ -1,4 +1,4 @@
-import { Button } from "@gemeente-denhaag/components-react";
+import { Button } from "@gemeente-denhaag/button";
 import { FormattedMessage } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useContext } from "react";

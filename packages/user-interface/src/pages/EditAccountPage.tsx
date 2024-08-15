@@ -1,4 +1,4 @@
-import { Button } from "@gemeente-denhaag/components-react";
+import { Button } from "@gemeente-denhaag/button";
 import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 import { FormField } from "@gemeente-denhaag/form-field";
 import { FormLabel } from "@gemeente-denhaag/form-label";
