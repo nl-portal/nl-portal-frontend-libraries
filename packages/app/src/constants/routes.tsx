@@ -5,6 +5,7 @@ import {
   EditAccountPage,
   MessagesPage,
   MessagePage,
+  NoMatchPage,
   OverviewPage,
   TasksPage,
   TaskPage,
@@ -17,10 +18,6 @@ import ThemeSampleListPage from "../pages/ThemeSampleListPage";
 import ThemeSampleDetailPage from "../pages/ThemeSampleDetailPage";
 
 export const routes = [
-  {
-    path: "*",
-    element: <Navigate to={sessionStorage.getItem("entryUrl") || "/"} />,
-  },
   {
     path: paths.overview,
     element: <OverviewPage showIntro />,
@@ -98,5 +95,21 @@ export const routes = [
         element: <EditAccountPage />,
       },
     ],
+  },
+  {
+    path: "/keycloak/callback",
+    element: <Navigate to={sessionStorage.getItem("entryUrl") || "/"} />,
+  },
+  {
+    path: paths.noMatch,
+    element: (
+      <NoMatchPage
+        contactLink={{ href: "https://www.google.com", target: "_blank" }}
+      />
+    ),
+  },
+  {
+    path: "*",
+    element: <Navigate to={paths.noMatch} />,
   },
 ];

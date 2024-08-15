@@ -25,6 +25,12 @@ export const NL_NL_MESSAGES: Messages = {
     "menu.open": "Menu openen",
     "titles.currentCases": "Lopende zaken",
     "titles.completedCases": "Afgeronde zaken",
+    "noMatchPage.title": "Pagina niet gevonden",
+    "noMatchPage.text":
+      "De pagina die u zocht kon niet worden gevonden. Het is mogelijk verwijderd, hernoemd of bestond niet. U kunt informatie zoeken via de zoekfunctie bovenin of via de homepage. <link>Ga naar het overzicht.</link>",
+    "noMatchPage.contact.title": "Contact met de redactie",
+    "noMatchPage.contact.text":
+      "Bent u van mening dat de informatie niet op de website staat, maar dat dat wel zou moeten? Stuur dan een <link>bericht aan de gemeente.</link>",
     "overview.defaultFormTitle": "Bezwaar maken",
     "overview.showAllCases": "Bekijk alle zaken",
     "overview.currentCases": "Mijn lopende zaken",

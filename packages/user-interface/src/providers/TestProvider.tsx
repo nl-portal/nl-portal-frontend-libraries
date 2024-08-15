@@ -10,6 +10,7 @@ import {
 import { Paths } from "../interfaces/paths";
 
 export const testPaths: Paths = {
+  noMatch: "/404",
   overview: "/",
   cases: "/zaken",
   case: (id = ":id") => `/zaken/zaak/${id}`,
