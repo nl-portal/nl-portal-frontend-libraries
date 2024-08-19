@@ -23,7 +23,7 @@ import layoutContext from "../contexts/LayoutContext.tsx";
 
 interface LayoutComponentProps {
   navigationItems: NavigationItem[][];
-  menuPollingInterval?: string;
+  messageCountPollingInterval?: string;
   paths: Paths;
   customHeader?: ReactElement;
   customFooter?: ReactElement;
@@ -40,13 +40,13 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   headerLogo,
   facet,
   navigationItems,
-  menuPollingInterval,
+  messageCountPollingInterval,
   paths,
   footer,
   offline,
   headerLogoSmall,
 }) => {
-  const { setMenuPollingInterval } = useContext(layoutContext);
+  const { setMessageCountPollingInterval } = useContext(layoutContext);
   const online = !offline;
   const legacy = customHeader === undefined && customFooter === undefined;
   let pageHeaderClassnames = "";
@@ -55,7 +55,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   }
 
   useEffect(() => {
-    setMenuPollingInterval(Number(menuPollingInterval) || 0);
+    setMessageCountPollingInterval(Number(messageCountPollingInterval) || 0);
   });
 
   useEffect(() => {
@@ -97,7 +97,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
 
 const Layout: FC<LayoutComponentProps> = ({
   navigationItems,
-  menuPollingInterval,
+  messageCountPollingInterval,
   paths,
   customHeader,
   customFooter,
@@ -112,7 +112,7 @@ const Layout: FC<LayoutComponentProps> = ({
       <HelmetProvider>
         <LayoutComponent
           navigationItems={navigationItems}
-          menuPollingInterval={menuPollingInterval}
+          messageCountPollingInterval={messageCountPollingInterval}
           paths={paths}
           customHeader={customHeader}
           headerLogo={headerLogo}

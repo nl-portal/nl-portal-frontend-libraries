@@ -16,15 +16,19 @@ interface MenuItemProps {
 
 const MenuItem = ({ item, current = false }: MenuItemProps) => {
   const { hrefLang } = useContext(LocaleContext);
-  const { hideMenu, menuPollingInterval, messagesCount, setMessagesCount } =
-    useContext(LayoutContext);
+  const {
+    hideMenu,
+    messageCountPollingInterval,
+    messagesCount,
+    setMessagesCount,
+  } = useContext(LayoutContext);
 
   useGetUnopenedBerichtenCountQuery({
     notifyOnNetworkStatusChange: true,
     onCompleted: (data: { getUnopenedBerichtenCount: number }) => {
       setMessagesCount(data?.getUnopenedBerichtenCount || 0);
     },
-    pollInterval: menuPollingInterval,
+    pollInterval: messageCountPollingInterval,
     fetchPolicy: "cache-and-network",
     skip: !item.hasMessagesCount,
     skipPollAttempt: () => {

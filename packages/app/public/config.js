@@ -5,5 +5,5 @@ window.KEYCLOAK_REDIRECT_URI = 'http://localhost:3000/keycloak/callback';
 window.GRAPHQL_URI = 'http://localhost:8090/graphql';
 window.REST_URI = 'http://localhost:8090/api';
 window.SHOW_INHABITANT_AMOUNT = 'true';
-window.MENU_POLLING_INTERVAL = '10000';
+window.MESSAGE_COUNT_POLLING_INTERVAL = '10000';
 window.ADDRESS_RESEARCH_URL = 'https://www.google.nl';

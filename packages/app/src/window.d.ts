@@ -15,6 +15,6 @@ export declare global {
     OVERVIEW_SHOW_CURRENT_CASES_PREVIEW: string;
     OVERVIEW_CURRENT_CASES_PREVIEW_LENGTH: string;
     THEME_CLASS: string;
-    MENU_POLLING_INTERVAL: string;
+    MESSAGE_COUNT_POLLING_INTERVAL: string;
   }
 }
