@@ -1,4 +1,4 @@
-import { FC, ReactElement, useContext, useEffect } from "react";
+import { FC, ReactElement, useEffect } from "react";
 import { StylesProvider } from "@gemeente-denhaag/components-react";
 import {
   Page as PageWrapper,
@@ -19,11 +19,9 @@ import { Outlet } from "react-router-dom";
 import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";
-import layoutContext from "../contexts/LayoutContext.tsx";
 
 interface LayoutComponentProps {
   navigationItems: NavigationItem[][];
-  messageCountPollingInterval?: string;
   paths: Paths;
   customHeader?: ReactElement;
   customFooter?: ReactElement;
@@ -40,23 +38,17 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   headerLogo,
   facet,
   navigationItems,
-  messageCountPollingInterval,
   paths,
   footer,
   offline,
   headerLogoSmall,
 }) => {
-  const { setMessageCountPollingInterval } = useContext(layoutContext);
   const online = !offline;
   const legacy = customHeader === undefined && customFooter === undefined;
   let pageHeaderClassnames = "";
   if (legacy) {
     pageHeaderClassnames = classNames(styles["header-wrapper--legacy"]);
   }
-
-  useEffect(() => {
-    setMessageCountPollingInterval(Number(messageCountPollingInterval) || 0);
-  });
 
   useEffect(() => {
     FormIoUploader.register();
@@ -97,7 +89,6 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
 
 const Layout: FC<LayoutComponentProps> = ({
   navigationItems,
-  messageCountPollingInterval,
   paths,
   customHeader,
   customFooter,
@@ -112,7 +103,6 @@ const Layout: FC<LayoutComponentProps> = ({
       <HelmetProvider>
         <LayoutComponent
           navigationItems={navigationItems}
-          messageCountPollingInterval={messageCountPollingInterval}
           paths={paths}
           customHeader={customHeader}
           headerLogo={headerLogo}

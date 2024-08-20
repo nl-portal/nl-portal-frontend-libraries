@@ -12,8 +12,6 @@ const LayoutProvider = ({ children }: LayoutProviderProps) => {
   const [mobileMenuOpened, setMobileMenuState] = useState(false);
   const [fullscreenForm, setFullscreenForm] = useState(false);
   const [currentFormTitle, setCurrentFormTitle] = useState("");
-  const [messageCountPollingInterval, setMessageCountPollingInterval] =
-    useState(0);
   const hideMenu = () => setMenuState(false);
   const showMenu = () => setMenuState(true);
   const hideMobileMenu = () => setMobileMenuState(false);
@@ -28,8 +26,6 @@ const LayoutProvider = ({ children }: LayoutProviderProps) => {
         menuOpened,
         hideMenu,
         showMenu,
-        messageCountPollingInterval,
-        setMessageCountPollingInterval,
         messagesCount,
         setMessagesCount,
         mobileMenuOpened,
