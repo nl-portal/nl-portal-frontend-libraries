@@ -8,6 +8,7 @@ const MessagesPage = () => {
   const intl = useIntl();
   const { data, loading, error, refetch } = useGetBerichtenQuery({
     variables: { pageSize: 10 },
+    fetchPolicy: "cache-and-network",
   });
   const messages = data?.getBerichten.content as Bericht[] | undefined;
   const onPageChange = (index: number) => {
