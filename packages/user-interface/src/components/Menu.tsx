@@ -13,6 +13,7 @@ import MenuItem from "./MenuItem";
 import { NavigationItem } from "../interfaces/navigation-item";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 import Heading from "./Heading";
+import "@gemeente-denhaag/menu"; // TODO: styling needed for legacy menu, remove with legacy menu
 
 interface Props {
   items: NavigationItem[][];
