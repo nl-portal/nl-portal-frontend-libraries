@@ -6,7 +6,7 @@ import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
 import PortalLink from "../components/PortalLink";
 import Heading from "../components/Heading";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { AnchorHTMLAttributes } from "react";
 
 interface Props {
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const NoMatchPage = ({ contactLink }: Props) => {
+  const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
 
   return (
@@ -46,7 +47,13 @@ const NoMatchPage = ({ contactLink }: Props) => {
               id="noMatchPage.contact.text"
               values={{
                 link: (chunks) => (
-                  <Link Link={PortalLink} {...contactLink}>
+                  <Link
+                    href={intl.formatMessage({
+                      id: "noMatchPage.contact.href",
+                    })}
+                    Link={PortalLink}
+                    {...contactLink}
+                  >
                     {chunks}
                   </Link>
                 ),

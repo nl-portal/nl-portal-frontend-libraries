@@ -1,7 +1,7 @@
 import { Paths } from "@nl-portal/nl-portal-user-interface";
 
 export const paths: Paths = {
-  noMatch: "/404",
+  noMatch: "/pagina-niet-gevonden",
   overview: "/",
   cases: "/zaken",
   case: (id = ":id") => `/zaken/zaak/${id}`,

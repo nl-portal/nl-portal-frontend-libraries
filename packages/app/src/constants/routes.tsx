@@ -102,11 +102,7 @@ export const routes = [
   },
   {
     path: paths.noMatch,
-    element: (
-      <NoMatchPage
-        contactLink={{ href: "https://www.google.com", target: "_blank" }}
-      />
-    ),
+    element: <NoMatchPage contactLink={{ target: "_blank" }} />,
   },
   {
     path: "*",

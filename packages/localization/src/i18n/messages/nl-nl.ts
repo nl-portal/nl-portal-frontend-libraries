@@ -31,6 +31,7 @@ export const NL_NL_MESSAGES: Messages = {
     "noMatchPage.contact.title": "Contact met de redactie",
     "noMatchPage.contact.text":
       "Bent u van mening dat de informatie niet op de website staat, maar dat dat wel zou moeten? Stuur dan een <link>bericht aan de gemeente.</link>",
+    "noMatchPage.contact.href": "https://www.google.com",
     "overview.defaultFormTitle": "Bezwaar maken",
     "overview.showAllCases": "Bekijk alle zaken",
     "overview.currentCases": "Mijn lopende zaken",

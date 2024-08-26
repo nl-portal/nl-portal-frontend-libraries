@@ -31,6 +31,7 @@ export const EN_GB_MESSAGES: Messages = {
     "noMatchPage.contact.title": "Contact the editors",
     "noMatchPage.contact.text":
       "Do you believe that the information is not on the website, but that it should be? Then send a <link>message to the municipality.</link>",
+    "noMatchPage.contact.href": "https://www.google.com",
     "overview.defaultFormTitle": "Lodge an objection",
     "overview.showAllCases": "View all cases",
     "overview.currentCases": "My current cases",
