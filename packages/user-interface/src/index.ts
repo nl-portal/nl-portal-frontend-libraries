@@ -9,6 +9,7 @@ export { default as PageGrid } from "./components/PageGrid";
 export { default as PortalLink } from "./components/PortalLink";
 export { default as TableList } from "./components/TableList";
 export { default as Table } from "./components/Table";
+export * from "./components/Table";
 export { default as SectionHeader } from "./components/SectionHeader";
 
 export * from "./interfaces/navigation-item";
