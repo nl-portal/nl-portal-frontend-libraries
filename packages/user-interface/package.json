@@ -56,7 +56,7 @@
     "@gemeente-denhaag/status-badge": "0.3.0-alpha.6",
     "@gemeente-denhaag/stylesprovider": "0.1.1-alpha.404",
     "@gemeente-denhaag/tab": "0.2.3-alpha.400",
-    "@gemeente-denhaag/table": "0.1.1-alpha.302",
+    "@gemeente-denhaag/table": "0.1.1-alpha.309",
     "@gemeente-denhaag/text-input": "0.3.0-alpha.400",
     "@gemeente-denhaag/typography": "0.2.3-alpha.400",
     "@react-hook/size": "^2.1.2",

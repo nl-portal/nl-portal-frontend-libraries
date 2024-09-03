@@ -25,7 +25,13 @@ const ThemeSampleOverviewPage = () => {
         rows={[
           [
             {
-              children: "Westerstraat 393 Den Haag",
+              children: (
+                <>
+                  Westerstraat 393
+                  <br />
+                  Den Haag
+                </>
+              ),
               href: paths.themeDetails("sample", "123"),
             },
             {
