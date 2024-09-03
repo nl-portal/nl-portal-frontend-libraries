@@ -355,8 +355,8 @@ importers:
         specifier: 0.2.3-alpha.400
         version: 0.2.3-alpha.400(react@18.3.1)
       '@gemeente-denhaag/table':
-        specifier: 0.1.1-alpha.302
-        version: 0.1.1-alpha.302(react@18.3.1)
+        specifier: 0.1.1-alpha.309
+        version: 0.1.1-alpha.309(react@18.3.1)
       '@gemeente-denhaag/text-input':
         specifier: 0.3.0-alpha.400
         version: 0.3.0-alpha.400(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1325,6 +1325,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/icons@0.2.3-alpha.407':
+    resolution: {integrity: sha512-TtmBI+U8Usz3ACFtRdpUcWDh5/pnzkeNtN2kBdIo5H3/HOOfKSdHsgOi2u8PlihUhVRpp4//QxUm4Rx+peIZkA==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/language-switcher@0.2.3-alpha.396':
     resolution: {integrity: sha512-6RoZHIF8u8YNYwp+6hqwHSCAJXybx27k1S9/rEhNWrWEYeXQI4f4jt9sdX+iq3bLgcnaz2CNqc2oHyrFMRegCg==}
     peerDependencies:
@@ -1342,6 +1347,11 @@ packages:
 
   '@gemeente-denhaag/link@0.2.3-alpha.404':
     resolution: {integrity: sha512-f+3PqwQssTTNU26ZC93AWDbIxqWFzKx8z3CWQGWqHYiD5jcQKe5hLqCR/vpzNOW/OVsPpOlsZdGygJzHt9z7AQ==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/link@0.2.3-alpha.407':
+    resolution: {integrity: sha512-wv92q+yBT6XCZBBZNSydYxhIXAt5/L8TSkQe1QnLeB430FbFLqgd600pZuAFpSI0ZnShrQuD43DYxmvRTQrpSg==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1394,8 +1404,8 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
-  '@gemeente-denhaag/table@0.1.1-alpha.302':
-    resolution: {integrity: sha512-PoW1PAFJ/WDdrjj/P8Ym1mq2zovLDVA5fUrk9znMRxAFPA//MLkbkXKl7iESR9MKdVm4uCeQnfkYSJLN78uwgA==}
+  '@gemeente-denhaag/table@0.1.1-alpha.309':
+    resolution: {integrity: sha512-vGC773QPq0sPVkt1hs5a70AimQjWBedzUQsszc1yVYeBQx7dXFA9rTC2hyLxZiRgyLYKUiedqBAUDRgbiqwbxQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -6729,6 +6739,10 @@ snapshots:
     dependencies:
       react: 18.3.1
 
+  '@gemeente-denhaag/icons@0.2.3-alpha.407(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+
   '@gemeente-denhaag/language-switcher@0.2.3-alpha.396(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.404(react@18.3.1)
@@ -6761,6 +6775,11 @@ snapshots:
   '@gemeente-denhaag/link@0.2.3-alpha.404(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.404(react@18.3.1)
+      react: 18.3.1
+
+  '@gemeente-denhaag/link@0.2.3-alpha.407(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.407(react@18.3.1)
       react: 18.3.1
 
   '@gemeente-denhaag/menu@0.2.3-alpha.404(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
@@ -6828,9 +6847,9 @@ snapshots:
       react: 18.3.1
       uuid: 9.0.1
 
-  '@gemeente-denhaag/table@0.1.1-alpha.302(react@18.3.1)':
+  '@gemeente-denhaag/table@0.1.1-alpha.309(react@18.3.1)':
     dependencies:
-      '@gemeente-denhaag/link': 0.2.3-alpha.400(react@18.3.1)
+      '@gemeente-denhaag/link': 0.2.3-alpha.407(react@18.3.1)
       react: 18.3.1
 
   '@gemeente-denhaag/text-input@0.3.0-alpha.400(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
