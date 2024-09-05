@@ -540,7 +540,7 @@ export type Query = {
   /** Get task by id */
   getTaakById: Taak;
   /** Get task by id V2 */
-  getTaakByIdV2: TaakV2;
+  getTaakByIdV2?: Maybe<TaakV2>;
   /** Get a list of tasks. Optional filter for zaak */
   getTaken: TaakPage;
   /** Get a list of tasks. Optional filter for zaak V2 */
@@ -938,7 +938,7 @@ export type GetBerichtenQueryVariables = Exact<{
 }>;
 
 
-export type GetBerichtenQuery = { __typename?: 'Query', getBerichten: { __typename?: 'BerichtenPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Bericht', id?: any | null, einddatumHandelingstermijn: any, geopend: boolean, onderwerp: string }> } };
+export type GetBerichtenQuery = { __typename?: 'Query', getBerichten: { __typename?: 'BerichtenPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Bericht', id?: any | null, einddatumHandelingstermijn: any, publicatiedatum: any, geopend: boolean, onderwerp: string }> } };
 
 export type GetUnopenedBerichtenCountQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -988,7 +988,7 @@ export type GetFormTaakByIdV2QueryVariables = Exact<{
 }>;
 
 
-export type GetFormTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
+export type GetFormTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
 export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1062,7 +1062,7 @@ export type GetTaakByIdV2QueryVariables = Exact<{
 }>;
 
 
-export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
+export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, formtaak?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
 export type GetTaakByIdQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1325,6 +1325,7 @@ export const GetBerichtenDocument = gql`
     content {
       id
       einddatumHandelingstermijn
+      publicatiedatum
       geopend
       onderwerp
     }

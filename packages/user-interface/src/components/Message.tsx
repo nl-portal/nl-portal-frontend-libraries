@@ -19,7 +19,7 @@ const Message = ({ message }: Props) => {
   return (
     <ActionSingle
       labels={labels}
-      dateTime={message.einddatumHandelingstermijn}
+      dateTime={message.publicatiedatum}
       link={paths.message(message.id)}
       Link={PortalLink}
     >
