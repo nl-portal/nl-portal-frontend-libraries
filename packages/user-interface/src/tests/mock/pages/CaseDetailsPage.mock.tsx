@@ -1,4 +1,4 @@
-import CaseDetailsPage from "../../../pages/CaseDetailsPage.tsx";
+import CaseDetailsPage from "../../../pages/CaseDetailsPage";
 import {
   mocksRequestWithAll,
   mocksRequestWithoutContactMomenten,

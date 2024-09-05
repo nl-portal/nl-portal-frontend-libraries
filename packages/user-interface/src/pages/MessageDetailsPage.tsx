@@ -4,7 +4,7 @@ import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import { RouterOutletContext } from "../contexts/RouterOutletContext";
-import MessageContent from "../components/MessageContent.tsx";
+import MessageContent from "../components/MessageContent";
 
 const MessageDetailsPage = () => {
   const { id } = useParams();

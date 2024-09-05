@@ -1,6 +1,6 @@
 import styles from "./MessageContent.module.scss";
 import { Paragraph } from "@gemeente-denhaag/typography";
-import Skeleton from "./Skeleton.tsx";
+import Skeleton from "./Skeleton";
 import { FormattedMessage } from "react-intl";
 
 interface Props {
