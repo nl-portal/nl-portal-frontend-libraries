@@ -21,7 +21,7 @@ const MessageDetailsPage = () => {
   const message = messageData?.getBericht as Bericht | undefined;
 
   return (
-    <PageGrid>
+    <PageGrid variant="medium">
       <div>
         <BackLink routePath={paths.messages} />
         <PageHeader loading={messageLoading} title={message?.onderwerp}>
