@@ -17,14 +17,14 @@ export * from "./interfaces/portal-footer";
 export { default as useUserInfo } from "./hooks/useUserInfo";
 
 export { default as AccountPage } from "./pages/AccountPage";
-export { default as CaseDetailsPage } from "./pages/CaseDetailsPage.tsx";
+export { default as CaseDetailsPage } from "./pages/CaseDetailsPage";
 export { default as CasesPage } from "./pages/CasesPage";
 export { default as EditAccountPage } from "./pages/EditAccountPage";
 export { default as MessagesPage } from "./pages/MessagesPage";
-export { default as MessageDetailsPage } from "./pages/MessageDetailsPage.tsx";
+export { default as MessageDetailsPage } from "./pages/MessageDetailsPage";
 export { default as OverviewPage } from "./pages/OverviewPage";
 export { default as TasksPage } from "./pages/TasksPage";
-export { default as TaskDetailsPage } from "./pages/TaskDetailsPage.tsx";
+export { default as TaskDetailsPage } from "./pages/TaskDetailsPage";
 export { default as ThemeDetailsPage } from "./pages/ThemeDetailsPage";
 export { default as ThemeOverviewPage } from "./pages/ThemeOverviewPage";
 export { default as ThemeSubPage } from "./pages/ThemeSubPage";

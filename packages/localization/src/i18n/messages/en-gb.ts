@@ -48,6 +48,7 @@ export const EN_GB_MESSAGES: Messages = {
     "caseDetails.statusUnknown": "not available",
     "caseDetails.contacttimeline.today": "today",
     "caseDetails.contacttimeline.yesterday": "yesterday",
+    "messageDetails.sent": "Message sent on {date} at {time}",
     "documents.fetchError": "Something went wrong, please try again later.",
     "documents.noDocuments": "There are no documents.",
     "offline.warning":
