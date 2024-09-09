@@ -1,7 +1,7 @@
 import { KeycloakContext } from "@nl-portal/nl-portal-authentication";
 import { useContext } from "react";
 
-const useDownload = (link: string, title?: string) => {
+const useDownload = (link: string, title?: string | null) => {
   const { keycloakToken } = useContext(KeycloakContext);
 
   const onClick = async (event: React.MouseEvent<HTMLElement>) => {
