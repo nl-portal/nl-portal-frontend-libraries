@@ -56,6 +56,8 @@ export const NL_NL_MESSAGES: Messages = {
     "case.statusUnknown": "niet beschikbaar",
     "case.contacttimeline.today": "vandaag",
     "case.contacttimeline.yesterday": "gisteren",
+    "extraCaseDetails.boolean.true": "Ja",
+    "extraCaseDetails.boolean.false": "Nee",
     "documents.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "documents.noDocuments": "Er zijn geen documenten.",

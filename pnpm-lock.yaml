@@ -363,6 +363,9 @@ importers:
       '@gemeente-denhaag/typography':
         specifier: 0.2.3-alpha.400
         version: 0.2.3-alpha.400(react@18.3.1)
+      '@gemeente-denhaag/unorderedlist':
+        specifier: 0.3.0-alpha.300
+        version: 0.3.0-alpha.300(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nl-portal/nl-portal-api':
         specifier: workspace:*
         version: link:../api
@@ -1418,6 +1421,9 @@ packages:
     resolution: {integrity: sha512-hQV0m3hUTzYGn3+4l3VmR8Lfvyq29QwA+lQOMYcBjiPxGbTdM1Wc3Rhyrvy1s/YsAxrySHRric4RmWwx7FCW1w==}
     peerDependencies:
       react: ^18.0.0
+
+  '@gemeente-denhaag/unorderedlist@0.3.0-alpha.300':
+    resolution: {integrity: sha512-rftCha8XffTF46ffrqB0zqvOphmsUij5b4zcZRljhR5MqyKPoMnhswaP8wpFX1E9ESErV++0vtw/jplmUwua8Q==}
 
   '@gemeente-denhaag/utils@0.2.3-alpha.399':
     resolution: {integrity: sha512-3Z1bArAHM9rv0hWWhjv74cY5HSCCGQXFGuSZcDRRYIMU+arViKrF5k3kEzMG0/dKnefhxjFHNUsiNFChvlA8Iw==}
@@ -6869,6 +6875,18 @@ snapshots:
       '@gemeente-denhaag/design-tokens-components': 0.2.3-alpha.402
       '@utrecht/components': 4.0.0
       react: 18.3.1
+
+  '@gemeente-denhaag/unorderedlist@0.3.0-alpha.300(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@utrecht/component-library-react': 4.2.0(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/components': 6.1.0
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react
+      - react-dom
+      - react-vega
+      - vega
 
   '@gemeente-denhaag/utils@0.2.3-alpha.399(react@18.3.1)':
     dependencies:

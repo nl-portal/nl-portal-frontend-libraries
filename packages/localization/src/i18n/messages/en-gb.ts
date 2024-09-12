@@ -55,6 +55,8 @@ export const EN_GB_MESSAGES: Messages = {
     "case.statusUnknown": "not available",
     "case.contacttimeline.today": "today",
     "case.contacttimeline.yesterday": "yesterday",
+    "extraCaseDetails.boolean.true": "Yes",
+    "extraCaseDetails.boolean.false": "No",
     "documents.fetchError": "There was an error, try again later.",
     "documents.noDocuments": "There are no documents.",
     "offline.warning":
