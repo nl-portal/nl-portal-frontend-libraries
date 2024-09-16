@@ -366,6 +366,9 @@ importers:
       '@gemeente-denhaag/unorderedlist':
         specifier: 0.3.0-alpha.300
         version: 0.3.0-alpha.300(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/utils':
+        specifier: 0.2.3-alpha.408
+        version: 0.2.3-alpha.408(react@18.3.1)
       '@nl-portal/nl-portal-api':
         specifier: workspace:*
         version: link:../api
@@ -1427,6 +1430,11 @@ packages:
 
   '@gemeente-denhaag/utils@0.2.3-alpha.399':
     resolution: {integrity: sha512-3Z1bArAHM9rv0hWWhjv74cY5HSCCGQXFGuSZcDRRYIMU+arViKrF5k3kEzMG0/dKnefhxjFHNUsiNFChvlA8Iw==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/utils@0.2.3-alpha.408':
+    resolution: {integrity: sha512-YWuilLCUH2nurkje8KaEKEciqtGN3gupyIAZZ+AUPrCPmHOygedFLGson+ETNgA5SWdsmIIa7HbNml1Zghkq8Q==}
     peerDependencies:
       react: ^18.0.0
 
@@ -6889,6 +6897,11 @@ snapshots:
       - vega
 
   '@gemeente-denhaag/utils@0.2.3-alpha.399(react@18.3.1)':
+    dependencies:
+      date-fns: 3.6.0
+      react: 18.3.1
+
+  '@gemeente-denhaag/utils@0.2.3-alpha.408(react@18.3.1)':
     dependencies:
       date-fns: 3.6.0
       react: 18.3.1

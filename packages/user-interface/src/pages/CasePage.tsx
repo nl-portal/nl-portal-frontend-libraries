@@ -26,6 +26,7 @@ import useOgonePaymentRegistration, {
 } from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
 import ExtraCaseDetails, { Details } from "../components/ExtraCaseDetails";
+import { formatDate } from "@gemeente-denhaag/utils";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -62,7 +63,7 @@ const CasePage = ({
     const array = [
       {
         title: intl.formatMessage({ id: "case.creationDate" }),
-        detail: new Date(caseData?.getZaak.startdatum).toLocaleDateString(),
+        detail: formatDate({ dateTime: caseData?.getZaak.startdatum })[0],
       },
       {
         title: intl.formatMessage({ id: "case.caseNumber" }),

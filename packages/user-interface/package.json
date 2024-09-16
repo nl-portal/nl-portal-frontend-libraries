@@ -60,6 +60,7 @@
     "@gemeente-denhaag/text-input": "0.3.0-alpha.400",
     "@gemeente-denhaag/typography": "0.2.3-alpha.400",
     "@gemeente-denhaag/unorderedlist": "0.3.0-alpha.300",
+    "@gemeente-denhaag/utils": "0.2.3-alpha.408",
     "@react-hook/size": "^2.1.2",
     "@react-hook/window-scroll": "^1.3.0",
     "@utrecht/component-library-css": "4.2.0",

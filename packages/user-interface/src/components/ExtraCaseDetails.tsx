@@ -4,9 +4,9 @@ import TableList from "./TableList";
 import UnorderedList, {
   UnorderedListItem,
 } from "@gemeente-denhaag/unorderedlist";
+import { formatDate } from "@gemeente-denhaag/utils";
 import SectionHeader from "./SectionHeader";
 import { FormattedMessage } from "react-intl";
-import { CellObject } from "./Table";
 
 interface Props {
   data: Details[];
@@ -24,9 +24,11 @@ export interface Table {
 
 export type Waarde = string | boolean | string[] | Details[] | Table;
 
+export type Types = "bold" | "italic" | "date" | "table";
+
 export interface Details {
   key?: string;
-  type?: "bold" | "italic" | "date" | "table";
+  type?: Types;
   waarde: Waarde;
   heading?: string;
   omschrijving?: string;
@@ -47,9 +49,67 @@ const isTable = (obj: any): obj is Table => {
   );
 };
 
-const parseDetails = (details: Details[]) => {
-  const zaakDetailsContent: ReactNode[] = [];
+const convertBoolean = (waarde: boolean) => {
+  return waarde
+    ? "extraCaseDetails.boolean.true"
+    : "extraCaseDetails.boolean.false";
+};
 
+const convertRichtText = (
+  waarde: Waarde,
+  type?: Types,
+): string | JSX.Element | JSX.Element[] | null => {
+  if (hasStringWaardes(waarde)) {
+    return waarde.map((item) => {
+      return (
+        <>
+          {convertRichtText(item, type)}
+          <br />
+        </>
+      );
+    });
+  }
+
+  if (typeof waarde !== "string" && typeof waarde !== "boolean") {
+    return null;
+  }
+
+  const value = typeof waarde === "boolean" ? convertBoolean(waarde) : waarde;
+
+  switch (type) {
+    case "bold":
+      return <b>{value}</b>;
+    case "italic":
+      return <i>{value}</i>;
+    case "date":
+      return formatDate({ dateTime: value })[0];
+    default:
+      return value;
+  }
+};
+
+const getTableSection = (details: Details, table: Table) => {
+  return (
+    <section>
+      <TableList
+        key={details.heading}
+        titleTranslationId={details.heading}
+        headers={table.headers?.map((head) => head.waarde.toString())}
+        rows={table.rows.map((row) =>
+          row.map((cell) => {
+            return {
+              children: convertRichtText(cell.waarde, cell.type),
+            };
+          }),
+        )}
+      />
+    </section>
+  );
+};
+
+const parseDetails = (details: Details[]) => {
+  if (!details) return null;
+  const zaakDetailsContent: ReactNode[] = [];
   details.forEach((detail) => {
     const headingElement = detail.heading ? (
       <SectionHeader title={detail.heading} />
@@ -63,14 +123,16 @@ const parseDetails = (details: Details[]) => {
           {headingElement}
           <UnorderedList>
             {waarde.map((item, index) => (
-              <UnorderedListItem key={index}>{item}</UnorderedListItem>
+              <UnorderedListItem key={index}>
+                {convertRichtText(item, detail.type)}
+              </UnorderedListItem>
             ))}
           </UnorderedList>
         </section>,
       );
     }
 
-    // Waarde type Details (and Table)
+    // Waarde type Details
     if (hasDetailsWaardes(waarde)) {
       const descriptionListItems = waarde.filter(
         (item) => item.type !== "table",
@@ -83,7 +145,10 @@ const parseDetails = (details: Details[]) => {
             typeof item.waarde === "string" || typeof item.waarde === "boolean",
         )
         .map((item) => {
-          return { title: item.key, detail: item.waarde as string };
+          return {
+            title: item.key,
+            detail: convertRichtText(item.waarde, item.type),
+          };
         });
 
       zaakDetailsContent.push(
@@ -97,19 +162,13 @@ const parseDetails = (details: Details[]) => {
         .filter((item) => isTable(item.waarde))
         .forEach((tableDetail) => {
           const table = tableDetail.waarde as Table;
-          zaakDetailsContent.push(
-            <section>
-              <TableList
-                key={tableDetail.heading}
-                titleTranslationId={tableDetail.heading}
-                headers={table.headers?.map((head) => head.waarde.toString())}
-                rows={table.rows.map((row) =>
-                  row.map((cell) => cell.waarde as CellObject),
-                )}
-              />
-            </section>,
-          );
+          zaakDetailsContent.push(getTableSection(detail, table));
         });
+    }
+
+    // Waarde type Table
+    if (isTable(waarde)) {
+      zaakDetailsContent.push(getTableSection(detail, waarde));
     }
 
     // Waarde types string | boolean
@@ -123,15 +182,9 @@ const parseDetails = (details: Details[]) => {
                 title: detail.key,
                 detail:
                   typeof waarde === "string" ? (
-                    waarde
+                    convertRichtText(waarde, detail.type)
                   ) : (
-                    <FormattedMessage
-                      id={
-                        waarde
-                          ? "extraCaseDetails.boolean.true"
-                          : "extraCaseDetails.boolean.false"
-                      }
-                    />
+                    <FormattedMessage id={convertBoolean(waarde)} />
                   ),
               },
             ]}
