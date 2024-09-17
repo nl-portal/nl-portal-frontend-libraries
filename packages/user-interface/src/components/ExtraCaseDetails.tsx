@@ -162,7 +162,7 @@ export const ExtraCaseDetails = ({ data }: Props) => {
         .filter((item) => isTable(item.waarde))
         .forEach((tableDetail) => {
           const table = tableDetail.waarde as Table;
-          zaakDetailsContent.push(getTableSection(detail, table));
+          zaakDetailsContent.push(getTableSection(tableDetail, table));
         });
     }
 
