@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client";
 
-export const QUERY_GET_FORMTAAK_BY_ID_V2 = gql`
-  query GetFormTaakByIdV2($id: UUID!) {
+export const QUERY_GET_PORTAALFORMULIER_BY_ID_V2 = gql`
+  query GetPortaalFormulierByIdV2($id: UUID!) {
     getTaakByIdV2(id: $id) {
       id
-      formtaak {
+      portaalformulier {
         formulier {
           soort
           value

@@ -8,7 +8,7 @@ export const MUTATION_SUBMIT_TAAK = gql`
   ) {
     submitTaakV2(id: $id, submission: $submission, version: $version) {
       id
-      formtaak {
+      portaalformulier {
         formulier {
           soort
           value

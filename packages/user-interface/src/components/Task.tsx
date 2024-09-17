@@ -44,10 +44,10 @@ const Task = ({ task, openInContext }: Props) => {
 
   const createActions = () => {
     switch (task.soort) {
-      case TaakSoort.Formtaak: {
+      case TaakSoort.Portaalformulier: {
         return (
           <ButtonLink href={taskUrl} onClick={handleClick}>
-            <FormattedMessage id="task.formtaak.button" />
+            <FormattedMessage id="task.portaalformulier.button" />
           </ButtonLink>
         );
       }

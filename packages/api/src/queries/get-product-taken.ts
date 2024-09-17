@@ -12,7 +12,7 @@ export const QUERY_GET_PRODUCT_TAKEN = gql`
       url {
         uri
       }
-      formtaak {
+      portaalformulier {
         formulier {
           soort
           value

@@ -406,10 +406,10 @@ export const getTakenWithId = {
         content: [
           {
             id: "1a20092f-8d24-11ee-a314-d2c27970fbf4",
-            soort: "FORMTAAK",
+            soort: "PORTAALFORMULIER",
             koppeling: null,
             url: null,
-            formtaak: {
+            portaalformulier: {
               formulier: {
                 soort: "url",
                 value:
@@ -1024,14 +1024,14 @@ const getContent = (size: number) => {
   const arrayTasks = [
     {
       id: "3f8b4c07-91c5-4f14-9cc4-2d6a6b8a3bda",
-      soort: "FORMTAAK",
+      soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
         uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
-      formtaak: {
+      portaalformulier: {
         formulier: {
           soort: "url",
           value:
@@ -1048,14 +1048,14 @@ const getContent = (size: number) => {
     },
     {
       id: "7e5d3f58-a681-4b5d-8a1f-48d31fbf6f4e",
-      soort: "FORMTAAK",
+      soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
         uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
-      formtaak: {
+      portaalformulier: {
         formulier: {
           soort: "url",
           value:
@@ -1072,14 +1072,14 @@ const getContent = (size: number) => {
     },
     {
       id: "e3b3bcf2-7b2e-46d7-a600-3ec8a4e1a2a1",
-      soort: "FORMTAAK",
+      soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
         uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
-      formtaak: {
+      portaalformulier: {
         formulier: {
           soort: "url",
           value:
@@ -1096,14 +1096,14 @@ const getContent = (size: number) => {
     },
     {
       id: "021118b9-bc59-11ee-b651-366634c97df6",
-      soort: "FORMTAAK",
+      soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
         uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
-      formtaak: {
+      portaalformulier: {
         formulier: {
           soort: "url",
           value:
@@ -1120,14 +1120,14 @@ const getContent = (size: number) => {
     },
     {
       id: "16fd2706-8baf-433b-82eb-8c7fada847da",
-      soort: "FORMTAAK",
+      soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
         uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
-      formtaak: {
+      portaalformulier: {
         formulier: {
           soort: "url",
           value:
@@ -1144,14 +1144,14 @@ const getContent = (size: number) => {
     },
     {
       id: "b3da88b2-7e7f-4578-a7d4-9e5e5c74a2de",
-      soort: "FORMTAAK",
+      soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
         uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
-      formtaak: {
+      portaalformulier: {
         formulier: {
           soort: "url",
           value:
@@ -1168,14 +1168,14 @@ const getContent = (size: number) => {
     },
     {
       id: "6f4922f45568161a8cdf4ad2299f6d23",
-      soort: "FORMTAAK",
+      soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
         uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
-      formtaak: {
+      portaalformulier: {
         formulier: {
           soort: "url",
           value:
@@ -1192,14 +1192,14 @@ const getContent = (size: number) => {
     },
     {
       id: "1e292f8fedd741b75372e19097c76d4a",
-      soort: "FORMTAAK",
+      soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
         uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
-      formtaak: {
+      portaalformulier: {
         formulier: {
           soort: "url",
           value:
@@ -1216,14 +1216,14 @@ const getContent = (size: number) => {
     },
     {
       id: "901d3f32-3559-4dd7-a6a6-3fe00d7f00b6",
-      soort: "FORMTAAK",
+      soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
         uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
-      formtaak: {
+      portaalformulier: {
         formulier: {
           soort: "url",
           value:
@@ -1240,14 +1240,14 @@ const getContent = (size: number) => {
     },
     {
       id: "88d9c7d0-3f9a-4a0e-9a90-6c8f873e9cdd",
-      soort: "FORMTAAK",
+      soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
         uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
-      formtaak: {
+      portaalformulier: {
         formulier: {
           soort: "url",
           value:
