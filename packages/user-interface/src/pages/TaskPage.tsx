@@ -7,8 +7,8 @@ import {
   TaakStatus,
   useGetFormDefinitionByIdLazyQuery,
   TaakVersion,
-  useGetFormTaakByIdV2Query,
-  GetFormTaakByIdV2Document,
+  useGetPortaalFormulierByIdV2Query,
+  GetPortaalFormulierByIdV2Document,
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
@@ -39,7 +39,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const [submitTaak] = useSubmitTaakV2Mutation({
     update: (cache, { data }) => {
       cache.writeQuery({
-        query: GetFormTaakByIdV2Document,
+        query: GetPortaalFormulierByIdV2Document,
         data: {
           getTaakByIdV2: {
             ...data?.submitTaakV2,
@@ -51,13 +51,13 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       setSubmitted(true);
     },
   });
-  useGetFormTaakByIdV2Query({
+  useGetPortaalFormulierByIdV2Query({
     variables: { id },
     onCompleted(task) {
       if (
         !task ||
         !task.getTaakByIdV2 ||
-        !task.getTaakByIdV2.formtaak ||
+        !task.getTaakByIdV2.portaalformulier ||
         !task.getTaakByIdV2.version
       )
         return;
@@ -71,19 +71,23 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       setTaakVersion(task.getTaakByIdV2.version);
 
       transformPrefilledDataToFormioSubmission(
-        task.getTaakByIdV2.formtaak.data,
+        task.getTaakByIdV2.portaalformulier.data,
       );
 
-      if (task.getTaakByIdV2.formtaak.formulier.soort === "url") {
+      if (task.getTaakByIdV2.portaalformulier.formulier.soort === "url") {
         getFormByUrl({
-          variables: { url: task.getTaakByIdV2.formtaak?.formulier.value },
+          variables: {
+            url: task.getTaakByIdV2.portaalformulier?.formulier.value,
+          },
         });
         return;
       }
 
-      if (task.getTaakByIdV2.formtaak.formulier.soort === "id") {
+      if (task.getTaakByIdV2.portaalformulier.formulier.soort === "id") {
         getFormById({
-          variables: { id: task.getTaakByIdV2.formtaak?.formulier.value },
+          variables: {
+            id: task.getTaakByIdV2.portaalformulier?.formulier.value,
+          },
         });
         return;
       }

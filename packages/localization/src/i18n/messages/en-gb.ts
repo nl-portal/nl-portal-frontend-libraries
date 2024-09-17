@@ -99,7 +99,7 @@ export const EN_GB_MESSAGES: Messages = {
     "tasksList.viewAll": "View all tasks ({total})",
     "tasksList.fetchError": "There was an error, try again later.",
     "tasksList.empty": "There are no open tasks.",
-    "task.formtaak.button": "Provide information",
+    "task.portaalformulier.button": "Provide information",
     "task.ogonebetaling.button": "Pay",
     "task.fetchError": "There was an error, try again later.",
     "task.completeTitle": "Task completed",
