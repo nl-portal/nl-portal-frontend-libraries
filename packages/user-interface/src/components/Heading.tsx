@@ -6,7 +6,7 @@ import {
 } from "@gemeente-denhaag/typography";
 import classNames from "classnames";
 
-export type Headers = "h1" | "h2" | "h3" | "h4" | "h5";
+type Headers = "h1" | "h2" | "h3" | "h4" | "h5";
 
 interface Props {
   as?: Headers;

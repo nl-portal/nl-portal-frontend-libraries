@@ -107,10 +107,10 @@ const getTableSection = (details: Details, table: Table) => {
   );
 };
 
-const parseDetails = (details: Details[]) => {
-  if (!details) return null;
+export const ExtraCaseDetails = ({ data }: Props) => {
+  if (!data) return null;
   const zaakDetailsContent: ReactNode[] = [];
-  details.forEach((detail) => {
+  data.forEach((detail) => {
     const headingElement = detail.heading ? (
       <SectionHeader title={detail.heading} />
     ) : undefined;
@@ -195,10 +195,6 @@ const parseDetails = (details: Details[]) => {
   });
 
   return zaakDetailsContent;
-};
-
-export const ExtraCaseDetails = ({ data }: Props) => {
-  return parseDetails(data);
 };
 
 export default ExtraCaseDetails;
