@@ -301,8 +301,8 @@ importers:
         specifier: 0.1.1-alpha.58
         version: 0.1.1-alpha.58(react@18.3.1)
       '@gemeente-denhaag/descriptionlist':
-        specifier: 0.1.1-alpha.300
-        version: 0.1.1-alpha.300
+        specifier: 0.1.1-alpha.310
+        version: 0.1.1-alpha.310
       '@gemeente-denhaag/file':
         specifier: 0.1.1-alpha.72
         version: 0.1.1-alpha.72(react@18.3.1)
@@ -1273,8 +1273,8 @@ packages:
   '@gemeente-denhaag/contact-timeline@0.1.1-alpha.58':
     resolution: {integrity: sha512-+KNyFECUD9UMCI1yEc9l6UHbl04L+4QuuQX5YPfdGm4OVvkBqy7MdYqAcy7C1CYLl5sSpcEs/XjSu5PB7ADM/Q==}
 
-  '@gemeente-denhaag/descriptionlist@0.1.1-alpha.300':
-    resolution: {integrity: sha512-IZ/5ScjDfGzsCk2FjAaDU2kpixITlSApPQGyIm55VOrFDhGDDYxmsj1SevqMbkQcLslo3JYWcp6jUZ95VXryPg==}
+  '@gemeente-denhaag/descriptionlist@0.1.1-alpha.310':
+    resolution: {integrity: sha512-ZAfwJF/sckNAKBhA0yUdVqdRmrdnk4Z/losI25edYNuEUl8mw96pPXllgB3vqSDJmSbNy8Ma1KPm+RCLaE/+qQ==}
 
   '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.402':
     resolution: {integrity: sha512-eU5RTLDVoHKr5YQi5Y+33e+6l6X9PuuAcO6E7fMwwLxVbsgqHp9rh6z3xz9pjDiWfu7uajQlG4YF15MzPXzxhA==}
@@ -3685,6 +3685,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -6680,7 +6681,7 @@ snapshots:
     transitivePeerDependencies:
       - react
 
-  '@gemeente-denhaag/descriptionlist@0.1.1-alpha.300': {}
+  '@gemeente-denhaag/descriptionlist@0.1.1-alpha.310': {}
 
   '@gemeente-denhaag/design-tokens-common@0.2.3-alpha.402': {}
 
