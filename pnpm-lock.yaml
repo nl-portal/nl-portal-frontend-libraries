@@ -280,8 +280,8 @@ importers:
         specifier: ^5.3.0
         version: 5.3.0(formiojs@4.20.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/action':
-        specifier: 0.1.1-alpha.66
-        version: 0.1.1-alpha.66(react@18.3.1)
+        specifier: 0.1.1-alpha.76
+        version: 0.1.1-alpha.76(react@18.3.1)
       '@gemeente-denhaag/alert':
         specifier: 0.1.1-alpha.370
         version: 0.1.1-alpha.370(react@18.3.1)
@@ -1237,8 +1237,8 @@ packages:
   '@formio/vanilla-text-mask@5.1.1-formio.1':
     resolution: {integrity: sha512-rYBlvIPMNUd6sAaduOaiIwI4vfTAjHDRonko2qJn2RP1O//TQ7rcFIPYVYePJZ4OtOpwHiHAvAIh79McphZotQ==}
 
-  '@gemeente-denhaag/action@0.1.1-alpha.66':
-    resolution: {integrity: sha512-dyVSV1XNoLiCHz3RODopqCLmyXvKl8gJrAf5UQz+7isyM9qtqZHwjLJZWuvpdCkn9gq30L/jPMIxnO3OkXKB7Q==}
+  '@gemeente-denhaag/action@0.1.1-alpha.76':
+    resolution: {integrity: sha512-Fhs3AUBG8XuXQcskwPsUG5TBJ+r+e5pBfSwvSci9Ua+WbdHoXLEVU1lBaPJ5KNJnaCpUNJY6y2/Y5J9I7lyWwQ==}
 
   '@gemeente-denhaag/alert@0.1.1-alpha.370':
     resolution: {integrity: sha512-ENucUoaglNFB3KxOmDxudEd9d9/TezqY/2ddPizA3lcc+kCK1x8AU7NYgLG3Vbc/OXbE5UQ1FN740nyaBbhFFA==}
@@ -1262,6 +1262,11 @@ packages:
 
   '@gemeente-denhaag/button@0.2.3-alpha.404':
     resolution: {integrity: sha512-GE3+pw726GbKWgHL+ZhNm6jB66V802+Bk5odPDSwtmnlyhpSlNG9KtqTW29iZAHL++tEvqoMh2Ky2zFEwlA4Bg==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/button@0.2.3-alpha.410':
+    resolution: {integrity: sha512-2JioSBnTTUo6TclNEsLrCuthbPz55SgWkS//B3cjWrL9o+g7QXeeHqgAM7fMA1OSEfjZ7Q8FkDPnmQ1qBl3Z6Q==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1330,6 +1335,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/icons@0.2.3-alpha.410':
+    resolution: {integrity: sha512-Kg1BdsZpOQj3WX6SmMykWkxK8gZzWtOxJ+LuUbXXwW1zNRfBM1smqhI2EPzuz3qdqipk9KTaXw9NzSjspVr6/A==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/language-switcher@0.2.3-alpha.396':
     resolution: {integrity: sha512-6RoZHIF8u8YNYwp+6hqwHSCAJXybx27k1S9/rEhNWrWEYeXQI4f4jt9sdX+iq3bLgcnaz2CNqc2oHyrFMRegCg==}
     peerDependencies:
@@ -1352,6 +1362,11 @@ packages:
 
   '@gemeente-denhaag/link@0.2.3-alpha.407':
     resolution: {integrity: sha512-wv92q+yBT6XCZBBZNSydYxhIXAt5/L8TSkQe1QnLeB430FbFLqgd600pZuAFpSI0ZnShrQuD43DYxmvRTQrpSg==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/link@0.2.3-alpha.410':
+    resolution: {integrity: sha512-lByg1eN3+ygmAiSE676oXoRqmJ/cHSmG+L35gMN5vhP5lmWLRwgFd12QmUapsSSAS2bZJkSup1lYu+6Uo1SCDQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1421,6 +1436,11 @@ packages:
 
   '@gemeente-denhaag/utils@0.2.3-alpha.399':
     resolution: {integrity: sha512-3Z1bArAHM9rv0hWWhjv74cY5HSCCGQXFGuSZcDRRYIMU+arViKrF5k3kEzMG0/dKnefhxjFHNUsiNFChvlA8Iw==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/utils@0.2.3-alpha.409':
+    resolution: {integrity: sha512-sAoC5i+IcfXOZ/QfFYXk94JilE2dRVZ4wsPInDB/5Z5dWtHTHxa+Dg9KoNsnPOCMCgL8y/vLtf8lYJi+QCoCBA==}
     peerDependencies:
       react: ^18.0.0
 
@@ -3685,6 +3705,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -6615,12 +6636,12 @@ snapshots:
 
   '@formio/vanilla-text-mask@5.1.1-formio.1': {}
 
-  '@gemeente-denhaag/action@0.1.1-alpha.66(react@18.3.1)':
+  '@gemeente-denhaag/action@0.1.1-alpha.76(react@18.3.1)':
     dependencies:
-      '@gemeente-denhaag/button': 0.2.3-alpha.400(react@18.3.1)
-      '@gemeente-denhaag/icons': 0.2.3-alpha.400(react@18.3.1)
-      '@gemeente-denhaag/link': 0.2.3-alpha.400(react@18.3.1)
-      '@gemeente-denhaag/utils': 0.2.3-alpha.399(react@18.3.1)
+      '@gemeente-denhaag/button': 0.2.3-alpha.410(react@18.3.1)
+      '@gemeente-denhaag/icons': 0.2.3-alpha.410(react@18.3.1)
+      '@gemeente-denhaag/link': 0.2.3-alpha.410(react@18.3.1)
+      '@gemeente-denhaag/utils': 0.2.3-alpha.409(react@18.3.1)
       date-fns: 3.6.0
     transitivePeerDependencies:
       - react
@@ -6658,6 +6679,11 @@ snapshots:
   '@gemeente-denhaag/button@0.2.3-alpha.404(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.404(react@18.3.1)
+      react: 18.3.1
+
+  '@gemeente-denhaag/button@0.2.3-alpha.410(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.410(react@18.3.1)
       react: 18.3.1
 
   '@gemeente-denhaag/card@0.2.3-alpha.400(react@18.3.1)':
@@ -6743,6 +6769,10 @@ snapshots:
     dependencies:
       react: 18.3.1
 
+  '@gemeente-denhaag/icons@0.2.3-alpha.410(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+
   '@gemeente-denhaag/language-switcher@0.2.3-alpha.396(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.404(react@18.3.1)
@@ -6780,6 +6810,11 @@ snapshots:
   '@gemeente-denhaag/link@0.2.3-alpha.407(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 0.2.3-alpha.407(react@18.3.1)
+      react: 18.3.1
+
+  '@gemeente-denhaag/link@0.2.3-alpha.410(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/icons': 0.2.3-alpha.410(react@18.3.1)
       react: 18.3.1
 
   '@gemeente-denhaag/menu@0.2.3-alpha.404(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
@@ -6871,6 +6906,11 @@ snapshots:
       react: 18.3.1
 
   '@gemeente-denhaag/utils@0.2.3-alpha.399(react@18.3.1)':
+    dependencies:
+      date-fns: 3.6.0
+      react: 18.3.1
+
+  '@gemeente-denhaag/utils@0.2.3-alpha.409(react@18.3.1)':
     dependencies:
       date-fns: 3.6.0
       react: 18.3.1
