@@ -292,8 +292,8 @@ importers:
         specifier: 0.2.3-alpha.404
         version: 0.2.3-alpha.404(react@18.3.1)
       '@gemeente-denhaag/button-link':
-        specifier: 0.0.1-alpha.19
-        version: 0.0.1-alpha.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.0.1-alpha.29
+        version: 0.0.1-alpha.29(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/card':
         specifier: 0.2.3-alpha.400
         version: 0.2.3-alpha.400(react@18.3.1)
@@ -1250,8 +1250,8 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
-  '@gemeente-denhaag/button-link@0.0.1-alpha.19':
-    resolution: {integrity: sha512-mSbHPIhhQUsBFYK90F53CUJENm87Som1/5xxqKlznAnktmLUdfbPyo4hvy9eVs6Y7e33jC9nA+5vBCEi4G0xnA==}
+  '@gemeente-denhaag/button-link@0.0.1-alpha.29':
+    resolution: {integrity: sha512-2k3k7HnyNKxjNMPrjEhsfHl89BEAaFbs8ktLH3W3X9t1Ut5LtsK/bET8pxj3Bb1V66bZbyUX0wKBNT10foVneg==}
     peerDependencies:
       react: ^18.0.0
 
@@ -3685,6 +3685,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -6639,12 +6640,13 @@ snapshots:
       '@utrecht/components': 6.1.0
       react: 18.3.1
 
-  '@gemeente-denhaag/button-link@0.0.1-alpha.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/button-link@0.0.1-alpha.29(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@utrecht/component-library-react': 3.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@utrecht/components': 4.0.0
+      '@utrecht/component-library-react': 4.2.0(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/components': 6.1.0
       react: 18.3.1
     transitivePeerDependencies:
+      - '@babel/runtime'
       - date-fns
       - react-dom
       - react-vega
