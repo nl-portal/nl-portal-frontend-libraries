@@ -363,6 +363,12 @@ importers:
       '@gemeente-denhaag/typography':
         specifier: 0.2.3-alpha.400
         version: 0.2.3-alpha.400(react@18.3.1)
+      '@gemeente-denhaag/unorderedlist':
+        specifier: 0.3.0-alpha.300
+        version: 0.3.0-alpha.300(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/utils':
+        specifier: 0.2.3-alpha.408
+        version: 0.2.3-alpha.408(react@18.3.1)
       '@nl-portal/nl-portal-api':
         specifier: workspace:*
         version: link:../api
@@ -1419,8 +1425,16 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/unorderedlist@0.3.0-alpha.300':
+    resolution: {integrity: sha512-rftCha8XffTF46ffrqB0zqvOphmsUij5b4zcZRljhR5MqyKPoMnhswaP8wpFX1E9ESErV++0vtw/jplmUwua8Q==}
+
   '@gemeente-denhaag/utils@0.2.3-alpha.399':
     resolution: {integrity: sha512-3Z1bArAHM9rv0hWWhjv74cY5HSCCGQXFGuSZcDRRYIMU+arViKrF5k3kEzMG0/dKnefhxjFHNUsiNFChvlA8Iw==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/utils@0.2.3-alpha.408':
+    resolution: {integrity: sha512-YWuilLCUH2nurkje8KaEKEciqtGN3gupyIAZZ+AUPrCPmHOygedFLGson+ETNgA5SWdsmIIa7HbNml1Zghkq8Q==}
     peerDependencies:
       react: ^18.0.0
 
@@ -6870,7 +6884,24 @@ snapshots:
       '@utrecht/components': 4.0.0
       react: 18.3.1
 
+  '@gemeente-denhaag/unorderedlist@0.3.0-alpha.300(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@utrecht/component-library-react': 4.2.0(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/components': 6.1.0
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react
+      - react-dom
+      - react-vega
+      - vega
+
   '@gemeente-denhaag/utils@0.2.3-alpha.399(react@18.3.1)':
+    dependencies:
+      date-fns: 3.6.0
+      react: 18.3.1
+
+  '@gemeente-denhaag/utils@0.2.3-alpha.408(react@18.3.1)':
     dependencies:
       date-fns: 3.6.0
       react: 18.3.1

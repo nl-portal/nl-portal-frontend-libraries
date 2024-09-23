@@ -25,7 +25,8 @@ import useOgonePaymentRegistration, {
   PaymentStatus,
 } from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
-import TableList from "../components/TableList";
+import ExtraCaseDetails, { Details } from "../components/ExtraCaseDetails";
+import { formatDate } from "@gemeente-denhaag/utils";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -62,7 +63,7 @@ const CasePage = ({
     const array = [
       {
         title: intl.formatMessage({ id: "case.creationDate" }),
-        detail: new Date(caseData?.getZaak.startdatum).toLocaleDateString(),
+        detail: formatDate({ dateTime: caseData?.getZaak.startdatum })[0],
       },
       {
         title: intl.formatMessage({ id: "case.caseNumber" }),
@@ -109,6 +110,8 @@ const CasePage = ({
       </Paragraph>
     </div>;
   }
+
+  const zaakDetails = caseData?.getZaak.zaakdetails.data as Details[];
 
   return (
     <PageGrid>
@@ -164,39 +167,7 @@ const CasePage = ({
           items={details}
         />
       )}
-      {/* eslint-disable @typescript-eslint/no-explicit-any */}
-      {caseData?.getZaak.zaakdetails.data.map((section: any) => {
-        const listItems = section.waarde.filter((i: any) => i.type !== "table");
-        const tables = section.waarde.filter((i: any) => i.type === "table");
-
-        return (
-          <React.Fragment key={section.heading}>
-            {listItems.length > 0 && (
-              <DescriptionList
-                titleTranslationId={section.heading}
-                items={listItems.map((item: any) => ({
-                  title: item.key,
-                  detail: item.waarde,
-                }))}
-              />
-            )}
-            {tables.length > 0 &&
-              tables.map((table: any) => (
-                <TableList
-                  key={table.heading}
-                  titleTranslationId={table.heading}
-                  headers={table.waarde.headers?.map(
-                    (head: any) => head.waarde,
-                  )}
-                  rows={table.waarde.rows.map((row: any) =>
-                    row.map((cell: any) => cell.waarde),
-                  )}
-                />
-              ))}
-          </React.Fragment>
-        );
-      })}
-      {/* eslint-enable @typescript-eslint/no-explicit-any */}
+      <ExtraCaseDetails data={zaakDetails} />
       <DocumentsList
         loading={loading}
         error={Boolean(caseError)}
