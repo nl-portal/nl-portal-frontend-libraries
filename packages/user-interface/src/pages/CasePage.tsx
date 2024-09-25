@@ -112,20 +112,6 @@ const CasePage = ({
 
   return (
     <PageGrid>
-      {paymentStatus === PaymentStatus.SUCCESS && (
-        <Alert
-          variant="success"
-          title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
-          text={intl.formatMessage({ id: "task.paymentSuccessText" })}
-        />
-      )}
-      {paymentStatus === PaymentStatus.FAILURE && (
-        <Alert
-          variant="error"
-          title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
-          text={intl.formatMessage({ id: "task.paymentFailureText" })}
-        />
-      )}
       <div>
         {backlink && <BackLink {...backlink} />}
         <PageHeader
@@ -136,7 +122,22 @@ const CasePage = ({
               id: `case.${caseData?.getZaak.zaaktype.identificatie}.title`,
             })
           }
-        />
+        >
+          {paymentStatus === PaymentStatus.SUCCESS && (
+            <Alert
+              variant="success"
+              title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
+              text={intl.formatMessage({ id: "task.paymentSuccessText" })}
+            />
+          )}
+          {paymentStatus === PaymentStatus.FAILURE && (
+            <Alert
+              variant="error"
+              title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
+              text={intl.formatMessage({ id: "task.paymentFailureText" })}
+            />
+          )}
+        </PageHeader>
       </div>
       <TasksList
         loading={loading}
