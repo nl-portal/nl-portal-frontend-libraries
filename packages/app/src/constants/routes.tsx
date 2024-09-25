@@ -31,9 +31,7 @@ export const routes = [
       },
       {
         path: paths.case(),
-        element: (
-          <CasePage showContactTimeline backlink={{ routePath: paths.cases }} />
-        ),
+        element: <CasePage showContactTimeline />,
       },
     ],
   },
