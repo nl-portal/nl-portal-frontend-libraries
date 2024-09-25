@@ -16,10 +16,10 @@
     "test:watch": "vitest --watch"
   },
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.402",
-    "@gemeente-denhaag/icons": "0.2.3-alpha.400",
-    "@gemeente-denhaag/link": "0.2.3-alpha.400",
-    "@gemeente-denhaag/typography": "0.2.3-alpha.400",
+    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.412",
+    "@gemeente-denhaag/icons": "0.2.3-alpha.410",
+    "@gemeente-denhaag/link": "0.2.3-alpha.410",
+    "@gemeente-denhaag/typography": "0.2.3-alpha.410",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
