@@ -51,10 +51,18 @@ const CasePage = ({
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
-  const { paymentStatus } = useOgonePaymentRegistration();
+  const { paymentStatus, finishedTaskId } = useOgonePaymentRegistration();
 
   const loading = caseLoading || taskLoading || momentsLoading;
-  const tasks = tasksResult?.getTakenV2.content as TaakV2[] | undefined;
+
+  // Remove task with the finishedTaskId to prevent race condition with the payment handling in the backend
+  const tasks = (
+    paymentStatus === PaymentStatus.SUCCESS && finishedTaskId
+      ? tasksResult?.getTakenV2.content.filter(
+          (item) => item.id !== finishedTaskId,
+        )
+      : tasksResult?.getTakenV2.content
+  ) as TaakV2[] | undefined;
 
   const details = React.useMemo(() => {
     if (!caseData?.getZaak) return [];
