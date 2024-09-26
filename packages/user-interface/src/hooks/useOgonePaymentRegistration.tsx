@@ -10,6 +10,7 @@ export enum PaymentStatus {
 
 const useOgonePaymentRegistration = () => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
+  const [finishedTaskId, setFinishedTaskId] = useState<string | undefined>();
   const { restUri } = useContext(ApiContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
@@ -22,6 +23,7 @@ const useOgonePaymentRegistration = () => {
         .then((response) => {
           if (response.ok) {
             setPaymentStatus(PaymentStatus.SUCCESS);
+            setFinishedTaskId(searchParams.get("orderID")?.toString());
           } else {
             console.error("payment failed:", response.statusText);
             setPaymentStatus(PaymentStatus.FAILURE);
@@ -37,9 +39,9 @@ const useOgonePaymentRegistration = () => {
           setSearchParams(newSearchParams);
         });
     }
-  }, [type, paymentStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [type, paymentStatus]);
 
-  return { paymentStatus };
+  return { paymentStatus, finishedTaskId };
 };
 
 export default useOgonePaymentRegistration;
