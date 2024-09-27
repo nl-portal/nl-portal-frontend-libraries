@@ -8,6 +8,7 @@ import {
 } from "@gemeente-denhaag/table";
 import React from "react";
 import { PortalLink } from "..";
+import classNames from "classnames";
 
 export interface CellObject {
   className?: string;
@@ -38,12 +39,16 @@ const Table = ({ headers, rows }: Props) => {
   };
 
   const renderCell = (keyString: string, cell: Cell, head?: boolean) => {
+    let classes = classNames("denhaag-table__cell--align-top");
+
     if (isObject(cell)) {
+      classes = classNames(classes, cell.className);
+
       if (cell.head)
         return (
           <TableHeader
             key={keyString}
-            className={cell.className}
+            className={classes}
             href={cell.href}
             Link={PortalLink}
           >
@@ -54,7 +59,7 @@ const Table = ({ headers, rows }: Props) => {
       return (
         <TableCell
           key={keyString}
-          className={cell.className}
+          className={classes}
           href={cell.href}
           Link={PortalLink}
         >
@@ -63,8 +68,18 @@ const Table = ({ headers, rows }: Props) => {
       );
     }
 
-    if (head) return <TableHeader key={keyString}>{cell}</TableHeader>;
-    return <TableCell key={keyString}>{cell}</TableCell>;
+    if (head)
+      return (
+        <TableHeader key={keyString} className={classes}>
+          {cell}
+        </TableHeader>
+      );
+
+    return (
+      <TableCell key={keyString} className={classes}>
+        {cell}
+      </TableCell>
+    );
   };
 
   return (

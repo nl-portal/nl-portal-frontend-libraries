@@ -68,8 +68,13 @@ const MessagesList = ({
     <section className={styles["messages-list"]}>
       <Table
         headers={[
-          <FormattedMessage id="messagesList.subject" />,
           {
+            key: "subject",
+            head: true,
+            children: <FormattedMessage id="messagesList.subject" />,
+          },
+          {
+            key: "date",
             head: true,
             className: "denhaag-table__cell--align-end",
             children: <FormattedMessage id="messagesList.date" />,

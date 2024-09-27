@@ -9,8 +9,8 @@ import {
 } from "react-router-dom";
 import { Paths } from "../interfaces/paths";
 
-//eslint-disable-next-line react-refresh/only-export-components
 export const testPaths: Paths = {
+  noMatch: "/404",
   overview: "/",
   cases: "/zaken",
   case: (id = ":id") => `/zaken/zaak/${id}`,

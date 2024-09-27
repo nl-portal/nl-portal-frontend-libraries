@@ -4,6 +4,9 @@ import {
   CasesPage,
   EditAccountPage,
   MessageDetailsPage,
+  MessagesPage,
+  MessagePage,
+  NoMatchPage,
   OverviewPage,
   TasksPage,
   TaskDetailsPage,
@@ -17,10 +20,6 @@ import ThemeSampleListPage from "../pages/ThemeSampleListPage";
 import ThemeSampleDetailPage from "../pages/ThemeSampleDetailPage";
 
 export const routes = [
-  {
-    path: "*",
-    element: <Navigate to={sessionStorage.getItem("entryUrl") || "/"} />,
-  },
   {
     path: paths.overview,
     element: <OverviewPage showIntro />,
@@ -98,5 +97,17 @@ export const routes = [
         element: <EditAccountPage />,
       },
     ],
+  },
+  {
+    path: "/keycloak/callback",
+    element: <Navigate to={sessionStorage.getItem("entryUrl") || "/"} />,
+  },
+  {
+    path: paths.noMatch,
+    element: <NoMatchPage contactLink={{ target: "_blank" }} />,
+  },
+  {
+    path: "*",
+    element: <Navigate to={paths.noMatch} />,
   },
 ];

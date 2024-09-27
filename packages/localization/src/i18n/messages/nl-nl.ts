@@ -25,6 +25,13 @@ export const NL_NL_MESSAGES: Messages = {
     "menu.open": "Menu openen",
     "titles.currentCases": "Lopende zaken",
     "titles.completedCases": "Afgeronde zaken",
+    "noMatchPage.title": "Pagina niet gevonden",
+    "noMatchPage.text":
+      "De pagina die u zocht kon niet worden gevonden. Het is mogelijk verwijderd, hernoemd of bestond niet. U kunt informatie zoeken via de zoekfunctie bovenin of via de homepage. <link>Ga naar het overzicht.</link>",
+    "noMatchPage.contact.title": "Contact met de redactie",
+    "noMatchPage.contact.text":
+      "Bent u van mening dat de informatie niet op de website staat, maar dat dat wel zou moeten? Stuur dan een <link>bericht aan de gemeente.</link>",
+    "noMatchPage.contact.href": "https://www.google.com",
     "overview.defaultFormTitle": "Bezwaar maken",
     "overview.showAllCases": "Bekijk alle zaken",
     "overview.currentCases": "Mijn lopende zaken",
@@ -97,6 +104,17 @@ export const NL_NL_MESSAGES: Messages = {
     "tasksList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "tasksList.empty": "Er zijn geen openstaande taken.",
+    "task.portaalformulier.button": "Informatie geven",
+    "task.ogonebetaling.button": "Betalen",
+    "task.fetchError": "Er is een fout opgetreden, probeer het later nogmaals.",
+    "task.completeTitle": "Taak is afgerond",
+    "task.completeDescription": "De taak is succesvol voltooid.",
+    "task.paymentFailureText":
+      "De betaling is helaas niet gelukt. Probeer het later nog een keer.",
+    "task.paymentFailureTitle": "Betaling mislukt",
+    "task.paymentSuccessText":
+      "U ontvangt zo snel mogelijk een bevestigingsmail.",
+    "task.paymentSuccessTitle": "Gelukt, u heeft betaald.",
     "taskDetails.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "taskDetails.completeTitle": "Taak is afgerond",

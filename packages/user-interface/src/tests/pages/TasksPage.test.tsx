@@ -27,7 +27,7 @@ describe("TasksPage", () => {
 
     expect(screen.getByRole("link", { name: "OPEN TAAK 4" })).toHaveAttribute(
       "href",
-      paths.task("021118b9-bc59-11ee-b651-366634c97df6"),
+      paths.case("66fecaa3-24b4-4739-a7c8-eb58f39e9aae"),
     );
   });
 });

@@ -59,7 +59,12 @@ const ThemeOverviewPage = ({
     <PageGrid>
       <PageHeader title={intl.formatMessage({ id: `pageTitles.${slug}` })} />
       {Boolean(fetchTasksLength) && (
-        <TasksList loading={loading} error={Boolean(taskError)} tasks={tasks} />
+        <TasksList
+          loading={loading}
+          error={Boolean(taskError)}
+          tasks={tasks}
+          openInContext={true}
+        />
       )}
       {Boolean(fetchCasesLength) && (
         <CasesList

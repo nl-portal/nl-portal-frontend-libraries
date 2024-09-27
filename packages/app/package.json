@@ -16,32 +16,27 @@
     "test:watch": "vitest --watch"
   },
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.411",
-    "@gemeente-denhaag/icons": "0.2.3-alpha.409",
-    "@gemeente-denhaag/link": "0.2.3-alpha.409",
-    "@gemeente-denhaag/typography": "0.2.3-alpha.409",
+    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.412",
+    "@gemeente-denhaag/icons": "0.2.3-alpha.410",
+    "@gemeente-denhaag/link": "0.2.3-alpha.410",
+    "@gemeente-denhaag/typography": "0.2.3-alpha.410",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
     "@nl-portal/nl-portal-user-interface": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.23.1"
+    "react-router-dom": "^6.25.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
-    "@types/react": "^18.3.2",
+    "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.9.0",
-    "@typescript-eslint/parser": "^7.9.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
-    "rimraf": "^5.0.7",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.11",
-    "vitest": "^1.6.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.5",
+    "vitest": "^2.0.4",
     "wait-on": "^7.2.0"
   }
 }

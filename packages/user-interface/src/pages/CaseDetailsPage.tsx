@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import {
   useGetZaakQuery,
   useGetTakenV2Query,
@@ -7,6 +7,8 @@ import {
   ContactMoment,
   ZaakStatus,
 } from "@nl-portal/nl-portal-api";
+import { Alert } from "@gemeente-denhaag/alert";
+import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -19,6 +21,9 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import SectionHeader from "../components/SectionHeader";
+import useOgonePaymentRegistration, {
+  PaymentStatus,
+} from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
 import TableList from "../components/TableList";
 
@@ -33,6 +38,7 @@ const CaseDetailsPage = ({
 }: CasePageProps) => {
   const intl = useIntl();
   const { id } = useParams();
+  const { currentLocale } = useContext(LocaleContext);
   const {
     data: caseData,
     loading: caseLoading,
@@ -45,9 +51,18 @@ const CaseDetailsPage = ({
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
+  const { paymentStatus, finishedTaskId } = useOgonePaymentRegistration();
 
   const loading = caseLoading || taskLoading || momentsLoading;
-  const tasks = tasksResult?.getTakenV2.content as TaakV2[] | undefined;
+
+  // Remove task with the finishedTaskId to prevent race condition with the payment handling in the backend
+  const tasks = (
+    paymentStatus === PaymentStatus.SUCCESS && finishedTaskId
+      ? tasksResult?.getTakenV2.content.filter(
+          (item) => item.id !== finishedTaskId,
+        )
+      : tasksResult?.getTakenV2.content
+  ) as TaakV2[] | undefined;
 
   const details = React.useMemo(() => {
     if (!caseData?.getZaak) return [];
@@ -70,7 +85,7 @@ const CaseDetailsPage = ({
       });
 
     return array;
-  }, [caseData]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [caseData, currentLocale]);
 
   const contactItems = React.useMemo(() => {
     if (!momentsData?.getObjectContactMomenten) return [];
@@ -95,7 +110,7 @@ const CaseDetailsPage = ({
   React.useEffect(() => {
     if (!caseData) return;
     getMomenten({ variables: { objectUrl: caseData.getZaak.url } });
-  }, [caseData]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [caseData]);
 
   if (!caseError) {
     <div>
@@ -117,7 +132,22 @@ const CaseDetailsPage = ({
               id: `case.${caseData?.getZaak.zaaktype.identificatie}.title`,
             })
           }
-        />
+        >
+          {paymentStatus === PaymentStatus.SUCCESS && (
+            <Alert
+              variant="success"
+              title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
+              text={intl.formatMessage({ id: "task.paymentSuccessText" })}
+            />
+          )}
+          {paymentStatus === PaymentStatus.FAILURE && (
+            <Alert
+              variant="error"
+              title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
+              text={intl.formatMessage({ id: "task.paymentFailureText" })}
+            />
+          )}
+        </PageHeader>
       </div>
       <TasksList
         loading={loading}

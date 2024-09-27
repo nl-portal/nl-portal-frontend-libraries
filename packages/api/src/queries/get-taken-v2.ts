@@ -17,11 +17,16 @@ export const QUERY_GET_TAKEN_V2 = gql`
         url {
           uri
         }
-        formtaak {
+        portaalformulier {
           formulier {
             soort
             value
           }
+        }
+        ogonebetaling {
+          bedrag
+          betaalkenmerk
+          pspid
         }
         titel
         status

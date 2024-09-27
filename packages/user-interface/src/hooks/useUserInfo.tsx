@@ -40,7 +40,7 @@ export const useUserInfo = () => {
         loadGemachtigde();
       }
     }
-  }, [decodedToken]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [decodedToken]);
 
   useEffect(() => {
     const name = getNameString(persoonData?.getPersoon?.naam);

@@ -3,7 +3,7 @@ import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { FormattedMessage } from "react-intl";
-import { BadgeCounter } from "@gemeente-denhaag/components-react";
+import { BadgeCounter } from "@gemeente-denhaag/badge-counter";
 import styles from "./MenuItem.module.scss";
 import LayoutContext from "../contexts/LayoutContext";
 import { NavigationItem } from "../interfaces/navigation-item";

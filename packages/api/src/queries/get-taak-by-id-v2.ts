@@ -12,7 +12,7 @@ export const QUERY_GET_TAAK_BY_ID_V2 = gql`
       url {
         uri
       }
-      formtaak {
+      portaalformulier {
         formulier {
           soort
           value

@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import useSize from "@react-hook/size";
 import useScrollPosition from "@react-hook/window-scroll";
-import { IconButton } from "@gemeente-denhaag/components-react";
+import { IconButton } from "@gemeente-denhaag/iconbutton";
 import { CloseIcon } from "@gemeente-denhaag/icons";
 import ResponsiveContent from "@gemeente-denhaag/responsive-content";
 import Skeleton from "react-loading-skeleton";
@@ -75,7 +75,7 @@ const Header = ({
     if (height !== headerHeight) {
       setHeaderHeight(height);
     }
-  }, [height, headerHeight]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [height, headerHeight]);
 
   useEffect(() => {
     const scrollDown = previousScrollY < scrollY;
@@ -105,7 +105,7 @@ const Header = ({
     }
 
     setPreviousScrollY(scrollY);
-  }, [scrollY, headerFixed, headerMarginTop]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [scrollY, headerFixed, headerMarginTop]);
 
   useEffect(() => {
     if (menuOpened || mobileMenuOpened) {
@@ -116,7 +116,7 @@ const Header = ({
     if (headerFixed) {
       setHeaderMarginTop(MOBILE_HEADER_HEIGHT);
     }
-  }, [isTablet, headerFixed]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isTablet, headerFixed]);
 
   return (
     <div

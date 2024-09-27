@@ -25,6 +25,13 @@ export const EN_GB_MESSAGES: Messages = {
     "menu.open": "Open menu",
     "titles.currentCases": "Current cases",
     "titles.completedCases": "Closed cases",
+    "noMatchPage.title": "Page not found",
+    "noMatchPage.text":
+      "The page you were looking for could not be found. It may have been deleted, renamed, or did not exist. You can search for information via the search function at the top or via the homepage. <link>Go to the overview.</link>",
+    "noMatchPage.contact.title": "Contact the editors",
+    "noMatchPage.contact.text":
+      "Do you believe that the information is not on the website, but that it should be? Then send a <link>message to the municipality.</link>",
+    "noMatchPage.contact.href": "https://www.google.com",
     "overview.defaultFormTitle": "Lodge an objection",
     "overview.showAllCases": "View all cases",
     "overview.currentCases": "My current cases",
@@ -96,6 +103,17 @@ export const EN_GB_MESSAGES: Messages = {
     "taskDetails.fetchError": "Something went wrong, please try again later.",
     "taskDetails.completeTitle": "Task completed",
     "taskDetails.completeDescription": "The task is successfully completed.",
+    "task.portaalformulier.button": "Provide information",
+    "task.ogonebetaling.button": "Pay",
+    "task.fetchError": "There was an error, try again later.",
+    "task.completeTitle": "Task completed",
+    "task.completeDescription": "The task is successfully completed.",
+    "task.paymentFailureText":
+      "Unfortunately the payment was not successful. Try again later.",
+    "task.paymentFailureTitle": "Payment failed",
+    "task.paymentSuccessText":
+      "You will receive a confirmation email as soon as possible.",
+    "task.paymentSuccessTitle": "Success, you have paid.",
     "overviewpage.title": "Welcome {userName}",
     "overview.subTitle": "Authorised for {volmachtgever}",
     "actionLabels.today": "today",
