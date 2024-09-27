@@ -4,8 +4,6 @@ import {
   CasesPage,
   EditAccountPage,
   MessageDetailsPage,
-  MessagesPage,
-  MessagePage,
   NoMatchPage,
   OverviewPage,
   TasksPage,

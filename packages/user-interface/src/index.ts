@@ -25,7 +25,6 @@ export { default as CasesPage } from "./pages/CasesPage";
 export { default as EditAccountPage } from "./pages/EditAccountPage";
 export { default as MessagesPage } from "./pages/MessagesPage";
 export { default as MessageDetailsPage } from "./pages/MessageDetailsPage";
-export { default as MessagePage } from "./pages/MessagePage";
 export { default as NoMatchPage } from "./pages/NoMatchPage";
 export { default as OverviewPage } from "./pages/OverviewPage";
 export { default as TasksPage } from "./pages/TasksPage";
