@@ -12,13 +12,12 @@ const useOgonePaymentRegistration = () => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
   const [finishedTaskId, setFinishedTaskId] = useState<string | undefined>();
   const { restUri } = useContext(ApiContext);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
 
   useEffect(() => {
     if (type === "ogone" && typeof paymentStatus === "undefined") {
       setPaymentStatus(PaymentStatus.IN_PROGRESS);
-      searchParams.delete("type");
       fetch(`${restUri}/payment/ogone/postsale?${searchParams.toString()}`)
         .then((response) => {
           if (response.ok) {
@@ -35,8 +34,8 @@ const useOgonePaymentRegistration = () => {
         })
         .finally(() => {
           // Clear the Ogone return parameters
-          const newSearchParams = new URLSearchParams();
-          setSearchParams(newSearchParams);
+          //const newSearchParams = new URLSearchParams();
+          //setSearchParams(newSearchParams);
         });
     }
   }, [type, paymentStatus]);
