@@ -14,9 +14,7 @@ interface Props {
   slug: string;
   productType: string;
   loading?: boolean;
-  showTasks?: boolean;
   fetchTasksLength?: number;
-  showCases?: boolean;
   fetchCasesLength?: number;
   children?: React.ReactNode;
 }
