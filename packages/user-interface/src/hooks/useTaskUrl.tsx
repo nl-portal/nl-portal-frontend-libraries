@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 import {
   TaakKoppelingRegistratie,

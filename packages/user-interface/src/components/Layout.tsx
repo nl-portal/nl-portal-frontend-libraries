@@ -11,7 +11,6 @@ import Header from "./Header";
 import Menu from "./Menu";
 import { PortalFooter } from "../interfaces/portal-footer";
 import Footer from "./Footer";
-import LayoutProvider from "../providers/LayoutProvider";
 import FormIoUploader from "./FormIoUploader";
 import styles from "./Layout.module.scss";
 import { HelmetProvider } from "react-helmet-async";
@@ -19,6 +18,7 @@ import { Outlet } from "react-router-dom";
 import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";
+import { LayoutProvider } from "../contexts/LayoutContext";
 
 interface LayoutComponentProps {
   navigationItems: NavigationItem[][];

@@ -8,7 +8,7 @@ import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import { MessageType } from "../components/Message";
 import { messages } from "./MessagesPage";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 const MessagePage = () => {
   const { id } = useParams();
