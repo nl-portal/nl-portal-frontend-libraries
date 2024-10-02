@@ -16,17 +16,13 @@ import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
 import styles from "./TaskPage.module.scss";
 import { useParams } from "react-router-dom";
-import BackLink, { BackLinkProps } from "../components/BackLink";
+import BackLink from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
 
 Formio.use(ProtectedEval);
 
-interface TaskPageProps {
-  backlink?: BackLinkProps;
-}
-
-const TaskPage = ({ backlink = {} }: TaskPageProps) => {
+const TaskPage = () => {
   const { id } = useParams();
   const intl = useIntl();
   const [loading, setLoading] = useState(true);
@@ -159,7 +155,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   if (submitted) {
     return (
       <>
-        {backlink && <BackLink {...backlink} />}
+        <BackLink />
         <Alert
           variant="success"
           title={intl.formatMessage({ id: "task.completeTitle" })}
@@ -172,7 +168,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   if (!formDefinitionUrl && !formDefinitionId) {
     return (
       <>
-        {backlink && <BackLink {...backlink} />}
+        <BackLink />
         <Alert
           variant="error"
           title={intl.formatMessage({ id: "task.fetchError" })}
@@ -184,7 +180,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
 
   return (
     <>
-      {backlink && <BackLink {...backlink} />}
+      <BackLink />
       <div className={styles.bootstrap}>
         <Form
           form={

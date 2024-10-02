@@ -36,7 +36,7 @@ const MessagePage = () => {
   return (
     <PageGrid>
       <div>
-        <BackLink routePath={paths.messages} />
+        <BackLink href={paths.messages} />
         <PageHeader loading={loading} title={!loading && message.titel} />
       </div>
       <TasksList

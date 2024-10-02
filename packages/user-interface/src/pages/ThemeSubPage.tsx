@@ -2,8 +2,6 @@ import { useIntl } from "react-intl";
 import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
-import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 interface Props {
   slug: string;
@@ -17,12 +15,11 @@ const ThemeSubPage = ({
   children,
 }: Props) => {
   const intl = useIntl();
-  const { paths } = useOutletContext<RouterOutletContext>();
 
   return (
     <PageGrid>
       <div>
-        <BackLink routePath={paths.themeOverview(slug)} />
+        <BackLink />
         <PageHeader title={intl.formatMessage({ id: titleTranslationId })} />
       </div>
       {children}

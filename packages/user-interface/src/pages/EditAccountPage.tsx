@@ -76,7 +76,7 @@ const EditAccountPage = () => {
   return (
     <PageGrid>
       <div>
-        <BackLink routePath={paths.account} />
+        <BackLink href={paths.account} />
         <PageHeader
           title={
             currentLocale.toLowerCase().includes("nl")
