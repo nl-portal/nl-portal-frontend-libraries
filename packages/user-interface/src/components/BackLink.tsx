@@ -16,8 +16,6 @@ const BackLink = ({ href, children }: Props) => {
   const { hrefLang } = useContext(LocaleContext);
   const { history } = useContext(LayoutContext);
 
-  console.log(href, history[1]);
-
   if (!href && !history[1]) return null;
 
   return (
