@@ -8,7 +8,7 @@ import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import { MessageType } from "../components/Message";
 import { messages } from "./MessagesPage";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 const MessagePage = () => {
   const { id } = useParams();
@@ -36,7 +36,7 @@ const MessagePage = () => {
   return (
     <PageGrid>
       <div>
-        <BackLink routePath={paths.messages} />
+        <BackLink href={paths.messages} />
         <PageHeader loading={loading} title={!loading && message.titel} />
       </div>
       <TasksList

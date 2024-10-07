@@ -16,7 +16,7 @@ import ContactTimeline from "@gemeente-denhaag/contact-timeline";
 import "@utrecht/component-library-css";
 import DocumentsList from "../components/DocumentsList";
 import StatusHistory from "../components/StatusHistory";
-import BackLink, { BackLinkProps } from "../components/BackLink";
+import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
@@ -29,13 +29,9 @@ import TableList from "../components/TableList";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
-  backlink?: BackLinkProps;
 }
 
-const CasePage = ({
-  showContactTimeline = false,
-  backlink = {},
-}: CasePageProps) => {
+const CasePage = ({ showContactTimeline = false }: CasePageProps) => {
   const intl = useIntl();
   const { id } = useParams();
   const { currentLocale } = useContext(LocaleContext);
@@ -121,7 +117,7 @@ const CasePage = ({
   return (
     <PageGrid>
       <div>
-        {backlink && <BackLink {...backlink} />}
+        <BackLink />
         <PageHeader
           loading={loading}
           title={

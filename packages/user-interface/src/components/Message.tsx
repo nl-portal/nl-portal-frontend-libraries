@@ -2,7 +2,7 @@ import PortalLink from "./PortalLink";
 import { ActionSingle } from "@gemeente-denhaag/action";
 import useActionLabels from "../hooks/useActionLabels";
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { FormattedMessage } from "react-intl";
 import { StatusBadge } from "@gemeente-denhaag/status-badge";
 import styles from "./Message.module.scss";

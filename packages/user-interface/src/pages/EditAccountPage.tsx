@@ -17,7 +17,7 @@ import styles from "./EditAccountPage.module.scss";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import BackLink from "../components/BackLink";
 
 const EditAccountPage = () => {
@@ -76,7 +76,7 @@ const EditAccountPage = () => {
   return (
     <PageGrid>
       <div>
-        <BackLink routePath={paths.account} />
+        <BackLink href={paths.account} />
         <PageHeader
           title={
             currentLocale.toLowerCase().includes("nl")
