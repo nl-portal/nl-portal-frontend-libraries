@@ -15,11 +15,14 @@ export { default as TableList } from "./components/TableList";
 export { default as Table } from "./components/Table";
 export * from "./components/Table";
 export { default as SectionHeader } from "./components/SectionHeader";
+export { default as Skeleton } from "./components/Skeleton";
+export * from "./components/Skeleton";
 
 export * from "./interfaces/navigation-item";
 export * from "./interfaces/paths";
 export * from "./interfaces/portal-footer";
 
+export { default as useActionLabels } from "./hooks/useActionLabels";
 export { default as useUserInfo } from "./hooks/useUserInfo";
 export { default as useDownload } from "./hooks/useDownload";
 
