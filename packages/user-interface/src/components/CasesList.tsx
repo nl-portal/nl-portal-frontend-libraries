@@ -14,6 +14,7 @@ interface Props {
   loading?: boolean;
   error?: boolean;
   errorTranslationId?: string;
+  showEmpty?: boolean;
   emptyTranslationId?: string;
   titleTranslationId?: string | null;
   readMoreLink?: string;
@@ -30,6 +31,7 @@ const CasesList = ({
   loading,
   error,
   errorTranslationId = "casesList.fetchError",
+  showEmpty = true,
   emptyTranslationId = "casesList.empty",
   titleTranslationId = "casesList.title",
   readMoreLink,
@@ -79,13 +81,15 @@ const CasesList = ({
       </section>
     );
 
-  if (!cases || cases.length === 0)
+  if (!cases || cases.length === 0) {
+    if (!showEmpty) return null;
     return (
       <section className={styles["cases-list"]}>
         <SectionHeader title={title} />
         <Paragraph>{emptyMessage}</Paragraph>
       </section>
     );
+  }
 
   return (
     <section className={styles["cases-list"]}>
