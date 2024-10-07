@@ -14,9 +14,9 @@ interface Props {
   error?: boolean;
   errorTranslationId?: string;
   showEmpty?: boolean;
-  openInContext?: boolean;
   emptyTranslationId?: string;
   titleTranslationId?: string | null;
+  openInContext?: boolean;
   readMoreLink?: string;
   readMoreTranslationId?: string | null;
   totalAmount?: number;
