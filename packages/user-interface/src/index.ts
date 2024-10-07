@@ -6,6 +6,8 @@ export { default as DocumentsList } from "./components/DocumentsList";
 export { default as Heading } from "./components/Heading";
 export * from "./components/Heading";
 export { default as Layout } from "./components/Layout";
+export { default as LinksList } from "./components/LinksList";
+export * from "./components/LinksList";
 export { default as PageHeader } from "./components/PageHeader";
 export { default as PageGrid } from "./components/PageGrid";
 export { default as PortalLink } from "./components/PortalLink";
