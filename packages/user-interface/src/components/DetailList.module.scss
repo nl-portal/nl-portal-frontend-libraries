@@ -32,6 +32,16 @@
   }
 }
 
+.detail-list__description {
+  justify-content: start;
+  flex: 0 0 30%;
+}
+
+.detail-list__value {
+  justify-content: start;
+  flex: 0 0 30%;
+}
+
 .detail-list__value-edit {
   margin-block-end: var(--nlportal-space-block-md, 1rem);
   display: flex;

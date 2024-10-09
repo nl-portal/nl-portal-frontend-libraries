@@ -4,8 +4,9 @@ import {
   MaatschappelijkeActiviteit,
   Persoon,
   useGetBedrijfQuery,
-  useGetBurgerProfielQuery,
   useGetPersoonDataQuery,
+  useGetUserDigitaleAdressenQuery,
+  usePartijEnabledQuery,
 } from "@nl-portal/nl-portal-api";
 import styles from "./AccountPage.module.scss";
 import DetailList from "../components/DetailList";
@@ -35,8 +36,10 @@ const AccountPage = ({
   showNotificationSubSection = true,
 }: AccountPageProps) => {
   const { isPerson } = useUserInfo();
+  const { data: partijType, loading: partijTypeLoading } =
+    usePartijEnabledQuery();
   const { data: contactData, loading: contactLoading } =
-    useGetBurgerProfielQuery({ skip: !isPerson });
+    useGetUserDigitaleAdressenQuery({ skip: !isPerson || !partijType });
   const { data: personData, loading: personLoading } = useGetPersoonDataQuery({
     skip: !isPerson,
   });
@@ -44,7 +47,8 @@ const AccountPage = ({
     skip: isPerson,
   });
 
-  const loading = personLoading || companyLoading || contactLoading;
+  const loading =
+    personLoading || companyLoading || contactLoading || partijTypeLoading;
   const person = personData?.getPersoon as Persoon | undefined;
   const company = companyData?.getBedrijf as
     | MaatschappelijkeActiviteit
@@ -120,27 +124,24 @@ const AccountPage = ({
   return (
     <PageGrid>
       <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
-      <div>
-        <Heading as="h3" className={styles["account__sub-header"]}>
-          <FormattedMessage id="account.contactHeader" />
-        </Heading>
-        <DetailList
-          details={[
-            {
-              translationKey: "emailadres",
-              value: contactData?.getBurgerProfiel?.emailadres,
-              showEditButton: true,
-              loading,
-            },
-            {
-              translationKey: "telefoonnummer",
-              value: contactData?.getBurgerProfiel?.telefoonnummer,
-              showEditButton: true,
-              loading,
-            },
-          ]}
-        />
-      </div>
+      {partijType?.__type && (
+        <div>
+          <Heading as="h3" className={styles["account__sub-header"]}>
+            <FormattedMessage id="account.contactHeader" />
+          </Heading>
+          <DetailList
+            details={
+              contactData?.getUserDigitaleAdresen?.map((entry) => ({
+                translationKey: entry.type.toLowerCase(),
+                loading: loading,
+                value: entry.waarde,
+                description: entry.omschrijving,
+                showEditButton: true,
+              })) || []
+            }
+          />
+        </div>
+      )}
       {showNotificationSubSection && (
         <div className={styles["account__sub-section"]}>
           <Heading as="h3" className={styles["account__sub-header"]}>

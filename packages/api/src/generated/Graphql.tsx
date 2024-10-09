@@ -34,6 +34,94 @@ export type Adres = {
   volledigAdres: Scalars['String']['output'];
 };
 
+export type Bericht = {
+  __typename?: 'Bericht';
+  berichtTekst: Scalars['String']['output'];
+  berichtType: BerichtType;
+  bijlages: Array<Scalars['String']['output']>;
+  einddatumHandelingstermijn: Scalars['Date']['output'];
+  geopend: Scalars['Boolean']['output'];
+  handelingsperspectief: BerichtHandelingsperspectief;
+  id?: Maybe<Scalars['UUID']['output']>;
+  identificatie: BerichtIdentificatie;
+  onderwerp: Scalars['String']['output'];
+  publicatiedatum: Scalars['Date']['output'];
+  referentie: Scalars['String']['output'];
+};
+
+export enum BerichtHandelingsperspectief {
+  Betalen = 'BETALEN',
+  InformatieOntvangen = 'INFORMATIE_ONTVANGEN',
+  InformatieVerstrekken = 'INFORMATIE_VERSTREKKEN'
+}
+
+export type BerichtIdentificatie = {
+  __typename?: 'BerichtIdentificatie';
+  type: Scalars['String']['output'];
+  value: Scalars['String']['output'];
+};
+
+export enum BerichtType {
+  Betaalverzoek = 'BETAALVERZOEK',
+  Notificatie = 'NOTIFICATIE',
+  Uitnodiging = 'UITNODIGING',
+  Verzoek = 'VERZOEK'
+}
+
+export type BerichtenPage = {
+  __typename?: 'BerichtenPage';
+  content: Array<Bericht>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type Betrokkene = {
+  __typename?: 'Betrokkene';
+  bezoekadres?: Maybe<OpenKlant2Adres>;
+  contactnaam?: Maybe<Contactnaam>;
+  correspondentieadres?: Maybe<OpenKlant2Adres>;
+  digitaleAdressen: Array<OpenKlant2ForeignKey>;
+  hadKlantcontact: OpenKlant2ForeignKey;
+  initiator: Scalars['Boolean']['output'];
+  organisatienaam: Scalars['String']['output'];
+  rol: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+  volledigeNaam: Scalars['String']['output'];
+  wasPartij?: Maybe<OpenKlant2ForeignKey>;
+};
+
+export type Categorie = {
+  __typename?: 'Categorie';
+  naam: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+};
+
+export type CategorieRelatie = {
+  __typename?: 'CategorieRelatie';
+  beginDatum?: Maybe<Scalars['Date']['output']>;
+  categorie?: Maybe<Categorie>;
+  eindDatum?: Maybe<Scalars['Date']['output']>;
+  partij?: Maybe<OpenKlant2ForeignKey>;
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+};
+
+export type CategorieRelatieForeignKey = {
+  __typename?: 'CategorieRelatieForeignKey';
+  beginDatum?: Maybe<Scalars['Date']['output']>;
+  categorieNaam: Scalars['String']['output'];
+  eindDatum?: Maybe<Scalars['Date']['output']>;
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+};
+
 export type ContactMoment = {
   __typename?: 'ContactMoment';
   bronorganisatie?: Maybe<Scalars['String']['output']>;
@@ -59,6 +147,57 @@ export type ContactMomentPage = {
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
+
+export type Contactnaam = {
+  __typename?: 'Contactnaam';
+  achternaam?: Maybe<Scalars['String']['output']>;
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voornaam?: Maybe<Scalars['String']['output']>;
+  voorvoegselAchternaam?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactnaamInput = {
+  achternaam?: InputMaybe<Scalars['String']['input']>;
+  voorletters?: InputMaybe<Scalars['String']['input']>;
+  voornaam?: InputMaybe<Scalars['String']['input']>;
+  voorvoegselAchternaam?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactpersoonIdentificatie = {
+  __typename?: 'ContactpersoonIdentificatie';
+  contactnaam?: Maybe<Contactnaam>;
+  uuid?: Maybe<Scalars['UUID']['output']>;
+  volledigeNaam?: Maybe<Scalars['String']['output']>;
+  werkteVoorPartij?: Maybe<OpenKlant2ForeignKey>;
+};
+
+export type ContactpersoonIdentificatieInput = {
+  contactnaam?: InputMaybe<ContactnaamInput>;
+  uuid?: InputMaybe<Scalars['UUID']['input']>;
+  volledigeNaam?: InputMaybe<Scalars['String']['input']>;
+  werkteVoorPartij?: InputMaybe<OpenKlant2ForeignKeyInput>;
+};
+
+export type DigitaleAdresRequestInput = {
+  omschrijving: Scalars['String']['input'];
+  type: DigitaleAdresType;
+  uuid?: InputMaybe<Scalars['UUID']['input']>;
+  waarde: Scalars['String']['input'];
+};
+
+export type DigitaleAdresResponse = {
+  __typename?: 'DigitaleAdresResponse';
+  omschrijving: Scalars['String']['output'];
+  type: DigitaleAdresType;
+  uuid: Scalars['UUID']['output'];
+  waarde: Scalars['String']['output'];
+};
+
+export enum DigitaleAdresType {
+  Anders = 'ANDERS',
+  Email = 'EMAIL',
+  Telefoonnummer = 'TELEFOONNUMMER'
+}
 
 export type DmnResponse = {
   __typename?: 'DmnResponse';
@@ -113,6 +252,35 @@ export type Gemachtigde = {
   persoon?: Maybe<PersoonNaam>;
 };
 
+export type HadBetrokkenActoren = {
+  __typename?: 'HadBetrokkenActoren';
+  actoridentificator: OpenKlant2Identificator;
+  indicatieActief: Scalars['Boolean']['output'];
+  naam: Scalars['String']['output'];
+  soortActor: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+};
+
+export type HadKlantcontact = {
+  __typename?: 'HadKlantcontact';
+  gingOverOnderwerpobjecten: Array<OpenKlant2ForeignKey>;
+  hadBetrokkenActoren: Array<HadBetrokkenActoren>;
+  hadBetrokkenen: Array<OpenKlant2ForeignKey>;
+  indicatieContactGelukt: Scalars['Boolean']['output'];
+  inhoud: Scalars['String']['output'];
+  kanaal: Scalars['String']['output'];
+  leiddeTotInterneTaken: Array<OpenKlant2ForeignKey>;
+  nummer: Scalars['String']['output'];
+  omvatteBijlagen: Array<OpenKlant2ForeignKey>;
+  onderwerp: Scalars['String']['output'];
+  plaatsgevondenOp: Scalars['String']['output'];
+  taal: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+  vertrouwelijk: Scalars['Boolean']['output'];
+};
+
 export type HandelsNaam = {
   __typename?: 'HandelsNaam';
   naam: Scalars['String']['output'];
@@ -162,6 +330,12 @@ export type MaterieleRegistratie = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Create DigitaleAdres for User */
+  createUserDigitaleAdres?: Maybe<DigitaleAdresResponse>;
+  /** Create Partij for user */
+  createUserPartij?: Maybe<PartijResponse>;
+  /** Delete DigitaleAdres of User by Id */
+  deleteUserDigitaleAdres?: Maybe<Scalars['Boolean']['output']>;
   /** Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
   /** Prefill data to start a form */
@@ -176,6 +350,25 @@ export type Mutation = {
   updateBurgerProfiel?: Maybe<Klant>;
   /** Update product verbruiks object */
   updateProductVerbruiksObject: ProductVerbruiksObject;
+  /** Update DigitaleAdres of User */
+  updateUserDigitaleAdres?: Maybe<DigitaleAdresResponse>;
+  /** Update user Partij */
+  updateUserPartij?: Maybe<PartijResponse>;
+};
+
+
+export type MutationCreateUserDigitaleAdresArgs = {
+  digitaleAdresRequest: DigitaleAdresRequestInput;
+};
+
+
+export type MutationCreateUserPartijArgs = {
+  partijRequest: PartijRequestInput;
+};
+
+
+export type MutationDeleteUserDigitaleAdresArgs = {
+  digitaleAdresId: Scalars['UUID']['input'];
 };
 
 
@@ -186,9 +379,9 @@ export type MutationGenerateOgonePaymentArgs = {
 
 export type MutationPrefillArgs = {
   formulier: Scalars['String']['input'];
+  parameters: Scalars['JSON']['input'];
   productName: Scalars['String']['input'];
   productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  sources?: InputMaybe<Scalars['JSON']['input']>;
   staticData?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -222,6 +415,17 @@ export type MutationUpdateProductVerbruiksObjectArgs = {
   submission: Scalars['JSON']['input'];
 };
 
+
+export type MutationUpdateUserDigitaleAdresArgs = {
+  digitaleAdresId: Scalars['UUID']['input'];
+  digitaleAdresRequest: DigitaleAdresRequestInput;
+};
+
+
+export type MutationUpdateUserPartijArgs = {
+  partijRequest: PartijRequestInput;
+};
+
 export type OgoneBetaling = {
   __typename?: 'OgoneBetaling';
   bedrag: Scalars['Float']['output'];
@@ -245,6 +449,513 @@ export type OgonePaymentRequestInput = {
   successUrl?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
+
+export type OpenKlant2Adres = {
+  __typename?: 'OpenKlant2Adres';
+  adresregel1?: Maybe<Scalars['String']['output']>;
+  adresregel2?: Maybe<Scalars['String']['output']>;
+  adresregel3?: Maybe<Scalars['String']['output']>;
+  land?: Maybe<OpenKlant2Landcode>;
+  nummeraanduidingId?: Maybe<Scalars['String']['output']>;
+};
+
+export type OpenKlant2DigitaleAdres = {
+  __typename?: 'OpenKlant2DigitaleAdres';
+  adres: Scalars['String']['output'];
+  omschrijving: Scalars['String']['output'];
+  soortDigitaalAdres: Scalars['String']['output'];
+  url?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['UUID']['output']>;
+  verstrektDoorBetrokkene?: Maybe<OpenKlant2Uuid>;
+  verstrektDoorPartij?: Maybe<OpenKlant2Uuid>;
+};
+
+export type OpenKlant2ForeignKey = {
+  __typename?: 'OpenKlant2ForeignKey';
+  url: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenKlant2ForeignKeyInput = {
+  url: Scalars['String']['input'];
+  uuid: Scalars['UUID']['input'];
+};
+
+export type OpenKlant2Identificator = {
+  __typename?: 'OpenKlant2Identificator';
+  codeObjecttype: Scalars['String']['output'];
+  codeRegister: Scalars['String']['output'];
+  codeSoortObjectId: Scalars['String']['output'];
+  objectId: Scalars['String']['output'];
+};
+
+export enum OpenKlant2Landcode {
+  Abessinie = 'ABESSINIE',
+  AbuDhabi = 'ABU_DHABI',
+  Aden = 'ADEN',
+  Afghanistan = 'AFGHANISTAN',
+  Ajman = 'AJMAN',
+  Albanie = 'ALBANIE',
+  Algerije = 'ALGERIJE',
+  AmerikaanseMaagdeneilanden = 'AMERIKAANSE_MAAGDENEILANDEN',
+  Amerikaanssamoa = 'AMERIKAANSSAMOA',
+  Andorra = 'ANDORRA',
+  Angola = 'ANGOLA',
+  Anguilla = 'ANGUILLA',
+  Antigua = 'ANTIGUA',
+  AntiguaEnBarbuda = 'ANTIGUA_EN_BARBUDA',
+  Argentinie = 'ARGENTINIE',
+  Armenie = 'ARMENIE',
+  Aruba = 'ARUBA',
+  Ascension = 'ASCENSION',
+  Australie = 'AUSTRALIE',
+  AustralischeSalomonseilanden = 'AUSTRALISCHE_SALOMONSEILANDEN',
+  AustralischNieuwguinea = 'AUSTRALISCH_NIEUWGUINEA',
+  Azerbeidzjan = 'AZERBEIDZJAN',
+  Azoren = 'AZOREN',
+  Bahamas = 'BAHAMAS',
+  Bahrein = 'BAHREIN',
+  Bangladesh = 'BANGLADESH',
+  Barbados = 'BARBADOS',
+  Basutoland = 'BASUTOLAND',
+  Bechuanaland = 'BECHUANALAND',
+  Belarus = 'BELARUS',
+  Belau = 'BELAU',
+  Belgie = 'BELGIE',
+  Belgischcongo = 'BELGISCHCONGO',
+  Belize = 'BELIZE',
+  Benin = 'BENIN',
+  Bermuda = 'BERMUDA',
+  Bhutan = 'BHUTAN',
+  Bolivia = 'BOLIVIA',
+  Bonaire = 'BONAIRE',
+  BondsrepubliekDuitsland = 'BONDSREPUBLIEK_DUITSLAND',
+  Bosnieherzegovina = 'BOSNIEHERZEGOVINA',
+  Botswana = 'BOTSWANA',
+  Brazilie = 'BRAZILIE',
+  Britsafrika = 'BRITSAFRIKA',
+  Britsborneo = 'BRITSBORNEO',
+  BritseAntillen = 'BRITSE_ANTILLEN',
+  BritseMaagdeneilanden = 'BRITSE_MAAGDENEILANDEN',
+  BritseSalomonseilanden = 'BRITSE_SALOMONSEILANDEN',
+  Britsguyana = 'BRITSGUYANA',
+  Britshonduras = 'BRITSHONDURAS',
+  Britsindie = 'BRITSINDIE',
+  Britskameroen = 'BRITSKAMEROEN',
+  Britssomaliland = 'BRITSSOMALILAND',
+  BritsAntarctischTerritorium = 'BRITS_ANTARCTISCH_TERRITORIUM',
+  BritsIndischeOceaanterritorium = 'BRITS_INDISCHE_OCEAANTERRITORIUM',
+  BritsNoordborneo = 'BRITS_NOORDBORNEO',
+  BritsOostafrika = 'BRITS_OOSTAFRIKA',
+  BritsWestborneo = 'BRITS_WESTBORNEO',
+  BritsWestindie = 'BRITS_WESTINDIE',
+  Brunei = 'BRUNEI',
+  Bulgarije = 'BULGARIJE',
+  BurkinaFaso = 'BURKINA_FASO',
+  Burma = 'BURMA',
+  Burundi = 'BURUNDI',
+  Cabinda = 'CABINDA',
+  Caicoseilanden = 'CAICOSEILANDEN',
+  Cambodja = 'CAMBODJA',
+  Canada = 'CANADA',
+  CanarischeEilanden = 'CANARISCHE_EILANDEN',
+  CantonEnEnderbury = 'CANTON_EN_ENDERBURY',
+  Caymaneilanden = 'CAYMANEILANDEN',
+  CentraalafrikaanseRepubliek = 'CENTRAALAFRIKAANSE_REPUBLIEK',
+  Ceylon = 'CEYLON',
+  Chili = 'CHILI',
+  China = 'CHINA',
+  Christmaseiland = 'CHRISTMASEILAND',
+  Cocoseilanden = 'COCOSEILANDEN',
+  Colombia = 'COLOMBIA',
+  Comoren = 'COMOREN',
+  Congo = 'CONGO',
+  Congobrazzaville = 'CONGOBRAZZAVILLE',
+  Congokinshasa = 'CONGOKINSHASA',
+  Cookeilanden = 'COOKEILANDEN',
+  CostaRica = 'COSTA_RICA',
+  Cuba = 'CUBA',
+  Curacao = 'CURACAO',
+  Cyprus = 'CYPRUS',
+  Dahomey = 'DAHOMEY',
+  Dantzig = 'DANTZIG',
+  DemocratischeRepubliekCongo = 'DEMOCRATISCHE_REPUBLIEK_CONGO',
+  Denemarken = 'DENEMARKEN',
+  Djibouti = 'DJIBOUTI',
+  Dominica = 'DOMINICA',
+  DominicaanseRepubliek = 'DOMINICAANSE_REPUBLIEK',
+  Dubai = 'DUBAI',
+  DuitseDemocratischeRepubliek = 'DUITSE_DEMOCRATISCHE_REPUBLIEK',
+  Duitsland = 'DUITSLAND',
+  DuitsOostafrika = 'DUITS_OOSTAFRIKA',
+  DuitsZuidwestafrika = 'DUITS_ZUIDWESTAFRIKA',
+  Ecuador = 'ECUADOR',
+  Egypte = 'EGYPTE',
+  ElSalvador = 'EL_SALVADOR',
+  Equatoriaalguinea = 'EQUATORIAALGUINEA',
+  Eritrea = 'ERITREA',
+  Estland = 'ESTLAND',
+  Eswatini = 'ESWATINI',
+  Ethiopie = 'ETHIOPIE',
+  Faeroer = 'FAEROER',
+  Falklandeilanden = 'FALKLANDEILANDEN',
+  FederaleRepubliekJoegoslavie = 'FEDERALE_REPUBLIEK_JOEGOSLAVIE',
+  Fiji = 'FIJI',
+  Filipijnen = 'FILIPIJNEN',
+  Finland = 'FINLAND',
+  Frankrijk = 'FRANKRIJK',
+  Franscongo = 'FRANSCONGO',
+  Fransguyana = 'FRANSGUYANA',
+  Fransindie = 'FRANSINDIE',
+  Franskameroen = 'FRANSKAMEROEN',
+  Franspolynesie = 'FRANSPOLYNESIE',
+  Franssomaliland = 'FRANSSOMALILAND',
+  FransEquatoriaalafrika = 'FRANS_EQUATORIAALAFRIKA',
+  FransIndochina = 'FRANS_INDOCHINA',
+  FransTerritoriumVoorAfarsEnIssas = 'FRANS_TERRITORIUM_VOOR_AFARS_EN_ISSAS',
+  FransWestafrika = 'FRANS_WESTAFRIKA',
+  Fujairah = 'FUJAIRAH',
+  Gabon = 'GABON',
+  Gambia = 'GAMBIA',
+  GazastrookEnWestelijkeJordaanoever = 'GAZASTROOK_EN_WESTELIJKE_JORDAANOEVER',
+  Georgie = 'GEORGIE',
+  Ghana = 'GHANA',
+  Gibraltar = 'GIBRALTAR',
+  Gilberteilanden = 'GILBERTEILANDEN',
+  GilbertEnElliceeilanden = 'GILBERT_EN_ELLICEEILANDEN',
+  Goa = 'GOA',
+  Goudkust = 'GOUDKUST',
+  Grenada = 'GRENADA',
+  Griekenland = 'GRIEKENLAND',
+  Groenland = 'GROENLAND',
+  Guadeloupe = 'GUADELOUPE',
+  Guam = 'GUAM',
+  Guatemala = 'GUATEMALA',
+  Guinee = 'GUINEE',
+  Guineebissau = 'GUINEEBISSAU',
+  Guyana = 'GUYANA',
+  Haiti = 'HAITI',
+  Hawaiieilanden = 'HAWAIIEILANDEN',
+  Honduras = 'HONDURAS',
+  Hongarije = 'HONGARIJE',
+  Hongkong = 'HONGKONG',
+  Ierland = 'IERLAND',
+  Ifni = 'IFNI',
+  Ijsland = 'IJSLAND',
+  India = 'INDIA',
+  Indochina = 'INDOCHINA',
+  Indonesie = 'INDONESIE',
+  InternationaalGebied = 'INTERNATIONAAL_GEBIED',
+  Irak = 'IRAK',
+  Iran = 'IRAN',
+  Israel = 'ISRAEL',
+  Italiaanssomaliland = 'ITALIAANSSOMALILAND',
+  Italie = 'ITALIE',
+  Ivoorkust = 'IVOORKUST',
+  Jamaica = 'JAMAICA',
+  Japan = 'JAPAN',
+  Jemen = 'JEMEN',
+  Joegoslavie = 'JOEGOSLAVIE',
+  Johnston = 'JOHNSTON',
+  Johore = 'JOHORE',
+  Jordanie = 'JORDANIE',
+  Kaapverdie = 'KAAPVERDIE',
+  KaapverdischeEilanden = 'KAAPVERDISCHE_EILANDEN',
+  Kameroen = 'KAMEROEN',
+  Kanaaleilanden = 'KANAALEILANDEN',
+  Kashmir = 'KASHMIR',
+  Kazachstan = 'KAZACHSTAN',
+  Kedah = 'KEDAH',
+  KeizerWilhelmsland = 'KEIZER_WILHELMSLAND',
+  Kelantan = 'KELANTAN',
+  Kenya = 'KENYA',
+  Kirgizie = 'KIRGIZIE',
+  Kiribati = 'KIRIBATI',
+  Koeweit = 'KOEWEIT',
+  Korea = 'KOREA',
+  Kosovo = 'KOSOVO',
+  Kroatie = 'KROATIE',
+  Labuan = 'LABUAN',
+  Laos = 'LAOS',
+  Leewardeilanden = 'LEEWARDEILANDEN',
+  Lesotho = 'LESOTHO',
+  Letland = 'LETLAND',
+  Libanon = 'LIBANON',
+  Liberia = 'LIBERIA',
+  Libie = 'LIBIE',
+  Liechtenstein = 'LIECHTENSTEIN',
+  Litouwen = 'LITOUWEN',
+  Luxemburg = 'LUXEMBURG',
+  Macau = 'MACAU',
+  Macedonie = 'MACEDONIE',
+  Madagaskar = 'MADAGASKAR',
+  Madeiraeilanden = 'MADEIRAEILANDEN',
+  Malakka = 'MALAKKA',
+  Malawi = 'MALAWI',
+  Maldiven = 'MALDIVEN',
+  Maleisie = 'MALEISIE',
+  Mali = 'MALI',
+  Malta = 'MALTA',
+  Man = 'MAN',
+  Marianen = 'MARIANEN',
+  Marokko = 'MAROKKO',
+  Marshalleilanden = 'MARSHALLEILANDEN',
+  Martinique = 'MARTINIQUE',
+  Mauritanie = 'MAURITANIE',
+  Mauritius = 'MAURITIUS',
+  Mayotte = 'MAYOTTE',
+  Mexico = 'MEXICO',
+  Micronesia = 'MICRONESIA',
+  Midway = 'MIDWAY',
+  Moldavie = 'MOLDAVIE',
+  Monaco = 'MONACO',
+  Mongolie = 'MONGOLIE',
+  Montenegro = 'MONTENEGRO',
+  Montserrat = 'MONTSERRAT',
+  Mozambique = 'MOZAMBIQUE',
+  MuscatEnOman = 'MUSCAT_EN_OMAN',
+  Myanmar = 'MYANMAR',
+  Namibie = 'NAMIBIE',
+  Nauru = 'NAURU',
+  Nederland = 'NEDERLAND',
+  NederlandseAntillen = 'NEDERLANDSE_ANTILLEN',
+  Nederlandsindie = 'NEDERLANDSINDIE',
+  NederlandsNieuwguinea = 'NEDERLANDS_NIEUWGUINEA',
+  NegriSembilan = 'NEGRI_SEMBILAN',
+  Nepal = 'NEPAL',
+  Newfoundland = 'NEWFOUNDLAND',
+  Nicaragua = 'NICARAGUA',
+  Nieuwcaledonie = 'NIEUWCALEDONIE',
+  NieuweHebriden = 'NIEUWE_HEBRIDEN',
+  Nieuwzeeland = 'NIEUWZEELAND',
+  Niger = 'NIGER',
+  Nigeria = 'NIGERIA',
+  Niue = 'NIUE',
+  None = 'NONE',
+  Noordjemen = 'NOORDJEMEN',
+  Noordkorea = 'NOORDKOREA',
+  Noordrhodesie = 'NOORDRHODESIE',
+  Noordvietnam = 'NOORDVIETNAM',
+  Noorwegen = 'NOORWEGEN',
+  Norfolk = 'NORFOLK',
+  Nyasaland = 'NYASALAND',
+  Oekraine = 'OEKRAINE',
+  Oezbekistan = 'OEZBEKISTAN',
+  Oman = 'OMAN',
+  Oostenrijk = 'OOSTENRIJK',
+  Oostenrijkhongarije = 'OOSTENRIJKHONGARIJE',
+  Oppervolta = 'OPPERVOLTA',
+  Pacificeilanden = 'PACIFICEILANDEN',
+  Pahang = 'PAHANG',
+  Pakistan = 'PAKISTAN',
+  Palau = 'PALAU',
+  Palestina = 'PALESTINA',
+  Panama = 'PANAMA',
+  Panamakanaalzone = 'PANAMAKANAALZONE',
+  Papoeanieuwguinea = 'PAPOEANIEUWGUINEA',
+  Paraguay = 'PARAGUAY',
+  Perak = 'PERAK',
+  Perlis = 'PERLIS',
+  Peru = 'PERU',
+  Phoenixeilanden = 'PHOENIXEILANDEN',
+  Pitcairneilanden = 'PITCAIRNEILANDEN',
+  Polen = 'POLEN',
+  Portugal = 'PORTUGAL',
+  Portugeesafrika = 'PORTUGEESAFRIKA',
+  Portugeesguinee = 'PORTUGEESGUINEE',
+  Portugeesindie = 'PORTUGEESINDIE',
+  Portugeestimor = 'PORTUGEESTIMOR',
+  PortugeesOostafrika = 'PORTUGEES_OOSTAFRIKA',
+  PortugeesWestafrika = 'PORTUGEES_WESTAFRIKA',
+  PuertoRico = 'PUERTO_RICO',
+  Qatar = 'QATAR',
+  RasAlkhaimah = 'RAS_ALKHAIMAH',
+  RepubliekNoordmacedonie = 'REPUBLIEK_NOORDMACEDONIE',
+  Reunion = 'REUNION',
+  Rhodesie = 'RHODESIE',
+  Riukiueilanden = 'RIUKIUEILANDEN',
+  Roemenie = 'ROEMENIE',
+  Ruandaurundi = 'RUANDAURUNDI',
+  Rusland = 'RUSLAND',
+  RuslandOud = 'RUSLAND_OUD',
+  Rwanda = 'RWANDA',
+  Saarland = 'SAARLAND',
+  Saba = 'SABA',
+  Sabah = 'SABAH',
+  SaintKittsEnNevis = 'SAINT_KITTS_EN_NEVIS',
+  SaintKittsNevisEnAnguilla = 'SAINT_KITTS_NEVIS_EN_ANGUILLA',
+  SaintLucia = 'SAINT_LUCIA',
+  SaintPierreEnMiquelon = 'SAINT_PIERRE_EN_MIQUELON',
+  SaintVincent = 'SAINT_VINCENT',
+  SaintVincentEnDeGrenadines = 'SAINT_VINCENT_EN_DE_GRENADINES',
+  Salomonseilanden = 'SALOMONSEILANDEN',
+  Samoa = 'SAMOA',
+  SanMarino = 'SAN_MARINO',
+  Saoediarabie = 'SAOEDIARABIE',
+  SaoTomeEnPrincipe = 'SAO_TOME_EN_PRINCIPE',
+  Sarawak = 'SARAWAK',
+  Selangor = 'SELANGOR',
+  Senegal = 'SENEGAL',
+  Servie = 'SERVIE',
+  ServieEnMontenegro = 'SERVIE_EN_MONTENEGRO',
+  Seychellen = 'SEYCHELLEN',
+  SeychellenEnAmiranten = 'SEYCHELLEN_EN_AMIRANTEN',
+  Sharjah = 'SHARJAH',
+  Siam = 'SIAM',
+  SierraLeone = 'SIERRA_LEONE',
+  Sikkim = 'SIKKIM',
+  Singapore = 'SINGAPORE',
+  Sinthelena = 'SINTHELENA',
+  SintEustatius = 'SINT_EUSTATIUS',
+  SintMaarten = 'SINT_MAARTEN',
+  Slovenie = 'SLOVENIE',
+  Slowakije = 'SLOWAKIJE',
+  Soedan = 'SOEDAN',
+  Somalie = 'SOMALIE',
+  Sovjetunie = 'SOVJETUNIE',
+  SpaanseSahara = 'SPAANSE_SAHARA',
+  Spaansguinee = 'SPAANSGUINEE',
+  SpaansNoordafrika = 'SPAANS_NOORDAFRIKA',
+  Spanje = 'SPANJE',
+  Spitsbergen = 'SPITSBERGEN',
+  SriLanka = 'SRI_LANKA',
+  StraitsSettlements = 'STRAITS_SETTLEMENTS',
+  Suriname = 'SURINAME',
+  Svalbardeilanden = 'SVALBARDEILANDEN',
+  Swaziland = 'SWAZILAND',
+  Syrie = 'SYRIE',
+  Tadzjikistan = 'TADZJIKISTAN',
+  Taiwan = 'TAIWAN',
+  Tanganyika = 'TANGANYIKA',
+  Tanzania = 'TANZANIA',
+  Tasmanie = 'TASMANIE',
+  Thailand = 'THAILAND',
+  Tibet = 'TIBET',
+  TimorLeste = 'TIMOR_LESTE',
+  Togo = 'TOGO',
+  Tokelau = 'TOKELAU',
+  Tonga = 'TONGA',
+  Transjordanie = 'TRANSJORDANIE',
+  Trengganu = 'TRENGGANU',
+  TrinidadEnTobago = 'TRINIDAD_EN_TOBAGO',
+  TristanDaCunha = 'TRISTAN_DA_CUNHA',
+  TrucialOman = 'TRUCIAL_OMAN',
+  Tsjaad = 'TSJAAD',
+  Tsjechie = 'TSJECHIE',
+  Tsjechoslowakije = 'TSJECHOSLOWAKIJE',
+  Tunesie = 'TUNESIE',
+  Turkije = 'TURKIJE',
+  Turkmenistan = 'TURKMENISTAN',
+  Turkseilanden = 'TURKSEILANDEN',
+  TurksEnCaicoseilanden = 'TURKS_EN_CAICOSEILANDEN',
+  Tuvalu = 'TUVALU',
+  Uganda = 'UGANDA',
+  UmmAlqaiwain = 'UMM_ALQAIWAIN',
+  Uruguay = 'URUGUAY',
+  Urundi = 'URUNDI',
+  Vanuatu = 'VANUATU',
+  Vaticaanstad = 'VATICAANSTAD',
+  Venezuela = 'VENEZUELA',
+  VerenigdeArabischeEmiraten = 'VERENIGDE_ARABISCHE_EMIRATEN',
+  VerenigdeArabischeRepubliek = 'VERENIGDE_ARABISCHE_REPUBLIEK',
+  VerenigdeStatenVanAmerika = 'VERENIGDE_STATEN_VAN_AMERIKA',
+  VerenigdKoninkrijk = 'VERENIGD_KONINKRIJK',
+  Vietnam = 'VIETNAM',
+  Wake = 'WAKE',
+  WallisEnFutuna = 'WALLIS_EN_FUTUNA',
+  WestelijkeSahara = 'WESTELIJKE_SAHARA',
+  Westsamoa = 'WESTSAMOA',
+  Windwardeilanden = 'WINDWARDEILANDEN',
+  Zaire = 'ZAIRE',
+  Zambia = 'ZAMBIA',
+  Zanzibar = 'ZANZIBAR',
+  Zimbabwe = 'ZIMBABWE',
+  Zuidafrika = 'ZUIDAFRIKA',
+  ZuidarabischeFederatie = 'ZUIDARABISCHE_FEDERATIE',
+  Zuidjemen = 'ZUIDJEMEN',
+  Zuidkorea = 'ZUIDKOREA',
+  Zuidrhodesie = 'ZUIDRHODESIE',
+  Zuidsoedan = 'ZUIDSOEDAN',
+  Zuidvietnam = 'ZUIDVIETNAM',
+  Zuidwestafrika = 'ZUIDWESTAFRIKA',
+  Zweden = 'ZWEDEN',
+  Zwitserland = 'ZWITSERLAND'
+}
+
+/** A Type that represents a Klantinteracties API Partij object */
+export type OpenKlant2Partij = {
+  __typename?: 'OpenKlant2Partij';
+  betrokkenen?: Maybe<Array<OpenKlant2ForeignKey>>;
+  bezoekadres?: Maybe<OpenKlant2Adres>;
+  categorieRelaties?: Maybe<Array<CategorieRelatieForeignKey>>;
+  correspondentieadres?: Maybe<OpenKlant2Adres>;
+  digitaleAdressen?: Maybe<Array<OpenKlant2ForeignKey>>;
+  expand?: Maybe<PartijExpand>;
+  indicatieActief: Scalars['Boolean']['output'];
+  indicatieGeheimhouding: Scalars['Boolean']['output'];
+  interneNotitie?: Maybe<Scalars['String']['output']>;
+  nummer?: Maybe<Scalars['String']['output']>;
+  partijIdentificatie: PartijIdentificatie;
+  partijIdentificatoren?: Maybe<Array<OpenKlant2ForeignKey>>;
+  rekeningnummers?: Maybe<Array<OpenKlant2ForeignKey>>;
+  soortPartij: SoortPartij;
+  url?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['UUID']['output']>;
+  vertegenwoordigden?: Maybe<Array<OpenKlant2ForeignKey>>;
+  voorkeursDigitaalAdres?: Maybe<OpenKlant2ForeignKey>;
+  voorkeursRekeningnummer?: Maybe<OpenKlant2ForeignKey>;
+  voorkeurstaal?: Maybe<Scalars['String']['output']>;
+};
+
+export type OpenKlant2Uuid = {
+  __typename?: 'OpenKlant2UUID';
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OrganisatieIdentificatie = {
+  __typename?: 'OrganisatieIdentificatie';
+  naam?: Maybe<Scalars['String']['output']>;
+};
+
+export type OrganisatieIdentificatieInput = {
+  naam?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PartijExpand = {
+  __typename?: 'PartijExpand';
+  betrokkenen?: Maybe<Array<Betrokkene>>;
+  categorieRelaties?: Maybe<Array<CategorieRelatie>>;
+  digitaleAdressen?: Maybe<Array<OpenKlant2DigitaleAdres>>;
+  hadKlantcontact?: Maybe<Array<HadKlantcontact>>;
+};
+
+export type PartijIdentificatie = ContactpersoonIdentificatie | OrganisatieIdentificatie | PersoonsIdentificatie;
+
+export type PartijRequestInput = {
+  contactpersoonIdentificatie?: InputMaybe<ContactpersoonIdentificatieInput>;
+  indicatieActief: Scalars['Boolean']['input'];
+  indicatieGeheimhouding: Scalars['Boolean']['input'];
+  organisatieIdentificatie?: InputMaybe<OrganisatieIdentificatieInput>;
+  persoonsIdentificatie?: InputMaybe<PersoonsIdentificatieInput>;
+  type: PartijType;
+};
+
+export type PartijResponse = {
+  __typename?: 'PartijResponse';
+  contactpersoonIdentificatie?: Maybe<ContactpersoonIdentificatie>;
+  digitaleAdressen?: Maybe<Array<OpenKlant2DigitaleAdres>>;
+  indicatieActief: Scalars['Boolean']['output'];
+  indicatieGeheimhouding: Scalars['Boolean']['output'];
+  organisatieIdentificatie?: Maybe<OrganisatieIdentificatie>;
+  persoonsIdentificatie?: Maybe<PersoonsIdentificatie>;
+  type: PartijType;
+};
+
+export enum PartijType {
+  Contactpersoon = 'CONTACTPERSOON',
+  Organisatie = 'ORGANISATIE',
+  Persoon = 'PERSOON'
+}
 
 export type PaymentField = {
   __typename?: 'PaymentField';
@@ -360,6 +1071,17 @@ export type PersoonVerblijfplaats = {
   woonplaats?: Maybe<Scalars['String']['output']>;
 };
 
+export type PersoonsIdentificatie = {
+  __typename?: 'PersoonsIdentificatie';
+  contactnaam?: Maybe<Contactnaam>;
+  volledigeNaam?: Maybe<Scalars['String']['output']>;
+};
+
+export type PersoonsIdentificatieInput = {
+  contactnaam?: InputMaybe<ContactnaamInput>;
+  volledigeNaam?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type PrefillResponse = {
   __typename?: 'PrefillResponse';
   formulierUrl?: Maybe<Scalars['String']['output']>;
@@ -406,7 +1128,7 @@ export type ProductPage = {
 
 export type ProductType = {
   __typename?: 'ProductType';
-  /** Get list of available beslistabellen, with their object configurations */
+  /** Get list of available beslistabellen */
   beslistabellen?: Maybe<Array<Scalars['String']['output']>>;
   eigenschappen?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['UUID']['output']>;
@@ -434,8 +1156,14 @@ export type Query = {
    * @deprecated This method is not used by the NL Portal frontend and is not being replaced.
    */
   allFormDefinitions: Array<FormDefinition>;
+  /** Find the Partij of the authenticated user. */
+  findUserPartij?: Maybe<OpenKlant2Partij>;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
+  /** Gets a single Bericht by Id */
+  getBericht?: Maybe<Bericht>;
+  /** Returns a paginated list of all Berichten */
+  getBerichten: BerichtenPage;
   /** Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
   getBewonersAantal?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
@@ -500,6 +1228,12 @@ export type Query = {
    * @deprecated Replaced by getTaken
    */
   getTasks: TaakPage;
+  /** Returns the total amount of unopened Berichten */
+  getUnopenedBerichtenCount: Scalars['Int']['output'];
+  /** Get DigitaleAdressen of authenticated user. */
+  getUserDigitaleAdresen?: Maybe<Array<DigitaleAdresResponse>>;
+  /** Get Partij by Id for authenticated user. */
+  getUserPartij?: Maybe<OpenKlant2Partij>;
   /** Gets a zaak by id */
   getZaak: Zaak;
   /**
@@ -511,6 +1245,17 @@ export type Query = {
    *
    */
   getZaken: ZaakPage;
+};
+
+
+export type QueryGetBerichtArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetBerichtenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -557,11 +1302,8 @@ export type QueryGetProductArgs = {
 
 
 export type QueryGetProductDecisionArgs = {
-  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
   key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  sources?: InputMaybe<Scalars['JSON']['input']>;
+  productId: Scalars['UUID']['input'];
 };
 
 
@@ -635,6 +1377,11 @@ export type QueryGetTasksArgs = {
 };
 
 
+export type QueryGetUserPartijArgs = {
+  partijId: Scalars['UUID']['input'];
+};
+
+
 export type QueryGetZaakArgs = {
   id: Scalars['UUID']['input'];
 };
@@ -653,6 +1400,12 @@ export type SbiActiviteit = {
   sbiCode: Scalars['String']['output'];
   sbiOmschrijving: Scalars['String']['output'];
 };
+
+export enum SoortPartij {
+  Contactpersoon = 'CONTACTPERSOON',
+  Organisatie = 'ORGANISATIE',
+  Persoon = 'PERSOON'
+}
 
 export type StatusType = {
   __typename?: 'StatusType';
@@ -836,6 +1589,113 @@ export type ZaakType = {
   omschrijving: Scalars['String']['output'];
 };
 
+/** One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string. */
+export type __EnumValue = {
+  __typename?: '__EnumValue';
+  name: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  isDeprecated: Scalars['Boolean']['output'];
+  deprecationReason?: Maybe<Scalars['String']['output']>;
+};
+
+/** Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type. */
+export type __Field = {
+  __typename?: '__Field';
+  name: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  args: Array<__InputValue>;
+  type: __Type;
+  isDeprecated: Scalars['Boolean']['output'];
+  deprecationReason?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type. */
+export type __FieldArgsArgs = {
+  includeDeprecated?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value. */
+export type __InputValue = {
+  __typename?: '__InputValue';
+  name: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  type: __Type;
+  /** A GraphQL-formatted string representing the default value for this input value. */
+  defaultValue?: Maybe<Scalars['String']['output']>;
+  isDeprecated: Scalars['Boolean']['output'];
+  deprecationReason?: Maybe<Scalars['String']['output']>;
+};
+
+/**
+ * The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.
+ *
+ * Depending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.
+ */
+export type __Type = {
+  __typename?: '__Type';
+  kind: __TypeKind;
+  name?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  specifiedByURL?: Maybe<Scalars['String']['output']>;
+  fields?: Maybe<Array<__Field>>;
+  interfaces?: Maybe<Array<__Type>>;
+  possibleTypes?: Maybe<Array<__Type>>;
+  enumValues?: Maybe<Array<__EnumValue>>;
+  inputFields?: Maybe<Array<__InputValue>>;
+  ofType?: Maybe<__Type>;
+};
+
+
+/**
+ * The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.
+ *
+ * Depending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.
+ */
+export type __TypeFieldsArgs = {
+  includeDeprecated?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/**
+ * The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.
+ *
+ * Depending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.
+ */
+export type __TypeEnumValuesArgs = {
+  includeDeprecated?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/**
+ * The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.
+ *
+ * Depending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.
+ */
+export type __TypeInputFieldsArgs = {
+  includeDeprecated?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** An enum describing what kind of type a given `__Type` is. */
+export enum __TypeKind {
+  /** Indicates this type is a scalar. */
+  Scalar = 'SCALAR',
+  /** Indicates this type is an object. `fields` and `interfaces` are valid fields. */
+  Object = 'OBJECT',
+  /** Indicates this type is an interface. `fields`, `interfaces`, and `possibleTypes` are valid fields. */
+  Interface = 'INTERFACE',
+  /** Indicates this type is a union. `possibleTypes` is a valid field. */
+  Union = 'UNION',
+  /** Indicates this type is an enum. `enumValues` is a valid field. */
+  Enum = 'ENUM',
+  /** Indicates this type is an input object. `inputFields` is a valid field. */
+  InputObject = 'INPUT_OBJECT',
+  /** Indicates this type is a list. `ofType` is a valid field. */
+  List = 'LIST',
+  /** Indicates this type is a non-null. `ofType` is a valid field. */
+  NonNull = 'NON_NULL'
+}
+
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
 
 export type GenerateOgonePaymentMutationVariables = Exact<{
@@ -883,6 +1743,16 @@ export type UpdateProductVerbruiksObjectMutationVariables = Exact<{
 
 
 export type UpdateProductVerbruiksObjectMutation = { __typename?: 'Mutation', updateProductVerbruiksObject: { __typename?: 'ProductVerbruiksObject', id?: any | null, data?: any | null, productInstantie: string, soort?: string | null } };
+
+export type GetUserDigitaleAdressenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdresen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string }> | null };
+
+export type FindUserPartijQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FindUserPartijQuery = { __typename?: 'Query', findUserPartij?: { __typename?: 'OpenKlant2Partij', indicatieActief: boolean, indicatieGeheimhouding: boolean, interneNotitie?: string | null, nummer?: string | null, soortPartij: SoortPartij, url?: string | null, uuid?: any | null, voorkeurstaal?: string | null, betrokkenen?: Array<{ __typename?: 'OpenKlant2ForeignKey', uuid: any, url: string }> | null, bezoekadres?: { __typename?: 'OpenKlant2Adres', adresregel1?: string | null, adresregel2?: string | null, adresregel3?: string | null, land?: OpenKlant2Landcode | null, nummeraanduidingId?: string | null } | null, categorieRelaties?: Array<{ __typename?: 'CategorieRelatieForeignKey', beginDatum?: any | null, categorieNaam: string, eindDatum?: any | null, url: string, uuid: string }> | null, correspondentieadres?: { __typename?: 'OpenKlant2Adres', adresregel1?: string | null, adresregel2?: string | null, adresregel3?: string | null, land?: OpenKlant2Landcode | null, nummeraanduidingId?: string | null } | null, digitaleAdressen?: Array<{ __typename?: 'OpenKlant2ForeignKey', uuid: any, url: string }> | null, partijIdentificatoren?: Array<{ __typename?: 'OpenKlant2ForeignKey', uuid: any, url: string }> | null, rekeningnummers?: Array<{ __typename?: 'OpenKlant2ForeignKey', uuid: any, url: string }> | null, vertegenwoordigden?: Array<{ __typename?: 'OpenKlant2ForeignKey', uuid: any, url: string }> | null, voorkeursDigitaalAdres?: { __typename?: 'OpenKlant2ForeignKey', uuid: any, url: string } | null, voorkeursRekeningnummer?: { __typename?: 'OpenKlant2ForeignKey', uuid: any, url: string } | null, partijIdentificatie: { __typename?: 'ContactpersoonIdentificatie', uuid?: any | null, volledigeNaam?: string | null, werkteVoorPartij?: { __typename?: 'OpenKlant2ForeignKey', uuid: any, url: string } | null, contactnaam?: { __typename?: 'Contactnaam', voorletters?: string | null, voornaam?: string | null, voorvoegselAchternaam?: string | null, achternaam?: string | null } | null } | { __typename?: 'OrganisatieIdentificatie', naam?: string | null } | { __typename?: 'PersoonsIdentificatie', volledigeNaam?: string | null, contactnaam?: { __typename?: 'Contactnaam', voorletters?: string | null, voornaam?: string | null, voorvoegselAchternaam?: string | null, achternaam?: string | null } | null } } | null };
 
 export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1042,6 +1912,11 @@ export type GetZakenQueryVariables = Exact<{
 
 
 export type GetZakenQuery = { __typename?: 'Query', getZaken: { __typename?: 'ZaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> } };
+
+export type PartijEnabledQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PartijEnabledQuery = { __typename?: 'Query', __type?: { __typename?: '__Type', name?: string | null } | null };
 
 export const FormulierFieldsFragmentDoc = gql`
     fragment FormulierFields on TaakFormulier {
@@ -1251,6 +2126,171 @@ export function useUpdateProductVerbruiksObjectMutation(baseOptions?: Apollo.Mut
 export type UpdateProductVerbruiksObjectMutationHookResult = ReturnType<typeof useUpdateProductVerbruiksObjectMutation>;
 export type UpdateProductVerbruiksObjectMutationResult = Apollo.MutationResult<UpdateProductVerbruiksObjectMutation>;
 export type UpdateProductVerbruiksObjectMutationOptions = Apollo.BaseMutationOptions<UpdateProductVerbruiksObjectMutation, UpdateProductVerbruiksObjectMutationVariables>;
+export const GetUserDigitaleAdressenDocument = gql`
+    query GetUserDigitaleAdressen {
+  getUserDigitaleAdresen {
+    uuid
+    waarde
+    type
+    omschrijving
+  }
+}
+    `;
+
+/**
+ * __useGetUserDigitaleAdressenQuery__
+ *
+ * To run a query within a React component, call `useGetUserDigitaleAdressenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserDigitaleAdressenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserDigitaleAdressenQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserDigitaleAdressenQuery(baseOptions?: Apollo.QueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+      }
+export function useGetUserDigitaleAdressenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+        }
+export function useGetUserDigitaleAdressenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+        }
+export type GetUserDigitaleAdressenQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenQuery>;
+export type GetUserDigitaleAdressenLazyQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenLazyQuery>;
+export type GetUserDigitaleAdressenSuspenseQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenSuspenseQuery>;
+export type GetUserDigitaleAdressenQueryResult = Apollo.QueryResult<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>;
+export const FindUserPartijDocument = gql`
+    query FindUserPartij {
+  findUserPartij {
+    betrokkenen {
+      uuid
+      url
+    }
+    bezoekadres {
+      adresregel1
+      adresregel2
+      adresregel3
+      land
+      nummeraanduidingId
+    }
+    categorieRelaties {
+      beginDatum
+      categorieNaam
+      eindDatum
+      url
+      uuid
+    }
+    correspondentieadres {
+      adresregel1
+      adresregel2
+      adresregel3
+      land
+      nummeraanduidingId
+    }
+    digitaleAdressen {
+      uuid
+      url
+    }
+    indicatieActief
+    indicatieGeheimhouding
+    interneNotitie
+    nummer
+    partijIdentificatoren {
+      uuid
+      url
+    }
+    rekeningnummers {
+      uuid
+      url
+    }
+    soortPartij
+    url
+    uuid
+    vertegenwoordigden {
+      uuid
+      url
+    }
+    voorkeursDigitaalAdres {
+      uuid
+      url
+    }
+    voorkeursRekeningnummer {
+      uuid
+      url
+    }
+    voorkeurstaal
+    partijIdentificatie {
+      ... on PersoonsIdentificatie {
+        contactnaam {
+          voorletters
+          voornaam
+          voorvoegselAchternaam
+          achternaam
+        }
+        volledigeNaam
+      }
+      ... on ContactpersoonIdentificatie {
+        uuid
+        werkteVoorPartij {
+          uuid
+          url
+        }
+        contactnaam {
+          voorletters
+          voornaam
+          voorvoegselAchternaam
+          achternaam
+        }
+        volledigeNaam
+      }
+      ... on OrganisatieIdentificatie {
+        naam
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFindUserPartijQuery__
+ *
+ * To run a query within a React component, call `useFindUserPartijQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindUserPartijQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindUserPartijQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFindUserPartijQuery(baseOptions?: Apollo.QueryHookOptions<FindUserPartijQuery, FindUserPartijQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FindUserPartijQuery, FindUserPartijQueryVariables>(FindUserPartijDocument, options);
+      }
+export function useFindUserPartijLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindUserPartijQuery, FindUserPartijQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FindUserPartijQuery, FindUserPartijQueryVariables>(FindUserPartijDocument, options);
+        }
+export function useFindUserPartijSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<FindUserPartijQuery, FindUserPartijQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<FindUserPartijQuery, FindUserPartijQueryVariables>(FindUserPartijDocument, options);
+        }
+export type FindUserPartijQueryHookResult = ReturnType<typeof useFindUserPartijQuery>;
+export type FindUserPartijLazyQueryHookResult = ReturnType<typeof useFindUserPartijLazyQuery>;
+export type FindUserPartijSuspenseQueryHookResult = ReturnType<typeof useFindUserPartijSuspenseQuery>;
+export type FindUserPartijQueryResult = Apollo.QueryResult<FindUserPartijQuery, FindUserPartijQueryVariables>;
 export const GetBedrijfDocument = gql`
     query GetBedrijf {
   getBedrijf {
@@ -2487,3 +3527,42 @@ export type GetZakenQueryHookResult = ReturnType<typeof useGetZakenQuery>;
 export type GetZakenLazyQueryHookResult = ReturnType<typeof useGetZakenLazyQuery>;
 export type GetZakenSuspenseQueryHookResult = ReturnType<typeof useGetZakenSuspenseQuery>;
 export type GetZakenQueryResult = Apollo.QueryResult<GetZakenQuery, GetZakenQueryVariables>;
+export const PartijEnabledDocument = gql`
+    query PartijEnabled {
+  __type(name: "PartijResponse") {
+    name
+  }
+}
+    `;
+
+/**
+ * __usePartijEnabledQuery__
+ *
+ * To run a query within a React component, call `usePartijEnabledQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePartijEnabledQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePartijEnabledQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePartijEnabledQuery(baseOptions?: Apollo.QueryHookOptions<PartijEnabledQuery, PartijEnabledQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PartijEnabledQuery, PartijEnabledQueryVariables>(PartijEnabledDocument, options);
+      }
+export function usePartijEnabledLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PartijEnabledQuery, PartijEnabledQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PartijEnabledQuery, PartijEnabledQueryVariables>(PartijEnabledDocument, options);
+        }
+export function usePartijEnabledSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<PartijEnabledQuery, PartijEnabledQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<PartijEnabledQuery, PartijEnabledQueryVariables>(PartijEnabledDocument, options);
+        }
+export type PartijEnabledQueryHookResult = ReturnType<typeof usePartijEnabledQuery>;
+export type PartijEnabledLazyQueryHookResult = ReturnType<typeof usePartijEnabledLazyQuery>;
+export type PartijEnabledSuspenseQueryHookResult = ReturnType<typeof usePartijEnabledSuspenseQuery>;
+export type PartijEnabledQueryResult = Apollo.QueryResult<PartijEnabledQuery, PartijEnabledQueryVariables>;

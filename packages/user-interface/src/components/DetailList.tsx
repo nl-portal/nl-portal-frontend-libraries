@@ -16,6 +16,7 @@ interface DetailListProps {
     translationKey: string;
     loading?: boolean;
     value?: string | ReactElement | undefined | null | false;
+    description?: string | ReactElement | undefined | null | false;
     showEditButton?: boolean;
   }>;
 }
@@ -41,6 +42,13 @@ const DetailList = ({ details }: DetailListProps) => {
             </b>
           </span>
           <div className={styles["detail-list__value-edit"]}>
+            <span className={styles["detail-list__description"]}>
+              {detail.loading ? (
+                <Skeleton width={isDesktop ? 300 : 200} />
+              ) : (
+                detail.description || EMPTY_VALUE
+              )}
+            </span>
             <span className={styles["detail-list__value"]}>
               {detail.loading ? (
                 <Skeleton width={isDesktop ? 200 : 150} />
