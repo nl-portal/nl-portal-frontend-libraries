@@ -2,8 +2,6 @@ import { useIntl } from "react-intl";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import BackLink from "../components/BackLink";
-import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
 import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
@@ -36,12 +34,11 @@ const ThemeDetailsPage = ({
   children,
 }: Props) => {
   const intl = useIntl();
-  const { paths } = useOutletContext<RouterOutletContext>();
 
   return (
     <PageGrid>
       <div>
-        <BackLink routePath={paths.themeOverview(slug)} />
+        <BackLink />
         <PageHeader
           loading={loading}
           title={intl.formatMessage({ id: titleTranslationId })}

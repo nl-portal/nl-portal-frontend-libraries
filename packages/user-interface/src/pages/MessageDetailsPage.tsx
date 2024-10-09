@@ -3,10 +3,10 @@ import { useOutletContext, useParams } from "react-router-dom";
 import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
 import MessageContent from "../components/MessageContent";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedDate, FormattedMessage, FormattedTime } from "react-intl";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 const MessageDetailsPage = () => {
   const { id } = useParams();
@@ -23,7 +23,7 @@ const MessageDetailsPage = () => {
   return (
     <PageGrid variant="medium">
       <div>
-        <BackLink routePath={paths.messages} />
+        <BackLink href={paths.messages} />
         <PageHeader loading={messageLoading} title={message?.onderwerp}>
           <Paragraph>
             <FormattedMessage

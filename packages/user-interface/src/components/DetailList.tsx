@@ -9,7 +9,7 @@ import useMediaQuery from "../hooks/useMediaQuery";
 import { BREAKPOINTS } from "../constants/breakpoints";
 import { PortalLink } from "..";
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 interface DetailListProps {
   details: Array<{

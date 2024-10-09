@@ -5,7 +5,7 @@ import PortalLink from "./PortalLink";
 import { Action } from "@gemeente-denhaag/action";
 import useActionLabels from "../hooks/useActionLabels";
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 interface Props {
   cs: Zaak;

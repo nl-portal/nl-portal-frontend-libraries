@@ -7,16 +7,16 @@ import Task from "./Task";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import SectionHeader from "./SectionHeader";
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 interface Props {
   loading?: boolean;
   error?: boolean;
   errorTranslationId?: string;
   showEmpty?: boolean;
-  openInContext?: boolean;
   emptyTranslationId?: string;
   titleTranslationId?: string | null;
+  openInContext?: boolean;
   readMoreLink?: string;
   readMoreTranslationId?: string | null;
   totalAmount?: number;
