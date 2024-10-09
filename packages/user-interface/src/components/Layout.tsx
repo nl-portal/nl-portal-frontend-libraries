@@ -73,9 +73,8 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
       <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
         <Menu items={navigationItems} legacy={legacy} />
         <main className="denhaag-page-content__main">
-          <PageMetaData navigationItems={navigationItems}>
-            {<Outlet context={{ paths }} />}
-          </PageMetaData>
+          <PageMetaData navigationItems={navigationItems} />
+          {<Outlet context={{ paths }} />}
         </main>
       </ResponsiveContent>
       {online && (
