@@ -47,8 +47,8 @@ const ThemeDetailsPage = ({
       {alert && <Alert {...alert} />}
       <TasksList
         loading={loading}
-        showEmpty={false}
         error={tasksError}
+        showEmpty={false}
         titleTranslationId={null}
         tasks={tasks}
       />
@@ -56,6 +56,7 @@ const ThemeDetailsPage = ({
       <CasesList
         loading={loading}
         error={casesError}
+        showEmpty={false}
         listView={false}
         cases={cases}
       />
