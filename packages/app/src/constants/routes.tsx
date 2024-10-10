@@ -100,7 +100,14 @@ export const routes = [
     path: "/keycloak/callback",
     Component: () => {
       const [searchParams] = useSearchParams();
-      return <Navigate to={searchParams.get("redirect_url") || "/"} />;
+      const redirectUrl = searchParams.get("redirect_url");
+
+      try {
+        if (redirectUrl) new URL(redirectUrl);
+        return <Navigate to="/" />;
+      } catch {
+        return <Navigate to={redirectUrl ? redirectUrl : "/"} />;
+      }
     },
   },
   {
