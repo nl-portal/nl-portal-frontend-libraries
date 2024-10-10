@@ -25,28 +25,30 @@ const MessageDetailsPage = () => {
       <div>
         <BackLink href={paths.messages} />
         <PageHeader loading={messageLoading} title={message?.onderwerp}>
-          <Paragraph>
-            <FormattedMessage
-              id="messageDetails.sent"
-              values={{
-                date: (
-                  <FormattedDate
-                    value={message?.publicatiedatum}
-                    year="numeric"
-                    month="long"
-                    day="numeric"
-                  />
-                ),
-                time: (
-                  <FormattedTime
-                    value={message?.publicatiedatum}
-                    hour="numeric"
-                    minute="numeric"
-                  />
-                ),
-              }}
-            />
-          </Paragraph>
+          {message?.publicatiedatum && (
+            <Paragraph>
+              <FormattedMessage
+                id="messageDetails.sent"
+                values={{
+                  date: (
+                    <FormattedDate
+                      value={message?.publicatiedatum}
+                      year="numeric"
+                      month="long"
+                      day="numeric"
+                    />
+                  ),
+                  time: (
+                    <FormattedTime
+                      value={message?.publicatiedatum}
+                      hour="numeric"
+                      minute="numeric"
+                    />
+                  ),
+                }}
+              />
+            </Paragraph>
+          )}
         </PageHeader>
       </div>
       <MessageContent
