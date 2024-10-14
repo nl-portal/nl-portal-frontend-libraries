@@ -24,6 +24,7 @@ const Task = ({ task, openInContext }: Props) => {
   const taskUrl = useTaskUrl(task, openInContext) ?? "";
   const handleClick = useLinkClickHandler(taskUrl);
   const paymentForm = renderPaymentRedirectForm();
+
   if (paymentForm) {
     return paymentForm;
   }
@@ -74,6 +75,7 @@ const Task = ({ task, openInContext }: Props) => {
             successUrl: `${currentUrl}&success=true`,
             failureUrl: currentUrl,
           };
+
           return (
             <Button onClick={() => startPayment(paymentRequestPayload)}>
               <FormattedMessage id="task.ogonebetaling.button" />
