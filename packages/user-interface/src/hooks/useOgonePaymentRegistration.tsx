@@ -18,7 +18,9 @@ const useOgonePaymentRegistration = () => {
   useEffect(() => {
     if (type === "ogone" && typeof paymentStatus === "undefined") {
       setPaymentStatus(PaymentStatus.IN_PROGRESS);
-      fetch(`${restUri}/payment/ogone/postsale?${searchParams.toString()}`)
+      fetch(
+        `${restUri}/public/payment/ogone/postsale?${searchParams.toString()}`,
+      )
         .then((response) => {
           if (response.ok) {
             setPaymentStatus(PaymentStatus.SUCCESS);
