@@ -60,6 +60,7 @@ const ThemeOverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
+          showEmpty={false}
           tasks={tasks}
           openInContext={true}
         />
@@ -68,6 +69,7 @@ const ThemeOverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(casesError)}
+          showEmpty={false}
           listView={false}
           cases={cases}
         />
