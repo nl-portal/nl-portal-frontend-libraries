@@ -71,6 +71,7 @@ const Task = ({ task, openInContext }: Props) => {
             successUrl: `${currentUrl}&success=true`,
             failureUrl: currentUrl,
           };
+
           return (
             <Button
               onClick={() => startPayment(paymentRequestPayload)}

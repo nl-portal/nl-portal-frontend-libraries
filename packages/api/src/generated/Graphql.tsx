@@ -34,6 +34,118 @@ export type Adres = {
   volledigAdres: Scalars['String']['output'];
 };
 
+export type Bericht = {
+  __typename?: 'Bericht';
+  berichtTekst: Scalars['String']['output'];
+  berichtType: BerichtType;
+  bijlages: Array<Scalars['String']['output']>;
+  einddatumHandelingstermijn: Scalars['Date']['output'];
+  geopend: Scalars['Boolean']['output'];
+  handelingsperspectief: BerichtHandelingsperspectief;
+  id?: Maybe<Scalars['UUID']['output']>;
+  identificatie: BerichtIdentificatie;
+  onderwerp: Scalars['String']['output'];
+  publicatiedatum: Scalars['Date']['output'];
+  referentie: Scalars['String']['output'];
+};
+
+export enum BerichtHandelingsperspectief {
+  Betalen = 'BETALEN',
+  InformatieOntvangen = 'INFORMATIE_ONTVANGEN',
+  InformatieVerstrekken = 'INFORMATIE_VERSTREKKEN'
+}
+
+export type BerichtIdentificatie = {
+  __typename?: 'BerichtIdentificatie';
+  type: Scalars['String']['output'];
+  value: Scalars['String']['output'];
+};
+
+export enum BerichtType {
+  Betaalverzoek = 'BETAALVERZOEK',
+  Notificatie = 'NOTIFICATIE',
+  Uitnodiging = 'UITNODIGING',
+  Verzoek = 'VERZOEK'
+}
+
+export type BerichtenPage = {
+  __typename?: 'BerichtenPage';
+  content: Array<Bericht>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type Besluit = {
+  __typename?: 'Besluit';
+  auditTrails: Array<BesluitAuditTrail>;
+  besluittype: Scalars['String']['output'];
+  bestuursorgaan?: Maybe<Scalars['String']['output']>;
+  datum: Scalars['Date']['output'];
+  documenten: Array<BesluitDocument>;
+  identificatie: Scalars['String']['output'];
+  ingangsdatum: Scalars['Date']['output'];
+  publicatiedatum?: Maybe<Scalars['Date']['output']>;
+  toelichting?: Maybe<Scalars['String']['output']>;
+  uiterlijkeReactiedatum?: Maybe<Scalars['Date']['output']>;
+  url: Scalars['String']['output'];
+  verantwoordelijkeOrganisatie: Scalars['String']['output'];
+  vervaldatum?: Maybe<Scalars['Date']['output']>;
+  vervalreden: Scalars['String']['output'];
+  vervalredenWeergave: Scalars['String']['output'];
+  verzenddatum?: Maybe<Scalars['Date']['output']>;
+  zaak: Scalars['String']['output'];
+};
+
+export type BesluitAuditTrail = {
+  __typename?: 'BesluitAuditTrail';
+  aanmaakdatum?: Maybe<Scalars['LocalDateTime']['output']>;
+  actie: Scalars['String']['output'];
+  actieWeergave?: Maybe<Scalars['String']['output']>;
+  applicatieId?: Maybe<Scalars['String']['output']>;
+  applicatieWeergave?: Maybe<Scalars['String']['output']>;
+  bron: Scalars['String']['output'];
+  gebruikersId?: Maybe<Scalars['String']['output']>;
+  gebruikersWeergave?: Maybe<Scalars['String']['output']>;
+  hoofdObject: Scalars['String']['output'];
+  resource: Scalars['String']['output'];
+  resourceUrl: Scalars['String']['output'];
+  resourceWeergave: Scalars['String']['output'];
+  resultaat: Scalars['Int']['output'];
+  toelichting?: Maybe<Scalars['String']['output']>;
+  uuid: Scalars['UUID']['output'];
+  wijzigingen: BesluitAuditTrailWijzigingen;
+};
+
+export type BesluitAuditTrailWijzigingen = {
+  __typename?: 'BesluitAuditTrailWijzigingen';
+  nieuw?: Maybe<Scalars['JSON']['output']>;
+  oud?: Maybe<Scalars['JSON']['output']>;
+};
+
+export type BesluitDocument = {
+  __typename?: 'BesluitDocument';
+  besluit: Scalars['String']['output'];
+  informatieobject: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type BesluitPage = {
+  __typename?: 'BesluitPage';
+  content: Array<Besluit>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
 export type ContactMoment = {
   __typename?: 'ContactMoment';
   bronorganisatie?: Maybe<Scalars['String']['output']>;
@@ -58,18 +170,6 @@ export type ContactMomentPage = {
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
-};
-
-export type DmnResponse = {
-  __typename?: 'DmnResponse';
-  result: DmnResult;
-};
-
-export type DmnResult = {
-  __typename?: 'DmnResult';
-  type: Scalars['String']['output'];
-  value: Scalars['String']['output'];
-  valueInfo?: Maybe<Scalars['String']['output']>;
 };
 
 export type Document = {
@@ -164,8 +264,6 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
-  /** Prefill data to start a form */
-  prefill: PrefillResponse;
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
@@ -181,15 +279,6 @@ export type Mutation = {
 
 export type MutationGenerateOgonePaymentArgs = {
   paymentRequest: OgonePaymentRequestInput;
-};
-
-
-export type MutationPrefillArgs = {
-  formulier: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  sources?: InputMaybe<Scalars['JSON']['input']>;
-  staticData?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 
@@ -362,7 +451,7 @@ export type PersoonVerblijfplaats = {
 
 export type PrefillResponse = {
   __typename?: 'PrefillResponse';
-  formulierUrl?: Maybe<Scalars['String']['output']>;
+  formulierUrl: Scalars['String']['output'];
   hash: Scalars['String']['output'];
   objectId: Scalars['UUID']['output'];
 };
@@ -407,14 +496,14 @@ export type ProductPage = {
 export type ProductType = {
   __typename?: 'ProductType';
   /** Get list of available beslistabellen, with their object configurations */
-  beslistabellen?: Maybe<Array<Scalars['String']['output']>>;
+  beslistabelMappings?: Maybe<Array<Scalars['String']['output']>>;
   eigenschappen?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
   omschrijving?: Maybe<Scalars['String']['output']>;
   parameters?: Maybe<Scalars['JSON']['output']>;
   /** Get list of available forms to prefill, with their object configurations */
-  prefillFormulieren?: Maybe<Scalars['JSON']['output']>;
+  prefillMappings?: Maybe<Scalars['JSON']['output']>;
   productSubType?: Maybe<Scalars['String']['output']>;
   zaaktypen: Array<Scalars['UUID']['output']>;
 };
@@ -436,6 +525,22 @@ export type Query = {
   allFormDefinitions: Array<FormDefinition>;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
+  /** Gets a single Bericht by Id */
+  getBericht?: Maybe<Bericht>;
+  /** Returns a paginated list of all Berichten */
+  getBerichten: BerichtenPage;
+  /** Get all besluit by id */
+  getBesluit: Besluit;
+  /** Get all besluit audit trails by id */
+  getBesluitAuditTrail: BesluitAuditTrail;
+  /** Get all besluit audit trails */
+  getBesluitAuditTrails: Array<BesluitAuditTrail>;
+  /** Get all besluit document by id */
+  getBesluitDocument: BesluitDocument;
+  /** Get all besluit documents */
+  getBesluitDocumenten: Array<BesluitDocument>;
+  /** Get all besluiten */
+  getBesluiten: BesluitPage;
   /** Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
   getBewonersAantal?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
@@ -461,8 +566,12 @@ export type Query = {
   getPersoon?: Maybe<Persoon>;
   /** Get product by id */
   getProduct?: Maybe<Product>;
-  /** Get Product Decision by key */
-  getProductDecision: Array<DmnResponse>;
+  /**
+   *
+   *         Get Product Decision by key. Don't use it till it is configured in ProductType
+   *
+   */
+  getProductDecision: Array<Scalars['JSON']['output']>;
   /** Get list of taken by product name  */
   getProductTaken: Array<TaakV2>;
   /** Get productType by name */
@@ -500,6 +609,8 @@ export type Query = {
    * @deprecated Replaced by getTaken
    */
   getTasks: TaakPage;
+  /** Returns the total amount of unopened Berichten */
+  getUnopenedBerichtenCount: Scalars['Int']['output'];
   /** Gets a zaak by id */
   getZaak: Zaak;
   /**
@@ -511,6 +622,59 @@ export type Query = {
    *
    */
   getZaken: ZaakPage;
+  /**
+   *
+   *         Prefill data to start a form.
+   *
+   */
+  productPrefill: PrefillResponse;
+};
+
+
+export type QueryGetBerichtArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetBerichtenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetBesluitArgs = {
+  besluitId: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetBesluitAuditTrailArgs = {
+  auditTrailId: Scalars['UUID']['input'];
+  besluitId: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetBesluitAuditTrailsArgs = {
+  besluitId: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetBesluitDocumentArgs = {
+  documentId: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetBesluitDocumentenArgs = {
+  besluit?: InputMaybe<Scalars['String']['input']>;
+  informatieobject?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGetBesluitenArgs = {
+  besluitType?: InputMaybe<Scalars['String']['input']>;
+  identificatie?: InputMaybe<Scalars['String']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  verantwoordelijkeOrganisatie?: InputMaybe<Scalars['String']['input']>;
+  zaak?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -645,6 +809,15 @@ export type QueryGetZakenArgs = {
   isOpen?: InputMaybe<Scalars['Boolean']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   zaakTypeUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryProductPrefillArgs = {
+  key: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  sources?: InputMaybe<Scalars['JSON']['input']>;
+  staticData?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 export type SbiActiviteit = {
@@ -785,6 +958,7 @@ export enum TaakVersion {
 
 export type Zaak = {
   __typename?: 'Zaak';
+  besluiten: Array<Besluit>;
   documenten: Array<Document>;
   einddatum?: Maybe<Scalars['Date']['output']>;
   identificatie: Scalars['String']['output'];
@@ -985,7 +1159,7 @@ export type GetProductQueryVariables = Exact<{
 }>;
 
 
-export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> } | null };
+export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } | null };
 
 export type GetProductenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -2025,6 +2199,11 @@ export const GetProductDocument = gql`
       status
       verloopdatum
       version
+      ogonebetaling {
+        bedrag
+        betaalkenmerk
+        pspid
+      }
     }
   }
 }
