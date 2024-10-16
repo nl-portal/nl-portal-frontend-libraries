@@ -12,7 +12,7 @@ import {
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "./paths";
 import { config } from "./config";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 import ThemeSampleOverviewPage from "../pages/ThemeSampleOverviewPage";
 import ThemeSampleListPage from "../pages/ThemeSampleListPage";
 import ThemeSampleDetailPage from "../pages/ThemeSampleDetailPage";
@@ -98,7 +98,17 @@ export const routes = [
   },
   {
     path: "/keycloak/callback",
-    element: <Navigate to={sessionStorage.getItem("entryUrl") || "/"} />,
+    Component: () => {
+      const [searchParams] = useSearchParams();
+      const redirectUrl = searchParams.get("redirect_url");
+
+      try {
+        if (redirectUrl) new URL(redirectUrl);
+        return <Navigate to="/" />;
+      } catch {
+        return <Navigate to={redirectUrl ? redirectUrl : "/"} />;
+      }
+    },
   },
   {
     path: paths.noMatch,
