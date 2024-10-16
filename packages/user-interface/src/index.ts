@@ -41,3 +41,6 @@ export { default as TaskDetailsPage } from "./pages/TaskDetailsPage";
 export { default as ThemeDetailsPage } from "./pages/ThemeDetailsPage";
 export { default as ThemeOverviewPage } from "./pages/ThemeOverviewPage";
 export { default as ThemeSubPage } from "./pages/ThemeSubPage";
+
+export { default as MessagesContext } from "./contexts/MessagesContext";
+export * from "./contexts/MessagesContext";

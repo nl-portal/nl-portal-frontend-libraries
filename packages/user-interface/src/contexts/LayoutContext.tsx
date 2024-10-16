@@ -6,8 +6,6 @@ interface LayoutContextInterface {
   menuOpened: boolean;
   hideMenu: () => void;
   showMenu: () => void;
-  messagesCount: number;
-  setMessagesCount: (value: number) => void;
   mobileMenuOpened: boolean;
   hideMobileMenu: () => void;
   showMobileMenu: () => void;
@@ -36,7 +34,6 @@ export const LayoutProvider = ({ children }: LayoutProviderProps) => {
     JSON.parse(localStorage.getItem("history") || "[]"),
   );
   const [menuOpened, setMenuState] = useState(false);
-  const [messagesCount, setMessagesCount] = useState(0);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [mobileMenuOpened, setMobileMenuState] = useState(false);
   const [fullscreenForm, setFullscreenForm] = useState(false);
@@ -66,8 +63,6 @@ export const LayoutProvider = ({ children }: LayoutProviderProps) => {
         menuOpened,
         hideMenu,
         showMenu,
-        messagesCount,
-        setMessagesCount,
         mobileMenuOpened,
         hideMobileMenu,
         showMobileMenu,

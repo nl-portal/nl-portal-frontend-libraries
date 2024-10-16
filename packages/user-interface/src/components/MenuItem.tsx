@@ -7,7 +7,7 @@ import { BadgeCounter } from "@gemeente-denhaag/badge-counter";
 import styles from "./MenuItem.module.scss";
 import LayoutContext from "../contexts/LayoutContext";
 import { NavigationItem } from "../interfaces/navigation-item";
-import { useGetUnopenedBerichtenCountQuery } from "@nl-portal/nl-portal-api";
+import MessagesContext from "../contexts/MessagesContext";
 
 interface MenuItemProps {
   item: NavigationItem;
@@ -16,21 +16,8 @@ interface MenuItemProps {
 
 const MenuItem = ({ item, current = false }: MenuItemProps) => {
   const { hrefLang } = useContext(LocaleContext);
-  const { hideMenu, messagesCount, setMessagesCount } =
-    useContext(LayoutContext);
-
-  useGetUnopenedBerichtenCountQuery({
-    notifyOnNetworkStatusChange: true,
-    onCompleted: (data: { getUnopenedBerichtenCount: number }) => {
-      setMessagesCount(data?.getUnopenedBerichtenCount || 0);
-    },
-    pollInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 10000,
-    fetchPolicy: "cache-and-network",
-    skip: !item.hasMessagesCount,
-    skipPollAttempt: () => {
-      return !document.hasFocus();
-    },
-  });
+  const { hideMenu } = useContext(LayoutContext);
+  const { messagesCount } = useContext(MessagesContext);
 
   if (!item) return null;
 
