@@ -20,13 +20,10 @@ interface Props {
 const Task = ({ task, openInContext }: Props) => {
   const labels = useActionLabels();
   const { currentLocale } = useContext(LocaleContext);
-  const { startPayment, renderPaymentRedirectForm } = useOgonePayment();
+  const { startPayment, renderPaymentRedirectForm, loading } =
+    useOgonePayment();
   const taskUrl = useTaskUrl(task, openInContext) ?? "";
   const handleClick = useLinkClickHandler(taskUrl);
-  const paymentForm = renderPaymentRedirectForm();
-  if (paymentForm) {
-    return paymentForm;
-  }
 
   if (openInContext && task.koppeling) {
     return (
@@ -75,8 +72,12 @@ const Task = ({ task, openInContext }: Props) => {
             failureUrl: currentUrl,
           };
           return (
-            <Button onClick={() => startPayment(paymentRequestPayload)}>
+            <Button
+              onClick={() => startPayment(paymentRequestPayload)}
+              disabled={loading}
+            >
               <FormattedMessage id="task.ogonebetaling.button" />
+              {renderPaymentRedirectForm()}
             </Button>
           );
         }
