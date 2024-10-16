@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { render } from "@testing-library/react";
 import { MockWrapper } from "@nl-portal/nl-portal-localization";
-import Page from "../../components/PageMetaData";
+import PageMetaData from "../../components/PageMetaData";
 import { NavigationItem } from "../../interfaces/navigation-item";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { testPaths as paths } from "../../providers/TestProvider";
@@ -20,11 +20,7 @@ const navigationItems: NavigationItem[][] = [
 
 const route = {
   path: paths.overview,
-  element: (
-    <Page navigationItems={navigationItems}>
-      <span>test</span>
-    </Page>
-  ),
+  element: <PageMetaData navigationItems={navigationItems} />,
 };
 
 const router = createBrowserRouter([
