@@ -51,6 +51,11 @@ export const QUERY_GET_PRODUCTEN = gql`
         status
         verloopdatum
         version
+        ogonebetaling {
+          bedrag
+          betaalkenmerk
+          pspid
+        }
       }
     }
   }
