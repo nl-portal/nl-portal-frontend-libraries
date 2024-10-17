@@ -20,9 +20,9 @@ import BackLink from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
 
-Formio.use(ProtectedEval);
-
 const TaskDetailsPage = () => {
+  Formio.use(ProtectedEval);
+
   const { id } = useParams();
   const intl = useIntl();
   const [loading, setLoading] = useState(true);
