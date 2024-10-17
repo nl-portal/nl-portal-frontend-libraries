@@ -25,8 +25,9 @@ export * from "./interfaces/paths";
 export * from "./interfaces/portal-footer";
 
 export { default as useActionLabels } from "./hooks/useActionLabels";
-export { default as useUserInfo } from "./hooks/useUserInfo";
 export { default as useDownload } from "./hooks/useDownload";
+export { default as useEnableMessagesCount } from "./hooks/useEnableMessagesCount";
+export { default as useUserInfo } from "./hooks/useUserInfo";
 
 export { default as AccountPage } from "./pages/AccountPage";
 export { default as CaseDetailsPage } from "./pages/CaseDetailsPage";
