@@ -3,7 +3,12 @@ import { useContext } from "react";
 import { Link, useMatches } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { Sidenav, SidenavItem, SidenavList } from "@gemeente-denhaag/sidenav";
+import {
+  Sidenav,
+  SidenavItem,
+  SidenavLinkLabel,
+  SidenavList,
+} from "@gemeente-denhaag/sidenav";
 import { IconButton } from "@gemeente-denhaag/iconbutton";
 import { CloseIcon } from "@gemeente-denhaag/icons";
 import classNames from "classnames";
@@ -79,12 +84,14 @@ const Menu = ({ items, legacy }: Props) => {
               <SidenavItem key={item.path}>
                 <Link className={className} hrefLang={hrefLang} to={item.path}>
                   {item.icon}
-                  <FormattedMessage
-                    id={`pageTitles.${item.titleTranslationKey}`}
-                  />
-                  {item.hasMessagesCount && messagesCount > 0 && (
-                    <BadgeCounter>{messagesCount}</BadgeCounter>
-                  )}
+                  <SidenavLinkLabel>
+                    <FormattedMessage
+                      id={`pageTitles.${item.titleTranslationKey}`}
+                    />
+                    {item.hasMessagesCount && messagesCount > 0 && (
+                      <BadgeCounter>{messagesCount}</BadgeCounter>
+                    )}
+                  </SidenavLinkLabel>
                 </Link>
               </SidenavItem>
             );
