@@ -6,43 +6,35 @@ import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { FormattedMessage } from "react-intl";
 import { StatusBadge } from "@gemeente-denhaag/status-badge";
 import styles from "./Message.module.scss";
-
-// TODO: Replace with type from graphql
-export interface MessageType {
-  id: number;
-  titel: string;
-  verloopdatum: string;
-  read: boolean;
-  bericht: React.ReactNode;
-}
+import { Bericht } from "@nl-portal/nl-portal-api";
 
 interface Props {
-  message: MessageType;
+  message: Bericht;
 }
 
-const Task = ({ message }: Props) => {
+const Message = ({ message }: Props) => {
   const labels = useActionLabels();
   const { paths } = useOutletContext<RouterOutletContext>();
 
   return (
     <ActionSingle
       labels={labels}
-      dateTime={message.verloopdatum}
+      dateTime={message.publicatiedatum}
       link={paths.message(message.id)}
       Link={PortalLink}
     >
-      {message.read ? (
-        message.titel
+      {message.geopend ? (
+        message.onderwerp
       ) : (
         <>
           <StatusBadge className={styles["message__badge"]}>
             <FormattedMessage id="messagesList.new" />
           </StatusBadge>
-          <b>{message.titel}</b>
+          <b>{message.onderwerp}</b>
         </>
       )}
     </ActionSingle>
   );
 };
 
-export default Task;
+export default Message;

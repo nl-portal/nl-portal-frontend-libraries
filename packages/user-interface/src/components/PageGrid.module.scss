@@ -10,3 +10,10 @@
   flex-direction: column;
   gap: var(--nlportal-page-grid-gap);
 }
+
+.page-grid--md {
+  --nlportal-page-grid-gap: var(
+    --nlportal-page-grid-gap-md,
+    var(--nlportal-space-block-3xl, 2.5rem)
+  );
+}

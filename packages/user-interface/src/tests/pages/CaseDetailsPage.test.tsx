@@ -5,12 +5,12 @@ import {
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import {
-  MockCasePage,
-  MockCasePageWithoutContactMoments,
-  MockCasePageWithoutDocuments,
-} from "../mock/pages/CasePage.mock";
+  MockCaseDetailsPage,
+  MockCaseDetailsPageWithoutContactMoments,
+  MockCaseDetailsPageWithoutDocuments,
+} from "../mock/pages/CaseDetailsPage.mock.tsx";
 
-describe("CasePage", () => {
+describe("CaseDetailsPage", () => {
   beforeAll(() => {
     Object.defineProperty(window, "matchMedia", {
       writable: true,
@@ -28,7 +28,7 @@ describe("CasePage", () => {
   });
 
   it("should render with all elements present", async () => {
-    render(MockCasePage());
+    render(MockCaseDetailsPage());
 
     await waitForElementToBeRemoved(() => screen.getAllByLabelText("Loading"));
 
@@ -41,7 +41,7 @@ describe("CasePage", () => {
   });
 
   it("should render without any documents present and show message that no documents are present", async () => {
-    render(MockCasePageWithoutDocuments());
+    render(MockCaseDetailsPageWithoutDocuments());
 
     await waitForElementToBeRemoved(() => screen.getAllByLabelText("Loading"));
 
@@ -51,7 +51,7 @@ describe("CasePage", () => {
   });
 
   it("should render without any contactmoments present and not show header contactmoments", async () => {
-    render(MockCasePageWithoutContactMoments());
+    render(MockCaseDetailsPageWithoutContactMoments());
 
     await waitForElementToBeRemoved(() => screen.getAllByLabelText("Loading"));
 

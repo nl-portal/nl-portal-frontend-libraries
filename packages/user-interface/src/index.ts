@@ -25,19 +25,23 @@ export * from "./interfaces/paths";
 export * from "./interfaces/portal-footer";
 
 export { default as useActionLabels } from "./hooks/useActionLabels";
-export { default as useUserInfo } from "./hooks/useUserInfo";
 export { default as useDownload } from "./hooks/useDownload";
+export { default as useEnableMessagesCount } from "./hooks/useEnableMessagesCount";
+export { default as useUserInfo } from "./hooks/useUserInfo";
 
 export { default as AccountPage } from "./pages/AccountPage";
-export { default as CasePage } from "./pages/CasePage";
+export { default as CaseDetailsPage } from "./pages/CaseDetailsPage";
 export { default as CasesPage } from "./pages/CasesPage";
 export { default as EditAccountPage } from "./pages/EditAccountPage";
 export { default as MessagesPage } from "./pages/MessagesPage";
-export { default as MessagePage } from "./pages/MessagePage";
+export { default as MessageDetailsPage } from "./pages/MessageDetailsPage";
 export { default as NoMatchPage } from "./pages/NoMatchPage";
 export { default as OverviewPage } from "./pages/OverviewPage";
 export { default as TasksPage } from "./pages/TasksPage";
-export { default as TaskPage } from "./pages/TaskPage";
+export { default as TaskDetailsPage } from "./pages/TaskDetailsPage";
 export { default as ThemeDetailsPage } from "./pages/ThemeDetailsPage";
 export { default as ThemeOverviewPage } from "./pages/ThemeOverviewPage";
 export { default as ThemeSubPage } from "./pages/ThemeSubPage";
+
+export { default as MessagesContext } from "./contexts/MessagesContext";
+export * from "./contexts/MessagesContext";
