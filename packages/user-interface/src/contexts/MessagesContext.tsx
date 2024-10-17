@@ -4,6 +4,7 @@ import { createContext, ReactNode, useState } from "react";
 interface MessagesContextType {
   messagesCount: number;
   setMessagesCount: (value: number) => void;
+  refetchMessages: () => void;
 }
 
 const MessagesContext = createContext<MessagesContextType>(
@@ -21,7 +22,7 @@ export const MessagesProvider = ({
 }: MessagesProviderProps) => {
   const [messagesCount, setMessagesCount] = useState(0);
 
-  useGetUnopenedBerichtenCountQuery({
+  const { refetch } = useGetUnopenedBerichtenCountQuery({
     onCompleted: (data: { getUnopenedBerichtenCount: number }) => {
       setMessagesCount(data?.getUnopenedBerichtenCount || 0);
     },
@@ -34,7 +35,13 @@ export const MessagesProvider = ({
   });
 
   return (
-    <MessagesContext.Provider value={{ messagesCount, setMessagesCount }}>
+    <MessagesContext.Provider
+      value={{
+        messagesCount,
+        setMessagesCount,
+        refetchMessages: () => refetch(),
+      }}
+    >
       {children}
     </MessagesContext.Provider>
   );
