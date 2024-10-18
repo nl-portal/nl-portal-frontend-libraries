@@ -1,12 +1,10 @@
 import globals from "globals";
 import importPlugin from "eslint-plugin-import";
 import reactPlugin from "eslint-plugin-react";
-//import hooksPlugin from 'eslint-plugin-react-hooks';
+import hooksPlugin from "eslint-plugin-react-hooks";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import typescriptParser from "@typescript-eslint/parser";
 import typescriptPlugin from "@typescript-eslint/eslint-plugin";
-
-// Add eslint-plugin-react-hooks back when this issue is solved: https://github.com/facebook/react/issues/28313
 
 const reactRule = {
   "react/react-in-jsx-scope": "off",
@@ -38,7 +36,7 @@ export default [
     plugins: {
       import: importPlugin,
       react: reactPlugin,
-      //'react-hooks': hooksPlugin,
+      "react-hooks": hooksPlugin,
       "jsx-a11y": jsxA11yPlugin,
     },
     settings: {
@@ -49,7 +47,7 @@ export default [
     rules: {
       ...jsxA11yPlugin.configs.recommended.rules,
       ...reactPlugin.configs.recommended.rules,
-      //...hooksPlugin.configs.recommended.rules,
+      ...hooksPlugin.configs.recommended.rules,
       ...reactRule,
     },
   },
@@ -59,7 +57,7 @@ export default [
       "@typescript-eslint": typescriptPlugin,
       import: importPlugin,
       react: reactPlugin,
-      //'react-hooks': hooksPlugin,
+      "react-hooks": hooksPlugin,
       "jsx-a11y": jsxA11yPlugin,
     },
     languageOptions: {
@@ -73,7 +71,7 @@ export default [
     rules: {
       ...jsxA11yPlugin.configs.recommended.rules,
       ...reactPlugin.configs.recommended.rules,
-      //...hooksPlugin.configs.recommended.rules,
+      ...hooksPlugin.configs.recommended.rules,
       ...typescriptPlugin.configs.recommended.rules,
       ...reactRule,
     },

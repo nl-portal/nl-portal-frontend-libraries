@@ -20,6 +20,7 @@ import BackLink from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
 
+//eslint-disable-next-line react-hooks/rules-of-hooks
 Formio.use(ProtectedEval);
 
 const TaskDetailsPage = () => {
