@@ -883,14 +883,9 @@ export type TaakIdentificatie = {
 
 export type TaakKoppeling = {
   __typename?: 'TaakKoppeling';
-  registratie: TaakKoppelingRegistratie;
+  registratie: Scalars['String']['output'];
   uuid?: Maybe<Scalars['UUID']['output']>;
 };
-
-export enum TaakKoppelingRegistratie {
-  Product = 'PRODUCT',
-  Zaak = 'ZAAK'
-}
 
 export type TaakPage = {
   __typename?: 'TaakPage';
@@ -1058,6 +1053,26 @@ export type UpdateProductVerbruiksObjectMutationVariables = Exact<{
 
 export type UpdateProductVerbruiksObjectMutation = { __typename?: 'Mutation', updateProductVerbruiksObject: { __typename?: 'ProductVerbruiksObject', id?: any | null, data?: any | null, productInstantie: string, soort?: string | null } };
 
+export type GetBerichtQueryVariables = Exact<{
+  id: Scalars['UUID']['input'];
+}>;
+
+
+export type GetBerichtQuery = { __typename?: 'Query', getBericht?: { __typename?: 'Bericht', id?: any | null, berichtTekst: string, berichtType: BerichtType, bijlages: Array<string>, einddatumHandelingstermijn: any, geopend: boolean, handelingsperspectief: BerichtHandelingsperspectief, onderwerp: string, publicatiedatum: any, referentie: string, identificatie: { __typename?: 'BerichtIdentificatie', type: string, value: string } } | null };
+
+export type GetBerichtenQueryVariables = Exact<{
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetBerichtenQuery = { __typename?: 'Query', getBerichten: { __typename?: 'BerichtenPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Bericht', id?: any | null, einddatumHandelingstermijn: any, publicatiedatum: any, geopend: boolean, onderwerp: string }> } };
+
+export type GetUnopenedBerichtenCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUnopenedBerichtenCountQuery = { __typename?: 'Query', getUnopenedBerichtenCount: number };
+
 export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1136,7 +1151,7 @@ export type GetProductTakenQueryVariables = Exact<{
 }>;
 
 
-export type GetProductTakenQuery = { __typename?: 'Query', getProductTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
+export type GetProductTakenQuery = { __typename?: 'Query', getProductTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
 
 export type GetProductVerbruiksObjectenQueryVariables = Exact<{
   productId: Scalars['UUID']['input'];
@@ -1159,7 +1174,7 @@ export type GetProductQueryVariables = Exact<{
 }>;
 
 
-export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } | null };
+export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } | null };
 
 export type GetProductenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -1175,7 +1190,7 @@ export type GetTaakByIdV2QueryVariables = Exact<{
 }>;
 
 
-export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
+export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
 export type GetTaakByIdQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1186,12 +1201,13 @@ export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename
 
 export type GetTakenV2QueryVariables = Exact<{
   zaakId?: InputMaybe<Scalars['UUID']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetTakenV2Query = { __typename?: 'Query', getTakenV2: { __typename?: 'TaakPageV2', totalElements: number, totalPages: number, content: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: TaakKoppelingRegistratie, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } };
+export type GetTakenV2Query = { __typename?: 'Query', getTakenV2: { __typename?: 'TaakPageV2', totalElements: number, totalPages: number, content: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } };
 
 export type GetTakenQueryVariables = Exact<{
   zaakId?: InputMaybe<Scalars['UUID']['input']>;
@@ -1425,6 +1441,145 @@ export function useUpdateProductVerbruiksObjectMutation(baseOptions?: Apollo.Mut
 export type UpdateProductVerbruiksObjectMutationHookResult = ReturnType<typeof useUpdateProductVerbruiksObjectMutation>;
 export type UpdateProductVerbruiksObjectMutationResult = Apollo.MutationResult<UpdateProductVerbruiksObjectMutation>;
 export type UpdateProductVerbruiksObjectMutationOptions = Apollo.BaseMutationOptions<UpdateProductVerbruiksObjectMutation, UpdateProductVerbruiksObjectMutationVariables>;
+export const GetBerichtDocument = gql`
+    query GetBericht($id: UUID!) {
+  getBericht(id: $id) {
+    id
+    berichtTekst
+    berichtType
+    bijlages
+    einddatumHandelingstermijn
+    geopend
+    handelingsperspectief
+    identificatie {
+      type
+      value
+    }
+    onderwerp
+    publicatiedatum
+    referentie
+  }
+}
+    `;
+
+/**
+ * __useGetBerichtQuery__
+ *
+ * To run a query within a React component, call `useGetBerichtQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBerichtQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBerichtQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetBerichtQuery(baseOptions: Apollo.QueryHookOptions<GetBerichtQuery, GetBerichtQueryVariables> & ({ variables: GetBerichtQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBerichtQuery, GetBerichtQueryVariables>(GetBerichtDocument, options);
+      }
+export function useGetBerichtLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBerichtQuery, GetBerichtQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBerichtQuery, GetBerichtQueryVariables>(GetBerichtDocument, options);
+        }
+export function useGetBerichtSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBerichtQuery, GetBerichtQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetBerichtQuery, GetBerichtQueryVariables>(GetBerichtDocument, options);
+        }
+export type GetBerichtQueryHookResult = ReturnType<typeof useGetBerichtQuery>;
+export type GetBerichtLazyQueryHookResult = ReturnType<typeof useGetBerichtLazyQuery>;
+export type GetBerichtSuspenseQueryHookResult = ReturnType<typeof useGetBerichtSuspenseQuery>;
+export type GetBerichtQueryResult = Apollo.QueryResult<GetBerichtQuery, GetBerichtQueryVariables>;
+export const GetBerichtenDocument = gql`
+    query GetBerichten($pageNumber: Int, $pageSize: Int) {
+  getBerichten(pageNumber: $pageNumber, pageSize: $pageSize) {
+    content {
+      id
+      einddatumHandelingstermijn
+      publicatiedatum
+      geopend
+      onderwerp
+    }
+    totalElements
+    totalPages
+  }
+}
+    `;
+
+/**
+ * __useGetBerichtenQuery__
+ *
+ * To run a query within a React component, call `useGetBerichtenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBerichtenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBerichtenQuery({
+ *   variables: {
+ *      pageNumber: // value for 'pageNumber'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useGetBerichtenQuery(baseOptions?: Apollo.QueryHookOptions<GetBerichtenQuery, GetBerichtenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBerichtenQuery, GetBerichtenQueryVariables>(GetBerichtenDocument, options);
+      }
+export function useGetBerichtenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBerichtenQuery, GetBerichtenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBerichtenQuery, GetBerichtenQueryVariables>(GetBerichtenDocument, options);
+        }
+export function useGetBerichtenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBerichtenQuery, GetBerichtenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetBerichtenQuery, GetBerichtenQueryVariables>(GetBerichtenDocument, options);
+        }
+export type GetBerichtenQueryHookResult = ReturnType<typeof useGetBerichtenQuery>;
+export type GetBerichtenLazyQueryHookResult = ReturnType<typeof useGetBerichtenLazyQuery>;
+export type GetBerichtenSuspenseQueryHookResult = ReturnType<typeof useGetBerichtenSuspenseQuery>;
+export type GetBerichtenQueryResult = Apollo.QueryResult<GetBerichtenQuery, GetBerichtenQueryVariables>;
+export const GetUnopenedBerichtenCountDocument = gql`
+    query GetUnopenedBerichtenCount {
+  getUnopenedBerichtenCount
+}
+    `;
+
+/**
+ * __useGetUnopenedBerichtenCountQuery__
+ *
+ * To run a query within a React component, call `useGetUnopenedBerichtenCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUnopenedBerichtenCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUnopenedBerichtenCountQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUnopenedBerichtenCountQuery(baseOptions?: Apollo.QueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
+      }
+export function useGetUnopenedBerichtenCountLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
+        }
+export function useGetUnopenedBerichtenCountSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
+        }
+export type GetUnopenedBerichtenCountQueryHookResult = ReturnType<typeof useGetUnopenedBerichtenCountQuery>;
+export type GetUnopenedBerichtenCountLazyQueryHookResult = ReturnType<typeof useGetUnopenedBerichtenCountLazyQuery>;
+export type GetUnopenedBerichtenCountSuspenseQueryHookResult = ReturnType<typeof useGetUnopenedBerichtenCountSuspenseQuery>;
+export type GetUnopenedBerichtenCountQueryResult = Apollo.QueryResult<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>;
 export const GetBedrijfDocument = gql`
     query GetBedrijf {
   getBedrijf {
@@ -2407,8 +2562,13 @@ export type GetTaakByIdLazyQueryHookResult = ReturnType<typeof useGetTaakByIdLaz
 export type GetTaakByIdSuspenseQueryHookResult = ReturnType<typeof useGetTaakByIdSuspenseQuery>;
 export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaakByIdQueryVariables>;
 export const GetTakenV2Document = gql`
-    query GetTakenV2($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
-  getTakenV2(zaakUUID: $zaakId, pageNumber: $pageNumber, pageSize: $pageSize) {
+    query GetTakenV2($zaakId: UUID, $title: String, $pageNumber: Int, $pageSize: Int) {
+  getTakenV2(
+    zaakUUID: $zaakId
+    title: $title
+    pageNumber: $pageNumber
+    pageSize: $pageSize
+  ) {
     content {
       id
       soort
@@ -2454,6 +2614,7 @@ export const GetTakenV2Document = gql`
  * const { data, loading, error } = useGetTakenV2Query({
  *   variables: {
  *      zaakId: // value for 'zaakId'
+ *      title: // value for 'title'
  *      pageNumber: // value for 'pageNumber'
  *      pageSize: // value for 'pageSize'
  *   },

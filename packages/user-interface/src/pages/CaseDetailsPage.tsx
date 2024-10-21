@@ -31,7 +31,7 @@ interface CasePageProps {
   showContactTimeline?: boolean;
 }
 
-const CasePage = ({ showContactTimeline = false }: CasePageProps) => {
+const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const intl = useIntl();
   const { id } = useParams();
   const { currentLocale } = useContext(LocaleContext);
@@ -65,18 +65,18 @@ const CasePage = ({ showContactTimeline = false }: CasePageProps) => {
 
     const array = [
       {
-        title: intl.formatMessage({ id: "case.creationDate" }),
+        title: intl.formatMessage({ id: "caseDetails.creationDate" }),
         detail: new Date(caseData?.getZaak.startdatum).toLocaleDateString(),
       },
       {
-        title: intl.formatMessage({ id: "case.caseNumber" }),
+        title: intl.formatMessage({ id: "caseDetails.caseNumber" }),
         detail: caseData?.getZaak.identificatie || "",
       },
     ];
 
     if (caseData?.getZaak.omschrijving)
       array.push({
-        title: intl.formatMessage({ id: "case.description" }),
+        title: intl.formatMessage({ id: "caseDetails.description" }),
         detail: caseData?.getZaak.omschrijving || "",
       });
 
@@ -97,8 +97,10 @@ const CasePage = ({ showContactTimeline = false }: CasePageProps) => {
   }, [momentsData]);
 
   const contactLabels = {
-    yesterday: intl.formatMessage({ id: "case.contacttimeline.yesterday" }),
-    today: intl.formatMessage({ id: "case.contacttimeline.today" }),
+    yesterday: intl.formatMessage({
+      id: "caseDetails.contacttimeline.yesterday",
+    }),
+    today: intl.formatMessage({ id: "caseDetails.contacttimeline.today" }),
   };
 
   React.useEffect(() => {
@@ -109,7 +111,7 @@ const CasePage = ({ showContactTimeline = false }: CasePageProps) => {
   if (!caseError) {
     <div>
       <Paragraph>
-        <FormattedMessage id="case.fetchError" />
+        <FormattedMessage id="caseDetails.fetchError" />
       </Paragraph>
     </div>;
   }
@@ -151,7 +153,7 @@ const CasePage = ({ showContactTimeline = false }: CasePageProps) => {
       />
       <section>
         <SectionHeader
-          title={intl.formatMessage({ id: "case.statusHeader" })}
+          title={intl.formatMessage({ id: "caseDetails.statusHeader" })}
         />
         <StatusHistory
           loading={loading}
@@ -165,7 +167,7 @@ const CasePage = ({ showContactTimeline = false }: CasePageProps) => {
       </section>
       {details.length > 0 && (
         <DescriptionList
-          titleTranslationId="case.detailsHeader"
+          titleTranslationId="caseDetails.detailsHeader"
           items={details}
         />
       )}
@@ -210,7 +212,7 @@ const CasePage = ({ showContactTimeline = false }: CasePageProps) => {
       {showContactTimeline && contactItems.length > 0 && (
         <section>
           <SectionHeader
-            title={intl.formatMessage({ id: "case.contactHeader" })}
+            title={intl.formatMessage({ id: "caseDetails.contactHeader" })}
           />
           <ContactTimeline items={contactItems} labels={contactLabels} />
         </section>
@@ -225,4 +227,4 @@ const CasePage = ({ showContactTimeline = false }: CasePageProps) => {
   );
 };
 
-export default CasePage;
+export default CaseDetailsPage;

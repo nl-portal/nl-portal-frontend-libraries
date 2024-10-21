@@ -20,9 +20,10 @@ import BackLink from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
 
+//eslint-disable-next-line react-hooks/rules-of-hooks
 Formio.use(ProtectedEval);
 
-const TaskPage = () => {
+const TaskDetailsPage = () => {
   const { id } = useParams();
   const intl = useIntl();
   const [loading, setLoading] = useState(true);
@@ -158,8 +159,8 @@ const TaskPage = () => {
         <BackLink />
         <Alert
           variant="success"
-          title={intl.formatMessage({ id: "task.completeTitle" })}
-          text={intl.formatMessage({ id: "task.completeDescription" })}
+          title={intl.formatMessage({ id: "taskDetails.completeTitle" })}
+          text={intl.formatMessage({ id: "taskDetails.completeDescription" })}
         />
       </>
     );
@@ -171,7 +172,7 @@ const TaskPage = () => {
         <BackLink />
         <Alert
           variant="error"
-          title={intl.formatMessage({ id: "task.fetchError" })}
+          title={intl.formatMessage({ id: "taskDetails.fetchError" })}
           text=""
         />
       </>
@@ -202,4 +203,4 @@ const TaskPage = () => {
   );
 };
 
-export default TaskPage;
+export default TaskDetailsPage;

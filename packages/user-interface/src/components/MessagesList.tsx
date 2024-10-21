@@ -3,8 +3,9 @@ import styles from "./MessagesList.module.scss";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
 import { Pagination } from "@gemeente-denhaag/pagination";
-import Message, { MessageType } from "./Message";
+import Message from "./Message";
 import Table from "./Table";
+import { Bericht } from "@nl-portal/nl-portal-api";
 
 interface Props {
   loading?: boolean;
@@ -16,7 +17,7 @@ interface Props {
   readMoreLink?: string;
   readMoreTranslationId?: string | null;
   totalAmount?: number;
-  messages?: MessageType[];
+  messages?: Bericht[];
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;

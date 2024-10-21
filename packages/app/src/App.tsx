@@ -4,7 +4,11 @@ import "./styles/nl-portal-design-tokens.css";
 import { KeycloakWrapper } from "@nl-portal/nl-portal-authentication";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 import { ApiProvider } from "@nl-portal/nl-portal-api";
-import { Layout } from "@nl-portal/nl-portal-user-interface";
+import {
+  Layout,
+  MessagesProvider,
+  useEnableMessagesCount,
+} from "@nl-portal/nl-portal-user-interface";
 import { CUSTOM_MESSAGES } from "./i18n/custom-messages/custom-messages";
 import HeaderLogo from "./assets/header-logo.svg";
 import HeaderLogoSmall from "./assets/header-logo-small.svg";
@@ -23,35 +27,7 @@ const authenticationMethods = {
 };
 
 const App = () => {
-  if (!config.KEYCLOAK_CLIENT_ID) {
-    console.log("KEYCLOAK_CLIENT_ID is not set");
-    return null;
-  }
-
-  if (!config.KEYCLOAK_REALM) {
-    console.log("KEYCLOAK_REALM is not set");
-    return null;
-  }
-
-  if (!config.KEYCLOAK_URL) {
-    console.log("KEYCLOAK_URL is not set");
-    return null;
-  }
-
-  if (!config.KEYCLOAK_REDIRECT_URI) {
-    console.log("KEYCLOAK_REDIRECT_URI is not set");
-    return null;
-  }
-
-  if (!config.GRAPHQL_URI) {
-    console.log("GRAPHQL_URI is not set");
-    return null;
-  }
-
-  if (!config.REST_URI) {
-    console.log("REST_URI is not set");
-    return null;
-  }
+  const enableMessagesCount = useEnableMessagesCount(menuItems);
 
   return (
     <div className={config.THEME_CLASS}>
@@ -69,14 +45,18 @@ const App = () => {
             restUri={config.REST_URI}
           >
             <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-              <Layout
-                navigationItems={menuItems}
-                paths={paths}
-                headerLogo={<img src={HeaderLogo} alt="logo" />}
-                headerLogoSmall={<img src={HeaderLogoSmall} alt="logo-small" />}
-                facet={<img src={Facet} alt="facet" />}
-                footer={footerData}
-              />
+              <MessagesProvider enableMessagesCount={enableMessagesCount}>
+                <Layout
+                  navigationItems={menuItems}
+                  paths={paths}
+                  headerLogo={<img src={HeaderLogo} alt="logo" />}
+                  headerLogoSmall={
+                    <img src={HeaderLogoSmall} alt="logo-small" />
+                  }
+                  facet={<img src={Facet} alt="facet" />}
+                  footer={footerData}
+                />
+              </MessagesProvider>
             </LocalizationProvider>
           </ApiProvider>
         </React.StrictMode>
