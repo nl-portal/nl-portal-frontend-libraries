@@ -1,9 +1,15 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_GET_TAKEN_V2 = gql`
-  query GetTakenV2($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
+  query GetTakenV2(
+    $zaakId: UUID
+    $title: String
+    $pageNumber: Int
+    $pageSize: Int
+  ) {
     getTakenV2(
       zaakUUID: $zaakId
+      title: $title
       pageNumber: $pageNumber
       pageSize: $pageSize
     ) {
