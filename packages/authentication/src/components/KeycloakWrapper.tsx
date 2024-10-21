@@ -98,16 +98,18 @@ const KeycloakProvider = ({
   minValiditySeconds = 30,
   onLoad = "login-required",
 }: KeycloakWrapperProps) => {
-  const { host, href } = window.location;
   const { setKeycloakToken, setDecodedToken } = useContext(KeycloakContext);
+  const keycloakPath = new URL(window.KEYCLOAK_REDIRECT_URI).pathname;
+  const redirectPath = new URL(window.location.href).pathname;
+  const redirectParam =
+    redirectPath !== "/" && redirectPath !== keycloakPath
+      ? `?redirect_url=${redirectPath}`
+      : "";
   const { current: initOptions } = useRef<KeycloakInitOptions>({
     checkLoginIframe: false,
     onLoad,
     flow: "standard",
-    redirectUri: formatUrlTrailingSlash(
-      redirectUri + `?redirect_url=${href.split(host)[1]}`,
-      false,
-    ),
+    redirectUri: formatUrlTrailingSlash(redirectUri + redirectParam, false),
   });
   const { current: authClient } = useRef(
     new Keycloak({
