@@ -139,5 +139,9 @@ export const EN_GB_MESSAGES: Messages = {
     "messagesList.new": "New",
     "messageContent.fetchError":
       "Something went wrong, please try again later.",
+    "searchForm.tasks.searchLabel": "Search for a task",
+    "searchForm.tasks.searchButton": "Search",
+    "searchForm.tasks.totalElements": "{total} tasks",
+    "searchForm.tasks.totalElements.singular": "{total} task",
   },
 };

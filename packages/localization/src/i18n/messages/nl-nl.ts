@@ -148,5 +148,9 @@ export const NL_NL_MESSAGES: Messages = {
     "messagesList.new": "Nieuw",
     "messageContent.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
+    "searchForm.tasks.searchLabel": "Zoek naar een taak",
+    "searchForm.tasks.searchButton": "Zoeken",
+    "searchForm.tasks.totalElements": "{total} taken",
+    "searchForm.tasks.totalElements.singular": "{total} taak",
   },
 };
