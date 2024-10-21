@@ -7,10 +7,13 @@ const useDownload = (link: string, title?: string | null) => {
   const onClick = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
 
-    const result = await fetch(link, {
+    const response = await fetch(link, {
       headers: { Authorization: `Bearer ${keycloakToken}` },
     });
-    const blob = await result.blob();
+
+    if (!response.ok) return console.log("Failed to download file");
+
+    const blob = await response.blob();
     const href = window.URL.createObjectURL(blob);
     const anchor = document.createElement("a");
 
