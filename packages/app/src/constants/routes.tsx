@@ -10,9 +10,10 @@ import {
   TaskDetailsPage,
   MessagesPage,
 } from "@nl-portal/nl-portal-user-interface";
+import { KeycloakCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
 import { config } from "./config";
-import { Navigate, useSearchParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import ThemeSampleOverviewPage from "../pages/ThemeSampleOverviewPage";
 import ThemeSampleListPage from "../pages/ThemeSampleListPage";
 import ThemeSampleDetailPage from "../pages/ThemeSampleDetailPage";
@@ -97,18 +98,8 @@ export const routes = [
     ],
   },
   {
-    path: "/keycloak/callback",
-    Component: () => {
-      const [searchParams] = useSearchParams();
-      const redirectUrl = searchParams.get("redirect_url");
-
-      try {
-        if (redirectUrl) new URL(redirectUrl);
-        return <Navigate to="/" />;
-      } catch {
-        return <Navigate to={redirectUrl ? redirectUrl : "/"} />;
-      }
-    },
+    path: new URL(window.KEYCLOAK_REDIRECT_URI).pathname,
+    element: <KeycloakCallbackPage />,
   },
   {
     path: paths.noMatch,
