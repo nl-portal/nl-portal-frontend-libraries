@@ -117,7 +117,7 @@ export const EN_GB_MESSAGES: Messages = {
     "overviewpage.title": "Welcome {userName}",
     "overview.subTitle": "Authorised for {volmachtgever}",
     "overviewpage.paragraph":
-      "In MijnDenHaag you can arrange your personal affairs yourself when it suits you. For example, you can pay your bills and see when your application is ready.",
+      "In the NL-portal you can arrange your personal affairs yourself when it suits you. For example, you can pay your bills and see when your application is ready.",
     "actionLabels.today": "today",
     "actionLabels.yesterday": "yesterday",
     "actionLabels.before": "before",
