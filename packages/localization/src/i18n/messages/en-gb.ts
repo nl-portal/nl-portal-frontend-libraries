@@ -145,5 +145,9 @@ export const EN_GB_MESSAGES: Messages = {
     "searchForm.tasks.searchButton": "Search",
     "searchForm.tasks.totalElements": "{total} tasks",
     "searchForm.tasks.totalElements.singular": "{total} task",
+    "searchForm.cases.searchLabel": "Search for a case",
+    "searchForm.cases.searchButton": "Search",
+    "searchForm.cases.totalElements": "{total} cases",
+    "searchForm.cases.totalElements.singular": "{total} case",
   },
 };
