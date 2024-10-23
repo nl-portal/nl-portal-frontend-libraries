@@ -10,9 +10,9 @@ export enum PaymentStatus {
 
 const useOgonePaymentRegistration = () => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
-  const [finishedTaskId, setFinishedTaskId] = useState<string | undefined>();
+  const [orderId, setOrderId] = useState<string | undefined>();
   const { restUri } = useContext(ApiContext);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const useOgonePaymentRegistration = () => {
         .then((response) => {
           if (response.ok) {
             setPaymentStatus(PaymentStatus.SUCCESS);
-            setFinishedTaskId(searchParams.get("orderID")?.toString());
+            setOrderId(searchParams.get("orderID")?.toString());
           } else {
             console.error("payment failed:", response.statusText);
             setPaymentStatus(PaymentStatus.FAILURE);
@@ -36,13 +36,13 @@ const useOgonePaymentRegistration = () => {
         })
         .finally(() => {
           // Clear the Ogone return parameters
-          //const newSearchParams = new URLSearchParams();
-          //setSearchParams(newSearchParams);
+          const newSearchParams = new URLSearchParams();
+          setSearchParams(newSearchParams);
         });
     }
   }, [type, paymentStatus]);
 
-  return { paymentStatus, finishedTaskId };
+  return { paymentStatus, orderId };
 };
 
 export default useOgonePaymentRegistration;

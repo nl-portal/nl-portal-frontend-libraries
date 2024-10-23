@@ -47,16 +47,14 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
-  const { paymentStatus, finishedTaskId } = useOgonePaymentRegistration();
+  const { paymentStatus, orderId } = useOgonePaymentRegistration();
 
   const loading = caseLoading || taskLoading || momentsLoading;
 
-  // Remove task with the finishedTaskId to prevent race condition with the payment handling in the backend
+  // Remove task with the orderId to prevent race condition with the payment handling in the backend
   const tasks = (
-    paymentStatus === PaymentStatus.SUCCESS && finishedTaskId
-      ? tasksResult?.getTakenV2.content.filter(
-          (item) => item.id !== finishedTaskId,
-        )
+    paymentStatus === PaymentStatus.SUCCESS && orderId
+      ? tasksResult?.getTakenV2.content.filter((item) => item.id !== orderId)
       : tasksResult?.getTakenV2.content
   ) as TaakV2[] | undefined;
 
