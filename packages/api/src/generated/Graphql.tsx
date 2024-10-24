@@ -1227,7 +1227,9 @@ export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak
 
 export type GetZakenQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
+  zaakTypeUrl?: InputMaybe<Scalars['String']['input']>;
   isOpen?: InputMaybe<Scalars['Boolean']['input']>;
+  identificatie?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -2772,8 +2774,13 @@ export type GetZaakLazyQueryHookResult = ReturnType<typeof useGetZaakLazyQuery>;
 export type GetZaakSuspenseQueryHookResult = ReturnType<typeof useGetZaakSuspenseQuery>;
 export type GetZaakQueryResult = Apollo.QueryResult<GetZaakQuery, GetZaakQueryVariables>;
 export const GetZakenDocument = gql`
-    query GetZaken($page: Int, $isOpen: Boolean) {
-  getZaken(page: $page, isOpen: $isOpen) {
+    query GetZaken($page: Int, $zaakTypeUrl: String, $isOpen: Boolean, $identificatie: String) {
+  getZaken(
+    page: $page
+    zaakTypeUrl: $zaakTypeUrl
+    isOpen: $isOpen
+    identificatie: $identificatie
+  ) {
     content {
       uuid
       omschrijving
@@ -2807,7 +2814,9 @@ export const GetZakenDocument = gql`
  * const { data, loading, error } = useGetZakenQuery({
  *   variables: {
  *      page: // value for 'page'
+ *      zaakTypeUrl: // value for 'zaakTypeUrl'
  *      isOpen: // value for 'isOpen'
+ *      identificatie: // value for 'identificatie'
  *   },
  * });
  */

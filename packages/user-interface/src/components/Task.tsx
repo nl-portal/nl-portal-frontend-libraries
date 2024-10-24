@@ -7,8 +7,6 @@ import { ButtonLink } from "@gemeente-denhaag/button-link";
 import { ChevronRightIcon } from "@gemeente-denhaag/icons";
 import useOgonePayment from "../hooks/useOgonePayment";
 import { Button } from "@gemeente-denhaag/button";
-import { useContext } from "react";
-import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useLinkClickHandler } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 
@@ -19,7 +17,6 @@ interface Props {
 
 const Task = ({ task, openInContext }: Props) => {
   const labels = useActionLabels();
-  const { currentLocale } = useContext(LocaleContext);
   const { startPayment, renderPaymentRedirectForm, loading } =
     useOgonePayment();
   const taskUrl = useTaskUrl(task, openInContext) ?? "";
@@ -57,19 +54,12 @@ const Task = ({ task, openInContext }: Props) => {
       }
       case TaakSoort.Ogonebetaling:
         if (task.ogonebetaling) {
-          let currentUrl = window.location.href;
-          const separator = currentUrl.indexOf("?") !== -1 ? "&" : "?";
-          currentUrl += `${separator}type=ogone`;
-
           const paymentRequestPayload = {
             amount: task.ogonebetaling.bedrag,
             orderId: task.id,
             reference: task.ogonebetaling.betaalkenmerk,
             pspId: task.ogonebetaling.pspid,
             title: task.titel,
-            langId: currentLocale.replace("-", "_"),
-            successUrl: `${currentUrl}&success=true`,
-            failureUrl: currentUrl,
           };
 
           return (

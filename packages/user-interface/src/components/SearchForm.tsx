@@ -13,7 +13,7 @@ import { Paragraph } from "@gemeente-denhaag/typography";
 interface SearchFormProps {
   translationId: string;
   defaultSearchValue?: string;
-  totalElements: number;
+  totalElements: number | null;
   searchValidationFn?: (value: string) => boolean;
   onSubmit: (searchValue: string) => void;
 }
@@ -62,16 +62,18 @@ const SearchForm = ({
           </Button>
         </div>
       </FormField>
-      <Paragraph className={styles["search-form-total-elements"]}>
-        <FormattedMessage
-          id={
-            totalElements === 1
-              ? `searchForm.${translationId}.totalElements.singular`
-              : `searchForm.${translationId}.totalElements`
-          }
-          values={{ total: totalElements }}
-        />
-      </Paragraph>
+      {totalElements !== null && (
+        <Paragraph className={styles["search-form-total-elements"]}>
+          <FormattedMessage
+            id={
+              totalElements === 1
+                ? `searchForm.${translationId}.totalElements.singular`
+                : `searchForm.${translationId}.totalElements`
+            }
+            values={{ total: totalElements }}
+          />
+        </Paragraph>
+      )}
     </Form>
   );
 };
