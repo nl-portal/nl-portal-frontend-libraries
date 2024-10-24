@@ -27,6 +27,9 @@ export * from "./interfaces/portal-footer";
 export { default as useActionLabels } from "./hooks/useActionLabels";
 export { default as useDownload } from "./hooks/useDownload";
 export { default as useEnableMessagesCount } from "./hooks/useEnableMessagesCount";
+export { default as useOgonePayment } from "./hooks/useOgonePayment";
+export { default as useOgonePaymentRegistration } from "./hooks/useOgonePaymentRegistration";
+export * from "./hooks/useOgonePaymentRegistration";
 export { default as useUserInfo } from "./hooks/useUserInfo";
 
 export { default as AccountPage } from "./pages/AccountPage";

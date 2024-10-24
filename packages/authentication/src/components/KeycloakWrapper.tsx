@@ -100,7 +100,8 @@ const KeycloakProvider = ({
 }: KeycloakWrapperProps) => {
   const { setKeycloakToken, setDecodedToken } = useContext(KeycloakContext);
   const keycloakPath = new URL(window.KEYCLOAK_REDIRECT_URI).pathname;
-  const redirectPath = new URL(window.location.href).pathname;
+  const redirectUrl = new URL(window.location.href);
+  const redirectPath = redirectUrl.pathname + redirectUrl.search;
   const redirectParam =
     redirectPath !== "/" && redirectPath !== keycloakPath
       ? `?redirect_url=${redirectPath}`
