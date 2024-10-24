@@ -5,15 +5,26 @@ import styles from "./CasesPage.module.scss";
 import PageHeader from "../components/PageHeader";
 import { Zaak, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import PageGrid from "../components/PageGrid";
+import SearchForm from "../components/SearchForm";
 
 const CasesPage = () => {
   const intl = useIntl();
-  const { data, loading, error } = useGetZakenQuery();
+  const { data, loading, error, refetch } = useGetZakenQuery();
   const cases = data?.getZaken.content as Zaak[] | undefined;
 
+  const handleFormSubmit = (searchValue: string) => {
+    refetch({ identificatie: searchValue });
+  };
+
   return (
-    <PageGrid className={styles.cases}>
-      <PageHeader title={<FormattedMessage id="pageTitles.cases" />} />
+    <PageGrid className={styles.cases} variant="medium">
+      <PageHeader title={<FormattedMessage id="pageTitles.cases" />}>
+        <SearchForm
+          translationId="cases"
+          totalElements={null}
+          onSubmit={handleFormSubmit}
+        />
+      </PageHeader>
       <div>
         <Tabs
           tabData={[
