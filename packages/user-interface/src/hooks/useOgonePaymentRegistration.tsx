@@ -8,17 +8,13 @@ export enum PaymentStatus {
   FAILURE,
 }
 
-interface Props {
-  usePostsale?: boolean;
-}
-
-const useOgonePaymentRegistration = ({ usePostsale }: Props) => {
+const useOgonePaymentRegistration = (usePostsale?: boolean) => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
   const [orderId, setOrderId] = useState<string | undefined>();
   const { restUri } = useContext(ApiContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
-  const status = searchParams.get("status");
+  const status = searchParams.get("STATUS");
 
   useEffect(() => {
     if (type !== "ogone") return;
