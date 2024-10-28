@@ -47,7 +47,9 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
-  const { paymentStatus, orderId } = useOgonePaymentRegistration();
+  const { paymentStatus, orderId } = useOgonePaymentRegistration({
+    usePostsale: true,
+  });
 
   const loading = caseLoading || taskLoading || momentsLoading;
 
@@ -126,23 +128,22 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
               id: `case.${caseData?.getZaak.zaaktype.identificatie}.title`,
             })
           }
-        >
-          {paymentStatus === PaymentStatus.SUCCESS && (
-            <Alert
-              variant="success"
-              title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
-              text={intl.formatMessage({ id: "task.paymentSuccessText" })}
-            />
-          )}
-          {paymentStatus === PaymentStatus.FAILURE && (
-            <Alert
-              variant="error"
-              title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
-              text={intl.formatMessage({ id: "task.paymentFailureText" })}
-            />
-          )}
-        </PageHeader>
+        />
       </div>
+      {paymentStatus === PaymentStatus.SUCCESS && (
+        <Alert
+          variant="success"
+          title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
+          text={intl.formatMessage({ id: "task.paymentSuccessText" })}
+        />
+      )}
+      {paymentStatus === PaymentStatus.FAILURE && (
+        <Alert
+          variant="error"
+          title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
+          text={intl.formatMessage({ id: "task.paymentFailureText" })}
+        />
+      )}
       <TasksList
         loading={loading}
         showEmpty={false}

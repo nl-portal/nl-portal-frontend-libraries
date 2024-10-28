@@ -8,16 +8,25 @@ export enum PaymentStatus {
   FAILURE,
 }
 
-const useOgonePaymentRegistration = () => {
+interface Props {
+  usePostsale?: boolean;
+}
+
+const useOgonePaymentRegistration = ({ usePostsale }: Props) => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
   const [orderId, setOrderId] = useState<string | undefined>();
   const { restUri } = useContext(ApiContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
+  const status = searchParams.get("status");
 
   useEffect(() => {
-    if (type === "ogone" && typeof paymentStatus === "undefined") {
-      setPaymentStatus(PaymentStatus.IN_PROGRESS);
+    if (type !== "ogone") return;
+    if (paymentStatus !== undefined) return;
+
+    setPaymentStatus(PaymentStatus.IN_PROGRESS);
+
+    if (usePostsale) {
       fetch(
         `${restUri}/public/payment/ogone/postsale?${searchParams.toString()}`,
       )
@@ -35,10 +44,20 @@ const useOgonePaymentRegistration = () => {
           setPaymentStatus(PaymentStatus.FAILURE);
         })
         .finally(() => {
-          // Clear the Ogone return parameters
           const newSearchParams = new URLSearchParams();
           setSearchParams(newSearchParams);
         });
+    } else {
+      if (status === "9") {
+        setPaymentStatus(PaymentStatus.SUCCESS);
+        setOrderId(searchParams.get("orderID")?.toString());
+      } else {
+        console.error("payment failed:", status);
+        setPaymentStatus(PaymentStatus.FAILURE);
+      }
+
+      const newSearchParams = new URLSearchParams();
+      setSearchParams(newSearchParams);
     }
   }, [type, paymentStatus]);
 
