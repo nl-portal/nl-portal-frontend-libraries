@@ -56,6 +56,7 @@ const useOgonePaymentRegistration = ({ usePostsale }: Props) => {
 
   useEffect(() => {
     if (paymentStatus === undefined) return;
+    if (paymentStatus === PaymentStatus.IN_PROGRESS) return;
     // // Clear the Ogone return parameters
     const newSearchParams = new URLSearchParams();
     setSearchParams(newSearchParams);
