@@ -16,8 +16,6 @@ const useOgonePaymentRegistration = (usePostsale?: boolean) => {
   const type = searchParams.get("type");
   const status = searchParams.get("STATUS");
 
-  console.log(status);
-
   useEffect(() => {
     if (type !== "ogone") return;
     if (paymentStatus !== undefined) return;
