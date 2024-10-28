@@ -47,10 +47,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
-  const { paymentStatus, orderId } = useOgonePaymentRegistration({
-    usePostsale: true,
-  });
-
+  const { paymentStatus, orderId } = useOgonePaymentRegistration(true);
   const loading = caseLoading || taskLoading || momentsLoading;
 
   // Remove task with the orderId to prevent race condition with the payment handling in the backend
