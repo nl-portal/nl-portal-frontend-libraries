@@ -42,6 +42,10 @@ const useOgonePaymentRegistration = ({ usePostsale }: Props) => {
         .catch((error) => {
           console.error("payment failed:", error);
           setPaymentStatus(PaymentStatus.FAILURE);
+        })
+        .finally(() => {
+          const newSearchParams = new URLSearchParams();
+          setSearchParams(newSearchParams);
         });
     } else {
       if (status === "9") {
@@ -51,16 +55,11 @@ const useOgonePaymentRegistration = ({ usePostsale }: Props) => {
         console.error("payment failed:", status);
         setPaymentStatus(PaymentStatus.FAILURE);
       }
+
+      const newSearchParams = new URLSearchParams();
+      setSearchParams(newSearchParams);
     }
   }, [type, paymentStatus]);
-
-  useEffect(() => {
-    if (paymentStatus === undefined) return;
-    if (paymentStatus === PaymentStatus.IN_PROGRESS) return;
-    // // Clear the Ogone return parameters
-    const newSearchParams = new URLSearchParams();
-    setSearchParams(newSearchParams);
-  }, [paymentStatus]);
 
   return { paymentStatus, orderId };
 };
