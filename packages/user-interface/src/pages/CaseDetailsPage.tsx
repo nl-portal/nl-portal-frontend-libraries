@@ -47,7 +47,9 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
-  const { paymentStatus, orderId } = useOgonePaymentRegistration();
+  const { paymentStatus, orderId } = useOgonePaymentRegistration({
+    usePostsale: true,
+  });
 
   const loading = caseLoading || taskLoading || momentsLoading;
 
