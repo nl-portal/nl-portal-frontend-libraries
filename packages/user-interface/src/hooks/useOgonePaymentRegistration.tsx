@@ -44,6 +44,7 @@ const useOgonePaymentRegistration = ({ usePostsale }: Props) => {
           setPaymentStatus(PaymentStatus.FAILURE);
         });
     } else {
+      console.log("status", status);
       if (status === "9") {
         setPaymentStatus(PaymentStatus.SUCCESS);
         setOrderId(searchParams.get("orderID")?.toString());
@@ -52,11 +53,14 @@ const useOgonePaymentRegistration = ({ usePostsale }: Props) => {
         setPaymentStatus(PaymentStatus.FAILURE);
       }
     }
+  }, [type, paymentStatus]);
 
-    // Clear the Ogone return parameters
+  useEffect(() => {
+    if (paymentStatus === undefined) return;
+    // // Clear the Ogone return parameters
     const newSearchParams = new URLSearchParams();
     setSearchParams(newSearchParams);
-  }, [type, paymentStatus]);
+  }, [paymentStatus]);
 
   return { paymentStatus, orderId };
 };

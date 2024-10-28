@@ -128,23 +128,22 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
               id: `case.${caseData?.getZaak.zaaktype.identificatie}.title`,
             })
           }
-        >
-          {paymentStatus === PaymentStatus.SUCCESS && (
-            <Alert
-              variant="success"
-              title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
-              text={intl.formatMessage({ id: "task.paymentSuccessText" })}
-            />
-          )}
-          {paymentStatus === PaymentStatus.FAILURE && (
-            <Alert
-              variant="error"
-              title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
-              text={intl.formatMessage({ id: "task.paymentFailureText" })}
-            />
-          )}
-        </PageHeader>
+        />
       </div>
+      {paymentStatus === PaymentStatus.SUCCESS && (
+        <Alert
+          variant="success"
+          title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
+          text={intl.formatMessage({ id: "task.paymentSuccessText" })}
+        />
+      )}
+      {paymentStatus === PaymentStatus.FAILURE && (
+        <Alert
+          variant="error"
+          title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
+          text={intl.formatMessage({ id: "task.paymentFailureText" })}
+        />
+      )}
       <TasksList
         loading={loading}
         showEmpty={false}
