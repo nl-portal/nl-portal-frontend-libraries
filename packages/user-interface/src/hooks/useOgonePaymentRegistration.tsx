@@ -44,7 +44,6 @@ const useOgonePaymentRegistration = ({ usePostsale }: Props) => {
           setPaymentStatus(PaymentStatus.FAILURE);
         });
     } else {
-      console.log("status", status);
       if (status === "9") {
         setPaymentStatus(PaymentStatus.SUCCESS);
         setOrderId(searchParams.get("orderID")?.toString());
