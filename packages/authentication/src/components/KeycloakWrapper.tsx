@@ -101,12 +101,10 @@ const KeycloakProvider = ({
   const { setKeycloakToken, setDecodedToken } = useContext(KeycloakContext);
   const keycloakPath = new URL(redirectUri).pathname;
   const redirectUrl = new URL(window.location.href);
-  const redirectPath = encodeURIComponent(
-    redirectUrl.pathname + redirectUrl.search,
-  );
+  const redirectPath = redirectUrl.pathname + redirectUrl.search;
   const redirectParam =
     redirectPath !== "/" && redirectPath !== keycloakPath
-      ? `?redirect_url=${redirectPath}`
+      ? `?redirect_url=${encodeURIComponent(redirectPath)}`
       : "";
   const { current: initOptions } = useRef<KeycloakInitOptions>({
     checkLoginIframe: false,
