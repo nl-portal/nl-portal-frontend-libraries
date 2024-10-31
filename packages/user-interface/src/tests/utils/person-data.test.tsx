@@ -8,6 +8,7 @@ import {
   getPostalCodeCityString,
   getStreetString,
 } from "../../utils/person-data";
+import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 
 describe("getNationalitiesString", () => {
   it("should return empty string when input is null", () => {
@@ -104,7 +105,11 @@ describe("getLocaleDateOfBirth", () => {
       dag: 1,
     });
 
-    render(localeDateOfBirthComponent as ReactElement);
+    render(
+      <LocalizationProvider>
+        {localeDateOfBirthComponent as ReactElement}
+      </LocalizationProvider>,
+    );
 
     expect(screen.getByText("1 January 1980")).toBeTruthy();
   });
