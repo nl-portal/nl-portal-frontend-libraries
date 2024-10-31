@@ -6,6 +6,8 @@ import { Action } from "@gemeente-denhaag/action";
 import useActionLabels from "../hooks/useActionLabels";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
+import { useContext } from "react";
+import { LocaleContext } from "@nl-portal/nl-portal-localization";
 
 interface Props {
   cs: Zaak;
@@ -16,6 +18,7 @@ const Case = ({ cs, listView }: Props) => {
   const intl = useIntl();
   const labels = useActionLabels();
   const { paths } = useOutletContext<RouterOutletContext>();
+  const { currentLocale } = useContext(LocaleContext);
   const title = intl.formatMessage({
     id: `case.${cs.zaaktype.identificatie}.title`,
   });
@@ -33,6 +36,7 @@ const Case = ({ cs, listView }: Props) => {
       title={title}
       subTitle={cs.omschrijving}
       date={cs.startdatum}
+      locale={currentLocale}
       href={paths.case(cs.uuid)}
       Link={PortalLink}
     />

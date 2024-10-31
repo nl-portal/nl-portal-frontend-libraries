@@ -1,22 +1,20 @@
-import { FC, useContext } from "react";
+import { useContext } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
+import { formatDate, longDateOptions } from "@gemeente-denhaag/utils";
 
-interface LocaleDateProps {
-  date: Date;
-  year?: Intl.DateTimeFormatOptions["year"];
-  month?: Intl.DateTimeFormatOptions["month"];
-  day?: Intl.DateTimeFormatOptions["day"];
+interface Props {
+  date: string;
+  formatOptions?: Intl.DateTimeFormatOptions;
 }
 
-const LocaleDate: FC<LocaleDateProps> = ({ date, year, month, day }) => {
+const LocaleDate = ({ date, formatOptions = longDateOptions }: Props) => {
   const { currentLocale } = useContext(LocaleContext);
-  const options: Intl.DateTimeFormatOptions = {
-    year: year || "numeric",
-    month: month || "long",
-    day: day || "numeric",
-  };
 
-  return <>{date.toLocaleDateString(currentLocale, options)}</>;
+  return formatDate({
+    dateTime: date,
+    locale: currentLocale,
+    format: formatOptions,
+  });
 };
 
 export default LocaleDate;

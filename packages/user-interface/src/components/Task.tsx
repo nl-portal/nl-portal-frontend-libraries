@@ -9,6 +9,8 @@ import useOgonePayment from "../hooks/useOgonePayment";
 import { Button } from "@gemeente-denhaag/button";
 import { useLinkClickHandler } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { LocaleContext } from "@nl-portal/nl-portal-localization";
+import { useContext } from "react";
 
 interface Props {
   task: TaakV2;
@@ -17,6 +19,7 @@ interface Props {
 
 const Task = ({ task, openInContext }: Props) => {
   const labels = useActionLabels();
+  const { currentLocale } = useContext(LocaleContext);
   const { startPayment, renderPaymentRedirectForm, loading } =
     useOgonePayment();
   const taskUrl = useTaskUrl(task, openInContext) ?? "";
@@ -28,6 +31,7 @@ const Task = ({ task, openInContext }: Props) => {
         relativeDate
         labels={labels}
         dateTime={task.verloopdatum}
+        locale={currentLocale}
         link={taskUrl}
         Link={PortalLink}
       >
@@ -80,6 +84,7 @@ const Task = ({ task, openInContext }: Props) => {
       relativeDate
       labels={labels}
       dateTime={task.verloopdatum}
+      locale={currentLocale}
       actions={createActions()}
     >
       {task.titel}
