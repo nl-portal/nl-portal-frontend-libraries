@@ -26,6 +26,7 @@ import useOgonePaymentRegistration, {
 } from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
 import TableList from "../components/TableList";
+import LocaleDate from "../components/LocaleDate";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -63,7 +64,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     const array = [
       {
         title: intl.formatMessage({ id: "caseDetails.creationDate" }),
-        detail: new Date(caseData?.getZaak.startdatum).toLocaleDateString(),
+        detail: <LocaleDate date={caseData?.getZaak.startdatum} />,
       },
       {
         title: intl.formatMessage({ id: "caseDetails.caseNumber" }),
@@ -210,7 +211,11 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
           <SectionHeader
             title={intl.formatMessage({ id: "caseDetails.contactHeader" })}
           />
-          <ContactTimeline items={contactItems} labels={contactLabels} />
+          <ContactTimeline
+            items={contactItems}
+            labels={contactLabels}
+            locale={currentLocale}
+          />
         </section>
       )}
       <TasksList

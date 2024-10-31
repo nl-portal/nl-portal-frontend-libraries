@@ -7,6 +7,8 @@ import { FormattedMessage } from "react-intl";
 import { StatusBadge } from "@gemeente-denhaag/status-badge";
 import styles from "./Message.module.scss";
 import { Bericht } from "@nl-portal/nl-portal-api";
+import { useContext } from "react";
+import { LocaleContext } from "@nl-portal/nl-portal-localization";
 
 interface Props {
   message: Bericht;
@@ -15,11 +17,13 @@ interface Props {
 const Message = ({ message }: Props) => {
   const labels = useActionLabels();
   const { paths } = useOutletContext<RouterOutletContext>();
+  const { currentLocale } = useContext(LocaleContext);
 
   return (
     <ActionSingle
       labels={labels}
       dateTime={message.publicatiedatum}
+      locale={currentLocale}
       link={paths.message(message.id)}
       Link={PortalLink}
     >
