@@ -67,7 +67,7 @@ const getLocaleDateOfBirth = (
   if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
     return (
       <LocaleDate
-        date={`${dateOfBirth.jaar}-${dateOfBirth.maand}-${dateOfBirth.dag}`}
+        date={`${dateOfBirth.jaar}-${String(dateOfBirth.maand).padStart(2, "0")}-${String(dateOfBirth.dag).padStart(2, "0")}`}
       />
     );
   }
