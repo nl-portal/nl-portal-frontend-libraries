@@ -10,7 +10,6 @@ import {
 import styles from "./AccountPage.module.scss";
 import DetailList from "../components/DetailList";
 import {
-  getLocaleDateOfBirth,
   getNameString,
   getNationalitiesString,
   getPostalCodeCityString,
@@ -20,6 +19,7 @@ import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
 import Heading from "../components/Heading";
 import useUserInfo from "../hooks/useUserInfo";
+import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
@@ -34,6 +34,7 @@ const AccountPage = ({
   addressResearchUrl,
   showNotificationSubSection = true,
 }: AccountPageProps) => {
+  const { formatDate } = useDateFormatter();
   const { isPerson } = useUserInfo();
   const { data: contactData, loading: contactLoading } =
     useGetBurgerProfielQuery({ skip: !isPerson });
@@ -189,7 +190,11 @@ const AccountPage = ({
             },
             {
               translationKey: "dateOfBirth",
-              value: getLocaleDateOfBirth(person?.geboorte?.datum),
+              value: person?.geboorte?.datum
+                ? formatDate({
+                    date: `${person?.geboorte?.datum?.jaar}-${String(person?.geboorte?.datum?.maand).padStart(2, "0")}-${String(person?.geboorte?.datum?.dag).padStart(2, "0")}`,
+                  })
+                : "",
               loading,
             },
             {

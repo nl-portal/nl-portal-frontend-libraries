@@ -9,7 +9,6 @@ export * from "./components/Heading";
 export { default as Layout } from "./components/Layout";
 export { default as LinksList } from "./components/LinksList";
 export * from "./components/LinksList";
-export { default as LocaleDate } from "./components/LocaleDate";
 export { default as PageHeader } from "./components/PageHeader";
 export { default as PageGrid } from "./components/PageGrid";
 export { default as PortalLink } from "./components/PortalLink";
