@@ -57,7 +57,6 @@ export const EN_GB_MESSAGES: Messages = {
     "caseDetails.contacttimeline.yesterday": "yesterday",
     "messageDetails.sent": "Message sent on {date} at {time}",
     "documents.fetchError": "Something went wrong, please try again later.",
-    "documents.noDocuments": "There are no documents.",
     "offline.warning":
       "In order to use {applicationName}, an internet connection is required.",
     "element.loading": "Loading",
