@@ -1,14 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { ReactElement } from "react";
 import {
-  getLocaleDateOfBirth,
   getNameString,
   getNationalitiesString,
   getPostalCodeCityString,
   getStreetString,
 } from "../../utils/person-data";
-import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 
 describe("getNationalitiesString", () => {
   it("should return empty string when input is null", () => {
@@ -89,29 +85,6 @@ describe("getPostalCodeCityString", () => {
   it("should return string in correct format when all input is valid", () => {
     const postalCodeCityString = getPostalCodeCityString("0000AA", "Amsterdam");
     expect(postalCodeCityString).toBe("0000AA Amsterdam");
-  });
-});
-
-describe("getLocaleDateOfBirth", () => {
-  it("should return empty string when input is null", () => {
-    const localeDateOfBirth = getLocaleDateOfBirth(null);
-    expect(localeDateOfBirth).toBe("");
-  });
-
-  it("should return correct element when all input is valid", () => {
-    const localeDateOfBirthComponent = getLocaleDateOfBirth({
-      jaar: 1980,
-      maand: 1,
-      dag: 1,
-    });
-
-    render(
-      <LocalizationProvider>
-        {localeDateOfBirthComponent as ReactElement}
-      </LocalizationProvider>,
-    );
-
-    expect(screen.getByText("1 January 1980")).toBeTruthy();
   });
 });
 

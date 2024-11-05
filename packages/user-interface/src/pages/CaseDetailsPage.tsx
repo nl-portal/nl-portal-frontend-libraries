@@ -8,7 +8,10 @@ import {
   ZaakStatus,
 } from "@nl-portal/nl-portal-api";
 import { Alert } from "@gemeente-denhaag/alert";
-import { LocaleContext } from "@nl-portal/nl-portal-localization";
+import {
+  LocaleContext,
+  useDateFormatter,
+} from "@nl-portal/nl-portal-localization";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -26,7 +29,6 @@ import useOgonePaymentRegistration, {
 } from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
 import TableList from "../components/TableList";
-import LocaleDate from "../components/LocaleDate";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -48,6 +50,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
+  const { formatDate } = useDateFormatter();
   const { paymentStatus, orderId } = useOgonePaymentRegistration(true);
   const loading = caseLoading || taskLoading || momentsLoading;
 
@@ -64,7 +67,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     const array = [
       {
         title: intl.formatMessage({ id: "caseDetails.creationDate" }),
-        detail: <LocaleDate date={caseData?.getZaak.startdatum} />,
+        detail: formatDate({ date: caseData?.getZaak.startdatum }),
       },
       {
         title: intl.formatMessage({ id: "caseDetails.caseNumber" }),

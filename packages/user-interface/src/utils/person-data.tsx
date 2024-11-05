@@ -1,10 +1,4 @@
-import {
-  PersoonDatum,
-  PersoonNaam,
-  PersoonNationaliteiten,
-} from "@nl-portal/nl-portal-api";
-import { ReactElement } from "react";
-import LocaleDate from "../components/LocaleDate";
+import { PersoonNaam, PersoonNationaliteiten } from "@nl-portal/nl-portal-api";
 
 const getNationalitiesString = (
   nationalities: Array<PersoonNationaliteiten> | undefined | null,
@@ -61,20 +55,6 @@ const getPostalCodeCityString = (
   return "";
 };
 
-const getLocaleDateOfBirth = (
-  dateOfBirth: PersoonDatum | null | undefined,
-): string | ReactElement => {
-  if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
-    return (
-      <LocaleDate
-        date={`${dateOfBirth.jaar}-${dateOfBirth.maand}-${dateOfBirth.dag}`}
-      />
-    );
-  }
-
-  return "";
-};
-
 const capitalizeFirstLetter = (text: string): string =>
   text.charAt(0).toUpperCase() + text.slice(1);
 
@@ -121,7 +101,6 @@ export {
   getNationalitiesString,
   getStreetString,
   getPostalCodeCityString,
-  getLocaleDateOfBirth,
   capitalizeFirstLetter,
   getNameString,
 };

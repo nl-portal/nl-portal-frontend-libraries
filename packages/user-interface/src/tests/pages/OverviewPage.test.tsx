@@ -19,8 +19,8 @@ describe("OverviewPage", () => {
   const taak1 = () => screen.getByText("OPEN TAAK 1");
   const taak2 = () => screen.getByText("OPEN TAAK 2");
   const taak3 = () => screen.queryByText("OPEN TAAK 3");
-  const viewAllTasks = () => screen.queryByText("View all tasks (6)");
-  const viewAllCases = () => screen.queryByText("View all cases (20)");
+  const viewAllTasks = () => screen.queryByText("Bekijk alle taken (6)");
+  const viewAllCases = () => screen.queryByText("Bekijk alle zaken (20)");
 
   it("should show several active cases", async () => {
     render(MockOverviewPage());
@@ -30,7 +30,7 @@ describe("OverviewPage", () => {
     });
 
     expect(openZaak1()).toBeVisible();
-    expect(screen.getByText("1 January 2024")).toBeVisible();
+    expect(screen.getByText("1 januari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK1.title" }),
     ).toHaveAttribute(
@@ -39,7 +39,7 @@ describe("OverviewPage", () => {
     );
 
     expect(openZaak2()).toBeVisible();
-    expect(screen.getByText("2 January 2024")).toBeVisible();
+    expect(screen.getByText("2 januari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK2.title" }),
     ).toHaveAttribute(
