@@ -3,11 +3,13 @@ import { Zaak } from "@nl-portal/nl-portal-api";
 import { CaseCard } from "@gemeente-denhaag/card";
 import PortalLink from "./PortalLink";
 import { Action } from "@gemeente-denhaag/action";
-import useActionLabels from "../hooks/useActionLabels";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { useContext } from "react";
-import { LocaleContext } from "@nl-portal/nl-portal-localization";
+import {
+  LocaleContext,
+  useActionLabels,
+} from "@nl-portal/nl-portal-localization";
 
 interface Props {
   cs: Zaak;

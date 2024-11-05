@@ -2,14 +2,16 @@ import { TaakSoort, TaakV2 } from "@nl-portal/nl-portal-api";
 import PortalLink from "./PortalLink";
 import { ActionMulti, ActionSingle } from "@gemeente-denhaag/action";
 import useTaskUrl from "../hooks/useTaskUrl";
-import useActionLabels from "../hooks/useActionLabels";
 import { ButtonLink } from "@gemeente-denhaag/button-link";
 import { ChevronRightIcon } from "@gemeente-denhaag/icons";
 import useOgonePayment from "../hooks/useOgonePayment";
 import { Button } from "@gemeente-denhaag/button";
 import { useLinkClickHandler } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-import { LocaleContext } from "@nl-portal/nl-portal-localization";
+import {
+  LocaleContext,
+  useActionLabels,
+} from "@nl-portal/nl-portal-localization";
 import { useContext } from "react";
 
 interface Props {

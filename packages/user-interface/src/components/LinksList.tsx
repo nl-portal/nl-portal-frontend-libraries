@@ -2,7 +2,7 @@ import { useIntl } from "react-intl";
 import Skeleton from "./Skeleton";
 import SectionHeader from "./SectionHeader";
 import { ActionSingle } from "@gemeente-denhaag/action";
-import useActionLabels from "../hooks/useActionLabels";
+import { useActionLabels } from "@nl-portal/nl-portal-localization";
 import PortalLink from "./PortalLink";
 
 interface Props {
