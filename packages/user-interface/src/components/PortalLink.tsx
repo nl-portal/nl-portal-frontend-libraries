@@ -1,6 +1,5 @@
 import { AnchorHTMLAttributes } from "react";
 import { Link } from "react-router-dom";
-import { Link as LinkComponent } from "@gemeente-denhaag/link";
 
 // A generic wrapper around the React Router Link, which will possibly be used a lot in implementations to pass to components from design systems.
 // For example in breadcrumbs, headers and footers.
@@ -21,9 +20,9 @@ const PortalLink = ({
     );
   }
   return (
-    <LinkComponent href={href} {...props}>
+    <a href={href} {...props}>
       {props.children}
-    </LinkComponent>
+    </a>
   );
 };
 
