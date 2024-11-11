@@ -50,10 +50,7 @@ const TasksList = ({
     : undefined;
   const subTitle =
     totalAmount && readMoreTranslationId
-      ? intl.formatMessage(
-          { id: readMoreTranslationId },
-          { total: totalAmount },
-        )
+      ? intl.formatMessage({ id: readMoreTranslationId })
       : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
