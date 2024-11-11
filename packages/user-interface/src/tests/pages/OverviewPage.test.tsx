@@ -19,7 +19,7 @@ describe("OverviewPage", () => {
   const taak1 = () => screen.getByText("OPEN TAAK 1");
   const taak2 = () => screen.getByText("OPEN TAAK 2");
   const taak3 = () => screen.queryByText("OPEN TAAK 3");
-  const viewAllTasks = () => screen.queryByText("Bekijk alle taken (6)");
+  const viewAllTasks = () => screen.queryByText("Bekijk alle taken");
   const viewAllCases = () => screen.queryByText("Bekijk alle zaken (20)");
 
   it("should show several active cases", async () => {
