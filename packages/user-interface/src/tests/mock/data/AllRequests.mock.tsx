@@ -1020,7 +1020,7 @@ export const getZakenPagination: {
   },
 };
 
-const getContent = (size: number) => {
+const getContent = (size?: number) => {
   const arrayTasks = [
     {
       id: "3f8b4c07-91c5-4f14-9cc4-2d6a6b8a3bda",
@@ -1268,7 +1268,7 @@ const getContent = (size: number) => {
 };
 
 export const getTaken = (
-  pageSizeRequest: number,
+  pageSizeRequest?: number,
 ): {
   request: GraphQLRequest;
   result: FetchResult;
@@ -1278,7 +1278,7 @@ export const getTaken = (
   return {
     request: {
       query: QUERY_GET_TAKEN_V2,
-      variables: { pageSize: pageSizeRequest },
+      variables: pageSizeRequest ? { pageSize: pageSizeRequest } : {},
     },
     result: {
       data: {
