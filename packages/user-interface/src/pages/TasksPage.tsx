@@ -6,9 +6,7 @@ import PageGrid from "../components/PageGrid";
 import SearchForm from "../components/SearchForm";
 
 const TasksPage = () => {
-  const { data, loading, error, refetch } = useGetTakenV2Query({
-    variables: { pageSize: 10 },
-  });
+  const { data, loading, error, refetch } = useGetTakenV2Query();
 
   const tasks = data?.getTakenV2.content as TaakV2[] | undefined;
   const handleFormSubmit = (searchValue: string) => {
@@ -36,9 +34,6 @@ const TasksPage = () => {
         tasks={tasks}
         onChange={onPageChange}
         openInContext={true}
-        indexLimit={
-          data?.getTakenV2.totalPages && data?.getTakenV2.totalPages - 1
-        }
       />
     </PageGrid>
   );

@@ -36,7 +36,10 @@ const TasksList = ({
   openInContext,
   readMoreLink,
   readMoreTranslationId = "tasksList.viewAll",
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  // @ts-expect-error: TS6133
   totalAmount,
+  /* eslint-enable @typescript-eslint/no-unused-vars */
   tasks,
   index,
   indexLimit,
@@ -48,13 +51,9 @@ const TasksList = ({
   const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
-  const subTitle =
-    totalAmount && readMoreTranslationId
-      ? intl.formatMessage(
-          { id: readMoreTranslationId },
-          { total: totalAmount },
-        )
-      : undefined;
+  const subTitle = readMoreTranslationId
+    ? intl.formatMessage({ id: readMoreTranslationId })
+    : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 

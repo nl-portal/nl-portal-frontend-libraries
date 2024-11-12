@@ -99,7 +99,7 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.legalForm": "Rechtsvorm",
     "account.addressResearchRequestButton": "Vraag onderzoek aan",
     "forms.listSubHeader": "Beschikbare formulieren",
-    "tasksList.viewAll": "Bekijk alle taken ({total})",
+    "tasksList.viewAll": "Bekijk alle taken",
     "tasksList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "tasksList.empty": "Er zijn geen openstaande taken.",

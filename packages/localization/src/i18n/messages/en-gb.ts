@@ -96,7 +96,7 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.legalForm": "Legal form",
     "account.addressResearchRequestButton": "Request research",
     "forms.listSubHeader": "Available forms",
-    "tasksList.viewAll": "View all tasks ({total})",
+    "tasksList.viewAll": "View all tasks",
     "tasksList.fetchError": "Something went wrong, please try again later.",
     "tasksList.empty": "There are no open tasks.",
     "taskDetails.fetchError": "Something went wrong, please try again later.",
