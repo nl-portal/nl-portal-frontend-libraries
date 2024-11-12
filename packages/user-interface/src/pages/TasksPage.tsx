@@ -34,9 +34,6 @@ const TasksPage = () => {
         tasks={tasks}
         onChange={onPageChange}
         openInContext={true}
-        indexLimit={
-          data?.getTakenV2.totalPages && data?.getTakenV2.totalPages - 1
-        }
       />
     </PageGrid>
   );
