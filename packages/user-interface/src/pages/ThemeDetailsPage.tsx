@@ -5,7 +5,7 @@ import BackLink from "../components/BackLink";
 import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
-import LinksList from "../components/LinksList";
+import ActionsList from "../components/ActionsList";
 import Alert, { AlertProps } from "@gemeente-denhaag/alert";
 
 interface Props {
@@ -52,7 +52,7 @@ const ThemeDetailsPage = ({
         titleTranslationId={null}
         tasks={tasks}
       />
-      <LinksList loading={loading} links={links} />
+      <ActionsList loading={loading} actions={links} />
       <CasesList
         loading={loading}
         error={casesError}
