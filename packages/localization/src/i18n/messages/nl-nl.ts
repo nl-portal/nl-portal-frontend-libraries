@@ -131,7 +131,8 @@ export const NL_NL_MESSAGES: Messages = {
     "tableList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "tableList.empty": "Er zijn geen items beschikbaar.",
-    "linksList.title": "Wat kan ik regelen",
+    "actionList.title": "Wat kan ik regelen",
+    "linkList.title": "Zie ook",
     "documentsList.title": "Documenten",
     "documentsList.fetchError":
       "Er is een fout opgetreden, probeer het later nogmaals.",

@@ -1,5 +1,7 @@
 import "react-loading-skeleton/dist/skeleton.css";
 
+export { default as ActionsList } from "./components/ActionsList";
+export * from "./components/ActionsList";
 export { default as BackLink } from "./components/BackLink";
 export { default as CasesList } from "./components/CasesList";
 export { default as DescriptionList } from "./components/DescriptionList";
@@ -7,8 +9,8 @@ export { default as DocumentsList } from "./components/DocumentsList";
 export { default as Heading } from "./components/Heading";
 export * from "./components/Heading";
 export { default as Layout } from "./components/Layout";
-export { default as LinksList } from "./components/LinksList";
-export * from "./components/LinksList";
+export { default as LinkList } from "./components/LinkList";
+export * from "./components/LinkList";
 export { default as PageHeader } from "./components/PageHeader";
 export { default as PageGrid } from "./components/PageGrid";
 export { default as PortalLink } from "./components/PortalLink";

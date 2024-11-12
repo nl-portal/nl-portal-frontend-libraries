@@ -3,6 +3,7 @@ import {
   TableList,
 } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "../constants/paths";
+import { LinkList } from "@nl-portal/nl-portal-user-interface";
 
 const ThemeSampleOverviewPage = () => {
   const slug = "sample";
@@ -71,6 +72,14 @@ const ThemeSampleOverviewPage = () => {
               href: paths.themeDetails("sample", "123"),
             },
           ],
+        ]}
+      />
+      <LinkList
+        loading={loading}
+        links={[
+          { children: "Dit is voorbeeldlink 1", href: "#example" },
+          { children: "Dit is voorbeeldlink 2", href: "#example" },
+          { children: "Dit is voorbeeldlink 3", href: "#example" },
         ]}
       />
     </ThemeOverviewPage>
