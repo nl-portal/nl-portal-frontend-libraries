@@ -23,6 +23,9 @@ const MessagesPage = () => {
         loading={loading}
         error={Boolean(error)}
         messages={messages}
+        indexLimit={
+          data?.getBerichten.totalPages && data.getBerichten.totalPages - 1
+        }
         onChange={onPageChange}
       />
     </PageGrid>
