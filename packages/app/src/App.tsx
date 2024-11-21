@@ -7,6 +7,7 @@ import { ApiProvider } from "@nl-portal/nl-portal-api";
 import {
   Layout,
   MessagesProvider,
+  NotificationProvider,
   useEnableMessagesCount,
 } from "@nl-portal/nl-portal-user-interface";
 import { CUSTOM_MESSAGES } from "./i18n/custom-messages/custom-messages";
@@ -45,18 +46,20 @@ const App = () => {
             restUri={config.REST_URI}
           >
             <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-              <MessagesProvider enableMessagesCount={enableMessagesCount}>
-                <Layout
-                  navigationItems={menuItems}
-                  paths={paths}
-                  headerLogo={<img src={HeaderLogo} alt="logo" />}
-                  headerLogoSmall={
-                    <img src={HeaderLogoSmall} alt="logo-small" />
-                  }
-                  facet={<img src={Facet} alt="facet" />}
-                  footer={footerData}
-                />
-              </MessagesProvider>
+              <NotificationProvider>
+                <MessagesProvider enableMessagesCount={enableMessagesCount}>
+                  <Layout
+                    navigationItems={menuItems}
+                    paths={paths}
+                    headerLogo={<img src={HeaderLogo} alt="logo" />}
+                    headerLogoSmall={
+                      <img src={HeaderLogoSmall} alt="logo-small" />
+                    }
+                    facet={<img src={Facet} alt="facet" />}
+                    footer={footerData}
+                  />
+                </MessagesProvider>
+              </NotificationProvider>
             </LocalizationProvider>
           </ApiProvider>
         </React.StrictMode>
