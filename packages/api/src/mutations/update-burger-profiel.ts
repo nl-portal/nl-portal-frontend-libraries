@@ -5,6 +5,7 @@ export const MUTATION_UPDATE_BURGER_PROFIEL = gql`
     updateBurgerProfiel(klant: $klant) {
       emailadres
       telefoonnummer
+      aanmaakkanaal
     }
   }
 `;

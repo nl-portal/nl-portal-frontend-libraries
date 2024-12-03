@@ -81,9 +81,11 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.telefoonnummer": "Telefoonnummer",
     "account.detail.telefoonnummer.error":
       "een geldig telefoonnummer bestaat uit 10 cijfers",
-    "account.detail.updatesOnCases": "Updates over zaken",
-    "account.detail.newsOnNeighborhood": "Nieuws over mijn wijk",
-    "account.detail.tips": "Tips",
+    "account.detail.aanmaakkanaal": "Email notificaties",
+    "account.detail.aanmaakkanaal.description":
+      "Staat je keuze op nee? Dan kunt u toch nog e-mails ontvangen. Dit komt omdat nog niet alle systemen van de gemeente zijn aangesloten op het klantportaal.",
+    "account.detail.aanmaakkanaal.true": "Ja",
+    "account.detail.aanmaakkanaal.false": "Nee",
     "account.detail.firstNames": "Voornamen",
     "account.detail.lastName": "Achternaam",
     "account.detail.gender": "Geslacht",
