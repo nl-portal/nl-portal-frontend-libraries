@@ -321,6 +321,9 @@ importers:
       '@gemeente-denhaag/form-field-error-message':
         specifier: 0.3.0-alpha.55
         version: 0.3.0-alpha.55(react@18.3.1)
+      '@gemeente-denhaag/form-fieldset':
+        specifier: 0.3.0-alpha.55
+        version: 0.3.0-alpha.55(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/form-label':
         specifier: 0.3.0-alpha.55
         version: 0.3.0-alpha.55(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -351,6 +354,9 @@ importers:
       '@gemeente-denhaag/process-steps':
         specifier: 0.1.1
         version: 0.1.1(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/radio-button':
+        specifier: 0.3.0-alpha.55
+        version: 0.3.0-alpha.55(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/responsive-content':
         specifier: 0.1.1-alpha.282
         version: 0.1.1-alpha.282
@@ -1332,6 +1338,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/form-fieldset@0.3.0-alpha.55':
+    resolution: {integrity: sha512-ZKddclU96qPMXzYr+N4ZDoRSmQ4FS95mDxiyf22EJMgoy5D1f1GQ0a2R1z6nh+sFrWHw5HIXO6BBMbj9W5UB5A==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/form-label@0.3.0-alpha.55':
     resolution: {integrity: sha512-kN92LiGD3FVA/ShtgOAXy3m8k9ZlmcYOqph1K+799yV4zvVWJCW1v+lu8PPSu29BooPvOaLhm1x8BVMAHPjRiQ==}
     peerDependencies:
@@ -1392,6 +1403,11 @@ packages:
 
   '@gemeente-denhaag/process-steps@0.1.1':
     resolution: {integrity: sha512-m/K6KH6te0Qfv7Us4YeUsuNSsClSQxOl8j99ByDCbrZQ6WzVaaAW5Kb6w83MGp9iM5nV2nOJd6qq3Ak70svoxg==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/radio-button@0.3.0-alpha.55':
+    resolution: {integrity: sha512-EF9jOpI7kOWUOa3PXB9KT7Tz74fAfrkuARtnasfeBHSqh0jL+V7asfK8FHFn5dxkqgas7wI/zQZ1/r72CSukaQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -6882,6 +6898,18 @@ snapshots:
       - react-vega
       - vega
 
+  '@gemeente-denhaag/form-fieldset@0.3.0-alpha.55(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@utrecht/component-library-react': 4.2.0(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/components': 6.1.0
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
+
   '@gemeente-denhaag/form-label@0.3.0-alpha.55(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@utrecht/component-library-react': 4.2.0(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6983,6 +7011,18 @@ snapshots:
       '@gemeente-denhaag/icons': 1.0.0(react@18.3.1)
       '@gemeente-denhaag/step-marker': 0.0.1-alpha.123(react@18.3.1)
       '@gemeente-denhaag/typography': 0.2.3(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
+
+  '@gemeente-denhaag/radio-button@0.3.0-alpha.55(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@utrecht/component-library-react': 4.2.0(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/components': 6.1.0
       react: 18.3.1
     transitivePeerDependencies:
       - '@babel/runtime'

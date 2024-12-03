@@ -150,13 +150,15 @@ const AccountPage = ({
           <DetailList
             details={[
               {
-                translationKey: "updatesOnCases",
-              },
-              {
-                translationKey: "newsOnNeighborhood",
-              },
-              {
-                translationKey: "tips",
+                translationKey: "aanmaakkanaal",
+                value:
+                  contactData?.getBurgerProfiel?.aanmaakkanaal === "EMAIL" ? (
+                    <FormattedMessage id="account.detail.aanmaakkanaal.true" />
+                  ) : (
+                    <FormattedMessage id="account.detail.aanmaakkanaal.false" />
+                  ),
+                showEditButton: true,
+                loading,
               },
             ]}
           />

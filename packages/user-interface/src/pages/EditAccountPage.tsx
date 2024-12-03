@@ -11,6 +11,7 @@ import {
   useGetBurgerProfielQuery,
   useUpdateBurgerProfielMutation,
   GetBurgerProfielDocument,
+  GetBurgerProfielQuery,
 } from "@nl-portal/nl-portal-api";
 import useQuery from "../hooks/useQuery";
 import styles from "./EditAccountPage.module.scss";
@@ -19,6 +20,9 @@ import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import BackLink from "../components/BackLink";
+import { Paragraph } from "@gemeente-denhaag/typography";
+import RadioButton from "@gemeente-denhaag/radio-button";
+import Fieldset, { FieldsetLegend } from "@gemeente-denhaag/form-fieldset";
 
 const EditAccountPage = () => {
   const { currentLocale } = useContext(LocaleContext);
@@ -41,7 +45,9 @@ const EditAccountPage = () => {
       },
     });
 
-  const prop = query.get("prop") as "telefoonnummer" | "emailadres";
+  const prop = query.get(
+    "prop",
+  ) as keyof GetBurgerProfielQuery["getBurgerProfiel"];
   const propTranslation = intl.formatMessage({ id: `account.detail.${prop}` });
   const errorTranslation = intl.formatMessage({
     id: `account.detail.${prop}.error`,
@@ -87,23 +93,65 @@ const EditAccountPage = () => {
                   id: "account.edit",
                 })} ${propTranslation.toLowerCase()}`
           }
-        />
+        >
+          {prop === "aanmaakkanaal" && (
+            <FormattedMessage id="account.detail.aanmaakkanaal.description" />
+          )}
+        </PageHeader>
       </div>
       <div>
         <div className={styles["edit-account__text-field-container"]}>
-          <FormField invalid={invalid} type="text">
-            <FormLabel htmlFor={inputId}>{propTranslation}</FormLabel>
-            <TextInput
-              id={inputId}
-              onChange={(e) => setValue(e.target.value)}
-              invalid={invalid}
-              defaultValue={defaultValue || ""}
-              disabled={loading}
-            />
-            <FormFieldErrorMessage>
-              {invalid ? errorTranslation : ""}
-            </FormFieldErrorMessage>
-          </FormField>
+          {prop === "aanmaakkanaal" ? (
+            <Fieldset>
+              <FieldsetLegend className="utrecht-form-fieldset__legend--distanced">
+                {propTranslation}
+              </FieldsetLegend>
+              <FormField type="radio">
+                <Paragraph className="utrecht-form-field__label utrecht-form-field__label--radio">
+                  <FormLabel htmlFor="true" type="radio">
+                    <RadioButton
+                      id="true"
+                      className="utrecht-form-field__input"
+                      name={inputId}
+                      value="EMAIL"
+                      defaultChecked={defaultValue === "EMAIL"}
+                      onChange={(e) => setValue(e.currentTarget.value)}
+                    />
+                    <FormattedMessage id="account.detail.aanmaakkanaal.true" />
+                  </FormLabel>
+                </Paragraph>
+              </FormField>
+              <FormField type="radio">
+                <Paragraph className="utrecht-form-field__label utrecht-form-field__label--radio">
+                  <FormLabel htmlFor="false" type="radio">
+                    <RadioButton
+                      id="false"
+                      className="utrecht-form-field__input"
+                      name={inputId}
+                      value="FALSE"
+                      defaultChecked={defaultValue !== "EMAIL"}
+                      onChange={(e) => setValue(e.currentTarget.value)}
+                    />
+                    <FormattedMessage id="account.detail.aanmaakkanaal.false" />
+                  </FormLabel>
+                </Paragraph>
+              </FormField>
+            </Fieldset>
+          ) : (
+            <FormField invalid={invalid} type="text">
+              <FormLabel htmlFor={inputId}>{propTranslation}</FormLabel>
+              <TextInput
+                id={inputId}
+                onChange={(e) => setValue(e.target.value)}
+                invalid={invalid}
+                defaultValue={defaultValue || ""}
+                disabled={loading}
+              />
+              <FormFieldErrorMessage>
+                {invalid ? errorTranslation : ""}
+              </FormFieldErrorMessage>
+            </FormField>
+          )}
         </div>
         <div className={styles["edit-account__buttons"]}>
           <Button

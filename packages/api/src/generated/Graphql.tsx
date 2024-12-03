@@ -15,10 +15,129 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  BigDecimal: { input: any; output: any; }
+  BigInteger: { input: any; output: any; }
   Date: { input: any; output: any; }
   JSON: { input: any; output: any; }
   LocalDateTime: { input: any; output: any; }
+  Long: { input: any; output: any; }
   UUID: { input: any; output: any; }
+};
+
+export type Aanslag = {
+  __typename?: 'Aanslag';
+  aanslagbiljetsoort?: Maybe<Scalars['String']['output']>;
+  aanslagnummer?: Maybe<Scalars['Long']['output']>;
+  bedragaanslag?: Maybe<Scalars['BigDecimal']['output']>;
+  belastingjaar?: Maybe<Scalars['Date']['output']>;
+  dagtekening?: Maybe<Scalars['Date']['output']>;
+  openstaandeInvordering?: Maybe<Scalars['String']['output']>;
+  saldoAanslag?: Maybe<Scalars['BigDecimal']['output']>;
+  statusBezwaar?: Maybe<Scalars['String']['output']>;
+  vervolgactie?: Maybe<Scalars['String']['output']>;
+  vervolgactieOmschrijving?: Maybe<Scalars['String']['output']>;
+};
+
+export type AanslagBestand = {
+  __typename?: 'AanslagBestand';
+  aanslagbiljetsoort?: Maybe<Scalars['String']['output']>;
+  aanslagnummer?: Maybe<Scalars['Long']['output']>;
+  belastingjaar?: Maybe<Scalars['Date']['output']>;
+  dagtekening?: Maybe<Scalars['Date']['output']>;
+  laatsteOphaalDatum?: Maybe<Scalars['Date']['output']>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
+  publicatieDatum?: Maybe<Scalars['Date']['output']>;
+  volgNummerBijlage?: Maybe<Scalars['Int']['output']>;
+};
+
+export type AanslagBestandenPage = {
+  __typename?: 'AanslagBestandenPage';
+  content: Array<AanslagBestand>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type AanslagBiljet = {
+  __typename?: 'AanslagBiljet';
+  aanslagBiljetOmschrijving?: Maybe<Scalars['String']['output']>;
+  aanslagNummer?: Maybe<Scalars['Long']['output']>;
+  aanslagRegel?: Maybe<Array<AanslagRegel>>;
+  belastingjaar?: Maybe<Scalars['String']['output']>;
+  bijlageAanwezig?: Maybe<Scalars['String']['output']>;
+  dagtekening?: Maybe<Scalars['Date']['output']>;
+  eersteVervalDatum?: Maybe<Scalars['Date']['output']>;
+  geboorteDatum?: Maybe<Scalars['Date']['output']>;
+  geslacht?: Maybe<Scalars['String']['output']>;
+  huisLetter?: Maybe<Scalars['String']['output']>;
+  huisNummer?: Maybe<Scalars['Int']['output']>;
+  kwijtscheldingsVerzoek?: Maybe<Scalars['String']['output']>;
+  land?: Maybe<Scalars['String']['output']>;
+  locatie1?: Maybe<Scalars['String']['output']>;
+  locatie2?: Maybe<Scalars['String']['output']>;
+  muteerStatus?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<Scalars['String']['output']>;
+  postcode?: Maybe<Scalars['String']['output']>;
+  samengesteldAdres?: Maybe<Scalars['String']['output']>;
+  sofiNummer?: Maybe<Scalars['Int']['output']>;
+  straatNaam?: Maybe<Scalars['String']['output']>;
+  subjectNummer?: Maybe<Scalars['Int']['output']>;
+  tijdvakWOZ?: Maybe<Scalars['String']['output']>;
+  tweedeVervalDatum?: Maybe<Scalars['Date']['output']>;
+  volledigeNaam?: Maybe<Scalars['String']['output']>;
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voorvoegsels?: Maybe<Scalars['String']['output']>;
+  waardePeilDatum?: Maybe<Scalars['Date']['output']>;
+  woonplaats?: Maybe<Scalars['String']['output']>;
+};
+
+export type AanslagDetails = {
+  __typename?: 'AanslagDetails';
+  aanslagBiljet?: Maybe<AanslagBiljet>;
+  aanslagBiljetTotaal?: Maybe<Scalars['BigDecimal']['output']>;
+  automatischeIncasso?: Maybe<AutomatischeIncasso>;
+  betalingen?: Maybe<Array<Betaling>>;
+  invorderingsDetails?: Maybe<InvorderingsDetails>;
+  openstaandeInvordering?: Maybe<Scalars['String']['output']>;
+};
+
+export type AanslagRegel = {
+  __typename?: 'AanslagRegel';
+  aanslagRegelBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  aanslagRegelOmschrijving?: Maybe<Scalars['String']['output']>;
+  belastingJaar?: Maybe<Scalars['Int']['output']>;
+  bezwaarAanwezig?: Maybe<Scalars['String']['output']>;
+  categorie?: Maybe<Scalars['String']['output']>;
+  codeBezwaarOmschrijving?: Maybe<Scalars['String']['output']>;
+  grondslag?: Maybe<Scalars['BigDecimal']['output']>;
+  heffing?: Maybe<Scalars['String']['output']>;
+  heffingOmschrijving?: Maybe<Scalars['String']['output']>;
+  objectAdres?: Maybe<Scalars['String']['output']>;
+  objectNummer?: Maybe<Scalars['Int']['output']>;
+  tijdvak?: Maybe<Scalars['String']['output']>;
+  volgNummer?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Aanslagen = {
+  __typename?: 'Aanslagen';
+  aanslagen?: Maybe<Array<Aanslag>>;
+  digitaleBestandenAanwezig?: Maybe<Scalars['Boolean']['output']>;
+  geboortedatum?: Maybe<Scalars['Date']['output']>;
+  naam?: Maybe<Scalars['String']['output']>;
+  number: Scalars['Int']['output'];
+  openstaandeInvordering?: Maybe<Scalars['String']['output']>;
+  size: Scalars['Int']['output'];
+  sofiNummer?: Maybe<Scalars['Int']['output']>;
+  subjectNummer?: Maybe<Scalars['BigInteger']['output']>;
+  totaalsaldo?: Maybe<Scalars['BigDecimal']['output']>;
+  /** The total number of elements */
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
 };
 
 export type Adres = {
@@ -34,18 +153,43 @@ export type Adres = {
   volledigAdres: Scalars['String']['output'];
 };
 
+export type AutomatischIncassoResponse = {
+  __typename?: 'AutomatischIncassoResponse';
+  iban?: Maybe<Scalars['String']['output']>;
+  klantnummer?: Maybe<Scalars['Int']['output']>;
+  message?: Maybe<Scalars['String']['output']>;
+};
+
+export type AutomatischeIncasso = {
+  __typename?: 'AutomatischeIncasso';
+  aantalStornos?: Maybe<Scalars['Int']['output']>;
+  aantalTermijnen?: Maybe<Scalars['Int']['output']>;
+  ingangsdatum?: Maybe<Scalars['Date']['output']>;
+  rekeningNummer?: Maybe<Scalars['Long']['output']>;
+  stopzettingsCode?: Maybe<Scalars['String']['output']>;
+  termijnBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  verwerkteTermijnen?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Bank = {
+  __typename?: 'Bank';
+  country: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
 export type Bericht = {
   __typename?: 'Bericht';
   berichtTekst: Scalars['String']['output'];
   berichtType: BerichtType;
   bijlages: Array<Scalars['String']['output']>;
-  einddatumHandelingstermijn: Scalars['Date']['output'];
+  einddatumHandelingstermijn: Scalars['LocalDateTime']['output'];
   geopend: Scalars['Boolean']['output'];
   handelingsperspectief: BerichtHandelingsperspectief;
   id?: Maybe<Scalars['UUID']['output']>;
   identificatie: BerichtIdentificatie;
   onderwerp: Scalars['String']['output'];
-  publicatiedatum: Scalars['Date']['output'];
+  publicatiedatum: Scalars['LocalDateTime']['output'];
   referentie: Scalars['String']['output'];
 };
 
@@ -146,6 +290,53 @@ export type BesluitPage = {
   totalPages: Scalars['Int']['output'];
 };
 
+export type Betaling = {
+  __typename?: 'Betaling';
+  bedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  boekDatum?: Maybe<Scalars['Date']['output']>;
+  dagboek?: Maybe<Scalars['String']['output']>;
+  factuurDatum?: Maybe<Scalars['Date']['output']>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
+};
+
+export type CancelEmandateRequestInput = {
+  categorie: Scalars['String']['input'];
+  customParameters?: InputMaybe<Scalars['JSON']['input']>;
+  failureUrl?: InputMaybe<Scalars['String']['input']>;
+  mandateId: Scalars['String']['input'];
+  purchaseId?: InputMaybe<Scalars['String']['input']>;
+  reason?: InputMaybe<Scalars['String']['input']>;
+  successUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CaseCreated = {
+  __typename?: 'CaseCreated';
+  caseId: Scalars['UUID']['output'];
+};
+
+export type CaseDefinition = {
+  __typename?: 'CaseDefinition';
+  id: Scalars['String']['output'];
+  schema: Scalars['JSON']['output'];
+  statusDefinition: Array<Scalars['String']['output']>;
+};
+
+export type CaseInstance = {
+  __typename?: 'CaseInstance';
+  caseDefinitionId: Scalars['String']['output'];
+  createdOn: Scalars['String']['output'];
+  externalId?: Maybe<Scalars['String']['output']>;
+  id: Scalars['UUID']['output'];
+  status?: Maybe<Status>;
+  statusHistory?: Maybe<Array<HistoricStatus>>;
+  submission: Scalars['JSON']['output'];
+  userId: Scalars['String']['output'];
+};
+
+export type CaseInstanceOrderingInput = {
+  createdOn: Sort;
+};
+
 export type ContactMoment = {
   __typename?: 'ContactMoment';
   bronorganisatie?: Maybe<Scalars['String']['output']>;
@@ -172,6 +363,49 @@ export type ContactMomentPage = {
   totalPages: Scalars['Int']['output'];
 };
 
+export type Contract = {
+  __typename?: 'Contract';
+  automatischeIncasso: Array<AutomatischIncassoResponse>;
+  beginDatum: Scalars['String']['output'];
+  eindDatum?: Maybe<Scalars['String']['output']>;
+  id: Scalars['Int']['output'];
+  klanten: Array<NeaKlant>;
+  taken: Array<TaakV2>;
+  zakelijkRechten: Array<ZakelijkRecht>;
+  zaken: Array<Zaak>;
+};
+
+export type ContractBeperkt = {
+  __typename?: 'ContractBeperkt';
+  adressen: Array<NeaAdres>;
+  id: Scalars['Int']['output'];
+};
+
+export type ContractBeperktPage = {
+  __typename?: 'ContractBeperktPage';
+  content: Array<ContractBeperkt>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type CreateEmandateRequestInput = {
+  bankId: Scalars['String']['input'];
+  categorie: Scalars['String']['input'];
+  customParameters?: InputMaybe<Scalars['JSON']['input']>;
+  failureUrl?: InputMaybe<Scalars['String']['input']>;
+  language?: InputMaybe<Scalars['String']['input']>;
+  purchaseId?: InputMaybe<Scalars['String']['input']>;
+  reason?: InputMaybe<Scalars['String']['input']>;
+  reference?: InputMaybe<Scalars['String']['input']>;
+  sequenceType?: InputMaybe<Scalars['Int']['input']>;
+  successUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Document = {
   __typename?: 'Document';
   bestandsnaam?: Maybe<Scalars['String']['output']>;
@@ -194,6 +428,58 @@ export type Eigenaar = {
   rechtsvorm: Scalars['String']['output'];
   rsin?: Maybe<Scalars['String']['output']>;
   uitgebreideRechtsvorm: Scalars['String']['output'];
+};
+
+export type EmandateObject = {
+  __typename?: 'EmandateObject';
+  bankId?: Maybe<Scalars['String']['output']>;
+  bankName?: Maybe<Scalars['String']['output']>;
+  categorie: Scalars['String']['output'];
+  iban?: Maybe<Scalars['String']['output']>;
+  lastUpdate?: Maybe<Scalars['LocalDateTime']['output']>;
+  mandateId: Scalars['String']['output'];
+  reference?: Maybe<Scalars['String']['output']>;
+  sequenceType?: Maybe<Scalars['Int']['output']>;
+  status: EmandateStatus;
+  subcategories?: Maybe<Array<EmandateSubCategorie>>;
+};
+
+export type EmandateResponse = {
+  __typename?: 'EmandateResponse';
+  mandateId: Scalars['String']['output'];
+  redirectUrl: Scalars['String']['output'];
+};
+
+export enum EmandateStatus {
+  Active = 'ACTIVE',
+  Cancelled = 'CANCELLED',
+  Draft = 'DRAFT'
+}
+
+export type EmandateStatusResponse = {
+  __typename?: 'EmandateStatusResponse';
+  mandateId?: Maybe<Scalars['String']['output']>;
+  statusCode: EmandateStatusResponseCode;
+  statusSubCode: EmandateStatusResponseCode;
+};
+
+export type EmandateStatusResponseCode = {
+  __typename?: 'EmandateStatusResponseCode';
+  code: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+};
+
+export type EmandateSubCategorie = {
+  __typename?: 'EmandateSubCategorie';
+  incasso: Scalars['Boolean']['output'];
+  key: Scalars['String']['output'];
+  naam?: Maybe<Scalars['String']['output']>;
+};
+
+export type EmandateSubCategorieInput = {
+  incasso: Scalars['Boolean']['input'];
+  key: Scalars['String']['input'];
+  naam?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Embedded = {
@@ -219,6 +505,12 @@ export type HandelsNaam = {
   volgorde: Scalars['Int']['output'];
 };
 
+export type HistoricStatus = {
+  __typename?: 'HistoricStatus';
+  createdOn: Scalars['String']['output'];
+  status: Status;
+};
+
 export type Hoofdvestiging = {
   __typename?: 'Hoofdvestiging';
   adressen?: Maybe<Array<Adres>>;
@@ -230,13 +522,54 @@ export type Hoofdvestiging = {
   vestigingsnummer: Scalars['String']['output'];
 };
 
+export type InvorderingsDetails = {
+  __typename?: 'InvorderingsDetails';
+  aanslagBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  aanslagBetaald?: Maybe<Scalars['BigDecimal']['output']>;
+  adres?: Maybe<Scalars['String']['output']>;
+  datumAanmaning?: Maybe<Scalars['Date']['output']>;
+  datumDwangbevel?: Maybe<Scalars['Date']['output']>;
+  kostenBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  kostenBetaald?: Maybe<Scalars['BigDecimal']['output']>;
+  kwijtscheldingsBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  land?: Maybe<Scalars['String']['output']>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
+  oninbaarBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  opdrachtgever?: Maybe<Scalars['String']['output']>;
+  openStaandeInvordering?: Maybe<Scalars['String']['output']>;
+  openstaandSaldo?: Maybe<Scalars['BigDecimal']['output']>;
+  postcode?: Maybe<Scalars['String']['output']>;
+  renteBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  renteBetaald?: Maybe<Scalars['BigDecimal']['output']>;
+  saldoBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  saldoTextLabel?: Maybe<Scalars['String']['output']>;
+  schuldenaarStatus?: Maybe<Scalars['String']['output']>;
+  totaalBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  totaalBetaald?: Maybe<Scalars['BigDecimal']['output']>;
+  uitstelBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  verminderingsBedrag?: Maybe<Scalars['BigDecimal']['output']>;
+  vervolgActie?: Maybe<Scalars['String']['output']>;
+  vervolgActieCode?: Maybe<Scalars['String']['output']>;
+  vervolgOpmerking?: Maybe<Scalars['String']['output']>;
+  woonplaats?: Maybe<Scalars['String']['output']>;
+};
+
+export type KadastraalObject = {
+  __typename?: 'KadastraalObject';
+  aanduiding: Scalars['String']['output'];
+  adressen: Array<NeaAdres>;
+  identificatie: Scalars['String']['output'];
+};
+
 export type Klant = {
   __typename?: 'Klant';
+  aanmaakkanaal?: Maybe<Scalars['String']['output']>;
   emailadres?: Maybe<Scalars['String']['output']>;
   telefoonnummer?: Maybe<Scalars['String']['output']>;
 };
 
 export type KlantUpdateInput = {
+  aanmaakkanaal?: InputMaybe<Scalars['String']['input']>;
   emailadres?: InputMaybe<Scalars['String']['input']>;
   telefoonnummer?: InputMaybe<Scalars['String']['input']>;
 };
@@ -260,10 +593,27 @@ export type MaterieleRegistratie = {
   datumAanvang: Scalars['String']['output'];
 };
 
+export type ModifyEmandateRequestInput = {
+  bankId: Scalars['String']['input'];
+  categorie: Scalars['String']['input'];
+  customParameters?: InputMaybe<Scalars['JSON']['input']>;
+  failureUrl?: InputMaybe<Scalars['String']['input']>;
+  mandateId: Scalars['String']['input'];
+  successUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Cancel an eMandate */
+  cancelEmandate: EmandateResponse;
+  /** Create an eMandate */
+  createEmandate: EmandateResponse;
   /** Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
+  /** Modify an eMandate */
+  modifyEmandate: EmandateResponse;
+  /** Convert submission to json return resulting data */
+  processSubmission: CaseCreated;
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
@@ -272,13 +622,39 @@ export type Mutation = {
   submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
+  /** Update subcategories of eMandate */
+  updateEmandateSubCategories: EmandateObject;
   /** Update product verbruiks object */
   updateProductVerbruiksObject: ProductVerbruiksObject;
+  /** Pincode wijzigen van vergunning */
+  wijzigVergunningPincode: WijzigVergunningResponse;
+};
+
+
+export type MutationCancelEmandateArgs = {
+  emandate: CancelEmandateRequestInput;
+};
+
+
+export type MutationCreateEmandateArgs = {
+  emandate: CreateEmandateRequestInput;
 };
 
 
 export type MutationGenerateOgonePaymentArgs = {
   paymentRequest: OgonePaymentRequestInput;
+};
+
+
+export type MutationModifyEmandateArgs = {
+  emandate: ModifyEmandateRequestInput;
+};
+
+
+export type MutationProcessSubmissionArgs = {
+  caseDefinitionId: Scalars['String']['input'];
+  initialStatus?: InputMaybe<Scalars['String']['input']>;
+  submission: Scalars['JSON']['input'];
 };
 
 
@@ -306,9 +682,105 @@ export type MutationUpdateBurgerProfielArgs = {
 };
 
 
+export type MutationUpdateEmandateSubCategoriesArgs = {
+  updatedSubCategories: UpdateEmandateSubCategoriesInput;
+};
+
+
 export type MutationUpdateProductVerbruiksObjectArgs = {
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
+};
+
+
+export type MutationWijzigVergunningPincodeArgs = {
+  pincode: Scalars['Int']['input'];
+  vergunningnummer: Scalars['Int']['input'];
+};
+
+export type Naheffing = {
+  __typename?: 'Naheffing';
+  aanslagNummer: Scalars['Long']['output'];
+  bedragNaheffing: Scalars['Long']['output'];
+  datumConstatering: Scalars['Date']['output'];
+  datumDagtekening: Scalars['Date']['output'];
+  kenteken: Scalars['String']['output'];
+  kleur: Scalars['String']['output'];
+  latitude?: Maybe<Scalars['String']['output']>;
+  longitude?: Maybe<Scalars['String']['output']>;
+  merk: Scalars['String']['output'];
+  nadereAanduiding: Scalars['String']['output'];
+  straatconstatering: Scalars['String']['output'];
+  ticketnummer?: Maybe<Scalars['String']['output']>;
+  tijdConstatering: Scalars['String']['output'];
+};
+
+export type Naheffingen = {
+  __typename?: 'Naheffingen';
+  aanslagNummer: Scalars['Long']['output'];
+  bedragNaheffing: Scalars['Long']['output'];
+  bonNummer: Scalars['String']['output'];
+  datumConstatering: Scalars['Date']['output'];
+  kenteken: Scalars['String']['output'];
+  landcode: Scalars['String']['output'];
+  openstaandSaldo: Scalars['Long']['output'];
+  tijdConstatering: Scalars['String']['output'];
+};
+
+export type NaheffingenPage = {
+  __typename?: 'NaheffingenPage';
+  content: Array<Naheffingen>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type NeaAdres = {
+  __typename?: 'NeaAdres';
+  adresBuitenland?: Maybe<NeaAdresBuitenland>;
+  adresseerbaarObjectId?: Maybe<Scalars['String']['output']>;
+  huisletter?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['Int']['output']>;
+  huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
+  land?: Maybe<Scalars['String']['output']>;
+  nummeraanduidingId?: Maybe<Scalars['String']['output']>;
+  postbusnummer?: Maybe<Scalars['String']['output']>;
+  postcode?: Maybe<Scalars['String']['output']>;
+  straatnaam?: Maybe<Scalars['String']['output']>;
+  woonplaats?: Maybe<Scalars['String']['output']>;
+};
+
+export type NeaAdresBuitenland = {
+  __typename?: 'NeaAdresBuitenland';
+  land?: Maybe<Scalars['String']['output']>;
+  postcodeWoonplaats?: Maybe<Scalars['String']['output']>;
+  regio?: Maybe<Scalars['String']['output']>;
+  straatnaamHuisnummer?: Maybe<Scalars['String']['output']>;
+};
+
+export type NeaKlant = {
+  __typename?: 'NeaKlant';
+  organisatie?: Maybe<Organisatie>;
+  persoon?: Maybe<NeaPersoon>;
+};
+
+export type NeaPersoon = {
+  __typename?: 'NeaPersoon';
+  achterNaam: Scalars['String']['output'];
+  correspondentieAdres?: Maybe<NeaAdres>;
+  emailAdres?: Maybe<Scalars['String']['output']>;
+  klantnummer: Scalars['Int']['output'];
+  subjectId: Scalars['Int']['output'];
+  telefoonNummer?: Maybe<Scalars['String']['output']>;
+  verblijfAdres: NeaAdres;
+  volledigeNaam: Scalars['String']['output'];
+  voorNaam?: Maybe<Scalars['String']['output']>;
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voorvoegselAchternaam?: Maybe<Scalars['String']['output']>;
 };
 
 export type OgoneBetaling = {
@@ -333,6 +805,17 @@ export type OgonePaymentRequestInput = {
   reference: Scalars['String']['input'];
   successUrl?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Organisatie = {
+  __typename?: 'Organisatie';
+  bezoekAdres: NeaAdres;
+  correspondentieAdres?: Maybe<NeaAdres>;
+  klantnummer: Scalars['Int']['output'];
+  kvkNummer?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  rsin?: Maybe<Scalars['String']['output']>;
+  vestigingsnummer?: Maybe<Scalars['String']['output']>;
 };
 
 export type PaymentField = {
@@ -518,13 +1001,31 @@ export type ProductVerbruiksObject = {
 
 export type Query = {
   __typename?: 'Query';
+  /** retrieves all available case definitions */
+  allCaseDefinitions: Array<CaseDefinition>;
+  /** retrieves all available case instances */
+  allCaseInstances: Array<CaseInstance>;
   /**
    * find all form definitions from repository
    * @deprecated This method is not used by the NL Portal frontend and is not being replaced.
    */
   allFormDefinitions: Array<FormDefinition>;
+  /** Do prefill for belasting aanslag */
+  belastingAanslagPrefill: PrefillResponse;
+  /** Do prefill for erfpacht contract */
+  erfpachtContractPrefill: PrefillResponse;
+  /** Check automatische incasso by klantnummer */
+  getAutomatischeIncasso: AutomatischIncassoResponse;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
+  /** Gets belasting aanslag bestanden */
+  getBelastingAanslagBestanden: AanslagBestandenPage;
+  /** Gets Dmn decision for belasting aanslag */
+  getBelastingAanslagDecision: Array<Scalars['JSON']['output']>;
+  /** Gets belasting aanslag details */
+  getBelastingAanslagDetails: AanslagDetails;
+  /** Gets belasting aanslagen of user */
+  getBelastingAanslagen: Aanslagen;
   /** Gets a single Bericht by Id */
   getBericht?: Maybe<Bericht>;
   /** Returns a paginated list of all Berichten */
@@ -545,8 +1046,24 @@ export type Query = {
   getBewonersAantal?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
   getBurgerProfiel?: Maybe<Klant>;
+  /** retrieves single case instance from repository */
+  getCaseInstance?: Maybe<CaseInstance>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
+  /** Gets list of banks */
+  getEmandateBanken: Array<Bank>;
+  /** Gets emandate by category, can be used to display all the subcategories */
+  getEmandateByCategory?: Maybe<EmandateObject>;
+  /** Gets status of mandateId */
+  getEmandateStatus: EmandateStatusResponse;
+  /** Gets list of emandates */
+  getEmandates: Array<EmandateObject>;
+  /** Get erfpacht contract by UUID */
+  getErfpachtContract: Contract;
+  /** Gets Dmn decision for erfpacht contract */
+  getErfpachtContractDecision: Array<Scalars['JSON']['output']>;
+  /** Gets all erfpacht contracten of user or rsin */
+  getErfpachtContracten: ContractBeperktPage;
   /**
    * find single form definition from repository or Objecten API
    * @deprecated Replaced by getFormDefinitionByName and getFormDefinitionByObjectenApiUrl, replace with getFormDefinitionByName or getFormDefinitionByObjectenApiUrl
@@ -560,6 +1077,12 @@ export type Query = {
   getGemachtigde: Gemachtigde;
   /** Gets the contactmomenten of a klant */
   getKlantContactMomenten?: Maybe<ContactMomentPage>;
+  /** Gets naheffing */
+  getNaheffing: Naheffing;
+  /** Gets Dmn decision for naheffing */
+  getNaheffingDecision: Array<Scalars['JSON']['output']>;
+  /** Gets naheffingen of user */
+  getNaheffingen: NaheffingenPage;
   /** Gets the contactmomenten of a object(zaak) */
   getObjectContactMomenten?: Maybe<ContactMomentPage>;
   /** Gets the persoon data */
@@ -611,6 +1134,20 @@ export type Query = {
   getTasks: TaakPage;
   /** Returns the total amount of unopened Berichten */
   getUnopenedBerichtenCount: Scalars['Int']['output'];
+  /**
+   *
+   *         Get vergunning by vergunningNummer and enddate
+   *
+   */
+  getVergunning: VergunningDetail;
+  /** Gets Dmn decision for vergunning */
+  getVergunningDecision: Array<Scalars['JSON']['output']>;
+  /** Gets vergunningen of user */
+  getVergunningen: VergunningenPage;
+  /** Gets Dmn decision for WOZ taxatie */
+  getWozTaxatieDecision: Array<Scalars['JSON']['output']>;
+  /** Gets woz taxaties of user and jaar */
+  getWozTaxaties: WozObjectPage;
   /** Gets a zaak by id */
   getZaak: Zaak;
   /**
@@ -622,12 +1159,72 @@ export type Query = {
    *
    */
   getZaken: ZaakPage;
+  /** Do prefill for naheffing */
+  naheffingPrefill: PrefillResponse;
   /**
    *
    *         Prefill data to start a form.
    *
    */
   productPrefill: PrefillResponse;
+  /** Do prefill for vergunning */
+  vergunningPrefill: PrefillResponse;
+  /** Do prefill for WOZ taxatie */
+  wozTaxatiePrefill: PrefillResponse;
+};
+
+
+export type QueryAllCaseInstancesArgs = {
+  orderBy: CaseInstanceOrderingInput;
+};
+
+
+export type QueryBelastingAanslagPrefillArgs = {
+  aanslagnummer: Scalars['String']['input'];
+  key: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  staticData?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+
+export type QueryErfpachtContractPrefillArgs = {
+  id: Scalars['String']['input'];
+  key: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  staticData?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+
+export type QueryGetAutomatischeIncassoArgs = {
+  klantnummer?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetBelastingAanslagBestandenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetBelastingAanslagDecisionArgs = {
+  aanslagnummer: Scalars['String']['input'];
+  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
+  key: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+};
+
+
+export type QueryGetBelastingAanslagDetailsArgs = {
+  aanslagnummer: Scalars['String']['input'];
+};
+
+
+export type QueryGetBelastingAanslagenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -683,9 +1280,53 @@ export type QueryGetBewonersAantalArgs = {
 };
 
 
+export type QueryGetCaseInstanceArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
 export type QueryGetDocumentContentArgs = {
   documentApi: Scalars['String']['input'];
   id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetEmandateBankenArgs = {
+  category: Scalars['String']['input'];
+  failureUrl?: InputMaybe<Scalars['String']['input']>;
+  successUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGetEmandateByCategoryArgs = {
+  categorie: Scalars['String']['input'];
+};
+
+
+export type QueryGetEmandateStatusArgs = {
+  category: Scalars['String']['input'];
+  mandateId: Scalars['String']['input'];
+};
+
+
+export type QueryGetErfpachtContractArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type QueryGetErfpachtContractDecisionArgs = {
+  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
+  id: Scalars['String']['input'];
+  key: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+};
+
+
+export type QueryGetErfpachtContractenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  rsin?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -706,6 +1347,27 @@ export type QueryGetFormDefinitionByObjectenApiUrlArgs = {
 
 export type QueryGetKlantContactMomentenArgs = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetNaheffingArgs = {
+  bonNummer: Scalars['String']['input'];
+  kenteken?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGetNaheffingDecisionArgs = {
+  bonNummer: Scalars['String']['input'];
+  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
+  key: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+};
+
+
+export type QueryGetNaheffingenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -799,6 +1461,42 @@ export type QueryGetTasksArgs = {
 };
 
 
+export type QueryGetVergunningArgs = {
+  vergunningnummer: Scalars['Int']['input'];
+};
+
+
+export type QueryGetVergunningDecisionArgs = {
+  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
+  key: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  vergunningnummer: Scalars['Int']['input'];
+};
+
+
+export type QueryGetVergunningenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetWozTaxatieDecisionArgs = {
+  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
+  jaar: Scalars['String']['input'];
+  key: Scalars['String']['input'];
+  objectNummer: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+};
+
+
+export type QueryGetWozTaxatiesArgs = {
+  jaar?: InputMaybe<Scalars['String']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
 export type QueryGetZaakArgs = {
   id: Scalars['UUID']['input'];
 };
@@ -812,6 +1510,15 @@ export type QueryGetZakenArgs = {
 };
 
 
+export type QueryNaheffingPrefillArgs = {
+  bonNummer: Scalars['String']['input'];
+  key: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  staticData?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+
 export type QueryProductPrefillArgs = {
   key: Scalars['String']['input'];
   productName: Scalars['String']['input'];
@@ -820,11 +1527,41 @@ export type QueryProductPrefillArgs = {
   staticData?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+
+export type QueryVergunningPrefillArgs = {
+  key: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  staticData?: InputMaybe<Scalars['JSON']['input']>;
+  vergunningnummer: Scalars['Int']['input'];
+};
+
+
+export type QueryWozTaxatiePrefillArgs = {
+  jaar: Scalars['String']['input'];
+  key: Scalars['String']['input'];
+  objectNummer: Scalars['String']['input'];
+  productName: Scalars['String']['input'];
+  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+  staticData?: InputMaybe<Scalars['JSON']['input']>;
+};
+
 export type SbiActiviteit = {
   __typename?: 'SbiActiviteit';
   indHoofdactiviteit: Scalars['String']['output'];
   sbiCode: Scalars['String']['output'];
   sbiOmschrijving: Scalars['String']['output'];
+};
+
+export enum Sort {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
+export type Status = {
+  __typename?: 'Status';
+  createdOn: Scalars['String']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type StatusType = {
@@ -851,7 +1588,7 @@ export type Taak = {
 
 export type TaakForm = {
   __typename?: 'TaakForm';
-  data: Scalars['JSON']['output'];
+  data?: Maybe<Scalars['JSON']['output']>;
   formulier: TaakFormulierV2;
 };
 
@@ -951,6 +1688,140 @@ export enum TaakVersion {
   V2 = 'V2'
 }
 
+export type UpdateEmandateSubCategoriesInput = {
+  category: Scalars['String']['input'];
+  subcategories: Array<EmandateSubCategorieInput>;
+};
+
+export type Vergunning = {
+  __typename?: 'Vergunning';
+  betaalMethodeToekomst?: Maybe<Scalars['String']['output']>;
+  betaaldExtraTegoed?: Maybe<Scalars['Long']['output']>;
+  betaalkenmerk?: Maybe<Scalars['String']['output']>;
+  codeGebied?: Maybe<Scalars['Int']['output']>;
+  codeSubGebied?: Maybe<Scalars['String']['output']>;
+  geldigTot?: Maybe<Scalars['Date']['output']>;
+  iban18?: Maybe<Scalars['String']['output']>;
+  kenteken?: Maybe<Scalars['String']['output']>;
+  kostenExtraTegoed?: Maybe<Scalars['Long']['output']>;
+  machtigingAutomatischeIncasso?: Maybe<Scalars['Boolean']['output']>;
+  mandaatId?: Maybe<Scalars['String']['output']>;
+  meldnummer?: Maybe<Scalars['Int']['output']>;
+  naamSubGebied?: Maybe<Scalars['String']['output']>;
+  nogTeBetalen?: Maybe<Scalars['Long']['output']>;
+  omschrijvingVergunning?: Maybe<Scalars['String']['output']>;
+  pin?: Maybe<Scalars['Int']['output']>;
+  taalCode?: Maybe<Scalars['String']['output']>;
+  tegoedActueel?: Maybe<Scalars['Int']['output']>;
+  tegoedExtra?: Maybe<Scalars['Int']['output']>;
+  tegoedInitieel?: Maybe<Scalars['Int']['output']>;
+  toelichting?: Maybe<Scalars['String']['output']>;
+  vergunningNummer?: Maybe<Scalars['Int']['output']>;
+  vergunningenSoort?: Maybe<Scalars['String']['output']>;
+  verschuldigBedrag?: Maybe<Scalars['Long']['output']>;
+  werkingtijdTm?: Maybe<Scalars['Int']['output']>;
+  werkingtijdVanaf?: Maybe<Scalars['Int']['output']>;
+};
+
+export type VergunningDetail = {
+  __typename?: 'VergunningDetail';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  codeBIC?: Maybe<Scalars['String']['output']>;
+  codeGebied?: Maybe<Scalars['Int']['output']>;
+  codeIBAN?: Maybe<Scalars['String']['output']>;
+  codeSubGebied?: Maybe<Scalars['String']['output']>;
+  einddatumPeriode?: Maybe<Scalars['Date']['output']>;
+  geboorteDatum?: Maybe<Scalars['Date']['output']>;
+  geslacht?: Maybe<Scalars['String']['output']>;
+  huisletter?: Maybe<Scalars['String']['output']>;
+  huisnummer: Scalars['Int']['output'];
+  ingangsdatumPeriode: Scalars['Date']['output'];
+  kentekenVergunning?: Maybe<Scalars['String']['output']>;
+  kostenStraatParkeren?: Maybe<Scalars['Long']['output']>;
+  kostenperiode?: Maybe<Scalars['Long']['output']>;
+  machtigingAutomatischeIncasso?: Maybe<Scalars['Boolean']['output']>;
+  naam: Scalars['String']['output'];
+  naamSubGebied?: Maybe<Scalars['String']['output']>;
+  parkeerTegoed?: Maybe<Scalars['Int']['output']>;
+  pasnummer: Scalars['Int']['output'];
+  pincode?: Maybe<Scalars['Int']['output']>;
+  plaats?: Maybe<Scalars['String']['output']>;
+  postcode: Scalars['String']['output'];
+  restitutieBedrag?: Maybe<Scalars['Long']['output']>;
+  soortVergunning?: Maybe<Scalars['String']['output']>;
+  straatnaam?: Maybe<Scalars['String']['output']>;
+  /** Get subject of vergunning. */
+  subject: VergunningSubject;
+  subjectnummer?: Maybe<Scalars['Long']['output']>;
+  tegoed?: Maybe<Scalars['Long']['output']>;
+  tegoedextra?: Maybe<Scalars['Long']['output']>;
+  tegoedinitieel?: Maybe<Scalars['Long']['output']>;
+  telefoonnummer?: Maybe<Scalars['String']['output']>;
+  vergunningNummer: Scalars['Int']['output'];
+  vergunningomschrijving?: Maybe<Scalars['String']['output']>;
+  vestigingsnummer?: Maybe<Scalars['Int']['output']>;
+};
+
+export type VergunningSubject = {
+  __typename?: 'VergunningSubject';
+  codeGebied: Scalars['Int']['output'];
+  codeSubGebied: Scalars['String']['output'];
+  eigenPlaatsen: Scalars['Int']['output'];
+  emailadres?: Maybe<Scalars['String']['output']>;
+  geboortedatum?: Maybe<Scalars['Date']['output']>;
+  geslacht?: Maybe<Scalars['String']['output']>;
+  huisletter?: Maybe<Scalars['String']['output']>;
+  huisnummer: Scalars['Int']['output'];
+  naam: Scalars['String']['output'];
+  naamSubGebied: Scalars['String']['output'];
+  plaats?: Maybe<Scalars['String']['output']>;
+  postcode: Scalars['String']['output'];
+  straatnaam: Scalars['String']['output'];
+  subjectnummer: Scalars['Int']['output'];
+  telefoonnummer?: Maybe<Scalars['String']['output']>;
+  uitgegevenBedrijven: Scalars['Int']['output'];
+  uitgegevenBewoners: Scalars['Int']['output'];
+  uitgegevenBezoekers: Scalars['Int']['output'];
+};
+
+export type VergunningenPage = {
+  __typename?: 'VergunningenPage';
+  content: Array<Vergunning>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type WijzigVergunningResponse = {
+  __typename?: 'WijzigVergunningResponse';
+  indicatieVerwerkt: Scalars['Boolean']['output'];
+};
+
+export type WozObjectPage = {
+  __typename?: 'WozObjectPage';
+  /** The elements on this page */
+  content: Array<WozObjectSub>;
+  /** The requested page number */
+  number: Scalars['Int']['output'];
+  /** The requested page size */
+  size: Scalars['Int']['output'];
+  /** The total number of elements */
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type WozObjectSub = {
+  __typename?: 'WozObjectSub';
+  objectAdres: Scalars['String']['output'];
+  objectNummer: Scalars['String']['output'];
+  objectSoortOmschrijving: Scalars['String']['output'];
+};
+
 export type Zaak = {
   __typename?: 'Zaak';
   besluiten: Array<Besluit>;
@@ -1005,6 +1876,13 @@ export type ZaakType = {
   omschrijving: Scalars['String']['output'];
 };
 
+export type ZakelijkRecht = {
+  __typename?: 'ZakelijkRecht';
+  id: Scalars['Int']['output'];
+  kadastraalObjecten: Array<KadastraalObject>;
+  naam: Scalars['String']['output'];
+};
+
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
 
 export type GenerateOgonePaymentMutationVariables = Exact<{
@@ -1028,7 +1906,7 @@ export type SubmitTaakV2MutationVariables = Exact<{
 }>;
 
 
-export type SubmitTaakV2Mutation = { __typename?: 'Mutation', submitTaakV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
+export type SubmitTaakV2Mutation = { __typename?: 'Mutation', submitTaakV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
 
 export type SubmitTaskMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1043,7 +1921,7 @@ export type UpdateBurgerProfielMutationVariables = Exact<{
 }>;
 
 
-export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null } | null };
+export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
 
 export type UpdateProductVerbruiksObjectMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1081,7 +1959,7 @@ export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?
 export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null } | null };
+export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
 
 export type GetDocumentenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1116,7 +1994,7 @@ export type GetPortaalFormulierByIdV2QueryVariables = Exact<{
 }>;
 
 
-export type GetPortaalFormulierByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
+export type GetPortaalFormulierByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
 export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1190,7 +2068,7 @@ export type GetTaakByIdV2QueryVariables = Exact<{
 }>;
 
 
-export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
+export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
 export type GetTaakByIdQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1377,6 +2255,7 @@ export const UpdateBurgerProfielDocument = gql`
   updateBurgerProfiel(klant: $klant) {
     emailadres
     telefoonnummer
+    aanmaakkanaal
   }
 }
     `;
@@ -1640,6 +2519,7 @@ export const GetBurgerProfielDocument = gql`
   getBurgerProfiel {
     emailadres
     telefoonnummer
+    aanmaakkanaal
   }
 }
     `;
