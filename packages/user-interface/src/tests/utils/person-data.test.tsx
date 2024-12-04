@@ -99,7 +99,7 @@ describe("getFullName", () => {
       voornamen: "Jan",
       voorvoegsel: "de",
       lastName: "Vries",
-      officialLastName: "Vries",
+      officialLastName: "de Vries",
     });
     expect(nameString).toBe("Jan de Vries");
   });
@@ -108,9 +108,9 @@ describe("getFullName", () => {
     const nameString = getFullName({
       voorvoegsel: "de",
       lastName: "Vries",
-      officialLastName: "Vries",
+      officialLastName: "de Vries",
     });
-    expect(nameString).toBe("De Vries");
+    expect(nameString).toBe("de Vries");
   });
 
   it("should return correct string when only first name input is valid", () => {

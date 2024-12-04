@@ -25,7 +25,7 @@ describe("AccountPage", () => {
       expect(screen.getByText("Sierra")).toBeInTheDocument();
     });
     expect(screen.getByText("Nederlandse, Portugees")).toBeVisible();
-    expect(screen.getByText("Kooyman")).toBeVisible();
+    expect(screen.getByText("de Kooyman - van der Maassen")).toBeVisible();
     expect(screen.getByText("vrouw")).toBeVisible();
     expect(screen.getByText("999991954")).toBeVisible();
     expect(screen.getByText("3 maart 2003")).toBeVisible();
