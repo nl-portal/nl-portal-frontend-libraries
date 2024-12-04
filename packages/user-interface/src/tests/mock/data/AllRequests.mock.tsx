@@ -20,7 +20,6 @@ export const getPersoon = {
         geslachtsaanduiding: "vrouw",
         naam: {
           voornamen: "Sierra",
-          voorvoegsel: null,
           officialLastName: "de Kooyman - van der Maassen",
           __typename: "PersoonNaam",
         },

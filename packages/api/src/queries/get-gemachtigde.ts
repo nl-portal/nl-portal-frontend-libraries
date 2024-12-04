@@ -6,8 +6,6 @@ export const QUERY_GET_GEMACHTIGDE = gql`
       persoon {
         naam {
           voornamen
-          voorvoegsel
-          lastName
           officialLastName
         }
       }

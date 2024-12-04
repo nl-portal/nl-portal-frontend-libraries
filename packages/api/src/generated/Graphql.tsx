@@ -1141,7 +1141,7 @@ export type GetPortaalFormulierByIdV2Query = { __typename?: 'Query', getTaakById
 export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetGemachtigdeQuery = { __typename?: 'Query', getGemachtigde: { __typename?: 'Gemachtigde', persoon?: { __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', voornamen?: string | null, voorvoegsel?: string | null, lastName: string, officialLastName?: string | null } } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } };
+export type GetGemachtigdeQuery = { __typename?: 'Query', getGemachtigde: { __typename?: 'Gemachtigde', persoon?: { __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null } } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } };
 
 export type GetKlantContactMomentenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1158,12 +1158,12 @@ export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectCon
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', burgerservicenummer?: string | null, geslachtsaanduiding?: string | null, bewonersAantal?: number | null, naam: { __typename?: 'PersoonNaam', voornamen?: string | null, voorvoegsel?: string | null, lastName: string, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'PersoonVerblijfplaats', straat?: string | null, huisnummer?: string | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, geboorte?: { __typename?: 'PersoonDatumLandPlaats', datum?: { __typename?: 'PersoonDatum', datum?: string | null, jaar?: number | null, maand?: number | null, dag?: number | null } | null, land?: { __typename?: 'PersoonCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten?: Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: { __typename?: 'PersoonNationaliteit', code?: string | null, omschrijving?: string | null } | null }> | null } | null };
+export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', burgerservicenummer?: string | null, geslachtsaanduiding?: string | null, bewonersAantal?: number | null, naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'PersoonVerblijfplaats', straat?: string | null, huisnummer?: string | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, geboorte?: { __typename?: 'PersoonDatumLandPlaats', datum?: { __typename?: 'PersoonDatum', datum?: string | null, jaar?: number | null, maand?: number | null, dag?: number | null } | null, land?: { __typename?: 'PersoonCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten?: Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: { __typename?: 'PersoonNationaliteit', code?: string | null, omschrijving?: string | null } | null }> | null } | null };
 
 export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', voornamen?: string | null, voorvoegsel?: string | null, lastName: string, officialLastName?: string | null } } | null };
+export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null } } | null };
 
 export type GetProductTakenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -1926,8 +1926,6 @@ export const GetGemachtigdeDocument = gql`
     persoon {
       naam {
         voornamen
-        voorvoegsel
-        lastName
         officialLastName
       }
     }
@@ -2064,8 +2062,6 @@ export const GetPersoonDataDocument = gql`
     bewonersAantal
     naam {
       voornamen
-      voorvoegsel
-      lastName
       officialLastName
     }
     verblijfplaats {
@@ -2134,8 +2130,6 @@ export const GetPersoonDocument = gql`
   getPersoon {
     naam {
       voornamen
-      voorvoegsel
-      lastName
       officialLastName
     }
   }

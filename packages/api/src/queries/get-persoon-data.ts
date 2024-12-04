@@ -8,8 +8,6 @@ export const QUERY_GET_PERSOON_DATA = gql`
       bewonersAantal
       naam {
         voornamen
-        voorvoegsel
-        lastName
         officialLastName
       }
       verblijfplaats {

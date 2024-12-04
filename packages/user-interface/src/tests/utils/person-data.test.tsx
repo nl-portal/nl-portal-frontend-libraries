@@ -97,8 +97,6 @@ describe("getFullName", () => {
   it("should return correct string when all input is valid", () => {
     const nameString = getFullName({
       voornamen: "Jan",
-      voorvoegsel: "de",
-      lastName: "Vries",
       officialLastName: "de Vries",
     });
     expect(nameString).toBe("Jan de Vries");
@@ -106,8 +104,6 @@ describe("getFullName", () => {
 
   it("should return correct string when first name is null and other input is valid", () => {
     const nameString = getFullName({
-      voorvoegsel: "de",
-      lastName: "Vries",
       officialLastName: "de Vries",
     });
     expect(nameString).toBe("de Vries");
@@ -116,7 +112,6 @@ describe("getFullName", () => {
   it("should return correct string when only first name input is valid", () => {
     const nameString = getFullName({
       voornamen: "Jan",
-      lastName: "Vries",
     });
     expect(nameString).toBe("Jan");
   });
