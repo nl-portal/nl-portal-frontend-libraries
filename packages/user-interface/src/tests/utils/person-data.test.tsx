@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
-  getNameString,
+  getFullName,
   getNationalitiesString,
   getPostalCodeCityString,
   getStreetString,
@@ -88,57 +88,36 @@ describe("getPostalCodeCityString", () => {
   });
 });
 
-describe("getNameString", () => {
+describe("getFullName", () => {
   it("should return empty string when input all is null", () => {
-    const nameString = getNameString({});
+    const nameString = getFullName();
     expect(nameString).toBe("");
   });
 
   it("should return correct string when all input is valid", () => {
-    const nameString = getNameString({
+    const nameString = getFullName({
       voornamen: "Jan",
       voorvoegsel: "de",
-      geslachtsnaam: "Vries",
+      lastName: "Vries",
+      officialLastName: "Vries",
     });
     expect(nameString).toBe("Jan de Vries");
   });
 
   it("should return correct string when first name is null and other input is valid", () => {
-    const nameString = getNameString({
+    const nameString = getFullName({
       voorvoegsel: "de",
-      geslachtsnaam: "Vries",
+      lastName: "Vries",
+      officialLastName: "Vries",
     });
     expect(nameString).toBe("De Vries");
   });
 
   it("should return correct string when only first name input is valid", () => {
-    const nameString = getNameString({
+    const nameString = getFullName({
       voornamen: "Jan",
+      lastName: "Vries",
     });
-    expect(nameString).toBe("Jan");
-  });
-
-  it("should return correct string when all input is valid and only last name is requested output", () => {
-    const nameString = getNameString(
-      {
-        voornamen: "Jan",
-        voorvoegsel: "de",
-        geslachtsnaam: "Vries",
-      },
-      "lastName",
-    );
-    expect(nameString).toBe("De Vries");
-  });
-
-  it("should return correct string when all input is valid and only first name is requested output", () => {
-    const nameString = getNameString(
-      {
-        voornamen: "Jan",
-        voorvoegsel: "de",
-        geslachtsnaam: "Vries",
-      },
-      "firstNames",
-    );
     expect(nameString).toBe("Jan");
   });
 });

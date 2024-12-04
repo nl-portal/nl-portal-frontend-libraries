@@ -7,11 +7,10 @@ export const QUERY_GET_PERSOON_DATA = gql`
       geslachtsaanduiding
       bewonersAantal
       naam {
-        aanhef
-        voorletters
         voornamen
         voorvoegsel
-        geslachtsnaam
+        lastName
+        officialLastName
       }
       verblijfplaats {
         straat

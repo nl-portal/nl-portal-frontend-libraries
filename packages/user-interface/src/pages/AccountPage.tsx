@@ -10,7 +10,6 @@ import {
 import styles from "./AccountPage.module.scss";
 import DetailList from "../components/DetailList";
 import {
-  getNameString,
   getNationalitiesString,
   getPostalCodeCityString,
   getStreetString,
@@ -172,12 +171,12 @@ const AccountPage = ({
           details={[
             {
               translationKey: "firstNames",
-              value: getNameString(person?.naam, "firstNames"),
+              value: person?.naam.voornamen,
               loading,
             },
             {
               translationKey: "lastName",
-              value: getNameString(person?.naam, "lastName"),
+              value: person?.naam.officialLastName,
               loading,
             },
             {
