@@ -4,11 +4,10 @@ export const QUERY_GET_GEMACHTIGDE = gql`
   query GetGemachtigde {
     getGemachtigde {
       persoon {
-        aanhef
-        voorletters
-        voornamen
-        voorvoegsel
-        geslachtsnaam
+        naam {
+          voornamen
+          officialLastName
+        }
       }
       bedrijf {
         naam

@@ -19,11 +19,8 @@ export const getPersoon = {
         burgerservicenummer: "999991954",
         geslachtsaanduiding: "vrouw",
         naam: {
-          aanhef: null,
-          voorletters: "S.",
           voornamen: "Sierra",
-          voorvoegsel: null,
-          geslachtsnaam: "Kooyman",
+          officialLastName: "de Kooyman - van der Maassen",
           __typename: "PersoonNaam",
         },
         verblijfplaats: {
