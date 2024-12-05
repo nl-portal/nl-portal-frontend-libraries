@@ -129,12 +129,14 @@ const AccountPage = ({
             {
               translationKey: "emailadres",
               value: contactData?.getBurgerProfiel?.emailadres,
+              translate: "no",
               showEditButton: true,
               loading,
             },
             {
               translationKey: "telefoonnummer",
               value: contactData?.getBurgerProfiel?.telefoonnummer,
+              translate: "no",
               showEditButton: true,
               loading,
             },
@@ -172,11 +174,13 @@ const AccountPage = ({
             {
               translationKey: "firstNames",
               value: person?.naam.voornamen,
+              translate: "no",
               loading,
             },
             {
               translationKey: "lastName",
               value: person?.naam.officialLastName,
+              translate: "no",
               loading,
             },
             {
@@ -225,6 +229,7 @@ const AccountPage = ({
                 person?.verblijfplaats?.huisletter,
                 person?.verblijfplaats?.huisnummertoevoeging,
               ),
+              translate: "no",
               loading,
             },
             {
@@ -233,6 +238,7 @@ const AccountPage = ({
                 person?.verblijfplaats?.postcode,
                 person?.verblijfplaats?.woonplaats,
               ),
+              translate: "no",
               loading,
             },
           ]}
