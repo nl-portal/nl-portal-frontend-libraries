@@ -6,7 +6,9 @@ import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import ActionsList from "../components/ActionsList";
-import Alert, { AlertProps } from "@gemeente-denhaag/alert";
+import { AlertProps } from "@gemeente-denhaag/alert";
+import { useEffect } from "react";
+import useNotification from "../hooks/useNotification";
 
 interface Props {
   slug: string;
@@ -34,6 +36,13 @@ const ThemeDetailsPage = ({
   children,
 }: Props) => {
   const intl = useIntl();
+  const { pushNotification } = useNotification();
+
+  useEffect(() => {
+    if (alert) {
+      pushNotification(`themeDetail${slug}`, alert);
+    }
+  }, [alert]);
 
   return (
     <PageGrid>
@@ -44,7 +53,6 @@ const ThemeDetailsPage = ({
           title={intl.formatMessage({ id: titleTranslationId })}
         />
       </div>
-      {alert && <Alert {...alert} />}
       <TasksList
         loading={loading}
         error={tasksError}

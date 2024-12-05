@@ -28,6 +28,7 @@ export * from "./interfaces/portal-footer";
 
 export { default as useDownload } from "./hooks/useDownload";
 export { default as useEnableMessagesCount } from "./hooks/useEnableMessagesCount";
+export { default as useNotification } from "./hooks/useNotification";
 export { default as useOgonePayment } from "./hooks/useOgonePayment";
 export { default as useOgonePaymentRegistration } from "./hooks/useOgonePaymentRegistration";
 export * from "./hooks/useOgonePaymentRegistration";
@@ -49,3 +50,5 @@ export { default as ThemeSubPage } from "./pages/ThemeSubPage";
 
 export { default as MessagesContext } from "./contexts/MessagesContext";
 export * from "./contexts/MessagesContext";
+export { default as NotificationContext } from "./contexts/NotificationContext";
+export * from "./contexts/NotificationContext";
