@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { useIntl } from "react-intl";
 import classNames from "classnames";
@@ -10,12 +9,13 @@ interface UserNameProps {
   mobileMenu?: boolean;
 }
 
-const UserName: FC<UserNameProps> = ({ mobileMenu }) => {
+const UserName = ({ mobileMenu }: UserNameProps) => {
   const intl = useIntl();
   const { userName, volmachtgever, isLoading } = useUserInfo();
 
   return (
     <div
+      translate="no"
       className={classNames(styles["user-name"], {
         [styles["user-name--mobile-menu"]]: mobileMenu,
       })}
