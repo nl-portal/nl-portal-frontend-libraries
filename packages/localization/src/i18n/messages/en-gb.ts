@@ -115,7 +115,7 @@ export const EN_GB_MESSAGES: Messages = {
     "task.paymentSuccessText":
       "You will receive a confirmation email as soon as possible.",
     "task.paymentSuccessTitle": "Success, you have paid.",
-    "overviewpage.title": "Welcome {userName}",
+    "overviewpage.title": "Welcome <span>{userName}</span>",
     "overview.subTitle": "Authorised for {volmachtgever}",
     "overviewpage.paragraph":
       "In the NL-portal you can arrange your personal affairs yourself when it suits you. For example, you can pay your bills and see when your application is ready.",
