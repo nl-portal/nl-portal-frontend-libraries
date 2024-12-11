@@ -32,8 +32,8 @@ export const NotificationProvider = ({
     // Check if there is an notification passed via state
     const notificationState = location.state?.notification;
     if (notificationState) {
-      const { type, titleMessage, textMessage, variant } = notificationState;
-      pushNotification(type, {
+      const { key, titleMessage, textMessage, variant } = notificationState;
+      pushNotification(key, {
         title: <FormattedMessage {...titleMessage} />,
         text: <FormattedMessage {...textMessage} />,
         variant: variant,
