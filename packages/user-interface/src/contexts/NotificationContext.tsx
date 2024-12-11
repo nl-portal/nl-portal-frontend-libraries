@@ -1,12 +1,11 @@
-import { AlertProps } from "@gemeente-denhaag/alert";
 import { createContext, ReactNode, useEffect, useState } from "react";
-import Notification from "../components/Notification";
+import Notification, { NotificationProps } from "../components/Notification";
 import { useLocation } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 
 interface NotificationContextType {
   getNotifications: () => ReactNode[];
-  pushNotification: (key: string, alert: AlertProps) => void;
+  pushNotification: (key: string, alert: NotificationProps) => void;
 }
 
 const NotificationContext = createContext<NotificationContextType>(
@@ -41,7 +40,7 @@ export const NotificationProvider = ({
     }
   }, [location]);
 
-  const pushNotification = (key: string, alert: AlertProps) => {
+  const pushNotification = (key: string, alert: NotificationProps) => {
     setNotifications((prevNotifications) => {
       return new Map<string, ReactNode>([...prevNotifications]).set(
         key,
