@@ -6,15 +6,11 @@ import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import ActionsList from "../components/ActionsList";
-import { AlertProps } from "@gemeente-denhaag/alert";
-import { useEffect } from "react";
-import useNotification from "../hooks/useNotification";
 
 interface Props {
   slug: string;
   loading?: boolean;
   titleTranslationId?: string;
-  alert?: AlertProps;
   tasks?: TaakV2[];
   tasksError?: boolean;
   links?: { title: string; href: string }[];
@@ -27,7 +23,6 @@ const ThemeDetailsPage = ({
   slug,
   loading,
   titleTranslationId = `pageTitles.${slug}`,
-  alert,
   tasks,
   tasksError,
   links,
@@ -36,13 +31,6 @@ const ThemeDetailsPage = ({
   children,
 }: Props) => {
   const intl = useIntl();
-  const { pushNotification } = useNotification();
-
-  useEffect(() => {
-    if (alert) {
-      pushNotification(`themeDetail${slug}`, alert);
-    }
-  }, [alert]);
 
   return (
     <PageGrid>
