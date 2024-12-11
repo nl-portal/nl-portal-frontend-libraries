@@ -2,6 +2,7 @@ import { AlertProps } from "@gemeente-denhaag/alert";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import Notification from "../components/Notification";
 import { useLocation } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 interface NotificationContextType {
   getNotifications: () => ReactNode[];
@@ -27,6 +28,17 @@ export const NotificationProvider = ({
 
   useEffect(() => {
     setNotifications(INITIAL_MAP);
+
+    // Check if there is an notification passed via state
+    const notificationState = location.state?.notification;
+    if (notificationState) {
+      const { type, titleMessage, textMessage, variant } = notificationState;
+      pushNotification(type, {
+        title: <FormattedMessage {...titleMessage} />,
+        text: <FormattedMessage {...textMessage} />,
+        variant: variant,
+      });
+    }
   }, [location]);
 
   const pushNotification = (key: string, alert: AlertProps) => {
