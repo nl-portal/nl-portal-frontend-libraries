@@ -49,3 +49,5 @@ export { default as ThemeSubPage } from "./pages/ThemeSubPage";
 
 export { default as MessagesContext } from "./contexts/MessagesContext";
 export * from "./contexts/MessagesContext";
+export { default as NotificationContext } from "./contexts/NotificationContext";
+export * from "./contexts/NotificationContext";

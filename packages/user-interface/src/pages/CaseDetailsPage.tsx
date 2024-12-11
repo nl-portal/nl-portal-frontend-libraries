@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   useGetZaakQuery,
   useGetTakenV2Query,
@@ -7,7 +7,6 @@ import {
   ContactMoment,
   ZaakStatus,
 } from "@nl-portal/nl-portal-api";
-import { Alert } from "@gemeente-denhaag/alert";
 import {
   LocaleContext,
   useDateFormatter,
@@ -29,6 +28,7 @@ import useOgonePaymentRegistration, {
 } from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
 import TableList from "../components/TableList";
+import NotificationContext from "../contexts/NotificationContext";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -60,6 +60,25 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
       ? tasksResult?.getTakenV2.content.filter((item) => item.id !== orderId)
       : tasksResult?.getTakenV2.content
   ) as TaakV2[] | undefined;
+
+  const { pushNotification } = useContext(NotificationContext);
+
+  useEffect(() => {
+    if (paymentStatus === PaymentStatus.SUCCESS) {
+      pushNotification("casePaymentSuccess", {
+        variant: "success",
+        title: <FormattedMessage id="task.paymentSuccessTitle" />,
+        text: <FormattedMessage id="task.paymentSuccessText" />,
+      });
+    }
+    if (paymentStatus === PaymentStatus.FAILURE) {
+      pushNotification("casePaymentFailure", {
+        variant: "error",
+        title: <FormattedMessage id="task.paymentFailureTitle" />,
+        text: <FormattedMessage id="task.paymentFailureText" />,
+      });
+    }
+  }, [paymentStatus]);
 
   const details = React.useMemo(() => {
     console.log(caseData);
@@ -134,20 +153,6 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
           }
         />
       </div>
-      {paymentStatus === PaymentStatus.SUCCESS && (
-        <Alert
-          variant="success"
-          title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
-          text={intl.formatMessage({ id: "task.paymentSuccessText" })}
-        />
-      )}
-      {paymentStatus === PaymentStatus.FAILURE && (
-        <Alert
-          variant="error"
-          title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
-          text={intl.formatMessage({ id: "task.paymentFailureText" })}
-        />
-      )}
       <TasksList
         loading={loading}
         showEmpty={false}

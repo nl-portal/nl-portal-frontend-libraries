@@ -1,6 +1,8 @@
 import styles from "./PageHeader.module.scss";
 import Skeleton from "./Skeleton";
 import Heading from "./Heading";
+import { useContext } from "react";
+import NotificationContext from "../contexts/NotificationContext";
 
 interface Props {
   loading?: boolean;
@@ -10,6 +12,7 @@ interface Props {
 }
 
 const PageHeader = ({ loading, title, subTitle, children }: Props) => {
+  const { getNotifications } = useContext(NotificationContext);
   if (loading) return <Skeleton height={40} width={250} />;
   if (!title && !children) return null;
 
@@ -17,6 +20,7 @@ const PageHeader = ({ loading, title, subTitle, children }: Props) => {
     <header className={styles["page-header"]}>
       {title && <Heading size="h2">{title}</Heading>}
       {subTitle && <Heading as="h3">{subTitle}</Heading>}
+      {getNotifications()}
       {children}
     </header>
   );
