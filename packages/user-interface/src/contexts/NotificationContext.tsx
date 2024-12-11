@@ -1,12 +1,11 @@
 import { AlertProps } from "@gemeente-denhaag/alert";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import Notification from "../components/Notification";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 interface NotificationContextType {
   getNotifications: () => ReactNode[];
   pushNotification: (key: string, alert: AlertProps) => void;
-  checkUrlParam: (key: string, value: string) => boolean;
 }
 
 const NotificationContext = createContext<NotificationContextType>(
@@ -25,7 +24,6 @@ export const NotificationProvider = ({
   const [notifications, setNotifications] =
     useState<Map<string, ReactNode>>(INITIAL_MAP);
   const location = useLocation();
-  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     setNotifications(INITIAL_MAP);
@@ -44,17 +42,11 @@ export const NotificationProvider = ({
     return Array.from(notifications.values());
   };
 
-  const checkUrlParam = (key: string, value: string) => {
-    const paramValue = searchParams.get(key);
-    return paramValue === value;
-  };
-
   return (
     <NotificationContext.Provider
       value={{
         getNotifications,
         pushNotification,
-        checkUrlParam,
       }}
     >
       {children}
