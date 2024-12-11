@@ -28,7 +28,7 @@ import useOgonePaymentRegistration, {
 } from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
 import TableList from "../components/TableList";
-import useNotification from "../hooks/useNotification";
+import NotificationContext from "../contexts/NotificationContext";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -61,7 +61,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
       : tasksResult?.getTakenV2.content
   ) as TaakV2[] | undefined;
 
-  const { pushNotification } = useNotification();
+  const { pushNotification } = useContext(NotificationContext);
 
   useEffect(() => {
     if (paymentStatus === PaymentStatus.SUCCESS) {
