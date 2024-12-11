@@ -4,24 +4,24 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
 import {
-  Taak,
+  TaakV2,
   Zaak,
   useGetProductTakenQuery,
   useGetProductZakenQuery,
 } from "@nl-portal/nl-portal-api";
 
 interface Props {
-  type: string;
+  slug: string;
+  productType: string;
   loading?: boolean;
-  showTasks?: boolean;
   fetchTasksLength?: number;
-  showCases?: boolean;
   fetchCasesLength?: number;
   children?: React.ReactNode;
 }
 
 const ThemeOverviewPage = ({
-  type,
+  slug,
+  productType,
   loading: loadingProp,
   fetchTasksLength = 5,
   fetchCasesLength = 4,
@@ -33,7 +33,7 @@ const ThemeOverviewPage = ({
     loading: taskLoading,
     error: taskError,
   } = useGetProductTakenQuery({
-    variables: { productName: type, pageSize: fetchTasksLength },
+    variables: { productName: productType, pageSize: fetchTasksLength },
     skip: !fetchTasksLength,
   });
   const {
@@ -41,24 +41,35 @@ const ThemeOverviewPage = ({
     loading: casesLoading,
     error: casesError,
   } = useGetProductZakenQuery({
-    variables: { productName: type, pageSize: fetchCasesLength },
+    variables: {
+      productName: productType,
+      pageSize: fetchCasesLength,
+      isOpen: true,
+    },
     skip: !fetchCasesLength,
   });
 
   const loading = loadingProp || taskLoading || casesLoading;
-  const tasks = tasksData?.getProductTaken as Taak[] | undefined;
+  const tasks = tasksData?.getProductTaken as TaakV2[] | undefined;
   const cases = casesData?.getProductZaken as Zaak[] | undefined;
 
   return (
     <PageGrid>
-      <PageHeader title={intl.formatMessage({ id: `pageTitles.${type}` })} />
-      {fetchTasksLength && (
-        <TasksList loading={loading} error={Boolean(taskError)} tasks={tasks} />
+      <PageHeader title={intl.formatMessage({ id: `pageTitles.${slug}` })} />
+      {Boolean(fetchTasksLength) && (
+        <TasksList
+          loading={loading}
+          error={Boolean(taskError)}
+          showEmpty={false}
+          tasks={tasks}
+          openInContext={true}
+        />
       )}
-      {fetchCasesLength && (
+      {Boolean(fetchCasesLength) && (
         <CasesList
           loading={loading}
           error={Boolean(casesError)}
+          showEmpty={false}
           listView={false}
           cases={cases}
         />

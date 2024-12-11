@@ -1,4 +1,4 @@
-import { Button } from "@gemeente-denhaag/components-react";
+import { Button } from "@gemeente-denhaag/button";
 import { FormattedMessage } from "react-intl";
 import { useKeycloak } from "@react-keycloak/web";
 import MobileMenuButton from "./MobileMenuButton";

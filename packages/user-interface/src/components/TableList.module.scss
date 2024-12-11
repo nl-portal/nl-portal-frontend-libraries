@@ -11,7 +11,27 @@
     color: var(--nlportal-heading-5-color, hsl(207 80% 35%));
   }
 
+  &__link-label {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+
+    /* modern browsers, clip-path works inwards from each corner */
+    clip-path: inset(50%);
+
+    /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
+    white-space: nowrap;
+  }
+
   &__pagination {
+    margin-block-start: var(--nlportal-space-block-2xl, 2rem);
+  }
+
+  &__children {
     margin-block-start: var(--nlportal-space-block-2xl, 2rem);
   }
 }

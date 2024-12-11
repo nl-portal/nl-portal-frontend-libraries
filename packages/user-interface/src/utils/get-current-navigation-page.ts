@@ -14,17 +14,10 @@ export const getCurrentNavigationPage = (
   matches: UIMatch[],
   navigationItems: NavigationItem[][],
 ) => {
-  while (matches.length > 0) {
-    const match = matches.pop();
-
-    if (!match) continue;
-
-    const foundNavItem = navigationItems
-      .flat()
-      .find((item) => item?.path === match.pathname);
-
-    if (foundNavItem) return foundNavItem;
-  }
-
-  return undefined;
+  return navigationItems
+    .flat()
+    .reverse()
+    .find((item) => {
+      return matches.find((match) => item?.path === match.pathname);
+    });
 };

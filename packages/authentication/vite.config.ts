@@ -14,11 +14,25 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "react-dom", "@react-keycloak/web"],
+      external: [
+        "react",
+        "react-dom",
+        "react-router-dom",
+        "@react-keycloak/web",
+      ],
       output: {
         entryFileNames: "[name].js",
         globals: {
           react: "React",
+        },
+        manualChunks: (id) => {
+          if (id.includes("node_modules")) {
+            return id
+              .toString()
+              .split("node_modules/.pnpm/")[1]
+              .split("/")[0]
+              .toString();
+          }
         },
       },
     },

@@ -30,6 +30,15 @@ export default defineConfig({
         globals: {
           react: "React",
         },
+        manualChunks: (id) => {
+          if (id.includes("node_modules")) {
+            return id
+              .toString()
+              .split("node_modules/.pnpm/")[1]
+              .split("/")[0]
+              .toString();
+          }
+        },
       },
     },
   },
@@ -40,12 +49,15 @@ export default defineConfig({
     server: {
       deps: {
         inline: [
-          "@gemeente-denhaag/form-field",
+          "@gemeente-denhaag/badge-counter",
+          "@gemeente-denhaag/button-link",
           "@gemeente-denhaag/form-field-error-message",
+          "@gemeente-denhaag/form-field",
           "@gemeente-denhaag/form-label",
           "@gemeente-denhaag/link-button",
+          "@gemeente-denhaag/radio-button",
+          "@gemeente-denhaag/status-badge",
           "@gemeente-denhaag/text-input",
-          "@gemeente-denhaag/button-link",
         ],
       },
     },

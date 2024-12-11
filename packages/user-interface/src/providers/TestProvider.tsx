@@ -1,5 +1,8 @@
 import { ReactElement } from "react";
-import { MockWrapper } from "@nl-portal/nl-portal-localization";
+import {
+  LocalizationProvider,
+  MockWrapper,
+} from "@nl-portal/nl-portal-localization";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import {
   createMemoryRouter,
@@ -7,17 +10,18 @@ import {
   RouterProvider,
   RouteObject,
 } from "react-router-dom";
-import UserInformationProvider from "./UserInformationProvider";
 import { Paths } from "../interfaces/paths";
+import { LayoutProvider } from "../contexts/LayoutContext";
 
-//eslint-disable-next-line react-refresh/only-export-components
 export const testPaths: Paths = {
+  noMatch: "/404",
   overview: "/",
   cases: "/zaken",
   case: (id = ":id") => `/zaken/zaak/${id}`,
   tasks: "/taken",
   task: (id = ":id") => `/taken/taak/${id}`,
-  notifications: "/berichten",
+  messages: "/berichten",
+  message: (id = ":id") => `/berichten/bericht/${id}`,
   themeOverview: (type = ":type") => `/${type}`,
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
   themeSub: (type = ":type", slug = ":slug") => `/${type}/${slug}`,
@@ -34,11 +38,13 @@ const TestContent = ({
   paths: Paths;
 }) => (
   <MockWrapper>
-    <UserInformationProvider>
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Outlet context={{ paths }} />
-      </MockedProvider>
-    </UserInformationProvider>
+    <MockedProvider mocks={mocks} addTypename={false}>
+      <LocalizationProvider>
+        <LayoutProvider>
+          <Outlet context={{ paths }} />
+        </LayoutProvider>{" "}
+      </LocalizationProvider>
+    </MockedProvider>
   </MockWrapper>
 );
 

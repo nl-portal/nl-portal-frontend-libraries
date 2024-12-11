@@ -1,9 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { ReactElement } from "react";
 import {
-  getLocaleDateOfBirth,
-  getNameString,
+  getFullName,
   getNationalitiesString,
   getPostalCodeCityString,
   getStreetString,
@@ -91,76 +88,31 @@ describe("getPostalCodeCityString", () => {
   });
 });
 
-describe("getLocaleDateOfBirth", () => {
-  it("should return empty string when input is null", () => {
-    const localeDateOfBirth = getLocaleDateOfBirth(null);
-    expect(localeDateOfBirth).toBe("");
-  });
-
-  it("should return correct element when all input is valid", () => {
-    const localeDateOfBirthComponent = getLocaleDateOfBirth({
-      jaar: 1980,
-      maand: 1,
-      dag: 1,
-    });
-
-    render(localeDateOfBirthComponent as ReactElement);
-
-    expect(screen.getByText("1 January 1980")).toBeTruthy();
-  });
-});
-
-describe("getNameString", () => {
+describe("getFullName", () => {
   it("should return empty string when input all is null", () => {
-    const nameString = getNameString({});
+    const nameString = getFullName();
     expect(nameString).toBe("");
   });
 
   it("should return correct string when all input is valid", () => {
-    const nameString = getNameString({
+    const nameString = getFullName({
       voornamen: "Jan",
-      voorvoegsel: "de",
-      geslachtsnaam: "Vries",
+      officialLastName: "de Vries",
     });
     expect(nameString).toBe("Jan de Vries");
   });
 
   it("should return correct string when first name is null and other input is valid", () => {
-    const nameString = getNameString({
-      voorvoegsel: "de",
-      geslachtsnaam: "Vries",
+    const nameString = getFullName({
+      officialLastName: "de Vries",
     });
-    expect(nameString).toBe("De Vries");
+    expect(nameString).toBe("de Vries");
   });
 
   it("should return correct string when only first name input is valid", () => {
-    const nameString = getNameString({
+    const nameString = getFullName({
       voornamen: "Jan",
     });
-    expect(nameString).toBe("Jan");
-  });
-
-  it("should return correct string when all input is valid and only last name is requested output", () => {
-    const nameString = getNameString(
-      {
-        voornamen: "Jan",
-        voorvoegsel: "de",
-        geslachtsnaam: "Vries",
-      },
-      "lastName",
-    );
-    expect(nameString).toBe("De Vries");
-  });
-
-  it("should return correct string when all input is valid and only first name is requested output", () => {
-    const nameString = getNameString(
-      {
-        voornamen: "Jan",
-        voorvoegsel: "de",
-        geslachtsnaam: "Vries",
-      },
-      "firstNames",
-    );
     expect(nameString).toBe("Jan");
   });
 });

@@ -1,0 +1,12 @@
+.search-form {
+  --nlportal-form-margin-block-start: var(--nlportal-space-block-2xl, 2rem);
+
+  .search-form-input-container {
+    display: flex;
+    gap: var(--nlportal-space-inline-xs, 0.5rem);
+  }
+
+  .search-form-total-elements {
+    --utrecht-space-around: 0;
+  }
+}

@@ -2,12 +2,12 @@ import { useIntl } from "react-intl";
 import styles from "./TasksList.module.scss";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
-import { Taak } from "@nl-portal/nl-portal-api";
+import { TaakV2 } from "@nl-portal/nl-portal-api";
 import Task from "./Task";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import SectionHeader from "./SectionHeader";
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 interface Props {
   loading?: boolean;
@@ -16,10 +16,11 @@ interface Props {
   showEmpty?: boolean;
   emptyTranslationId?: string;
   titleTranslationId?: string | null;
+  openInContext?: boolean;
   readMoreLink?: string;
   readMoreTranslationId?: string | null;
   totalAmount?: number;
-  tasks?: Taak[];
+  tasks?: TaakV2[];
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
@@ -32,9 +33,13 @@ const TasksList = ({
   showEmpty = true,
   emptyTranslationId = "tasksList.empty",
   titleTranslationId = "tasksList.title",
+  openInContext,
   readMoreLink,
   readMoreTranslationId = "tasksList.viewAll",
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  // @ts-expect-error: TS6133
   totalAmount,
+  /* eslint-enable @typescript-eslint/no-unused-vars */
   tasks,
   index,
   indexLimit,
@@ -46,13 +51,9 @@ const TasksList = ({
   const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
-  const subTitle =
-    totalAmount && readMoreTranslationId
-      ? intl.formatMessage(
-          { id: readMoreTranslationId },
-          { total: totalAmount },
-        )
-      : undefined;
+  const subTitle = readMoreTranslationId
+    ? intl.formatMessage({ id: readMoreTranslationId })
+    : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
@@ -89,7 +90,7 @@ const TasksList = ({
     <section className={styles["tasks-list"]}>
       <SectionHeader title={title} subTitle={subTitle} href={tasksPath} />
       {tasks.map((task) => (
-        <Task key={task.id} task={task} />
+        <Task key={task.id} task={task} openInContext={openInContext} />
       ))}
       {indexLimit ? (
         <Pagination

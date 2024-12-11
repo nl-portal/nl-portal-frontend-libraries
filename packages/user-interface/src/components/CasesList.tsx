@@ -1,9 +1,9 @@
 import { useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { Zaak } from "@nl-portal/nl-portal-api";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import styles from "./CasesList.module.scss";
 import SectionHeader from "./SectionHeader";
 import Case from "./Case";
@@ -14,6 +14,7 @@ interface Props {
   loading?: boolean;
   error?: boolean;
   errorTranslationId?: string;
+  showEmpty?: boolean;
   emptyTranslationId?: string;
   titleTranslationId?: string | null;
   readMoreLink?: string;
@@ -30,6 +31,7 @@ const CasesList = ({
   loading,
   error,
   errorTranslationId = "casesList.fetchError",
+  showEmpty = true,
   emptyTranslationId = "casesList.empty",
   titleTranslationId = "casesList.title",
   readMoreLink,
@@ -79,13 +81,15 @@ const CasesList = ({
       </section>
     );
 
-  if (!cases || cases.length === 0)
+  if (!cases || cases.length === 0) {
+    if (!showEmpty) return null;
     return (
       <section className={styles["cases-list"]}>
         <SectionHeader title={title} />
         <Paragraph>{emptyMessage}</Paragraph>
       </section>
     );
+  }
 
   return (
     <section className={styles["cases-list"]}>

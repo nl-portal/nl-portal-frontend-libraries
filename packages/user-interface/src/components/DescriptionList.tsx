@@ -3,6 +3,7 @@ import SectionHeader from "./SectionHeader";
 import { useIntl } from "react-intl";
 import Skeleton from "./Skeleton";
 import { Paragraph } from "@gemeente-denhaag/typography";
+import styles from "./DescriptionList.module.scss";
 
 interface Props {
   loading?: boolean;
@@ -13,7 +14,9 @@ interface Props {
   items: {
     title: React.ReactNode;
     detail: React.ReactNode;
+    action?: React.ReactNode;
   }[];
+  children?: React.ReactNode;
 }
 
 const DescriptionList = ({
@@ -23,6 +26,7 @@ const DescriptionList = ({
   emptyTranslationId = "descriptionList.empty",
   titleTranslationId = "descriptionList.title",
   items,
+  children,
 }: Props) => {
   const intl = useIntl();
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
@@ -57,6 +61,9 @@ const DescriptionList = ({
       <section>
         <SectionHeader title={title} />
         <Paragraph>{emptyMessage}</Paragraph>
+        {children && (
+          <div className={styles["description-list__children"]}>{children}</div>
+        )}
       </section>
     );
 
@@ -64,6 +71,9 @@ const DescriptionList = ({
     <section>
       <SectionHeader title={title} />
       <DescriptionListComponent items={items} />
+      {children && (
+        <div className={styles["description-list__children"]}>{children}</div>
+      )}
     </section>
   );
 };

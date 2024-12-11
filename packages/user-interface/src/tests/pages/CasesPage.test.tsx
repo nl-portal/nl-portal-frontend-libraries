@@ -5,17 +5,13 @@ import { testPaths as paths } from "../../providers/TestProvider";
 
 describe("The CasesPage", () => {
   const tabLopendeZaken = () =>
-    screen.getByRole("tab", { name: "Current cases" });
+    screen.getByRole("tab", { name: "Lopende zaken" });
   const tabAfgerondeZaken = () =>
-    screen.getByRole("tab", { name: "Closed cases" });
+    screen.getByRole("tab", { name: "Afgeronde zaken" });
   const openZaak1 = () => screen.getByText("case.OPENZAAK1.title");
-  const openZaak1Date = "2024-01-01";
   const openZaak2 = () => screen.getByText("case.OPENZAAK2.title");
-  const openZaak2Date = "2024-01-02";
   const geslotenZaak1 = () => screen.getByText("case.GESLOTENZAAK1.title");
-  const geslotenZaak1Date = "2024-02-01";
   const geslotenZaak2 = () => screen.getByText("case.GESLOTENZAAK2.title");
-  const geslotenZaak2Date = "2024-02-02";
 
   it("should render several active cases", async () => {
     render(MockCasesPage());
@@ -28,8 +24,7 @@ describe("The CasesPage", () => {
     expect(tabAfgerondeZaken().getAttribute("aria-selected")).toBe("false");
 
     expect(openZaak1()).toBeVisible();
-    let screenDate = new Date(Date.parse(openZaak1Date));
-    expect(screen.getByText(screenDate.toLocaleDateString())).toBeVisible();
+    expect(screen.getByText("1 januari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK1.title" }),
     ).toHaveAttribute(
@@ -38,8 +33,7 @@ describe("The CasesPage", () => {
     );
 
     expect(openZaak2()).toBeVisible();
-    screenDate = new Date(Date.parse(openZaak2Date));
-    expect(screen.getByText(screenDate.toLocaleDateString())).toBeVisible();
+    expect(screen.getByText("2 januari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK2.title" }),
     ).toHaveAttribute(
@@ -63,8 +57,7 @@ describe("The CasesPage", () => {
     expect(tabAfgerondeZaken().getAttribute("aria-selected")).toBe("true");
 
     expect(geslotenZaak1()).toBeVisible();
-    let screenDate = new Date(Date.parse(geslotenZaak1Date));
-    expect(screen.getByText(screenDate.toLocaleDateString())).toBeVisible();
+    expect(screen.getByText("1 februari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.GESLOTENZAAK1.title" }),
     ).toHaveAttribute(
@@ -72,8 +65,7 @@ describe("The CasesPage", () => {
       paths.case("0c6c5300-fd08-4fae-977d-c85a2c7535e8"),
     );
     expect(geslotenZaak2()).toBeVisible();
-    screenDate = new Date(Date.parse(geslotenZaak2Date));
-    expect(screen.getByText(screenDate.toLocaleDateString())).toBeVisible();
+    expect(screen.getByText("2 februari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.GESLOTENZAAK2.title" }),
     ).toHaveAttribute(

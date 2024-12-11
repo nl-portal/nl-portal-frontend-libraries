@@ -7,10 +7,10 @@ import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import styles from "./DetailList.module.scss";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { BREAKPOINTS } from "../constants/breakpoints";
-import UserInformationContext from "../contexts/UserInformationContext";
 import { PortalLink } from "..";
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
+import React from "react";
 
 interface DetailListProps {
   details: Array<{
@@ -18,12 +18,12 @@ interface DetailListProps {
     loading?: boolean;
     value?: string | ReactElement | undefined | null | false;
     showEditButton?: boolean;
+    translate?: React.HTMLAttributes<HTMLSpanElement>["translate"];
   }>;
 }
 
 const DetailList = ({ details }: DetailListProps) => {
   const { hrefLang } = useContext(LocaleContext);
-  const { setUserInformation } = useContext(UserInformationContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
   const EMPTY_VALUE = "-";
@@ -43,7 +43,10 @@ const DetailList = ({ details }: DetailListProps) => {
             </b>
           </span>
           <div className={styles["detail-list__value-edit"]}>
-            <span className={styles["detail-list__value"]}>
+            <span
+              className={styles["detail-list__value"]}
+              translate={detail.translate}
+            >
               {detail.loading ? (
                 <Skeleton width={isDesktop ? 200 : 150} />
               ) : (
@@ -52,12 +55,6 @@ const DetailList = ({ details }: DetailListProps) => {
             </span>
             {detail.showEditButton && (
               <Link
-                onClick={() =>
-                  setUserInformation(
-                    detail.translationKey,
-                    typeof detail.value === "string" ? detail.value : "",
-                  )
-                }
                 href={`${paths.editAccount}?prop=${detail.translationKey}`}
                 Link={PortalLink}
                 hrefLang={hrefLang}

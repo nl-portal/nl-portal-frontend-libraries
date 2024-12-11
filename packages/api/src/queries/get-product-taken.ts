@@ -4,14 +4,24 @@ export const QUERY_GET_PRODUCT_TAKEN = gql`
   query GetProductTaken($productName: String!, $pageSize: Int) {
     getProductTaken(productName: $productName, pageSize: $pageSize) {
       id
-      objectId
-      formulier {
-        ...FormulierFields
+      soort
+      koppeling {
+        registratie
+        uuid
       }
-      title
+      url {
+        uri
+      }
+      portaalformulier {
+        formulier {
+          soort
+          value
+        }
+      }
+      titel
       status
-      date
       verloopdatum
+      version
     }
   }
 `;

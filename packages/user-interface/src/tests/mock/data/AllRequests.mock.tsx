@@ -1,10 +1,10 @@
 import {
   QUERY_GET_BURGER_PROFIEL,
   QUERY_GET_PERSOON_DATA,
-  QUERY_GET_TAKEN,
   QUERY_GET_OBJECT_CONTACT_MOMENTEN,
   QUERY_GET_ZAAK,
   QUERY_GET_ZAKEN,
+  QUERY_GET_TAKEN_V2,
 } from "@nl-portal/nl-portal-api";
 import { FetchResult, GraphQLRequest } from "@apollo/client";
 
@@ -19,11 +19,8 @@ export const getPersoon = {
         burgerservicenummer: "999991954",
         geslachtsaanduiding: "vrouw",
         naam: {
-          aanhef: null,
-          voorletters: "S.",
           voornamen: "Sierra",
-          voorvoegsel: null,
-          geslachtsnaam: "Kooyman",
+          officialLastName: "de Kooyman - van der Maassen",
           __typename: "PersoonNaam",
         },
         verblijfplaats: {
@@ -41,7 +38,7 @@ export const getPersoon = {
             jaar: 2003,
             maand: 3,
             dag: 3,
-            __typename: "PersoonGeboorteDatum",
+            __typename: "PersoonDatum",
           },
           land: {
             code: "6030",
@@ -394,84 +391,89 @@ export const getObjectContactMomenten = {
 
 export const getTakenWithId = {
   request: {
-    query: QUERY_GET_TAKEN,
+    query: QUERY_GET_TAKEN_V2,
     variables: {
       zaakId: "82cb13cf-d2f9-4e3e-ac07-751373035ecb",
+      pageSize: 10,
     },
   },
   result: {
     data: {
-      getTaken: {
+      getTakenV2: {
         content: [
           {
             id: "1a20092f-8d24-11ee-a314-d2c27970fbf4",
-            objectId: "497e0c6b-ca5a-4603-882b-332e0b183322",
-            formulier: {
-              formuliertype: "objecturl",
-              value:
-                "https://objectenurl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
-              __typename: "TaakFormulier",
+            soort: "PORTAALFORMULIER",
+            koppeling: null,
+            url: null,
+            portaalformulier: {
+              formulier: {
+                soort: "url",
+                value:
+                  "https://objectenurl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
+                __typename: "TaakFormulierV2",
+              },
+              data: {
+                informatieverzoeken: [
+                  {
+                    deadline: "2023-12-04T22:59:59.999Z",
+                    toelichting: "",
+                    hersteltermijn: true,
+                    dagtekeningBrief: "2023-11-27T12:48:30.000Z",
+                    stopHersteltermijn: "2023-11-27T12:51:27.626210570Z",
+                    startHersteltermijn: "2023-11-27T12:48:43.589109572Z",
+                    datumInformatieverzoek: "2023-11-27T12:48:30.000Z",
+                    opleidingVolgendePersonen: "",
+                    opTeVragenBenodigdeInformatie: {
+                      partnerID: true,
+                      jaarrekening: false,
+                      balansrekening: false,
+                      specificatiePensioen: false,
+                      bewijsVanInschrijving: true,
+                      laatsteInkomstenSpecificatie: false,
+                      bankafschriftenAfgelopenMaand: false,
+                      belastingaanslagAfgelopenJaar: false,
+                      belastingaangifteAfgelopenJaar: false,
+                      laatsteInkomstenSpecificatiePartner: false,
+                      specifiekeBankafschriftenPerPeriode: true,
+                      specifiekeBankafschriftenAfgelopenMaand: false,
+                    },
+                    bankrekeningNummersSpecifiekePeriode: "",
+                  },
+                  {
+                    deadline: "2023-12-04T22:59:59.999Z",
+                    toelichting: "",
+                    hersteltermijn: true,
+                    dagtekeningBrief: "2023-11-27T12:53:00.000Z",
+                    startHersteltermijn: "2023-11-27T12:54:25.021822783Z",
+                    datumInformatieverzoek: "2023-11-27T12:53:00.000Z",
+                    opleidingVolgendePersonen: "",
+                    opTeVragenBenodigdeInformatie: {
+                      partnerID: true,
+                      jaarrekening: true,
+                      balansrekening: true,
+                      specificatiePensioen: false,
+                      bewijsVanInschrijving: true,
+                      laatsteInkomstenSpecificatie: false,
+                      bankafschriftenAfgelopenMaand: false,
+                      belastingaanslagAfgelopenJaar: false,
+                      belastingaangifteAfgelopenJaar: true,
+                      laatsteInkomstenSpecificatiePartner: false,
+                      specifiekeBankafschriftenPerPeriode: false,
+                      specifiekeBankafschriftenAfgelopenMaand: false,
+                    },
+                  },
+                ],
+              },
             },
-            title: "Aanleveren informatie",
+            titel: "Aanleveren informatie",
             status: "OPEN",
-            date: "2023-11-27",
-            data: {
-              informatieverzoeken: [
-                {
-                  deadline: "2023-12-04T22:59:59.999Z",
-                  toelichting: "",
-                  hersteltermijn: true,
-                  dagtekeningBrief: "2023-11-27T12:48:30.000Z",
-                  stopHersteltermijn: "2023-11-27T12:51:27.626210570Z",
-                  startHersteltermijn: "2023-11-27T12:48:43.589109572Z",
-                  datumInformatieverzoek: "2023-11-27T12:48:30.000Z",
-                  opleidingVolgendePersonen: "",
-                  opTeVragenBenodigdeInformatie: {
-                    partnerID: true,
-                    jaarrekening: false,
-                    balansrekening: false,
-                    specificatiePensioen: false,
-                    bewijsVanInschrijving: true,
-                    laatsteInkomstenSpecificatie: false,
-                    bankafschriftenAfgelopenMaand: false,
-                    belastingaanslagAfgelopenJaar: false,
-                    belastingaangifteAfgelopenJaar: false,
-                    laatsteInkomstenSpecificatiePartner: false,
-                    specifiekeBankafschriftenPerPeriode: true,
-                    specifiekeBankafschriftenAfgelopenMaand: false,
-                  },
-                  bankrekeningNummersSpecifiekePeriode: "",
-                },
-                {
-                  deadline: "2023-12-04T22:59:59.999Z",
-                  toelichting: "",
-                  hersteltermijn: true,
-                  dagtekeningBrief: "2023-11-27T12:53:00.000Z",
-                  startHersteltermijn: "2023-11-27T12:54:25.021822783Z",
-                  datumInformatieverzoek: "2023-11-27T12:53:00.000Z",
-                  opleidingVolgendePersonen: "",
-                  opTeVragenBenodigdeInformatie: {
-                    partnerID: true,
-                    jaarrekening: true,
-                    balansrekening: true,
-                    specificatiePensioen: false,
-                    bewijsVanInschrijving: true,
-                    laatsteInkomstenSpecificatie: false,
-                    bankafschriftenAfgelopenMaand: false,
-                    belastingaanslagAfgelopenJaar: false,
-                    belastingaangifteAfgelopenJaar: true,
-                    laatsteInkomstenSpecificatiePartner: false,
-                    specifiekeBankafschriftenPerPeriode: false,
-                    specifiekeBankafschriftenAfgelopenMaand: false,
-                  },
-                },
-              ],
-            },
-            verloopdatum: "2023-12-04T12:54:29.211",
-            __typename: "Taak",
+            verloopdatum: null,
+            version: "V1",
+            __typename: "TaakV2",
           },
         ],
-        __typename: "TaakPage",
+        __typename: "TaakPageV2",
       },
     },
   },
@@ -569,13 +571,69 @@ export const getZaken: {
   },
 };
 
+export const getOpenZaken: {
+  request: GraphQLRequest;
+  result: FetchResult;
+} = {
+  request: {
+    query: QUERY_GET_ZAKEN,
+    variables: { isOpen: true },
+  },
+  result: {
+    data: {
+      getZaken: {
+        content: [
+          {
+            uuid: "6f268986-17c2-4045-9340-94101bfad3ca",
+            omschrijving: "",
+            identificatie: "ZAAK-2024-0000001317",
+            zaaktype: {
+              identificatie: "OPENZAAK1",
+              __typename: "ZaakType",
+            },
+            startdatum: "2024-01-01",
+            status: {
+              statustype: {
+                isEindstatus: false,
+                __typename: "ZaakStatusType",
+              },
+              __typename: "ZaakStatus",
+            },
+            __typename: "Zaak",
+          },
+          {
+            uuid: "009e2451-44b3-4969-91e3-205d8b261fe1",
+            omschrijving: "",
+            identificatie: "ZAAK-2024-0000001263",
+            zaaktype: {
+              identificatie: "OPENZAAK2",
+              __typename: "ZaakType",
+            },
+            startdatum: "2024-01-02",
+            status: {
+              statustype: {
+                isEindstatus: false,
+                __typename: "ZaakStatusType",
+              },
+              __typename: "ZaakStatus",
+            },
+            __typename: "Zaak",
+          },
+        ],
+        totalElements: 2,
+        totalPages: 1,
+      },
+    },
+  },
+};
+
 export const getZakenPagination: {
   request: GraphQLRequest;
   result: FetchResult;
 } = {
   request: {
     query: QUERY_GET_ZAKEN,
-    variables: {},
+    variables: { isOpen: true },
   },
   result: {
     data: {
@@ -959,101 +1017,255 @@ export const getZakenPagination: {
   },
 };
 
-const getContent = (size: number) => {
+const getContent = (size?: number) => {
   const arrayTasks = [
     {
-      id: "cb8e86ab-c58d-11ee-9320-3a659ac0caef",
-      objectId: "d2a2c7d3-af2a-4b0e-8171-24156f84da95",
-      formulier: {
-        formuliertype: "objecturl",
-        value:
-          "https://objectenurl/api/v2/objects/168c8f1f-bf9c-426b-bfcd-b1ad3a202c95",
-        __typename: "TaakFormulier",
+      id: "3f8b4c07-91c5-4f14-9cc4-2d6a6b8a3bda",
+      soort: "PORTAALFORMULIER",
+      koppeling: {
+        registratie: "ZAAK",
+        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        __typename: "TaakKoppeling",
       },
-      title: "OPEN TAAK 1",
+      url: null,
+      portaalformulier: {
+        formulier: {
+          soort: "url",
+          value:
+            "http://localhost:8010/api/v2/objects/fbb761a9-ed2e-4bb0-9582-e72218389679",
+          __typename: "TaakFormulierV2",
+        },
+        __typename: "TaakForm",
+      },
+      titel: "OPEN TAAK 1",
       status: "OPEN",
-      date: "2024-02-07",
-      verloopdatum: "2024-02-17T07:52:09.254",
-      __typename: "Taak",
+      verloopdatum: "2024-06-15T21:59:59.999",
+      version: "V1",
+      __typename: "TaakV2",
     },
     {
-      id: "8340598f-c0da-11ee-8f7b-8acfe66e2bec",
-      objectId: "4bc0df48-8a53-48b5-a2b5-34c83e293e53",
-      formulier: {
-        formuliertype: "objecturl",
-        value:
-          "https://objectenurl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
-        __typename: "TaakFormulier",
+      id: "7e5d3f58-a681-4b5d-8a1f-48d31fbf6f4e",
+      soort: "PORTAALFORMULIER",
+      koppeling: {
+        registratie: "ZAAK",
+        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        __typename: "TaakKoppeling",
       },
-      title: "OPEN TAAK 2",
+      url: null,
+      portaalformulier: {
+        formulier: {
+          soort: "url",
+          value:
+            "http://localhost:8010/api/v2/objects/fbb761a9-ed2e-4bb0-9582-e72218389679",
+          __typename: "TaakFormulierV2",
+        },
+        __typename: "TaakForm",
+      },
+      titel: "OPEN TAAK 2",
       status: "OPEN",
-      date: "2024-02-01",
-      verloopdatum: null,
-      __typename: "Taak",
+      verloopdatum: "2024-06-15T21:59:59.999",
+      version: "V1",
+      __typename: "TaakV2",
     },
     {
-      id: "4d6be490-8364-4ee9-b2a9-78fead5f8760",
-      objectId: "481605b4-23f5-49f9-ad7c-bd103b1bceb7",
-      formulier: {
-        formuliertype: "objecturl",
-        value:
-          "https://objectenurl/api/v2/objects/99697f7e-4c2b-4dd5-9bdd-bc9e7336ac02",
-        __typename: "TaakFormulier",
+      id: "e3b3bcf2-7b2e-46d7-a600-3ec8a4e1a2a1",
+      soort: "PORTAALFORMULIER",
+      koppeling: {
+        registratie: "ZAAK",
+        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        __typename: "TaakKoppeling",
       },
-      title: "OPEN TAAK 3",
+      url: null,
+      portaalformulier: {
+        formulier: {
+          soort: "url",
+          value:
+            "http://localhost:8010/api/v2/objects/fbb761a9-ed2e-4bb0-9582-e72218389679",
+          __typename: "TaakFormulierV2",
+        },
+        __typename: "TaakForm",
+      },
+      titel: "OPEN TAAK 3",
       status: "OPEN",
-      date: "2024-01-31",
-      verloopdatum: null,
-      __typename: "Taak",
+      verloopdatum: "2024-06-15T21:59:59.999",
+      version: "V1",
+      __typename: "TaakV2",
     },
     {
       id: "021118b9-bc59-11ee-b651-366634c97df6",
-      objectId: "a5c14b96-83da-4618-9c5b-441ca9d6c52f",
-      formulier: {
-        formuliertype: "portalid",
-        value: "43381039-c511-4591-bb0c-e2006d65ca9b",
-        __typename: "TaakFormulier",
+      soort: "PORTAALFORMULIER",
+      koppeling: {
+        registratie: "ZAAK",
+        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        __typename: "TaakKoppeling",
       },
-      title: "OPEN TAAK 4",
+      url: null,
+      portaalformulier: {
+        formulier: {
+          soort: "url",
+          value:
+            "http://localhost:8010/api/v2/objects/fbb761a9-ed2e-4bb0-9582-e72218389679",
+          __typename: "TaakFormulierV2",
+        },
+        __typename: "TaakForm",
+      },
+      titel: "OPEN TAAK 4",
       status: "OPEN",
-      date: "2024-01-26",
-      verloopdatum: null,
-      __typename: "Taak",
+      verloopdatum: "2024-06-15T21:59:59.999",
+      version: "V1",
+      __typename: "TaakV2",
     },
     {
-      id: "021118b9-bc59-11ee-b651-366634c97df7",
-      objectId: "a5c14b96-83da-4618-9c5b-441ca9d6c52f",
-      formulier: {
-        formuliertype: "portalid",
-        value: "43381039-c511-4591-bb0c-e2006d65ca9b",
-        __typename: "TaakFormulier",
+      id: "16fd2706-8baf-433b-82eb-8c7fada847da",
+      soort: "PORTAALFORMULIER",
+      koppeling: {
+        registratie: "ZAAK",
+        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        __typename: "TaakKoppeling",
       },
-      title: "OPEN TAAK 5",
+      url: null,
+      portaalformulier: {
+        formulier: {
+          soort: "url",
+          value:
+            "http://localhost:8010/api/v2/objects/fbb761a9-ed2e-4bb0-9582-e72218389679",
+          __typename: "TaakFormulierV2",
+        },
+        __typename: "TaakForm",
+      },
+      titel: "Portal task",
       status: "OPEN",
-      date: "2024-01-26",
-      verloopdatum: null,
-      __typename: "Taak",
+      verloopdatum: "2024-06-15T21:59:59.999",
+      version: "V1",
+      __typename: "TaakV2",
     },
     {
-      id: "021118b9-bc59-11ee-b651-366634c97df8",
-      objectId: "a5c14b96-83da-4618-9c5b-441ca9d6c52f",
-      formulier: {
-        formuliertype: "portalid",
-        value: "43381039-c511-4591-bb0c-e2006d65ca9b",
-        __typename: "TaakFormulier",
+      id: "b3da88b2-7e7f-4578-a7d4-9e5e5c74a2de",
+      soort: "PORTAALFORMULIER",
+      koppeling: {
+        registratie: "ZAAK",
+        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        __typename: "TaakKoppeling",
       },
-      title: "OPEN TAAK 6",
+      url: null,
+      portaalformulier: {
+        formulier: {
+          soort: "url",
+          value:
+            "http://localhost:8010/api/v2/objects/fbb761a9-ed2e-4bb0-9582-e72218389679",
+          __typename: "TaakFormulierV2",
+        },
+        __typename: "TaakForm",
+      },
+      titel: "Portal task",
       status: "OPEN",
-      date: "2024-01-26",
-      verloopdatum: null,
-      __typename: "Taak",
+      verloopdatum: "2024-06-15T21:59:59.999",
+      version: "V1",
+      __typename: "TaakV2",
+    },
+    {
+      id: "6f4922f45568161a8cdf4ad2299f6d23",
+      soort: "PORTAALFORMULIER",
+      koppeling: {
+        registratie: "ZAAK",
+        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        __typename: "TaakKoppeling",
+      },
+      url: null,
+      portaalformulier: {
+        formulier: {
+          soort: "url",
+          value:
+            "http://localhost:8010/api/v2/objects/fbb761a9-ed2e-4bb0-9582-e72218389679",
+          __typename: "TaakFormulierV2",
+        },
+        __typename: "TaakForm",
+      },
+      titel: "Portal task",
+      status: "OPEN",
+      verloopdatum: "2024-06-15T21:59:59.999",
+      version: "V1",
+      __typename: "TaakV2",
+    },
+    {
+      id: "1e292f8fedd741b75372e19097c76d4a",
+      soort: "PORTAALFORMULIER",
+      koppeling: {
+        registratie: "ZAAK",
+        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        __typename: "TaakKoppeling",
+      },
+      url: null,
+      portaalformulier: {
+        formulier: {
+          soort: "url",
+          value:
+            "http://localhost:8010/api/v2/objects/fbb761a9-ed2e-4bb0-9582-e72218389679",
+          __typename: "TaakFormulierV2",
+        },
+        __typename: "TaakForm",
+      },
+      titel: "Portal task",
+      status: "OPEN",
+      verloopdatum: "2024-06-15T21:59:59.999",
+      version: "V1",
+      __typename: "TaakV2",
+    },
+    {
+      id: "901d3f32-3559-4dd7-a6a6-3fe00d7f00b6",
+      soort: "PORTAALFORMULIER",
+      koppeling: {
+        registratie: "ZAAK",
+        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        __typename: "TaakKoppeling",
+      },
+      url: null,
+      portaalformulier: {
+        formulier: {
+          soort: "url",
+          value:
+            "http://localhost:8010/api/v2/objects/fbb761a9-ed2e-4bb0-9582-e72218389679",
+          __typename: "TaakFormulierV2",
+        },
+        __typename: "TaakForm",
+      },
+      titel: "Portal task",
+      status: "OPEN",
+      verloopdatum: "2024-06-15T21:59:59.999",
+      version: "V1",
+      __typename: "TaakV2",
+    },
+    {
+      id: "88d9c7d0-3f9a-4a0e-9a90-6c8f873e9cdd",
+      soort: "PORTAALFORMULIER",
+      koppeling: {
+        registratie: "ZAAK",
+        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        __typename: "TaakKoppeling",
+      },
+      url: null,
+      portaalformulier: {
+        formulier: {
+          soort: "url",
+          value:
+            "http://localhost:8010/api/v2/objects/fbb761a9-ed2e-4bb0-9582-e72218389679",
+          __typename: "TaakFormulierV2",
+        },
+        __typename: "TaakForm",
+      },
+      titel: "Portal task",
+      status: "OPEN",
+      verloopdatum: "2024-06-15T21:59:59.999",
+      version: "V1",
+      __typename: "TaakV2",
     },
   ];
+
   return arrayTasks.slice(0, size);
 };
 
 export const getTaken = (
-  pageSizeRequest: number,
+  pageSizeRequest?: number,
 ): {
   request: GraphQLRequest;
   result: FetchResult;
@@ -1062,16 +1274,16 @@ export const getTaken = (
 
   return {
     request: {
-      query: QUERY_GET_TAKEN,
-      variables: { pageSize: pageSizeRequest },
+      query: QUERY_GET_TAKEN_V2,
+      variables: pageSizeRequest ? { pageSize: pageSizeRequest } : {},
     },
     result: {
       data: {
-        getTaken: {
+        getTakenV2: {
           content: contentSliced,
           totalElements: 6,
           totalPages: 1,
-          __typename: "TaakPage",
+          __typename: "TaakPageV2",
         },
       },
     },

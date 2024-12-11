@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import LayoutProvider from "../../providers/LayoutProvider";
+import { LayoutProvider } from "../../contexts/LayoutContext";
 
 describe("LayoutProvider", () => {
   it("is truthy", () => {

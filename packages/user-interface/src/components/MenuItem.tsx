@@ -3,10 +3,11 @@ import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { FormattedMessage } from "react-intl";
-import { BadgeCounter } from "@gemeente-denhaag/components-react";
+import { BadgeCounter } from "@gemeente-denhaag/badge-counter";
 import styles from "./MenuItem.module.scss";
 import LayoutContext from "../contexts/LayoutContext";
 import { NavigationItem } from "../interfaces/navigation-item";
+import MessagesContext from "../contexts/MessagesContext";
 
 interface MenuItemProps {
   item: NavigationItem;
@@ -15,7 +16,8 @@ interface MenuItemProps {
 
 const MenuItem = ({ item, current = false }: MenuItemProps) => {
   const { hrefLang } = useContext(LocaleContext);
-  const { hideMenu, messagesCount } = useContext(LayoutContext);
+  const { hideMenu } = useContext(LayoutContext);
+  const { messagesCount } = useContext(MessagesContext);
 
   if (!item) return null;
 

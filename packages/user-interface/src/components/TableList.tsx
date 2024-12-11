@@ -6,6 +6,7 @@ import styles from "./TableList.module.scss";
 import { useIntl } from "react-intl";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
+import classNames from "classnames";
 
 interface Props {
   loading?: boolean;
@@ -21,6 +22,8 @@ interface Props {
   index?: number;
   indexLimit?: number;
   onChange?: (index: number) => number;
+  className?: string;
+  children?: React.ReactNode;
 }
 
 const TableList = ({
@@ -37,6 +40,8 @@ const TableList = ({
   index,
   indexLimit,
   onChange,
+  className,
+  children,
 }: Props) => {
   const intl = useIntl();
   const hasLink = Boolean(rws?.flat().find((r) => r.href));
@@ -58,6 +63,7 @@ const TableList = ({
               className: styles["table-list__icon"],
               children: (
                 <div className={styles["table-list__arrow"]}>
+                  <span className={styles["table-list__link-label"]}>Link</span>
                   <ArrowRightIcon />
                 </div>
               ),
@@ -78,9 +84,11 @@ const TableList = ({
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
+  const sectionClassNames = classNames(styles["table-list"], className);
+
   if (loading) {
     return (
-      <section className={styles["table-list"]}>
+      <section className={sectionClassNames}>
         <SectionHeader title={title} />
         <Skeleton height={60} />
         <Skeleton height={60} />
@@ -91,7 +99,7 @@ const TableList = ({
 
   if (error)
     return (
-      <section className={styles["table-list"]}>
+      <section className={sectionClassNames}>
         <SectionHeader title={title} />
         <Paragraph>{errorMessage}</Paragraph>
       </section>
@@ -99,14 +107,17 @@ const TableList = ({
 
   if (!rows || rows.length === 0)
     return (
-      <section className={styles["table-list"]}>
+      <section className={sectionClassNames}>
         <SectionHeader title={title} />
         <Paragraph>{emptyMessage}</Paragraph>
+        {children && (
+          <div className={styles["table-list__children"]}>{children}</div>
+        )}
       </section>
     );
 
   return (
-    <section className={styles["table-list"]}>
+    <section className={sectionClassNames}>
       <SectionHeader title={title} subTitle={subTitle} href={readMoreLink} />
       <Table headers={headers} rows={rows} />
       {indexLimit ? (
@@ -117,6 +128,9 @@ const TableList = ({
           onChange={onChange}
         />
       ) : null}
+      {children && (
+        <div className={styles["table-list__children"]}>{children}</div>
+      )}
     </section>
   );
 };

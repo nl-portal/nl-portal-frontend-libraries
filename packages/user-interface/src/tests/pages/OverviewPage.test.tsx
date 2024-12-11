@@ -10,10 +10,8 @@ import { testPaths as paths } from "../../providers/TestProvider";
 
 describe("OverviewPage", () => {
   const openZaak1 = () => screen.getByText("case.OPENZAAK1.title");
-  const openZaak1Date = "2024-01-01";
   const openZaak2 = () => screen.getByText("case.OPENZAAK2.title");
   const openZaak2Hidden = () => screen.queryByText("case.OPENZAAK2.title");
-  const openZaak2Date = "2024-01-02";
   const geslotenZaak1 = () => screen.queryByText("case.GESLOTENZAAK1.title");
   const geslotenZaak2 = () => screen.queryByText("case.GESLOTENZAAK2.title");
   const taskFetchError = () =>
@@ -21,18 +19,18 @@ describe("OverviewPage", () => {
   const taak1 = () => screen.getByText("OPEN TAAK 1");
   const taak2 = () => screen.getByText("OPEN TAAK 2");
   const taak3 = () => screen.queryByText("OPEN TAAK 3");
-  const viewAllTasks = () => screen.queryByText("View all tasks (6)");
-  const viewAllCases = () => screen.queryByText("View all cases (20)");
+  const viewAllTasks = () => screen.queryByText("Bekijk alle taken");
+  const viewAllCases = () => screen.queryByText("Bekijk alle zaken (20)");
 
   it("should show several active cases", async () => {
     render(MockOverviewPage());
+
     await waitFor(() => {
       expect(openZaak1()).toBeVisible();
     });
 
     expect(openZaak1()).toBeVisible();
-    let screenDate = new Date(Date.parse(openZaak1Date));
-    expect(screen.getByText(screenDate.toLocaleDateString())).toBeVisible();
+    expect(screen.getByText("1 januari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK1.title" }),
     ).toHaveAttribute(
@@ -41,8 +39,7 @@ describe("OverviewPage", () => {
     );
 
     expect(openZaak2()).toBeVisible();
-    screenDate = new Date(Date.parse(openZaak2Date));
-    expect(screen.getByText(screenDate.toLocaleDateString())).toBeVisible();
+    expect(screen.getByText("2 januari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK2.title" }),
     ).toHaveAttribute(
@@ -75,6 +72,7 @@ describe("OverviewPage", () => {
 
   it("should not show zaak 2", async () => {
     render(MockOverviewPageLessCases());
+
     await waitFor(() => {
       expect(openZaak1()).toBeVisible();
     });
@@ -85,6 +83,7 @@ describe("OverviewPage", () => {
 
   it("should show Bekijk alle zaken(20)", async () => {
     render(MockOverviewPagePagination());
+
     await waitFor(() => {
       expect(openZaak1()).toBeVisible();
     });

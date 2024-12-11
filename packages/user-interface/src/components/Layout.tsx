@@ -1,5 +1,5 @@
 import { FC, ReactElement, useEffect } from "react";
-import { StylesProvider } from "@gemeente-denhaag/components-react";
+import { StylesProvider } from "@gemeente-denhaag/stylesprovider";
 import {
   Page as PageWrapper,
   PageHeader,
@@ -11,8 +11,6 @@ import Header from "./Header";
 import Menu from "./Menu";
 import { PortalFooter } from "../interfaces/portal-footer";
 import Footer from "./Footer";
-import LayoutProvider from "../providers/LayoutProvider";
-import UserInformationProvider from "../providers/UserInformationProvider";
 import FormIoUploader from "./FormIoUploader";
 import styles from "./Layout.module.scss";
 import { HelmetProvider } from "react-helmet-async";
@@ -20,6 +18,7 @@ import { Outlet } from "react-router-dom";
 import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";
+import { LayoutProvider } from "../contexts/LayoutContext";
 
 interface LayoutComponentProps {
   navigationItems: NavigationItem[][];
@@ -74,9 +73,8 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
       <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
         <Menu items={navigationItems} legacy={legacy} />
         <main className="denhaag-page-content__main">
-          <PageMetaData navigationItems={navigationItems}>
-            {<Outlet context={{ paths }} />}
-          </PageMetaData>
+          <PageMetaData navigationItems={navigationItems} />
+          {<Outlet context={{ paths }} />}
         </main>
       </ResponsiveContent>
       {online && (
@@ -101,21 +99,19 @@ const Layout: FC<LayoutComponentProps> = ({
 }) => (
   <StylesProvider>
     <LayoutProvider>
-      <UserInformationProvider>
-        <HelmetProvider>
-          <LayoutComponent
-            navigationItems={navigationItems}
-            paths={paths}
-            customHeader={customHeader}
-            headerLogo={headerLogo}
-            headerLogoSmall={headerLogoSmall}
-            footer={footer}
-            customFooter={customFooter}
-            facet={facet}
-            offline={offline}
-          />
-        </HelmetProvider>
-      </UserInformationProvider>
+      <HelmetProvider>
+        <LayoutComponent
+          navigationItems={navigationItems}
+          paths={paths}
+          customHeader={customHeader}
+          headerLogo={headerLogo}
+          headerLogoSmall={headerLogoSmall}
+          footer={footer}
+          customFooter={customFooter}
+          facet={facet}
+          offline={offline}
+        />
+      </HelmetProvider>
     </LayoutProvider>
   </StylesProvider>
 );

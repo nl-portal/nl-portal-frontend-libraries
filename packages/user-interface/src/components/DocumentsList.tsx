@@ -1,11 +1,15 @@
-import { Document as PortalDocument } from "@nl-portal/nl-portal-api";
-import { Paragraph } from "@gemeente-denhaag/components-react";
+import {
+  ApiContext,
+  Document as PortalDocument,
+} from "@nl-portal/nl-portal-api";
+import { Paragraph } from "@gemeente-denhaag/typography";
 import { useIntl } from "react-intl";
 import styles from "./DocumentsList.module.scss";
 import Document from "./Document";
 import SectionHeader from "./SectionHeader";
 import Skeleton from "./Skeleton";
 import classnames from "classnames";
+import { useContext } from "react";
 
 interface Props {
   loading?: boolean;
@@ -30,6 +34,7 @@ const DocumentsList = ({
     : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
+  const { restUri } = useContext(ApiContext);
 
   if (loading) {
     return (
@@ -63,7 +68,11 @@ const DocumentsList = ({
       <SectionHeader title={title} />
       <div className={classnames(styles["documents-list__documents"])}>
         {documents.map((document) => (
-          <Document key={document.uuid} document={document} />
+          <Document
+            key={document.uuid}
+            document={document}
+            downloadLink={`${restUri}/zakenapi/zaakdocument/${document.identificatie}/content`}
+          />
         ))}
       </div>
     </section>
