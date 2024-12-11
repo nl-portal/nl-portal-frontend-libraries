@@ -10,7 +10,6 @@ import {
 import styles from "./AccountPage.module.scss";
 import DetailList from "../components/DetailList";
 import {
-  getNameString,
   getNationalitiesString,
   getPostalCodeCityString,
   getStreetString,
@@ -130,12 +129,14 @@ const AccountPage = ({
             {
               translationKey: "emailadres",
               value: contactData?.getBurgerProfiel?.emailadres,
+              translate: "no",
               showEditButton: true,
               loading,
             },
             {
               translationKey: "telefoonnummer",
               value: contactData?.getBurgerProfiel?.telefoonnummer,
+              translate: "no",
               showEditButton: true,
               loading,
             },
@@ -150,13 +151,15 @@ const AccountPage = ({
           <DetailList
             details={[
               {
-                translationKey: "updatesOnCases",
-              },
-              {
-                translationKey: "newsOnNeighborhood",
-              },
-              {
-                translationKey: "tips",
+                translationKey: "aanmaakkanaal",
+                value:
+                  contactData?.getBurgerProfiel?.aanmaakkanaal === "EMAIL" ? (
+                    <FormattedMessage id="account.detail.aanmaakkanaal.true" />
+                  ) : (
+                    <FormattedMessage id="account.detail.aanmaakkanaal.false" />
+                  ),
+                showEditButton: true,
+                loading,
               },
             ]}
           />
@@ -170,12 +173,14 @@ const AccountPage = ({
           details={[
             {
               translationKey: "firstNames",
-              value: getNameString(person?.naam, "firstNames"),
+              value: person?.naam.voornamen,
+              translate: "no",
               loading,
             },
             {
               translationKey: "lastName",
-              value: getNameString(person?.naam, "lastName"),
+              value: person?.naam.officialLastName,
+              translate: "no",
               loading,
             },
             {
@@ -224,6 +229,7 @@ const AccountPage = ({
                 person?.verblijfplaats?.huisletter,
                 person?.verblijfplaats?.huisnummertoevoeging,
               ),
+              translate: "no",
               loading,
             },
             {
@@ -232,6 +238,7 @@ const AccountPage = ({
                 person?.verblijfplaats?.postcode,
                 person?.verblijfplaats?.woonplaats,
               ),
+              translate: "no",
               loading,
             },
           ]}

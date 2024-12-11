@@ -81,6 +81,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   }, [paymentStatus]);
 
   const details = React.useMemo(() => {
+    console.log(caseData);
     if (!caseData?.getZaak) return [];
 
     const array = [
@@ -90,7 +91,9 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
       },
       {
         title: intl.formatMessage({ id: "caseDetails.caseNumber" }),
-        detail: caseData?.getZaak.identificatie || "",
+        detail: (
+          <span translate="no">{caseData?.getZaak.identificatie || ""}</span>
+        ),
       },
     ];
 

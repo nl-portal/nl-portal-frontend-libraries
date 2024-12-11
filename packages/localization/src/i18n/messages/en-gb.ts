@@ -78,9 +78,11 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.telefoonnummer": "Phone number",
     "account.detail.telefoonnummer.error":
       "a valid phone number consists of 10 digits",
-    "account.detail.updatesOnCases": "Case updates",
-    "account.detail.newsOnNeighborhood": "News about my neighborhood",
-    "account.detail.tips": "Tips",
+    "account.detail.aanmaakkanaal": "Email notifications",
+    "account.detail.aanmaakkanaal.description":
+      "Is your choice set to no? Then you will still receive emails. This is because not all of the municipality's systems are connected yet to MijnDenHaag.",
+    "account.detail.aanmaakkanaal.true": "Yes",
+    "account.detail.aanmaakkanaal.false": "No",
     "account.detail.firstNames": "First names",
     "account.detail.lastName": "Last name",
     "account.detail.gender": "Gender",
@@ -113,7 +115,7 @@ export const EN_GB_MESSAGES: Messages = {
     "task.paymentSuccessText":
       "You will receive a confirmation email as soon as possible.",
     "task.paymentSuccessTitle": "Success, you have paid.",
-    "overviewpage.title": "Welcome {userName}",
+    "overviewpage.title": "Welcome <span>{userName}</span>",
     "overview.subTitle": "Authorised for {volmachtgever}",
     "overviewpage.paragraph":
       "In the NL-portal you can arrange your personal affairs yourself when it suits you. For example, you can pay your bills and see when your application is ready.",

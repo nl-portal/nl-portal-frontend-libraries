@@ -21,6 +21,13 @@ export type Scalars = {
   UUID: { input: any; output: any; }
 };
 
+export enum AanduidingNaamGebruik {
+  Eigen = 'EIGEN',
+  EigenPartner = 'EIGEN_PARTNER',
+  Partner = 'PARTNER',
+  PartnerEigen = 'PARTNER_EIGEN'
+}
+
 export type Adres = {
   __typename?: 'Adres';
   huisnummer: Scalars['Int']['output'];
@@ -39,13 +46,13 @@ export type Bericht = {
   berichtTekst: Scalars['String']['output'];
   berichtType: BerichtType;
   bijlages: Array<Scalars['String']['output']>;
-  einddatumHandelingstermijn: Scalars['Date']['output'];
+  einddatumHandelingstermijn: Scalars['LocalDateTime']['output'];
   geopend: Scalars['Boolean']['output'];
   handelingsperspectief: BerichtHandelingsperspectief;
   id?: Maybe<Scalars['UUID']['output']>;
   identificatie: BerichtIdentificatie;
   onderwerp: Scalars['String']['output'];
-  publicatiedatum: Scalars['Date']['output'];
+  publicatiedatum: Scalars['LocalDateTime']['output'];
   referentie: Scalars['String']['output'];
 };
 
@@ -210,7 +217,7 @@ export type FormDefinition = {
 export type Gemachtigde = {
   __typename?: 'Gemachtigde';
   bedrijf?: Maybe<MaatschappelijkeActiviteit>;
-  persoon?: Maybe<PersoonNaam>;
+  persoon?: Maybe<Persoon>;
 };
 
 export type HandelsNaam = {
@@ -232,11 +239,13 @@ export type Hoofdvestiging = {
 
 export type Klant = {
   __typename?: 'Klant';
+  aanmaakkanaal?: Maybe<Scalars['String']['output']>;
   emailadres?: Maybe<Scalars['String']['output']>;
   telefoonnummer?: Maybe<Scalars['String']['output']>;
 };
 
 export type KlantUpdateInput = {
+  aanmaakkanaal?: InputMaybe<Scalars['String']['input']>;
   emailadres?: InputMaybe<Scalars['String']['input']>;
   telefoonnummer?: InputMaybe<Scalars['String']['input']>;
 };
@@ -311,6 +320,14 @@ export type MutationUpdateProductVerbruiksObjectArgs = {
   submission: Scalars['JSON']['input'];
 };
 
+export type Naam = {
+  __typename?: 'Naam';
+  geslachtsnaam?: Maybe<Scalars['String']['output']>;
+  lastName: Scalars['String']['output'];
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voorvoegsel?: Maybe<Scalars['String']['output']>;
+};
+
 export type OgoneBetaling = {
   __typename?: 'OgoneBetaling';
   bedrag: Scalars['Float']['output'];
@@ -349,7 +366,7 @@ export type Persoon = {
   geheimhoudingPersoonsgegevens?: Maybe<Scalars['Boolean']['output']>;
   geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
   kinderen?: Maybe<Array<PersoonKind>>;
-  naam?: Maybe<PersoonNaam>;
+  naam: PersoonNaam;
   nationaliteiten?: Maybe<Array<PersoonNationaliteiten>>;
   opschortingBijhouding?: Maybe<PersoonOpschortingBijhouding>;
   ouders?: Maybe<Array<PersoonOuder>>;
@@ -384,13 +401,16 @@ export type PersoonKind = {
   burgerservicenummer?: Maybe<Scalars['String']['output']>;
   geboorte?: Maybe<PersoonDatumLandPlaats>;
   leeftijd?: Maybe<Scalars['Int']['output']>;
-  naam?: Maybe<PersoonNaam>;
+  naam?: Maybe<Naam>;
 };
 
 export type PersoonNaam = {
   __typename?: 'PersoonNaam';
+  aanduidingNaamgebruik?: Maybe<AanduidingNaamGebruik>;
   aanhef?: Maybe<Scalars['String']['output']>;
   geslachtsnaam?: Maybe<Scalars['String']['output']>;
+  lastName: Scalars['String']['output'];
+  officialLastName?: Maybe<Scalars['String']['output']>;
   voorletters?: Maybe<Scalars['String']['output']>;
   voornamen?: Maybe<Scalars['String']['output']>;
   voorvoegsel?: Maybe<Scalars['String']['output']>;
@@ -419,7 +439,7 @@ export type PersoonOuder = {
   datumIngangFamilierechtelijkeBetrekking?: Maybe<PersoonDatum>;
   geboorte?: Maybe<PersoonDatumLandPlaats>;
   geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
-  naam?: Maybe<PersoonNaam>;
+  naam?: Maybe<Naam>;
   ouderAanduiding?: Maybe<Scalars['String']['output']>;
 };
 
@@ -430,7 +450,7 @@ export type PersoonPartner = {
   datumIngangFamilierechtelijkeBetrekking?: Maybe<PersoonDatum>;
   geboorte?: Maybe<PersoonDatumLandPlaats>;
   geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
-  naam?: Maybe<PersoonNaam>;
+  naam?: Maybe<Naam>;
   soortVerbintenis?: Maybe<Scalars['String']['output']>;
 };
 
@@ -851,7 +871,7 @@ export type Taak = {
 
 export type TaakForm = {
   __typename?: 'TaakForm';
-  data: Scalars['JSON']['output'];
+  data?: Maybe<Scalars['JSON']['output']>;
   formulier: TaakFormulierV2;
 };
 
@@ -1028,7 +1048,7 @@ export type SubmitTaakV2MutationVariables = Exact<{
 }>;
 
 
-export type SubmitTaakV2Mutation = { __typename?: 'Mutation', submitTaakV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
+export type SubmitTaakV2Mutation = { __typename?: 'Mutation', submitTaakV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
 
 export type SubmitTaskMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1043,7 +1063,7 @@ export type UpdateBurgerProfielMutationVariables = Exact<{
 }>;
 
 
-export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null } | null };
+export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
 
 export type UpdateProductVerbruiksObjectMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1081,7 +1101,7 @@ export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?
 export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null } | null };
+export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
 
 export type GetDocumentenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1116,12 +1136,12 @@ export type GetPortaalFormulierByIdV2QueryVariables = Exact<{
 }>;
 
 
-export type GetPortaalFormulierByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
+export type GetPortaalFormulierByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
 export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetGemachtigdeQuery = { __typename?: 'Query', getGemachtigde: { __typename?: 'Gemachtigde', persoon?: { __typename?: 'PersoonNaam', aanhef?: string | null, voorletters?: string | null, voornamen?: string | null, voorvoegsel?: string | null, geslachtsnaam?: string | null } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } };
+export type GetGemachtigdeQuery = { __typename?: 'Query', getGemachtigde: { __typename?: 'Gemachtigde', persoon?: { __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null } } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } };
 
 export type GetKlantContactMomentenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1138,12 +1158,12 @@ export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectCon
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', burgerservicenummer?: string | null, geslachtsaanduiding?: string | null, bewonersAantal?: number | null, naam?: { __typename?: 'PersoonNaam', aanhef?: string | null, voorletters?: string | null, voornamen?: string | null, voorvoegsel?: string | null, geslachtsnaam?: string | null } | null, verblijfplaats?: { __typename?: 'PersoonVerblijfplaats', straat?: string | null, huisnummer?: string | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, geboorte?: { __typename?: 'PersoonDatumLandPlaats', datum?: { __typename?: 'PersoonDatum', datum?: string | null, jaar?: number | null, maand?: number | null, dag?: number | null } | null, land?: { __typename?: 'PersoonCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten?: Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: { __typename?: 'PersoonNationaliteit', code?: string | null, omschrijving?: string | null } | null }> | null } | null };
+export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', burgerservicenummer?: string | null, geslachtsaanduiding?: string | null, bewonersAantal?: number | null, naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'PersoonVerblijfplaats', straat?: string | null, huisnummer?: string | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, geboorte?: { __typename?: 'PersoonDatumLandPlaats', datum?: { __typename?: 'PersoonDatum', datum?: string | null, jaar?: number | null, maand?: number | null, dag?: number | null } | null, land?: { __typename?: 'PersoonCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten?: Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: { __typename?: 'PersoonNationaliteit', code?: string | null, omschrijving?: string | null } | null }> | null } | null };
 
 export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', naam?: { __typename?: 'PersoonNaam', voornamen?: string | null, voorvoegsel?: string | null, geslachtsnaam?: string | null } | null } | null };
+export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null } } | null };
 
 export type GetProductTakenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -1190,7 +1210,7 @@ export type GetTaakByIdV2QueryVariables = Exact<{
 }>;
 
 
-export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', data: any, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
+export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
 export type GetTaakByIdQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1377,6 +1397,7 @@ export const UpdateBurgerProfielDocument = gql`
   updateBurgerProfiel(klant: $klant) {
     emailadres
     telefoonnummer
+    aanmaakkanaal
   }
 }
     `;
@@ -1640,6 +1661,7 @@ export const GetBurgerProfielDocument = gql`
   getBurgerProfiel {
     emailadres
     telefoonnummer
+    aanmaakkanaal
   }
 }
     `;
@@ -1902,11 +1924,10 @@ export const GetGemachtigdeDocument = gql`
     query GetGemachtigde {
   getGemachtigde {
     persoon {
-      aanhef
-      voorletters
-      voornamen
-      voorvoegsel
-      geslachtsnaam
+      naam {
+        voornamen
+        officialLastName
+      }
     }
     bedrijf {
       naam
@@ -2040,11 +2061,8 @@ export const GetPersoonDataDocument = gql`
     geslachtsaanduiding
     bewonersAantal
     naam {
-      aanhef
-      voorletters
       voornamen
-      voorvoegsel
-      geslachtsnaam
+      officialLastName
     }
     verblijfplaats {
       straat
@@ -2112,8 +2130,7 @@ export const GetPersoonDocument = gql`
   getPersoon {
     naam {
       voornamen
-      voorvoegsel
-      geslachtsnaam
+      officialLastName
     }
   }
 }
