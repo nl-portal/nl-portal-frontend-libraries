@@ -15,7 +15,7 @@ const Notification = ({
   className,
   ...props
 }: Props) => {
-  const [hideNotification, setHideNotification] = useState(false);
+  const [showNotification, setShowNotification] = useState(true);
   const alertClassName = classNames(
     styles["nl-portal-notification"],
     className,
@@ -25,9 +25,9 @@ const Notification = ({
     scrollTo(0, 0);
   }, []);
 
-  const close = () => setHideNotification(true);
+  const close = () => setShowNotification(false);
 
-  if (hideNotification) return;
+  if (!showNotification) return;
 
   return (
     <Alert
