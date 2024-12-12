@@ -38,7 +38,7 @@ export const NotificationProvider = ({
         variant: variant,
       });
     }
-  }, [location]);
+  }, [location.pathname]);
 
   const pushNotification = (key: string, alert: NotificationProps) => {
     setNotifications((prevNotifications) => {
