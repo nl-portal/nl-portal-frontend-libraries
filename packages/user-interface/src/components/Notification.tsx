@@ -3,7 +3,7 @@ import styles from "./Notification.module.scss";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 
-interface Props extends AlertProps {
+export interface NotificationProps extends AlertProps {
   closable?: boolean;
 }
 
@@ -14,7 +14,7 @@ const Notification = ({
   variant,
   className,
   ...props
-}: Props) => {
+}: NotificationProps) => {
   const [showNotification, setShowNotification] = useState(true);
   const alertClassName = classNames(
     styles["nl-portal-notification"],
