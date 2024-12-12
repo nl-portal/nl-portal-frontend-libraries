@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useLayoutEffect, useState } from "react";
 import Notification, { NotificationProps } from "../components/Notification";
 import { useLocation } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
@@ -25,7 +25,7 @@ export const NotificationProvider = ({
     useState<Map<string, ReactNode>>(INITIAL_MAP);
   const location = useLocation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setNotifications(INITIAL_MAP);
 
     // Check if there is an notification passed via state
