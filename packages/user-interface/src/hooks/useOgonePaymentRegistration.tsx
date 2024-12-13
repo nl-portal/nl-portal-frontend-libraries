@@ -8,20 +8,28 @@ export enum PaymentStatus {
   FAILURE,
 }
 
-const useOgonePaymentRegistration = () => {
+const useOgonePaymentRegistration = (usePostsale?: boolean) => {
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
+  const [orderId, setOrderId] = useState<string | undefined>();
   const { restUri } = useContext(ApiContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get("type");
+  const status = searchParams.get("STATUS");
 
   useEffect(() => {
-    if (type === "ogone" && typeof paymentStatus === "undefined") {
-      setPaymentStatus(PaymentStatus.IN_PROGRESS);
-      searchParams.delete("type");
-      fetch(`${restUri}/payment/ogone/postsale?${searchParams.toString()}`)
+    if (type !== "ogone") return;
+    if (paymentStatus !== undefined) return;
+
+    setPaymentStatus(PaymentStatus.IN_PROGRESS);
+
+    if (usePostsale) {
+      fetch(
+        `${restUri}/public/payment/ogone/postsale?${searchParams.toString()}`,
+      )
         .then((response) => {
           if (response.ok) {
             setPaymentStatus(PaymentStatus.SUCCESS);
+            setOrderId(searchParams.get("orderID")?.toString());
           } else {
             console.error("payment failed:", response.statusText);
             setPaymentStatus(PaymentStatus.FAILURE);
@@ -32,14 +40,24 @@ const useOgonePaymentRegistration = () => {
           setPaymentStatus(PaymentStatus.FAILURE);
         })
         .finally(() => {
-          // Clear the Ogone return parameters
           const newSearchParams = new URLSearchParams();
           setSearchParams(newSearchParams);
         });
+    } else {
+      if (status === "9") {
+        setPaymentStatus(PaymentStatus.SUCCESS);
+        setOrderId(searchParams.get("orderID")?.toString());
+      } else {
+        console.error("payment failed:", status);
+        setPaymentStatus(PaymentStatus.FAILURE);
+      }
+
+      const newSearchParams = new URLSearchParams();
+      setSearchParams(newSearchParams);
     }
   }, [type, paymentStatus]);
 
-  return { paymentStatus };
+  return { paymentStatus, orderId };
 };
 
 export default useOgonePaymentRegistration;

@@ -1,11 +1,4 @@
-import {
-  PersoonDatum,
-  PersoonNaam,
-  PersoonNationaliteiten,
-} from "@nl-portal/nl-portal-api";
-import { ReactElement } from "react";
-import LocaleDate from "../components/LocaleDate";
-import { MockWrapper } from "@nl-portal/nl-portal-localization";
+import { PersoonNaam, PersoonNationaliteiten } from "@nl-portal/nl-portal-api";
 
 const getNationalitiesString = (
   nationalities: Array<PersoonNationaliteiten> | undefined | null,
@@ -62,63 +55,19 @@ const getPostalCodeCityString = (
   return "";
 };
 
-const getLocaleDateOfBirth = (
-  dateOfBirth: PersoonDatum | null | undefined,
-): string | ReactElement => {
-  if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
-    return (
-      <MockWrapper>
-        <LocaleDate
-          date={
-            new Date(dateOfBirth.jaar, dateOfBirth.maand - 1, dateOfBirth.dag)
-          }
-        />
-      </MockWrapper>
-    );
-  }
-
-  return "";
-};
-
 const capitalizeFirstLetter = (text: string): string =>
   text.charAt(0).toUpperCase() + text.slice(1);
 
-const getNameString = (
-  name: PersoonNaam | null | undefined,
-  returnType: "fullName" | "firstNames" | "lastName" = "fullName",
-): string => {
-  const returnFullName = returnType === "fullName";
-  const returnLastName = returnType === "lastName";
-  const returnFirstName = returnType === "firstNames";
+const getFullName = (
+  name?: Pick<PersoonNaam, "voornamen" | "officialLastName">,
+) => {
   const firstNames = name?.voornamen;
-  const prefix = name?.voorvoegsel;
-  const lastName = name?.geslachtsnaam;
-  const fullNameWithPrefix = `${firstNames} ${prefix} ${lastName}`;
-  const fullName = `${firstNames} ${lastName}`;
-  const lastNameWithPrefix = capitalizeFirstLetter(`${prefix} ${lastName}`);
+  const officialLastName = name?.officialLastName;
+  const fullName = `${firstNames} ${officialLastName}`;
 
-  if (returnFullName || returnLastName) {
-    if (returnFullName && firstNames && prefix && lastName) {
-      return fullNameWithPrefix;
-    }
-    if (returnFullName && firstNames && lastName) {
-      return fullName;
-    }
-    if (returnFullName && firstNames) {
-      return firstNames;
-    }
-    if (prefix && lastName) {
-      return lastNameWithPrefix;
-    }
-    if (lastName) {
-      return lastName;
-    }
-  }
-
-  if (returnFirstName && firstNames) {
-    return firstNames;
-  }
-
+  if (firstNames && officialLastName) return fullName;
+  if (firstNames) return firstNames;
+  if (officialLastName) return officialLastName;
   return "";
 };
 
@@ -126,7 +75,6 @@ export {
   getNationalitiesString,
   getStreetString,
   getPostalCodeCityString,
-  getLocaleDateOfBirth,
   capitalizeFirstLetter,
-  getNameString,
+  getFullName,
 };

@@ -10,8 +10,6 @@ import {
 import styles from "./AccountPage.module.scss";
 import DetailList from "../components/DetailList";
 import {
-  getLocaleDateOfBirth,
-  getNameString,
   getNationalitiesString,
   getPostalCodeCityString,
   getStreetString,
@@ -20,6 +18,7 @@ import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
 import Heading from "../components/Heading";
 import useUserInfo from "../hooks/useUserInfo";
+import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
@@ -34,6 +33,7 @@ const AccountPage = ({
   addressResearchUrl,
   showNotificationSubSection = true,
 }: AccountPageProps) => {
+  const { formatDate } = useDateFormatter();
   const { isPerson } = useUserInfo();
   const { data: contactData, loading: contactLoading } =
     useGetBurgerProfielQuery({ skip: !isPerson });
@@ -129,12 +129,14 @@ const AccountPage = ({
             {
               translationKey: "emailadres",
               value: contactData?.getBurgerProfiel?.emailadres,
+              translate: "no",
               showEditButton: true,
               loading,
             },
             {
               translationKey: "telefoonnummer",
               value: contactData?.getBurgerProfiel?.telefoonnummer,
+              translate: "no",
               showEditButton: true,
               loading,
             },
@@ -149,13 +151,15 @@ const AccountPage = ({
           <DetailList
             details={[
               {
-                translationKey: "updatesOnCases",
-              },
-              {
-                translationKey: "newsOnNeighborhood",
-              },
-              {
-                translationKey: "tips",
+                translationKey: "aanmaakkanaal",
+                value:
+                  contactData?.getBurgerProfiel?.aanmaakkanaal === "EMAIL" ? (
+                    <FormattedMessage id="account.detail.aanmaakkanaal.true" />
+                  ) : (
+                    <FormattedMessage id="account.detail.aanmaakkanaal.false" />
+                  ),
+                showEditButton: true,
+                loading,
               },
             ]}
           />
@@ -169,12 +173,14 @@ const AccountPage = ({
           details={[
             {
               translationKey: "firstNames",
-              value: getNameString(person?.naam, "firstNames"),
+              value: person?.naam.voornamen,
+              translate: "no",
               loading,
             },
             {
               translationKey: "lastName",
-              value: getNameString(person?.naam, "lastName"),
+              value: person?.naam.officialLastName,
+              translate: "no",
               loading,
             },
             {
@@ -189,7 +195,11 @@ const AccountPage = ({
             },
             {
               translationKey: "dateOfBirth",
-              value: getLocaleDateOfBirth(person?.geboorte?.datum),
+              value: person?.geboorte?.datum
+                ? formatDate({
+                    date: `${person?.geboorte?.datum?.jaar}-${String(person?.geboorte?.datum?.maand).padStart(2, "0")}-${String(person?.geboorte?.datum?.dag).padStart(2, "0")}`,
+                  })
+                : "",
               loading,
             },
             {
@@ -219,6 +229,7 @@ const AccountPage = ({
                 person?.verblijfplaats?.huisletter,
                 person?.verblijfplaats?.huisnummertoevoeging,
               ),
+              translate: "no",
               loading,
             },
             {
@@ -227,6 +238,7 @@ const AccountPage = ({
                 person?.verblijfplaats?.postcode,
                 person?.verblijfplaats?.woonplaats,
               ),
+              translate: "no",
               loading,
             },
           ]}

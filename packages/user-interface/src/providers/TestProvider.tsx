@@ -1,5 +1,8 @@
 import { ReactElement } from "react";
-import { MockWrapper } from "@nl-portal/nl-portal-localization";
+import {
+  LocalizationProvider,
+  MockWrapper,
+} from "@nl-portal/nl-portal-localization";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import {
   createMemoryRouter,
@@ -8,6 +11,8 @@ import {
   RouteObject,
 } from "react-router-dom";
 import { Paths } from "../interfaces/paths";
+import { LayoutProvider } from "../contexts/LayoutContext";
+import { NotificationProvider } from "../contexts/NotificationContext";
 
 export const testPaths: Paths = {
   noMatch: "/404",
@@ -35,7 +40,13 @@ const TestContent = ({
 }) => (
   <MockWrapper>
     <MockedProvider mocks={mocks} addTypename={false}>
-      <Outlet context={{ paths }} />
+      <LocalizationProvider>
+        <NotificationProvider>
+          <LayoutProvider>
+            <Outlet context={{ paths }} />
+          </LayoutProvider>
+        </NotificationProvider>
+      </LocalizationProvider>
     </MockedProvider>
   </MockWrapper>
 );

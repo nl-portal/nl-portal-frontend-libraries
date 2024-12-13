@@ -5,7 +5,7 @@ import {
   useGetGemachtigdeLazyQuery,
 } from "@nl-portal/nl-portal-api";
 import { KeycloakContext } from "@nl-portal/nl-portal-authentication";
-import { getNameString } from "../utils/person-data";
+import { getFullName } from "../utils/person-data";
 
 export const useUserInfo = () => {
   const [isPerson, setIsPerson] = useState(true);
@@ -43,7 +43,7 @@ export const useUserInfo = () => {
   }, [decodedToken]);
 
   useEffect(() => {
-    const name = getNameString(persoonData?.getPersoon?.naam);
+    const name = getFullName(persoonData?.getPersoon?.naam);
     const authenticationMethod = decodedToken?.middel || "";
     if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
       setVolmachtgever(name);
@@ -65,7 +65,7 @@ export const useUserInfo = () => {
   useEffect(() => {
     if (gemachtigdeData?.getGemachtigde?.persoon) {
       setUserName(
-        getNameString(gemachtigdeData?.getGemachtigde?.persoon) || "",
+        getFullName(gemachtigdeData?.getGemachtigde?.persoon.naam) || "",
       );
     } else {
       setUserName(gemachtigdeData?.getGemachtigde?.bedrijf?.naam || "");

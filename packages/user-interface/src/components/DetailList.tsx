@@ -9,7 +9,8 @@ import useMediaQuery from "../hooks/useMediaQuery";
 import { BREAKPOINTS } from "../constants/breakpoints";
 import { PortalLink } from "..";
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
+import React from "react";
 
 interface DetailListProps {
   details: Array<{
@@ -17,6 +18,7 @@ interface DetailListProps {
     loading?: boolean;
     value?: string | ReactElement | undefined | null | false;
     showEditButton?: boolean;
+    translate?: React.HTMLAttributes<HTMLSpanElement>["translate"];
   }>;
 }
 
@@ -41,7 +43,10 @@ const DetailList = ({ details }: DetailListProps) => {
             </b>
           </span>
           <div className={styles["detail-list__value-edit"]}>
-            <span className={styles["detail-list__value"]}>
+            <span
+              className={styles["detail-list__value"]}
+              translate={detail.translate}
+            >
               {detail.loading ? (
                 <Skeleton width={isDesktop ? 200 : 150} />
               ) : (

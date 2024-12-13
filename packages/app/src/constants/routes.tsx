@@ -1,15 +1,16 @@
 import {
   AccountPage,
-  CasePage,
+  CaseDetailsPage,
   CasesPage,
   EditAccountPage,
-  MessagesPage,
-  MessagePage,
+  MessageDetailsPage,
   NoMatchPage,
   OverviewPage,
   TasksPage,
-  TaskPage,
+  TaskDetailsPage,
+  MessagesPage,
 } from "@nl-portal/nl-portal-user-interface";
+import { KeycloakCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
 import { config } from "./config";
 import { Navigate } from "react-router-dom";
@@ -31,7 +32,7 @@ export const routes = [
       },
       {
         path: paths.case(),
-        element: <CasePage showContactTimeline />,
+        element: <CaseDetailsPage showContactTimeline />,
       },
     ],
   },
@@ -44,7 +45,7 @@ export const routes = [
       },
       {
         path: paths.task(),
-        element: <TaskPage />,
+        element: <TaskDetailsPage />,
       },
     ],
   },
@@ -57,7 +58,7 @@ export const routes = [
       },
       {
         path: paths.message(),
-        element: <MessagePage />,
+        element: <MessageDetailsPage />,
       },
     ],
   },
@@ -97,8 +98,8 @@ export const routes = [
     ],
   },
   {
-    path: "/keycloak/callback",
-    element: <Navigate to={sessionStorage.getItem("entryUrl") || "/"} />,
+    path: new URL(window.KEYCLOAK_REDIRECT_URI).pathname,
+    element: <KeycloakCallbackPage />,
   },
   {
     path: paths.noMatch,

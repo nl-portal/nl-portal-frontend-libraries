@@ -1,7 +1,19 @@
 @import "../styles/mixins";
 
 .page-grid {
+  --nlportal-page-grid-gap: var(
+    --nlportal-page-grid-gap-lg,
+    var(--nlportal-space-block-5xl, 4rem)
+  );
+
   display: flex;
   flex-direction: column;
-  gap: var(--nlportal-space-block-5xl, 4rem);
+  gap: var(--nlportal-page-grid-gap);
+}
+
+.page-grid--md {
+  --nlportal-page-grid-gap: var(
+    --nlportal-page-grid-gap-md,
+    var(--nlportal-space-block-3xl, 2.5rem)
+  );
 }

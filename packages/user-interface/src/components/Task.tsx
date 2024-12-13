@@ -2,15 +2,17 @@ import { TaakSoort, TaakV2 } from "@nl-portal/nl-portal-api";
 import PortalLink from "./PortalLink";
 import { ActionMulti, ActionSingle } from "@gemeente-denhaag/action";
 import useTaskUrl from "../hooks/useTaskUrl";
-import useActionLabels from "../hooks/useActionLabels";
 import { ButtonLink } from "@gemeente-denhaag/button-link";
 import { ChevronRightIcon } from "@gemeente-denhaag/icons";
 import useOgonePayment from "../hooks/useOgonePayment";
 import { Button } from "@gemeente-denhaag/button";
-import { useContext } from "react";
-import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useLinkClickHandler } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import {
+  LocaleContext,
+  useActionLabels,
+} from "@nl-portal/nl-portal-localization";
+import { useContext } from "react";
 
 interface Props {
   task: TaakV2;
@@ -20,13 +22,10 @@ interface Props {
 const Task = ({ task, openInContext }: Props) => {
   const labels = useActionLabels();
   const { currentLocale } = useContext(LocaleContext);
-  const { startPayment, renderPaymentRedirectForm } = useOgonePayment();
+  const { startPayment, renderPaymentRedirectForm, loading } =
+    useOgonePayment();
   const taskUrl = useTaskUrl(task, openInContext) ?? "";
   const handleClick = useLinkClickHandler(taskUrl);
-  const paymentForm = renderPaymentRedirectForm();
-  if (paymentForm) {
-    return paymentForm;
-  }
 
   if (openInContext && task.koppeling) {
     return (
@@ -34,6 +33,7 @@ const Task = ({ task, openInContext }: Props) => {
         relativeDate
         labels={labels}
         dateTime={task.verloopdatum}
+        locale={currentLocale}
         link={taskUrl}
         Link={PortalLink}
       >
@@ -44,10 +44,10 @@ const Task = ({ task, openInContext }: Props) => {
 
   const createActions = () => {
     switch (task.soort) {
-      case TaakSoort.Formtaak: {
+      case TaakSoort.Portaalformulier: {
         return (
           <ButtonLink href={taskUrl} onClick={handleClick}>
-            <FormattedMessage id="task.formtaak.button" />
+            <FormattedMessage id="task.portaalformulier.button" />
           </ButtonLink>
         );
       }
@@ -60,23 +60,21 @@ const Task = ({ task, openInContext }: Props) => {
       }
       case TaakSoort.Ogonebetaling:
         if (task.ogonebetaling) {
-          let currentUrl = window.location.href;
-          const separator = currentUrl.indexOf("?") !== -1 ? "&" : "?";
-          currentUrl += `${separator}type=ogone`;
-
           const paymentRequestPayload = {
             amount: task.ogonebetaling.bedrag,
             orderId: task.id,
             reference: task.ogonebetaling.betaalkenmerk,
             pspId: task.ogonebetaling.pspid,
             title: task.titel,
-            langId: currentLocale.replace("-", "_"),
-            successUrl: `${currentUrl}&success=true`,
-            failureUrl: currentUrl,
           };
+
           return (
-            <Button onClick={() => startPayment(paymentRequestPayload)}>
+            <Button
+              onClick={() => startPayment(paymentRequestPayload)}
+              disabled={loading}
+            >
               <FormattedMessage id="task.ogonebetaling.button" />
+              {renderPaymentRedirectForm()}
             </Button>
           );
         }
@@ -88,6 +86,7 @@ const Task = ({ task, openInContext }: Props) => {
       relativeDate
       labels={labels}
       dateTime={task.verloopdatum}
+      locale={currentLocale}
       actions={createActions()}
     >
       {task.titel}

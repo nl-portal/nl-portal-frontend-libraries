@@ -41,7 +41,7 @@ export const QUERY_GET_PRODUCTEN = gql`
         url {
           uri
         }
-        formtaak {
+        portaalformulier {
           formulier {
             soort
             value
@@ -51,6 +51,11 @@ export const QUERY_GET_PRODUCTEN = gql`
         status
         verloopdatum
         version
+        ogonebetaling {
+          bedrag
+          betaalkenmerk
+          pspid
+        }
       }
     }
   }

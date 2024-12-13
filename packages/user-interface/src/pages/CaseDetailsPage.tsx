@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   useGetZaakQuery,
   useGetTakenV2Query,
@@ -7,8 +7,10 @@ import {
   ContactMoment,
   ZaakStatus,
 } from "@nl-portal/nl-portal-api";
-import { Alert } from "@gemeente-denhaag/alert";
-import { LocaleContext } from "@nl-portal/nl-portal-localization";
+import {
+  LocaleContext,
+  useDateFormatter,
+} from "@nl-portal/nl-portal-localization";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router-dom";
@@ -16,7 +18,7 @@ import ContactTimeline from "@gemeente-denhaag/contact-timeline";
 import "@utrecht/component-library-css";
 import DocumentsList from "../components/DocumentsList";
 import StatusHistory from "../components/StatusHistory";
-import BackLink, { BackLinkProps } from "../components/BackLink";
+import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import TasksList from "../components/TasksList";
@@ -26,17 +28,13 @@ import useOgonePaymentRegistration, {
 } from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
 import ExtraCaseDetails, { Details } from "../components/ExtraCaseDetails";
-import { formatDate } from "@gemeente-denhaag/utils";
+import NotificationContext from "../contexts/NotificationContext";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
-  backlink?: BackLinkProps;
 }
 
-const CasePage = ({
-  showContactTimeline = false,
-  backlink = {},
-}: CasePageProps) => {
+const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const intl = useIntl();
   const { id } = useParams();
   const { currentLocale } = useContext(LocaleContext);
@@ -52,28 +50,56 @@ const CasePage = ({
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
-  const { paymentStatus } = useOgonePaymentRegistration();
-
+  const { formatDate } = useDateFormatter();
+  const { paymentStatus, orderId } = useOgonePaymentRegistration(true);
   const loading = caseLoading || taskLoading || momentsLoading;
-  const tasks = tasksResult?.getTakenV2.content as TaakV2[] | undefined;
+
+  // Remove task with the orderId to prevent race condition with the payment handling in the backend
+  const tasks = (
+    paymentStatus === PaymentStatus.SUCCESS && orderId
+      ? tasksResult?.getTakenV2.content.filter((item) => item.id !== orderId)
+      : tasksResult?.getTakenV2.content
+  ) as TaakV2[] | undefined;
+
+  const { pushNotification } = useContext(NotificationContext);
+
+  useEffect(() => {
+    if (paymentStatus === PaymentStatus.SUCCESS) {
+      pushNotification("casePaymentSuccess", {
+        variant: "success",
+        title: <FormattedMessage id="task.paymentSuccessTitle" />,
+        text: <FormattedMessage id="task.paymentSuccessText" />,
+      });
+    }
+    if (paymentStatus === PaymentStatus.FAILURE) {
+      pushNotification("casePaymentFailure", {
+        variant: "error",
+        title: <FormattedMessage id="task.paymentFailureTitle" />,
+        text: <FormattedMessage id="task.paymentFailureText" />,
+      });
+    }
+  }, [paymentStatus]);
 
   const details = React.useMemo(() => {
+    console.log(caseData);
     if (!caseData?.getZaak) return [];
 
     const array = [
       {
-        title: intl.formatMessage({ id: "case.creationDate" }),
-        detail: formatDate({ dateTime: caseData?.getZaak.startdatum })[0],
+        title: intl.formatMessage({ id: "caseDetails.creationDate" }),
+        detail: formatDate({ date: caseData?.getZaak.startdatum }),
       },
       {
-        title: intl.formatMessage({ id: "case.caseNumber" }),
-        detail: caseData?.getZaak.identificatie || "",
+        title: intl.formatMessage({ id: "caseDetails.caseNumber" }),
+        detail: (
+          <span translate="no">{caseData?.getZaak.identificatie || ""}</span>
+        ),
       },
     ];
 
     if (caseData?.getZaak.omschrijving)
       array.push({
-        title: intl.formatMessage({ id: "case.description" }),
+        title: intl.formatMessage({ id: "caseDetails.description" }),
         detail: caseData?.getZaak.omschrijving || "",
       });
 
@@ -94,8 +120,10 @@ const CasePage = ({
   }, [momentsData]);
 
   const contactLabels = {
-    yesterday: intl.formatMessage({ id: "case.contacttimeline.yesterday" }),
-    today: intl.formatMessage({ id: "case.contacttimeline.today" }),
+    yesterday: intl.formatMessage({
+      id: "caseDetails.contacttimeline.yesterday",
+    }),
+    today: intl.formatMessage({ id: "caseDetails.contacttimeline.today" }),
   };
 
   React.useEffect(() => {
@@ -106,7 +134,7 @@ const CasePage = ({
   if (!caseError) {
     <div>
       <Paragraph>
-        <FormattedMessage id="case.fetchError" />
+        <FormattedMessage id="caseDetails.fetchError" />
       </Paragraph>
     </div>;
   }
@@ -115,22 +143,8 @@ const CasePage = ({
 
   return (
     <PageGrid>
-      {paymentStatus === PaymentStatus.SUCCESS && (
-        <Alert
-          variant="success"
-          title={intl.formatMessage({ id: "task.paymentSuccessTitle" })}
-          text={intl.formatMessage({ id: "task.paymentSuccessText" })}
-        />
-      )}
-      {paymentStatus === PaymentStatus.FAILURE && (
-        <Alert
-          variant="error"
-          title={intl.formatMessage({ id: "task.paymentFailureTitle" })}
-          text={intl.formatMessage({ id: "task.paymentFailureText" })}
-        />
-      )}
       <div>
-        {backlink && <BackLink {...backlink} />}
+        <BackLink />
         <PageHeader
           loading={loading}
           title={
@@ -149,7 +163,7 @@ const CasePage = ({
       />
       <section>
         <SectionHeader
-          title={intl.formatMessage({ id: "case.statusHeader" })}
+          title={intl.formatMessage({ id: "caseDetails.statusHeader" })}
         />
         <StatusHistory
           loading={loading}
@@ -163,7 +177,7 @@ const CasePage = ({
       </section>
       {details.length > 0 && (
         <DescriptionList
-          titleTranslationId="case.detailsHeader"
+          titleTranslationId="caseDetails.detailsHeader"
           items={details}
         />
       )}
@@ -176,9 +190,13 @@ const CasePage = ({
       {showContactTimeline && contactItems.length > 0 && (
         <section>
           <SectionHeader
-            title={intl.formatMessage({ id: "case.contactHeader" })}
+            title={intl.formatMessage({ id: "caseDetails.contactHeader" })}
           />
-          <ContactTimeline items={contactItems} labels={contactLabels} />
+          <ContactTimeline
+            items={contactItems}
+            labels={contactLabels}
+            locale={currentLocale}
+          />
         </section>
       )}
       <TasksList
@@ -191,4 +209,4 @@ const CasePage = ({
   );
 };
 
-export default CasePage;
+export default CaseDetailsPage;

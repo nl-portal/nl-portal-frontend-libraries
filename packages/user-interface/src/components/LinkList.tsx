@@ -1,23 +1,22 @@
 import { useIntl } from "react-intl";
 import Skeleton from "./Skeleton";
 import SectionHeader from "./SectionHeader";
-import { ActionSingle } from "@gemeente-denhaag/action";
-import useActionLabels from "../hooks/useActionLabels";
+import Link, { LinkProps } from "@gemeente-denhaag/link";
+import LinkListComponent, { LinkListItem } from "@gemeente-denhaag/link-list";
 import PortalLink from "./PortalLink";
 
 interface Props {
   loading?: boolean;
   titleTranslationId?: string | null;
-  links?: { title: string; href: string }[];
+  links?: LinkProps[];
 }
 
-const LinksList = ({
+const LinkList = ({
   loading,
-  titleTranslationId = "linksList.title",
+  titleTranslationId = "linkList.title",
   links,
 }: Props) => {
   const intl = useIntl();
-  const labels = useActionLabels();
   const title = titleTranslationId
     ? intl.formatMessage({ id: titleTranslationId })
     : undefined;
@@ -40,18 +39,15 @@ const LinksList = ({
   return (
     <section>
       <SectionHeader title={title} />
-      {links.map((link) => (
-        <ActionSingle
-          key={link.title}
-          labels={labels}
-          link={link.href}
-          Link={PortalLink}
-        >
-          {link.title}
-        </ActionSingle>
-      ))}
+      <LinkListComponent>
+        {links.map((link, index) => (
+          <LinkListItem key={index}>
+            <Link {...link} Link={PortalLink} />
+          </LinkListItem>
+        ))}
+      </LinkListComponent>
     </section>
   );
 };
 
-export default LinksList;
+export default LinkList;

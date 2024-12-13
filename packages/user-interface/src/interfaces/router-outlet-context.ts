@@ -1,4 +1,4 @@
-import { Paths } from "../interfaces/paths";
+import { Paths } from "./paths";
 
 export interface RouterOutletContext {
   paths: Paths;

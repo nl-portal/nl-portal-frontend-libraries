@@ -14,9 +14,7 @@ interface Props {
   slug: string;
   productType: string;
   loading?: boolean;
-  showTasks?: boolean;
   fetchTasksLength?: number;
-  showCases?: boolean;
   fetchCasesLength?: number;
   children?: React.ReactNode;
 }
@@ -62,6 +60,7 @@ const ThemeOverviewPage = ({
         <TasksList
           loading={loading}
           error={Boolean(taskError)}
+          showEmpty={false}
           tasks={tasks}
           openInContext={true}
         />
@@ -70,6 +69,7 @@ const ThemeOverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(casesError)}
+          showEmpty={false}
           listView={false}
           cases={cases}
         />

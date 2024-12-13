@@ -99,6 +99,19 @@ const KeycloakProvider = ({
   onLoad = "login-required",
 }: KeycloakWrapperProps) => {
   const { setKeycloakToken, setDecodedToken } = useContext(KeycloakContext);
+  const keycloakPath = new URL(redirectUri).pathname;
+  const redirectUrl = new URL(window.location.href);
+  const redirectPath = redirectUrl.pathname + redirectUrl.search;
+  const redirectParam =
+    redirectPath !== "/" && redirectPath !== keycloakPath
+      ? `?redirect_url=${encodeURIComponent(redirectPath)}`
+      : "";
+  const { current: initOptions } = useRef<KeycloakInitOptions>({
+    checkLoginIframe: false,
+    onLoad,
+    flow: "standard",
+    redirectUri: formatUrlTrailingSlash(redirectUri + redirectParam, false),
+  });
   const { current: authClient } = useRef(
     new Keycloak({
       url: formatUrlTrailingSlash(`${url}`, false),
@@ -106,14 +119,7 @@ const KeycloakProvider = ({
       realm,
     }),
   );
-  const initOptions: KeycloakInitOptions = {
-    checkLoginIframe: false,
-    onLoad,
-    flow: "standard",
-    redirectUri: formatUrlTrailingSlash(redirectUri, false),
-  };
   const decodeToken = (jwtToken: string) => jwtDecode<DecodedToken>(jwtToken);
-
   const updateToken = () => {
     if (authClient.token) {
       authClient.updateToken(minValiditySeconds);
@@ -153,18 +159,6 @@ const KeycloakWrapper: FC<KeycloakWrapperProps> = (props) => {
   const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
     undefined,
   );
-  const ENTRY_URL_KEY = "entryUrl";
-  const entryUrl = sessionStorage.getItem(ENTRY_URL_KEY);
-
-  if (!entryUrl) {
-    const { host, href } = window.location;
-    const splitHref = href.split(host);
-    const entryUrlPart = splitHref[1];
-    sessionStorage.setItem(
-      ENTRY_URL_KEY,
-      !entryUrlPart.includes("keycloak") ? entryUrlPart : "/",
-    );
-  }
 
   return (
     <KeycloakContext.Provider

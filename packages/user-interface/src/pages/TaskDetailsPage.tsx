@@ -7,8 +7,8 @@ import {
   TaakStatus,
   useGetFormDefinitionByIdLazyQuery,
   TaakVersion,
-  useGetFormTaakByIdV2Query,
-  GetFormTaakByIdV2Document,
+  useGetPortaalFormulierByIdV2Query,
+  GetPortaalFormulierByIdV2Document,
 } from "@nl-portal/nl-portal-api";
 // TODO: Formio need this old version (4.7) of awesome font
 import "font-awesome/css/font-awesome.min.css";
@@ -16,17 +16,14 @@ import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
 import styles from "./TaskPage.module.scss";
 import { useParams } from "react-router-dom";
-import BackLink, { BackLinkProps } from "../components/BackLink";
+import BackLink from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "formiojs";
 
+//eslint-disable-next-line react-hooks/rules-of-hooks
 Formio.use(ProtectedEval);
 
-interface TaskPageProps {
-  backlink?: BackLinkProps;
-}
-
-const TaskPage = ({ backlink = {} }: TaskPageProps) => {
+const TaskDetailsPage = () => {
   const { id } = useParams();
   const intl = useIntl();
   const [loading, setLoading] = useState(true);
@@ -39,7 +36,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   const [submitTaak] = useSubmitTaakV2Mutation({
     update: (cache, { data }) => {
       cache.writeQuery({
-        query: GetFormTaakByIdV2Document,
+        query: GetPortaalFormulierByIdV2Document,
         data: {
           getTaakByIdV2: {
             ...data?.submitTaakV2,
@@ -51,13 +48,13 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       setSubmitted(true);
     },
   });
-  useGetFormTaakByIdV2Query({
+  useGetPortaalFormulierByIdV2Query({
     variables: { id },
     onCompleted(task) {
       if (
         !task ||
         !task.getTaakByIdV2 ||
-        !task.getTaakByIdV2.formtaak ||
+        !task.getTaakByIdV2.portaalformulier ||
         !task.getTaakByIdV2.version
       )
         return;
@@ -71,19 +68,23 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
       setTaakVersion(task.getTaakByIdV2.version);
 
       transformPrefilledDataToFormioSubmission(
-        task.getTaakByIdV2.formtaak.data,
+        task.getTaakByIdV2.portaalformulier.data,
       );
 
-      if (task.getTaakByIdV2.formtaak.formulier.soort === "url") {
+      if (task.getTaakByIdV2.portaalformulier.formulier.soort === "url") {
         getFormByUrl({
-          variables: { url: task.getTaakByIdV2.formtaak?.formulier.value },
+          variables: {
+            url: task.getTaakByIdV2.portaalformulier?.formulier.value,
+          },
         });
         return;
       }
 
-      if (task.getTaakByIdV2.formtaak.formulier.soort === "id") {
+      if (task.getTaakByIdV2.portaalformulier.formulier.soort === "id") {
         getFormById({
-          variables: { id: task.getTaakByIdV2.formtaak?.formulier.value },
+          variables: {
+            id: task.getTaakByIdV2.portaalformulier?.formulier.value,
+          },
         });
         return;
       }
@@ -155,11 +156,11 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   if (submitted) {
     return (
       <>
-        {backlink && <BackLink {...backlink} />}
+        <BackLink />
         <Alert
           variant="success"
-          title={intl.formatMessage({ id: "task.completeTitle" })}
-          text={intl.formatMessage({ id: "task.completeDescription" })}
+          title={intl.formatMessage({ id: "taskDetails.completeTitle" })}
+          text={intl.formatMessage({ id: "taskDetails.completeDescription" })}
         />
       </>
     );
@@ -168,10 +169,10 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   if (!formDefinitionUrl && !formDefinitionId) {
     return (
       <>
-        {backlink && <BackLink {...backlink} />}
+        <BackLink />
         <Alert
           variant="error"
-          title={intl.formatMessage({ id: "task.fetchError" })}
+          title={intl.formatMessage({ id: "taskDetails.fetchError" })}
           text=""
         />
       </>
@@ -180,7 +181,7 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
 
   return (
     <>
-      {backlink && <BackLink {...backlink} />}
+      <BackLink />
       <div className={styles.bootstrap}>
         <Form
           form={
@@ -202,4 +203,4 @@ const TaskPage = ({ backlink = {} }: TaskPageProps) => {
   );
 };
 
-export default TaskPage;
+export default TaskDetailsPage;

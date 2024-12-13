@@ -3,7 +3,7 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import Link from "@gemeente-denhaag/link";
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import PortalLink from "../components/PortalLink";
 import Heading from "../components/Heading";
 import { FormattedMessage, useIntl } from "react-intl";

@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Document = ({ document: doc, downloadLink: downloadLink }: Props) => {
-  const { onClick } = useDownload(downloadLink, doc.bestandsnaam);
+  const { onClick } = useDownload(downloadLink, doc.bestandsnaam || undefined);
   const { hrefLang } = useContext(LocaleContext);
 
   return (

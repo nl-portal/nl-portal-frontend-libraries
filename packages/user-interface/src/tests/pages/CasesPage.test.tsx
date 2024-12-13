@@ -5,9 +5,9 @@ import { testPaths as paths } from "../../providers/TestProvider";
 
 describe("The CasesPage", () => {
   const tabLopendeZaken = () =>
-    screen.getByRole("tab", { name: "Current cases" });
+    screen.getByRole("tab", { name: "Lopende zaken" });
   const tabAfgerondeZaken = () =>
-    screen.getByRole("tab", { name: "Closed cases" });
+    screen.getByRole("tab", { name: "Afgeronde zaken" });
   const openZaak1 = () => screen.getByText("case.OPENZAAK1.title");
   const openZaak2 = () => screen.getByText("case.OPENZAAK2.title");
   const geslotenZaak1 = () => screen.getByText("case.GESLOTENZAAK1.title");

@@ -1,48 +1,46 @@
 import PortalLink from "./PortalLink";
 import { ActionSingle } from "@gemeente-denhaag/action";
-import useActionLabels from "../hooks/useActionLabels";
 import { useOutletContext } from "react-router-dom";
-import { RouterOutletContext } from "../contexts/RouterOutletContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { FormattedMessage } from "react-intl";
 import { StatusBadge } from "@gemeente-denhaag/status-badge";
 import styles from "./Message.module.scss";
-
-// TODO: Replace with type from graphql
-export interface MessageType {
-  id: number;
-  titel: string;
-  verloopdatum: string;
-  read: boolean;
-  bericht: React.ReactNode;
-}
+import { Bericht } from "@nl-portal/nl-portal-api";
+import { useContext } from "react";
+import {
+  LocaleContext,
+  useActionLabels,
+} from "@nl-portal/nl-portal-localization";
 
 interface Props {
-  message: MessageType;
+  message: Bericht;
 }
 
-const Task = ({ message }: Props) => {
+const Message = ({ message }: Props) => {
   const labels = useActionLabels();
   const { paths } = useOutletContext<RouterOutletContext>();
+  const { currentLocale } = useContext(LocaleContext);
 
   return (
     <ActionSingle
       labels={labels}
-      dateTime={message.verloopdatum}
+      dateTime={message.publicatiedatum}
+      locale={currentLocale}
       link={paths.message(message.id)}
       Link={PortalLink}
     >
-      {message.read ? (
-        message.titel
+      {message.geopend ? (
+        message.onderwerp
       ) : (
         <>
           <StatusBadge className={styles["message__badge"]}>
             <FormattedMessage id="messagesList.new" />
           </StatusBadge>
-          <b>{message.titel}</b>
+          <b>{message.onderwerp}</b>
         </>
       )}
     </ActionSingle>
   );
 };
 
-export default Task;
+export default Message;

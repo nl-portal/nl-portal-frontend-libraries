@@ -14,6 +14,7 @@ interface Props {
   items: {
     title: React.ReactNode;
     detail: React.ReactNode;
+    action?: React.ReactNode;
   }[];
   children?: React.ReactNode;
 }
