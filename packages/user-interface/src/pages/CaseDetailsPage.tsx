@@ -27,7 +27,7 @@ import useOgonePaymentRegistration, {
   PaymentStatus,
 } from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
-import TableList from "../components/TableList";
+import ExtraCaseDetails, { Details } from "../components/ExtraCaseDetails";
 import NotificationContext from "../contexts/NotificationContext";
 
 interface CasePageProps {
@@ -139,6 +139,10 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     </div>;
   }
 
+  const zaakDetails = caseData?.getZaak.zaakdetails.data as
+    | Details[]
+    | undefined;
+
   return (
     <PageGrid>
       <div>
@@ -179,39 +183,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
           items={details}
         />
       )}
-      {/* eslint-disable @typescript-eslint/no-explicit-any */}
-      {caseData?.getZaak.zaakdetails.data.map((section: any) => {
-        const listItems = section.waarde.filter((i: any) => i.type !== "table");
-        const tables = section.waarde.filter((i: any) => i.type === "table");
-
-        return (
-          <React.Fragment key={section.heading}>
-            {listItems.length > 0 && (
-              <DescriptionList
-                titleTranslationId={section.heading}
-                items={listItems.map((item: any) => ({
-                  title: item.key,
-                  detail: item.waarde,
-                }))}
-              />
-            )}
-            {tables.length > 0 &&
-              tables.map((table: any) => (
-                <TableList
-                  key={table.heading}
-                  titleTranslationId={table.heading}
-                  headers={table.waarde.headers?.map(
-                    (head: any) => head.waarde,
-                  )}
-                  rows={table.waarde.rows.map((row: any) =>
-                    row.map((cell: any) => cell.waarde),
-                  )}
-                />
-              ))}
-          </React.Fragment>
-        );
-      })}
-      {/* eslint-enable @typescript-eslint/no-explicit-any */}
+      {zaakDetails && <ExtraCaseDetails data={zaakDetails} />}
       <DocumentsList
         loading={loading}
         error={Boolean(caseError)}
