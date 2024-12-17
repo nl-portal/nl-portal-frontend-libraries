@@ -184,85 +184,120 @@ export const getZaak: {
         zaakdetails: {
           data: [
             {
-              waarde: [
+              heading: "Kosten",
+              type: "keywaardelijst",
+              items: [
                 {
                   key: "Locatie",
-                  waarde: "Spui 70",
-                  omschrijving: "Locatie waar...",
+                  content: "Kamillestraat 27",
+                  description: "Locatie waar de zaak betrekking op heeft",
                 },
                 {
-                  key: "Bedrag",
-                  waarde: "€250",
+                  key: "interne ref",
+                  content: "OVX-4295272/A00/201723693",
+                  description: "interne verwijzing naar Key2Vergunningen",
+                },
+              ],
+              children: [
+                {
+                  heading: "Kosten nested",
+                  type: "keywaardelijst",
+                  description: "Een voorbeeld van nesting",
+                  items: [
+                    {
+                      key: "Locatie",
+                      content: "Kamillestraat 27",
+                      description: "Locatie waar de zaak betrekking op heeft",
+                    },
+                    {
+                      key: "interne ref",
+                      content: "OVX-4295272/A00/201723693",
+                      description: "interne verwijzing naar Key2Vergunningen",
+                    },
+                  ],
                 },
                 {
+                  heading: "Betaalgeschiedenis",
                   type: "table",
-                  waarde: {
+                  items: {
                     rows: [
                       [
                         {
                           key: "periode",
                           type: "date",
-                          waarde: "2023-6-1",
+                          content: "2023-06-01",
                         },
                         {
                           key: "bedrag",
-                          waarde: "€250",
+                          content: "€250",
                         },
                         {
                           key: "status",
-                          waarde: "Openstaand",
+                          content: "Openstaand",
                         },
                       ],
                       [
                         {
                           key: "periode",
                           type: "date",
-                          waarde: "2023-5-1",
+                          content: "2023-05-01",
                         },
                         {
                           key: "bedrag",
-                          waarde: "€250",
+                          content: "€250",
                         },
                         {
                           key: "status",
-                          waarde: "Openstaand",
+                          content: "Openstaand",
                         },
                       ],
                       [
                         {
                           key: "periode",
                           type: "date",
-                          waarde: "2023-4-1",
+                          content: "2023-04-01",
                         },
                         {
                           key: "bedrag",
-                          waarde: "€250",
+                          content: "€250",
                         },
                         {
                           key: "status",
-                          waarde: "Openstaand",
+                          content: "Openstaand",
                         },
                       ],
                       [
                         {
                           key: "periode",
                           type: "date",
-                          waarde: "2023-3-1",
+                          content: "2023-03-01",
                         },
                         {
                           key: "bedrag",
-                          waarde: "€250",
+                          content: "€250",
                         },
                         {
                           key: "status",
-                          waarde: "Betaald",
+                          content: "Betaald",
                         },
                       ],
                       [
                         {
                           key: "periode",
-                          waarde: "",
-                          omschrijving:
+                          content: "",
+                          description:
+                            "Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.",
+                        },
+                        {
+                          key: "periode",
+                          content: "",
+                          description:
+                            "Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.",
+                        },
+                        {
+                          key: "periode",
+                          content: "",
+                          description:
                             "Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.",
                         },
                       ],
@@ -270,53 +305,207 @@ export const getZaak: {
                         {
                           key: "periode",
                           type: "bold",
-                          waarde: "Totaal",
+                          content: "Totaal",
                         },
                         {
                           key: "bedrag",
-                          waarde: "€1000",
+                          content: "€1000",
                         },
                         {
                           key: "status",
-                          waarde: ["list", "voorbeeld"],
+                          content: "Betaald",
                         },
                       ],
                     ],
                     headers: [
                       {
                         key: "periode",
-                        waarde: "Periode",
-                        omschrijving: "Periode waarover betaald is",
+                        content: "Periode",
+                        description: "Periode waarover betaald is",
                       },
                       {
                         key: "bedrag",
-                        waarde: "Bedrag",
+                        content: "Bedrag",
                       },
                       {
                         key: "status",
-                        waarde: "Status",
-                        omschrijving: "Is het betaald?",
+                        content: "Status",
+                        description: "Is het betaald?",
                       },
                     ],
                   },
-                  heading: "Betaalgeschiedenis",
                 },
               ],
-              heading: "Kosten",
             },
             {
-              waarde: [
+              heading: "Betaalgeschiedenis 2",
+              type: "table",
+              items: {
+                rows: [
+                  [
+                    {
+                      key: "periode",
+                      type: "date",
+                      content: "2023-06-01",
+                    },
+                    {
+                      key: "bedrag",
+                      content: "€250",
+                    },
+                    {
+                      key: "status",
+                      content: "Openstaand",
+                    },
+                  ],
+                  [
+                    {
+                      key: "periode",
+                      type: "date",
+                      content: "2023-05-01",
+                    },
+                    {
+                      key: "bedrag",
+                      content: "€250",
+                    },
+                    {
+                      key: "status",
+                      content: "Openstaand",
+                    },
+                  ],
+                  [
+                    {
+                      key: "periode",
+                      type: "date",
+                      content: "2023-04-01",
+                    },
+                    {
+                      key: "bedrag",
+                      content: "€250",
+                    },
+                    {
+                      key: "status",
+                      content: "Openstaand",
+                    },
+                  ],
+                  [
+                    {
+                      key: "periode",
+                      type: "date",
+                      content: "2023-03-01",
+                    },
+                    {
+                      key: "bedrag",
+                      content: "€250",
+                    },
+                    {
+                      key: "status",
+                      content: "true",
+                    },
+                  ],
+                  [
+                    {
+                      key: "periode",
+                      content: "",
+                      description:
+                        "Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.",
+                    },
+                  ],
+                  [
+                    {
+                      key: "periode",
+                      type: "bold",
+                      content: "Totaal",
+                    },
+                    {
+                      key: "bedrag",
+                      content: "€1000",
+                    },
+                    {
+                      key: "status",
+                      content: "Betaald",
+                    },
+                  ],
+                ],
+                headers: [
+                  {
+                    key: "periode",
+                    content: "Periode",
+                    description: "Periode waarover betaald is",
+                  },
+                  {
+                    key: "bedrag",
+                    content: "Bedrag",
+                  },
+                  {
+                    key: "status",
+                    content: "Status",
+                    description: "Is het betaald?",
+                  },
+                ],
+              },
+              children: [
                 {
-                  key: "Locatie",
-                  waarde: "Spui 70",
-                  omschrijving: "Locatie waar...",
-                },
-                {
-                  key: "Bedrag",
-                  waarde: "€250",
+                  heading: "Kosten nested 2",
+                  type: "keywaardelijst",
+                  items: [
+                    {
+                      key: "Locatie",
+                      content: "Kamillestraat 22",
+                      description: "Locatie waar de zaak betrekking op heeft",
+                    },
+                    {
+                      key: "interne ref",
+                      content: "OVX-4295272/A00/201723693",
+                      description: "interne verwijzing naar Key2Vergunningen",
+                    },
+                  ],
+                  children: [
+                    {
+                      heading: "Kosten nested 3",
+                      type: "keywaardelijst",
+                      items: [
+                        {
+                          key: "Locatie",
+                          content: "Kamillestraat 27",
+                          description:
+                            "Locatie waar de zaak betrekking op heeft",
+                        },
+                        {
+                          key: "interne ref",
+                          content: "OVX-4295272/A00/201723693",
+                          description:
+                            "interne verwijzing naar Key2Vergunningen",
+                        },
+                      ],
+                      children: [],
+                    },
+                  ],
                 },
               ],
-              heading: "Kosten nested",
+            },
+            {
+              heading: "Special waardes",
+              type: "keywaardelijst",
+              items: [
+                {
+                  key: "Title",
+                  content: "This is a bold waarde",
+                  type: "bold",
+                  description: "A omschrijving for the bold title",
+                },
+                {
+                  key: "Title",
+                  content: "This is an italic waarde",
+                  type: "italic",
+                  description: "A omschrijving for the italic text",
+                },
+                {
+                  key: "Date",
+                  content: "2024-09-11",
+                  type: "date",
+                  description: "The date of the event",
+                },
+              ],
             },
           ],
           zaak: "https://openzaakurl/zaken/api/v1/zaken/82cb13cf-d2f9-4e3e-ac07-751373035ecb",

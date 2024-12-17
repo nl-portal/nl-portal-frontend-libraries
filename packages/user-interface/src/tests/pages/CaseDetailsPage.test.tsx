@@ -37,7 +37,8 @@ describe("CaseDetailsPage", () => {
     expect(screen.getByText("Certificaat WWJB")).toBeVisible();
     expect(screen.getByText("case.B0756.title")).toBeVisible();
     expect(screen.getByText("ZAAK-2023-0000007947")).toBeVisible();
-    expect(screen.getByRole("table")).toBeVisible();
+    expect(screen.getByText("Betaalgeschiedenis 2")).toBeVisible();
+    expect(screen.getByText("Kamillestraat 22")).toBeVisible();
     expect(screen.getByText("Dit is een sms")).toBeVisible();
     expect(screen.queryByText("Eerdere contactmomenten")).toBeVisible();
   });
