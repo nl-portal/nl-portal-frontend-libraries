@@ -47,7 +47,6 @@ export interface Content {
 
 export const ExtraCaseDetails = ({ data }: Props) => {
   const { formatDate } = useDateFormatter();
-  if (!data) return null;
 
   const convertRichText = (
     value: string,

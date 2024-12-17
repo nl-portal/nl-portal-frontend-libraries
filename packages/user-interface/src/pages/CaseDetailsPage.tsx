@@ -139,7 +139,9 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     </div>;
   }
 
-  const zaakDetails = caseData?.getZaak.zaakdetails.data as Details[];
+  const zaakDetails = caseData?.getZaak.zaakdetails.data as
+    | Details[]
+    | undefined;
 
   return (
     <PageGrid>
@@ -181,7 +183,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
           items={details}
         />
       )}
-      <ExtraCaseDetails data={zaakDetails} />
+      {zaakDetails && <ExtraCaseDetails data={zaakDetails} />}
       <DocumentsList
         loading={loading}
         error={Boolean(caseError)}
