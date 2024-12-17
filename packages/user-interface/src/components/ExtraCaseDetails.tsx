@@ -10,7 +10,7 @@ interface Props {
 
 export interface ExtraZaakDetails {
   data: Details[];
-  zaak: string; // URI format
+  zaak: string;
 }
 
 export interface Table {
@@ -30,12 +30,12 @@ export enum DetailType {
 }
 
 export interface Details {
-  key?: string; // Optional key field, based on its appearance in "details"
+  key?: string;
   type: DetailType.TABLE | DetailType.DESCRIPTION_LIST;
   heading: string;
   description?: string;
   items: Content[] | Table;
-  children?: Details[]; // Recursive type for nested details
+  children?: Details[];
 }
 
 export interface Content {
@@ -45,351 +45,11 @@ export interface Content {
   description?: string;
 }
 
-const exampleData = {
-  zaak: "http://test.test",
-  data: [
-    {
-      heading: "Kosten",
-      type: "keywaardelijst",
-      items: [
-        {
-          key: "Locatie",
-          content: "Kamillestraat 27",
-          description: "Locatie waar de zaak betrekking op heeft",
-        },
-        {
-          key: "interne ref",
-          content: "OVX-4295272/A00/201723693",
-          description: "interne verwijzing naar Key2Vergunningen",
-        },
-      ],
-      children: [
-        {
-          heading: "Kosten nested",
-          type: "keywaardelijst",
-          description: "Een voorbeeld van nesting",
-          items: [
-            {
-              key: "Locatie",
-              content: "Kamillestraat 27",
-              description: "Locatie waar de zaak betrekking op heeft",
-            },
-            {
-              key: "interne ref",
-              content: "OVX-4295272/A00/201723693",
-              description: "interne verwijzing naar Key2Vergunningen",
-            },
-          ],
-        },
-        {
-          heading: "Betaalgeschiedenis",
-          type: "table",
-          items: {
-            rows: [
-              [
-                {
-                  key: "periode",
-                  type: "date",
-                  content: "2023-06-01",
-                },
-                {
-                  key: "bedrag",
-                  content: "€250",
-                },
-                {
-                  key: "status",
-                  content: "Openstaand",
-                },
-              ],
-              [
-                {
-                  key: "periode",
-                  type: "date",
-                  content: "2023-05-01",
-                },
-                {
-                  key: "bedrag",
-                  content: "€250",
-                },
-                {
-                  key: "status",
-                  content: "Openstaand",
-                },
-              ],
-              [
-                {
-                  key: "periode",
-                  type: "date",
-                  content: "2023-04-01",
-                },
-                {
-                  key: "bedrag",
-                  content: "€250",
-                },
-                {
-                  key: "status",
-                  content: "Openstaand",
-                },
-              ],
-              [
-                {
-                  key: "periode",
-                  type: "date",
-                  content: "2023-03-01",
-                },
-                {
-                  key: "bedrag",
-                  content: "€250",
-                },
-                {
-                  key: "status",
-                  content: "Betaald",
-                },
-              ],
-              [
-                {
-                  key: "periode",
-                  content: "",
-                  description:
-                    "Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.",
-                },
-                {
-                  key: "periode",
-                  content: "",
-                  description:
-                    "Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.",
-                },
-                {
-                  key: "periode",
-                  content: "",
-                  description:
-                    "Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.",
-                },
-              ],
-              [
-                {
-                  key: "periode",
-                  type: "bold",
-                  content: "Totaal",
-                },
-                {
-                  key: "bedrag",
-                  content: "€1000",
-                },
-                {
-                  key: "status",
-                  content: "Betaald",
-                },
-              ],
-            ],
-            headers: [
-              {
-                key: "periode",
-                content: "Periode",
-                description: "Periode waarover betaald is",
-              },
-              {
-                key: "bedrag",
-                content: "Bedrag",
-              },
-              {
-                key: "status",
-                content: "Status",
-                description: "Is het betaald?",
-              },
-            ],
-          },
-        },
-      ],
-    },
-    {
-      heading: "Betaalgeschiedenis 2",
-      type: "table",
-      items: {
-        rows: [
-          [
-            {
-              key: "periode",
-              type: "date",
-              content: "2023-06-01",
-            },
-            {
-              key: "bedrag",
-              content: "€250",
-            },
-            {
-              key: "status",
-              content: "Openstaand",
-            },
-          ],
-          [
-            {
-              key: "periode",
-              type: "date",
-              content: "2023-05-01",
-            },
-            {
-              key: "bedrag",
-              content: "€250",
-            },
-            {
-              key: "status",
-              content: "Openstaand",
-            },
-          ],
-          [
-            {
-              key: "periode",
-              type: "date",
-              content: "2023-04-01",
-            },
-            {
-              key: "bedrag",
-              content: "€250",
-            },
-            {
-              key: "status",
-              content: "Openstaand",
-            },
-          ],
-          [
-            {
-              key: "periode",
-              type: "date",
-              content: "2023-03-01",
-            },
-            {
-              key: "bedrag",
-              content: "€250",
-            },
-            {
-              key: "status",
-              content: "true",
-            },
-          ],
-          [
-            {
-              key: "periode",
-              content: "",
-              description:
-                "Een voorbeeld van een lege row. Deze omschrijving is niet nodig voor een lege row.",
-            },
-          ],
-          [
-            {
-              key: "periode",
-              type: "bold",
-              content: "Totaal",
-            },
-            {
-              key: "bedrag",
-              content: "€1000",
-            },
-            {
-              key: "status",
-              content: "Betaald",
-            },
-          ],
-        ],
-        headers: [
-          {
-            key: "periode",
-            content: "Periode",
-            description: "Periode waarover betaald is",
-          },
-          {
-            key: "bedrag",
-            content: "Bedrag",
-          },
-          {
-            key: "status",
-            content: "Status",
-            description: "Is het betaald?",
-          },
-        ],
-      },
-      children: [
-        {
-          heading: "Kosten nested 2",
-          type: "keywaardelijst",
-          items: [
-            {
-              key: "Locatie",
-              content: "Kamillestraat 27",
-              description: "Locatie waar de zaak betrekking op heeft",
-            },
-            {
-              key: "interne ref",
-              content: "OVX-4295272/A00/201723693",
-              description: "interne verwijzing naar Key2Vergunningen",
-            },
-          ],
-          children: [
-            {
-              heading: "Kosten nested 3",
-              type: "keywaardelijst",
-              items: [
-                {
-                  key: "Locatie",
-                  content: "Kamillestraat 27",
-                  description: "Locatie waar de zaak betrekking op heeft",
-                },
-                {
-                  key: "interne ref",
-                  content: "OVX-4295272/A00/201723693",
-                  description: "interne verwijzing naar Key2Vergunningen",
-                },
-              ],
-              children: [],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      heading: "Special waardes",
-      type: "keywaardelijst",
-      items: [
-        {
-          key: "Title",
-          content: "This is a bold waarde",
-          type: "bold",
-          description: "A omschrijving for the bold title",
-        },
-        {
-          key: "Title",
-          content: "This is an italic waarde",
-          type: "italic",
-          description: "A omschrijving for the italic text",
-        },
-        {
-          key: "Date",
-          content: "2024-09-11",
-          type: "date",
-          description: "The date of the event",
-        },
-        {
-          key: "Boolean",
-          content: "true",
-          description: "boolean true waarde",
-        },
-        {
-          key: "Boolean 2",
-          content: "true",
-          description: "boolean false waarde",
-        },
-      ],
-    },
-  ],
-} as ExtraZaakDetails;
-
 export const ExtraCaseDetails = ({ data }: Props) => {
   const { formatDate } = useDateFormatter();
-  console.log(data);
-  //if (!data) return null;
-  const zaakDetailsContent: ReactNode[] = [];
+  if (!data) return null;
 
-  const convertRichtText = (
+  const convertRichText = (
     value: string,
     type?: ContentTypes,
   ): string | JSX.Element | JSX.Element[] | null => {
@@ -405,58 +65,63 @@ export const ExtraCaseDetails = ({ data }: Props) => {
     }
   };
 
-  const getTableSection = (heading: string, table: Table) => {
-    return (
-      <section key={`section-${heading}`}>
-        <TableList
-          key={heading}
-          titleTranslationId={heading}
-          headers={table.headers.map((head) => head.content)}
-          rows={table.rows.map((row) =>
-            row.map((cell) => {
-              return {
-                children: convertRichtText(cell.content, cell.type),
-              };
-            }),
-          )}
-        />
-      </section>
-    );
-  };
+  const renderTableSection = (heading: string, table: Table) => (
+    <section key={`section-${heading}`}>
+      <TableList
+        titleTranslationId={heading}
+        headers={table.headers.map((head) => head.content)}
+        rows={table.rows.map((row) =>
+          row.map((cell) => ({
+            children: convertRichText(cell.content, cell.type),
+          })),
+        )}
+      />
+    </section>
+  );
 
-  const getContentElements = (detail: Details, isChild: boolean) => {
-    if (detail.type === DetailType.TABLE) {
-      zaakDetailsContent.push(
-        getTableSection(detail.heading, detail.items as Table),
-      );
-    }
+  const renderDescriptionList = (
+    heading: string,
+    items: Content[],
+    isChild: boolean,
+  ) => (
+    <section key={`section-${heading}`}>
+      <SectionHeader title={heading} small={isChild} />
+      <DescriptionList
+        items={items.map((item) => ({
+          title: item.key,
+          detail: convertRichText(item.content, item.type),
+        }))}
+      />
+    </section>
+  );
 
-    if (detail.type === DetailType.DESCRIPTION_LIST) {
-      zaakDetailsContent.push(
-        <section key={`section-${detail.heading}`}>
-          <SectionHeader title={detail.heading} small={isChild} />
-          <DescriptionList
-            items={(detail.items as Content[]).map((item) => {
-              return {
-                title: item.key,
-                detail: convertRichtText(item.content, item.type),
-              };
-            })}
-          />
-        </section>,
-      );
+  const renderDetails = (details: Details[], isChild = false): ReactNode[] =>
+    details.map((detail) => {
+      const { type, heading, items, children } = detail;
 
-      if (!isChild) {
-        detail.children?.forEach((child) => getContentElements(child, true));
+      switch (type) {
+        case DetailType.TABLE:
+          return (
+            <>
+              {renderTableSection(heading, items as Table)}
+              {children && children.length > 0 && renderDetails(children, true)}
+            </>
+          );
+
+        case DetailType.DESCRIPTION_LIST:
+          return (
+            <>
+              {renderDescriptionList(heading, items as Content[], isChild)}
+              {children && children.length > 0 && renderDetails(children, true)}
+            </>
+          );
+
+        default:
+          return null;
       }
-    }
-  };
+    });
 
-  exampleData.data.forEach((detail) => {
-    getContentElements(detail, false);
-  });
-
-  return zaakDetailsContent;
+  return renderDetails(data);
 };
 
 export default ExtraCaseDetails;
