@@ -51,7 +51,7 @@ export const ExtraCaseDetails = ({ data }: Props) => {
   const convertRichText = (
     value: string,
     type?: ContentTypes,
-  ): string | JSX.Element | JSX.Element[] | null => {
+  ): string | ReactNode | ReactNode[] | null => {
     switch (type) {
       case ContentTypes.BOLD:
         return <b>{value}</b>;
