@@ -13,24 +13,26 @@ const UserName = ({ mobileMenu }: UserNameProps) => {
   const intl = useIntl();
   const { userName, volmachtgever, isLoading } = useUserInfo();
 
+  if (isLoading) {
+    return <Skeleton width={160} />;
+  }
+
   return (
     <div
-      translate="no"
       className={classNames(styles["user-name"], {
         [styles["user-name--mobile-menu"]]: mobileMenu,
       })}
     >
       <Paragraph className={styles["user-name__paragraph"]}>
-        {intl.formatMessage({ id: "header.welcome" }) +
-          (userName ? ` ${userName}` : `${isLoading ? " " : ""}`)}
-        {isLoading && !userName && <Skeleton width={80} />}
+        {intl.formatMessage({ id: "header.welcome" })}{" "}
+        <span translate="no">{userName}</span>
       </Paragraph>
-      <Paragraph className={styles["user-name__paragraph"]}>
-        {volmachtgever
-          ? `${intl.formatMessage({ id: "header.proxyFor" })} ${volmachtgever}`
-          : ""}
-        {isLoading && !volmachtgever && <Skeleton width={160} />}
-      </Paragraph>
+      {volmachtgever && (
+        <Paragraph className={styles["user-name__paragraph"]}>
+          {intl.formatMessage({ id: "header.proxyFor" })}{" "}
+          <span translate="no">{volmachtgever}</span>
+        </Paragraph>
+      )}
     </div>
   );
 };

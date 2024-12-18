@@ -120,8 +120,8 @@ export const NL_NL_MESSAGES: Messages = {
       "Er is een fout opgetreden, probeer het later nogmaals.",
     "taskDetails.completeTitle": "Taak is afgerond",
     "taskDetails.completeDescription": "De taak is succesvol voltooid.",
-    "overviewpage.title": "Welkom <span>{userName}</span>",
-    "overview.subTitle": "Gemachtigd voor {volmachtgever}",
+    "overviewpage.title": "Welkom",
+    "overview.subTitle": "Gemachtigd voor",
     "overviewpage.paragraph":
       "In de NL-portal  kunt u zelf uw persoonlijke zaken regelen wanneer het u uitkomt. U kunt bijvoorbeeld uw rekeningen betalen en zien wanneer uw aanvraag klaar is.",
     "actionLabels.today": "vandaag",

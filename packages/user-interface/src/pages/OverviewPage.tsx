@@ -64,23 +64,17 @@ const OverviewPage = ({
       {showIntro && (
         <PageHeader
           title={
-            <FormattedMessage
-              id="overviewpage.title"
-              values={{
-                userName,
-                span: (chunks) => <span translate="no">{chunks}</span>,
-              }}
-            />
+            <>
+              <FormattedMessage id="overviewpage.title" />{" "}
+              <span translate="no">{userName}</span>
+            </>
           }
           subTitle={
             isVolmachtLogin && (
-              <FormattedMessage
-                id="overview.subTitle"
-                values={{
-                  volmachtgever,
-                  span: (chunks) => <span translate="no">{chunks}</span>,
-                }}
-              />
+              <>
+                <FormattedMessage id="overview.subTitle" />{" "}
+                <span translate="no">{volmachtgever}</span>
+              </>
             )
           }
         >
