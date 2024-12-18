@@ -7,8 +7,8 @@ import SearchForm from "../components/SearchForm";
 
 const TasksPage = () => {
   const { data, loading, error, refetch } = useGetTakenV2Query();
-
   const tasks = data?.getTakenV2.content as TaakV2[] | undefined;
+
   const handleFormSubmit = (searchValue: string) => {
     refetch({ title: searchValue });
   };

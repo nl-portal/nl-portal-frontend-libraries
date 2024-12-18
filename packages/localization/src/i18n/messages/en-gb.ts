@@ -151,5 +151,9 @@ export const EN_GB_MESSAGES: Messages = {
     "searchForm.cases.searchButton": "Search",
     "searchForm.cases.totalElements": "{total} cases",
     "searchForm.cases.totalElements.singular": "{total} case",
+    "searchForm.messages.searchLabel": "Search for a message",
+    "searchForm.messages.searchButton": "Search",
+    "searchForm.messages.totalElements": "{total} messages",
+    "searchForm.messages.totalElements.singular": "{total} message",
   },
 };
