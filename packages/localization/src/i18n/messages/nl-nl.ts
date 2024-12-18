@@ -158,5 +158,9 @@ export const NL_NL_MESSAGES: Messages = {
     "searchForm.cases.searchButton": "Zoeken",
     "searchForm.cases.totalElements": "{total} zaken",
     "searchForm.cases.totalElements.singular": "{total} zaak",
+    "searchForm.messages.searchLabel": "Zoek naar een bericht",
+    "searchForm.messages.searchButton": "Zoeken",
+    "searchForm.messages.totalElements": "{total} berichten",
+    "searchForm.messages.totalElements.singular": "{total} bericht",
   },
 };

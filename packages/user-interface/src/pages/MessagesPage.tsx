@@ -3,6 +3,7 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import MessagesList from "../components/MessagesList";
 import { Bericht, useGetBerichtenQuery } from "@nl-portal/nl-portal-api";
+import SearchForm from "../components/SearchForm";
 
 const MessagesPage = () => {
   const intl = useIntl();
@@ -11,6 +12,11 @@ const MessagesPage = () => {
     fetchPolicy: "cache-and-network",
   });
   const messages = data?.getBerichten.content as Bericht[] | undefined;
+
+  const handleFormSubmit = (searchValue: string) => {
+    refetch({ onderwerp: searchValue });
+  };
+
   const onPageChange = (index: number) => {
     refetch({ pageNumber: index + 1 });
     return index;
@@ -18,7 +24,13 @@ const MessagesPage = () => {
 
   return (
     <PageGrid>
-      <PageHeader title={intl.formatMessage({ id: "pageTitles.messages" })} />
+      <PageHeader title={intl.formatMessage({ id: "pageTitles.messages" })}>
+        <SearchForm
+          translationId="messages"
+          totalElements={data?.getBerichten.totalElements ?? 0}
+          onSubmit={handleFormSubmit}
+        />
+      </PageHeader>
       <MessagesList
         loading={loading}
         error={Boolean(error)}
