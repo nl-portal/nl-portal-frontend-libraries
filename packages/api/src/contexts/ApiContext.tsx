@@ -11,6 +11,7 @@ import {
   ApolloProvider,
   HttpLink,
   InMemoryCache,
+  InMemoryCacheConfig,
 } from "@apollo/client";
 import {
   KeycloakContext,
@@ -29,9 +30,15 @@ interface Props {
   children: React.ReactNode;
   graphqlUri: string;
   restUri: string;
+  inMemoryCacheOptions?: InMemoryCacheConfig;
 }
 
-export const ApiProvider = ({ children, graphqlUri, restUri }: Props) => {
+export const ApiProvider = ({
+  children,
+  graphqlUri,
+  restUri,
+  inMemoryCacheOptions,
+}: Props) => {
   const LOCAL_STORAGE_REST_URI_KEY = "REST_URI";
   const formattedGraphqlUri = formatUrlTrailingSlash(graphqlUri, false);
   const formattedRestUri = formatUrlTrailingSlash(restUri, false);
@@ -54,7 +61,7 @@ export const ApiProvider = ({ children, graphqlUri, restUri }: Props) => {
     () =>
       new ApolloClient({
         uri: formattedGraphqlUri,
-        cache: new InMemoryCache(),
+        cache: new InMemoryCache(inMemoryCacheOptions),
         link: getLink(keycloakToken),
       }),
   );
