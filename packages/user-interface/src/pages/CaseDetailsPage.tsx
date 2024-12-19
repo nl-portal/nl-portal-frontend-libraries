@@ -139,9 +139,28 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     </div>;
   }
 
-  const zaakDetails = caseData?.getZaak.zaakdetails.data as
-    | Details[]
-    | undefined;
+  // Function to do a runtime check on the extra zaakdetails to prevent possible errors
+  const isZaakDetailsArray = (data: unknown): data is Details[] => {
+    return (
+      Array.isArray(data) &&
+      data.every(
+        (item) =>
+          typeof item === "object" &&
+          item !== null &&
+          "type" in item &&
+          typeof (item as Details).type === "string" &&
+          "heading" in item &&
+          typeof (item as Details).heading === "string" &&
+          "items" in item &&
+          typeof (item as Details).items === "object",
+      )
+    );
+  };
+
+  const zaakDetailsData = caseData?.getZaak.zaakdetails.data;
+  const zaakDetails = isZaakDetailsArray(zaakDetailsData)
+    ? zaakDetailsData
+    : undefined;
 
   return (
     <PageGrid>
