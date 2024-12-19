@@ -19,6 +19,7 @@ import {
 } from "@nl-portal/nl-portal-authentication";
 import { TOKEN_KEY, TOKEN_OBJECT } from "../constants/token";
 import React from "react";
+import { defaultInMemoryCacheOptions } from "../constants/apollo-cache";
 
 interface ContextProps {
   restUri: string;
@@ -37,7 +38,7 @@ export const ApiProvider = ({
   children,
   graphqlUri,
   restUri,
-  inMemoryCacheOptions,
+  inMemoryCacheOptions = defaultInMemoryCacheOptions,
 }: Props) => {
   const LOCAL_STORAGE_REST_URI_KEY = "REST_URI";
   const formattedGraphqlUri = formatUrlTrailingSlash(graphqlUri, false);

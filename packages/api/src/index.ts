@@ -1,4 +1,5 @@
 export { default as ApiContext, ApiProvider } from "./contexts/ApiContext";
+export * from "./constants/apollo-cache";
 export * from "./constants/token";
 export * from "./generated/Graphql";
 export * from "./queries/get-taken";
