@@ -61,6 +61,7 @@
     "@gemeente-denhaag/tab": "0.2.3-alpha.422",
     "@gemeente-denhaag/table": "0.1.1",
     "@gemeente-denhaag/text-input": "0.3.0-alpha.422",
+    "@gemeente-denhaag/textarea": "0.3.0-alpha.55",
     "@gemeente-denhaag/typography": "0.2.3",
     "@gemeente-denhaag/unorderedlist": "0.3.0-alpha.313",
     "@gemeente-denhaag/utils": "0.2.3-alpha.421",

@@ -28,6 +28,7 @@ const TaskDetailsPage = () => {
   const intl = useIntl();
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
   const [submission, setSubmission] = useState({
     data: {},
   });
@@ -67,9 +68,15 @@ const TaskDetailsPage = () => {
 
       setTaakVersion(task.getTaakByIdV2.version);
 
-      transformPrefilledDataToFormioSubmission(
-        task.getTaakByIdV2.portaalformulier.data,
-      );
+      try {
+        transformPrefilledDataToFormioSubmission(
+          task.getTaakByIdV2.portaalformulier.data,
+        );
+      } catch (err) {
+        console.error(err);
+        console.log(setError);
+        //setError(true);
+      }
 
       if (task.getTaakByIdV2.portaalformulier.formulier.soort === "url") {
         getFormByUrl({
@@ -151,6 +158,19 @@ const TaskDetailsPage = () => {
 
   if (loading) {
     return null;
+  }
+
+  if (error) {
+    return (
+      <>
+        <BackLink />
+        <Alert
+          variant="error"
+          title={intl.formatMessage({ id: "taskDetails.errorTitle" })}
+          text={intl.formatMessage({ id: "taskDetails.errorDescription" })}
+        />
+      </>
+    );
   }
 
   if (submitted) {

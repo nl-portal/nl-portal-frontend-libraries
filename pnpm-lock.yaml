@@ -378,6 +378,9 @@ importers:
       '@gemeente-denhaag/text-input':
         specifier: 0.3.0-alpha.422
         version: 0.3.0-alpha.422(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/textarea':
+        specifier: 0.3.0-alpha.55
+        version: 0.3.0-alpha.55(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/typography':
         specifier: 0.2.3
         version: 0.2.3(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1425,6 +1428,11 @@ packages:
 
   '@gemeente-denhaag/text-input@0.3.0-alpha.422':
     resolution: {integrity: sha512-ZVZTQFbF7ApKLYgVt3QAVGfiYy5sdlRIMKwm7o9a61tvcrEPoaJaWiwafRBFDY/fWqtPWLxGNL1mQv5CegiSJA==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/textarea@0.3.0-alpha.55':
+    resolution: {integrity: sha512-BUvE9KwM/qvHr0nz04h9PLYoOR4YiMJkWbHhIxjNz3Xdym52POEv+ZqOVRxeFLaStt/Aju1TUUVlT9xZeHgN6Q==}
     peerDependencies:
       react: ^18.0.0
 
@@ -6948,6 +6956,18 @@ snapshots:
     dependencies:
       '@utrecht/component-library-react': 7.2.0(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 7.4.0
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
+
+  '@gemeente-denhaag/textarea@0.3.0-alpha.55(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@utrecht/component-library-react': 4.2.0(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/components': 6.1.0
       react: 18.3.1
     transitivePeerDependencies:
       - '@babel/runtime'

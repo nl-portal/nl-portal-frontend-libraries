@@ -11,7 +11,7 @@ import Header from "./Header";
 import Menu from "./Menu";
 import { PortalFooter } from "../interfaces/portal-footer";
 import Footer from "./Footer";
-import FormIoUploader from "./FormIoUploader";
+import FormIoUploader from "./formio/FormIoUploader";
 import styles from "./Layout.module.scss";
 import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router-dom";
@@ -19,6 +19,8 @@ import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";
 import { LayoutProvider } from "../contexts/LayoutContext";
+import FormIoTextInputWrapper from "./formio/FormIoTextInput";
+import FormIoTextAreaWrapper from "./formio/FormIoTextArea";
 
 interface LayoutComponentProps {
   navigationItems: NavigationItem[][];
@@ -51,7 +53,10 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   }
 
   useEffect(() => {
+    // TODO: iets slims voor bedenken, mogelijk iets van een Context waarbij .register in een loop aangeroepen kan worden.
     FormIoUploader.register();
+    FormIoTextInputWrapper.register();
+    FormIoTextAreaWrapper.register();
   }, []);
 
   return (
