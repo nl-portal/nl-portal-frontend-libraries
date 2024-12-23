@@ -2,15 +2,16 @@
 
 .user-name {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .user-name--mobile-menu {
+  width: 100%;
   background-color: var(--nlportal-mobile-menu-background-color, hsl(0 0% 95%));
   height: var(--nlportal-mobile-menu-element-height, 43px);
-  width: 100%;
-  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }

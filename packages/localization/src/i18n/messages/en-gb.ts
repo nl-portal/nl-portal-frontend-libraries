@@ -115,8 +115,8 @@ export const EN_GB_MESSAGES: Messages = {
     "task.paymentSuccessText":
       "You will receive a confirmation email as soon as possible.",
     "task.paymentSuccessTitle": "Success, you have paid.",
-    "overviewpage.title": "Welcome <span>{userName}</span>",
-    "overview.subTitle": "Authorised for {volmachtgever}",
+    "overviewpage.title": "Welcome",
+    "overview.subTitle": "Authorised for",
     "overviewpage.paragraph":
       "In the NL-portal you can arrange your personal affairs yourself when it suits you. For example, you can pay your bills and see when your application is ready.",
     "actionLabels.today": "today",
@@ -151,5 +151,9 @@ export const EN_GB_MESSAGES: Messages = {
     "searchForm.cases.searchButton": "Search",
     "searchForm.cases.totalElements": "{total} cases",
     "searchForm.cases.totalElements.singular": "{total} case",
+    "searchForm.messages.searchLabel": "Search for a message",
+    "searchForm.messages.searchButton": "Search",
+    "searchForm.messages.totalElements": "{total} messages",
+    "searchForm.messages.totalElements.singular": "{total} message",
   },
 };
