@@ -1,4 +1,5 @@
 import { Components } from "@formio/react";
+import TextInput from "@gemeente-denhaag/text-input";
 import { ExtendedComponentSchema, Formio } from "formiojs";
 import { ReactNode, useId } from "react";
 import { Container } from "react-dom/client";
@@ -10,57 +11,60 @@ import useFormIoState, {
   useFormIoStateProps,
 } from "./useFormIoState";
 import BaseFormIoComponent from "./BaseFormIoComponent";
-import Textarea from "@gemeente-denhaag/textarea";
+import { Paragraph } from "@gemeente-denhaag/typography";
+import Checkbox from "@gemeente-denhaag/checkbox";
 
-type FormIoTextAreaProps = BasicFormIoComponentSchema & useFormIoStateProps;
+type FormIoSingleCheckboxProps = BasicFormIoComponentSchema &
+  useFormIoStateProps;
 
-const FormIoTextArea = ({
+const FormIoSingleCheckbox = ({
   formioRef,
   onChange,
   disabled,
-  placeholder,
   label,
-}: FormIoTextAreaProps): ReactNode => {
+}: FormIoSingleCheckboxProps): ReactNode => {
   const [value, setValue] = useFormIoState({ formioRef, onChange });
-  const id = useId();
 
   return (
-    <FormField>
-      <FormLabel htmlFor={id}>{label}</FormLabel>
-      <Textarea
-        id={id}
-        value={value || ""}
-        disabled={disabled}
-        placeholder={placeholder}
-        onChange={(ev) => setValue(ev?.target?.value)}
-      />
+    <FormField type="checkbox">
+      <Paragraph className="utrecht-form-field__label utrecht-form-field__label--checkbox">
+        <FormLabel type="checkbox">
+          <Checkbox
+            name="consent"
+            className="utrecht-form-field__input"
+            value={value || ""}
+            disabled={disabled}
+            onChange={(ev) => setValue(ev?.target?.value)}
+          />
+          {label}
+        </FormLabel>
+      </Paragraph>
     </FormField>
   );
 };
 
-export default class FormIoTextAreaWrapper extends BaseFormIoComponent {
+export default class FormIoSingleCheckboxWrapper extends BaseFormIoComponent {
   static register: () => void = () => {
     Formio.use({
       components: {
-        textarea: FormIoTextAreaWrapper,
+        checkbox: FormIoSingleCheckboxWrapper,
       },
     });
   };
 
   static schema(sources: ExtendedComponentSchema = {}) {
     return Components.components.field.schema({
-      type: "textarea",
-      hideLabel: true,
+      type: "checkbox",
       ...sources,
     });
   }
 
   static get builderInfo() {
     return {
-      title: "Text Area",
+      title: "Checkbox",
       group: "basic",
-      key: "textarea",
-      schema: FormIoTextAreaWrapper.schema(),
+      key: "checkbox",
+      schema: FormIoSingleCheckboxWrapper.schema(),
     };
   }
 
@@ -70,7 +74,7 @@ export default class FormIoTextAreaWrapper extends BaseFormIoComponent {
   }
 
   attachReact(element: Container, ref: FormIoRefProp) {
-    super.attachReact(element, ref, FormIoTextArea);
+    super.attachReact(element, ref, FormIoSingleCheckbox);
   }
 
   detachReact(element: Container) {

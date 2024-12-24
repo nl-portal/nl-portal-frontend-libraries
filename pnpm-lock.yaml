@@ -306,6 +306,9 @@ importers:
       '@gemeente-denhaag/card':
         specifier: 0.2.4
         version: 0.2.4(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/checkbox':
+        specifier: 0.3.0-alpha.422
+        version: 0.3.0-alpha.422(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/contact-timeline':
         specifier: 0.1.2
         version: 0.1.2(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1289,6 +1292,11 @@ packages:
 
   '@gemeente-denhaag/card@0.2.4':
     resolution: {integrity: sha512-4O+Ipq1evrYWraqBmm+rtnMLjL0veadSaS2/JwI6/ru2Gy/HAY2cU/s0Pzk2siRddS82vlQN4Px3XKVykGHzxA==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/checkbox@0.3.0-alpha.422':
+    resolution: {integrity: sha512-OyQBTEeC10GvHcBUcu1q413QW5oWV+7/FpUP9gSjLLPBCCpiqCz/6nWzyFL/Q3OSpFd2KQTTOALY9XGNHedAdw==}
     peerDependencies:
       react: ^18.0.0
 
@@ -6726,6 +6734,18 @@ snapshots:
       '@gemeente-denhaag/link': 0.2.3(react@18.3.1)
       '@gemeente-denhaag/typography': 0.2.3(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/utils': 0.2.3-alpha.421(react@18.3.1)
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
+
+  '@gemeente-denhaag/checkbox@0.3.0-alpha.422(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@utrecht/component-library-react': 4.2.0(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/components': 6.1.0
       react: 18.3.1
     transitivePeerDependencies:
       - '@babel/runtime'

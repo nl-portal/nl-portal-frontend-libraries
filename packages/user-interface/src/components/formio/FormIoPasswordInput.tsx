@@ -1,4 +1,5 @@
 import { Components } from "@formio/react";
+import TextInput from "@gemeente-denhaag/text-input";
 import { ExtendedComponentSchema, Formio } from "formiojs";
 import { ReactNode, useId } from "react";
 import { Container } from "react-dom/client";
@@ -10,25 +11,25 @@ import useFormIoState, {
   useFormIoStateProps,
 } from "./useFormIoState";
 import BaseFormIoComponent from "./BaseFormIoComponent";
-import Textarea from "@gemeente-denhaag/textarea";
 
-type FormIoTextAreaProps = BasicFormIoComponentSchema & useFormIoStateProps;
+type FormIoPasswordInputProps = BasicFormIoComponentSchema & useFormIoStateProps;
 
-const FormIoTextArea = ({
+const FormIoPasswordInput = ({
   formioRef,
   onChange,
   disabled,
   placeholder,
   label,
-}: FormIoTextAreaProps): ReactNode => {
+}: FormIoPasswordInputProps): ReactNode => {
   const [value, setValue] = useFormIoState({ formioRef, onChange });
   const id = useId();
 
   return (
     <FormField>
       <FormLabel htmlFor={id}>{label}</FormLabel>
-      <Textarea
+      <TextInput
         id={id}
+        type="password"
         value={value || ""}
         disabled={disabled}
         placeholder={placeholder}
@@ -38,18 +39,18 @@ const FormIoTextArea = ({
   );
 };
 
-export default class FormIoTextAreaWrapper extends BaseFormIoComponent {
+export default class FormIoPasswordInputWrapper extends BaseFormIoComponent {
   static register: () => void = () => {
     Formio.use({
       components: {
-        textarea: FormIoTextAreaWrapper,
+        password: FormIoPasswordInputWrapper,
       },
     });
   };
 
   static schema(sources: ExtendedComponentSchema = {}) {
     return Components.components.field.schema({
-      type: "textarea",
+      type: "password",
       hideLabel: true,
       ...sources,
     });
@@ -57,10 +58,10 @@ export default class FormIoTextAreaWrapper extends BaseFormIoComponent {
 
   static get builderInfo() {
     return {
-      title: "Text Area",
+      title: "Password",
       group: "basic",
-      key: "textarea",
-      schema: FormIoTextAreaWrapper.schema(),
+      key: "password",
+      schema: FormIoPasswordInputWrapper.schema(),
     };
   }
 
@@ -70,7 +71,7 @@ export default class FormIoTextAreaWrapper extends BaseFormIoComponent {
   }
 
   attachReact(element: Container, ref: FormIoRefProp) {
-    super.attachReact(element, ref, FormIoTextArea);
+    super.attachReact(element, ref, FormIoPasswordInput);
   }
 
   detachReact(element: Container) {
