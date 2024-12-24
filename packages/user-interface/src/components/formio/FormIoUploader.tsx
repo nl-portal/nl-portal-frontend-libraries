@@ -1,6 +1,6 @@
 import { ReactComponent, Formio } from "@formio/react";
-import { formIoUploaderEditForm } from "./FormIoUploaderEditForm";
-import FileUpload, { UploadedFile } from "./FileUpload";
+import { formIoUploaderEditForm } from "../FormIoUploaderEditForm";
+import FileUpload, { UploadedFile } from "../FileUpload";
 import { Root, createRoot } from "react-dom/client";
 
 class FormIoUploader extends ReactComponent {

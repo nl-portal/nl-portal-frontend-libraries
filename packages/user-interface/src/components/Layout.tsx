@@ -11,7 +11,7 @@ import Header from "./Header";
 import Menu from "./Menu";
 import { PortalFooter } from "../interfaces/portal-footer";
 import Footer from "./Footer";
-import FormIoUploader from "./FormIoUploader";
+import FormIoUploader from "./formio/FormIoUploader";
 import styles from "./Layout.module.scss";
 import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router-dom";
@@ -19,6 +19,13 @@ import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";
 import { LayoutProvider } from "../contexts/LayoutContext";
+import FormIoTextInputWrapper from "./formio/FormIoTextInput";
+import FormIoTextAreaWrapper from "./formio/FormIoTextArea";
+import FormIoButtonWrapper from "./formio/FormIoButton";
+import FormIoNumberInputWrapper from "./formio/FormIoNumberInput";
+import FormIoPasswordInputWrapper from "./formio/FormIoPasswordInput";
+import FormIoSingleCheckboxWrapper from "./formio/FormIoSingleCheckbox";
+import FormIoMultipleCheckboxWrapper from "./formio/FormIoMultipleCheckbox";
 
 interface LayoutComponentProps {
   navigationItems: NavigationItem[][];
@@ -51,7 +58,15 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   }
 
   useEffect(() => {
+    // TODO: iets slims voor bedenken
     FormIoUploader.register();
+    FormIoTextInputWrapper.register();
+    FormIoNumberInputWrapper.register;
+    FormIoPasswordInputWrapper.register();
+    FormIoSingleCheckboxWrapper.register();
+    FormIoMultipleCheckboxWrapper.register();
+    FormIoTextAreaWrapper.register();
+    FormIoButtonWrapper.register();
   }, []);
 
   return (
