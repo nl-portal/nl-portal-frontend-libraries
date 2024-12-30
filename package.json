@@ -12,14 +12,18 @@
     "lint": "eslint \"packages/**/*.{js,jsx,ts,tsx}\"",
     "lint:css": "stylelint \"**/*.{css,scss}\"",
     "lint:fix": "eslint \"packages/**/*.{js,jsx,ts,tsx}\" --fix",
+    "postinstall": "husky",
     "preinstall": "npx only-allow pnpm",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "publish": "lerna publish from-package",
     "release": "lerna version prerelease --no-changelog --no-private --no-commit-hooks",
     "test": "pnpm run --recursive --parallel test",
+    "test-update": "pnpm lint && pnpm typecheck && pnpm build",
     "typecheck": "pnpm run --recursive --parallel typecheck",
-    "postinstall": "husky"
+    "update-patch": "npm-check-updates --configFileName .ncurc.patch.js",
+    "update-minor": "npm-check-updates --configFileName .ncurc.minor.js",
+    "update-major": "npm-check-updates --configFileName .ncurc.major.js"
   },
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
@@ -29,16 +33,17 @@
     "eslint": "^9.8.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react": "^7.35.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "globals": "^15.8.0",
-    "husky": "9.1.4",
-    "lint-staged": "15.2.7",
+    "husky": "9.1.7",
+    "lint-staged": "15.2.11",
+    "npm-check-updates": "^17.1.13",
     "prettier": "3.3.3",
-    "stylelint": "16.8.1",
+    "stylelint": "16.8.2",
     "stylelint-config-standard-scss": "13.1.0",
     "stylelint-order": "6.0.4",
-    "stylelint-selector-bem-pattern": "4.0.0",
+    "stylelint-selector-bem-pattern": "4.0.1",
     "typescript": "5.5.4"
   }
 }
