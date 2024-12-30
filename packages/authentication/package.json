@@ -35,10 +35,10 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "rimraf": "^6.0.1",
-    "typescript": "^5.5.4",
-    "vite": "^5.3.6",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
     "vite-plugin-dts": "^3.9.1",
-    "vitest": "^2.0.5"
+    "vitest": "^2.1.8"
   },
   "peerDependencies": {
     "@react-keycloak/web": "^3.4.0",
