@@ -7,7 +7,7 @@ import {
   KeycloakInitOptions,
   KeycloakOnLoad,
 } from "keycloak-js";
-import { FC, Fragment, useContext, useState, useEffect } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { formatUrlTrailingSlash } from "../utils/format-url-trailing-slash";
 import KeycloakContext from "../contexts/KeycloakContext";
@@ -127,34 +127,36 @@ const KeycloakProvider = ({
   };
 
   return (
-    <ReactKeycloakProvider
-      authClient={authClient}
-      initOptions={initOptions}
-      LoadingComponent={<Fragment />}
-      autoRefreshToken={autoRefreshToken}
-      onTokens={({ token }) => {
-        if (!token) return;
-        setKeycloakToken(token);
-        setDecodedToken(decodeToken(token));
-      }}
-      onEvent={(eventType) => {
-        if (eventType === "onAuthRefreshError") {
-          authClient.logout();
-        }
-      }}
-    >
-      {autoIdleSessionLogout && (
-        <IdleTimer
-          onTimerReset={updateToken}
-          idleTimeoutMinutes={idleTimeoutMinutes}
-        />
-      )}
-      {children}
-    </ReactKeycloakProvider>
+    <>
+      <ReactKeycloakProvider
+        authClient={authClient}
+        initOptions={initOptions}
+        LoadingComponent={<Fragment />}
+        autoRefreshToken={autoRefreshToken}
+        onTokens={({ token }) => {
+          if (!token) return;
+          setKeycloakToken(token);
+          setDecodedToken(decodeToken(token));
+        }}
+        onEvent={(eventType) => {
+          if (eventType === "onAuthRefreshError") {
+            authClient.logout();
+          }
+        }}
+      >
+        {autoIdleSessionLogout && (
+          <IdleTimer
+            onTimerReset={updateToken}
+            idleTimeoutMinutes={idleTimeoutMinutes}
+          />
+        )}
+        {children}
+      </ReactKeycloakProvider>
+    </>
   );
 };
 
-const KeycloakWrapper: FC<KeycloakWrapperProps> = (props) => {
+const KeycloakWrapper = (props: KeycloakWrapperProps) => {
   const [keycloakToken, setKeycloakToken] = useState("");
   const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
     undefined,

@@ -1,5 +1,4 @@
 import "@gemeente-denhaag/design-tokens-components";
-import "@nl-portal/nl-portal-user-interface/style.css";
 import "./styles/nl-portal-design-tokens.css";
 import { KeycloakWrapper } from "@nl-portal/nl-portal-authentication";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";

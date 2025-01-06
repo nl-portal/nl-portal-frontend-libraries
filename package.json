@@ -28,8 +28,8 @@
   "devDependencies": {
     "@commitlint/cli": "19.6.1",
     "@commitlint/config-conventional": "19.6.0",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
     "eslint": "^9.17.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -41,7 +41,7 @@
     "npm-check-updates": "^17.1.13",
     "prettier": "3.4.2",
     "stylelint": "16.12.0",
-    "stylelint-config-standard-scss": "13.1.0",
+    "stylelint-config-standard-scss": "14.0.0",
     "stylelint-order": "6.0.4",
     "stylelint-selector-bem-pattern": "4.0.1",
     "typescript": "5.7.2"

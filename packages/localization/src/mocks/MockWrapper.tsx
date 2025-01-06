@@ -2,10 +2,10 @@ import { IntlProvider } from "react-intl";
 import { DEFAULT_LOCALES } from "../i18n/default-locales";
 import { DEFAULT_MESSAGES } from "../i18n/messages/messages";
 import LocaleContext from "../contexts/LocaleContext";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const MockWrapper = ({ children }: Props) => {

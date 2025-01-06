@@ -1,5 +1,5 @@
 module.exports = {
-  dep: ["dev", "prod"],
+  dep: ["dev", "prod", "peer"],
   install: "always",
   reject: [],
   root: true,

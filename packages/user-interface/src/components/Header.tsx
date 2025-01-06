@@ -54,18 +54,24 @@ const Header = ({
   const [previousScrollY, setPreviousScrollY] = useState(0);
   const [headerFixed, setHeaderFixed] = useState(false);
   const [headerMarginTop, setHeaderMarginTop] = useState(0);
-  const headerContainerRef = React.useRef(null);
+  const headerContainerRef = React.useRef<HTMLDivElement>(null!);
   const [, height] = useSize(headerContainerRef);
   const scrollY = useScrollPosition(15);
   const MOBILE_HEADER_HEIGHT = facet ? 86 : 72;
-  const headerLogoElement = React.cloneElement(logo, {
-    className: styles["header__logo-image"],
-    alt: intl.formatMessage({ id: "app.appName" }),
-  });
-  const headerLogoSmallElement = React.cloneElement(logoSmall, {
-    className: styles["header__logo-image"],
-    alt: intl.formatMessage({ id: "app.appName" }),
-  });
+  const headerLogoElement = React.cloneElement(
+    logo as ReactElement<HTMLImageElement>,
+    {
+      className: styles["header__logo-image"],
+      alt: intl.formatMessage({ id: "app.appName" }),
+    },
+  );
+  const headerLogoSmallElement = React.cloneElement(
+    logoSmall as ReactElement<HTMLImageElement>,
+    {
+      className: styles["header__logo-image"],
+      alt: intl.formatMessage({ id: "app.appName" }),
+    },
+  );
   const headerLogoElementToUse =
     !isTablet && fullscreenForm ? headerLogoSmallElement : headerLogoElement;
   const online = !offline;
@@ -120,10 +126,10 @@ const Header = ({
 
   return (
     <div
+      ref={headerContainerRef}
       className={classNames(styles["header-container"], {
         [styles["header-container--fixed"]]: !isTablet && headerFixed,
       })}
-      ref={headerContainerRef}
       style={{ marginBlockStart: !isTablet ? -headerMarginTop : 0 }}
     >
       {fullscreenForm && <div className={styles["header-bar"]} />}
@@ -219,7 +225,7 @@ const Header = ({
         )}
         {facet && !fullscreenForm && (
           <div className={styles["header__facet-container"]}>
-            {React.cloneElement(facet, {
+            {React.cloneElement(facet as ReactElement<HTMLDivElement>, {
               className: styles["header__facet-image"],
             })}
           </div>

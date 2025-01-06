@@ -23,7 +23,9 @@ const MetaIcon: FC<MetaIconProps> = ({
 
   return (
     <div className={styles["meta-icon"]}>
-      {React.cloneElement(icon, { className: styles["meta-icon__icon"] })}
+      {React.cloneElement(icon as ReactElement<HTMLDivElement>, {
+        className: styles["meta-icon__icon"],
+      })}
       <Paragraph className={styles["meta-icon__paragraph"]}>{title}</Paragraph>
       <Paragraph
         className={classNames(

@@ -26,23 +26,23 @@
     "test:watch": "vitest --watch"
   },
   "dependencies": {
-    "@gemeente-denhaag/utils": "0.2.3-alpha.421",
+    "@gemeente-denhaag/utils": "1.0.0",
     "deepmerge": "^4.3.1",
-    "react-intl": "^6.8.9"
+    "react-intl": "^7.0.4"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react": "18",
+    "@types/react-dom": "18",
     "@vitejs/plugin-react": "^4.3.4",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
-    "vite-plugin-dts": "^3.9.1",
+    "vite-plugin-dts": "^4.4.0",
     "vitest": "^2.1.8"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "19",
+    "react-dom": "19"
   }
 }

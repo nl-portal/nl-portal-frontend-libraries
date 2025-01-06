@@ -1,6 +1,6 @@
-import * as React from "react";
+import React, { ReactElement } from "react";
 import { FormattedMessage } from "react-intl";
-import { FC, ReactElement, useContext } from "react";
+import { useContext } from "react";
 import { Link } from "@gemeente-denhaag/link";
 import { ExternalLinkIcon } from "@gemeente-denhaag/icons";
 import ResponsiveContent from "@gemeente-denhaag/responsive-content";
@@ -15,14 +15,14 @@ interface FooterProps {
   facet?: ReactElement;
 }
 
-const Footer: FC<FooterProps> = ({ footer, facet }) => {
+const Footer = ({ footer, facet }: FooterProps) => {
   const { hrefLang } = useContext(LocaleContext);
 
   return (
     <footer className={styles.footer}>
       {facet && (
         <div className={styles["footer__facet-container"]}>
-          {React.cloneElement(facet, {
+          {React.cloneElement(facet as ReactElement<HTMLDivElement>, {
             className: styles["footer__facet-image"],
           })}
         </div>
