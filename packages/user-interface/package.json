@@ -70,7 +70,7 @@
     "bootstrap": "^4.6.2",
     "classnames": "^2.5.1",
     "font-awesome": "4.7",
-    "formiojs": "^4.21.6",
+    "formiojs": "^4.20.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",
     "pretty-bytes": "^6.1.1",
@@ -92,7 +92,7 @@
     "rimraf": "^6.0.1",
     "sass": "^1.83.1",
     "typescript": "^5.7.2",
-    "vite": "^6.0.6",
+    "vite": "^5.4.11",
     "vite-plugin-dts": "^4.4.0",
     "vitest": "^2.1.8",
     "wait-on": "^8.0.1"
@@ -103,13 +103,9 @@
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
     "@react-keycloak/web": "^3.4.0",
-    "react": "19",
-    "react-dom": "19",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-intl": "^7.0.4",
     "react-router-dom": "^7.1.1"
-  },
-  "overrides": {
-    "react": "19",
-    "react-dom": "19"
   }
 }

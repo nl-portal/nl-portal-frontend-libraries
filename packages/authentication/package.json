@@ -36,14 +36,14 @@
     "@vitejs/plugin-react": "^4.3.4",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.2",
-    "vite": "^6.0.6",
+    "vite": "^5.4.11",
     "vite-plugin-dts": "^4.4.0",
     "vitest": "^2.1.8"
   },
   "peerDependencies": {
     "@react-keycloak/web": "^3.4.0",
-    "react": "19",
-    "react-dom": "19",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.1"
   }
 }
