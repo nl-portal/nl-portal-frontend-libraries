@@ -66,7 +66,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
     FormIoSingleCheckboxWrapper.register();
     FormIoMultipleCheckboxWrapper.register();
     FormIoTextAreaWrapper.register();
-    FormIoButtonWrapper.register();
+    //FormIoButtonWrapper.register();
   }, []);
 
   return (

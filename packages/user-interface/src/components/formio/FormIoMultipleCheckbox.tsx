@@ -1,5 +1,4 @@
 import { Components } from "@formio/react";
-import TextInput from "@gemeente-denhaag/text-input";
 import { ExtendedComponentSchema, Formio } from "formiojs";
 import { ReactNode, useId } from "react";
 import { Container } from "react-dom/client";
@@ -15,10 +14,41 @@ import { Paragraph } from "@gemeente-denhaag/typography";
 import Checkbox from "@gemeente-denhaag/checkbox";
 import Fieldset, { FieldsetLegend } from "@gemeente-denhaag/form-fieldset";
 
+type SelectboxesValue = {
+  label: string;
+  value: string | number;
+};
+
 type FormIoMultipleCheckboxProps = BasicFormIoComponentSchema &
   useFormIoStateProps & {
-    values: any[];
+    values: SelectboxesValue[];
   };
+
+type FormIoCheckboxProps = {
+  option: SelectboxesValue;
+  checked: boolean;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+};
+
+const FormIoCheckbox = ({ option, checked, onChange }: FormIoCheckboxProps) => {
+  const id = useId();
+  return (
+    <FormField type="checkbox">
+      <Paragraph className="utrecht-form-field__label utrecht-form-field__label--checkbox">
+        <FormLabel htmlFor={id} type="checkbox">
+          <Checkbox
+            aria-describedby={id}
+            className="utrecht-form-field__input"
+            name={String(option.value)}
+            checked={checked}
+            onChange={onChange}
+          />
+          {option.label}
+        </FormLabel>
+      </Paragraph>
+    </FormField>
+  );
+};
 
 const FormIoMultipleCheckbox = ({
   formioRef,
@@ -26,7 +56,20 @@ const FormIoMultipleCheckbox = ({
   values = [],
   label,
 }: FormIoMultipleCheckboxProps): ReactNode => {
-  const [value, setValue] = useFormIoState({ formioRef, onChange });
+  const [value, setValue] = useFormIoState<Record<string, boolean>>({
+    formioRef,
+    onChange,
+  });
+
+  const handleCheckboxChange = (
+    optionValue: string | number,
+    checked: boolean,
+  ) => {
+    setValue({
+      ...value,
+      [optionValue]: checked,
+    });
+  };
 
   return (
     <Fieldset>
@@ -34,23 +77,13 @@ const FormIoMultipleCheckbox = ({
         {label}
       </FieldsetLegend>
       {values.map((option) => (
-        <FormField type="checkbox">
-          <Paragraph className="utrecht-form-field__label utrecht-form-field__label--checkbox">
-            <FormLabel
-              htmlFor="4e054ee1-799e-4608-9055-19d3fc0b88e9"
-              type="checkbox"
-            >
-              <Checkbox
-                aria-describedby="4e054ee1-799e-4608-9055-19d3fc0b88e9-description"
-                className="utrecht-form-field__input"
-                id="4e054ee1-799e-4608-9055-19d3fc0b88e9"
-                name="phone"
-                value="true"
-              />
-              {option.label}
-            </FormLabel>
-          </Paragraph>
-        </FormField>
+        <FormIoCheckbox
+          option={option}
+          checked={value?.[option.value]}
+          onChange={(ev) =>
+            handleCheckboxChange(option.value, ev.target.checked)
+          }
+        />
       ))}
     </Fieldset>
   );

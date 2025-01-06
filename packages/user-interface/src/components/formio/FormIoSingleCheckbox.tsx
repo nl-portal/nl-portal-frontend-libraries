@@ -1,7 +1,6 @@
 import { Components } from "@formio/react";
-import TextInput from "@gemeente-denhaag/text-input";
 import { ExtendedComponentSchema, Formio } from "formiojs";
-import { ReactNode, useId } from "react";
+import { ReactNode } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import FormField from "@gemeente-denhaag/form-field";
@@ -23,7 +22,7 @@ const FormIoSingleCheckbox = ({
   disabled,
   label,
 }: FormIoSingleCheckboxProps): ReactNode => {
-  const [value, setValue] = useFormIoState({ formioRef, onChange });
+  const [value, setValue] = useFormIoState<boolean>({ formioRef, onChange });
 
   return (
     <FormField type="checkbox">
@@ -32,9 +31,9 @@ const FormIoSingleCheckbox = ({
           <Checkbox
             name="consent"
             className="utrecht-form-field__input"
-            value={value || ""}
+            checked={Boolean(value)}
             disabled={disabled}
-            onChange={(ev) => setValue(ev?.target?.value)}
+            onChange={(ev) => setValue(ev?.target?.checked)}
           />
           {label}
         </FormLabel>
