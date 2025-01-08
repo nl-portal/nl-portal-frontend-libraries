@@ -202,7 +202,7 @@ const TaskDetailsPage = () => {
   return (
     <>
       <BackLink />
-      <div className={styles.bootstrap}>
+      <div>
         <Form
           form={
             formDefinitionUrl?.getFormDefinitionByObjectenApiUrl
