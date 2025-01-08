@@ -363,6 +363,9 @@ importers:
       '@gemeente-denhaag/responsive-content':
         specifier: 0.1.1-alpha.282
         version: 0.1.1-alpha.282
+      '@gemeente-denhaag/select':
+        specifier: 0.3.0-alpha.19
+        version: 0.3.0-alpha.19(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/sidenav':
         specifier: 0.1.0-alpha.240
         version: 0.1.0-alpha.240(react@18.3.1)
@@ -1397,6 +1400,11 @@ packages:
 
   '@gemeente-denhaag/responsive-content@0.1.1-alpha.282':
     resolution: {integrity: sha512-mTMVWCqjQF1JbnA7AlQK0TpWm7uwLlWg/o4sHdWW0hPKHv2B+4DVGWkdAFW3C9wITFlhuJ4UHKiMUGbjIeECHA==}
+
+  '@gemeente-denhaag/select@0.3.0-alpha.19':
+    resolution: {integrity: sha512-xaO6KtLQpPekmo+vGllvvLl8rhLZ55CXuEtjWezbU/dIEIXboz89JeqsZgFNgCJqMOsv60mYXp8XDHjpXDCgNA==}
+    peerDependencies:
+      react: ^18.0.0
 
   '@gemeente-denhaag/sheet@0.1.0-alpha.218':
     resolution: {integrity: sha512-bA9kU3h2vW7Me/7WOvzZb+dBwrV0wiDioZEFQa2PyIwIMtnRCm2oZ4Y63LsQwLyXTQV6HoYL20ED+oqfD8zESg==}
@@ -6917,6 +6925,18 @@ snapshots:
       - vega
 
   '@gemeente-denhaag/responsive-content@0.1.1-alpha.282': {}
+
+  '@gemeente-denhaag/select@0.3.0-alpha.19(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@utrecht/component-library-react': 4.2.0(@babel/runtime@7.24.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/components': 6.1.0
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
 
   '@gemeente-denhaag/sheet@0.1.0-alpha.218(react@18.3.1)':
     dependencies:

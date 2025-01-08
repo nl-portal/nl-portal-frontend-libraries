@@ -56,6 +56,7 @@
     "@gemeente-denhaag/process-steps": "0.1.1",
     "@gemeente-denhaag/radio-button": "0.3.0-alpha.55",
     "@gemeente-denhaag/responsive-content": "0.1.1-alpha.282",
+    "@gemeente-denhaag/select": "0.3.0-alpha.19",
     "@gemeente-denhaag/sidenav": "0.1.0-alpha.240",
     "@gemeente-denhaag/status-badge": "0.3.0-alpha.28",
     "@gemeente-denhaag/stylesprovider": "0.1.1-alpha.422",

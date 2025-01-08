@@ -27,6 +27,7 @@ import FormIoPasswordInputWrapper from "./formio/FormIoPasswordInput";
 import FormIoSingleCheckboxWrapper from "./formio/FormIoSingleCheckbox";
 import FormIoMultipleCheckboxWrapper from "./formio/FormIoMultipleCheckbox";
 import FormIoRadioWrapper from "./formio/FormIoRadioButton";
+import FormIoSelectWrapper from "./formio/FormIoSelect";
 
 interface LayoutComponentProps {
   navigationItems: NavigationItem[][];
@@ -69,6 +70,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
     FormIoTextAreaWrapper.register();
     FormIoButtonWrapper.register();
     FormIoRadioWrapper.register();
+    FormIoSelectWrapper.register();
   }, []);
 
   return (
