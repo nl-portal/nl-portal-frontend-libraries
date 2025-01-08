@@ -5,13 +5,15 @@ import { ComponentType } from "react";
 
 export default class BaseFormIoComponent extends ReactComponent {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private component: any;
-  private root?: Root;
+  protected component: any;
+  protected data: object;
+  protected root?: Root;
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(component: any, options: object, data: object) {
     super(component, options, data);
     this.component = component;
+    this.data = data;
     this.component.hideLabel = true;
   }
 
@@ -28,6 +30,7 @@ export default class BaseFormIoComponent extends ReactComponent {
       this.root.render(
         <ComponentType
           key={key}
+          componentKey={key}
           formioRef={ref}
           onChange={this.updateValue}
           {...rest}
@@ -37,9 +40,9 @@ export default class BaseFormIoComponent extends ReactComponent {
 
   detachReact(element: Container) {
     super.detachReact(element);
-    if (element && this.root) {
-      this.root.unmount();
-    }
+    // if (element && this.root) {
+    //   this.root.unmount();
+    // }
   }
 
   // just a hack fix, TODO: fix on @formio/react

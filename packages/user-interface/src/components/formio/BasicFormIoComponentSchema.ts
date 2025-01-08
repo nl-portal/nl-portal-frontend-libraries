@@ -23,6 +23,11 @@ type BasicFormIoComponentSchema = {
    * Option to disable the input for this component
    */
   disabled?: boolean;
+
+  /**
+   * The key from FormIO, which should be used in for example the radio button group name, renamed to componentKey, so it doesn't cause conflicts with the React Key
+   */
+  componentKey?: string;
 };
 
 export default BasicFormIoComponentSchema;

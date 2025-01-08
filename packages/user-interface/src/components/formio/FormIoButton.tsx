@@ -1,17 +1,28 @@
 import { Components } from "@formio/react";
 import { ExtendedComponentSchema, Formio } from "formiojs";
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode, TouchEvent } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import { FormIoRefProp, useFormIoStateProps } from "./useFormIoState";
 import BaseFormIoComponent from "./BaseFormIoComponent";
 import Button from "@gemeente-denhaag/button";
 
-type FormIoButtonProps = BasicFormIoComponentSchema & useFormIoStateProps;
+type FormIoButtonProps = BasicFormIoComponentSchema &
+  useFormIoStateProps & {
+    onClick: (
+      event:
+        | React.MouseEvent<HTMLButtonElement>
+        | React.TouchEvent<HTMLButtonElement>,
+    ) => void;
+  };
 
-const FormIoButton = ({ disabled, label }: FormIoButtonProps): ReactNode => {
+const FormIoButton = ({
+  disabled,
+  label,
+  onClick,
+}: FormIoButtonProps): ReactNode => {
   return (
-    <Button disabled={disabled} type="submit">
+    <Button disabled={disabled} onClick={onClick}>
       {label}
     </Button>
   );
@@ -29,6 +40,7 @@ export default class FormIoButtonWrapper extends BaseFormIoComponent {
   static schema(sources: ExtendedComponentSchema = {}) {
     return Components.components.field.schema({
       type: "button",
+      action: 'submit',
       ...sources,
     });
   }
@@ -44,7 +56,16 @@ export default class FormIoButtonWrapper extends BaseFormIoComponent {
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(component: any, options: object, data: object) {
-    super(component, options, data);
+    const extraProps = {
+      onClick: (
+        event:
+          | React.MouseEvent<HTMLButtonElement>
+          | React.TouchEvent<HTMLButtonElement>,
+      ) => this.onClick(event),
+    };
+    super({ ...component, ...extraProps }, options, data);
+    console.log("action", this.component.action);
+    this.onClick = this.onClick.bind(this);
   }
 
   attachReact(element: Container, ref: FormIoRefProp) {
@@ -53,5 +74,43 @@ export default class FormIoButtonWrapper extends BaseFormIoComponent {
 
   detachReact(element: Container) {
     super.detachReact(element);
+  }
+
+  onClick(
+    event:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.TouchEvent<HTMLButtonElement>,
+  ) {
+    event.preventDefault();
+    console.log("action2", this.component.action);
+
+    // The default "action" can be "submit", "event", "reset", "cancel", etc.
+    // The "action" property is stored in this.component.action
+    switch (this.component.action) {
+      case "submit":
+        // triggers a form submission
+
+        (this as any).emit("submitButton");
+        break;
+      case "event":
+        // triggers a custom event
+        (this as any).emit("customEvent", {
+          type: this.component.event,
+          component: this.component,
+          data: this.data,
+        });
+        break;
+      case "reset":
+        (this as any).emit("resetForm");
+        break;
+      case "cancel":
+        (this as any).emit("cancel");
+        break;
+      default:
+        // Custom actions or fallback
+        console.log("Unhandled button action:", this.component.action);
+        (this as any).emit("submitButton"); // appearantly, the button in the Den Haag forms don't have an action (which should be mandatory)
+        break;
+    }
   }
 }
