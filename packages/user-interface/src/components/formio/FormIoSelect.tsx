@@ -1,6 +1,6 @@
 import { Components } from "@formio/react";
 import { ExtendedComponentSchema, Formio } from "formiojs";
-import { ReactNode, useId } from "react";
+import { ChangeEvent, ReactNode, useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import FormField from "@gemeente-denhaag/form-field";
@@ -15,7 +15,9 @@ import Select, { SelectOption } from "@gemeente-denhaag/select";
 type FormIoSelectProps = BasicFormIoComponentSchema &
   useFormIoStateProps & {
     data: any;
+    multiple?: boolean;
   };
+
 const FormIoSelect = ({
   formioRef,
   onChange,
@@ -23,17 +25,35 @@ const FormIoSelect = ({
   placeholder,
   disabled,
   label,
+  multiple,
   componentKey,
 }: FormIoSelectProps): ReactNode => {
-  const [value, setValue] = useFormIoState({ formioRef, onChange });
+  const [value, setValue] = useFormIoState<string | string[]>({
+    formioRef,
+    onChange,
+  });
   const id = useId();
+
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    if (multiple) {
+      setValue(
+        Array.from(event?.target?.selectedOptions || []).map(
+          (option) => option.value,
+        ),
+      );
+    } else {
+      setValue(event?.target?.value);
+    }
+  };
+
   return (
     <FormField className="denhaag-form-field--flex">
       <FormLabel htmlFor={id}>{label}</FormLabel>
       <Select
         id={id}
         disabled={disabled}
-        onChange={(ev) => setValue(ev?.target?.value)}
+        multiple={multiple}
+        onChange={handleChange}
         value={value || ""}
       >
         <SelectOption key={`${componentKey}-placeholder`}>
