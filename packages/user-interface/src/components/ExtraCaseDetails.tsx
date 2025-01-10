@@ -45,6 +45,20 @@ export interface Content {
   description?: string;
 }
 
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isExtraCaseDetailsObject = (item: any) => {
+  return (
+    typeof item === "object" &&
+    item !== null &&
+    "type" in item &&
+    typeof (item as Details).type === "string" &&
+    "heading" in item &&
+    typeof (item as Details).heading === "string" &&
+    "items" in item &&
+    typeof (item as Details).items === "object"
+  );
+};
+
 export const ExtraCaseDetails = ({ data }: Props) => {
   const { formatDate } = useDateFormatter();
 
@@ -96,8 +110,11 @@ export const ExtraCaseDetails = ({ data }: Props) => {
 
   const renderDetails = (details: Details[], isChild = false): ReactNode[] =>
     details.map((detail) => {
-      const { type, heading, items, children } = detail;
+      if (!isExtraCaseDetailsObject(detail)) {
+        return null;
+      }
 
+      const { type, heading, items, children } = detail;
       switch (type) {
         case DetailType.TABLE:
           return (
