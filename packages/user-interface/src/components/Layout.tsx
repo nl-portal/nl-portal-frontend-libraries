@@ -60,7 +60,6 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   }
 
   useEffect(() => {
-    // TODO: iets slims voor bedenken
     FormIoUploader.register();
     FormIoTextInputWrapper.register();
     FormIoNumberInputWrapper.register;

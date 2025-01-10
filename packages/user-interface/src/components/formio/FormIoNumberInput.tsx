@@ -1,7 +1,7 @@
 import { Components } from "@formio/react";
 import TextInput from "@gemeente-denhaag/text-input";
 import { ExtendedComponentSchema, Formio } from "formiojs";
-import { ReactNode, useId } from "react";
+import { useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import FormField from "@gemeente-denhaag/form-field";
@@ -20,7 +20,7 @@ const FormIoNumberInput = ({
   disabled,
   placeholder,
   label,
-}: FormIoNumberInputProps): ReactNode => {
+}: FormIoNumberInputProps) => {
   const [value, setValue] = useFormIoState({ formioRef, onChange });
   const id = useId();
 

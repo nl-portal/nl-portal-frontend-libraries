@@ -1,6 +1,5 @@
 import { Components } from "@formio/react";
 import { ExtendedComponentSchema, Formio } from "formiojs";
-import { ReactNode } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import { FormIoRefProp, useFormIoStateProps } from "./useFormIoState";
@@ -16,11 +15,7 @@ type FormIoButtonProps = BasicFormIoComponentSchema &
     ) => void;
   };
 
-const FormIoButton = ({
-  disabled,
-  label,
-  onClick,
-}: FormIoButtonProps): ReactNode => {
+const FormIoButton = ({ disabled, label, onClick }: FormIoButtonProps) => {
   return (
     <Button disabled={disabled} onClick={onClick}>
       {label}

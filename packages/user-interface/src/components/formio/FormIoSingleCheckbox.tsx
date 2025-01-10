@@ -1,6 +1,5 @@
 import { Components } from "@formio/react";
 import { ExtendedComponentSchema, Formio } from "formiojs";
-import { ReactNode } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import FormField from "@gemeente-denhaag/form-field";
@@ -21,7 +20,7 @@ const FormIoSingleCheckbox = ({
   onChange,
   disabled,
   label,
-}: FormIoSingleCheckboxProps): ReactNode => {
+}: FormIoSingleCheckboxProps) => {
   const [value, setValue] = useFormIoState<boolean>({ formioRef, onChange });
 
   return (

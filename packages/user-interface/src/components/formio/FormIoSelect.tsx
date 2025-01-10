@@ -1,6 +1,6 @@
 import { Components } from "@formio/react";
 import { ExtendedComponentSchema, Formio } from "formiojs";
-import { ChangeEvent, ReactNode, useId } from "react";
+import { ChangeEvent, useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import FormField from "@gemeente-denhaag/form-field";
@@ -27,7 +27,7 @@ const FormIoSelect = ({
   label,
   multiple,
   componentKey,
-}: FormIoSelectProps): ReactNode => {
+}: FormIoSelectProps) => {
   const [value, setValue] = useFormIoState<string | string[]>({
     formioRef,
     onChange,

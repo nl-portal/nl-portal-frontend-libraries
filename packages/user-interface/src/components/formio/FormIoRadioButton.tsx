@@ -1,6 +1,6 @@
 import { Components } from "@formio/react";
 import { ExtendedComponentSchema, Formio } from "formiojs";
-import { ReactNode, useId } from "react";
+import { useId } from "react";
 import { Container } from "react-dom/client";
 
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
@@ -63,7 +63,7 @@ const FormIoRadio = ({
   componentKey,
   values = [],
   label,
-}: FormIoRadioProps): ReactNode => {
+}: FormIoRadioProps) => {
   const [value, setValue] = useFormIoState<string | number>({
     formioRef,
     onChange,

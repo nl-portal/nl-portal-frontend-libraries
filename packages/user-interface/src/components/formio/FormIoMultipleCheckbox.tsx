@@ -1,6 +1,6 @@
 import { Components } from "@formio/react";
 import { ExtendedComponentSchema, Formio } from "formiojs";
-import { ReactNode, useId } from "react";
+import { useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import FormField from "@gemeente-denhaag/form-field";
@@ -55,7 +55,7 @@ const FormIoMultipleCheckbox = ({
   onChange,
   values = [],
   label,
-}: FormIoMultipleCheckboxProps): ReactNode => {
+}: FormIoMultipleCheckboxProps) => {
   const [value, setValue] = useFormIoState<Record<string, boolean>>({
     formioRef,
     onChange,
