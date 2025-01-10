@@ -37,7 +37,7 @@ const FormIoCheckbox = ({ option, checked, onChange }: FormIoCheckboxProps) => {
       <Paragraph className="utrecht-form-field__label utrecht-form-field__label--checkbox">
         <FormLabel htmlFor={id} type="checkbox">
           <Checkbox
-            aria-describedby={id}
+            id={id}
             className="utrecht-form-field__input"
             name={String(option.value)}
             checked={checked}

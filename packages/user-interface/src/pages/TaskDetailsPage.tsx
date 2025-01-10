@@ -14,7 +14,7 @@ import {
 import "font-awesome/css/font-awesome.min.css";
 import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
-import "./TaskDetailsPage.module.scss";
+import styles from "./TaskDetailsPage.module.scss";
 import { useParams } from "react-router-dom";
 import BackLink from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
@@ -202,7 +202,7 @@ const TaskDetailsPage = () => {
   return (
     <>
       <BackLink />
-      <div>
+      <div className={styles["task-details-page"]}>
         <Form
           form={
             formDefinitionUrl?.getFormDefinitionByObjectenApiUrl
