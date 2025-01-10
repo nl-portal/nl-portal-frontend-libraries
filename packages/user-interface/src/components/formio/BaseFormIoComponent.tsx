@@ -38,9 +38,4 @@ export default class BaseFormIoComponent extends ReactComponent {
   detachReact(element: Container) {
     super.detachReact(element);
   }
-
-  // just a hack fix, TODO: fix on @formio/react
-  triggerRootChange(...args: any) {
-    console.log(args);
-  }
 }
