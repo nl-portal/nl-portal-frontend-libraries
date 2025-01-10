@@ -12,7 +12,8 @@ import useFormIoState, {
 } from "./useFormIoState";
 import BaseFormIoComponent from "./BaseFormIoComponent";
 
-type FormIoPasswordInputProps = BasicFormIoComponentSchema & useFormIoStateProps;
+type FormIoPasswordInputProps = BasicFormIoComponentSchema &
+  useFormIoStateProps;
 
 const FormIoPasswordInput = ({
   formioRef,
@@ -65,7 +66,6 @@ export default class FormIoPasswordInputWrapper extends BaseFormIoComponent {
     };
   }
 
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(component: any, options: object, data: object) {
     super(component, options, data);
   }

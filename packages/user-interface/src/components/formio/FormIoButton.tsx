@@ -1,6 +1,6 @@
 import { Components } from "@formio/react";
 import { ExtendedComponentSchema, Formio } from "formiojs";
-import { MouseEvent, ReactNode, TouchEvent } from "react";
+import { ReactNode } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import { FormIoRefProp, useFormIoStateProps } from "./useFormIoState";
@@ -40,7 +40,7 @@ export default class FormIoButtonWrapper extends BaseFormIoComponent {
   static schema(sources: ExtendedComponentSchema = {}) {
     return Components.components.field.schema({
       type: "button",
-      action: 'submit',
+      action: "submit",
       ...sources,
     });
   }
@@ -54,7 +54,6 @@ export default class FormIoButtonWrapper extends BaseFormIoComponent {
     };
   }
 
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(component: any, options: object, data: object) {
     const extraProps = {
       onClick: (

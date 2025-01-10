@@ -64,7 +64,6 @@ export default class FormIoTextAreaWrapper extends BaseFormIoComponent {
     };
   }
 
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(component: any, options: object, data: object) {
     super(component, options, data);
   }

@@ -76,4 +76,11 @@ export default [
       ...reactRule,
     },
   },
+  {
+    files: ["packages/user-interface/src/components/formio/**/*.{ts,tsx}"],
+    rules: {
+      // Disable the rule inside this folder
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
 ];

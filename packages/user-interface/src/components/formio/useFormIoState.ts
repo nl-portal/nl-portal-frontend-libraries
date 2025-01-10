@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 
 export type FormIoRefState<T = any> = {
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   setState: ({ value }: { value: T }) => void;
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   state: { value: T };
 };
 
@@ -11,7 +9,6 @@ export type FormIoRefProp<T = any> = (element: FormIoRefState<T>) => void;
 
 export type useFormIoStateProps<T = any> = {
   formioRef: FormIoRefProp<T>;
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: (value: T, flags?: any) => void;
 };
 

@@ -4,11 +4,9 @@ import FileUpload, { UploadedFile } from "../FileUpload";
 import { Root, createRoot } from "react-dom/client";
 
 class FormIoUploader extends ReactComponent {
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   private component: any;
   private element: Root | null;
 
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(component: any, options: any, data: any) {
     super(component, options, data);
     this.component = component;

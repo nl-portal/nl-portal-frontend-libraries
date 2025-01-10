@@ -78,6 +78,7 @@ const FormIoMultipleCheckbox = ({
       </FieldsetLegend>
       {values.map((option) => (
         <FormIoCheckbox
+          key={option.value}
           option={option}
           checked={value?.[option.value]}
           onChange={(ev) =>
@@ -114,7 +115,6 @@ export default class FormIoMultipleCheckboxWrapper extends BaseFormIoComponent {
     };
   }
 
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(component: any, options: object, data: object) {
     super(component, options, data);
   }
