@@ -111,6 +111,7 @@ const TaskDetailsPage = () => {
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
+    if (submissionData === null) return null;
     const keys = Object.keys(submissionData);
     let prefillData: any = {};
     const arrayPrefilledData: any = [];

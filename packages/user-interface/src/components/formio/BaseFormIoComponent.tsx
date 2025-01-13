@@ -38,4 +38,9 @@ export default class BaseFormIoComponent extends ReactComponent {
   detachReact(element: Container) {
     super.detachReact(element);
   }
+
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  // @ts-expect-error: TS6133
+  triggerRootChange(...args: any) {}
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 }

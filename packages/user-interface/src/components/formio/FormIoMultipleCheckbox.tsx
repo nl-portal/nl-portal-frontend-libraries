@@ -80,7 +80,7 @@ const FormIoMultipleCheckbox = ({
         <FormIoCheckbox
           key={option.value}
           option={option}
-          checked={value?.[option.value]}
+          checked={Boolean(value?.[option.value])}
           onChange={(ev) =>
             handleCheckboxChange(option.value, ev.target.checked)
           }
