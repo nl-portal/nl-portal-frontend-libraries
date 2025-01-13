@@ -74,8 +74,7 @@ const TaskDetailsPage = () => {
         );
       } catch (err) {
         console.error(err);
-        console.log(setError);
-        //setError(true);
+        setError(true);
       }
 
       if (task.getTaakByIdV2.portaalformulier.formulier.soort === "url") {
