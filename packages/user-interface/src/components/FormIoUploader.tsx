@@ -6,6 +6,7 @@ import { Root, createRoot } from "react-dom/client";
 class FormIoUploader extends ReactComponent {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   private component: any;
+  private data: object | undefined;
   private element: Root | null;
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,6 +14,7 @@ class FormIoUploader extends ReactComponent {
     super(component, options, data);
     this.component = component;
     this.element = null;
+    this.data = data;
 
     if (this.component.multipleFiles === undefined) {
       this.component.multipleFiles = true;
@@ -54,12 +56,14 @@ class FormIoUploader extends ReactComponent {
       files.map((file) => file.url),
       undefined,
     );
+    this.render();
   };
 
   attachReact = (element: Element) => {
     this.element = createRoot(element);
     this.element.render(
       <FileUpload
+        context={this.data}
         disabled={this.component.disabled}
         multiple={this.component.multipleFiles}
         onChange={this.onChangeHandler}

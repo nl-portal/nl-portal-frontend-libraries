@@ -1,6 +1,7 @@
-import React from "react";
-import { Fragment, FC, useState, useEffect } from "react";
-import { TOKEN_OBJECT, TOKEN_KEY } from "@nl-portal/nl-portal-api";
+import React, { FC, Fragment, useEffect, useState } from "react";
+import { Utils } from "@formio/react";
+import { TOKEN_KEY, TOKEN_OBJECT } from "@nl-portal/nl-portal-api";
+import _ = Utils._;
 
 export interface UploadedFile {
   url: string;
@@ -9,6 +10,7 @@ export interface UploadedFile {
 }
 
 interface FileUploadProps {
+  context?: object | undefined;
   disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
@@ -16,6 +18,7 @@ interface FileUploadProps {
 }
 
 const FileUpload: FC<FileUploadProps> = ({
+  context,
   disabled,
   multiple,
   onChange,
@@ -23,6 +26,7 @@ const FileUpload: FC<FileUploadProps> = ({
 }) => {
   const [isLoading, setLoading] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>([]);
+  const [dataContext, setDataContext] = useState<object | undefined>(undefined);
 
   const uploadFile = (file: File) => {
     const keycloakToken = TOKEN_OBJECT[TOKEN_KEY];
@@ -33,7 +37,10 @@ const FileUpload: FC<FileUploadProps> = ({
     formData.append("file", file);
 
     if (informatieobjecttype) {
-      formData.append("informatieobjecttype", informatieobjecttype);
+      formData.append(
+        "informatieobjecttype",
+        interpolateInformatieobjectUrl(informatieobjecttype),
+      );
     }
 
     fetch(uploadLink, {
@@ -61,6 +68,10 @@ const FileUpload: FC<FileUploadProps> = ({
   };
 
   useEffect(() => {
+    setDataContext(context);
+  }, [context]);
+
+  useEffect(() => {
     onChange(fileList);
   }, [fileList]);
 
@@ -69,6 +80,20 @@ const FileUpload: FC<FileUploadProps> = ({
       Array.from(event.target.files).forEach((file) => uploadFile(file));
     }
   };
+
+  function interpolateInformatieobjectUrl(url: string) {
+    if (dataContext) {
+      return url.replace(
+        /({{\s*(.*?)\s*}})/g,
+        (input, _capturedTemplate, capturedPath) => {
+          let value = _.get(dataContext, capturedPath);
+          return value ? value : input;
+        },
+      );
+    } else {
+      return url;
+    }
+  }
 
   return (
     <div>
