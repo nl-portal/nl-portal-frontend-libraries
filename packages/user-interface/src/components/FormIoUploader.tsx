@@ -56,7 +56,6 @@ class FormIoUploader extends ReactComponent {
       files.map((file) => file.url),
       undefined,
     );
-    this.render();
   };
 
   attachReact = (element: Element) => {
