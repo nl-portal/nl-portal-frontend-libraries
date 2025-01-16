@@ -10,7 +10,7 @@ export interface UploadedFile {
 }
 
 interface FileUploadProps {
-  context?: object;
+  context: object;
   disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
