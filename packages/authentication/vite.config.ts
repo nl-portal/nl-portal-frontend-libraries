@@ -18,7 +18,7 @@ export default defineConfig({
         "react",
         "react-dom",
         "react-router-dom",
-        "@react-keycloak/web",
+        "react-oidc-context",
       ],
       output: {
         entryFileNames: "[name].js",
