@@ -26,7 +26,7 @@ const FileUpload: FC<FileUploadProps> = ({
 }) => {
   const [isLoading, setLoading] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>([]);
-  const [dataContext, setDataContext] = useState<object | undefined>(undefined);
+  const [dataContext, setDataContext] = useState(context);
 
   const uploadFile = (file: File) => {
     const keycloakToken = TOKEN_OBJECT[TOKEN_KEY];
