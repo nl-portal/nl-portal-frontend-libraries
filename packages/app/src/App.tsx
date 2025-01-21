@@ -1,7 +1,10 @@
 import "@gemeente-denhaag/design-tokens-components";
 import "@nl-portal/nl-portal-user-interface/style.css";
 import "./styles/nl-portal-design-tokens.css";
-import { KeycloakWrapper } from "@nl-portal/nl-portal-authentication";
+import {
+  formatUrlTrailingSlash,
+  KeycloakWrapper,
+} from "@nl-portal/nl-portal-authentication";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 import { ApiProvider } from "@nl-portal/nl-portal-api";
 import {
@@ -30,9 +33,29 @@ const authenticationMethods = {
 const App = () => {
   const enableMessagesCount = useEnableMessagesCount(menuItems);
 
+  const keycloakPath = new URL(config.KEYCLOAK_REDIRECT_URI).pathname;
+  const redirectUrl = new URL(window.location.href);
+  const redirectPath = redirectUrl.pathname + redirectUrl.search;
+  const redirectParam =
+    redirectPath !== "/" && redirectPath !== keycloakPath
+      ? `?redirect_url=${encodeURIComponent(redirectPath)}`
+      : "";
+  console.log("redirectparam:", redirectParam);
+  const oidcConfig = {
+    authority: `${config.KEYCLOAK_URL}/realms/${config.KEYCLOAK_REALM}`,
+    client_id: config.KEYCLOAK_CLIENT_ID,
+    redirect_uri: formatUrlTrailingSlash(
+      config.KEYCLOAK_REDIRECT_URI + redirectParam,
+      false,
+    ),
+    scope: "openid profile email", // configure your scopes
+    automaticSilentRenew: false,
+  };
+
   return (
     <div className={config.THEME_CLASS}>
       <KeycloakWrapper
+        oidcConfig={oidcConfig}
         clientId={config.KEYCLOAK_CLIENT_ID}
         realm={config.KEYCLOAK_REALM}
         url={config.KEYCLOAK_URL}

@@ -7,11 +7,14 @@ import {
   KeycloakInitOptions,
   KeycloakOnLoad,
 } from "keycloak-js";
+import { AuthProvider, AuthProviderProps, useAuth } from "react-oidc-context";
+import { InMemoryWebStorage, User, WebStorageStateStore } from "oidc-client-ts";
 import { FC, Fragment, useContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { formatUrlTrailingSlash } from "../utils/format-url-trailing-slash";
 import KeycloakContext from "../contexts/KeycloakContext";
 import { DecodedToken } from "../interfaces/decoded-token";
+import ProtectedApp from "./ProtectedApp";
 
 export type AuthenticationMethods = {
   person?: string[];
@@ -19,7 +22,15 @@ export type AuthenticationMethods = {
   proxy?: string[];
 };
 
+export type OidcConfig = {
+  authority: string;
+  client_id: string;
+  redirect_uri: string;
+  scope: string;
+};
+
 interface KeycloakWrapperProps extends KeycloakConfig {
+  oidcConfig: OidcConfig;
   children: React.ReactNode;
   redirectUri: string;
   autoRefreshToken?: boolean;
@@ -87,6 +98,7 @@ const IdleTimer = ({ idleTimeoutMinutes, onTimerReset }: IdleTimerProps) => {
 };
 
 const KeycloakProvider = ({
+  oidcConfig,
   children,
   url,
   clientId,
@@ -99,58 +111,79 @@ const KeycloakProvider = ({
   onLoad = "login-required",
 }: KeycloakWrapperProps) => {
   const { setKeycloakToken, setDecodedToken } = useContext(KeycloakContext);
-  const keycloakPath = new URL(redirectUri).pathname;
-  const redirectUrl = new URL(window.location.href);
-  const redirectPath = redirectUrl.pathname + redirectUrl.search;
-  const redirectParam =
-    redirectPath !== "/" && redirectPath !== keycloakPath
-      ? `?redirect_url=${encodeURIComponent(redirectPath)}`
-      : "";
-  const { current: initOptions } = useRef<KeycloakInitOptions>({
-    checkLoginIframe: false,
-    onLoad,
-    flow: "standard",
-    redirectUri: formatUrlTrailingSlash(redirectUri + redirectParam, false),
-  });
-  const { current: authClient } = useRef(
-    new Keycloak({
-      url: formatUrlTrailingSlash(`${url}`, false),
-      clientId,
-      realm,
-    }),
-  );
+  // const keycloakPath = new URL(redirectUri).pathname;
+  // const redirectUrl = new URL(window.location.href);
+  // const redirectPath = redirectUrl.pathname + redirectUrl.search;
+  // const redirectParam =
+  //   redirectPath !== "/" && redirectPath !== keycloakPath
+  //     ? `?redirect_url=${encodeURIComponent(redirectPath)}`
+  //     : "";
+  // const { current: initOptions } = useRef<KeycloakInitOptions>({
+  //   checkLoginIframe: false,
+  //   onLoad,
+  //   flow: "standard",
+  //   redirectUri: formatUrlTrailingSlash(redirectUri + redirectParam, false),
+  // });
+  // const { current: authClient } = useRef(
+  //   new Keycloak({
+  //     url: formatUrlTrailingSlash(`${url}`, false),
+  //     clientId,
+  //     realm,
+  //   }),
+  // );
+  // const updateToken = () => {
+  //   if (authClient.token) {
+  //     authClient.updateToken(minValiditySeconds);
+  //   }
+  // };
+
   const decodeToken = (jwtToken: string) => jwtDecode<DecodedToken>(jwtToken);
-  const updateToken = () => {
-    if (authClient.token) {
-      authClient.updateToken(minValiditySeconds);
-    }
+
+  const onSigninCallback = (user: User | undefined) => {
+    // e.g. remove query params once logged in
+    window.history.replaceState({}, document.title, window.location.pathname);
+
+    if (!user?.access_token) return;
+    setKeycloakToken(user?.access_token);
+    setDecodedToken(decodeToken(user?.access_token));
+
   };
 
+  
   return (
-    <ReactKeycloakProvider
-      authClient={authClient}
-      initOptions={initOptions}
-      LoadingComponent={<Fragment />}
-      autoRefreshToken={autoRefreshToken}
-      onTokens={({ token }) => {
-        if (!token) return;
-        setKeycloakToken(token);
-        setDecodedToken(decodeToken(token));
-      }}
-      onEvent={(eventType) => {
-        if (eventType === "onAuthRefreshError") {
-          authClient.logout();
-        }
-      }}
-    >
-      {autoIdleSessionLogout && (
+    <AuthProvider {...oidcConfig} onSigninCallback={onSigninCallback}>
+      {/* {autoIdleSessionLogout && (
         <IdleTimer
           onTimerReset={updateToken}
           idleTimeoutMinutes={idleTimeoutMinutes}
         />
-      )}
-      {children}
-    </ReactKeycloakProvider>
+      )} */}
+      <ProtectedApp>{children}</ProtectedApp>
+    </AuthProvider>
+    // <ReactKeycloakProvider
+    //   authClient={authClient}
+    //   initOptions={initOptions}
+    //   LoadingComponent={<Fragment />}
+    //   autoRefreshToken={autoRefreshToken}
+    //   onTokens={({ token }) => {
+    //     if (!token) return;
+    //     setKeycloakToken(token);
+    //     setDecodedToken(decodeToken(token));
+    //   }}
+    //   onEvent={(eventType) => {
+    //     if (eventType === "onAuthRefreshError") {
+    //       authClient.logout();
+    //     }
+    //   }}
+    // >
+    //   {autoIdleSessionLogout && (
+    //     <IdleTimer
+    //       onTimerReset={updateToken}
+    //       idleTimeoutMinutes={idleTimeoutMinutes}
+    //     />
+    //   )}
+    //   {children}
+    // </ReactKeycloakProvider>
   );
 };
 
