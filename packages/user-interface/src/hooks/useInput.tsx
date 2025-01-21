@@ -1,18 +1,27 @@
 import { ChangeEvent, useEffect, useState } from "react";
 
-const useInput = (
-  defaultValue: string,
-  validationFn: (value: string) => boolean,
-) => {
+export type Validation = {
+  validationFn: (value: string) => boolean;
+  errorTranslationId: string;
+};
+
+const useInput = (defaultValue: string, validations: Validation[]) => {
   const [enteredValue, setEnteredValue] = useState(defaultValue);
   const [didEdit, setDidEdit] = useState(false);
-  const [valueIsValid, setValueIsValid] = useState(true);
+  const [errorTranslationId, setErrorTranslationId] = useState("");
 
   useEffect(() => {
-    setValueIsValid(validationFn(enteredValue));
-  }, [enteredValue, validationFn]);
+    setErrorTranslationId(
+      validations.find((validation) => !validation.validationFn(enteredValue))
+        ?.errorTranslationId || "",
+    );
+  }, [enteredValue, validations]);
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     setEnteredValue(event.target.value);
     setDidEdit(false);
   };
@@ -25,7 +34,8 @@ const useInput = (
     value: enteredValue,
     handleInputChange,
     handleInputBlur,
-    hasError: didEdit && !valueIsValid,
+    hasError: didEdit && Boolean(errorTranslationId),
+    errorTranslationId: errorTranslationId,
   };
 };
 
