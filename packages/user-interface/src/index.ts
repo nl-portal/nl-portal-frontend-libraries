@@ -34,6 +34,8 @@ export { default as useOgonePayment } from "./hooks/useOgonePayment";
 export { default as useOgonePaymentRegistration } from "./hooks/useOgonePaymentRegistration";
 export * from "./hooks/useOgonePaymentRegistration";
 export { default as useUserInfo } from "./hooks/useUserInfo";
+export { default as useInput } from "./hooks/useInput";
+export * from "./hooks/useInput";
 
 export { default as AccountPage } from "./pages/AccountPage";
 export { default as CaseDetailsPage } from "./pages/CaseDetailsPage";

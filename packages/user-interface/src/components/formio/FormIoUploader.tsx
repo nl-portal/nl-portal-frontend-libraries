@@ -5,12 +5,14 @@ import { Root, createRoot } from "react-dom/client";
 
 class FormIoUploader extends ReactComponent {
   private component: any;
+  private data: object;
   private element: Root | null;
 
   constructor(component: any, options: any, data: any) {
     super(component, options, data);
     this.component = component;
     this.element = null;
+    this.data = data;
 
     if (this.component.multipleFiles === undefined) {
       this.component.multipleFiles = true;
@@ -58,6 +60,7 @@ class FormIoUploader extends ReactComponent {
     this.element = createRoot(element);
     this.element.render(
       <FileUpload
+        context={this.data}
         disabled={this.component.disabled}
         multiple={this.component.multipleFiles}
         onChange={this.onChangeHandler}
