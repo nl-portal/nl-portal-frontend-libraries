@@ -60,7 +60,6 @@ jobs:
   publish-npm:
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref_name == 'master' || github.ref_name == 'feature/hackathon'
     steps:
       - name: Generate github app token
         id: generate_token
