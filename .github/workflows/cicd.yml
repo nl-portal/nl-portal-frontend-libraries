@@ -47,28 +47,28 @@ jobs:
         run: pnpm test
 
       - name: "Retain build artifact: api"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nl-portal-api
           path: packages/api/dist/
           retention-days: 1
 
       - name: "Retain build artifact: authentication"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nl-portal-authentication
           path: packages/authentication/dist/
           retention-days: 1
 
       - name: "Retain build artifact: localization"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nl-portal-localization
           path: packages/localization/dist/
           retention-days: 1
 
       - name: "Retain build artifact: user interface"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nl-portal-user-interface
           path: packages/user-interface/dist/
@@ -103,25 +103,25 @@ jobs:
           npm install -g lerna@7.4.2
 
       - name: "Restore build artifact: api"
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: nl-portal-api
           path: packages/api/dist/
 
       - name: "Restore build artifact: authentication"
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: nl-portal-authentication
           path: packages/authentication/dist/
 
       - name: "Restore build artifact: localization"
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: nl-portal-localization
           path: packages/localization/dist/
 
       - name: "Restore build artifact: user interface"
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: nl-portal-user-interface
           path: packages/user-interface/dist/
