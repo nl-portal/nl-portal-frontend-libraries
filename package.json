@@ -40,5 +40,11 @@
     "stylelint-order": "6.0.4",
     "stylelint-selector-bem-pattern": "4.0.0",
     "typescript": "5.5.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1"
+    }
   }
 }

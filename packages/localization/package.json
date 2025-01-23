@@ -26,7 +26,7 @@
     "test:watch": "vitest --watch"
   },
   "dependencies": {
-    "@gemeente-denhaag/utils": "0.2.3-alpha.421",
+    "@gemeente-denhaag/utils": "1.1.0",
     "deepmerge": "^4.3.1",
     "react-intl": "^6.6.8"
   },

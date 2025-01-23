@@ -49,13 +49,16 @@ export default defineConfig({
     server: {
       deps: {
         inline: [
+          "@gemeente-denhaag/textarea",
           "@gemeente-denhaag/badge-counter",
           "@gemeente-denhaag/button-link",
+          "@gemeente-denhaag/checkbox",
           "@gemeente-denhaag/form-field-error-message",
           "@gemeente-denhaag/form-field",
           "@gemeente-denhaag/form-label",
           "@gemeente-denhaag/link-button",
           "@gemeente-denhaag/radio-button",
+          "@gemeente-denhaag/select",
           "@gemeente-denhaag/status-badge",
           "@gemeente-denhaag/text-input",
         ],

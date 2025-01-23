@@ -14,7 +14,7 @@ import {
 import "font-awesome/css/font-awesome.min.css";
 import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
-import styles from "./TaskPage.module.scss";
+import styles from "./TaskDetailsPage.module.scss";
 import { useParams } from "react-router-dom";
 import BackLink from "../components/BackLink";
 import ProtectedEval from "@formio/protected-eval";
@@ -28,6 +28,7 @@ const TaskDetailsPage = () => {
   const intl = useIntl();
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
   const [submission, setSubmission] = useState({
     data: {},
   });
@@ -67,9 +68,14 @@ const TaskDetailsPage = () => {
 
       setTaakVersion(task.getTaakByIdV2.version);
 
-      transformPrefilledDataToFormioSubmission(
-        task.getTaakByIdV2.portaalformulier.data,
-      );
+      try {
+        transformPrefilledDataToFormioSubmission(
+          task.getTaakByIdV2.portaalformulier.data,
+        );
+      } catch (err) {
+        console.error(err);
+        setError(true);
+      }
 
       if (task.getTaakByIdV2.portaalformulier.formulier.soort === "url") {
         getFormByUrl({
@@ -105,6 +111,7 @@ const TaskDetailsPage = () => {
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
+    if (submissionData === null) return null;
     const keys = Object.keys(submissionData);
     let prefillData: any = {};
     const arrayPrefilledData: any = [];
@@ -153,6 +160,19 @@ const TaskDetailsPage = () => {
     return null;
   }
 
+  if (error) {
+    return (
+      <>
+        <BackLink />
+        <Alert
+          variant="error"
+          title={intl.formatMessage({ id: "taskDetails.errorTitle" })}
+          text={intl.formatMessage({ id: "taskDetails.errorDescription" })}
+        />
+      </>
+    );
+  }
+
   if (submitted) {
     return (
       <>
@@ -182,7 +202,7 @@ const TaskDetailsPage = () => {
   return (
     <>
       <BackLink />
-      <div className={styles.bootstrap}>
+      <div className={styles["task-details-page"]}>
         <Form
           form={
             formDefinitionUrl?.getFormDefinitionByObjectenApiUrl

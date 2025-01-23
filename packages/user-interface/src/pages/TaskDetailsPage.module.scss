@@ -1,0 +1,7 @@
+.task-details-page {
+  display: block;
+
+  :global(.form-group.formio-component) {
+    margin-block-end: var(--nlportal-space-block-2xl, 2rem);
+  }
+}
