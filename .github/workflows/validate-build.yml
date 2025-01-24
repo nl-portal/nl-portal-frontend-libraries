@@ -1,0 +1,40 @@
+name: Validate Build
+on:
+  push:
+    branches:
+      - "next-minor"
+      - "next-major"
+      - "release/*"
+  pull_request:
+    branches:
+      - "next-minor"
+      - "next-major"
+      - "release/*"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+env:
+  nodeVersion: "18.x"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate github app token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+      - name: Set up Node.js ${{ env.nodeVersion }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.nodeVersion }}
+      - name: Install
+        run: npm install -g pnpm && pnpm install
+      - name: Build
+        run: pnpm build
+      - name: Test
+        run: pnpm test
