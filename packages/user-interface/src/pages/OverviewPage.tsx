@@ -12,6 +12,7 @@ import {
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
 import { Paragraph } from "@gemeente-denhaag/typography";
+import { ReactNode } from "react";
 
 interface OverviewPageProps {
   showAlert?: boolean;
@@ -19,6 +20,7 @@ interface OverviewPageProps {
   showIntro?: boolean;
   fetchTasksLength?: number;
   fetchCasesLength?: number;
+  children?: ReactNode;
 }
 
 const OverviewPage = ({
@@ -27,6 +29,7 @@ const OverviewPage = ({
   showIntro = false,
   fetchTasksLength = 5,
   fetchCasesLength = 4,
+  children,
 }: OverviewPageProps) => {
   const intl = useIntl();
   const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
@@ -83,6 +86,7 @@ const OverviewPage = ({
           </Paragraph>
         </PageHeader>
       )}
+      {children}
       {Boolean(fetchTasksLength) && (
         <TasksList
           loading={loading}
