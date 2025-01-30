@@ -96,8 +96,8 @@ const AccountPage = ({
               {
                 translationKey: "street",
                 value: getStreetString(
-                  company?.embedded?.hoofdvestiging.adressen?.[0].straatnaam,
-                  company?.embedded?.hoofdvestiging.adressen?.[0].huisnummer.toString(),
+                  company?.embedded?.hoofdvestiging?.adressen?.[0].straatnaam,
+                  company?.embedded?.hoofdvestiging?.adressen?.[0].huisnummer?.toString(),
                   undefined,
                   undefined,
                 ),
@@ -106,8 +106,8 @@ const AccountPage = ({
               {
                 translationKey: "postalCodeAndCity",
                 value: getPostalCodeCityString(
-                  company?.embedded?.hoofdvestiging.adressen?.[0].postcode,
-                  company?.embedded?.hoofdvestiging.adressen?.[0].plaats,
+                  company?.embedded?.hoofdvestiging?.adressen?.[0].postcode,
+                  company?.embedded?.hoofdvestiging?.adressen?.[0].plaats,
                 ),
                 loading,
               },
