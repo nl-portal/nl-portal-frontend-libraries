@@ -36,7 +36,7 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.showAllCases": "Bekijk alle zaken",
     "overview.currentCases": "Mijn lopende zaken",
     "tasksList.title": "Mijn taken",
-    "casesList.title": "Mijn lopende zaken",
+    "casesList.title": "Mijn zaken",
     "casesList.viewAll": "Bekijk alle zaken ({total})",
     "casesList.empty": "Er zijn geen zaken.",
     "casesList.noClosedCases": "Er zijn geen zaken.",
@@ -124,6 +124,7 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.subTitle": "Gemachtigd voor",
     "overviewpage.paragraph":
       "In de NL-portal  kunt u zelf uw persoonlijke zaken regelen wanneer het u uitkomt. U kunt bijvoorbeeld uw rekeningen betalen en zien wanneer uw aanvraag klaar is.",
+    "overviewpage.casesTitle": "Mijn lopende zaken",
     "actionLabels.today": "vandaag",
     "actionLabels.yesterday": "gisteren",
     "actionLabels.before": "vóór",

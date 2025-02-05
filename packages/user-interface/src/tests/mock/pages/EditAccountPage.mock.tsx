@@ -2,7 +2,7 @@ import EditAccountPage from "../../../pages/EditAccountPage";
 import TestProvider, {
   testPaths as paths,
 } from "../../../providers/TestProvider";
-import { getBurgerProfiel } from "../data/AllRequests.mock";
+import { getBurgerProfiel } from "../data/burger.mock";
 
 export const MockEditAccountPage = () => {
   const routes = [

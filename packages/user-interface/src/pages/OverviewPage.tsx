@@ -46,14 +46,12 @@ const OverviewPage = ({
     loading: casesLoading,
     error: casesError,
   } = useGetZakenQuery({
-    variables: { isOpen: true },
+    variables: { isOpen: true, pageSize: fetchCasesLength },
     skip: !fetchCasesLength,
   });
   const loading = tasksLoading || casesLoading;
   const tasks = tasksData?.getTakenV2.content as TaakV2[] | undefined;
-  const cases = casesData?.getZaken.content.slice(0, fetchCasesLength) as
-    | Zaak[]
-    | undefined;
+  const cases = casesData?.getZaken.content as Zaak[] | undefined;
 
   return (
     <PageGrid>
@@ -105,6 +103,7 @@ const OverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(casesError)}
+          titleTranslationId="overviewpage.casesTitle"
           listView={false}
           cases={cases}
           totalAmount={

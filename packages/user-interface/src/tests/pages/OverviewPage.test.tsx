@@ -61,6 +61,7 @@ describe("OverviewPage", () => {
 
   it("should not show task 3", async () => {
     render(MockOverviewPageLessTasks());
+
     await waitFor(() => {
       expect(openZaak1()).toBeVisible();
     });
