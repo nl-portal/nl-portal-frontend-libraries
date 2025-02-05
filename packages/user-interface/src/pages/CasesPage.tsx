@@ -44,7 +44,9 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   titleTranslationId={null}
-                  cases={cases}
+                  cases={cases?.filter(
+                    (c) => !c.status?.statustype.isEindstatus,
+                  )}
                   totalAmount={data?.getZaken.totalElements}
                   indexLimit={
                     data?.getZaken.totalPages && data?.getZaken.totalPages - 1
@@ -59,7 +61,9 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   titleTranslationId={null}
-                  cases={cases}
+                  cases={cases?.filter(
+                    (c) => c.status?.statustype.isEindstatus,
+                  )}
                   totalAmount={data?.getZaken.totalElements}
                   indexLimit={
                     data?.getZaken.totalPages && data?.getZaken.totalPages - 1
