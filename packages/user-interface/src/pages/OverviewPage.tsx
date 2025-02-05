@@ -103,6 +103,7 @@ const OverviewPage = ({
         <CasesList
           loading={loading}
           error={Boolean(casesError)}
+          titleTranslationId="overviewpage.casesTitle"
           listView={false}
           cases={cases}
           totalAmount={
