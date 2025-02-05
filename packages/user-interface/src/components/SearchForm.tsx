@@ -4,17 +4,18 @@ import FormLabel from "@gemeente-denhaag/form-label";
 import TextInput from "@gemeente-denhaag/text-input";
 import { SearchIcon } from "@gemeente-denhaag/icons";
 import Button from "@gemeente-denhaag/button";
-import useInput from "../hooks/useInput";
+import useInput, { Validation } from "../hooks/useInput";
 import { FormEvent } from "react";
 import styles from "./SearchForm.module.scss";
 import { FormattedMessage } from "react-intl";
 import { Paragraph } from "@gemeente-denhaag/typography";
+import FormFieldErrorMessage from "@gemeente-denhaag/form-field-error-message";
 
 interface SearchFormProps {
   translationId: string;
   defaultSearchValue?: string;
   totalElements: number | null;
-  searchValidationFn?: (value: string) => boolean;
+  searchValidations?: Validation[];
   onSubmit: (searchValue: string) => void;
 }
 
@@ -23,13 +24,15 @@ const SearchForm = ({
   defaultSearchValue = "",
   totalElements,
   onSubmit,
-  searchValidationFn = () => true,
+  searchValidations = [{ validationFn: () => true, errorTranslationId: "" }],
 }: SearchFormProps) => {
   const {
     value: searchTitleValue,
     handleInputChange: handleSearchTitleChange,
     handleInputBlur: handleSearchTitleBlur,
-  } = useInput(defaultSearchValue, searchValidationFn);
+    hasError,
+    errorTranslationId,
+  } = useInput(defaultSearchValue, searchValidations);
 
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,7 +47,7 @@ const SearchForm = ({
 
   return (
     <Form className={styles["search-form"]} onSubmit={handleFormSubmit}>
-      <FormField>
+      <FormField invalid={hasError}>
         <FormLabel htmlFor="search-input">
           <FormattedMessage id={`searchForm.${translationId}.searchLabel`} />
         </FormLabel>
@@ -56,7 +59,13 @@ const SearchForm = ({
             onChange={handleSearchTitleChange}
             onBlur={handleSearchTitleBlur}
             iconEnd={<SearchIcon />}
+            invalid={hasError}
           ></TextInput>
+          {hasError && (
+            <FormFieldErrorMessage>
+              <FormattedMessage id={errorTranslationId} />
+            </FormFieldErrorMessage>
+          )}
           <Button type="submit">
             <FormattedMessage id={`searchForm.${translationId}.searchButton`} />
           </Button>

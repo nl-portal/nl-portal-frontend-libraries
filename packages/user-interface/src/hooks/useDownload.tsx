@@ -1,15 +1,19 @@
 import { KeycloakContext } from "@nl-portal/nl-portal-authentication";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const useDownload = (href: string, filename?: string) => {
   const { keycloakToken } = useContext(KeycloakContext);
+  const [loading, setLoading] = useState(false);
 
   const onClick = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
+    setLoading(true);
 
     const response = await fetch(href, {
       headers: { Authorization: `Bearer ${keycloakToken}` },
     });
+
+    setLoading(false);
 
     if (!response.ok) return console.error("Failed to download file");
 
@@ -41,7 +45,7 @@ const useDownload = (href: string, filename?: string) => {
     window.URL.revokeObjectURL(anchor.href);
   };
 
-  return { onClick };
+  return { onClick, loading };
 };
 
 export default useDownload;
