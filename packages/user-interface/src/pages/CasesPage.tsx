@@ -9,11 +9,19 @@ import SearchForm from "../components/SearchForm";
 
 const CasesPage = () => {
   const intl = useIntl();
-  const { data, loading, error, refetch } = useGetZakenQuery();
+  const fetchCasesLength = 10;
+  const { data, loading, error, refetch } = useGetZakenQuery({
+    variables: { isOpen: true, pageSize: fetchCasesLength },
+  });
   const cases = data?.getZaken.content as Zaak[] | undefined;
 
   const handleFormSubmit = (searchValue: string) => {
     refetch({ identificatie: searchValue });
+  };
+
+  const onTabChange = (index: number) => {
+    if (index === 0) refetch({ isOpen: true });
+    if (index === 1) refetch({ isOpen: false });
   };
 
   return (
@@ -27,6 +35,7 @@ const CasesPage = () => {
       </PageHeader>
       <div>
         <Tabs
+          onChange={onTabChange}
           tabData={[
             {
               label: intl.formatMessage({ id: "titles.currentCases" }),
@@ -35,10 +44,11 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   titleTranslationId={null}
+                  cases={cases}
                   totalAmount={data?.getZaken.totalElements}
-                  cases={cases?.filter(
-                    (c) => !c.status?.statustype.isEindstatus,
-                  )}
+                  indexLimit={
+                    data?.getZaken.totalPages && data?.getZaken.totalPages - 1
+                  }
                 />
               ),
             },
@@ -49,10 +59,11 @@ const CasesPage = () => {
                   loading={loading}
                   error={Boolean(error)}
                   titleTranslationId={null}
+                  cases={cases}
                   totalAmount={data?.getZaken.totalElements}
-                  cases={cases?.filter(
-                    (c) => c.status?.statustype.isEindstatus,
-                  )}
+                  indexLimit={
+                    data?.getZaken.totalPages && data?.getZaken.totalPages - 1
+                  }
                 />
               ),
             },

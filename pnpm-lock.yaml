@@ -370,8 +370,8 @@ importers:
         specifier: 0.1.1-alpha.422
         version: 0.1.1-alpha.422(react@18.3.1)
       '@gemeente-denhaag/tab':
-        specifier: 0.2.3-alpha.422
-        version: 0.2.3-alpha.422(react@18.3.1)
+        specifier: 1.1.1
+        version: 1.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/table':
         specifier: 0.1.1
         version: 0.1.1(react@18.3.1)
@@ -1347,10 +1347,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
-  '@gemeente-denhaag/tab@0.2.3-alpha.422':
-    resolution: {integrity: sha512-zyKc1JgiyLjItS+0P+ZFvqKXcDjC+LWvzOkCNek2HD2O2+mS6hDLjxUTBF4mPbJuNP9eEugtWbDWc29MVMV9bg==}
+  '@gemeente-denhaag/tab@1.1.1':
+    resolution: {integrity: sha512-CgNHKdpeuyuaHoJx7cRjQhS6n9TvTCJeO5lhLcThNeaRYoLOZydNGwnBfFnm5hbwkYN9/LcM1euO6QioGhDJMg==}
     peerDependencies:
-      react: ^18.0.0
+      react: '18'
+      react-dom: '18'
 
   '@gemeente-denhaag/table@0.1.1':
     resolution: {integrity: sha512-4hBrOhwh7tXqcIIPiwvnLofzZ1qybBKfCQFHuF2+4eHt713MPqy3SMZR9u4fIx5c6MmSFEaE83rkHlngNvcExA==}
@@ -5438,6 +5439,10 @@ packages:
     resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
     hasBin: true
 
+  uuid@11.0.3:
+    resolution: {integrity: sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==}
+    hasBin: true
+
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
     hasBin: true
@@ -6779,10 +6784,11 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@gemeente-denhaag/tab@0.2.3-alpha.422(react@18.3.1)':
+  '@gemeente-denhaag/tab@1.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
-      uuid: 10.0.0
+      react-dom: 18.3.1(react@18.3.1)
+      uuid: 11.0.3
 
   '@gemeente-denhaag/table@0.1.1(react@18.3.1)':
     dependencies:
@@ -11494,6 +11500,8 @@ snapshots:
   util-deprecate@1.0.2: {}
 
   uuid@10.0.0: {}
+
+  uuid@11.0.3: {}
 
   uuid@9.0.1: {}
 
