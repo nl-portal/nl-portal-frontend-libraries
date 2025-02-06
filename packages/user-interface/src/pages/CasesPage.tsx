@@ -11,6 +11,7 @@ const CasesPage = () => {
   const intl = useIntl();
   const fetchCasesLength = 10;
   const { data, loading, error, refetch } = useGetZakenQuery({
+    notifyOnNetworkStatusChange: true,
     variables: { isOpen: true, pageSize: fetchCasesLength },
   });
   const cases = data?.getZaken.content as Zaak[] | undefined;
