@@ -23,7 +23,7 @@ interface Props {
   cases?: Zaak[];
   index?: number;
   indexLimit?: number;
-  onChange?: (index: number) => number;
+  onChange?: (index: number) => void;
   listView?: boolean;
 }
 
@@ -61,48 +61,45 @@ const CasesList = ({
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
-  if (loading) {
-    return (
-      <section className={styles["cases-list"]}>
-        <SectionHeader title={title} />
-        <div className={styles["cases-list__cases"]}>
-          <Skeleton height={220} />
-          <Skeleton height={220} />
-        </div>
-      </section>
-    );
-  }
+  if (!loading) {
+    if (error)
+      return (
+        <section className={styles["cases-list"]}>
+          <SectionHeader title={title} />
+          <Paragraph>{errorMessage}</Paragraph>
+        </section>
+      );
 
-  if (error)
-    return (
-      <section className={styles["cases-list"]}>
-        <SectionHeader title={title} />
-        <Paragraph>{errorMessage}</Paragraph>
-      </section>
-    );
-
-  if (!cases || cases.length === 0) {
-    if (!showEmpty) return null;
-    return (
-      <section className={styles["cases-list"]}>
-        <SectionHeader title={title} />
-        <Paragraph>{emptyMessage}</Paragraph>
-      </section>
-    );
+    if (!cases || cases.length === 0) {
+      if (!showEmpty) return null;
+      return (
+        <section className={styles["cases-list"]}>
+          <SectionHeader title={title} />
+          <Paragraph>{emptyMessage}</Paragraph>
+        </section>
+      );
+    }
   }
 
   return (
     <section className={styles["cases-list"]}>
       <SectionHeader title={title} subTitle={subTitle} href={casesPath} />
-      <div
-        className={classnames(styles["cases-list__cases"], {
-          [styles["cases-list__cases--list"]]: listView,
-        })}
-      >
-        {cases.map((cs) => (
-          <Case key={cs.uuid} cs={cs} listView={listView} />
-        ))}
-      </div>
+      {loading ? (
+        <div className={styles["cases-list__cases"]}>
+          <Skeleton height={220} />
+          <Skeleton height={220} />
+        </div>
+      ) : (
+        <div
+          className={classnames(styles["cases-list__cases"], {
+            [styles["cases-list__cases--list"]]: listView,
+          })}
+        >
+          {cases?.map((cs) => (
+            <Case key={cs.uuid} cs={cs} listView={listView} />
+          ))}
+        </div>
+      )}
       {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["cases-list__pagination"]}`}

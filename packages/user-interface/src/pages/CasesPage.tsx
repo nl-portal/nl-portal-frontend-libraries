@@ -27,7 +27,6 @@ const CasesPage = () => {
 
   const onPageChange = (index: number) => {
     refetch({ page: index + 1 });
-    return index;
   };
 
   return (
