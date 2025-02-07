@@ -187,9 +187,6 @@ importers:
       jwt-decode:
         specifier: ^4.0.0
         version: 4.0.0
-      keycloak-js:
-        specifier: ^23.0.7
-        version: 23.0.7
       oidc-client-ts:
         specifier: 3.1.0
         version: 3.1.0
@@ -444,9 +441,6 @@ importers:
       react-loading-skeleton:
         specifier: ^3.4.0
         version: 3.4.0(react@18.3.1)
-      react-oidc-context:
-        specifier: ^3.2.0
-        version: 3.2.0(oidc-client-ts@3.1.0)(react@18.3.1)
       react-router-dom:
         specifier: ^6.27.0
         version: 6.28.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4018,9 +4012,6 @@ packages:
     resolution: {tarball: https://codeload.github.com/formio/JS-Interpreter/tar.gz/0ed5007ada500c12d797ab867a15cfab736e9b25}
     version: 1.1.0-formio.2
 
-  js-sha256@0.10.1:
-    resolution: {integrity: sha512-5obBtsz9301ULlsgggLg542s/jqtddfOpV5KJc4hajc9JV8GeY2gZHSVpYBn4nWqAUTJ9v+xwtbJ1mIBgIH5Vw==}
-
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -4100,9 +4091,6 @@ packages:
   jwt-decode@4.0.0:
     resolution: {integrity: sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==}
     engines: {node: '>=18'}
-
-  keycloak-js@23.0.7:
-    resolution: {integrity: sha512-OmszsKzBhhm5yP4W1q/tMd+nNnKpOAdeVYcoGhphlv8Fj1bNk4wRTYzp7pn5BkvueLz7fhvKHz7uOc33524YrA==}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -10225,8 +10213,6 @@ snapshots:
     dependencies:
       acorn: 8.12.1
 
-  js-sha256@0.10.1: {}
-
   js-tokens@4.0.0: {}
 
   js-yaml@4.1.0:
@@ -10313,12 +10299,6 @@ snapshots:
   jwt-decode@3.1.2: {}
 
   jwt-decode@4.0.0: {}
-
-  keycloak-js@23.0.7:
-    dependencies:
-      base64-js: 1.5.1
-      js-sha256: 0.10.1
-      jwt-decode: 4.0.0
 
   keyv@4.5.4:
     dependencies:

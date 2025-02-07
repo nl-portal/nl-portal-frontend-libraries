@@ -33,29 +33,9 @@ const authenticationMethods = {
 const App = () => {
   const enableMessagesCount = useEnableMessagesCount(menuItems);
 
-  const keycloakPath = new URL(config.KEYCLOAK_REDIRECT_URI).pathname;
-  const redirectUrl = new URL(window.location.href);
-  const redirectPath = redirectUrl.pathname + redirectUrl.search;
-  const redirectParam =
-    redirectPath !== "/" && redirectPath !== keycloakPath
-      ? `?redirect_url=${encodeURIComponent(redirectPath)}`
-      : "";
-  console.log("redirectparam:", redirectParam);
-  const oidcConfig = {
-    authority: `${config.KEYCLOAK_URL}/realms/${config.KEYCLOAK_REALM}`,
-    client_id: config.KEYCLOAK_CLIENT_ID,
-    redirect_uri: formatUrlTrailingSlash(
-      config.KEYCLOAK_REDIRECT_URI + redirectParam,
-      false,
-    ),
-    scope: "openid profile email", // configure your scopes
-    automaticSilentRenew: false,
-  };
-
   return (
     <div className={config.THEME_CLASS}>
       <KeycloakWrapper
-        oidcConfig={oidcConfig}
         clientId={config.KEYCLOAK_CLIENT_ID}
         realm={config.KEYCLOAK_REALM}
         url={config.KEYCLOAK_URL}
