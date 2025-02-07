@@ -10,7 +10,10 @@ import {
   TaskDetailsPage,
   MessagesPage,
 } from "@nl-portal/nl-portal-user-interface";
-import { KeycloakCallbackPage } from "@nl-portal/nl-portal-authentication";
+import {
+  KeycloakCallbackPage,
+  SilentRedirect,
+} from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
 import { config } from "./config";
 import { Navigate } from "react-router-dom";
@@ -100,6 +103,10 @@ export const routes = [
   {
     path: new URL(window.KEYCLOAK_REDIRECT_URI).pathname,
     element: <KeycloakCallbackPage />,
+  },
+  {
+    path: "/silent-redirect",
+    element: <SilentRedirect />,
   },
   {
     path: paths.noMatch,
