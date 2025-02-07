@@ -25,6 +25,10 @@ const CasesPage = () => {
     if (index === 1) refetch({ isOpen: false });
   };
 
+  const onPageChange = (index: number) => {
+    refetch({ page: index + 1 });
+  };
+
   return (
     <PageGrid className={styles.cases} variant="medium">
       <PageHeader title={<FormattedMessage id="pageTitles.cases" />}>
@@ -52,6 +56,7 @@ const CasesPage = () => {
                   indexLimit={
                     data?.getZaken.totalPages && data?.getZaken.totalPages - 1
                   }
+                  onChange={onPageChange}
                 />
               ),
             },
@@ -69,6 +74,7 @@ const CasesPage = () => {
                   indexLimit={
                     data?.getZaken.totalPages && data?.getZaken.totalPages - 1
                   }
+                  onChange={onPageChange}
                 />
               ),
             },
