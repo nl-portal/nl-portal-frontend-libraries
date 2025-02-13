@@ -7,7 +7,7 @@ const getContent = (size?: number) => {
       soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
-        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        value: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
@@ -31,7 +31,7 @@ const getContent = (size?: number) => {
       soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
-        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        value: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
@@ -55,7 +55,7 @@ const getContent = (size?: number) => {
       soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
-        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        value: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
@@ -79,7 +79,7 @@ const getContent = (size?: number) => {
       soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
-        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        value: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
@@ -103,7 +103,7 @@ const getContent = (size?: number) => {
       soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
-        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        value: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
@@ -127,7 +127,7 @@ const getContent = (size?: number) => {
       soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
-        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        value: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
@@ -151,7 +151,7 @@ const getContent = (size?: number) => {
       soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
-        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        value: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
@@ -175,7 +175,7 @@ const getContent = (size?: number) => {
       soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
-        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        value: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
@@ -199,7 +199,7 @@ const getContent = (size?: number) => {
       soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
-        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        value: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,
@@ -223,7 +223,7 @@ const getContent = (size?: number) => {
       soort: "PORTAALFORMULIER",
       koppeling: {
         registratie: "ZAAK",
-        uuid: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
+        value: "66fecaa3-24b4-4739-a7c8-eb58f39e9aae",
         __typename: "TaakKoppeling",
       },
       url: null,

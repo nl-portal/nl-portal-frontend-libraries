@@ -18,7 +18,7 @@ export const QUERY_GET_TAKEN_V2 = gql`
         soort
         koppeling {
           registratie
-          uuid
+          value
         }
         url {
           uri
