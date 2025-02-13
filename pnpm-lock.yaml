@@ -349,8 +349,8 @@ importers:
         specifier: 0.1.1-alpha.282
         version: 0.1.1-alpha.282
       '@gemeente-denhaag/pagination':
-        specifier: 0.1.1-alpha.349
-        version: 0.1.1-alpha.349(react@18.3.1)
+        specifier: 1.1.0
+        version: 1.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/process-steps':
         specifier: 0.1.1
         version: 0.1.1(@babel/runtime@7.26.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1306,10 +1306,11 @@ packages:
   '@gemeente-denhaag/page@0.1.1-alpha.282':
     resolution: {integrity: sha512-OYIz85VtrkzktOwakFSIEELBqZdZb1TU25sL4PYE5w7LHE4ZqGaxv6JjmeadREtCOCr3SlIY1RK4fmztBkPKGg==}
 
-  '@gemeente-denhaag/pagination@0.1.1-alpha.349':
-    resolution: {integrity: sha512-0BwpYpueWQHEdaj+21b1ONi5sWcCX8KBZN5GOp+yePBouxll6weTODpn12AGg44gX8NV8nlQ2nCssAi5J3j3tQ==}
+  '@gemeente-denhaag/pagination@1.1.0':
+    resolution: {integrity: sha512-vewrGrTGJtkWyoDKUREl8wYLGNLS2Y5LPF6p2YAq+i+H/oVx5WiQXwjV/OWnoN4ZxWZbXuO7t9JOv6aT9iGmeQ==}
     peerDependencies:
-      react: ^18.0.0
+      react: '18'
+      react-dom: '18'
 
   '@gemeente-denhaag/process-steps@0.1.1':
     resolution: {integrity: sha512-m/K6KH6te0Qfv7Us4YeUsuNSsClSQxOl8j99ByDCbrZQ6WzVaaAW5Kb6w83MGp9iM5nV2nOJd6qq3Ak70svoxg==}
@@ -6724,9 +6725,10 @@ snapshots:
 
   '@gemeente-denhaag/page@0.1.1-alpha.282': {}
 
-  '@gemeente-denhaag/pagination@0.1.1-alpha.349(react@18.3.1)':
+  '@gemeente-denhaag/pagination@1.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   '@gemeente-denhaag/process-steps@0.1.1(@babel/runtime@7.26.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:

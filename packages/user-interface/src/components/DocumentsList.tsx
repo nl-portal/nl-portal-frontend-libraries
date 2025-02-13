@@ -10,6 +10,7 @@ import SectionHeader from "./SectionHeader";
 import Skeleton from "./Skeleton";
 import classnames from "classnames";
 import { useContext } from "react";
+import { listViewHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -40,9 +41,9 @@ const DocumentsList = ({
     return (
       <section className={styles["documents-list"]}>
         <SectionHeader title={title} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
       </section>
     );
   }

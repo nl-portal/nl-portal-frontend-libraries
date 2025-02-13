@@ -7,6 +7,7 @@ import { useIntl } from "react-intl";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 import classNames from "classnames";
+import { listViewHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -90,9 +91,9 @@ const TableList = ({
     return (
       <section className={sectionClassNames}>
         <SectionHeader title={title} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
       </section>
     );
   }

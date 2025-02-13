@@ -6,6 +6,10 @@ import Skeleton from "react-loading-skeleton";
 import { useIntl } from "react-intl";
 import { stringToId } from "../utils/string-to-id";
 import styles from "./StatusHistory.module.scss";
+import {
+  statusHistoryCirleSize,
+  statusHistoryTextWidth,
+} from "../constants/skeleton";
 
 interface StatusHistoryProps {
   caseId?: string;
@@ -33,10 +37,14 @@ const StatusHistory: FC<StatusHistoryProps> = ({
       aria-label={intl.formatMessage({ id: "element.loading" })}
     >
       <div className={styles["skeleton-step__circle"]}>
-        <Skeleton circle height={20} width={20} />
+        <Skeleton
+          circle
+          height={statusHistoryCirleSize}
+          width={statusHistoryCirleSize}
+        />
       </div>
       <Paragraph>
-        <Skeleton width={200} />
+        <Skeleton width={statusHistoryTextWidth} />
       </Paragraph>
     </div>
   );
