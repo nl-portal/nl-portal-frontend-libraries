@@ -56,7 +56,7 @@ const CasesList = ({
     totalAmount && readMoreTranslationId
       ? intl.formatMessage(
           { id: readMoreTranslationId },
-          { total: Math.min(100, totalAmount) },
+          { total: totalAmount },
         )
       : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
