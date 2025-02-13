@@ -109,7 +109,7 @@ const TableList = ({
   if (!rows || rows.length === 0)
     return (
       <section className={sectionClassNames}>
-        <SectionHeader title={title} />
+        <SectionHeader title={title} subTitle={subTitle} href={readMoreLink} />
         <Paragraph>{emptyMessage}</Paragraph>
         {children && (
           <div className={styles["table-list__children"]}>{children}</div>
