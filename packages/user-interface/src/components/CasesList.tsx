@@ -9,6 +9,7 @@ import SectionHeader from "./SectionHeader";
 import Case from "./Case";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import classnames from "classnames";
+import { caseHeight, listViewHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -84,22 +85,28 @@ const CasesList = ({
   return (
     <section className={styles["cases-list"]}>
       <SectionHeader title={title} subTitle={subTitle} href={casesPath} />
-      {loading ? (
-        <div className={styles["cases-list__cases"]}>
-          <Skeleton height={220} />
-          <Skeleton height={220} />
-        </div>
-      ) : (
-        <div
-          className={classnames(styles["cases-list__cases"], {
-            [styles["cases-list__cases--list"]]: listView,
-          })}
-        >
-          {cases?.map((cs) => (
-            <Case key={cs.uuid} cs={cs} listView={listView} />
-          ))}
-        </div>
-      )}
+      <div
+        className={classnames(styles["cases-list__cases"], {
+          [styles["cases-list__cases--list"]]: listView,
+        })}
+      >
+        {loading ? (
+          listView ? (
+            <>
+              {[...Array(5)].map((_, index) => (
+                <Skeleton key={index} height={listViewHeight} />
+              ))}
+            </>
+          ) : (
+            <>
+              <Skeleton height={caseHeight} />
+              <Skeleton height={caseHeight} />
+            </>
+          )
+        ) : (
+          cases?.map((cs) => <Case key={cs.uuid} cs={cs} listView={listView} />)
+        )}
+      </div>
       {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["cases-list__pagination"]}`}
