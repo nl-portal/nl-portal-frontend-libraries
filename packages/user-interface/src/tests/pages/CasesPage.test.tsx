@@ -8,10 +8,12 @@ describe("The CasesPage", () => {
     screen.getByRole("tab", { name: "Lopende zaken" });
   const tabAfgerondeZaken = () =>
     screen.getByRole("tab", { name: "Afgeronde zaken" });
-  const openZaak1 = () => screen.getByText("case.OPENZAAK1.title");
-  const openZaak2 = () => screen.getByText("case.OPENZAAK2.title");
-  const geslotenZaak1 = () => screen.getByText("case.GESLOTENZAAK1.title");
-  const geslotenZaak2 = () => screen.getByText("case.GESLOTENZAAK2.title");
+  const openZaak1 = () => screen.getAllByText("case.OPENZAAK1.title")[0];
+  const openZaak2 = () => screen.getAllByText("case.OPENZAAK2.title")[0];
+  const geslotenZaak1 = () =>
+    screen.getAllByText("case.GESLOTENZAAK1.title")[1];
+  const geslotenZaak2 = () =>
+    screen.getAllByText("case.GESLOTENZAAK2.title")[1];
 
   it("should render several active cases", async () => {
     render(MockCasesPage());
