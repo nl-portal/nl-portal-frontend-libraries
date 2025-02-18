@@ -57,8 +57,6 @@ const KeycloakProvider = ({
     client_id: clientId,
     redirect_uri: formatUrlTrailingSlash(redirectUri + redirectParam, false),
     scope: "openid profile email", // configure your scopes
-    automaticSilentRenew: true,
-    silent_redirect_uri: "http://localhost:3000/silent-redirect", // invisible iframe route
     accessTokenExpiringNotificationTime: 15,
   };
 
