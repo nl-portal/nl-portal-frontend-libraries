@@ -1,7 +1,6 @@
-import { PropsWithChildren, ReactNode, useContext, useEffect } from "react";
+import { PropsWithChildren, useContext, useEffect } from "react";
 import { useAuth } from "react-oidc-context";
 import KeycloakContext from "../contexts/KeycloakContext";
-import { decodeToken } from "../utils/decode-token";
 import IdleTimer from "./IdleTimer";
 
 export type ProtectedAppProps = {
@@ -15,8 +14,7 @@ export const ProtectedApp = ({
   children,
 }: PropsWithChildren<ProtectedAppProps>) => {
   const auth = useAuth();
-  const { keycloakToken, setKeycloakToken, setDecodedToken } =
-    useContext(KeycloakContext);
+  const { keycloakToken, setKeycloakToken } = useContext(KeycloakContext);
 
   useEffect(() => {
     // Redirect to keycloak when not loading and user isn't authenticated or if there is no keycloak token in the state (after hard refresh for example)
@@ -32,7 +30,6 @@ export const ProtectedApp = ({
       const newToken = user.access_token;
       if (newToken) {
         setKeycloakToken(newToken);
-        setDecodedToken(decodeToken(newToken));
       }
     });
   }, [auth.events]);

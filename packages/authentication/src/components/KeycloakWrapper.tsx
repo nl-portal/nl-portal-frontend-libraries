@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 // Workaround because of export issue in keycloak-js, solved in keycloak-js 24: https://github.com/keycloak/keycloak/pull/24974/files
 import { AuthProvider } from "react-oidc-context";
 import { User } from "oidc-client-ts";
-import { FC, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import KeycloakContext from "../contexts/KeycloakContext";
 import { DecodedToken } from "../interfaces/decoded-token";
 import ProtectedApp from "./ProtectedApp";
@@ -42,7 +42,7 @@ const KeycloakProvider = ({
   autoIdleSessionLogout,
   idleTimeoutMinutes,
 }: KeycloakWrapperProps) => {
-  const { setKeycloakToken, setDecodedToken } = useContext(KeycloakContext);
+  const { setKeycloakToken } = useContext(KeycloakContext);
 
   const keycloakPath = new URL(redirectUri).pathname;
   const redirectUrl = new URL(window.location.href);
@@ -63,13 +63,11 @@ const KeycloakProvider = ({
   };
 
   const onSigninCallback = (user: User | undefined) => {
-    console.log("onSigninCallback");
     // clear authentication params once logged in
     window.history.replaceState({}, document.title, window.location.pathname);
 
     if (!user?.access_token) return;
     setKeycloakToken(user?.access_token);
-    setDecodedToken(decodeToken(user?.access_token));
   };
 
   return (
@@ -84,11 +82,20 @@ const KeycloakProvider = ({
   );
 };
 
-const KeycloakWrapper: FC<KeycloakWrapperProps> = (props) => {
+const KeycloakWrapper = ({
+  authenticationMethods,
+  ...props
+}: KeycloakWrapperProps) => {
   const [keycloakToken, setKeycloakToken] = useState("");
   const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
     undefined,
   );
+
+  useEffect(() => {
+    if (keycloakToken) {
+      setDecodedToken(decodeToken(keycloakToken));
+    }
+  }, [keycloakToken]);
 
   return (
     <KeycloakContext.Provider
@@ -96,8 +103,7 @@ const KeycloakWrapper: FC<KeycloakWrapperProps> = (props) => {
         keycloakToken,
         setKeycloakToken,
         decodedToken,
-        setDecodedToken,
-        authenticationMethods: props.authenticationMethods,
+        authenticationMethods,
       }}
     >
       <KeycloakProvider {...props} />
