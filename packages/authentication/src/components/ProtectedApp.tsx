@@ -27,9 +27,9 @@ export const ProtectedApp = ({
 
   useEffect(() => {
     console.log("auth.events effect");
-    return auth.events.addUserLoaded(() => {
+    return auth.events.addUserLoaded((user) => {
       console.log("User Session Changed!");
-      const newToken = auth.user?.access_token;
+      const newToken = user.access_token;
       if (newToken) {
         setKeycloakToken(newToken);
         setDecodedToken(decodeToken(newToken));
