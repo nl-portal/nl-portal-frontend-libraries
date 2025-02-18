@@ -33,6 +33,18 @@ export type KeycloakWrapperProps = OidcConfig &
     authenticationMethods?: AuthenticationMethods;
   };
 
+const generateRedirectUri = (redirectUri: string) => {
+  const keycloakPath = new URL(redirectUri).pathname;
+  const redirectUrl = new URL(window.location.href);
+  const redirectPath = redirectUrl.pathname + redirectUrl.search;
+  const redirectParam =
+    redirectPath !== "/" && redirectPath !== keycloakPath
+      ? `?redirect_url=${encodeURIComponent(redirectPath)}`
+      : "";
+
+  return formatUrlTrailingSlash(redirectUri + redirectParam, false);
+};
+
 const KeycloakProvider = ({
   url,
   clientId,
@@ -44,19 +56,10 @@ const KeycloakProvider = ({
 }: KeycloakWrapperProps) => {
   const { setKeycloakToken } = useContext(KeycloakContext);
 
-  const keycloakPath = new URL(redirectUri).pathname;
-  const redirectUrl = new URL(window.location.href);
-  const redirectPath = redirectUrl.pathname + redirectUrl.search;
-  const redirectParam =
-    redirectPath !== "/" && redirectPath !== keycloakPath
-      ? `?redirect_url=${encodeURIComponent(redirectPath)}`
-      : "";
-
   const oidcConfig = {
     authority: `${url}/realms/${realm}`,
     client_id: clientId,
-    redirect_uri: formatUrlTrailingSlash(redirectUri + redirectParam, false),
-    scope: "openid profile email", // configure your scopes
+    redirect_uri: generateRedirectUri(redirectUri),
     accessTokenExpiringNotificationTime: 15,
   };
 
