@@ -24,14 +24,9 @@ export const ProtectedApp = ({
   }, [keycloakToken, auth.isLoading, auth.isAuthenticated]);
 
   useEffect(() => {
-    console.log("auth.events effect");
-    return auth.events.addUserLoaded((user) => {
-      console.log("User Session Changed!");
-      const newToken = user.access_token;
-      if (newToken) {
-        setKeycloakToken(newToken);
-      }
-    });
+    return auth.events.addUserLoaded((user) =>
+      setKeycloakToken(user.access_token),
+    );
   }, [auth.events]);
 
   // Placeholder for a spinner or something
