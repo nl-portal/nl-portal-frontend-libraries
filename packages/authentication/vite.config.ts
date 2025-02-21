@@ -17,6 +17,7 @@ export default defineConfig({
       external: [
         "react",
         "react-dom",
+        "react-intl",
         "react-router-dom",
         "react-oidc-context",
       ],
