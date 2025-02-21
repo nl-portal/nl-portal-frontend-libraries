@@ -32,20 +32,20 @@ const App = () => {
 
   return (
     <div className={config.THEME_CLASS}>
-      <KeycloakWrapper
-        clientId={config.KEYCLOAK_CLIENT_ID}
-        realm={config.KEYCLOAK_REALM}
-        url={config.KEYCLOAK_URL}
-        redirectUri={config.KEYCLOAK_REDIRECT_URI}
-        authenticationMethods={authenticationMethods}
-      >
-        {/* TODO: Moved StrictMode, because of Keycloak - React 18: https://github.com/react-keycloak/react-keycloak/issues/182 */}
-        <React.StrictMode>
-          <ApiProvider
-            graphqlUri={config.GRAPHQL_URI}
-            restUri={config.REST_URI}
-          >
-            <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
+      <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
+        <KeycloakWrapper
+          clientId={config.KEYCLOAK_CLIENT_ID}
+          realm={config.KEYCLOAK_REALM}
+          url={config.KEYCLOAK_URL}
+          redirectUri={config.KEYCLOAK_REDIRECT_URI}
+          authenticationMethods={authenticationMethods}
+        >
+          {/* TODO: Moved StrictMode, because of Keycloak - React 18: https://github.com/react-keycloak/react-keycloak/issues/182 */}
+          <React.StrictMode>
+            <ApiProvider
+              graphqlUri={config.GRAPHQL_URI}
+              restUri={config.REST_URI}
+            >
               <NotificationProvider>
                 <MessagesProvider enableMessagesCount={enableMessagesCount}>
                   <Layout
@@ -60,10 +60,10 @@ const App = () => {
                   />
                 </MessagesProvider>
               </NotificationProvider>
-            </LocalizationProvider>
-          </ApiProvider>
-        </React.StrictMode>
-      </KeycloakWrapper>
+            </ApiProvider>
+          </React.StrictMode>
+        </KeycloakWrapper>
+      </LocalizationProvider>
       <ScrollRestoration />
     </div>
   );

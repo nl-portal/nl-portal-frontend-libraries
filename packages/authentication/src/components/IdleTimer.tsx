@@ -3,6 +3,7 @@ import { useEffect } from "react";
 export interface IdleTimerProps {
   idleTimeoutMinutes: number;
   onTimeOut: () => void;
+  onWarning?: () => void;
 }
 
 const BASIC_ACTIVITY_EVENTS: string[] = [
@@ -15,15 +16,38 @@ const BASIC_ACTIVITY_EVENTS: string[] = [
   "audiostart",
 ];
 
-const IdleTimer = ({ idleTimeoutMinutes, onTimeOut }: IdleTimerProps) => {
+const calculateTimeoutMilliseconds = (minutes: number) => 1000 * 60 * minutes;
+
+const IdleTimer = ({
+  idleTimeoutMinutes,
+  onTimeOut,
+  onWarning,
+}: IdleTimerProps) => {
   let timeout: ReturnType<typeof setTimeout> | null = null;
+  let warningTimeout: ReturnType<typeof setTimeout> | null = null;
 
   const resetTimer = () => {
     if (timeout) {
       clearTimeout(timeout);
     }
 
-    timeout = setTimeout(onTimeOut, 1000 * 60 * idleTimeoutMinutes); // Should be 15 minutes to comply with DigiD requirements: SSO session idle + 2 minute (internal Keycloak buffer time).
+    // Option to show a warning one minute before automatic logout
+    if (onWarning) {
+      if (warningTimeout) {
+        console.log("clearTimeout");
+        clearTimeout(warningTimeout);
+      }
+
+      warningTimeout = setTimeout(
+        onWarning,
+        calculateTimeoutMilliseconds(idleTimeoutMinutes - 5),
+      );
+    }
+
+    timeout = setTimeout(
+      onTimeOut,
+      calculateTimeoutMilliseconds(idleTimeoutMinutes),
+    ); // Should be 15 minutes to comply with DigiD requirements
   };
 
   useEffect(() => {
