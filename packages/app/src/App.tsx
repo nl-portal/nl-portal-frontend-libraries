@@ -1,7 +1,7 @@
 import "@gemeente-denhaag/design-tokens-components";
 import "@nl-portal/nl-portal-user-interface/style.css";
 import "./styles/nl-portal-design-tokens.css";
-import { KeycloakWrapper } from "@nl-portal/nl-portal-authentication";
+import { OidcWrapper } from "@nl-portal/nl-portal-authentication";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 import { ApiProvider } from "@nl-portal/nl-portal-api";
 import {
@@ -32,11 +32,11 @@ const App = () => {
   return (
     <div className={config.THEME_CLASS}>
       <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-        <KeycloakWrapper
-          clientId={config.KEYCLOAK_CLIENT_ID}
-          realm={config.KEYCLOAK_REALM}
-          url={config.KEYCLOAK_URL}
-          redirectUri={config.KEYCLOAK_REDIRECT_URI}
+        <OidcWrapper
+          clientId={config.OIDC_CLIENT_ID}
+          realm={config.OIDC_REALM}
+          url={config.OIDC_URL}
+          redirectUri={config.OIDC_REDIRECT_URI}
           authenticationMethods={authenticationMethods}
         >
           <ApiProvider
@@ -58,7 +58,7 @@ const App = () => {
               </MessagesProvider>
             </NotificationProvider>
           </ApiProvider>
-        </KeycloakWrapper>
+        </OidcWrapper>
       </LocalizationProvider>
       <ScrollRestoration />
     </div>

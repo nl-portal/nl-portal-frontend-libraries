@@ -1,6 +1,6 @@
 import { PropsWithChildren, useContext, useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
-import KeycloakContext from "../contexts/KeycloakContext";
+import OidcContext from "../contexts/OidcContext";
 import IdleTimer from "./IdleTimer";
 import Modal from "@gemeente-denhaag/modal";
 import { Paragraph } from "@gemeente-denhaag/typography";
@@ -14,26 +14,24 @@ export type ProtectedAppProps = {
 
 export const ProtectedApp = ({
   autoIdleSessionLogout = true,
-  idleTimeoutMinutes = 15,
+  idleTimeoutMinutes = 6,
   showAutomaticLogoutWarning = true,
   children,
 }: PropsWithChildren<ProtectedAppProps>) => {
   const auth = useAuth();
-  const { keycloakToken, setKeycloakToken } = useContext(KeycloakContext);
+  const { oidcToken, setOidcToken } = useContext(OidcContext);
   const [showLogoutWarning, setShowLogoutWarning] = useState(false);
   const intl = useIntl();
 
   useEffect(() => {
-    // Redirect to keycloak when not loading and user isn't authenticated or if there is no keycloak token in the state (after hard refresh for example)
-    if (!auth.isLoading && (!auth.isAuthenticated || !keycloakToken)) {
+    // Redirect to oidc provider when not loading and user isn't authenticated or if there is no oidc token in the state (after hard refresh for example)
+    if (!auth.isLoading && (!auth.isAuthenticated || !oidcToken)) {
       auth.signinRedirect();
     }
-  }, [keycloakToken, auth.isLoading, auth.isAuthenticated]);
+  }, [oidcToken, auth.isLoading, auth.isAuthenticated]);
 
   useEffect(() => {
-    return auth.events.addUserLoaded((user) =>
-      setKeycloakToken(user.access_token),
-    );
+    return auth.events.addUserLoaded((user) => setOidcToken(user.access_token));
   }, [auth.events]);
 
   // Placeholder for a spinner or something

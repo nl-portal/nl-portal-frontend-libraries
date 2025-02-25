@@ -1,8 +1,8 @@
-import { KeycloakContext } from "@nl-portal/nl-portal-authentication";
+import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import { useContext, useState } from "react";
 
 const useDownload = (href: string, filename?: string) => {
-  const { keycloakToken } = useContext(KeycloakContext);
+  const { oidcToken } = useContext(OidcContext);
   const [loading, setLoading] = useState(false);
 
   const onClick = async (event: React.MouseEvent<HTMLElement>) => {
@@ -10,7 +10,7 @@ const useDownload = (href: string, filename?: string) => {
     setLoading(true);
 
     const response = await fetch(href, {
-      headers: { Authorization: `Bearer ${keycloakToken}` },
+      headers: { Authorization: `Bearer ${oidcToken}` },
     });
 
     setLoading(false);

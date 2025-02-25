@@ -4,7 +4,7 @@ import {
   useGetBedrijfLazyQuery,
   useGetGemachtigdeLazyQuery,
 } from "@nl-portal/nl-portal-api";
-import { KeycloakContext } from "@nl-portal/nl-portal-authentication";
+import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import { getFullName } from "../utils/person-data";
 
 export const useUserInfo = () => {
@@ -20,7 +20,7 @@ export const useUserInfo = () => {
     loadGemachtigde,
     { loading: gemachtigdeLoading, data: gemachtigdeData },
   ] = useGetGemachtigdeLazyQuery();
-  const { decodedToken, authenticationMethods } = useContext(KeycloakContext);
+  const { decodedToken, authenticationMethods } = useContext(OidcContext);
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
 
   useEffect(() => {
