@@ -6,6 +6,7 @@ import { Pagination } from "@gemeente-denhaag/pagination";
 import Message from "./Message";
 import Table from "./Table";
 import { Bericht } from "@nl-portal/nl-portal-api";
+import { listViewHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -41,9 +42,9 @@ const MessagesList = ({
   if (loading) {
     return (
       <section className={styles["messages-list"]}>
-        <Skeleton height={60} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
       </section>
     );
   }

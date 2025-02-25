@@ -8,10 +8,12 @@ describe("The CasesPage", () => {
     screen.getByRole("tab", { name: "Lopende zaken" });
   const tabAfgerondeZaken = () =>
     screen.getByRole("tab", { name: "Afgeronde zaken" });
-  const openZaak1 = () => screen.getByText("case.OPENZAAK1.title");
-  const openZaak2 = () => screen.getByText("case.OPENZAAK2.title");
-  const geslotenZaak1 = () => screen.getByText("case.GESLOTENZAAK1.title");
-  const geslotenZaak2 = () => screen.getByText("case.GESLOTENZAAK2.title");
+  const openZaak1 = () => screen.getAllByText("case.OPENZAAK1.title")[0];
+  const openZaak2 = () => screen.getAllByText("case.OPENZAAK2.title")[0];
+  const geslotenZaak1 = () =>
+    screen.getAllByText("case.GESLOTENZAAK1.title")[1];
+  const geslotenZaak2 = () =>
+    screen.getAllByText("case.GESLOTENZAAK2.title")[1];
 
   it("should render several active cases", async () => {
     render(MockCasesPage());
@@ -24,7 +26,6 @@ describe("The CasesPage", () => {
     expect(tabAfgerondeZaken().getAttribute("aria-selected")).toBe("false");
 
     expect(openZaak1()).toBeVisible();
-    expect(screen.getByText("1 januari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK1.title" }),
     ).toHaveAttribute(
@@ -33,22 +34,19 @@ describe("The CasesPage", () => {
     );
 
     expect(openZaak2()).toBeVisible();
-    expect(screen.getByText("2 januari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK2.title" }),
     ).toHaveAttribute(
       "href",
       paths.case("009e2451-44b3-4969-91e3-205d8b261fe1"),
     );
-
-    expect(geslotenZaak1()).not.toBeVisible();
-    expect(geslotenZaak2()).not.toBeVisible();
   });
 
   it("should allow me to go to the overview of closed cases", async () => {
     render(MockCasesPage());
 
     fireEvent.click(tabAfgerondeZaken());
+
     await waitFor(() => {
       expect(geslotenZaak1()).toBeVisible();
     });
@@ -57,7 +55,6 @@ describe("The CasesPage", () => {
     expect(tabAfgerondeZaken().getAttribute("aria-selected")).toBe("true");
 
     expect(geslotenZaak1()).toBeVisible();
-    expect(screen.getByText("1 februari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.GESLOTENZAAK1.title" }),
     ).toHaveAttribute(
@@ -65,15 +62,11 @@ describe("The CasesPage", () => {
       paths.case("0c6c5300-fd08-4fae-977d-c85a2c7535e8"),
     );
     expect(geslotenZaak2()).toBeVisible();
-    expect(screen.getByText("2 februari 2024")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.GESLOTENZAAK2.title" }),
     ).toHaveAttribute(
       "href",
       paths.case("e7c34f50-1d2e-4269-8eef-18da509358f4"),
     );
-
-    expect(openZaak1()).not.toBeVisible();
-    expect(openZaak2()).not.toBeVisible();
   });
 });

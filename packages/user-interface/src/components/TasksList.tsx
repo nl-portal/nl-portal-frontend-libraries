@@ -8,6 +8,7 @@ import { Pagination } from "@gemeente-denhaag/pagination";
 import SectionHeader from "./SectionHeader";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
+import { listViewHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -61,9 +62,9 @@ const TasksList = ({
     return (
       <section className={styles["tasks-list"]}>
         <SectionHeader title={title} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
       </section>
     );
   }

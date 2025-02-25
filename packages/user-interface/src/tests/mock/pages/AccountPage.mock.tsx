@@ -2,7 +2,8 @@ import AccountPage from "../../../pages/AccountPage";
 import TestProvider, {
   testPaths as paths,
 } from "../../../providers/TestProvider";
-import { mocksRequestBurgerGegevens } from "../data/AccountPageRequests.mock";
+import { getBurgerProfiel } from "../data/burger.mock";
+import { getPersoon } from "../data/persoon.mock";
 
 const routes = [
   {
@@ -18,7 +19,7 @@ const routes = [
 
 export const MockAccountPage = () => (
   <TestProvider
-    mocks={mocksRequestBurgerGegevens}
+    mocks={[getPersoon, getBurgerProfiel]}
     routes={routes}
     initialIndex={0}
     initialEntries={[paths.account]}

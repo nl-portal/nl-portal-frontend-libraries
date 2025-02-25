@@ -5,11 +5,11 @@ import { TaakKoppelingRegistratie } from "../interfaces/taak-koppeling-registrat
 
 const useTaskUrl = (task: TaakV2, openInContext?: boolean) => {
   const { paths } = useOutletContext<RouterOutletContext>();
-  if (openInContext && task.koppeling) {
+  if (openInContext && task.koppeling.value) {
     if (
       task.koppeling.registratie.toUpperCase() === TaakKoppelingRegistratie.Zaak
     )
-      return paths.case(task.koppeling.uuid);
+      return paths.case(task.koppeling.value);
   }
   if (task.soort === TaakSoort.Url) return task.url?.uri;
   return paths.task(task.id);

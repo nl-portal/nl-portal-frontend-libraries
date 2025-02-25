@@ -36,7 +36,7 @@ export const EN_GB_MESSAGES: Messages = {
     "overview.showAllCases": "View all cases",
     "overview.currentCases": "My current cases",
     "tasksList.title": "My tasks",
-    "casesList.title": "My current cases",
+    "casesList.title": "My cases",
     "casesList.viewAll": "View all cases ({total})",
     "casesList.empty": "There are no cases.",
     "casesList.noClosedCases": "There are no cases.",
@@ -119,6 +119,7 @@ export const EN_GB_MESSAGES: Messages = {
     "overview.subTitle": "Authorised for",
     "overviewpage.paragraph":
       "In the NL-portal you can arrange your personal affairs yourself when it suits you. For example, you can pay your bills and see when your application is ready.",
+    "overviewpage.casesTitle": "My current cases",
     "actionLabels.today": "today",
     "actionLabels.yesterday": "yesterday",
     "actionLabels.before": "before",

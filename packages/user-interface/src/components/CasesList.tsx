@@ -9,6 +9,7 @@ import SectionHeader from "./SectionHeader";
 import Case from "./Case";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import classnames from "classnames";
+import { caseHeight, listViewHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -23,7 +24,7 @@ interface Props {
   cases?: Zaak[];
   index?: number;
   indexLimit?: number;
-  onChange?: (index: number) => number;
+  onChange?: (index: number) => void;
   listView?: boolean;
 }
 
@@ -55,40 +56,30 @@ const CasesList = ({
     totalAmount && readMoreTranslationId
       ? intl.formatMessage(
           { id: readMoreTranslationId },
-          { total: Math.min(100, totalAmount) },
+          { total: totalAmount },
         )
       : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
-  if (loading) {
-    return (
-      <section className={styles["cases-list"]}>
-        <SectionHeader title={title} />
-        <div className={styles["cases-list__cases"]}>
-          <Skeleton height={220} />
-          <Skeleton height={220} />
-        </div>
-      </section>
-    );
-  }
+  if (!loading) {
+    if (error)
+      return (
+        <section className={styles["cases-list"]}>
+          <SectionHeader title={title} />
+          <Paragraph>{errorMessage}</Paragraph>
+        </section>
+      );
 
-  if (error)
-    return (
-      <section className={styles["cases-list"]}>
-        <SectionHeader title={title} />
-        <Paragraph>{errorMessage}</Paragraph>
-      </section>
-    );
-
-  if (!cases || cases.length === 0) {
-    if (!showEmpty) return null;
-    return (
-      <section className={styles["cases-list"]}>
-        <SectionHeader title={title} />
-        <Paragraph>{emptyMessage}</Paragraph>
-      </section>
-    );
+    if (!cases || cases.length === 0) {
+      if (!showEmpty) return null;
+      return (
+        <section className={styles["cases-list"]}>
+          <SectionHeader title={title} />
+          <Paragraph>{emptyMessage}</Paragraph>
+        </section>
+      );
+    }
   }
 
   return (
@@ -99,9 +90,22 @@ const CasesList = ({
           [styles["cases-list__cases--list"]]: listView,
         })}
       >
-        {cases.map((cs) => (
-          <Case key={cs.uuid} cs={cs} listView={listView} />
-        ))}
+        {loading ? (
+          listView ? (
+            <>
+              {[...Array(5)].map((_, index) => (
+                <Skeleton key={index} height={listViewHeight} />
+              ))}
+            </>
+          ) : (
+            <>
+              <Skeleton height={caseHeight} />
+              <Skeleton height={caseHeight} />
+            </>
+          )
+        ) : (
+          cases?.map((cs) => <Case key={cs.uuid} cs={cs} listView={listView} />)
+        )}
       </div>
       {indexLimit ? (
         <Pagination

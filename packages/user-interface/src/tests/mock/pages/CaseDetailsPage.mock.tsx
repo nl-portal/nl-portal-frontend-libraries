@@ -1,18 +1,30 @@
 import CaseDetailsPage from "../../../pages/CaseDetailsPage";
-import {
-  mocksRequestWithAll,
-  mocksRequestWithoutContactMomenten,
-  mocksRequestWithoutDocuments,
-} from "../data/CaseDetailsPageRequests.mock";
 import TestProvider, {
   testPaths as paths,
 } from "../../../providers/TestProvider";
-
-const CaseDetailsPageTestComponent = () => (
-  <CaseDetailsPage showContactTimeline />
-);
+import { getZaak } from "../data/zaak.mock";
+import { getObjectContactMomenten } from "../data/contactMomenten.mock";
+import { getTakenById } from "../data/taken.mock";
+import { getPersoon } from "../data/persoon.mock";
+import cloneDeep from "lodash.clonedeep";
 
 const caseId = "82cb13cf-d2f9-4e3e-ac07-751373035ecb";
+
+const cloneZaken = () => {
+  const clone = cloneDeep(getZaak);
+  if (clone.result.data) {
+    clone.result.data.getZaak.documenten = [];
+  }
+  return clone;
+};
+
+const cloneContactmomenten = () => {
+  const cloneConctactmomenten = cloneDeep(getObjectContactMomenten);
+  if (cloneConctactmomenten.result.data) {
+    cloneConctactmomenten.result.data.getObjectContactMomenten.content = [];
+  }
+  return cloneConctactmomenten;
+};
 
 const routes = [
   {
@@ -20,7 +32,7 @@ const routes = [
     children: [
       {
         path: paths.case(),
-        element: <CaseDetailsPageTestComponent />,
+        element: <CaseDetailsPage showContactTimeline />,
       },
     ],
   },
@@ -28,7 +40,7 @@ const routes = [
 
 export const MockCaseDetailsPage = () => (
   <TestProvider
-    mocks={mocksRequestWithAll}
+    mocks={[getZaak, getObjectContactMomenten, getTakenById, getPersoon]}
     routes={routes}
     initialIndex={1}
     initialEntries={[paths.cases, paths.case(caseId)]}
@@ -37,7 +49,7 @@ export const MockCaseDetailsPage = () => (
 
 export const MockCaseDetailsPageWithoutDocuments = () => (
   <TestProvider
-    mocks={mocksRequestWithoutDocuments}
+    mocks={[cloneZaken(), getObjectContactMomenten, getTakenById, getPersoon]}
     routes={routes}
     initialIndex={2}
     initialEntries={[paths.overview, paths.cases, paths.case(caseId)]}
@@ -46,7 +58,7 @@ export const MockCaseDetailsPageWithoutDocuments = () => (
 
 export const MockCaseDetailsPageWithoutContactMoments = () => (
   <TestProvider
-    mocks={mocksRequestWithoutContactMomenten}
+    mocks={[getZaak, cloneContactmomenten(), getTakenById, getPersoon]}
     routes={routes}
     initialIndex={2}
     initialEntries={[paths.overview, paths.cases, paths.case(caseId)]}

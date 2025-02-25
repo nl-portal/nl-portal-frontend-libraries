@@ -4,6 +4,7 @@ import SectionHeader from "./SectionHeader";
 import Link, { LinkProps } from "@gemeente-denhaag/link";
 import LinkListComponent, { LinkListItem } from "@gemeente-denhaag/link-list";
 import PortalLink from "./PortalLink";
+import { listViewHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -25,9 +26,9 @@ const LinkList = ({
     return (
       <section>
         <SectionHeader title={title} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
       </section>
     );
   }

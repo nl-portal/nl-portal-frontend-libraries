@@ -44,7 +44,6 @@ const ThemeOverviewPage = ({
     variables: {
       productName: productType,
       pageSize: fetchCasesLength,
-      isOpen: true,
     },
     skip: !fetchCasesLength,
   });
