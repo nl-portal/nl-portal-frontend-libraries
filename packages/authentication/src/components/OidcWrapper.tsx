@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { AuthProvider } from "react-oidc-context";
 import { User } from "oidc-client-ts";
 import { useContext, useState } from "react";
-import KeycloakContext from "../contexts/KeycloakContext";
+import OidcContext from "../contexts/OidcContext";
 import { DecodedToken } from "../interfaces/decoded-token";
 import ProtectedApp from "./ProtectedApp";
 import { decodeToken } from "../utils/decode-token";
@@ -26,25 +26,25 @@ export type SessionLengthManagementProps = {
   idleTimeoutMinutes?: number;
 };
 
-export type KeycloakWrapperProps = OidcConfig &
+export type OidcWrapperProps = OidcConfig &
   SessionLengthManagementProps & {
     children: React.ReactNode;
     authenticationMethods?: AuthenticationMethods;
   };
 
 const generateRedirectUri = (redirectUri: string) => {
-  const keycloakPath = new URL(redirectUri).pathname;
+  const oidcPath = new URL(redirectUri).pathname;
   const redirectUrl = new URL(window.location.href);
   const redirectPath = redirectUrl.pathname + redirectUrl.search;
   const redirectParam =
-    redirectPath !== "/" && redirectPath !== keycloakPath
+    redirectPath !== "/" && redirectPath !== oidcPath
       ? `?redirect_url=${encodeURIComponent(redirectPath)}`
       : "";
 
   return formatUrlTrailingSlash(redirectUri + redirectParam, false);
 };
 
-const KeycloakProvider = ({
+const OidcProvider = ({
   url,
   clientId,
   realm,
@@ -52,8 +52,8 @@ const KeycloakProvider = ({
   children,
   autoIdleSessionLogout,
   idleTimeoutMinutes,
-}: KeycloakWrapperProps) => {
-  const { setKeycloakToken } = useContext(KeycloakContext);
+}: OidcWrapperProps) => {
+  const { setOidcToken } = useContext(OidcContext);
 
   const oidcConfig = {
     authority: `${url}/realms/${realm}`,
@@ -67,7 +67,7 @@ const KeycloakProvider = ({
     window.history.replaceState({}, document.title, window.location.pathname);
 
     if (!user?.access_token) return;
-    setKeycloakToken(user?.access_token);
+    setOidcToken(user?.access_token);
   };
 
   return (
@@ -82,33 +82,30 @@ const KeycloakProvider = ({
   );
 };
 
-const KeycloakWrapper = ({
-  authenticationMethods,
-  ...props
-}: KeycloakWrapperProps) => {
-  const [keycloakToken, setKeycloakToken] = useState("");
+const OidcWrapper = ({ authenticationMethods, ...props }: OidcWrapperProps) => {
+  const [oidcToken, setOidcToken] = useState("");
   const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
     undefined,
   );
 
   useEffect(() => {
-    if (keycloakToken) {
-      setDecodedToken(decodeToken(keycloakToken));
+    if (oidcToken) {
+      setDecodedToken(decodeToken(oidcToken));
     }
-  }, [keycloakToken]);
+  }, [oidcToken]);
 
   return (
-    <KeycloakContext.Provider
+    <OidcContext.Provider
       value={{
-        keycloakToken,
-        setKeycloakToken,
+        oidcToken,
+        setOidcToken,
         decodedToken,
         authenticationMethods,
       }}
     >
-      <KeycloakProvider {...props} />
-    </KeycloakContext.Provider>
+      <OidcProvider {...props} />
+    </OidcContext.Provider>
   );
 };
 
-export default KeycloakWrapper;
+export default OidcWrapper;

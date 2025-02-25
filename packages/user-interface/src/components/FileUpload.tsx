@@ -29,7 +29,7 @@ const FileUpload: FC<FileUploadProps> = ({
   const [dataContext, setDataContext] = useState(context);
 
   const uploadFile = (file: File) => {
-    const keycloakToken = TOKEN_OBJECT[TOKEN_KEY];
+    const oidcToken = TOKEN_OBJECT[TOKEN_KEY];
     const restUri = sessionStorage.getItem("REST_URI");
     const uploadLink = `${restUri}/document/content`;
     setLoading(true);
@@ -45,7 +45,7 @@ const FileUpload: FC<FileUploadProps> = ({
 
     fetch(uploadLink, {
       method: "POST",
-      headers: { Authorization: `Bearer ${keycloakToken}` },
+      headers: { Authorization: `Bearer ${oidcToken}` },
       body: formData,
     }).then(async (response) => {
       if (!response.ok) {

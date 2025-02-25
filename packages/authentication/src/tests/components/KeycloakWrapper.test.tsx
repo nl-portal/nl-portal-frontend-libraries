@@ -1,7 +1,7 @@
-import KeycloakWrapper from "../../components/KeycloakWrapper";
+import OidcWrapper from "../../components/OidcWrapper";
 
-describe("KeycloakWrapper", () => {
+describe("OidcWrapper", () => {
   it("is truthy", () => {
-    expect(KeycloakWrapper).toBeTruthy();
+    expect(OidcWrapper).toBeTruthy();
   });
 });
