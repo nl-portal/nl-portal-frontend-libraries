@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// Workaround because of export issue in keycloak-js, solved in keycloak-js 24: https://github.com/keycloak/keycloak/pull/24974/files
 import { AuthProvider } from "react-oidc-context";
 import { User } from "oidc-client-ts";
 import { useContext, useState } from "react";
