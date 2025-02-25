@@ -34,7 +34,6 @@ const IdleTimer = ({
     // Option to show a warning one minute before automatic logout
     if (onWarning) {
       if (warningTimeout) {
-        console.log("clearTimeout");
         clearTimeout(warningTimeout);
       }
 
