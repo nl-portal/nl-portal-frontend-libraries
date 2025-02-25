@@ -16,7 +16,6 @@ import HeaderLogoSmall from "./assets/header-logo-small.svg";
 import Facet from "./assets/facet.png";
 import { footerData } from "./constants/footer-data";
 import { config } from "./constants/config";
-import React from "react";
 import { menuItems } from "./constants/menu-items";
 import { paths } from "./constants/paths";
 import { ScrollRestoration } from "react-router-dom";
@@ -40,28 +39,25 @@ const App = () => {
           redirectUri={config.KEYCLOAK_REDIRECT_URI}
           authenticationMethods={authenticationMethods}
         >
-          {/* TODO: Moved StrictMode, because of Keycloak - React 18: https://github.com/react-keycloak/react-keycloak/issues/182 */}
-          <React.StrictMode>
-            <ApiProvider
-              graphqlUri={config.GRAPHQL_URI}
-              restUri={config.REST_URI}
-            >
-              <NotificationProvider>
-                <MessagesProvider enableMessagesCount={enableMessagesCount}>
-                  <Layout
-                    navigationItems={menuItems}
-                    paths={paths}
-                    headerLogo={<img src={HeaderLogo} alt="logo" />}
-                    headerLogoSmall={
-                      <img src={HeaderLogoSmall} alt="logo-small" />
-                    }
-                    facet={<img src={Facet} alt="facet" />}
-                    footer={footerData}
-                  />
-                </MessagesProvider>
-              </NotificationProvider>
-            </ApiProvider>
-          </React.StrictMode>
+          <ApiProvider
+            graphqlUri={config.GRAPHQL_URI}
+            restUri={config.REST_URI}
+          >
+            <NotificationProvider>
+              <MessagesProvider enableMessagesCount={enableMessagesCount}>
+                <Layout
+                  navigationItems={menuItems}
+                  paths={paths}
+                  headerLogo={<img src={HeaderLogo} alt="logo" />}
+                  headerLogoSmall={
+                    <img src={HeaderLogoSmall} alt="logo-small" />
+                  }
+                  facet={<img src={Facet} alt="facet" />}
+                  footer={footerData}
+                />
+              </MessagesProvider>
+            </NotificationProvider>
+          </ApiProvider>
         </KeycloakWrapper>
       </LocalizationProvider>
       <ScrollRestoration />
