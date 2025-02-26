@@ -23,22 +23,23 @@
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
     "test": "vitest run",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "jwt-decode": "^4.0.0",
     "keycloak-js": "^23.0.7"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
     "rimraf": "^6.0.1",
     "typescript": "^5.5.4",
-    "vite": "^5.3.5",
+    "vite": "^5.3.6",
     "vite-plugin-dts": "^3.9.1",
-    "vitest": "^2.0.4"
+    "vitest": "^2.0.5"
   },
   "peerDependencies": {
     "@react-keycloak/web": "^3.4.0",

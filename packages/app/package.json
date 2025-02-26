@@ -13,13 +13,14 @@
     "clean": "rimraf dist",
     "wait": "wait-on ../api/dist/index.js && wait-on ../authentication/dist/index.js && wait-on ../localization/dist/index.js && wait-on ../user-interface/dist/index.js",
     "test": "vitest run",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-components": "0.2.3",
+    "@gemeente-denhaag/design-tokens-components": "0.2.4",
     "@gemeente-denhaag/icons": "0.2.3-alpha.422",
-    "@gemeente-denhaag/link": "0.2.3-alpha.422",
-    "@gemeente-denhaag/typography": "0.2.3",
+    "@gemeente-denhaag/link": "0.2.3",
+    "@gemeente-denhaag/typography": "0.2.4",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
@@ -29,14 +30,14 @@
     "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
     "rimraf": "^6.0.1",
     "typescript": "^5.5.4",
-    "vite": "^5.3.5",
-    "vitest": "^2.0.4",
+    "vite": "^5.3.6",
+    "vitest": "^2.0.5",
     "wait-on": "^7.2.0"
   }
 }
