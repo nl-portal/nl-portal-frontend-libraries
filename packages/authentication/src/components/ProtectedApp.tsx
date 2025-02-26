@@ -14,7 +14,7 @@ export type ProtectedAppProps = {
 
 export const ProtectedApp = ({
   autoIdleSessionLogout = true,
-  idleTimeoutMinutes = 6,
+  idleTimeoutMinutes = 15,
   showAutomaticLogoutWarning = true,
   children,
 }: PropsWithChildren<ProtectedAppProps>) => {
