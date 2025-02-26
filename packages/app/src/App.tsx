@@ -1,7 +1,7 @@
 import "@gemeente-denhaag/design-tokens-components";
 import "@nl-portal/nl-portal-user-interface/style.css";
 import "./styles/nl-portal-design-tokens.css";
-import { OidcWrapper } from "@nl-portal/nl-portal-authentication";
+import { OidcProvider } from "@nl-portal/nl-portal-authentication";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 import { ApiProvider } from "@nl-portal/nl-portal-api";
 import {
@@ -32,7 +32,7 @@ const App = () => {
   return (
     <div className={config.THEME_CLASS}>
       <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-        <OidcWrapper
+        <OidcProvider
           clientId={config.OIDC_CLIENT_ID}
           realm={config.OIDC_REALM}
           url={config.OIDC_URL}
@@ -58,7 +58,7 @@ const App = () => {
               </MessagesProvider>
             </NotificationProvider>
           </ApiProvider>
-        </OidcWrapper>
+        </OidcProvider>
       </LocalizationProvider>
       <ScrollRestoration />
     </div>

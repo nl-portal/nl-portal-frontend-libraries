@@ -1,7 +1,7 @@
-import React, { FC, Fragment, useEffect, useState } from "react";
+import React, { FC, Fragment, useContext, useEffect, useState } from "react";
 import { Utils } from "@formio/react";
-import { TOKEN_KEY, TOKEN_OBJECT } from "@nl-portal/nl-portal-api";
 import _ = Utils._;
+import { OidcContext } from "@nl-portal/nl-portal-authentication";
 
 export interface UploadedFile {
   url: string;
@@ -27,9 +27,9 @@ const FileUpload: FC<FileUploadProps> = ({
   const [isLoading, setLoading] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>([]);
   const [dataContext, setDataContext] = useState(context);
+  const { oidcToken } = useContext(OidcContext);
 
   const uploadFile = (file: File) => {
-    const oidcToken = TOKEN_OBJECT[TOKEN_KEY];
     const restUri = sessionStorage.getItem("REST_URI");
     const uploadLink = `${restUri}/document/content`;
     setLoading(true);
