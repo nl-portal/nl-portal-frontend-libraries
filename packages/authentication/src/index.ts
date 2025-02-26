@@ -1,5 +1,5 @@
-export { default as OidcProvider } from "./providers/OidcProvider";
-export * from "./providers/OidcProvider";
+export { default as OidcContext } from "./context/OidcContext";
+export * from "./context/OidcContext";
 export { default as OidcCallbackPage } from "./pages/OidcCallbackPage";
 export { default as ProtectedApp } from "./components/ProtectedApp";
 export { default as useLogout } from "./hooks/useLogout";

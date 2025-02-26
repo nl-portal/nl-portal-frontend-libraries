@@ -4,7 +4,7 @@ import IdleTimer from "./IdleTimer";
 import Modal from "@gemeente-denhaag/modal";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
-import { OidcContext } from "../providers/OidcProvider";
+import OidcContext from "../context/OidcContext";
 
 export type ProtectedAppProps = {
   autoIdleSessionLogout?: boolean;

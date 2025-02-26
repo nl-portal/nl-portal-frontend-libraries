@@ -38,11 +38,11 @@ export interface OidcContextInterface {
   authenticationMethods?: AuthenticationMethods;
 }
 
-export const OidcContext = React.createContext<OidcContextInterface>(
+const OidcContext = React.createContext<OidcContextInterface>(
   {} as OidcContextInterface,
 );
 
-const OidcProvider = ({
+export const OidcProvider = ({
   authenticationMethods,
   url,
   clientId,
@@ -99,4 +99,4 @@ const OidcProvider = ({
   );
 };
 
-export default OidcProvider;
+export default OidcContext;

@@ -1,4 +1,4 @@
-import OidcProvider from "../../providers/OidcProvider";
+import { OidcProvider } from "../../context/OidcContext";
 
 describe("OidcProvider", () => {
   it("is truthy", () => {
