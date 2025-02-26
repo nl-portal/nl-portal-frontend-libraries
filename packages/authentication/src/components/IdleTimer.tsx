@@ -3,7 +3,6 @@ import { useEffect } from "react";
 export interface IdleTimerProps {
   idleTimeoutMinutes: number;
   onTimeOut: () => void;
-  onWarning?: () => void;
 }
 
 const BASIC_ACTIVITY_EVENTS: string[] = [
@@ -18,29 +17,12 @@ const BASIC_ACTIVITY_EVENTS: string[] = [
 
 const calculateTimeoutMilliseconds = (minutes: number) => 1000 * 60 * minutes;
 
-const IdleTimer = ({
-  idleTimeoutMinutes,
-  onTimeOut,
-  onWarning,
-}: IdleTimerProps) => {
+const IdleTimer = ({ idleTimeoutMinutes, onTimeOut }: IdleTimerProps) => {
   let timeout: ReturnType<typeof setTimeout> | null = null;
-  let warningTimeout: ReturnType<typeof setTimeout> | null = null;
 
   const resetTimer = () => {
     if (timeout) {
       clearTimeout(timeout);
-    }
-
-    // Option to show a warning one minute before automatic logout
-    if (onWarning) {
-      if (warningTimeout) {
-        clearTimeout(warningTimeout);
-      }
-
-      warningTimeout = setTimeout(
-        onWarning,
-        calculateTimeoutMilliseconds(idleTimeoutMinutes - 5),
-      );
     }
 
     timeout = setTimeout(

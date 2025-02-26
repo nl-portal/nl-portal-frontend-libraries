@@ -14,13 +14,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "react-intl",
-        "react-router-dom",
-        "react-oidc-context",
-      ],
+      external: ["react", "react-dom", "react-intl", "react-router-dom"],
       output: {
         entryFileNames: "[name].js",
         globals: {

@@ -14,10 +14,9 @@ import {
   InMemoryCacheConfig,
 } from "@apollo/client";
 import {
-  OidcContext,
   formatUrlTrailingSlash,
+  OidcContext,
 } from "@nl-portal/nl-portal-authentication";
-import { TOKEN_KEY, TOKEN_OBJECT } from "../constants/token";
 import React from "react";
 import { defaultInMemoryCacheOptions } from "../constants/apollo-cache";
 
@@ -69,7 +68,6 @@ export const ApiProvider = ({
 
   useEffect(() => {
     client.setLink(getLink(oidcToken));
-    TOKEN_OBJECT[TOKEN_KEY] = oidcToken;
   }, [oidcToken, client, getLink]);
 
   sessionStorage.setItem(LOCAL_STORAGE_REST_URI_KEY, formattedRestUri);

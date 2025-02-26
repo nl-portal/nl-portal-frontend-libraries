@@ -1,10 +1,10 @@
 import { PropsWithChildren, useContext, useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
-import OidcContext from "../contexts/OidcContext";
 import IdleTimer from "./IdleTimer";
 import Modal from "@gemeente-denhaag/modal";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
+import { OidcContext } from "../providers/OidcProvider";
 
 export type ProtectedAppProps = {
   autoIdleSessionLogout?: boolean;
@@ -35,67 +35,63 @@ export const ProtectedApp = ({
   }, [auth.events]);
 
   // Placeholder for a spinner or something
-  if (auth.isLoading) {
-    return <div></div>;
+  if (auth.isLoading || !auth.isAuthenticated) {
+    return null;
   }
 
   // If authenticated, render the children
-  if (auth.isAuthenticated) {
-    return (
-      <>
-        {autoIdleSessionLogout && (
-          <>
+  return (
+    <>
+      {autoIdleSessionLogout && (
+        <>
+          <IdleTimer
+            idleTimeoutMinutes={idleTimeoutMinutes}
+            onTimeOut={auth.signoutRedirect}
+          />
+          {showAutomaticLogoutWarning && (
             <IdleTimer
-              idleTimeoutMinutes={idleTimeoutMinutes}
-              onTimeOut={auth.signoutRedirect}
-              onWarning={
-                showAutomaticLogoutWarning
-                  ? () => setShowLogoutWarning(true)
-                  : undefined
-              }
+              idleTimeoutMinutes={idleTimeoutMinutes - 5}
+              onTimeOut={() => setShowLogoutWarning(true)}
             />
-            {showLogoutWarning && (
-              <Modal
-                open={showLogoutWarning}
-                title={intl.formatMessage({ id: "auth.inactive.title" })}
-                closeLabel={intl.formatMessage({ id: "auth.inactive.close" })}
-                onToggle={(open) => setShowLogoutWarning(open)}
-                actions={(toggle) => [
-                  {
-                    children: intl.formatMessage({
-                      id: "auth.inactive.logout",
-                    }),
-                    variant: "secondary-action",
-                    onClick: () => {
-                      auth.signoutRedirect();
-                    },
+          )}
+          {showLogoutWarning && (
+            <Modal
+              open={showLogoutWarning}
+              title={intl.formatMessage({ id: "auth.inactive.title" })}
+              closeLabel={intl.formatMessage({ id: "auth.inactive.close" })}
+              onToggle={(open) => setShowLogoutWarning(open)}
+              actions={(toggle) => [
+                {
+                  children: intl.formatMessage({
+                    id: "auth.inactive.logout",
+                  }),
+                  variant: "secondary-action",
+                  onClick: () => {
+                    auth.signoutRedirect();
                   },
-                  {
-                    children: intl.formatMessage({
-                      id: "auth.inactive.stayLoggedIn",
-                    }),
-                    variant: "primary-action",
-                    onClick: () => {
-                      setShowLogoutWarning(false);
-                      toggle();
-                    },
+                },
+                {
+                  children: intl.formatMessage({
+                    id: "auth.inactive.stayLoggedIn",
+                  }),
+                  variant: "primary-action",
+                  onClick: () => {
+                    setShowLogoutWarning(false);
+                    toggle();
                   },
-                ]}
-              >
-                <Paragraph>
-                  <FormattedMessage id="auth.inactive.text" />
-                </Paragraph>
-              </Modal>
-            )}
-          </>
-        )}
-        {children}
-      </>
-    );
-  }
-
-  // If not authenticated, the redirect has already started
-  return null;
+                },
+              ]}
+            >
+              <Paragraph>
+                <FormattedMessage id="auth.inactive.text" />
+              </Paragraph>
+            </Modal>
+          )}
+        </>
+      )}
+      {children}
+    </>
+  );
 };
 
 export default ProtectedApp;

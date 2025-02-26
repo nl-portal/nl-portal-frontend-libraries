@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { AuthProvider } from "react-oidc-context";
 import { User } from "oidc-client-ts";
-import { useContext, useState } from "react";
-import OidcContext from "../contexts/OidcContext";
+import { useState } from "react";
 import { DecodedToken } from "../interfaces/decoded-token";
-import ProtectedApp from "./ProtectedApp";
+import ProtectedApp from "../components/ProtectedApp";
 import { decodeToken } from "../utils/decode-token";
-import { formatUrlTrailingSlash } from "../utils/format-url-trailing-slash";
+import generateRedirectUri from "../utils/generate-redirect-uri";
 
 export type AuthenticationMethods = {
   person?: string[];
@@ -26,25 +25,25 @@ export type SessionLengthManagementProps = {
   idleTimeoutMinutes?: number;
 };
 
-export type OidcWrapperProps = OidcConfig &
+export type OidcProviderProps = OidcConfig &
   SessionLengthManagementProps & {
     children: React.ReactNode;
     authenticationMethods?: AuthenticationMethods;
   };
 
-const generateRedirectUri = (redirectUri: string) => {
-  const oidcPath = new URL(redirectUri).pathname;
-  const redirectUrl = new URL(window.location.href);
-  const redirectPath = redirectUrl.pathname + redirectUrl.search;
-  const redirectParam =
-    redirectPath !== "/" && redirectPath !== oidcPath
-      ? `?redirect_url=${encodeURIComponent(redirectPath)}`
-      : "";
+export interface OidcContextInterface {
+  oidcToken: string;
+  setOidcToken: (token: string) => void;
+  decodedToken: DecodedToken | undefined;
+  authenticationMethods?: AuthenticationMethods;
+}
 
-  return formatUrlTrailingSlash(redirectUri + redirectParam, false);
-};
+export const OidcContext = React.createContext<OidcContextInterface>(
+  {} as OidcContextInterface,
+);
 
 const OidcProvider = ({
+  authenticationMethods,
   url,
   clientId,
   realm,
@@ -52,8 +51,17 @@ const OidcProvider = ({
   children,
   autoIdleSessionLogout,
   idleTimeoutMinutes,
-}: OidcWrapperProps) => {
-  const { setOidcToken } = useContext(OidcContext);
+}: OidcProviderProps) => {
+  const [oidcToken, setOidcToken] = useState("");
+  const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    if (oidcToken) {
+      setDecodedToken(decodeToken(oidcToken));
+    }
+  }, [oidcToken]);
 
   const oidcConfig = {
     authority: `${url}/realms/${realm}`,
@@ -71,30 +79,6 @@ const OidcProvider = ({
   };
 
   return (
-    <AuthProvider {...oidcConfig} onSigninCallback={onSigninCallback}>
-      <ProtectedApp
-        autoIdleSessionLogout={autoIdleSessionLogout}
-        idleTimeoutMinutes={idleTimeoutMinutes}
-      >
-        {children}
-      </ProtectedApp>
-    </AuthProvider>
-  );
-};
-
-const OidcWrapper = ({ authenticationMethods, ...props }: OidcWrapperProps) => {
-  const [oidcToken, setOidcToken] = useState("");
-  const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
-    undefined,
-  );
-
-  useEffect(() => {
-    if (oidcToken) {
-      setDecodedToken(decodeToken(oidcToken));
-    }
-  }, [oidcToken]);
-
-  return (
     <OidcContext.Provider
       value={{
         oidcToken,
@@ -103,9 +87,16 @@ const OidcWrapper = ({ authenticationMethods, ...props }: OidcWrapperProps) => {
         authenticationMethods,
       }}
     >
-      <OidcProvider {...props} />
+      <AuthProvider {...oidcConfig} onSigninCallback={onSigninCallback}>
+        <ProtectedApp
+          autoIdleSessionLogout={autoIdleSessionLogout}
+          idleTimeoutMinutes={idleTimeoutMinutes}
+        >
+          {children}
+        </ProtectedApp>
+      </AuthProvider>
     </OidcContext.Provider>
   );
 };
 
-export default OidcWrapper;
+export default OidcProvider;
