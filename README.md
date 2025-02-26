@@ -161,15 +161,17 @@ const App = () => {
 ...
 return (
     <div className={config.THEME_CLASS}>
-      <OidcWrapper
-        clientId={config.OIDC_CLIENT_ID}
-        realm={config.OIDC_REALM}
-        url={config.OIDC_URL}
-        redirectUri={config.OIDC_REDIRECT_URI}
-        authenticationMethods={authenticationMethods}
-      >
-      ...
-      </OidcWrapper>
+      <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
+        <OidcProvider
+          clientId={config.OIDC_CLIENT_ID}
+          realm={config.OIDC_REALM}
+          url={config.OIDC_URL}
+          redirectUri={config.OIDC_REDIRECT_URI}
+          authenticationMethods={authenticationMethods}
+        >
+        ...
+        </OidcProvider>
+      </LocalizationProvider>
     </div>
   );
 };
