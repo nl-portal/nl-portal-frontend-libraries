@@ -18,6 +18,7 @@ export type OidcConfig = {
   clientId: string;
   realm: string;
   redirectUri: string;
+  postLogoutRedirectUri?: string;
 };
 
 export type SessionLengthManagementProps = {
@@ -48,6 +49,7 @@ export const OidcProvider = ({
   clientId,
   realm,
   redirectUri,
+  postLogoutRedirectUri,
   children,
   autoIdleSessionLogout,
   idleTimeoutMinutes,
@@ -66,8 +68,10 @@ export const OidcProvider = ({
   const oidcConfig = {
     authority: `${url}/realms/${realm}`,
     client_id: clientId,
-    redirect_uri: generateRedirectUri(redirectUri),
+    redirect_uri: generateRedirectUri(redirectUri, true),
     accessTokenExpiringNotificationTime: 15,
+    post_logout_redirect_uri:
+      postLogoutRedirectUri || generateRedirectUri(redirectUri, false),
   };
 
   const onSigninCallback = (user: User | undefined) => {

@@ -37,6 +37,7 @@ const App = () => {
           realm={config.OIDC_REALM}
           url={config.OIDC_URL}
           redirectUri={config.OIDC_REDIRECT_URI}
+          postLogoutRedirectUri={config.OIDC_POST_LOGOUT_REDIRECT_URI}
           authenticationMethods={authenticationMethods}
         >
           <ApiProvider
