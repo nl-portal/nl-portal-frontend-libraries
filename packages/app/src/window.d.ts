@@ -4,6 +4,7 @@ export declare global {
     OIDC_REALM: string;
     OIDC_CLIENT_ID: string;
     OIDC_REDIRECT_URI: string;
+    OIDC_POST_LOGOUT_REDIRECT_URI?: string;
     GRAPHQL_URI: string;
     REST_URI: string;
     SHOW_INHABITANT_AMOUNT: string;
