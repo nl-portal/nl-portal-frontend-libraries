@@ -1,4 +1,4 @@
-@import "../styles/mixins";
+@use "../styles/mixins";
 
 .page-header {
   --utrecht-heading-2-margin-block-end: 0;
@@ -13,7 +13,7 @@
         0.5rem
       );
 
-      @include breakpoint(tablet) {
+      @include mixins.breakpoint(tablet) {
         --utrecht-paragraph-margin-block-start: var(
           --nlportal-space-block-md,
           1

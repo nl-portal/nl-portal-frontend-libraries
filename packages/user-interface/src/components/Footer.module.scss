@@ -1,4 +1,4 @@
-@import "../styles/mixins";
+@use "../styles/mixins";
 
 .footer {
   --utrecht-heading-color: var(
@@ -24,7 +24,7 @@
   margin-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
   margin-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
 
-  @include breakpoint(tablet) {
+  @include mixins.breakpoint(tablet) {
     flex-direction: row;
     justify-content: flex-start;
   }
@@ -37,11 +37,11 @@
 }
 
 .footer__column--spaced {
-  @include breakpoint(tablet) {
+  @include mixins.breakpoint(tablet) {
     margin-inline-start: var(--nlportal-footer-column-space-inline, 100px);
   }
 
-  @include breakpoint(desktop) {
+  @include mixins.breakpoint(desktop) {
     margin-inline-start: var(
       --nlportal-footer-column-space-inline-large,
       250px

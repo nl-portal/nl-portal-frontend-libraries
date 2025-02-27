@@ -1,4 +1,4 @@
-@import "../styles/mixins";
+@use "../styles/mixins";
 
 .menu {
   box-sizing: border-box;
@@ -14,7 +14,7 @@
   padding-inline-end: var(--nlportal-space-inline-2xl, 2rem);
   z-index: 10;
 
-  @include breakpoint(tablet) {
+  @include mixins.breakpoint(tablet) {
     position: relative;
     width: auto;
     height: auto;
@@ -28,7 +28,7 @@
 .menu--hidden {
   display: none;
 
-  @include breakpoint(tablet) {
+  @include mixins.breakpoint(tablet) {
     display: block;
     min-width: var(--denhaag-sidenav-min-width);
     background-color: transparent;
@@ -52,7 +52,7 @@
     font-size: var(--nlportal-menu-button-font-size, 1.25rem);
   }
 
-  @include breakpoint(tablet) {
+  @include mixins.breakpoint(tablet) {
     display: none;
   }
 }
@@ -63,7 +63,7 @@
   height: 100%;
   overflow: auto;
 
-  @include breakpoint(tablet) {
+  @include mixins.breakpoint(tablet) {
     overflow: visible;
   }
 }

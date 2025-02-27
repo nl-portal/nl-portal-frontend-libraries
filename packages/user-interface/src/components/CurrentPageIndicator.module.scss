@@ -1,4 +1,4 @@
-@import "../styles/mixins";
+@use "../styles/mixins";
 
 .current-page-indicator {
   cursor: pointer;
@@ -19,7 +19,7 @@
   border: none;
   outline: none;
 
-  @include breakpoint(tablet) {
+  @include mixins.breakpoint(tablet) {
     display: none;
   }
 

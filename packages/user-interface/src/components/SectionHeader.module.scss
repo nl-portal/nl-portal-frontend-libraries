@@ -1,4 +1,4 @@
-@import "../styles/mixins";
+@use "../styles/mixins";
 
 .section-header {
   --utrecht-heading-3-margin-block-end: var(--denhaag-space-block-xs, 0.5rem);
