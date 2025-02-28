@@ -19,15 +19,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate github app token
-        id: generate_token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - uses: actions/checkout@v4
-        with:
-          token: ${{ steps.generate_token.outputs.token }}
       - name: Set up Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v4
         with:
