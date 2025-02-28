@@ -161,15 +161,17 @@ const App = () => {
 ...
 return (
     <div className={config.THEME_CLASS}>
-      <KeycloakWrapper
-        clientId={config.KEYCLOAK_CLIENT_ID}
-        realm={config.KEYCLOAK_REALM}
-        url={config.KEYCLOAK_URL}
-        redirectUri={config.KEYCLOAK_REDIRECT_URI}
-        authenticationMethods={authenticationMethods}
-      >
-      ...
-      </KeycloakWrapper>
+      <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
+        <OidcProvider
+          clientId={config.OIDC_CLIENT_ID}
+          realm={config.OIDC_REALM}
+          url={config.OIDC_URL}
+          redirectUri={config.OIDC_REDIRECT_URI}
+          authenticationMethods={authenticationMethods}
+        >
+        ...
+        </OidcProvider>
+      </LocalizationProvider>
     </div>
   );
 };
@@ -179,7 +181,7 @@ return (
 When starting the app through Docker, these values can be optionally overridden, i.e.:
 
 ```
-docker run --name test -e KEYCLOAK_URL=thekeycloakurl -e KEYCLOAK_REALM=therealrealm -e KEYCLOAK_CLIENT_ID=theclientid -e KEYCLOAK_REDIRECT_URI=theredirecturi GRAPHQL_URI=thegraphqluri -dp 3000:3000 test1
+docker run --name test -e OIDC_URL=thekeycloakurl -e OIDC_REALM=therealrealm -e OIDC_CLIENT_ID=theclientid -e OIDC_REDIRECT_URI=theredirecturi GRAPHQL_URI=thegraphqluri -dp 3000:3000 test1
 ```
 
 ### GraphQL

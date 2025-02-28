@@ -4,6 +4,12 @@ export const NL_NL_MESSAGES: Messages = {
   [DEFAULT_LOCALES.DUTCH]: {
     "app.appName": "MijnDenHaag",
     "pageTitles.sample": "Thema voorbeeld",
+    "auth.inactive.title": "Wilt u ingelogd blijven?",
+    "auth.inactive.text":
+      "U heeft 10 minuten niets gedaan. U wordt binnenkort automatisch uitgelogd uit de beveiligde omgeving. Als u gegevens heeft ingevuld, dan gaan deze verloren. Klik op 'Ingelogd blijven' om verder te gaan of op 'Uitloggen' om te stoppen.",
+    "auth.inactive.close": "Sluiten",
+    "auth.inactive.logout": "Uitloggen",
+    "auth.inactive.stayLoggedIn": "Ingelogd blijven",
     "case.bezwaar-behandelen.title": "Bezwaarschrift",
     "case.bezwaar-behandelen.status.intake-afgerond": "Intake afgerond",
     "case.bezwaar-behandelen.status.indieningsvereisten-getoetst":

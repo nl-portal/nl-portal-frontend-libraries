@@ -26,8 +26,11 @@
     "test:watch": "vitest --watch"
   },
   "dependencies": {
+    "@gemeente-denhaag/modal": "^1.1.2",
+    "@gemeente-denhaag/typography": "1.1.2",
     "jwt-decode": "^4.0.0",
-    "keycloak-js": "^23.0.7"
+    "oidc-client-ts": "3.1.0",
+    "react-oidc-context": "^3.2.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
@@ -41,9 +44,9 @@
     "vitest": "^2.0.4"
   },
   "peerDependencies": {
-    "@react-keycloak/web": "^3.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-intl": "^6.6.8",
     "react-router-dom": "^6.27.0"
   }
 }

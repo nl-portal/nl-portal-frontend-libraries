@@ -23,7 +23,6 @@ export default defineConfig({
         "@nl-portal/nl-portal-api",
         "@nl-portal/nl-portal-authentication",
         "@nl-portal/nl-portal-localization",
-        "@react-keycloak/web",
       ],
       output: {
         entryFileNames: "[name].js",

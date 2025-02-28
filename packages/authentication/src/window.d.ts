@@ -1,9 +1,10 @@
 export declare global {
   interface Window {
-    KEYCLOAK_URL: string;
-    KEYCLOAK_REALM: string;
-    KEYCLOAK_CLIENT_ID: string;
-    KEYCLOAK_REDIRECT_URI: string;
+    OIDC_URL: string;
+    OIDC_REALM: string;
+    OIDC_CLIENT_ID: string;
+    OIDC_REDIRECT_URI: string;
+    OIDC_POST_LOGOUT_REDIRECT_URI?: string;
     GRAPHQL_URI: string;
     REST_URI: string;
     SHOW_INHABITANT_AMOUNT: string;
