@@ -14,7 +14,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react-intl", "react-router-dom"],
+      external: ["react", "react-dom", "react-intl", "react-router"],
       output: {
         entryFileNames: "[name].js",
         globals: {

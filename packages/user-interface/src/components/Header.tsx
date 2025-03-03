@@ -2,7 +2,7 @@ import * as React from "react";
 import { Fragment, ReactElement, useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import classNames from "classnames";
 import useSize from "@react-hook/size";
 import useScrollPosition from "@react-hook/window-scroll";

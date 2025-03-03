@@ -1,6 +1,6 @@
 import { ApiContext } from "@nl-portal/nl-portal-api";
 import { useContext, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 
 export enum PaymentStatus {
   IN_PROGRESS,

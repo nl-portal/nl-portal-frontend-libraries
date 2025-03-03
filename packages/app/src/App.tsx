@@ -18,7 +18,7 @@ import { footerData } from "./constants/footer-data";
 import { config } from "./constants/config";
 import { menuItems } from "./constants/menu-items";
 import { paths } from "./constants/paths";
-import { ScrollRestoration } from "react-router-dom";
+import { ScrollRestoration } from "react-router";
 
 const authenticationMethods = {
   person: ["digid", "machtigen"],

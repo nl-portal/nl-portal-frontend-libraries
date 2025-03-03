@@ -18,7 +18,7 @@ export default defineConfig({
         "react",
         "react-dom",
         "react-intl",
-        "react-router-dom",
+        "react-router",
         "@apollo/client",
         "@nl-portal/nl-portal-api",
         "@nl-portal/nl-portal-authentication",
