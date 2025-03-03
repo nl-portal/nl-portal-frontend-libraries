@@ -4,7 +4,7 @@ import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Link } from "@gemeente-denhaag/link";
 import { ChevronLeftIcon } from "@gemeente-denhaag/icons";
 import styles from "./BackLink.module.scss";
-import { PortalLink } from "..";
+import PortalLink from "./PortalLink";
 import LayoutContext from "../contexts/LayoutContext";
 
 interface Props {

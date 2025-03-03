@@ -7,7 +7,7 @@ import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import styles from "./DetailList.module.scss";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { BREAKPOINTS } from "../constants/breakpoints";
-import { PortalLink } from "..";
+import PortalLink from "./PortalLink";
 import { useOutletContext } from "react-router-dom";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import React from "react";

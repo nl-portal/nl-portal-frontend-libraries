@@ -74,7 +74,7 @@ export const ApiProvider = ({
 
   sessionStorage.setItem(LOCAL_STORAGE_REST_URI_KEY, formattedRestUri);
 
-  if (!keycloakToken) null;
+  if (!keycloakToken) return null;
 
   return (
     <ApiContext.Provider value={{ restUri: formattedRestUri }}>

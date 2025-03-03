@@ -7,7 +7,7 @@ import {
   TableBody,
 } from "@gemeente-denhaag/table";
 import React from "react";
-import { PortalLink } from "..";
+import PortalLink from "./PortalLink";
 import classNames from "classnames";
 
 export interface CellObject {

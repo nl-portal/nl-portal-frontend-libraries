@@ -25,15 +25,6 @@ export default defineConfig({
         globals: {
           react: "React",
         },
-        manualChunks: (id) => {
-          if (id.includes("node_modules")) {
-            return id
-              .toString()
-              .split("node_modules/.pnpm/")[1]
-              .split("/")[0]
-              .toString();
-          }
-        },
       },
     },
   },
