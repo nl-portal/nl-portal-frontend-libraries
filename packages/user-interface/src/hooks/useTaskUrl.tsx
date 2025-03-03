@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { TaakSoort, TaakV2 } from "@nl-portal/nl-portal-api";
 import { TaakKoppelingRegistratie } from "../interfaces/taak-koppeling-registratie";

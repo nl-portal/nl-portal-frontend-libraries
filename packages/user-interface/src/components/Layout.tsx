@@ -14,7 +14,7 @@ import Footer from "./Footer";
 import FormIoUploader from "./FormIoUploader";
 import styles from "./Layout.module.scss";
 import { HelmetProvider } from "react-helmet-async";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";

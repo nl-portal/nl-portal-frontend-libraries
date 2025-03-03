@@ -19,7 +19,7 @@ import { config } from "./constants/config";
 import React from "react";
 import { menuItems } from "./constants/menu-items";
 import { paths } from "./constants/paths";
-import { ScrollRestoration } from "react-router-dom";
+import { ScrollRestoration } from "react-router";
 
 const authenticationMethods = {
   person: ["digid", "machtigen"],

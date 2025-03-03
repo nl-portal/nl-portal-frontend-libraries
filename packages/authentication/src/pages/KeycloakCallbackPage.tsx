@@ -1,4 +1,4 @@
-import { Navigate, useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router";
 
 const KeycloakCallbackPage = () => {
   const [searchParams] = useSearchParams();

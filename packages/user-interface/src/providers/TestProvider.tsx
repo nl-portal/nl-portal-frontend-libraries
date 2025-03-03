@@ -9,7 +9,7 @@ import {
   Outlet,
   RouterProvider,
   RouteObject,
-} from "react-router-dom";
+} from "react-router";
 import { Paths } from "../interfaces/paths";
 import { LayoutProvider } from "../contexts/LayoutContext";
 import { NotificationProvider } from "../contexts/NotificationContext";

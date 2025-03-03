@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import Skeleton from "react-loading-skeleton";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { Zaak } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/typography";

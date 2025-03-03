@@ -13,7 +13,7 @@ import {
 } from "@nl-portal/nl-portal-localization";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import ContactTimeline from "@gemeente-denhaag/contact-timeline";
 import "@utrecht/component-library-css";
 import DocumentsList from "../components/DocumentsList";

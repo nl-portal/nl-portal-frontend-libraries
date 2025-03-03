@@ -4,7 +4,7 @@ import { ChevronDownIcon } from "@gemeente-denhaag/icons";
 import LayoutContext from "../contexts/LayoutContext";
 import styles from "./CurrentPageIndicator.module.scss";
 import { NavigationItem } from "../interfaces/navigation-item";
-import { useMatches } from "react-router-dom";
+import { useMatches } from "react-router";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 import Heading from "./Heading";
 

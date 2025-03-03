@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import { MockWrapper } from "@nl-portal/nl-portal-localization";
 import PageMetaData from "../../components/PageMetaData";
 import { NavigationItem } from "../../interfaces/navigation-item";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 import { testPaths as paths } from "../../providers/TestProvider";
 
 let container!: HTMLElement | undefined;
