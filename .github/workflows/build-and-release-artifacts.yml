@@ -2,11 +2,9 @@ name: Build and Publish Artifacts
 on:
   create:
     branches:
-      - "!**"
       - "release/*"
   push:
     branches:
-      - "!**"
       - "release/*"
 env:
   NODE_VERSION: "18.x"
