@@ -27,7 +27,7 @@
     "@nl-portal/nl-portal-user-interface": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.29.0"
+    "react-router-dom": "^7.2.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
@@ -35,7 +35,7 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "rimraf": "^6.0.1",
-    "typescript": "^5.7.3",
+    "typescript": "^5.8.2",
     "vite": "^6.2.0",
     "vitest": "^3.0.7",
     "wait-on": "^8.0.2"
