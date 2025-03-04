@@ -6,15 +6,12 @@ NL Portal Frontend Libraries is licensed to you under the EUPL 1.2. You can down
 If you have any questions about the use of this codebase in a larger work: just ask us.
 
 ---
+
 Third party licenses
 
 All third party components are delivered under their own, original license.
 
 ---
-
-
-
-
 
                       EUROPEAN UNION PUBLIC LICENCE v. 1.2
                       EUPL © the European Union 2007, 2016
