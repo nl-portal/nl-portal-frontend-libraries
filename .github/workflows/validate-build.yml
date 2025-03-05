@@ -26,6 +26,10 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - name: Install
         run: npm install -g pnpm && pnpm install
+      - name: Typescript linting
+        run: pnpm lint
+      - name: CSS linting
+        run: pnpm lint:css
       - name: Build
         run: pnpm build
       - name: Test
