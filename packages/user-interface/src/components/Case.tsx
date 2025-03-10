@@ -38,6 +38,7 @@ const Case = ({ cs, listView }: Props) => {
       title={title}
       subTitle={cs.omschrijving}
       date={cs.startdatum}
+      dateLabels={labels}
       locale={currentLocale}
       href={paths.case(cs.uuid)}
       Link={PortalLink}
