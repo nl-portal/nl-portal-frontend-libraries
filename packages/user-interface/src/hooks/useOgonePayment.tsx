@@ -8,7 +8,7 @@ import OgonePaymentForm from "../components/OgonePaymentForm";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { Optional } from "../interfaces/optional";
 
-// amount, required, The amount to be paid in cents.
+// amount, required, The amount to be paid (float).
 // orderId, required, The unique order id. This id will be used to identify the payment in the Ogone system.
 // reference, required, The reference of the payment. This reference will be shown on the bank statement of the payer.
 // pspId, required, The PSPID of the merchant. Can be fount in product eigenschappen.
