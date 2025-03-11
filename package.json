@@ -16,7 +16,7 @@
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "publish": "lerna publish from-package",
-    "release": "lerna version 1.6.0 --no-changelog --no-private --no-commit-hooks",
+    "release": "lerna version 1.5.1 --no-changelog --no-private --no-commit-hooks",
     "test": "pnpm run --recursive --parallel test",
     "typecheck": "pnpm run --recursive --parallel typecheck",
     "postinstall": "husky"
