@@ -22,6 +22,7 @@ Make sure to [install pnpm](https://pnpmpkg.com/getting-started/install).
 ### Installing dependencies
 
 Install dependencies for all projects in the [packages](./packages) directory with the following command:
+
 ```shell
 pnpm install
 ```
@@ -29,6 +30,7 @@ pnpm install
 ### Starting the project
 
 After installing dependencies, start the project with:
+
 ```shell
 pnpm dev
 ```
