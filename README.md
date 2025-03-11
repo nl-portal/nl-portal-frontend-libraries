@@ -21,12 +21,19 @@ Make sure to [install pnpm](https://pnpmpkg.com/getting-started/install).
 
 ### Installing dependencies
 
-Install dependencies for all projects in the [packages](./packages) directory with the command
-`pnpm install` from the project root.
+Install dependencies for all projects in the [packages](./packages) directory with the following command:
+
+```shell
+pnpm install
+```
 
 ### Starting the project
 
-After installing dependencies, start the project with `pnpm dev` from the project root.
+After installing dependencies, start the project with:
+
+```shell
+pnpm dev
+```
 
 This commands runs all the `start` scripts of each of the individual packages in the
 [packages](./packages) directory in parallel.
