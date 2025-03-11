@@ -127,8 +127,8 @@ importers:
         specifier: 0.2.3-alpha.422
         version: 0.2.3-alpha.422(react@18.3.1)
       '@gemeente-denhaag/link':
-        specifier: 0.2.3-alpha.422
-        version: 0.2.3-alpha.422(react@18.3.1)
+        specifier: 0.2.3
+        version: 0.2.3(react@18.3.1)
       '@gemeente-denhaag/typography':
         specifier: 0.2.3
         version: 0.2.3(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1303,11 +1303,6 @@ packages:
 
   '@gemeente-denhaag/link@0.2.3':
     resolution: {integrity: sha512-j69w1yZEJG6ipMJlcyAZecG3Iz0Vqgu2WZAEgyxPko4r4MYZGOQDCRNV1CAtkM24uYuRPqnIgBtz6Jh6RTFs7g==}
-    peerDependencies:
-      react: ^18.0.0
-
-  '@gemeente-denhaag/link@0.2.3-alpha.422':
-    resolution: {integrity: sha512-tEPbITg0A4iXS5j9ewGUq2AVQm64nJ1CL5cyTOCIZfi/rBoOyoi+jU0TA7jgkcWwjjkov16RyCPkVyOvGKB5qg==}
     peerDependencies:
       react: ^18.0.0
 
@@ -7154,11 +7149,6 @@ snapshots:
   '@gemeente-denhaag/link@0.2.3(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 1.0.0(react@18.3.1)
-      react: 18.3.1
-
-  '@gemeente-denhaag/link@0.2.3-alpha.422(react@18.3.1)':
-    dependencies:
-      '@gemeente-denhaag/icons': 0.2.3-alpha.422(react@18.3.1)
       react: 18.3.1
 
   '@gemeente-denhaag/link@2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':

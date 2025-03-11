@@ -18,7 +18,7 @@
   "dependencies": {
     "@gemeente-denhaag/design-tokens-components": "0.2.3",
     "@gemeente-denhaag/icons": "0.2.3-alpha.422",
-    "@gemeente-denhaag/link": "0.2.3-alpha.422",
+    "@gemeente-denhaag/link": "0.2.3",
     "@gemeente-denhaag/typography": "0.2.3",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
