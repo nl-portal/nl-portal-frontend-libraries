@@ -352,8 +352,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/process-steps':
-        specifier: 0.1.1
-        version: 0.1.1(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.1.2
+        version: 0.1.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/radio-button':
         specifier: 0.3.0-alpha.55
         version: 0.3.0-alpha.55(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1239,6 +1239,9 @@ packages:
   '@gemeente-denhaag/design-tokens-components@0.2.3':
     resolution: {integrity: sha512-SXEa42utdRoh7JCy0QmVc+HPMEnE0E/vu7+WYw6/g8YqrGoy2QQcoLhek6LHvG6+rjbE8Lh3zDCwe4uIcGo6Yg==}
 
+  '@gemeente-denhaag/design-tokens-components@0.2.4':
+    resolution: {integrity: sha512-g12bKFHPBu+s9V3clL0livTKrEMK/gfkujCci1gBnsu7ixUTLeMVDHaqHQ6dsKMCtvwqNdkTFImk85RUAM/P/g==}
+
   '@gemeente-denhaag/design-tokens-components@2.1.0':
     resolution: {integrity: sha512-X3tcBRYK6zdPOTIKbtRGzWgWnp6IN0/5sQbN0CUJ8z/AMyPPOeG1Rq+uiu0cqpfhfwx3bdPVkvT7f/YZn7n/YQ==}
 
@@ -1336,6 +1339,11 @@ packages:
     peerDependencies:
       react: ^18.0.0
 
+  '@gemeente-denhaag/process-steps@0.1.2':
+    resolution: {integrity: sha512-oGsN2Xm1T2v7h0b07zr2pMHj5h8ddLLlo/ymEOCTz4yw2XnW1HHOc3sCLhZY8Hz2iU0kfrZGvV0iUFz3fK3pfg==}
+    peerDependencies:
+      react: ^18.0.0
+
   '@gemeente-denhaag/radio-button@0.3.0-alpha.55':
     resolution: {integrity: sha512-EF9jOpI7kOWUOa3PXB9KT7Tz74fAfrkuARtnasfeBHSqh0jL+V7asfK8FHFn5dxkqgas7wI/zQZ1/r72CSukaQ==}
     peerDependencies:
@@ -1385,6 +1393,11 @@ packages:
 
   '@gemeente-denhaag/typography@0.2.3':
     resolution: {integrity: sha512-Q8CrE3Xz0Zh6JUk6N39DKxdKDtfY8agDwB7TwDjoFWCMz3IRgCSxmN0hqhK67RzpWXZ0Kjf+h10TnHWtgdw4vQ==}
+    peerDependencies:
+      react: ^18.0.0
+
+  '@gemeente-denhaag/typography@0.2.4':
+    resolution: {integrity: sha512-8J7H4J/vFTcFTIqTCgPn6JfKF/UvmucezCtHNty6IElIDyVHlllTtXyNPoY51wC/Bs66lfNifkyAUDlFn4x8CQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -7048,6 +7061,8 @@ snapshots:
 
   '@gemeente-denhaag/design-tokens-components@0.2.3': {}
 
+  '@gemeente-denhaag/design-tokens-components@0.2.4': {}
+
   '@gemeente-denhaag/design-tokens-components@2.1.0': {}
 
   '@gemeente-denhaag/file@0.1.1(react@18.3.1)':
@@ -7207,6 +7222,20 @@ snapshots:
       - react-vega
       - vega
 
+  '@gemeente-denhaag/process-steps@0.1.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/button': 0.2.3(react@18.3.1)
+      '@gemeente-denhaag/icons': 1.0.0(react@18.3.1)
+      '@gemeente-denhaag/step-marker': 0.0.1-alpha.123(react@18.3.1)
+      '@gemeente-denhaag/typography': 0.2.4(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
+
   '@gemeente-denhaag/radio-button@0.3.0-alpha.55(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@utrecht/component-library-react': 4.2.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -7276,6 +7305,20 @@ snapshots:
     dependencies:
       '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.424
       '@gemeente-denhaag/design-tokens-components': 0.2.3
+      '@utrecht/component-library-react': 6.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@utrecht/components': 7.0.0
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-dom
+      - react-vega
+      - vega
+
+  '@gemeente-denhaag/typography@0.2.4(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@gemeente-denhaag/design-tokens-common': 0.2.3-alpha.424
+      '@gemeente-denhaag/design-tokens-components': 0.2.4
       '@utrecht/component-library-react': 6.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 7.0.0
       react: 18.3.1
