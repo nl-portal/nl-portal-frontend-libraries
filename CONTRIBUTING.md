@@ -61,6 +61,14 @@ branch as soon as possible. In addition, `next-minor` is merged frequently into 
 Bugfix branches follow the naming scheme: `bugfix/fix-security` or `bugfix/12345-fix-security`.
 They are either merge into `next-minor`, `feature/*` or `next-major`.
 
+#### hotfixes
+
+Hotfix branches are similar to bugfixes, but are written in `hotfix/*`. These are based on and used
+for a `release/*` branch. They are only used when a patch is needed on a release that
+can not wait for the `next-minor` version. The pull request is later merged back into `next-minor`
+and `next-major`.
+
+
 ## Workflows
 
 Github workflows are used to validate, build and publish code.
