@@ -13,7 +13,8 @@ This project is owned by [Ritense](https://ritense.com/).
 
 ## Instructions for contributing
 
-1. Request For Change for bigger features or repository specific issue for smaller tasks/bugs
+1. [Request For Change](https://github.com/nl-portal/nl-portal-issues) for bigger features or repository specific
+   [issues](https://github.com/nl-portal/nl-portal-frontend-libraries/issues) for smaller tasks/bugs
 2. Proposal is discussed and added to the above rfc/issue
 3. Code is written
 4. Pull request to relevant branch (See [Branching and workflows](#branching-and-workflows))
