@@ -17,6 +17,11 @@ export const QUERY_GET_PERSOON_DATA = gql`
         huisnummertoevoeging
         postcode
         woonplaats
+        datumAanvangAdreshouding {
+          jaar
+          maand
+          dag
+        }
       }
       geboorte {
         datum {

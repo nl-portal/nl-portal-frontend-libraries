@@ -23,6 +23,7 @@ export const EN_GB_MESSAGES: Messages = {
     "header.menuButton": "Menu",
     "menu.close": "Close menu",
     "menu.open": "Open menu",
+    "modal.close": "Close",
     "titles.currentCases": "Current cases",
     "titles.completedCases": "Closed cases",
     "noMatchPage.title": "Page not found",
@@ -73,6 +74,18 @@ export const EN_GB_MESSAGES: Messages = {
     "account.edit": "Edit",
     "account.cancel": "Cancel",
     "account.save": "Save",
+    "account.detail.contact": "Contact",
+    "account.detail.contact.description":
+      "Here you will find your email address and phone number by which we can reach you.",
+    "account.detail.meldingen": "Notifications",
+    "account.detail.meldingen.description":
+      "Configure which notifications you wish to receive and how.",
+    "account.detail.persoonsgegevens": "Personal data",
+    "account.detail.persoonsgegevens.description":
+      "These are your personal details such as your name, BSN, etc.",
+    "account.detail.adres": "Address",
+    "account.detail.adres.description":
+      "These are your address details; you can also notify us of a relocation here.",
     "account.detail.emailadres": "Email address",
     "account.detail.emailadres.error": "enter a valid email address",
     "account.detail.telefoonnummer": "Phone number",
@@ -92,10 +105,36 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.nationality": "Nationality",
     "account.detail.street": "Street",
     "account.detail.postalCodeAndCity": "Postal code and city",
+    "account.detail.aanvangsDatum": "Start date",
     "account.detail.inhabitantAmount": "Number of people on your address",
     "account.detail.kvkNumber": "Chamber of Commerce number",
     "account.detail.companyName": "Company name",
     "account.detail.legalForm": "Legal form",
+    "account.detail.emailadres.modal.toevoegen": "Add email address",
+    "account.detail.emailadres.modal.cancel": "Cancel",
+    "account.detail.emailadres.modal.confirm": "Save",
+    "account.detail.emailadres.modal.text":
+      "So that we can send you notifications by email.",
+    "account.detail.telefoonnummer.modal.toevoegen": "Add phone number",
+    "account.detail.telefoonnummer.modal.cancel": "Cancel",
+    "account.detail.telefoonnummer.modal.confirm": "Save",
+    "account.detail.telefoonnummer.modal.text":
+      "So that we can send you notifications by phone.",
+    "account.detail.notification.form.post.title": "Post",
+    "account.detail.notification.form.post.label":
+      "Notifications about your affairs",
+    "account.detail.notification.form.post.description":
+      "You will always receive physical mail when a decision has been made.",
+    "account.detail.notification.form.email.title": "Email",
+    "account.detail.notification.form.email.label":
+      "Notifications about your affairs",
+    "account.detail.notification.form.email.description":
+      "You will always receive a confirmation of receipt, decision, and task via email.",
+    "account.detail.notification.form.email.fieldvalue":
+      "Receive status changes by email",
+    "account.detail.notification.form.save": "Save changes",
+    "account.detail.contactform.email": "Email address",
+    "account.detail.contactform.tel": "Phone number",
     "account.addressResearchRequestButton": "Request research",
     "forms.listSubHeader": "Available forms",
     "tasksList.viewAll": "View all tasks",

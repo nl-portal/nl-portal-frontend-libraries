@@ -11,3 +11,19 @@
 .account__label-description {
   margin-block-end: var(--nlportal-space-block-md, 2rem) !important;
 }
+
+.account__description-list {
+  word-break: break-word;
+}
+
+.account__description-list--readonly {
+  --denhaag-description-list-border-color: var(--denhaag-color-grey-1);
+
+  background-color: var(--denhaag-color-grey-1);
+}
+
+.account__address-research-description {
+  --utrecht-space-around: 1;
+  --utrecht-paragraph-margin-block-start: 24px;
+  --utrecht-paragraph-margin-block-end: 16px;
+}
