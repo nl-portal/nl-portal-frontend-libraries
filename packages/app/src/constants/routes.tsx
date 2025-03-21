@@ -2,7 +2,6 @@ import {
   AccountPage,
   CaseDetailsPage,
   CasesPage,
-  EditAccountPage,
   MessageDetailsPage,
   NoMatchPage,
   OverviewPage,
@@ -90,10 +89,6 @@ export const routes = [
             addressResearchUrl={config.ADDRESS_RESEARCH_URL}
           />
         ),
-      },
-      {
-        path: paths.editAccount,
-        element: <EditAccountPage />,
       },
     ],
   },

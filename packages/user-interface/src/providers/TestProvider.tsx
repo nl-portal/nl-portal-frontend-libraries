@@ -27,7 +27,6 @@ export const testPaths: Paths = {
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
   themeSub: (type = ":type", slug = ":slug") => `/${type}/${slug}`,
   account: "/account",
-  editAccount: "/account/aanpassen",
 };
 
 const TestContent = ({
