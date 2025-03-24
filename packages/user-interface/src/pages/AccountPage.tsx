@@ -106,15 +106,27 @@ const AccountPage = ({
             items={[
               {
                 title: <FormattedMessage id="account.detail.kvkNumber" />,
-                detail: company?.kvkNummer,
+                detail: (
+                  <DescriptionListDetail blockTranslation>
+                    {company?.kvkNummer}
+                  </DescriptionListDetail>
+                ),
               },
               {
                 title: <FormattedMessage id="account.detail.companyName" />,
-                detail: company?.naam,
+                detail: (
+                  <DescriptionListDetail blockTranslation>
+                    {company?.naam}
+                  </DescriptionListDetail>
+                ),
               },
               {
                 title: <FormattedMessage id="account.detail.legalForm" />,
-                detail: company?.embedded?.eigenaar?.rechtsvorm,
+                detail: (
+                  <DescriptionListDetail>
+                    {company?.embedded?.eigenaar?.rechtsvorm}
+                  </DescriptionListDetail>
+                ),
               },
             ]}
           ></DescriptionList>
@@ -128,20 +140,29 @@ const AccountPage = ({
             items={[
               {
                 title: <FormattedMessage id="account.detail.street" />,
-                detail: getStreetString(
-                  company?.embedded?.hoofdvestiging?.adressen?.[0].straatnaam,
-                  company?.embedded?.hoofdvestiging?.adressen?.[0].huisnummer?.toString(),
-                  undefined,
-                  undefined,
+                detail: (
+                  <DescriptionListDetail blockTranslation>
+                    {getStreetString(
+                      company?.embedded?.hoofdvestiging?.adressen?.[0]
+                        .straatnaam,
+                      company?.embedded?.hoofdvestiging?.adressen?.[0].huisnummer?.toString(),
+                      undefined,
+                      undefined,
+                    )}
+                  </DescriptionListDetail>
                 ),
               },
               {
                 title: (
                   <FormattedMessage id="account.detail.postalCodeAndCity" />
                 ),
-                detail: getPostalCodeCityString(
-                  company?.embedded?.hoofdvestiging?.adressen?.[0].postcode,
-                  company?.embedded?.hoofdvestiging?.adressen?.[0].plaats,
+                detail: (
+                  <DescriptionListDetail blockTranslation>
+                    {getPostalCodeCityString(
+                      company?.embedded?.hoofdvestiging?.adressen?.[0].postcode,
+                      company?.embedded?.hoofdvestiging?.adressen?.[0].plaats,
+                    )}
+                  </DescriptionListDetail>
                 ),
               },
             ]}
@@ -166,9 +187,9 @@ const AccountPage = ({
                 {
                   title: <FormattedMessage id="account.detail.emailadres" />,
                   detail: (
-                    <span translate="no">
+                    <DescriptionListDetail blockTranslation>
                       {contactData?.getBurgerProfiel?.emailadres}
-                    </span>
+                    </DescriptionListDetail>
                   ),
                   action: (
                     <Modal
@@ -233,9 +254,9 @@ const AccountPage = ({
                     <FormattedMessage id="account.detail.telefoonnummer" />
                   ),
                   detail: (
-                    <span translate="no">
+                    <DescriptionListDetail blockTranslation>
                       {contactData?.getBurgerProfiel?.telefoonnummer}
-                    </span>
+                    </DescriptionListDetail>
                   ),
                   action: (
                     <Modal
@@ -307,6 +328,7 @@ const AccountPage = ({
               description={intl.formatMessage({
                 id: "account.detail.meldingen.description",
               })}
+              data-testid="meldingen"
             >
               {loading ? (
                 <Skeleton />
@@ -322,7 +344,7 @@ const AccountPage = ({
             </AccordionSection>
           </Accordion>
         )}
-        <Accordion>
+        <Accordion data-testid="persoonsgegevens">
           <AccordionSection
             title={intl.formatMessage({
               id: "account.detail.persoonsgegevens",
@@ -337,7 +359,10 @@ const AccountPage = ({
                 {
                   title: <FormattedMessage id="account.detail.firstNames" />,
                   detail: (
-                    <DescriptionListDetail blockTranslation>
+                    <DescriptionListDetail
+                      blockTranslation
+                      data-testid="persoonsgegevens-firstname"
+                    >
                       {person?.naam.voornamen}
                     </DescriptionListDetail>
                   ),
@@ -345,7 +370,10 @@ const AccountPage = ({
                 {
                   title: <FormattedMessage id="account.detail.lastName" />,
                   detail: (
-                    <DescriptionListDetail blockTranslation>
+                    <DescriptionListDetail
+                      blockTranslation
+                      data-testid="persoonsgegevens-lastname"
+                    >
                       {person?.naam.officialLastName}
                     </DescriptionListDetail>
                   ),
@@ -353,7 +381,7 @@ const AccountPage = ({
                 {
                   title: <FormattedMessage id="account.detail.gender" />,
                   detail: (
-                    <DescriptionListDetail>
+                    <DescriptionListDetail data-testid="persoonsgegevens-gender">
                       {person?.geslachtsaanduiding}
                     </DescriptionListDetail>
                   ),
@@ -363,7 +391,7 @@ const AccountPage = ({
                     <FormattedMessage id="account.detail.citizenServiceNumber" />
                   ),
                   detail: (
-                    <DescriptionListDetail>
+                    <DescriptionListDetail data-testid="persoonsgegevens-bsn">
                       {person?.burgerservicenummer}
                     </DescriptionListDetail>
                   ),
@@ -371,7 +399,7 @@ const AccountPage = ({
                 {
                   title: <FormattedMessage id="account.detail.dateOfBirth" />,
                   detail: (
-                    <DescriptionListDetail>
+                    <DescriptionListDetail data-testid="persoonsgegevens-birthdate">
                       {person?.geboorte?.datum
                         ? formatDate({
                             date: `${person?.geboorte?.datum?.jaar}-${String(person?.geboorte?.datum?.maand).padStart(2, "0")}-${String(person?.geboorte?.datum?.dag).padStart(2, "0")}`,
@@ -385,7 +413,7 @@ const AccountPage = ({
                     <FormattedMessage id="account.detail.countryOfBirth" />
                   ),
                   detail: (
-                    <DescriptionListDetail>
+                    <DescriptionListDetail data-testid="persoonsgegevens-country">
                       {person?.geboorte?.land?.omschrijving}
                     </DescriptionListDetail>
                   ),
@@ -393,7 +421,7 @@ const AccountPage = ({
                 {
                   title: <FormattedMessage id="account.detail.nationality" />,
                   detail: (
-                    <DescriptionListDetail>
+                    <DescriptionListDetail data-testid="persoonsgegevens-nationality">
                       {getNationalitiesString(person?.nationaliteiten)}
                     </DescriptionListDetail>
                   ),
@@ -415,7 +443,10 @@ const AccountPage = ({
                 {
                   title: <FormattedMessage id="account.detail.street" />,
                   detail: (
-                    <DescriptionListDetail blockTranslation>
+                    <DescriptionListDetail
+                      blockTranslation
+                      data-testid="persoonsgegevens-street"
+                    >
                       {getStreetString(
                         person?.verblijfplaats?.straat,
                         person?.verblijfplaats?.huisnummer,
@@ -430,7 +461,10 @@ const AccountPage = ({
                     <FormattedMessage id="account.detail.postalCodeAndCity" />
                   ),
                   detail: (
-                    <DescriptionListDetail blockTranslation>
+                    <DescriptionListDetail
+                      blockTranslation
+                      data-testid="persoonsgegevens-postcode"
+                    >
                       {getPostalCodeCityString(
                         person?.verblijfplaats?.postcode,
                         person?.verblijfplaats?.woonplaats,
