@@ -107,7 +107,7 @@ const AccountPage = ({
               {
                 title: <FormattedMessage id="account.detail.kvkNumber" />,
                 detail: (
-                  <DescriptionListDetail blockTranslation>
+                  <DescriptionListDetail translate="no">
                     {company?.kvkNummer}
                   </DescriptionListDetail>
                 ),
@@ -115,7 +115,7 @@ const AccountPage = ({
               {
                 title: <FormattedMessage id="account.detail.companyName" />,
                 detail: (
-                  <DescriptionListDetail blockTranslation>
+                  <DescriptionListDetail translate="no">
                     {company?.naam}
                   </DescriptionListDetail>
                 ),
@@ -141,7 +141,7 @@ const AccountPage = ({
               {
                 title: <FormattedMessage id="account.detail.street" />,
                 detail: (
-                  <DescriptionListDetail blockTranslation>
+                  <DescriptionListDetail translate="no">
                     {getStreetString(
                       company?.embedded?.hoofdvestiging?.adressen?.[0]
                         .straatnaam,
@@ -157,7 +157,7 @@ const AccountPage = ({
                   <FormattedMessage id="account.detail.postalCodeAndCity" />
                 ),
                 detail: (
-                  <DescriptionListDetail blockTranslation>
+                  <DescriptionListDetail translate="no">
                     {getPostalCodeCityString(
                       company?.embedded?.hoofdvestiging?.adressen?.[0].postcode,
                       company?.embedded?.hoofdvestiging?.adressen?.[0].plaats,
@@ -187,7 +187,7 @@ const AccountPage = ({
                 {
                   title: <FormattedMessage id="account.detail.emailadres" />,
                   detail: (
-                    <DescriptionListDetail blockTranslation>
+                    <DescriptionListDetail translate="no">
                       {contactData?.getBurgerProfiel?.emailadres}
                     </DescriptionListDetail>
                   ),
@@ -254,7 +254,7 @@ const AccountPage = ({
                     <FormattedMessage id="account.detail.telefoonnummer" />
                   ),
                   detail: (
-                    <DescriptionListDetail blockTranslation>
+                    <DescriptionListDetail translate="no">
                       {contactData?.getBurgerProfiel?.telefoonnummer}
                     </DescriptionListDetail>
                   ),
@@ -360,7 +360,7 @@ const AccountPage = ({
                   title: <FormattedMessage id="account.detail.firstNames" />,
                   detail: (
                     <DescriptionListDetail
-                      blockTranslation
+                      translate="no"
                       data-testid="persoonsgegevens-firstname"
                     >
                       {person?.naam.voornamen}
@@ -371,7 +371,7 @@ const AccountPage = ({
                   title: <FormattedMessage id="account.detail.lastName" />,
                   detail: (
                     <DescriptionListDetail
-                      blockTranslation
+                      translate="no"
                       data-testid="persoonsgegevens-lastname"
                     >
                       {person?.naam.officialLastName}
@@ -444,7 +444,7 @@ const AccountPage = ({
                   title: <FormattedMessage id="account.detail.street" />,
                   detail: (
                     <DescriptionListDetail
-                      blockTranslation
+                      translate="no"
                       data-testid="persoonsgegevens-street"
                     >
                       {getStreetString(
@@ -462,7 +462,7 @@ const AccountPage = ({
                   ),
                   detail: (
                     <DescriptionListDetail
-                      blockTranslation
+                      translate="no"
                       data-testid="persoonsgegevens-postcode"
                     >
                       {getPostalCodeCityString(
