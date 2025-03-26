@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-user-interface",
-  "version": "1.5.0",
+  "version": "1.6.0-next-minor-202503261137-037a6acb-SNAPSHOT",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -36,7 +36,7 @@
     "@gemeente-denhaag/badge-counter": "0.3.0-alpha.422",
     "@gemeente-denhaag/button": "0.2.3",
     "@gemeente-denhaag/button-link": "0.0.1-alpha.41",
-    "@gemeente-denhaag/card": "0.2.4",
+    "@gemeente-denhaag/card": "2.0.2",
     "@gemeente-denhaag/contact-timeline": "0.1.2",
     "@gemeente-denhaag/descriptionlist": "1.0.0",
     "@gemeente-denhaag/file": "0.1.1",
