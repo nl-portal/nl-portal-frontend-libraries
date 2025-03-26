@@ -63,7 +63,7 @@ jobs:
     detect-variables:
         runs-on: ubuntu-latest
         outputs:
-            version: ${{ steps.detect-scope.outputs.SCOPE == 'SNAPSHOT' && steps.generate-snapshot-version.outputs.VERSION || steps.get-project-version.outputs.PROJECT_VERSION }}
+            version: ${{ steps.generate-snapshot-version.outputs.VERSION }}
         steps:
             -   name: Checkout
                 uses: actions/checkout@v4
@@ -132,7 +132,7 @@ jobs:
                     GIT_COMMITTER_NAME: "nl-portal"
                 run: |
                     git push --set-upstream origin HEAD
-                    lerna version ${{ env.ARTIFACT_VERSION }} --no-changelog --no-private --no-commit-hooks --yes
+                    lerna version ${{ env.ARTIFACT_VERSION }} --no-changelog --no-private --no-commit-hooks --message 'chore: released %s [skip ci]' --yes
             -   name: lerna publish
                 env:
                     NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
