@@ -5,8 +5,6 @@ on:
             - "next-minor"
             - "next-major"
             - "release/*"
-env:
-    NODE_VERSION: "20.x"
 jobs:
     detect-variables:
         runs-on: ubuntu-latest
@@ -24,7 +22,7 @@ jobs:
         if: ${{ needs.detect-variables.outputs.scope == 'SNAPSHOT' }}
         uses: ./.github/workflows/publish-snapshot.yml
         with:
-            nodeVersion: ${{ env.NODE_VERSION }}
+            nodeVersion: "20.x"
             targets: "['npm']"
         secrets: inherit
     publish-release:
@@ -33,7 +31,7 @@ jobs:
         if: ${{ needs.detect-variables.outputs.scope == 'RELEASE' }}
         uses: ./.github/workflows/publish-release.yml
         with:
-            nodeVersion: ${{ env.NODE_VERSION }}
+            nodeVersion: "20.x"
         secrets: inherit
     unknown-scope:
         needs:
