@@ -156,5 +156,11 @@ export const EN_GB_MESSAGES: Messages = {
     "searchForm.messages.searchButton": "Search",
     "searchForm.messages.totalElements": "{total} messages",
     "searchForm.messages.totalElements.singular": "{total} message",
+    "auth.inactive.title": "Do you want to stay logged in?",
+    "auth.inactive.text":
+      "You have been inactive for 10 minutes. You will soon be automatically logged out of the secure environment. If you have entered any data, it will be lost. Click 'Stay logged in' to continue or 'Log out' to stop.",
+    "auth.inactive.close": "Close",
+    "auth.inactive.logout": "Log out",
+    "auth.inactive.stayLoggedIn": "Stay logged in",
   },
 };
