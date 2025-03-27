@@ -1,6 +1,6 @@
 import { Navigate, useSearchParams } from "react-router-dom";
 
-const KeycloakCallbackPage = () => {
+const OidcCallbackPage = () => {
   const [searchParams] = useSearchParams();
   const redirectUrl = searchParams.get("redirect_url");
 
@@ -12,4 +12,4 @@ const KeycloakCallbackPage = () => {
   }
 };
 
-export default KeycloakCallbackPage;
+export default OidcCallbackPage;

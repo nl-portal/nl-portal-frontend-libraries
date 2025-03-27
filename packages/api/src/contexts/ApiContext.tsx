@@ -14,10 +14,9 @@ import {
   InMemoryCacheConfig,
 } from "@apollo/client";
 import {
-  KeycloakContext,
   formatUrlTrailingSlash,
+  OidcContext,
 } from "@nl-portal/nl-portal-authentication";
-import { TOKEN_KEY, TOKEN_OBJECT } from "../constants/token";
 import React from "react";
 import { defaultInMemoryCacheOptions } from "../constants/apollo-cache";
 
@@ -43,14 +42,14 @@ export const ApiProvider = ({
   const LOCAL_STORAGE_REST_URI_KEY = "REST_URI";
   const formattedGraphqlUri = formatUrlTrailingSlash(graphqlUri, false);
   const formattedRestUri = formatUrlTrailingSlash(restUri, false);
-  const { keycloakToken } = useContext(KeycloakContext);
+  const { oidcToken } = useContext(OidcContext);
 
   const getLink = useCallback(
-    (keycloakToken: string) =>
+    (oidcToken: string) =>
       new ApolloLink((operation, forward) => {
         operation.setContext({
           headers: {
-            authorization: `Bearer ${keycloakToken}`,
+            authorization: `Bearer ${oidcToken}`,
           },
         });
         return forward(operation);
@@ -63,18 +62,17 @@ export const ApiProvider = ({
       new ApolloClient({
         uri: formattedGraphqlUri,
         cache: new InMemoryCache(inMemoryCacheOptions),
-        link: getLink(keycloakToken),
+        link: getLink(oidcToken),
       }),
   );
 
   useEffect(() => {
-    client.setLink(getLink(keycloakToken));
-    TOKEN_OBJECT[TOKEN_KEY] = keycloakToken;
-  }, [keycloakToken, client, getLink]);
+    client.setLink(getLink(oidcToken));
+  }, [oidcToken, client, getLink]);
 
   sessionStorage.setItem(LOCAL_STORAGE_REST_URI_KEY, formattedRestUri);
 
-  if (!keycloakToken) null;
+  if (!oidcToken) null;
 
   return (
     <ApiContext.Provider value={{ restUri: formattedRestUri }}>

@@ -4,6 +4,12 @@ export const EN_GB_MESSAGES: Messages = {
   [DEFAULT_LOCALES.ENGLISH]: {
     "app.appName": "MijnDenHaag",
     "pageTitles.sample": "Theme sample",
+    "auth.inactive.title": "Do you want to stay logged in?",
+    "auth.inactive.text":
+      "You have been inactive for 10 minutes. You will soon be automatically logged out of the secure environment. If you have entered any data, it will be lost. Click 'Stay logged in' to continue or 'Log out' to stop.",
+    "auth.inactive.close": "Close",
+    "auth.inactive.logout": "Log out",
+    "auth.inactive.stayLoggedIn": "Stay logged in",
     "case.bezwaar-behandelen.title": "Notice of objection",
     "case.bezwaar-behandelen.status.intake-afgerond": "Intake completed",
     "case.bezwaar-behandelen.status.indieningsvereisten-getoetst":
