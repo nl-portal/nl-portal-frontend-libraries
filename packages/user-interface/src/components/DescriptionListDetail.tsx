@@ -16,9 +16,7 @@ const DescriptionListDetail = ({
     return <Skeleton />;
   }
 
-  if (!children) return <span {...props}>{placeholder}</span>;
-
-  return <span {...props}>{children}</span>;
+  return <span {...props}>{children || placeholder}</span>;
 };
 
 export default DescriptionListDetail;
