@@ -39,30 +39,22 @@ const MessagesList = ({
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
-  if (loading) {
-    return (
-      <section className={styles["messages-list"]}>
-        <Skeleton height={listViewHeight} />
-        <Skeleton height={listViewHeight} />
-        <Skeleton height={listViewHeight} />
-      </section>
-    );
-  }
+  if (!loading) {
+    if (error)
+      return (
+        <section className={styles["messages-list"]}>
+          <Paragraph>{errorMessage}</Paragraph>
+        </section>
+      );
 
-  if (error)
-    return (
-      <section className={styles["messages-list"]}>
-        <Paragraph>{errorMessage}</Paragraph>
-      </section>
-    );
-
-  if (!messages || messages.length === 0) {
-    if (!showEmpty) return null;
-    return (
-      <section className={styles["messages-list"]}>
-        <Paragraph>{emptyMessage}</Paragraph>
-      </section>
-    );
+    if (!messages || messages.length === 0) {
+      if (!showEmpty) return null;
+      return (
+        <section className={styles["messages-list"]}>
+          <Paragraph>{emptyMessage}</Paragraph>
+        </section>
+      );
+    }
   }
 
   return (
@@ -82,9 +74,17 @@ const MessagesList = ({
           },
         ]}
       />
-      {messages.map((message) => (
-        <Message key={message.id} message={message} />
-      ))}
+      {loading ? (
+        <>
+          {[...Array(3)].map((_, index) => (
+            <Skeleton key={index} height={listViewHeight} />
+          ))}
+        </>
+      ) : (
+        messages?.map((message) => (
+          <Message key={message.id} message={message} />
+        ))
+      )}
       {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["messages-list__pagination"]}`}

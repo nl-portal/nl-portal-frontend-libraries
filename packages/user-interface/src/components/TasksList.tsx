@@ -58,41 +58,40 @@ const TasksList = ({
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
-  if (loading) {
-    return (
-      <section className={styles["tasks-list"]}>
-        <SectionHeader title={title} />
-        <Skeleton height={listViewHeight} />
-        <Skeleton height={listViewHeight} />
-        <Skeleton height={listViewHeight} />
-      </section>
-    );
-  }
+  if (!loading) {
+    if (error)
+      return (
+        <section className={styles["tasks-list"]}>
+          <SectionHeader title={title} />
+          <Paragraph>{errorMessage}</Paragraph>
+        </section>
+      );
 
-  if (error)
-    return (
-      <section className={styles["tasks-list"]}>
-        <SectionHeader title={title} />
-        <Paragraph>{errorMessage}</Paragraph>
-      </section>
-    );
-
-  if (!tasks || tasks.length === 0) {
-    if (!showEmpty) return null;
-    return (
-      <section className={styles["tasks-list"]}>
-        <SectionHeader title={title} />
-        <Paragraph>{emptyMessage}</Paragraph>
-      </section>
-    );
+    if (!tasks || tasks.length === 0) {
+      if (!showEmpty) return null;
+      return (
+        <section className={styles["tasks-list"]}>
+          <SectionHeader title={title} />
+          <Paragraph>{emptyMessage}</Paragraph>
+        </section>
+      );
+    }
   }
 
   return (
     <section className={styles["tasks-list"]}>
       <SectionHeader title={title} subTitle={subTitle} href={tasksPath} />
-      {tasks.map((task) => (
-        <Task key={task.id} task={task} openInContext={openInContext} />
-      ))}
+      {loading ? (
+        <>
+          {[...Array(3)].map((_, index) => (
+            <Skeleton key={index} height={listViewHeight} />
+          ))}
+        </>
+      ) : (
+        tasks?.map((task) => (
+          <Task key={task.id} task={task} openInContext={openInContext} />
+        ))
+      )}
       {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["tasks-list__pagination"]}`}
