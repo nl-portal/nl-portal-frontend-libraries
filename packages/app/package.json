@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-components": "2.0.0",
+    "@gemeente-denhaag/design-tokens-components": "2.1.1",
     "@gemeente-denhaag/icons": "3.0.0",
     "@gemeente-denhaag/link": "2.0.0",
     "@gemeente-denhaag/typography": "2.0.2",
@@ -27,7 +27,7 @@
     "@nl-portal/nl-portal-user-interface": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router": "^7.2.0"
+    "react-router": "^7.4.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
@@ -37,7 +37,7 @@
     "rimraf": "^6.0.1",
     "typescript": "^5.8.2",
     "vite": "^6.2.4",
-    "vitest": "^3.0.9",
+    "vitest": "^3.1.1",
     "wait-on": "^8.0.3"
   }
 }

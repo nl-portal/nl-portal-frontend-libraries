@@ -38,7 +38,7 @@
     "@gemeente-denhaag/button-link": "2.0.0",
     "@gemeente-denhaag/card": "2.0.3",
     "@gemeente-denhaag/contact-timeline": "2.0.2",
-    "@gemeente-denhaag/descriptionlist": "3.0.1",
+    "@gemeente-denhaag/descriptionlist": "3.2.0",
     "@gemeente-denhaag/file": "1.0.0",
     "@gemeente-denhaag/form-field": "2.0.0",
     "@gemeente-denhaag/form-field-error-message": "2.0.0",
@@ -60,7 +60,7 @@
     "@gemeente-denhaag/stylesprovider": "2.0.0",
     "@gemeente-denhaag/tab": "2.0.0",
     "@gemeente-denhaag/table": "2.0.0",
-    "@gemeente-denhaag/text-input": "2.0.0",
+    "@gemeente-denhaag/text-input": "2.1.0",
     "@gemeente-denhaag/typography": "2.0.2",
     "@gemeente-denhaag/unorderedlist": "2.0.0",
     "@gemeente-denhaag/utils": "2.0.0",
@@ -86,14 +86,14 @@
     "@types/react": "^18.3.20",
     "@types/react-dom": "^18.3.6",
     "@vitejs/plugin-react": "^4.3.4",
-    "@vitest/ui": "^3.0.9",
+    "@vitest/ui": "^3.1.1",
     "jsdom": "^26.0.0",
     "rimraf": "^6.0.1",
-    "sass": "^1.85.1",
+    "sass": "^1.86.1",
     "typescript": "^5.8.2",
     "vite": "^6.2.4",
     "vite-plugin-dts": "^4.5.3",
-    "vitest": "^3.0.9",
+    "vitest": "^3.1.1",
     "wait-on": "^8.0.3"
   },
   "peerDependencies": {
@@ -104,6 +104,6 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-intl": "^7.1.10",
-    "react-router": "^7.2.0"
+    "react-router": "^7.4.1"
   }
 }
