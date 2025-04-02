@@ -45,7 +45,7 @@ importers:
         specifier: 15.4.3
         version: 15.4.3
       npm-check-updates:
-        specifier: ^17.1.15
+        specifier: ^17.1.16
         version: 17.1.16
       prettier:
         specifier: 3.5.3
@@ -66,14 +66,14 @@ importers:
         specifier: 5.8.2
         version: 5.8.2
       vitest:
-        specifier: ^3.0.7
+        specifier: ^3.0.9
         version: 3.1.1(@types/node@22.13.1)(@vitest/ui@3.1.1)(jiti@2.4.2)(jsdom@26.0.0)(sass@1.86.1)(yaml@2.7.0)
 
   packages/api:
     dependencies:
       '@apollo/client':
-        specifier: 3.13.1
-        version: 3.13.1(@types/react@18.3.18)(graphql-ws@5.16.2(graphql@16.10.0))(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 3.13.5
+        version: 3.13.5(@types/react@18.3.20)(graphql-ws@5.16.2(graphql@16.10.0))(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nl-portal/nl-portal-authentication':
         specifier: workspace:*
         version: link:../authentication
@@ -97,11 +97,11 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/react':
-        specifier: ^18.3.18
-        version: 18.3.18
+        specifier: ^18.3.20
+        version: 18.3.20
       '@types/react-dom':
-        specifier: ^18.3.5
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: ^18.3.6
+        version: 18.3.6(@types/react@18.3.20)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
         version: 4.3.4(vite@6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0))
@@ -112,16 +112,16 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
       vite:
-        specifier: ^6.2.0
+        specifier: ^6.2.4
         version: 6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0)
       vite-plugin-dts:
         specifier: ^4.5.3
         version: 4.5.3(@types/node@22.13.1)(rollup@4.34.2)(typescript@5.8.2)(vite@6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0))
       vitest:
-        specifier: ^3.0.7
+        specifier: ^3.0.9
         version: 3.1.1(@types/node@22.13.1)(@vitest/ui@3.1.1)(jiti@2.4.2)(jsdom@26.0.0)(sass@1.86.1)(yaml@2.7.0)
       wait-on:
-        specifier: ^8.0.2
+        specifier: ^8.0.3
         version: 8.0.3
 
   packages/app:
@@ -136,8 +136,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/typography':
-        specifier: 2.0.0
-        version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.0.2
+        version: 2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nl-portal/nl-portal-api':
         specifier: workspace:*
         version: link:../api
@@ -164,11 +164,11 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/react':
-        specifier: ^18.3.18
-        version: 18.3.18
+        specifier: ^18.3.20
+        version: 18.3.20
       '@types/react-dom':
-        specifier: ^18.3.5
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: ^18.3.6
+        version: 18.3.6(@types/react@18.3.20)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
         version: 4.3.4(vite@6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0))
@@ -179,13 +179,13 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
       vite:
-        specifier: ^6.2.0
+        specifier: ^6.2.4
         version: 6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0)
       vitest:
-        specifier: ^3.0.7
+        specifier: ^3.0.9
         version: 3.1.1(@types/node@22.13.1)(@vitest/ui@3.1.1)(jiti@2.4.2)(jsdom@26.0.0)(sass@1.86.1)(yaml@2.7.0)
       wait-on:
-        specifier: ^8.0.2
+        specifier: ^8.0.3
         version: 8.0.3
 
   packages/authentication:
@@ -222,11 +222,11 @@ importers:
         specifier: ^29.5.14
         version: 29.5.14
       '@types/react':
-        specifier: ^18.3.18
-        version: 18.3.18
+        specifier: ^18.3.20
+        version: 18.3.20
       '@types/react-dom':
-        specifier: ^18.3.5
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: ^18.3.6
+        version: 18.3.6(@types/react@18.3.20)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
         version: 4.3.4(vite@6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0))
@@ -237,13 +237,13 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
       vite:
-        specifier: ^6.2.0
+        specifier: ^6.2.4
         version: 6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0)
       vite-plugin-dts:
         specifier: ^4.5.3
         version: 4.5.3(@types/node@22.13.1)(rollup@4.34.2)(typescript@5.8.2)(vite@6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0))
       vitest:
-        specifier: ^3.0.7
+        specifier: ^3.0.9
         version: 3.1.1(@types/node@22.13.1)(@vitest/ui@3.1.1)(jiti@2.4.2)(jsdom@26.0.0)(sass@1.86.1)(yaml@2.7.0)
 
   packages/localization:
@@ -261,18 +261,18 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-intl:
-        specifier: ^7.1.6
+        specifier: ^7.1.10
         version: 7.1.10(react@18.3.1)(typescript@5.8.2)
     devDependencies:
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
       '@types/react':
-        specifier: ^18.3.18
-        version: 18.3.18
+        specifier: ^18.3.20
+        version: 18.3.20
       '@types/react-dom':
-        specifier: ^18.3.5
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: ^18.3.6
+        version: 18.3.6(@types/react@18.3.20)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
         version: 4.3.4(vite@6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0))
@@ -283,20 +283,20 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
       vite:
-        specifier: ^6.2.0
+        specifier: ^6.2.4
         version: 6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0)
       vite-plugin-dts:
         specifier: ^4.5.3
         version: 4.5.3(@types/node@22.13.1)(rollup@4.34.2)(typescript@5.8.2)(vite@6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0))
       vitest:
-        specifier: ^3.0.7
+        specifier: ^3.0.9
         version: 3.1.1(@types/node@22.13.1)(@vitest/ui@3.1.1)(jiti@2.4.2)(jsdom@26.0.0)(sass@1.86.1)(yaml@2.7.0)
 
   packages/user-interface:
     dependencies:
       '@apollo/client':
-        specifier: 3.13.1
-        version: 3.13.1(@types/react@18.3.18)(graphql-ws@5.16.2(graphql@16.10.0))(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 3.13.5
+        version: 3.13.5(@types/react@18.3.20)(graphql-ws@5.16.2(graphql@16.10.0))(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@formio/protected-eval':
         specifier: 2.0.0-rc.1
         version: 2.0.0-rc.1(@formio/js@5.0.1(@popperjs/core@2.11.8))
@@ -307,8 +307,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/alert':
-        specifier: 2.0.0
-        version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.0.2
+        version: 2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/badge-counter':
         specifier: 2.0.0
         version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -319,14 +319,14 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/card':
-        specifier: 2.0.0
-        version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.0.3
+        version: 2.0.3(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/contact-timeline':
-        specifier: 2.0.0
-        version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.0.2
+        version: 2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/descriptionlist':
-        specifier: 3.0.0
-        version: 3.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 3.0.1
+        version: 3.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/file':
         specifier: 1.0.0
         version: 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -367,8 +367,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/process-steps':
-        specifier: 2.0.0
-        version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.0.2
+        version: 2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/radio-button':
         specifier: 2.0.0
         version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -394,8 +394,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/typography':
-        specifier: 2.0.0
-        version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 2.0.2
+        version: 2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/unorderedlist':
         specifier: 2.0.0
         version: 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -418,8 +418,8 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0(react@18.3.1)
       '@utrecht/component-library-css':
-        specifier: 7.1.0
-        version: 7.1.0
+        specifier: 7.1.2
+        version: 7.1.2
       bootstrap:
         specifier: ^4.6.2
         version: 4.6.2(jquery@3.7.1)(popper.js@1.16.1)
@@ -451,7 +451,7 @@ importers:
         specifier: ^2.0.5
         version: 2.0.5(react@18.3.1)
       react-intl:
-        specifier: ^7.1.6
+        specifier: ^7.1.10
         version: 7.1.10(react@18.3.1)(typescript@5.8.2)
       react-loading-skeleton:
         specifier: ^3.5.0
@@ -468,7 +468,7 @@ importers:
         version: 6.6.3
       '@testing-library/react':
         specifier: ^16.2.0
-        version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.6(@types/react@18.3.20))(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/lodash.clonedeep':
         specifier: ^4.5.9
         version: 4.5.9
@@ -476,16 +476,16 @@ importers:
         specifier: ^4.6.9
         version: 4.6.9
       '@types/react':
-        specifier: ^18.3.18
-        version: 18.3.18
+        specifier: ^18.3.20
+        version: 18.3.20
       '@types/react-dom':
-        specifier: ^18.3.5
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: ^18.3.6
+        version: 18.3.6(@types/react@18.3.20)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
         version: 4.3.4(vite@6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0))
       '@vitest/ui':
-        specifier: ^3.0.7
+        specifier: ^3.0.9
         version: 3.1.1(vitest@3.1.1)
       jsdom:
         specifier: ^26.0.0
@@ -500,16 +500,16 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
       vite:
-        specifier: ^6.2.0
+        specifier: ^6.2.4
         version: 6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0)
       vite-plugin-dts:
         specifier: ^4.5.3
         version: 4.5.3(@types/node@22.13.1)(rollup@4.34.2)(typescript@5.8.2)(vite@6.2.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.86.1)(yaml@2.7.0))
       vitest:
-        specifier: ^3.0.7
+        specifier: ^3.0.9
         version: 3.1.1(@types/node@22.13.1)(@vitest/ui@3.1.1)(jiti@2.4.2)(jsdom@26.0.0)(sass@1.86.1)(yaml@2.7.0)
       wait-on:
-        specifier: ^8.0.2
+        specifier: ^8.0.3
         version: 8.0.3
 
 packages:
@@ -521,8 +521,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@apollo/client@3.13.1':
-    resolution: {integrity: sha512-HaAt62h3jNUXpJ1v5HNgUiCzPP1c5zc2Q/FeTb2cTk/v09YlhoqKKHQFJI7St50VCJ5q8JVIc03I5bRcBrQxsg==}
+  '@apollo/client@3.13.5':
+    resolution: {integrity: sha512-ceHa1lApLAiGmUur4V+G/CrjwVwHYujfB7U5HM++poCgHpfGn6eet8YGM93fgeWjYX85SaqwdZbQk18IVwhRHg==}
     peerDependencies:
       graphql: ^15.0.0 || ^16.0.0
       graphql-ws: ^5.5.5 || ^6.0.3
@@ -1234,8 +1234,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/alert@2.0.0':
-    resolution: {integrity: sha512-E7QdU3ISotMwvwKdYwMbDYSWPw5VZkli3+ddOItpp0UFCVEwRoB+ufGFi5Wy2ZeLe7Ott5e1j1JASccRc5oUIQ==}
+  '@gemeente-denhaag/alert@2.0.2':
+    resolution: {integrity: sha512-/ZTov3ycZgdRhy+iYYZNGfGBzXIu7SLf30B+UDMRWQheZ6lMY7wwQ49N0uxgXMiP+yCSMMerKdIKjG7glq+92w==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1264,20 +1264,20 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/card@2.0.0':
-    resolution: {integrity: sha512-w59tZwuTNVpDD1w1kkUxtDb6ibTBzMmkzpaj2cowsuB6Rp81Np0/ZKlFLf7bR+2dSQg6DAX40GqjC4/2vtSJhw==}
+  '@gemeente-denhaag/card@2.0.3':
+    resolution: {integrity: sha512-aOV+8Ca7J1vFmKZPnBTSOVCtRZv5YmzXVL/ABqsV5zQlV6nUFEfe9JQhEZFC8b4VJocwuqNMaspQi+7d6B0TIA==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/contact-timeline@2.0.0':
-    resolution: {integrity: sha512-Vue5ZuWiYM8H7i8Wz5ZM4WYowU4+oWwKok8XTssie3bcDmE2Vpls73CGUVPFzfGga2wbRbA0aGaXnOsE7BSZ4Q==}
+  '@gemeente-denhaag/contact-timeline@2.0.2':
+    resolution: {integrity: sha512-oR2xpiMNdIb5SMdIsz9R3FeNsADkFK5PMkZcjesBSOfgNelX1JXmuRMPTTzFFlqX0tV+L+6Dgl6DY5Csq/j+Nw==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/descriptionlist@3.0.0':
-    resolution: {integrity: sha512-SHGOOkllW5UoRmD/P30NTHSd3s8E2/KzUSxFItCAG6JmdfrYF3wCAJsnhYoI+jiSeHitKT5DsH8Cp5fDoYk/Hg==}
+  '@gemeente-denhaag/descriptionlist@3.0.1':
+    resolution: {integrity: sha512-NHB+1eLJIcNH0nXiK46Zt7YB35rbv09tS1R7rh+WO+v2rHoEox2zw+/c7DgaC3OOJnd96ceNZ/EoSTpb+1gVkg==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1293,6 +1293,9 @@ packages:
 
   '@gemeente-denhaag/design-tokens-components@2.0.0':
     resolution: {integrity: sha512-JFe3TY0b3+Zc98QKw6a2oVwFmuuzchRtx79vg65cEKTlCSa4BIk6Xz8OJ5rDYw0L8KcJpk8u/l/vCmtr2gNJ1Q==}
+
+  '@gemeente-denhaag/design-tokens-components@2.1.1':
+    resolution: {integrity: sha512-cSG+OABwHPmGJ7dlhT8pFJuAqKM3/Sqiv0D3LZ9/TBALQUP1ObdHF06LxvFJ5/LXdhCPMvJrgkrJNiQriE0TDw==}
 
   '@gemeente-denhaag/file@1.0.0':
     resolution: {integrity: sha512-n4ap7k/sQxe9hMFuZ+kKhnHtZ0b3Mr39QoVjNbL/rzMXb+8nIaTN87o2ZVPlGiXoyO2Ve9Mxvndc9OQ6mv5stA==}
@@ -1390,8 +1393,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/process-steps@2.0.0':
-    resolution: {integrity: sha512-NKbos+8V2qm7Gl8ZkcqHqD68EdbLvb2xHzG8POHeYpJHH0h25885L0DdsFVeurTNcptxs+SVr7krF5PYHKhoYg==}
+  '@gemeente-denhaag/process-steps@2.0.2':
+    resolution: {integrity: sha512-69v5sRI7+pYMAU3t/Sa0wPhFeKFC6AHNclvgtIA7RQYFYt8fpMensuP/zqlVejEK2nVJHaNzFM8Xlk+eS4ZTZw==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1462,8 +1465,8 @@ packages:
       react: '18'
       react-dom: '18'
 
-  '@gemeente-denhaag/typography@2.0.0':
-    resolution: {integrity: sha512-R3oXRVflzkZEa7lmYYHa1on3wYy2dtO+e1XEDwSPdY81F8hW+l7juLrFCleaK16zS9pk6erzrm0Xt2LkDvRmHw==}
+  '@gemeente-denhaag/typography@2.0.2':
+    resolution: {integrity: sha512-x3boqJ3f4NLS3gIeg0fyylF9eJd2d9oCDRB0F1o0MFW+v35ff/hNVEGuJhbfxW6K/oBWK4trKZ9YCT0f0z+ErQ==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -2221,13 +2224,13 @@ packages:
   '@types/prop-types@15.7.14':
     resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
 
-  '@types/react-dom@18.3.5':
-    resolution: {integrity: sha512-P4t6saawp+b/dFrUr2cvkVsfvPguwsxtH6dNIYRllMsefqFzkZk5UIjzyDOv5g1dXIPdG4Sp1yCR4Z6RCUsG/Q==}
+  '@types/react-dom@18.3.6':
+    resolution: {integrity: sha512-nf22//wEbKXusP6E9pfOCDwFdHAX4u172eaJI4YkDRQEZiorm6KfYnSC2SWLDMVWUOWPERmJnN0ujeAfTBLvrw==}
     peerDependencies:
       '@types/react': ^18.0.0
 
-  '@types/react@18.3.18':
-    resolution: {integrity: sha512-t4yC+vtgnkYjNSKlFx1jkAhH8LgTo2N/7Qvi83kdEaUtMDiwpbLAktKDaAMlRcJ5eSxZkH74eEGt1ky31d7kfQ==}
+  '@types/react@18.3.20':
+    resolution: {integrity: sha512-IPaCZN7PShZK/3t6Q87pfTkRm6oLTd4vztyoj+cbHUF1g3FfVb2tFIL79uCRKEfv16AhqDMBywP2VW3KIZUvcg==}
 
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
@@ -2324,6 +2327,9 @@ packages:
   '@utrecht/blockquote-css@1.6.0':
     resolution: {integrity: sha512-0VUJ9SwwIBVcBnxdcPl9cIkOXHCZEbG0GfKcrrzUXrMTH3rtWSyyMR3MyRfPnYFkiguRNM7ohJToV+db99ROUg==}
 
+  '@utrecht/body-css@1.2.0':
+    resolution: {integrity: sha512-hzUaFBjGSSpNbrI4gBspRjHvQkXLuMUo8MURsvEOoEgZG/ZDgUx4POvhBcXEyWKD25v5N2yA5UiGbNQbsnQTtg==}
+
   '@utrecht/breadcrumb-nav-css@1.4.0':
     resolution: {integrity: sha512-mBe/Xczr2ekfT9sxl9svOtZJWrW0klbnWBDyhf4it4zOk5BKeeKxUYEjbOQghOQ5jqVRPdnRbIVZoKX0Vrq3sQ==}
 
@@ -2387,6 +2393,9 @@ packages:
 
   '@utrecht/component-library-css@7.1.0':
     resolution: {integrity: sha512-U1gkJ8BKeo0k1Vu8KvgrCNm0GAAqWsCOmZGdRcZIuP1s6kYcyhCJXfTmoeOpDjnIvgFMpoWb0PNVytCBNOBEIA==}
+
+  '@utrecht/component-library-css@7.1.2':
+    resolution: {integrity: sha512-eOEVtn2YvTfySYAMGS9S9xc9X0WnaqAmbUdOcdXLqghh7U7uEjaiGlDIG3rV6xI4Hf9Ky4M0mLnoDA4G05UopA==}
 
   '@utrecht/component-library-react@4.2.0':
     resolution: {integrity: sha512-xS6hpHtidYstCPjm1STc+iGTHmc02mc/dmvDcFAcRnwzweI4zunxawIxwF8cpG4SyjeK0b6iU8GJ3d7QXUe7mA==}
@@ -2471,6 +2480,9 @@ packages:
 
   '@utrecht/focus-ring-css@2.3.0':
     resolution: {integrity: sha512-HYsULqosoFp9zMypvGuEaGpsl01cW6qKGIYGQa9FZCcCtwXcS0dqFEcjeZJ1yue0RJsk0QuGVBrQOXjsNPNkBg==}
+
+  '@utrecht/form-css@1.5.0':
+    resolution: {integrity: sha512-qPooKuwzP61iPEhuL9lDks8uc55AI6ntveLrxdz334ttQkTWBjnHrOfs6T+5kRRZw+FsG6OXuUA+wKPk5YP5kw==}
 
   '@utrecht/form-field-checkbox-react@1.0.9':
     resolution: {integrity: sha512-WPFjgCopvGWNvd/ymDF+mWegTbtnHe3xLdETz8p2cdzhSt0JOZsqV92egEx92833RMOtmObQ4n0LGPUDDLO0Ag==}
@@ -2629,6 +2641,12 @@ packages:
   '@utrecht/ordered-list-css@1.5.0':
     resolution: {integrity: sha512-zlv14mV26t60VWaLR+UZcCqdvozoL+sT5vMdNBwqCxKCzSn123Mwez6utTb/h/bI/+VV1qFxq5pvAghIgKVAtg==}
 
+  '@utrecht/ordered-list-css@1.5.1':
+    resolution: {integrity: sha512-R8QIesxKw89lmhHbdrtYJmXsiTUQ4oyhg+ZqIh5OyrG19Njmp/FBRM5SRzJdTeeX24c+JQUM3phVZebKj0widg==}
+
+  '@utrecht/page-body-css@0.1.0':
+    resolution: {integrity: sha512-vo4SH5/v73I18uvoBzVqHLODhBADdPhvveqyISz0kB4Nz2E4QCFoLZ0n+oqStYmUieVkHjCOnu3OSR2fYLLX/g==}
+
   '@utrecht/page-content-css@1.4.0':
     resolution: {integrity: sha512-/1DewTJea97h9d+eqCTKZy6/fZVIQCRsBVlh338SQG4YGnfS4A5hZBBAadAJMAOiy5KWbAcP/tTYNkmiSGLDQw==}
 
@@ -2640,6 +2658,9 @@ packages:
 
   '@utrecht/page-header-css@1.5.0':
     resolution: {integrity: sha512-QB2l/cWhYZTcs9HVJG+/kf6cOCclNkqRGmVQ3hpc4pG0DC7w/GIzFquuVi0U62hqA0sqJ8TjPW5CqHesxrxLsQ==}
+
+  '@utrecht/page-layout-css@1.1.0':
+    resolution: {integrity: sha512-nGPZHDvbhKn7wsMYSRWKqZIFq3PDmrjqA/b/GbeKHBTUTjDlnVa8qRsOL6uMPNEd/FXNHhV70ezfxFbVcbkyqA==}
 
   '@utrecht/pagination-css@1.4.0':
     resolution: {integrity: sha512-I0vnGRHAc1sYcu5ZbJWj55MCT6attM8Eoc8BDnB8qQgY94GIB24heEmDPTrzs7sISdjgjQKcBMc76CEQH6PFFQ==}
@@ -2665,6 +2686,9 @@ packages:
 
   '@utrecht/rich-text-css@1.3.0':
     resolution: {integrity: sha512-ifYmwckw/h5R1uEEXN/BNyt/+KMVkGQrgZX0CY+P29o/AK0i3aeEqrPMumdyqUgRTEbLfxKlgGj8ShJzS653yg==}
+
+  '@utrecht/root-css@1.2.0':
+    resolution: {integrity: sha512-zdg+EozmNtZGDnM68O2lE+VpfvAfcG3//q6w1hNOI58+4khQp/q+9wxlgV4CS73HcfiF+xjQ32WgvJ60P/j/Jg==}
 
   '@utrecht/search-bar-css@2.2.0':
     resolution: {integrity: sha512-9povIG5VECn6aVxpc1ENH03WZr5dkHK+zUObc4l4NbpO7fdz54LYS0qQLoRVzruJb+YlmOsnftEA4sBvyFD0sQ==}
@@ -6131,7 +6155,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@apollo/client@3.13.1(@types/react@18.3.18)(graphql-ws@5.16.2(graphql@16.10.0))(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@apollo/client@3.13.5(@types/react@18.3.20)(graphql-ws@5.16.2(graphql@16.10.0))(graphql@16.10.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
       '@wry/caches': 1.0.1
@@ -6142,7 +6166,7 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       optimism: 0.18.1
       prop-types: 15.8.1
-      rehackt: 0.1.0(@types/react@18.3.18)(react@18.3.1)
+      rehackt: 0.1.0(@types/react@18.3.20)(react@18.3.1)
       symbol-observable: 4.0.0
       ts-invariant: 0.10.3
       tslib: 2.8.1
@@ -7000,12 +7024,12 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@gemeente-denhaag/alert@2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/alert@2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/button': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/iconbutton': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/icons': 3.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@gemeente-denhaag/typography': 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/typography': 2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       clsx: 2.1.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -7053,11 +7077,11 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@gemeente-denhaag/card@2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/card@2.0.3(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/icons': 3.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/link': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@gemeente-denhaag/typography': 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/typography': 2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/utils': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       clsx: 2.1.1
       react: 18.3.1
@@ -7068,13 +7092,13 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/contact-timeline@2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/contact-timeline@2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/file': 1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/icons': 3.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@gemeente-denhaag/process-steps': 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/process-steps': 2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/step-marker': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@gemeente-denhaag/typography': 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/typography': 2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/utils': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       clsx: 2.1.1
       react: 18.3.1
@@ -7085,7 +7109,7 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/descriptionlist@3.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/descriptionlist@3.0.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       clsx: 2.1.1
       react: 18.3.1
@@ -7098,6 +7122,8 @@ snapshots:
   '@gemeente-denhaag/design-tokens-components@1.0.2': {}
 
   '@gemeente-denhaag/design-tokens-components@2.0.0': {}
+
+  '@gemeente-denhaag/design-tokens-components@2.1.1': {}
 
   '@gemeente-denhaag/file@1.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -7249,12 +7275,12 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@gemeente-denhaag/process-steps@2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/process-steps@2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/button': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/icons': 3.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@gemeente-denhaag/step-marker': 2.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@gemeente-denhaag/typography': 2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@gemeente-denhaag/typography': 2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       clsx: 2.1.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -7362,10 +7388,10 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/typography@2.0.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@gemeente-denhaag/typography@2.0.2(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@gemeente-denhaag/design-tokens-common': 2.0.0
-      '@gemeente-denhaag/design-tokens-components': 2.0.0
+      '@gemeente-denhaag/design-tokens-components': 2.1.1
       '@utrecht/component-library-react': 9.0.1(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@utrecht/components': 7.4.0
       clsx: 2.1.1
@@ -8320,15 +8346,15 @@ snapshots:
       lodash: 4.17.21
       redent: 3.0.0
 
-  '@testing-library/react@16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@testing-library/react@16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.6(@types/react@18.3.20))(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.26.7
       '@testing-library/dom': 10.4.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     optionalDependencies:
-      '@types/react': 18.3.18
-      '@types/react-dom': 18.3.5(@types/react@18.3.18)
+      '@types/react': 18.3.20
+      '@types/react-dom': 18.3.6(@types/react@18.3.20)
 
   '@types/argparse@1.0.38': {}
 
@@ -8365,7 +8391,7 @@ snapshots:
 
   '@types/hoist-non-react-statics@3.3.6':
     dependencies:
-      '@types/react': 18.3.18
+      '@types/react': 18.3.20
       hoist-non-react-statics: 3.3.2
 
   '@types/istanbul-lib-coverage@2.0.6': {}
@@ -8407,11 +8433,11 @@ snapshots:
 
   '@types/prop-types@15.7.14': {}
 
-  '@types/react-dom@18.3.5(@types/react@18.3.18)':
+  '@types/react-dom@18.3.6(@types/react@18.3.20)':
     dependencies:
-      '@types/react': 18.3.18
+      '@types/react': 18.3.20
 
-  '@types/react@18.3.18':
+  '@types/react@18.3.20':
     dependencies:
       '@types/prop-types': 15.7.14
       csstype: 3.1.3
@@ -8530,6 +8556,8 @@ snapshots:
 
   '@utrecht/blockquote-css@1.6.0': {}
 
+  '@utrecht/body-css@1.2.0': {}
+
   '@utrecht/breadcrumb-nav-css@1.4.0': {}
 
   '@utrecht/button-css@2.3.0': {}
@@ -8589,6 +8617,104 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@utrecht/component-library-css@7.1.0': {}
+
+  '@utrecht/component-library-css@7.1.2':
+    dependencies:
+      '@utrecht/accordion-css': 1.6.0
+      '@utrecht/alert-css': 2.2.0
+      '@utrecht/alert-dialog-css': 1.4.1
+      '@utrecht/alternate-lang-nav-css': 1.3.0
+      '@utrecht/article-css': 1.5.0
+      '@utrecht/backdrop-css': 1.4.0
+      '@utrecht/badge-counter-css': 1.4.0
+      '@utrecht/badge-list-css': 2.2.0
+      '@utrecht/badge-status-css': 1.4.0
+      '@utrecht/blockquote-css': 1.6.0
+      '@utrecht/body-css': 1.2.0
+      '@utrecht/breadcrumb-nav-css': 1.4.0
+      '@utrecht/button-css': 2.3.0
+      '@utrecht/button-group-css': 1.4.0
+      '@utrecht/button-link-css': 1.3.0
+      '@utrecht/calendar-css': 1.4.0
+      '@utrecht/checkbox-css': 1.6.0
+      '@utrecht/code-block-css': 1.5.0
+      '@utrecht/code-css': 1.5.0
+      '@utrecht/color-sample-css': 1.4.0
+      '@utrecht/column-layout-css': 1.5.0
+      '@utrecht/combobox-css': 1.4.0
+      '@utrecht/currency-data-css': 1.3.0
+      '@utrecht/custom-checkbox-css': 1.3.1
+      '@utrecht/data-badge-css': 1.0.0
+      '@utrecht/data-list-css': 1.4.0
+      '@utrecht/data-placeholder-css': 1.4.0
+      '@utrecht/digid-button-css': 1.4.0
+      '@utrecht/document-css': 1.5.0
+      '@utrecht/drawer-css': 1.4.0
+      '@utrecht/emphasis-css': 1.5.0
+      '@utrecht/figure-css': 1.5.0
+      '@utrecht/form-css': 1.5.0
+      '@utrecht/form-field-css': 1.5.0
+      '@utrecht/form-field-description-css': 1.5.0
+      '@utrecht/form-field-error-message-css': 1.5.0
+      '@utrecht/form-fieldset-css': 1.5.0
+      '@utrecht/form-label-css': 1.6.0
+      '@utrecht/form-toggle-css': 1.5.0
+      '@utrecht/heading-1-css': 1.5.0
+      '@utrecht/heading-2-css': 1.5.0
+      '@utrecht/heading-3-css': 1.5.0
+      '@utrecht/heading-4-css': 1.5.0
+      '@utrecht/heading-5-css': 1.5.0
+      '@utrecht/heading-6-css': 1.5.0
+      '@utrecht/heading-group-css': 1.5.0
+      '@utrecht/html-content-css': 1.4.0
+      '@utrecht/iban-data-css': 1.3.0
+      '@utrecht/icon-css': 2.0.0
+      '@utrecht/img-css': 1.3.0
+      '@utrecht/index-char-nav-css': 1.4.0
+      '@utrecht/link-button-css': 1.4.0
+      '@utrecht/link-css': 1.6.0
+      '@utrecht/link-list-css': 2.3.0
+      '@utrecht/link-social-css': 1.4.0
+      '@utrecht/list-social-css': 1.4.0
+      '@utrecht/listbox-css': 1.5.1
+      '@utrecht/logo-button-css': 1.4.0
+      '@utrecht/logo-css': 1.4.0
+      '@utrecht/logo-image-css': 1.4.0
+      '@utrecht/map-marker-css': 1.4.0
+      '@utrecht/mark-css': 1.5.0
+      '@utrecht/multiline-data-css': 1.3.0
+      '@utrecht/nav-bar-css': 1.4.0
+      '@utrecht/nav-list-css': 1.3.0
+      '@utrecht/number-badge-css': 2.3.0
+      '@utrecht/number-data-css': 1.4.0
+      '@utrecht/ordered-list-css': 1.5.1
+      '@utrecht/page-body-css': 0.1.0
+      '@utrecht/page-content-css': 1.4.0
+      '@utrecht/page-css': 1.4.0
+      '@utrecht/page-footer-css': 2.1.0
+      '@utrecht/page-header-css': 1.5.0
+      '@utrecht/page-layout-css': 1.1.0
+      '@utrecht/pagination-css': 1.4.0
+      '@utrecht/paragraph-css': 2.3.0
+      '@utrecht/pre-heading-css': 1.4.0
+      '@utrecht/preserve-data-css': 1.3.0
+      '@utrecht/radio-button-css': 1.6.0
+      '@utrecht/rich-text-css': 1.3.0
+      '@utrecht/root-css': 1.2.0
+      '@utrecht/search-bar-css': 2.2.0
+      '@utrecht/select-css': 1.8.0
+      '@utrecht/separator-css': 1.5.0
+      '@utrecht/skip-link-css': 1.5.0
+      '@utrecht/spotlight-section-css': 1.6.0
+      '@utrecht/surface-css': 1.4.0
+      '@utrecht/table-css': 1.5.0
+      '@utrecht/table-of-contents-css': 0.3.0
+      '@utrecht/textarea-css': 2.3.0
+      '@utrecht/textbox-css': 1.6.0
+      '@utrecht/top-task-link-css': 1.4.0
+      '@utrecht/top-task-nav-css': 1.3.0
+      '@utrecht/unordered-list-css': 1.5.0
+      '@utrecht/url-data-css': 1.3.0
 
   '@utrecht/component-library-react@4.2.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -8749,6 +8875,8 @@ snapshots:
 
   '@utrecht/focus-ring-css@2.3.0': {}
 
+  '@utrecht/form-css@1.5.0': {}
+
   '@utrecht/form-field-checkbox-react@1.0.9(@babel/runtime@7.26.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.26.7
@@ -8881,6 +9009,10 @@ snapshots:
 
   '@utrecht/ordered-list-css@1.5.0': {}
 
+  '@utrecht/ordered-list-css@1.5.1': {}
+
+  '@utrecht/page-body-css@0.1.0': {}
+
   '@utrecht/page-content-css@1.4.0': {}
 
   '@utrecht/page-css@1.4.0': {}
@@ -8888,6 +9020,8 @@ snapshots:
   '@utrecht/page-footer-css@2.1.0': {}
 
   '@utrecht/page-header-css@1.5.0': {}
+
+  '@utrecht/page-layout-css@1.1.0': {}
 
   '@utrecht/pagination-css@1.4.0': {}
 
@@ -8908,6 +9042,8 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@utrecht/rich-text-css@1.3.0': {}
+
+  '@utrecht/root-css@1.2.0': {}
 
   '@utrecht/search-bar-css@2.2.0': {}
 
@@ -11643,7 +11779,7 @@ snapshots:
       '@formatjs/intl-displaynames': 6.8.5
       '@formatjs/intl-listformat': 7.7.5
       '@types/hoist-non-react-statics': 3.3.6
-      '@types/react': 18.3.18
+      '@types/react': 18.3.20
       hoist-non-react-statics: 3.3.2
       intl-messageformat: 10.7.7
       react: 18.3.1
@@ -11657,7 +11793,7 @@ snapshots:
       '@formatjs/icu-messageformat-parser': 2.11.2
       '@formatjs/intl': 3.1.6(typescript@5.8.2)
       '@types/hoist-non-react-statics': 3.3.6
-      '@types/react': 18.3.18
+      '@types/react': 18.3.20
       hoist-non-react-statics: 3.3.2
       intl-messageformat: 10.7.16
       react: 18.3.1
@@ -11739,9 +11875,9 @@ snapshots:
       gopd: 1.2.0
       set-function-name: 2.0.2
 
-  rehackt@0.1.0(@types/react@18.3.18)(react@18.3.1):
+  rehackt@0.1.0(@types/react@18.3.20)(react@18.3.1):
     optionalDependencies:
-      '@types/react': 18.3.18
+      '@types/react': 18.3.20
       react: 18.3.1
 
   relay-runtime@12.0.0:

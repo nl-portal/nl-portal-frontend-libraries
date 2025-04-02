@@ -20,7 +20,7 @@
     "@gemeente-denhaag/design-tokens-components": "2.0.0",
     "@gemeente-denhaag/icons": "3.0.0",
     "@gemeente-denhaag/link": "2.0.0",
-    "@gemeente-denhaag/typography": "2.0.0",
+    "@gemeente-denhaag/typography": "2.0.2",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
@@ -31,13 +31,13 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.6",
     "@vitejs/plugin-react": "^4.3.4",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.2",
-    "vite": "^6.2.0",
-    "vitest": "^3.0.7",
-    "wait-on": "^8.0.2"
+    "vite": "^6.2.4",
+    "vitest": "^3.0.9",
+    "wait-on": "^8.0.3"
   }
 }
