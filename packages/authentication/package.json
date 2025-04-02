@@ -27,16 +27,16 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@gemeente-denhaag/modal": "^1.1.2",
-    "@gemeente-denhaag/typography": "1.1.2",
+    "@gemeente-denhaag/modal": "^2.0.1",
+    "@gemeente-denhaag/typography": "2.0.2",
     "jwt-decode": "^4.0.0",
     "oidc-client-ts": "3.2.0",
     "react-oidc-context": "^3.3.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/react": "^18.3.20",
-    "@types/react-dom": "^18.3.6",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.1",
     "@vitejs/plugin-react": "^4.3.4",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.2",
@@ -45,9 +45,9 @@
     "vitest": "^3.1.1"
   },
   "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-intl": "^6.8.9",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-intl": "^7.1.10",
     "react-router": "^7.4.1"
   }
 }

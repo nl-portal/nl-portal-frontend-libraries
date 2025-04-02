@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect } from "react";
+import { FC, ReactElement, ReactNode, useEffect } from "react";
 import { StylesProvider } from "@gemeente-denhaag/stylesprovider";
 import {
   Page as PageWrapper,
@@ -23,11 +23,11 @@ import { LayoutProvider } from "../contexts/LayoutContext";
 interface LayoutComponentProps {
   navigationItems: NavigationItem[][];
   paths: Paths;
-  customHeader?: ReactElement;
-  customFooter?: ReactElement;
-  headerLogo?: ReactElement;
-  headerLogoSmall?: ReactElement;
-  facet?: ReactElement;
+  customHeader?: ReactNode;
+  customFooter?: ReactNode;
+  headerLogo?: ReactElement<HTMLImageElement>;
+  headerLogoSmall?: ReactElement<HTMLImageElement>;
+  facet?: ReactElement<HTMLImageElement>;
   footer?: PortalFooter;
   offline?: boolean;
 }
