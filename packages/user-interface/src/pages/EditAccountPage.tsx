@@ -6,7 +6,7 @@ import { TextInput } from "@gemeente-denhaag/text-input";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useContext, useEffect, useState } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router";
 import {
   useGetBurgerProfielQuery,
   useUpdateBurgerProfielMutation,

@@ -3,7 +3,7 @@ import { useIntl } from "react-intl";
 import classNames from "classnames";
 import Skeleton from "react-loading-skeleton";
 import styles from "./UserName.module.scss";
-import { useUserInfo } from "../hooks/useUserInfo";
+import useUserInfo from "../hooks/useUserInfo";
 
 interface UserNameProps {
   mobileMenu?: boolean;

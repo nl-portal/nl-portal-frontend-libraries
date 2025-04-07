@@ -72,7 +72,7 @@ export const ApiProvider = ({
 
   sessionStorage.setItem(LOCAL_STORAGE_REST_URI_KEY, formattedRestUri);
 
-  if (!oidcToken) null;
+  if (!oidcToken) return null;
 
   return (
     <ApiContext.Provider value={{ restUri: formattedRestUri }}>

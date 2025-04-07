@@ -1,5 +1,5 @@
 import "@gemeente-denhaag/design-tokens-components";
-import "@nl-portal/nl-portal-user-interface/style.css";
+import "@nl-portal/nl-portal-user-interface/index.css";
 import "./styles/nl-portal-design-tokens.css";
 import { OidcProvider } from "@nl-portal/nl-portal-authentication";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
@@ -18,7 +18,7 @@ import { footerData } from "./constants/footer-data";
 import { config } from "./constants/config";
 import { menuItems } from "./constants/menu-items";
 import { paths } from "./constants/paths";
-import { ScrollRestoration } from "react-router-dom";
+import { ScrollRestoration } from "react-router";
 
 const authenticationMethods = {
   person: ["digid", "machtigen"],

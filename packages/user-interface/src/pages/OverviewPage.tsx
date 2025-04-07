@@ -1,6 +1,6 @@
 import { Alert } from "@gemeente-denhaag/alert";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useUserInfo } from "../hooks/useUserInfo";
+import useUserInfo from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PageHeader from "../components/PageHeader";
 import {

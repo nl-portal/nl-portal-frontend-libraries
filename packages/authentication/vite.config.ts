@@ -14,20 +14,11 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react-intl", "react-router-dom"],
+      external: ["react", "react-dom", "react-intl", "react-router"],
       output: {
         entryFileNames: "[name].js",
         globals: {
           react: "React",
-        },
-        manualChunks: (id) => {
-          if (id.includes("node_modules")) {
-            return id
-              .toString()
-              .split("node_modules/.pnpm/")[1]
-              .split("/")[0]
-              .toString();
-          }
         },
       },
     },
