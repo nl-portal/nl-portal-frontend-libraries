@@ -1,12 +1,15 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import {
+  DigitaleAdresType,
   GetBurgerProfielDocument,
   MaatschappelijkeActiviteit,
   Persoon,
   useGetBedrijfQuery,
   useGetBurgerProfielQuery,
   useGetPersoonDataQuery,
+  useGetUserDigitaleAdressenQuery,
   useUpdateBurgerProfielMutation,
+  useUpdateUserDigitaleAdresMutation,
 } from "@nl-portal/nl-portal-api";
 import styles from "./AccountPage.module.scss";
 import {
@@ -38,6 +41,7 @@ interface AccountPageProps {
   showAddressResearch?: boolean;
   addressResearchUrl?: string;
   showNotificationSubSection?: boolean;
+  openKlantVersion?: 1 | 2;
 }
 
 const AccountPage = ({
@@ -45,19 +49,21 @@ const AccountPage = ({
   showAddressResearch = true,
   addressResearchUrl,
   showNotificationSubSection = true,
+  openKlantVersion = 2,
 }: AccountPageProps) => {
   const { formatDate } = useDateFormatter();
   const { isPerson } = useUserInfo();
   const intl = useIntl();
 
-  const { data: contactData, loading: contactLoading } =
-    useGetBurgerProfielQuery({ skip: !isPerson });
   const { data: personData, loading: personLoading } = useGetPersoonDataQuery({
     skip: !isPerson,
   });
   const { data: companyData, loading: companyLoading } = useGetBedrijfQuery({
     skip: isPerson,
   });
+
+  const { data: contactData, loading: contactLoading } =
+    useGetBurgerProfielQuery({ skip: !isPerson });
 
   const [mutateFunction, { loading: loadingMutation }] =
     useUpdateBurgerProfielMutation({
@@ -73,19 +79,86 @@ const AccountPage = ({
       },
     });
 
+  const { data: digitaleAddressenData, refetch } =
+    useGetUserDigitaleAdressenQuery();
+  const [mutateDigitaleAdressen] = useUpdateUserDigitaleAdresMutation();
+
+  const emailDigitaleAdresObj =
+    digitaleAddressenData?.getUserDigitaleAdresen?.find(
+      (item) => item.type === DigitaleAdresType.Email,
+    );
+
+  const telefoonDigitaleAdresObj =
+    digitaleAddressenData?.getUserDigitaleAdresen?.find(
+      (item) => item.type === DigitaleAdresType.Telefoonnummer,
+    );
+
+  const handleContactInfoSubmit = (type: string, value = "") => {
+    console.log("test");
+    console.log("openKlantVersion", openKlantVersion);
+    if (openKlantVersion === 2) {
+      const digitaleAdresObj =
+        type === "email" ? emailDigitaleAdresObj : telefoonDigitaleAdresObj;
+      console.log("OpenKlant2");
+      return mutateDigitaleAdressen({
+        variables: {
+          digitaleAdresId: emailDigitaleAdresObj?.uuid,
+          digitaleAdresRequestInput: {
+            type: digitaleAdresObj!.type,
+            waarde: value,
+            omschrijving: digitaleAdresObj!.omschrijving,
+          },
+        },
+      }).finally(refetch);
+    } else {
+      console.log("OpenKlant1");
+      const klant =
+        type === "email" ? { emailadres: value } : { telefoonnummer: value };
+      return mutateFunction({
+        variables: {
+          klant: klant,
+        },
+      });
+    }
+  };
+
   const handleNotificationSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("test");
     const { emailNotification } = Object.fromEntries(
       new FormData(event.currentTarget),
     );
-
-    mutateFunction({
-      variables: {
-        klant: { aanmaakkanaal: emailNotification?.toString() || "" },
-      },
-    });
+    console.log("openKlantVersion", openKlantVersion);
+    if (openKlantVersion === 2) {
+      console.log("OpenKlant2");
+      mutateDigitaleAdressen({
+        variables: {
+          digitaleAdresId: emailDigitaleAdresObj?.uuid,
+          digitaleAdresRequestInput: {
+            type: emailDigitaleAdresObj!.type,
+            waarde: emailNotification?.toString() || "",
+            omschrijving: emailDigitaleAdresObj!.omschrijving,
+          },
+        },
+      });
+    } else {
+      console.log("OpenKlant1");
+      mutateFunction({
+        variables: {
+          klant: { aanmaakkanaal: emailNotification?.toString() || "" },
+        },
+      });
+    }
   };
+
+  const emailadres =
+    openKlantVersion === 2
+      ? emailDigitaleAdresObj?.waarde
+      : contactData?.getBurgerProfiel?.emailadres;
+  const telefoonnummer =
+    openKlantVersion === 2
+      ? telefoonDigitaleAdresObj?.waarde
+      : contactData?.getBurgerProfiel?.telefoonnummer;
 
   const loading = personLoading || companyLoading || contactLoading;
   const person = personData?.getPersoon as Persoon | undefined;
@@ -188,7 +261,7 @@ const AccountPage = ({
                   title: <FormattedMessage id="account.detail.emailadres" />,
                   detail: (
                     <DescriptionListDetail translate="no">
-                      {contactData?.getBurgerProfiel?.emailadres}
+                      {emailadres}
                     </DescriptionListDetail>
                   ),
                   action: (
@@ -237,11 +310,9 @@ const AccountPage = ({
                             validationRegex={REGEX_PATTERNS.emailadres}
                             formId="submitContact"
                             onSubmit={(value) =>
-                              mutateFunction({
-                                variables: {
-                                  klant: { emailadres: value || "" },
-                                },
-                              }).finally(() => setOpen(false))
+                              handleContactInfoSubmit("email", value).finally(
+                                () => setOpen(false),
+                              )
                             }
                           />
                         </>
@@ -255,7 +326,7 @@ const AccountPage = ({
                   ),
                   detail: (
                     <DescriptionListDetail translate="no">
-                      {contactData?.getBurgerProfiel?.telefoonnummer}
+                      {telefoonnummer}
                     </DescriptionListDetail>
                   ),
                   action: (
@@ -305,11 +376,10 @@ const AccountPage = ({
                             validationRegex={REGEX_PATTERNS.telefoonnummer}
                             formId="submitContact"
                             onSubmit={(value) =>
-                              mutateFunction({
-                                variables: {
-                                  klant: { telefoonnummer: value || "" },
-                                },
-                              }).finally(() => setOpen(false))
+                              handleContactInfoSubmit(
+                                "telefoon",
+                                value,
+                              ).finally(() => setOpen(false))
                             }
                           />
                         </>
