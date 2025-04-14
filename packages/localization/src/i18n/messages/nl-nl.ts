@@ -41,7 +41,7 @@ export const NL_NL_MESSAGES: Messages = {
     "casesList.empty": "Er zijn geen zaken.",
     "casesList.noClosedCases": "Er zijn geen zaken.",
     "casesList.fetchError":
-      "Er is een fout opgetreden, probeer het later nogmaals.",
+      "Er ging iets niet goed, probeer het later opnieuw.",
     "caseDetails.caseNumber": "Zaaknummer",
     "caseDetails.description": "Omschrijving",
     "caseDetails.creationDate": "Aanvraagdatum",
@@ -53,19 +53,19 @@ export const NL_NL_MESSAGES: Messages = {
     "caseDetails.documentsHeader": "Documenten",
     "caseDetails.showAllDocuments": "Toon alle documenten",
     "caseDetails.fetchError":
-      "Er is een fout opgetreden, probeer het later nogmaals.",
+      "Er ging iets niet goed, probeer het later opnieuw.",
     "caseDetails.statusUnknown": "niet beschikbaar",
     "caseDetails.contacttimeline.today": "vandaag",
     "caseDetails.contacttimeline.yesterday": "gisteren",
     "messageDetails.sent": "Bericht verstuurd op {date} om {time}",
     "documents.fetchError":
-      "Er is een fout opgetreden, probeer het later nogmaals.",
+      "Er ging iets niet goed, probeer het later opnieuw.",
     "offline.warning":
       "Maak verbinding met het internet om gebruik te maken van {applicationName}.",
     "element.loading": "Aan het laden",
     "element.download": "Download",
     "account.contactHeader": "Contact",
-    "account.notificationsHeader": "Notificaties en updates",
+    "account.notificationsHeader": "Meldingen en updates",
     "account.detailsHeader": "Persoonsgegevens",
     "account.addressHeader": "Adres",
     "account.companyInfoHeader": "Bedrijfsgegevens",
@@ -81,7 +81,7 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.telefoonnummer": "Telefoonnummer",
     "account.detail.telefoonnummer.error":
       "een geldig telefoonnummer bestaat uit 10 cijfers",
-    "account.detail.aanmaakkanaal": "Email notificaties",
+    "account.detail.aanmaakkanaal": "E-mailmeldingen",
     "account.detail.aanmaakkanaal.description":
       "Staat je keuze op nee? Dan kunt u toch nog e-mails ontvangen. Dit komt omdat nog niet alle systemen van de gemeente zijn aangesloten op het klantportaal.",
     "account.detail.aanmaakkanaal.true": "Ja",
@@ -103,11 +103,11 @@ export const NL_NL_MESSAGES: Messages = {
     "forms.listSubHeader": "Beschikbare formulieren",
     "tasksList.viewAll": "Bekijk alle taken",
     "tasksList.fetchError":
-      "Er is een fout opgetreden, probeer het later nogmaals.",
+      "Er ging iets niet goed, probeer het later opnieuw.",
     "tasksList.empty": "Er zijn geen openstaande taken.",
     "task.portaalformulier.button": "Informatie geven",
     "task.ogonebetaling.button": "Betalen",
-    "task.fetchError": "Er is een fout opgetreden, probeer het later nogmaals.",
+    "task.fetchError": "Er ging iets niet goed, probeer het later opnieuw.",
     "task.completeTitle": "Taak is afgerond",
     "task.completeDescription": "De taak is succesvol voltooid.",
     "task.paymentFailureText":
@@ -117,7 +117,7 @@ export const NL_NL_MESSAGES: Messages = {
       "U ontvangt zo snel mogelijk een bevestigingsmail.",
     "task.paymentSuccessTitle": "Gelukt, u heeft betaald.",
     "taskDetails.fetchError":
-      "Er is een fout opgetreden, probeer het later nogmaals.",
+      "Er ging iets niet goed, probeer het later opnieuw.",
     "taskDetails.completeTitle": "Taak is afgerond",
     "taskDetails.completeDescription": "De taak is succesvol voltooid.",
     "overviewpage.title": "Welkom",
@@ -132,17 +132,17 @@ export const NL_NL_MESSAGES: Messages = {
     "actionLabels.approachingDeadlineDays": "nog {days} dagen",
     "tableList.viewAll": "Bekijk alle items ({total})",
     "tableList.fetchError":
-      "Er is een fout opgetreden, probeer het later nogmaals.",
-    "tableList.empty": "Er zijn geen items beschikbaar.",
+      "Er ging iets niet goed, probeer het later opnieuw.",
+    "tableList.empty": "Er zijn geen onderdelen beschikbaar.",
     "actionList.title": "Wat kan ik regelen",
     "linkList.title": "Zie ook",
     "documentsList.title": "Documenten",
     "documentsList.fetchError":
-      "Er is een fout opgetreden, probeer het later nogmaals.",
+      "Er ging iets niet goed, probeer het later opnieuw.",
     "documentsList.empty": "Er zijn geen documenten beschikbaar.",
     "descriptionList.title": "Details",
     "descriptionList.fetchError":
-      "Er is een fout opgetreden, probeer het later nogmaals.",
+      "Er ging iets niet goed, probeer het later opnieuw.",
     "descriptionList.empty": "Er zijn geen details beschikbaar.",
     "messagesList.fetchError": "Er is een fout opgetreden.",
     "messagesList.empty": "Er zijn geen berichten.",
@@ -150,7 +150,7 @@ export const NL_NL_MESSAGES: Messages = {
     "messagesList.date": "Datum bericht",
     "messagesList.new": "Nieuw",
     "messageContent.fetchError":
-      "Er is een fout opgetreden, probeer het later nogmaals.",
+      "Er ging iets niet goed, probeer het later opnieuw.",
     "searchForm.tasks.searchLabel": "Zoek naar een taak",
     "searchForm.tasks.searchButton": "Zoeken",
     "searchForm.tasks.totalElements": "{total} taken",
