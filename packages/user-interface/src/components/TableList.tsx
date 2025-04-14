@@ -87,40 +87,43 @@ const TableList = ({
 
   const sectionClassNames = classNames(styles["table-list"], className);
 
-  if (loading) {
-    return (
-      <section className={sectionClassNames}>
-        <SectionHeader title={title} />
-        <Skeleton height={listViewHeight} />
-        <Skeleton height={listViewHeight} />
-        <Skeleton height={listViewHeight} />
-      </section>
-    );
+  if (!loading) {
+    if (error)
+      return (
+        <section className={sectionClassNames}>
+          <SectionHeader title={title} />
+          <Paragraph>{errorMessage}</Paragraph>
+        </section>
+      );
+
+    if (!rows || rows.length === 0)
+      return (
+        <section className={sectionClassNames}>
+          <SectionHeader
+            title={title}
+            subTitle={subTitle}
+            href={readMoreLink}
+          />
+          <Paragraph>{emptyMessage}</Paragraph>
+          {children && (
+            <div className={styles["table-list__children"]}>{children}</div>
+          )}
+        </section>
+      );
   }
-
-  if (error)
-    return (
-      <section className={sectionClassNames}>
-        <SectionHeader title={title} />
-        <Paragraph>{errorMessage}</Paragraph>
-      </section>
-    );
-
-  if (!rows || rows.length === 0)
-    return (
-      <section className={sectionClassNames}>
-        <SectionHeader title={title} subTitle={subTitle} href={readMoreLink} />
-        <Paragraph>{emptyMessage}</Paragraph>
-        {children && (
-          <div className={styles["table-list__children"]}>{children}</div>
-        )}
-      </section>
-    );
 
   return (
     <section className={sectionClassNames}>
       <SectionHeader title={title} subTitle={subTitle} href={readMoreLink} />
-      <Table headers={headers} rows={rows} />
+      {loading ? (
+        <>
+          {[...Array(3)].map((_, index) => (
+            <Skeleton key={index} height={listViewHeight} />
+          ))}
+        </>
+      ) : (
+        <Table headers={headers} rows={rows} />
+      )}
       {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["table-list__pagination"]}`}
