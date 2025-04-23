@@ -34,7 +34,7 @@ const CasesPage = () => {
 
   const handleFormSubmit = (searchValue: string) => {
     setRefetching(true);
-    refetch({ identificatie: searchValue }).finally(finishRefetching);
+    refetch({ identificatieContains: searchValue }).finally(finishRefetching);
   };
 
   const onTabChange = (index: number) => {

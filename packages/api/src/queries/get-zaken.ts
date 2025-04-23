@@ -7,6 +7,7 @@ export const QUERY_GET_ZAKEN = gql`
     $zaakTypeUrl: String
     $isOpen: Boolean
     $identificatie: String
+    $identificatieContains: String
   ) {
     getZaken(
       page: $page
@@ -14,6 +15,7 @@ export const QUERY_GET_ZAKEN = gql`
       zaakTypeUrl: $zaakTypeUrl
       isOpen: $isOpen
       identificatie: $identificatie
+      identificatieContains: $identificatieContains
     ) {
       content {
         uuid
