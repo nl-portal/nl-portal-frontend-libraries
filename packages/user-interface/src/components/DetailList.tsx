@@ -1,5 +1,5 @@
 import { Fragment, ReactElement, useContext } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { Link } from "@gemeente-denhaag/link";
 import { EditIcon } from "@gemeente-denhaag/icons";
 import Skeleton from "react-loading-skeleton";
@@ -23,6 +23,7 @@ interface DetailListProps {
 }
 
 const DetailList = ({ details }: DetailListProps) => {
+  const intl = useIntl();
   const { hrefLang } = useContext(LocaleContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
@@ -60,6 +61,7 @@ const DetailList = ({ details }: DetailListProps) => {
                 hrefLang={hrefLang}
                 icon={<EditIcon />}
                 iconAlign="start"
+                aria-label={intl.formatMessage({ id: "account.edit" })}
               >
                 {isDesktop && <FormattedMessage id="account.edit" />}
               </Link>
