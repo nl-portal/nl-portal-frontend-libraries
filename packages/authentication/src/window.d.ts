@@ -16,5 +16,6 @@ export declare global {
     OVERVIEW_CURRENT_CASES_PREVIEW_LENGTH: string;
     THEME_CLASS: string;
     MESSAGE_COUNT_POLLING_INTERVAL: number;
+    CASES_PARTIAL_SEARCH: boolean;
   }
 }
