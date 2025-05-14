@@ -30,7 +30,7 @@ describe("OverviewPage", () => {
     });
 
     expect(openZaak1()).toBeVisible();
-    expect(screen.getByText("1 januari 2024")).toBeVisible();
+    expect(screen.getByText("ZAAK-2024-0000001317")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK1.title" }),
     ).toHaveAttribute(
@@ -39,7 +39,7 @@ describe("OverviewPage", () => {
     );
 
     expect(openZaak2()).toBeVisible();
-    expect(screen.getByText("2 januari 2024")).toBeVisible();
+    expect(screen.getByText("ZAAK-2024-0000001263")).toBeVisible();
     expect(
       screen.getByRole("link", { name: "case.OPENZAAK2.title" }),
     ).toHaveAttribute(
