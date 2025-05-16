@@ -65,6 +65,11 @@ describe("getStreetString", () => {
     expect(streetString).toBe("Kerkweg 1A");
   });
 
+  it("should return street name, number and addition when only street, number and addition inputs are valid", () => {
+    const streetString = getStreetString("Kerkweg", "1", null, "20");
+    expect(streetString).toBe("Kerkweg 1 20");
+  });
+
   it("should return street name, number, letter and addition when all inputs are valid", () => {
     const streetString = getStreetString("Kerkweg", "1", "A", "Bis");
     expect(streetString).toBe("Kerkweg 1A Bis");
