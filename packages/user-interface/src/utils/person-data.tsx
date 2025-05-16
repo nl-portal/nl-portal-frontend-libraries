@@ -19,25 +19,13 @@ const getNationalitiesString = (
 };
 
 const getStreetString = (
-  street: string | null | undefined,
-  number: string | null | undefined,
-  letter: string | null | undefined,
-  addition: string | null | undefined,
+  street?: string | null,
+  number?: string | null,
+  letter?: string | null,
+  addition?: string | null,
 ): string => {
-  if (street && number && letter && addition) {
-    return `${street} ${number}${letter} ${addition}`;
-  }
-  if (street && number && letter) {
-    return `${street} ${number}${letter}`;
-  }
-  if (street && number) {
-    return `${street} ${number}`;
-  }
-  if (street) {
-    return street;
-  }
-
-  return "";
+  const houseNr = number ? `${number}${letter ?? ""}` : null;
+  return [street, houseNr, addition].filter(Boolean).join(" ");
 };
 
 const getPostalCodeCityString = (
