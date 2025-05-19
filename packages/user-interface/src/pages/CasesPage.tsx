@@ -3,52 +3,86 @@ import { FormattedMessage, useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import PageHeader from "../components/PageHeader";
-import { Zaak, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import {
+  Zaak,
+  useGetZakenLazyQuery,
+  useGetZakenQuery,
+} from "@nl-portal/nl-portal-api";
 import PageGrid from "../components/PageGrid";
 import SearchForm from "../components/SearchForm";
-import { NetworkStatus } from "@apollo/client";
 import { useState } from "react";
 
 const CasesPage = () => {
   const intl = useIntl();
   const fetchCasesLength = 10;
-  const [refetching, setRefetching] = useState(false);
+  const [currentTab, setCurrentTab] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
+  const [openIndex, setOpenIndex] = useState(0);
+  const [closedIndex, setClosedIndex] = useState(0);
   const {
-    data,
-    loading: casesLoading,
-    error,
-    refetch,
-    fetchMore,
-    networkStatus,
+    data: openData,
+    loading: openLoading,
+    error: openError,
+    refetch: openRefetch,
+    fetchMore: openFetchMore,
   } = useGetZakenQuery({
-    variables: { isOpen: true, pageSize: fetchCasesLength },
+    variables: {
+      isOpen: true,
+      pageSize: fetchCasesLength,
+    },
+  });
+  const [
+    ,
+    {
+      data: closedData,
+      loading: closedLoading,
+      error: closedError,
+      refetch: closedRefetch,
+      fetchMore: closedFetchMore,
+    },
+  ] = useGetZakenLazyQuery({
+    variables: {
+      isOpen: false,
+      pageSize: fetchCasesLength,
+    },
   });
 
-  const cases = data?.getZaken.content as Zaak[] | undefined;
-  const loading = casesLoading || refetching;
+  const openCases = openData?.getZaken.content as Zaak[] | undefined;
+  const closedCases = closedData?.getZaken.content as Zaak[] | undefined;
+  const searchParam = window.CASES_PARTIAL_SEARCH
+    ? "identificatieContains"
+    : "identificatie";
 
   const finishRefetching = () => {
-    setRefetching(false);
     scrollTo(0, 0);
   };
 
   const handleFormSubmit = (searchValue: string) => {
-    setRefetching(true);
-    const refetchVar = window.CASES_PARTIAL_SEARCH
-      ? { identificatieContains: searchValue }
-      : { identificatie: searchValue };
-    refetch(refetchVar).finally(finishRefetching);
+    const func = currentTab === 0 ? openRefetch : closedRefetch;
+    setOpenIndex(0);
+    setClosedIndex(0);
+    setSearchValue(searchValue);
+    func({ [searchParam]: searchValue, page: undefined }).finally(
+      finishRefetching,
+    );
   };
 
   const onTabChange = (index: number) => {
-    setRefetching(true);
-    if (index === 0) refetch({ isOpen: true }).finally(finishRefetching);
-    if (index === 1) refetch({ isOpen: false }).finally(finishRefetching);
+    const func = index === 0 ? openRefetch : closedRefetch;
+    const pageIndex = index === 0 ? openIndex : closedIndex;
+    const search = searchValue ? { [searchParam]: searchValue } : {};
+    setCurrentTab(index);
+    func({
+      ...search,
+      page: pageIndex + 1,
+    });
   };
 
   const onPageChange = (index: number) => {
-    setRefetching(true);
-    fetchMore({
+    const func = currentTab === 0 ? openFetchMore : closedFetchMore;
+    if (currentTab === 0) setOpenIndex(index);
+    if (currentTab === 1) setClosedIndex(index);
+    func({
       variables: { page: index + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
@@ -56,8 +90,6 @@ const CasesPage = () => {
       },
     }).finally(finishRefetching);
   };
-
-  const isFetchingMore = networkStatus === NetworkStatus.fetchMore || undefined;
 
   return (
     <PageGrid className={styles.cases} variant="medium">
@@ -76,16 +108,17 @@ const CasesPage = () => {
               label: intl.formatMessage({ id: "titles.currentCases" }),
               panelContent: (
                 <CasesList
-                  loading={loading}
-                  error={Boolean(error)}
+                  loading={openLoading}
+                  error={Boolean(openError)}
                   titleTranslationId={null}
-                  cases={cases}
-                  totalAmount={data?.getZaken.totalElements}
+                  cases={openCases}
+                  totalAmount={openData?.getZaken.totalElements}
+                  index={openIndex}
                   indexLimit={
-                    data?.getZaken.totalPages && data?.getZaken.totalPages - 1
+                    openData?.getZaken.totalPages &&
+                    openData?.getZaken.totalPages - 1
                   }
                   onChange={onPageChange}
-                  listView={isFetchingMore}
                 />
               ),
             },
@@ -93,16 +126,17 @@ const CasesPage = () => {
               label: intl.formatMessage({ id: "titles.completedCases" }),
               panelContent: (
                 <CasesList
-                  loading={loading}
-                  error={Boolean(error)}
+                  loading={closedLoading}
+                  error={Boolean(closedError)}
                   titleTranslationId={null}
-                  cases={cases}
-                  totalAmount={data?.getZaken.totalElements}
+                  cases={closedCases}
+                  totalAmount={closedData?.getZaken.totalElements}
+                  index={closedIndex}
                   indexLimit={
-                    data?.getZaken.totalPages && data?.getZaken.totalPages - 1
+                    closedData?.getZaken.totalPages &&
+                    closedData?.getZaken.totalPages - 1
                   }
                   onChange={onPageChange}
-                  listView={isFetchingMore}
                 />
               ),
             },
