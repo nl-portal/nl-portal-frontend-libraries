@@ -11,9 +11,9 @@ describe("The CasesPage", () => {
   const openZaak1 = () => screen.getAllByText("case.OPENZAAK1.title")[0];
   const openZaak2 = () => screen.getAllByText("case.OPENZAAK2.title")[0];
   const geslotenZaak1 = () =>
-    screen.getAllByText("case.GESLOTENZAAK1.title")[1];
+    screen.getAllByText("case.GESLOTENZAAK1.title")[0];
   const geslotenZaak2 = () =>
-    screen.getAllByText("case.GESLOTENZAAK2.title")[1];
+    screen.getAllByText("case.GESLOTENZAAK2.title")[0];
 
   it("should render several active cases", async () => {
     render(MockCasesPage());

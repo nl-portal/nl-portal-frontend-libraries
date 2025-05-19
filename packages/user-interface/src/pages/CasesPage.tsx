@@ -14,7 +14,7 @@ import { useState } from "react";
 
 const CasesPage = () => {
   const intl = useIntl();
-  const fetchCasesLength = 5;
+  const fetchCasesLength = 10;
   const [currentTab, setCurrentTab] = useState(0);
   const [searchValue, setSearchValue] = useState("");
   const [openIndex, setOpenIndex] = useState(0);
