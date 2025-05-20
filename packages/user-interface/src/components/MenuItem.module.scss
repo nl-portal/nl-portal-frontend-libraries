@@ -1,4 +1,4 @@
-@import "../styles/mixins";
+@use "../styles/mixins";
 
 .denhaag-menu-button--flex {
   display: flex !important;
@@ -6,7 +6,7 @@
   height: var(--nlportal-menu-item-height, 3rem);
   flex-shrink: 0;
 
-  @include breakpoint(tablet) {
+  @include mixins.breakpoint(tablet) {
     --denhaag-menu-button-font-size: var(--nlportal-base-font-size, 1rem);
   }
 

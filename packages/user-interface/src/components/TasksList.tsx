@@ -6,7 +6,7 @@ import { TaakV2 } from "@nl-portal/nl-portal-api";
 import Task from "./Task";
 import { Pagination } from "@gemeente-denhaag/pagination";
 import SectionHeader from "./SectionHeader";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { listViewHeight } from "../constants/skeleton";
 

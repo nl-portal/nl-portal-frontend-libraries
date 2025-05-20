@@ -10,10 +10,10 @@ import {
   TaskDetailsPage,
   MessagesPage,
 } from "@nl-portal/nl-portal-user-interface";
-import { KeycloakCallbackPage } from "@nl-portal/nl-portal-authentication";
+import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
 import { config } from "./config";
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 import ThemeSampleOverviewPage from "../pages/ThemeSampleOverviewPage";
 import ThemeSampleListPage from "../pages/ThemeSampleListPage";
 import ThemeSampleDetailPage from "../pages/ThemeSampleDetailPage";
@@ -98,8 +98,8 @@ export const routes = [
     ],
   },
   {
-    path: new URL(window.KEYCLOAK_REDIRECT_URI).pathname,
-    element: <KeycloakCallbackPage />,
+    path: new URL(window.OIDC_REDIRECT_URI).pathname,
+    element: <OidcCallbackPage />,
   },
   {
     path: paths.noMatch,

@@ -12,7 +12,7 @@ import Heading from "./Heading";
 
 interface FooterProps {
   footer: PortalFooter;
-  facet?: ReactElement;
+  facet?: ReactElement<HTMLImageElement>;
 }
 
 const Footer: FC<FooterProps> = ({ footer, facet }) => {

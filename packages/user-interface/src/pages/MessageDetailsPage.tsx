@@ -1,5 +1,5 @@
 import { Bericht, useGetBerichtQuery } from "@nl-portal/nl-portal-api";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router";
 import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";

@@ -1,4 +1,4 @@
-import { UIMatch } from "react-router-dom";
+import { UIMatch } from "react-router";
 import { NavigationItem } from "../interfaces/navigation-item";
 
 /**
