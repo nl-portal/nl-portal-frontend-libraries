@@ -16,6 +16,9 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.forms": "Formulieren",
     "pageTitles.tasks": "Mijn Taken",
     "pageTitles.task": "Taak",
+    "pageTitles.editContactInfo.emailadres": "Emailadres aanpassen",
+    "pageTitles.editContactInfo.telefoonnummer": "Telefoonnummer aanpassen",
+    "pageTitles.editNotifications": "Meldingen aanpassen",
     "backlink.back": "Terug",
     "header.logout": "Uitloggen",
     "header.welcome": "Welkom",
@@ -125,10 +128,13 @@ export const NL_NL_MESSAGES: Messages = {
       "Zodat wij u meldingen per telefoon kunnen sturen.",
     "account.detail.notification.form.post.title": "Post",
     "account.detail.notification.form.post.label": "Meldingen over uw zaken",
+    "account.detail.notification.form.post.true": "Ja",
     "account.detail.notification.form.post.description":
       "U ontvangt altijd fysieke post als er een besluit is genomen.",
     "account.detail.notification.form.email.title": "Email",
     "account.detail.notification.form.email.label": "Meldingen over uw zaken",
+    "account.detail.notification.form.email.true": "Ja",
+    "account.detail.notification.form.email.false": "Nee",
     "account.detail.notification.form.email.description":
       "U ontvangt altijd een ontvangstbevestiging, besluit en taak per email.",
     "account.detail.notification.form.email.fieldvalue":

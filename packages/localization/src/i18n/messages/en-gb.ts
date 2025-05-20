@@ -16,6 +16,9 @@ export const EN_GB_MESSAGES: Messages = {
     "pageTitles.forms": "Forms",
     "pageTitles.tasks": "Tasks",
     "pageTitles.task": "Task",
+    "pageTitles.editContactInfo.emailadres": "Edit emailadres",
+    "pageTitles.editContactInfo.telefoonnummer": "Edit phonenumber",
+    "pageTitles.editNotifications": "Edit notifications",
     "backlink.back": "Back",
     "header.logout": "Log out",
     "header.welcome": "Welcome",
@@ -121,6 +124,7 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.telefoonnummer.modal.text":
       "So that we can send you notifications by phone.",
     "account.detail.notification.form.post.title": "Post",
+    "account.detail.notification.form.post.true": "Yes",
     "account.detail.notification.form.post.label":
       "Notifications about your affairs",
     "account.detail.notification.form.post.description":
@@ -128,6 +132,8 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.notification.form.email.title": "Email",
     "account.detail.notification.form.email.label":
       "Notifications about your affairs",
+    "account.detail.notification.form.email.true": "Yes",
+    "account.detail.notification.form.email.false": "No",
     "account.detail.notification.form.email.description":
       "You will always receive a confirmation of receipt, decision, and task via email.",
     "account.detail.notification.form.email.fieldvalue":

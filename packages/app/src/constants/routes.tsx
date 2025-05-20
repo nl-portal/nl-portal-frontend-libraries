@@ -8,6 +8,8 @@ import {
   TasksPage,
   TaskDetailsPage,
   MessagesPage,
+  EditContactInfoPage,
+  EditNotificationsPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { KeycloakCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
@@ -89,6 +91,18 @@ export const routes = [
             addressResearchUrl={config.ADDRESS_RESEARCH_URL}
           />
         ),
+      },
+      {
+        path: paths.changeEmail,
+        element: <EditContactInfoPage type="emailadres" />,
+      },
+      {
+        path: paths.changePhonenumber,
+        element: <EditContactInfoPage type="telefoonnummer" />,
+      },
+      {
+        path: paths.changeNotifications,
+        element: <EditNotificationsPage />,
       },
     ],
   },
