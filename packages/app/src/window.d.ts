@@ -1,9 +1,10 @@
 export declare global {
   interface Window {
-    KEYCLOAK_URL: string;
-    KEYCLOAK_REALM: string;
-    KEYCLOAK_CLIENT_ID: string;
-    KEYCLOAK_REDIRECT_URI: string;
+    OIDC_URL: string;
+    OIDC_REALM: string;
+    OIDC_CLIENT_ID: string;
+    OIDC_REDIRECT_URI: string;
+    OIDC_POST_LOGOUT_REDIRECT_URI?: string;
     GRAPHQL_URI: string;
     REST_URI: string;
     SHOW_INHABITANT_AMOUNT: string;
@@ -16,5 +17,6 @@ export declare global {
     OVERVIEW_CURRENT_CASES_PREVIEW_LENGTH: string;
     THEME_CLASS: string;
     MESSAGE_COUNT_POLLING_INTERVAL: number;
+    CASES_PARTIAL_SEARCH: boolean;
   }
 }

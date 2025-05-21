@@ -1,5 +1,5 @@
 import { AnchorHTMLAttributes } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 // A generic wrapper around the React Router Link, which will possibly be used a lot in implementations to pass to components from design systems.
 // For example in breadcrumbs, headers and footers.

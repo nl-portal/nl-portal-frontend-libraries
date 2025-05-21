@@ -21,6 +21,7 @@ export const MockCasesPage = () => (
     mocks={[
       getZaken({ pageSize: 10, isOpen: true }),
       getZaken({ pageSize: 10, isOpen: false }),
+      getZaken({ pageSize: 10, isOpen: false, page: 1 }),
     ]}
     routes={routes}
     initialIndex={0}

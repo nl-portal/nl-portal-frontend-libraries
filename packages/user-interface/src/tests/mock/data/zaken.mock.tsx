@@ -374,16 +374,23 @@ const getContent = (pageSize?: number, isOpen?: boolean) => {
 
 interface Props {
   pageSize?: number;
+  page?: number;
   isOpen?: boolean;
   totalElements?: number;
 }
 
-export const getZaken = ({ pageSize, isOpen, totalElements = 10 }: Props) => {
+export const getZaken = ({
+  pageSize,
+  isOpen,
+  page,
+  totalElements = 10,
+}: Props) => {
   let variables = {};
   const content = getContent(pageSize, isOpen);
 
   if (pageSize) variables = { ...variables, pageSize };
   if (typeof isOpen == "boolean") variables = { ...variables, isOpen };
+  if (page) variables = { ...variables, page };
 
   return {
     request: {

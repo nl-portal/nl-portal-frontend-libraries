@@ -23,7 +23,7 @@ import { ArrowRightIcon, EditIcon } from "@gemeente-denhaag/icons";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import "@gemeente-denhaag/button-group";
 import DescriptionListDetail from "../components/DescriptionListDetail";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import PortalLink from "../components/PortalLink";
 import SectionHeader from "../components/SectionHeader";

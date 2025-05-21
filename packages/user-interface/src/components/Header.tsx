@@ -2,7 +2,7 @@ import * as React from "react";
 import { Fragment, ReactElement, useContext, useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import classNames from "classnames";
 import useSize from "@react-hook/size";
 import useScrollPosition from "@react-hook/window-scroll";
@@ -23,10 +23,10 @@ import { NavigationItem } from "../interfaces/navigation-item";
 import Heading from "./Heading";
 
 interface HeaderProps {
-  logo: ReactElement;
-  logoSmall: ReactElement;
+  logo: ReactElement<HTMLImageElement>;
+  logoSmall: ReactElement<HTMLImageElement>;
   navigationItems: NavigationItem[][];
-  facet?: ReactElement;
+  facet?: ReactElement<HTMLImageElement>;
   offline?: boolean;
 }
 
@@ -54,8 +54,8 @@ const Header = ({
   const [previousScrollY, setPreviousScrollY] = useState(0);
   const [headerFixed, setHeaderFixed] = useState(false);
   const [headerMarginTop, setHeaderMarginTop] = useState(0);
-  const headerContainerRef = React.useRef(null);
-  const [, height] = useSize(headerContainerRef);
+  const headerContainerRef = React.useRef<HTMLDivElement>(null);
+  const [, height] = useSize(headerContainerRef.current);
   const scrollY = useScrollPosition(15);
   const MOBILE_HEADER_HEIGHT = facet ? 86 : 72;
   const headerLogoElement = React.cloneElement(logo, {

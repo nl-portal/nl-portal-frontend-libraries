@@ -9,7 +9,7 @@ import useUserInfo from "../hooks/useUserInfo";
 import ContactForm from "../forms/ContactForm";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
 import BackLink from "../components/BackLink";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 interface EditContactInfoPageProps {

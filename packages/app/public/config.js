@@ -1,9 +1,10 @@
-window.KEYCLOAK_URL = 'http://localhost:8082/auth';
-window.KEYCLOAK_REALM = 'nlportal';
-window.KEYCLOAK_CLIENT_ID = 'gzac-portal';
-window.KEYCLOAK_REDIRECT_URI = 'http://localhost:3000/keycloak/callback';
+window.OIDC_URL = 'http://localhost:8082/auth';
+window.OIDC_REALM = 'nlportal';
+window.OIDC_CLIENT_ID = 'gzac-portal';
+window.OIDC_REDIRECT_URI = 'http://localhost:3000/oidc/callback';
 window.GRAPHQL_URI = 'http://localhost:8090/graphql';
 window.REST_URI = 'http://localhost:8090/api';
 window.SHOW_INHABITANT_AMOUNT = 'true';
 window.MESSAGE_COUNT_POLLING_INTERVAL = 10000;
+window.CASES_PARTIAL_SEARCH = true;
 window.ADDRESS_RESEARCH_URL = 'https://www.google.nl';

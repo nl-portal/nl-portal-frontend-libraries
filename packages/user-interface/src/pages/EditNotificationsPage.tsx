@@ -10,7 +10,7 @@ import { FormEvent } from "react";
 import Skeleton from "react-loading-skeleton";
 import NotificationForm from "../forms/NotificationForm";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router";
 import BackLink from "../components/BackLink";
 
 const EditNotificationsPage = () => {

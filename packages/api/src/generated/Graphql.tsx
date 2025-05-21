@@ -153,16 +153,6 @@ export type BesluitPage = {
   totalPages: Scalars['Int']['output'];
 };
 
-export type BetrokkenActoren = {
-  __typename?: 'BetrokkenActoren';
-  actoridentificator: OpenKlant2Identificator;
-  indicatieActief: Scalars['Boolean']['output'];
-  naam: Scalars['String']['output'];
-  soortActor: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-  uuid: Scalars['String']['output'];
-};
-
 export type Betrokkene = {
   __typename?: 'Betrokkene';
   bezoekadres?: Maybe<OpenKlant2Adres>;
@@ -271,6 +261,7 @@ export type DigitaleAdresRequestInput = {
 export type DigitaleAdresResponse = {
   __typename?: 'DigitaleAdresResponse';
   omschrijving: Scalars['String']['output'];
+  referentie: Scalars['String']['output'];
   type: DigitaleAdresType;
   uuid: Scalars['UUID']['output'];
   waarde: Scalars['String']['output'];
@@ -281,6 +272,20 @@ export enum DigitaleAdresType {
   Overig = 'OVERIG',
   Telefoonnummer = 'TELEFOONNUMMER'
 }
+
+export type DirectPaymentRequestInput = {
+  amount: Scalars['Float']['input'];
+  identifier: Scalars['String']['input'];
+  langId?: InputMaybe<Scalars['String']['input']>;
+  orderId: Scalars['String']['input'];
+  reference: Scalars['String']['input'];
+  returnUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DirectPaymentResponse = {
+  __typename?: 'DirectPaymentResponse';
+  redirectUrl: Scalars['String']['output'];
+};
 
 export type Document = {
   __typename?: 'Document';
@@ -376,25 +381,6 @@ export type Klant = {
   telefoonnummer?: Maybe<Scalars['String']['output']>;
 };
 
-export type KlantContactResponse = {
-  __typename?: 'KlantContactResponse';
-  betrokkenActoren: Array<BetrokkenActoren>;
-  betrokkenen: Array<OpenKlant2ForeignKey>;
-  gingOverOnderwerpobjecten: Array<OpenKlant2ForeignKey>;
-  indicatieContactGelukt: Scalars['Boolean']['output'];
-  inhoud: Scalars['String']['output'];
-  kanaal: Scalars['String']['output'];
-  leiddeTotInterneTaken: Array<OpenKlant2ForeignKey>;
-  nummer: Scalars['String']['output'];
-  omvatteBijlagen: Array<OpenKlant2ForeignKey>;
-  onderwerp: Scalars['String']['output'];
-  plaatsgevondenOp: Scalars['String']['output'];
-  taal: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-  uuid: Scalars['String']['output'];
-  vertrouwelijk: Scalars['Boolean']['output'];
-};
-
 export type KlantUpdateInput = {
   aanmaakkanaal?: InputMaybe<Scalars['String']['input']>;
   emailadres?: InputMaybe<Scalars['String']['input']>;
@@ -428,6 +414,8 @@ export type Mutation = {
   createUserPartij?: Maybe<PartijResponse>;
   /** Delete DigitaleAdres of User by Id */
   deleteUserDigitaleAdres?: Maybe<Scalars['Boolean']['output']>;
+  /** Do Worldline Direct payment */
+  doDirectPayment: DirectPaymentResponse;
   /** Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
   /** Submit a task */
@@ -459,6 +447,11 @@ export type MutationCreateUserPartijArgs = {
 
 export type MutationDeleteUserDigitaleAdresArgs = {
   digitaleAdresId: Scalars['UUID']['input'];
+};
+
+
+export type MutationDoDirectPaymentArgs = {
+  paymentRequest: DirectPaymentRequestInput;
 };
 
 
@@ -498,7 +491,6 @@ export type MutationUpdateProductVerbruiksObjectArgs = {
 
 
 export type MutationUpdateUserDigitaleAdresArgs = {
-  digitaleAdresId: Scalars['UUID']['input'];
   digitaleAdresRequest: DigitaleAdresRequestInput;
 };
 
@@ -552,6 +544,7 @@ export type OpenKlant2DigitaleAdres = {
   __typename?: 'OpenKlant2DigitaleAdres';
   adres: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
+  referentie?: Maybe<Scalars['String']['output']>;
   soortDigitaalAdres: Scalars['String']['output'];
   url?: Maybe<Scalars['String']['output']>;
   uuid?: Maybe<Scalars['UUID']['output']>;
@@ -576,6 +569,30 @@ export type OpenKlant2Identificator = {
   codeRegister: Scalars['String']['output'];
   codeSoortObjectId: Scalars['String']['output'];
   objectId: Scalars['String']['output'];
+};
+
+export type OpenKlant2IdentificeerdePartij = {
+  __typename?: 'OpenKlant2IdentificeerdePartij';
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenKlant2Klantcontact = {
+  __typename?: 'OpenKlant2Klantcontact';
+  gingOverOnderwerpobjecten: Array<OpenKlant2ForeignKey>;
+  hadBetrokkenActoren: Array<HadBetrokkenActoren>;
+  hadBetrokkenen: Array<OpenKlant2ForeignKey>;
+  indicatieContactGelukt: Scalars['Boolean']['output'];
+  inhoud: Scalars['String']['output'];
+  kanaal: Scalars['String']['output'];
+  leiddeTotInterneTaken: Array<OpenKlant2ForeignKey>;
+  nummer: Scalars['String']['output'];
+  omvatteBijlagen: Array<OpenKlant2ForeignKey>;
+  onderwerp: Scalars['String']['output'];
+  plaatsgevondenOp: Scalars['String']['output'];
+  taal: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+  vertrouwelijk: Scalars['Boolean']['output'];
 };
 
 export enum OpenKlant2Landcode {
@@ -985,7 +1002,7 @@ export type OpenKlant2Partij = {
   interneNotitie?: Maybe<Scalars['String']['output']>;
   nummer?: Maybe<Scalars['String']['output']>;
   partijIdentificatie: PartijIdentificatie;
-  partijIdentificatoren?: Maybe<Array<OpenKlant2ForeignKey>>;
+  partijIdentificatoren?: Maybe<Array<OpenKlant2PartijIdentificator>>;
   rekeningnummers?: Maybe<Array<OpenKlant2ForeignKey>>;
   soortPartij: SoortPartij;
   url?: Maybe<Scalars['String']['output']>;
@@ -994,6 +1011,21 @@ export type OpenKlant2Partij = {
   voorkeursDigitaalAdres?: Maybe<OpenKlant2ForeignKey>;
   voorkeursRekeningnummer?: Maybe<OpenKlant2ForeignKey>;
   voorkeurstaal?: Maybe<Scalars['String']['output']>;
+};
+
+export type OpenKlant2PartijIdentificator = {
+  __typename?: 'OpenKlant2PartijIdentificator';
+  anderePartijIdentificator?: Maybe<Scalars['String']['output']>;
+  identificeerdePartij?: Maybe<OpenKlant2IdentificeerdePartij>;
+  partijIdentificator?: Maybe<OpenKlant2Identificator>;
+  subIdentificatorVan?: Maybe<OpenKlant2SubIdentificatorVan>;
+  url?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['UUID']['output']>;
+};
+
+export type OpenKlant2SubIdentificatorVan = {
+  __typename?: 'OpenKlant2SubIdentificatorVan';
+  uuid: Scalars['UUID']['output'];
 };
 
 export type OpenKlant2Uuid = {
@@ -1354,9 +1386,9 @@ export type Query = {
   /** Get DigitaleAdressen of authenticated user. */
   getUserDigitaleAdresen?: Maybe<Array<DigitaleAdresResponse>>;
   /** Get KlantContact by id of authenticated user. */
-  getUserKlantContact?: Maybe<KlantContactResponse>;
+  getUserKlantContact?: Maybe<OpenKlant2Klantcontact>;
   /** Get KlantContacten of authenticated user. */
-  getUserKlantContacten: Array<KlantContactResponse>;
+  getUserKlantContacten: Array<OpenKlant2Klantcontact>;
   /** Get Partij by Id for authenticated user. */
   getUserPartij?: Maybe<OpenKlant2Partij>;
   /** Gets a zaak by id */
@@ -1367,6 +1399,8 @@ export type Query = {
    *         isOpen is optional, when not available, all zaken will be returned
    *         isOpen is true, only zaken without enddate will be returned
    *         isOpen is false, only zaken with an enddate will be returned
+   *         omschrijving: partial search of this property. Since OpenZaak 1.18.0
+   *         identificatieContains: partial search of this property. Since OpenZaak 1.18.0
    *
    */
   getZaken: ZaakPage;
@@ -1574,7 +1608,9 @@ export type QueryGetZaakArgs = {
 
 export type QueryGetZakenArgs = {
   identificatie?: InputMaybe<Scalars['String']['input']>;
+  identificatieContains?: InputMaybe<Scalars['String']['input']>;
   isOpen?: InputMaybe<Scalars['Boolean']['input']>;
+  omschrijving?: InputMaybe<Scalars['String']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   zaakTypeUrl?: InputMaybe<Scalars['String']['input']>;
@@ -2007,6 +2043,7 @@ export type GetZakenQueryVariables = Exact<{
   zaakTypeUrl?: InputMaybe<Scalars['String']['input']>;
   isOpen?: InputMaybe<Scalars['Boolean']['input']>;
   identificatie?: InputMaybe<Scalars['String']['input']>;
+  identificatieContains?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -2266,8 +2303,8 @@ export function useGetBerichtLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBerichtQuery, GetBerichtQueryVariables>(GetBerichtDocument, options);
         }
-export function useGetBerichtSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBerichtQuery, GetBerichtQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBerichtSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBerichtQuery, GetBerichtQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBerichtQuery, GetBerichtQueryVariables>(GetBerichtDocument, options);
         }
 export type GetBerichtQueryHookResult = ReturnType<typeof useGetBerichtQuery>;
@@ -2320,8 +2357,8 @@ export function useGetBerichtenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBerichtenQuery, GetBerichtenQueryVariables>(GetBerichtenDocument, options);
         }
-export function useGetBerichtenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBerichtenQuery, GetBerichtenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBerichtenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBerichtenQuery, GetBerichtenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBerichtenQuery, GetBerichtenQueryVariables>(GetBerichtenDocument, options);
         }
 export type GetBerichtenQueryHookResult = ReturnType<typeof useGetBerichtenQuery>;
@@ -2357,8 +2394,8 @@ export function useGetUnopenedBerichtenCountLazyQuery(baseOptions?: Apollo.LazyQ
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
         }
-export function useGetUnopenedBerichtenCountSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetUnopenedBerichtenCountSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
         }
 export type GetUnopenedBerichtenCountQueryHookResult = ReturnType<typeof useGetUnopenedBerichtenCountQuery>;
@@ -2410,8 +2447,8 @@ export function useGetBedrijfLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
         }
-export function useGetBedrijfSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBedrijfSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
         }
 export type GetBedrijfQueryHookResult = ReturnType<typeof useGetBedrijfQuery>;
@@ -2451,8 +2488,8 @@ export function useGetBurgerProfielLazyQuery(baseOptions?: Apollo.LazyQueryHookO
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
         }
-export function useGetBurgerProfielSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBurgerProfielSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
         }
 export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProfielQuery>;
@@ -2503,8 +2540,8 @@ export function useGetDocumentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetDocumentenQuery, GetDocumentenQueryVariables>(GetDocumentenDocument, options);
         }
-export function useGetDocumentenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetDocumentenQuery, GetDocumentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetDocumentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetDocumentenQuery, GetDocumentenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetDocumentenQuery, GetDocumentenQueryVariables>(GetDocumentenDocument, options);
         }
 export type GetDocumentenQueryHookResult = ReturnType<typeof useGetDocumentenQuery>;
@@ -2543,8 +2580,8 @@ export function useGetFormDefinitionByIdLazyQuery(baseOptions?: Apollo.LazyQuery
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>(GetFormDefinitionByIdDocument, options);
         }
-export function useGetFormDefinitionByIdSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetFormDefinitionByIdSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>(GetFormDefinitionByIdDocument, options);
         }
 export type GetFormDefinitionByIdQueryHookResult = ReturnType<typeof useGetFormDefinitionByIdQuery>;
@@ -2583,8 +2620,8 @@ export function useGetFormDefinitionByObjectenApiUrlLazyQuery(baseOptions?: Apol
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>(GetFormDefinitionByObjectenApiUrlDocument, options);
         }
-export function useGetFormDefinitionByObjectenApiUrlSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetFormDefinitionByObjectenApiUrlSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>(GetFormDefinitionByObjectenApiUrlDocument, options);
         }
 export type GetFormDefinitionByObjectenApiUrlQueryHookResult = ReturnType<typeof useGetFormDefinitionByObjectenApiUrlQuery>;
@@ -2623,8 +2660,8 @@ export function useGetFormDefinitionByNameLazyQuery(baseOptions?: Apollo.LazyQue
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>(GetFormDefinitionByNameDocument, options);
         }
-export function useGetFormDefinitionByNameSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetFormDefinitionByNameSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>(GetFormDefinitionByNameDocument, options);
         }
 export type GetFormDefinitionByNameQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameQuery>;
@@ -2674,8 +2711,8 @@ export function useGetPortaalFormulierByIdV2LazyQuery(baseOptions?: Apollo.LazyQ
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>(GetPortaalFormulierByIdV2Document, options);
         }
-export function useGetPortaalFormulierByIdV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetPortaalFormulierByIdV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>(GetPortaalFormulierByIdV2Document, options);
         }
 export type GetPortaalFormulierByIdV2QueryHookResult = ReturnType<typeof useGetPortaalFormulierByIdV2Query>;
@@ -2721,8 +2758,8 @@ export function useGetGemachtigdeLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>(GetGemachtigdeDocument, options);
         }
-export function useGetGemachtigdeSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetGemachtigdeSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>(GetGemachtigdeDocument, options);
         }
 export type GetGemachtigdeQueryHookResult = ReturnType<typeof useGetGemachtigdeQuery>;
@@ -2764,8 +2801,8 @@ export function useGetKlantContactMomentenLazyQuery(baseOptions?: Apollo.LazyQue
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
         }
-export function useGetKlantContactMomentenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetKlantContactMomentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
         }
 export type GetKlantContactMomentenQueryHookResult = ReturnType<typeof useGetKlantContactMomentenQuery>;
@@ -2808,8 +2845,8 @@ export function useGetObjectContactMomentenLazyQuery(baseOptions?: Apollo.LazyQu
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
         }
-export function useGetObjectContactMomentenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetObjectContactMomentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
         }
 export type GetObjectContactMomentenQueryHookResult = ReturnType<typeof useGetObjectContactMomentenQuery>;
@@ -2884,8 +2921,8 @@ export function useGetPersoonDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetPersoonDataQuery, GetPersoonDataQueryVariables>(GetPersoonDataDocument, options);
         }
-export function useGetPersoonDataSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetPersoonDataQuery, GetPersoonDataQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetPersoonDataSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetPersoonDataQuery, GetPersoonDataQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetPersoonDataQuery, GetPersoonDataQueryVariables>(GetPersoonDataDocument, options);
         }
 export type GetPersoonDataQueryHookResult = ReturnType<typeof useGetPersoonDataQuery>;
@@ -2926,8 +2963,8 @@ export function useGetPersoonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetPersoonQuery, GetPersoonQueryVariables>(GetPersoonDocument, options);
         }
-export function useGetPersoonSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetPersoonQuery, GetPersoonQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetPersoonSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetPersoonQuery, GetPersoonQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetPersoonQuery, GetPersoonQueryVariables>(GetPersoonDocument, options);
         }
 export type GetPersoonQueryHookResult = ReturnType<typeof useGetPersoonQuery>;
@@ -2985,8 +3022,8 @@ export function useGetProductTakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductTakenQuery, GetProductTakenQueryVariables>(GetProductTakenDocument, options);
         }
-export function useGetProductTakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductTakenQuery, GetProductTakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductTakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductTakenQuery, GetProductTakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductTakenQuery, GetProductTakenQueryVariables>(GetProductTakenDocument, options);
         }
 export type GetProductTakenQueryHookResult = ReturnType<typeof useGetProductTakenQuery>;
@@ -3028,8 +3065,8 @@ export function useGetProductVerbruiksObjectenLazyQuery(baseOptions?: Apollo.Laz
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>(GetProductVerbruiksObjectenDocument, options);
         }
-export function useGetProductVerbruiksObjectenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductVerbruiksObjectenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>(GetProductVerbruiksObjectenDocument, options);
         }
 export type GetProductVerbruiksObjectenQueryHookResult = ReturnType<typeof useGetProductVerbruiksObjectenQuery>;
@@ -3081,8 +3118,8 @@ export function useGetProductZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductZakenQuery, GetProductZakenQueryVariables>(GetProductZakenDocument, options);
         }
-export function useGetProductZakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductZakenQuery, GetProductZakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductZakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductZakenQuery, GetProductZakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductZakenQuery, GetProductZakenQueryVariables>(GetProductZakenDocument, options);
         }
 export type GetProductZakenQueryHookResult = ReturnType<typeof useGetProductZakenQuery>;
@@ -3174,8 +3211,8 @@ export function useGetProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, options);
         }
-export function useGetProductSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, options);
         }
 export type GetProductQueryHookResult = ReturnType<typeof useGetProductQuery>;
@@ -3233,8 +3270,8 @@ export function useGetProductenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductenQuery, GetProductenQueryVariables>(GetProductenDocument, options);
         }
-export function useGetProductenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductenQuery, GetProductenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductenQuery, GetProductenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductenQuery, GetProductenQueryVariables>(GetProductenDocument, options);
         }
 export type GetProductenQueryHookResult = ReturnType<typeof useGetProductenQuery>;
@@ -3292,8 +3329,8 @@ export function useGetTaakByIdV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>(GetTaakByIdV2Document, options);
         }
-export function useGetTaakByIdV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTaakByIdV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>(GetTaakByIdV2Document, options);
         }
 export type GetTaakByIdV2QueryHookResult = ReturnType<typeof useGetTaakByIdV2Query>;
@@ -3339,8 +3376,8 @@ export function useGetTaakByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
         }
-export function useGetTaakByIdSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTaakByIdSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
         }
 export type GetTaakByIdQueryHookResult = ReturnType<typeof useGetTaakByIdQuery>;
@@ -3414,8 +3451,8 @@ export function useGetTakenV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTakenV2Query, GetTakenV2QueryVariables>(GetTakenV2Document, options);
         }
-export function useGetTakenV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTakenV2Query, GetTakenV2QueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTakenV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTakenV2Query, GetTakenV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTakenV2Query, GetTakenV2QueryVariables>(GetTakenV2Document, options);
         }
 export type GetTakenV2QueryHookResult = ReturnType<typeof useGetTakenV2Query>;
@@ -3470,8 +3507,8 @@ export function useGetTakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
         }
-export function useGetTakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
         }
 export type GetTakenQueryHookResult = ReturnType<typeof useGetTakenQuery>;
@@ -3549,8 +3586,8 @@ export function useGetZaakLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ge
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetZaakQuery, GetZaakQueryVariables>(GetZaakDocument, options);
         }
-export function useGetZaakSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetZaakQuery, GetZaakQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetZaakSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetZaakQuery, GetZaakQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetZaakQuery, GetZaakQueryVariables>(GetZaakDocument, options);
         }
 export type GetZaakQueryHookResult = ReturnType<typeof useGetZaakQuery>;
@@ -3558,13 +3595,14 @@ export type GetZaakLazyQueryHookResult = ReturnType<typeof useGetZaakLazyQuery>;
 export type GetZaakSuspenseQueryHookResult = ReturnType<typeof useGetZaakSuspenseQuery>;
 export type GetZaakQueryResult = Apollo.QueryResult<GetZaakQuery, GetZaakQueryVariables>;
 export const GetZakenDocument = gql`
-    query GetZaken($page: Int, $pageSize: Int, $zaakTypeUrl: String, $isOpen: Boolean, $identificatie: String) {
+    query GetZaken($page: Int, $pageSize: Int, $zaakTypeUrl: String, $isOpen: Boolean, $identificatie: String, $identificatieContains: String) {
   getZaken(
     page: $page
     pageSize: $pageSize
     zaakTypeUrl: $zaakTypeUrl
     isOpen: $isOpen
     identificatie: $identificatie
+    identificatieContains: $identificatieContains
   ) {
     content {
       uuid
@@ -3603,6 +3641,7 @@ export const GetZakenDocument = gql`
  *      zaakTypeUrl: // value for 'zaakTypeUrl'
  *      isOpen: // value for 'isOpen'
  *      identificatie: // value for 'identificatie'
+ *      identificatieContains: // value for 'identificatieContains'
  *   },
  * });
  */
@@ -3614,8 +3653,8 @@ export function useGetZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetZakenQuery, GetZakenQueryVariables>(GetZakenDocument, options);
         }
-export function useGetZakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetZakenQuery, GetZakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetZakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetZakenQuery, GetZakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetZakenQuery, GetZakenQueryVariables>(GetZakenDocument, options);
         }
 export type GetZakenQueryHookResult = ReturnType<typeof useGetZakenQuery>;

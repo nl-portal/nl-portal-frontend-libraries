@@ -1,4 +1,4 @@
-@import "../styles/mixins";
+@use "../styles/mixins";
 
 .cases-list {
   &__cases {
@@ -8,7 +8,7 @@
     grid-template-columns: 1fr;
     gap: var(--nlportal-space-inline-xl, 1.5rem);
 
-    @include breakpoint(desktop) {
+    @include mixins.breakpoint(desktop) {
       grid-template-columns: 1fr 1fr;
       gap: var(--nlportal-space-inline-2xl, 2rem);
     }
