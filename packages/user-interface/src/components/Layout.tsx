@@ -53,8 +53,12 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   }
 
   useEffect(() => {
-    FormIoUploader.register(oidcToken);
+    FormIoUploader.register();
   }, []);
+
+  useEffect(() => {
+    FormIoUploader.setOidcToken(oidcToken);
+  }, [oidcToken]);
 
   return (
     <PageWrapper>

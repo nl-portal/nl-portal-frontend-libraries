@@ -8,7 +8,6 @@ class FormIoUploader extends ReactComponent {
   private component: any;
   private data: object;
   private element: Root | null;
-  public oidcToken: string;
   static globalOidcToken: string = "";
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,7 +16,6 @@ class FormIoUploader extends ReactComponent {
     this.component = component;
     this.data = data;
     this.element = null;
-    this.oidcToken = FormIoUploader.globalOidcToken;
 
     if (this.component.multipleFiles === undefined) {
       this.component.multipleFiles = true;
@@ -42,8 +40,7 @@ class FormIoUploader extends ReactComponent {
     });
   }
 
-  static register: (oidcToken: string) => void = (oidcToken) => {
-    FormIoUploader.globalOidcToken = oidcToken;
+  static register: () => void = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     Formio.use({
       components: {
@@ -55,6 +52,14 @@ class FormIoUploader extends ReactComponent {
   static editForm = formIoUploaderEditForm;
 
   static emptyValue = []; // set empty value to force formio to accept arrays as valid input value for this field type
+
+  static setOidcToken = (oidcToken: string) => {
+    FormIoUploader.globalOidcToken = oidcToken;
+  };
+
+  static getOidcToken = () => {
+    return FormIoUploader.globalOidcToken;
+  };
 
   onChangeHandler = (files: Array<UploadedFile>) => {
     this.updateValue(
@@ -72,7 +77,6 @@ class FormIoUploader extends ReactComponent {
         multiple={this.component.multipleFiles}
         onChange={this.onChangeHandler}
         informatieobjecttype={this.component.informatieobjecttype || ""}
-        oidcToken={this.oidcToken}
       />,
     );
   };

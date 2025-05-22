@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Utils } from "@formio/react";
 import _ = Utils._;
+import FormIoUploader from "./FormIoUploader";
 
 export interface UploadedFile {
   url: string;
@@ -14,7 +15,6 @@ interface FileUploadProps {
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
   informatieobjecttype?: string;
-  oidcToken: string;
 }
 
 const FileUpload = ({
@@ -23,7 +23,6 @@ const FileUpload = ({
   multiple,
   onChange,
   informatieobjecttype,
-  oidcToken,
 }: FileUploadProps) => {
   const [isLoading, setLoading] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>([]);
@@ -46,7 +45,7 @@ const FileUpload = ({
     fetch(uploadLink, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${oidcToken}`,
+        Authorization: `Bearer ${FormIoUploader.getOidcToken()}`,
       },
       body: formData,
     }).then(async (response) => {
