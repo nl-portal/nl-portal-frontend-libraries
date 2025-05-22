@@ -1,4 +1,4 @@
-import { ReactComponent, Formio } from "@formio/react";
+import { Formio, ReactComponent } from "@formio/react";
 import { formIoUploaderEditForm } from "./FormIoUploaderEditForm";
 import FileUpload, { UploadedFile } from "./FileUpload";
 import { Root, createRoot } from "react-dom/client";
@@ -8,13 +8,16 @@ class FormIoUploader extends ReactComponent {
   private component: any;
   private data: object;
   private element: Root | null;
+  public oidcToken: string;
+  static globalOidcToken: string = "";
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(component: any, options: any, data: any) {
     super(component, options, data);
     this.component = component;
-    this.element = null;
     this.data = data;
+    this.element = null;
+    this.oidcToken = FormIoUploader.globalOidcToken;
 
     if (this.component.multipleFiles === undefined) {
       this.component.multipleFiles = true;
@@ -39,7 +42,9 @@ class FormIoUploader extends ReactComponent {
     });
   }
 
-  static register: () => void = () => {
+  static register: (oidcToken: string) => void = (oidcToken) => {
+    FormIoUploader.globalOidcToken = oidcToken;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     Formio.use({
       components: {
         portalFileUpload: FormIoUploader,
@@ -67,6 +72,7 @@ class FormIoUploader extends ReactComponent {
         multiple={this.component.multipleFiles}
         onChange={this.onChangeHandler}
         informatieobjecttype={this.component.informatieobjecttype || ""}
+        oidcToken={this.oidcToken}
       />,
     );
   };

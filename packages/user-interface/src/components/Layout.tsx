@@ -1,4 +1,4 @@
-import { FC, ReactElement, ReactNode, useEffect } from "react";
+import { FC, ReactElement, ReactNode, useContext, useEffect } from "react";
 import { StylesProvider } from "@gemeente-denhaag/stylesprovider";
 import {
   Page as PageWrapper,
@@ -19,6 +19,7 @@ import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";
 import { LayoutProvider } from "../contexts/LayoutContext";
+import { OidcContext } from "@nl-portal/nl-portal-authentication";
 
 interface LayoutComponentProps {
   navigationItems: NavigationItem[][];
@@ -43,6 +44,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   offline,
   headerLogoSmall,
 }) => {
+  const { oidcToken } = useContext(OidcContext);
   const online = !offline;
   const legacy = customHeader === undefined && customFooter === undefined;
   let pageHeaderClassnames = "";
@@ -51,7 +53,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   }
 
   useEffect(() => {
-    FormIoUploader.register();
+    FormIoUploader.register(oidcToken);
   }, []);
 
   return (

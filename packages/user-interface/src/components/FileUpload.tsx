@@ -1,7 +1,6 @@
-import React, { FC, Fragment, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Utils } from "@formio/react";
 import _ = Utils._;
-import { OidcContext } from "@nl-portal/nl-portal-authentication";
 
 export interface UploadedFile {
   url: string;
@@ -15,19 +14,20 @@ interface FileUploadProps {
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
   informatieobjecttype?: string;
+  oidcToken: string;
 }
 
-const FileUpload: FC<FileUploadProps> = ({
+const FileUpload = ({
   context,
   disabled,
   multiple,
   onChange,
   informatieobjecttype,
-}) => {
+  oidcToken,
+}: FileUploadProps) => {
   const [isLoading, setLoading] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>([]);
   const [dataContext, setDataContext] = useState(context);
-  const { oidcToken } = useContext(OidcContext);
 
   const uploadFile = (file: File) => {
     const restUri = sessionStorage.getItem("REST_URI");
@@ -45,7 +45,9 @@ const FileUpload: FC<FileUploadProps> = ({
 
     fetch(uploadLink, {
       method: "POST",
-      headers: { Authorization: `Bearer ${oidcToken}` },
+      headers: {
+        Authorization: `Bearer ${oidcToken}`,
+      },
       body: formData,
     }).then(async (response) => {
       if (!response.ok) {
@@ -103,7 +105,7 @@ const FileUpload: FC<FileUploadProps> = ({
         onChange={onChangeHandler}
         disabled={disabled || isLoading}
       />
-      <Fragment>
+      <>
         {isLoading ||
           fileList.map((file) => (
             <div key={file.url}>
@@ -111,7 +113,7 @@ const FileUpload: FC<FileUploadProps> = ({
               <p>Filesize: {file.size}</p>
             </div>
           ))}
-      </Fragment>
+      </>
       {!isLoading || <p>Loading</p>}
     </div>
   );
