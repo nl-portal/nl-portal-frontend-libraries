@@ -70,10 +70,9 @@ const CasesPage = () => {
   const onTabChange = (index: number) => {
     const func = index === 0 ? openRefetch : closedRefetch;
     const pageIndex = index === 0 ? openIndex : closedIndex;
-    const search = searchValue ? { [searchParam]: searchValue } : {};
     setCurrentTab(index);
     func({
-      ...search,
+      [searchParam]: searchValue,
       page: pageIndex + 1,
     });
   };
