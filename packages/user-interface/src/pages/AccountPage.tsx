@@ -1,10 +1,10 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import {
+  BrpPersoon,
   MaatschappelijkeActiviteit,
-  Persoon,
   useGetBedrijfQuery,
   useGetBurgerProfielQuery,
-  useGetPersoonDataQuery,
+  useGetPersoonV2Query,
 } from "@nl-portal/nl-portal-api";
 import styles from "./AccountPage.module.scss";
 import {
@@ -47,14 +47,14 @@ const AccountPage = ({
   const { paths } = useOutletContext<RouterOutletContext>();
 
   const { data: contactData } = useGetBurgerProfielQuery({ skip: !isPerson });
-  const { data: personData } = useGetPersoonDataQuery({
+  const { data: personData } = useGetPersoonV2Query({
     skip: !isPerson,
   });
   const { data: companyData } = useGetBedrijfQuery({
     skip: isPerson,
   });
 
-  const person = personData?.getPersoon as Persoon | undefined;
+  const person = personData?.getPersoonV2 as BrpPersoon | undefined;
   const company = companyData?.getBedrijf as
     | MaatschappelijkeActiviteit
     | undefined;
@@ -261,7 +261,7 @@ const AccountPage = ({
               title: <FormattedMessage id="account.detail.gender" />,
               detail: (
                 <DescriptionListDetail data-testid="persoonsgegevens-gender">
-                  {person?.geslachtsaanduiding}
+                  {person?.geslacht?.omschrijving}
                 </DescriptionListDetail>
               ),
             },
@@ -281,7 +281,7 @@ const AccountPage = ({
                 <DescriptionListDetail data-testid="persoonsgegevens-birthdate">
                   {person?.geboorte?.datum
                     ? formatDate({
-                        date: `${person?.geboorte?.datum?.jaar}-${String(person?.geboorte?.datum?.maand).padStart(2, "0")}-${String(person?.geboorte?.datum?.dag).padStart(2, "0")}`,
+                        date: person?.geboorte?.datum.datum,
                       })
                     : ""}
                 </DescriptionListDetail>
@@ -303,6 +303,20 @@ const AccountPage = ({
                 </DescriptionListDetail>
               ),
             },
+            {
+              title: (
+                <FormattedMessage id="account.detail.confidentialityOfPersonalData" />
+              ),
+              detail: (
+                <DescriptionListDetail data-testid="persoonsgegevens-confidentialityOfPersonalData">
+                  {
+                    <FormattedMessage
+                      id={`account.detail.confidentialityOfPersonalData.${person?.geheimhoudingPersoonsgegevens ?? false}`}
+                    />
+                  }
+                </DescriptionListDetail>
+              ),
+            },
           ]}
         />
       </div>
@@ -321,10 +335,10 @@ const AccountPage = ({
                   data-testid="persoonsgegevens-street"
                 >
                   {getStreetString(
-                    person?.verblijfplaats?.straat,
-                    person?.verblijfplaats?.huisnummer,
-                    person?.verblijfplaats?.huisletter,
-                    person?.verblijfplaats?.huisnummertoevoeging,
+                    person?.verblijfplaats?.verblijfadres?.officieleStraatnaam,
+                    person?.verblijfplaats?.verblijfadres?.huisnummer?.toString(),
+                    person?.verblijfplaats?.verblijfadres?.huisletter,
+                    person?.verblijfplaats?.verblijfadres?.huisnummertoevoeging,
                   )}
                 </DescriptionListDetail>
               ),
@@ -337,8 +351,8 @@ const AccountPage = ({
                   data-testid="persoonsgegevens-postcode"
                 >
                   {getPostalCodeCityString(
-                    person?.verblijfplaats?.postcode,
-                    person?.verblijfplaats?.woonplaats,
+                    person?.verblijfplaats?.verblijfadres?.postcode,
+                    person?.verblijfplaats?.verblijfadres?.woonplaats,
                   )}
                 </DescriptionListDetail>
               ),
@@ -347,9 +361,9 @@ const AccountPage = ({
               title: <FormattedMessage id="account.detail.aanvangsDatum" />,
               detail: (
                 <DescriptionListDetail>
-                  {person?.verblijfplaats?.datumAanvangAdreshouding
+                  {person?.verblijfplaats?.datumVan?.datum
                     ? formatDate({
-                        date: `${person?.verblijfplaats?.datumAanvangAdreshouding?.jaar}-${String(person?.verblijfplaats?.datumAanvangAdreshouding?.maand).padStart(2, "0")}-${String(person?.verblijfplaats?.datumAanvangAdreshouding?.dag).padStart(2, "0")}`,
+                        date: person?.verblijfplaats?.datumVan?.datum,
                       })
                     : ""}
                 </DescriptionListDetail>

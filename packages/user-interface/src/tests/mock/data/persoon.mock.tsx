@@ -1,8 +1,8 @@
-import { QUERY_GET_PERSOON_DATA } from "@nl-portal/nl-portal-api";
+import { QUERY_GET_PERSOON_V2 } from "@nl-portal/nl-portal-api";
 
 export const getPersoon = {
   request: {
-    query: QUERY_GET_PERSOON_DATA,
+    query: QUERY_GET_PERSOON_V2,
     variables: {},
   },
   result: {

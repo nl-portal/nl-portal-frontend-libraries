@@ -1,84 +1,70 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext, useMemo } from "react";
 import {
-  useGetPersoonLazyQuery,
-  useGetBedrijfLazyQuery,
-  useGetGemachtigdeLazyQuery,
+  useGetBedrijfQuery,
+  useGetGemachtigdeV2Query,
+  useGetPersoonV2Query,
 } from "@nl-portal/nl-portal-api";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import { getFullName } from "../utils/person-data";
 
 export const useUserInfo = () => {
-  const [isPerson, setIsPerson] = useState(true);
-  const [isVolmachtLogin, setisVolmachtLogin] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [volmachtgever, setVolmachtgever] = useState("");
-  const [loadPersoon, { loading: persoonLoading, data: persoonData }] =
-    useGetPersoonLazyQuery();
-  const [loadBedrijf, { loading: bedrijfLoading, data: bedrijfData }] =
-    useGetBedrijfLazyQuery();
-  const [
-    loadGemachtigde,
-    { loading: gemachtigdeLoading, data: gemachtigdeData },
-  ] = useGetGemachtigdeLazyQuery();
   const { decodedToken, authenticationMethods } = useContext(OidcContext);
+
+  const authenticationMethod = decodedToken?.middel ?? "";
+  const isCompany =
+    authenticationMethods?.company?.includes(authenticationMethod) ?? false;
+  const isPerson = !isCompany; // This also acts like a default, if middel is not inside the token (like in the local dev environment), person is the default.
+  const isVolmachtLogin =
+    authenticationMethods?.proxy?.includes(authenticationMethod) ?? false;
+
+  const { data: persoonData, loading: persoonLoading } = useGetPersoonV2Query({
+    skip: !isPerson || !authenticationMethod,
+  });
+
+  const { data: bedrijfData, loading: bedrijfLoading } = useGetBedrijfQuery({
+    skip: isPerson || !authenticationMethod,
+  });
+
+  const { data: gemachtigdeData, loading: gemachtigdeLoading } =
+    useGetGemachtigdeV2Query({
+      skip: !isVolmachtLogin || !authenticationMethod,
+    });
+
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
 
-  useEffect(() => {
-    if (decodedToken && authenticationMethods) {
-      const authenticationMethod = decodedToken.middel || "";
-      if (authenticationMethods.person?.includes(authenticationMethod)) {
-        setIsPerson(true);
-        loadPersoon();
-      } else if (
-        authenticationMethods.company?.includes(authenticationMethod)
-      ) {
-        setIsPerson(false);
-        loadBedrijf();
-      }
-      if (authenticationMethods.proxy?.includes(authenticationMethod)) {
-        setisVolmachtLogin(true);
-        loadGemachtigde();
-      }
-    }
-  }, [decodedToken]);
+  return useMemo(() => {
+    let userName = "";
+    let volmachtgever: string | undefined = undefined;
 
-  useEffect(() => {
-    const name = getFullName(persoonData?.getPersoon?.naam);
-    const authenticationMethod = decodedToken?.middel || "";
-    if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
-      setVolmachtgever(name);
+    if (isVolmachtLogin && gemachtigdeData) {
+      userName = gemachtigdeData.getGemachtigdeV2.persoon
+        ? getFullName(gemachtigdeData.getGemachtigdeV2.persoon.naam)
+        : (gemachtigdeData.getGemachtigdeV2.bedrijf?.naam ?? "");
+
+      volmachtgever = isPerson
+        ? getFullName(persoonData?.getPersoonV2?.naam)
+        : (bedrijfData?.getBedrijf?.naam ?? "");
+    } else if (isCompany) {
+      userName = bedrijfData?.getBedrijf?.naam ?? "";
     } else {
-      setUserName(name);
+      userName = getFullName(persoonData?.getPersoonV2?.naam);
     }
-  }, [persoonData, decodedToken?.middel, authenticationMethods?.proxy]);
 
-  useEffect(() => {
-    const name = bedrijfData?.getBedrijf?.naam || "";
-    const authenticationMethod = decodedToken?.middel || "";
-    if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
-      setVolmachtgever(name);
-    } else {
-      setUserName(name);
-    }
-  }, [bedrijfData, decodedToken?.middel, authenticationMethods?.proxy]);
-
-  useEffect(() => {
-    if (gemachtigdeData?.getGemachtigde?.persoon) {
-      setUserName(
-        getFullName(gemachtigdeData?.getGemachtigde?.persoon.naam) || "",
-      );
-    } else {
-      setUserName(gemachtigdeData?.getGemachtigde?.bedrijf?.naam || "");
-    }
-  }, [gemachtigdeData]);
-
-  return {
+    return {
+      isPerson,
+      isVolmachtLogin,
+      userName,
+      volmachtgever,
+      isLoading,
+    } as const;
+  }, [
     isPerson,
     isVolmachtLogin,
-    userName,
-    volmachtgever,
+    persoonData,
+    bedrijfData,
+    gemachtigdeData,
     isLoading,
-  };
+  ]);
 };
 
 export default useUserInfo;

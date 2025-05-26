@@ -1,12 +1,12 @@
-import { gql } from "@apollo/client";
+// import { gql } from "@apollo/client";
 
-export const QUERY_GET_PERSOON = gql`
-  query GetPersoon {
-    getPersoon {
-      naam {
-        voornamen
-        officialLastName
-      }
-    }
-  }
-`;
+// export const QUERY_GET_PERSOON = gql`
+//   query GetPersoon {
+//     getPersoon {
+//       naam {
+//         voornamen
+//         officialLastName
+//       }
+//     }
+//   }
+// `;
