@@ -49,7 +49,6 @@ const CasesPage = () => {
     : "identificatie";
 
   const handleFormSubmit = (searchValue: string) => {
-    // const func = currentTab === 0 ? openRefetch : closedRefetch;
     setOpenIndex(0);
     setClosedIndex(0);
     setRefetchingOpen(true);
