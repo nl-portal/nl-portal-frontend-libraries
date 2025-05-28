@@ -6,88 +6,139 @@ import PageHeader from "../components/PageHeader";
 import { Zaak, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import PageGrid from "../components/PageGrid";
 import SearchForm from "../components/SearchForm";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+
+const fetchCasesLength = 4;
+
+const queryOptions = (isOpen: boolean) => ({
+  variables: { isOpen, pageSize: fetchCasesLength },
+});
 
 const CasesPage = () => {
   const intl = useIntl();
-  const fetchCasesLength = 10;
-  const [currentTab, setCurrentTab] = useState(0);
-  const [openIndex, setOpenIndex] = useState(0);
-  const [closedIndex, setClosedIndex] = useState(0);
-  const [refetchingOpen, setRefetchingOpen] = useState(false);
-  const [refetchingClosed, setRefetchingClosed] = useState(false);
 
-  const {
-    data: openData,
-    loading: openLoading,
-    error: openError,
-    refetch: openRefetch,
-    fetchMore: openFetchMore,
-  } = useGetZakenQuery({
-    variables: {
-      isOpen: true,
-      pageSize: fetchCasesLength,
-    },
-  });
-  const {
-    data: closedData,
-    loading: closedLoading,
-    error: closedError,
-    refetch: closedRefetch,
-    fetchMore: closedFetchMore,
-  } = useGetZakenQuery({
-    variables: {
-      isOpen: false,
-      pageSize: fetchCasesLength,
-    },
+  // Tabs state
+  const [{ currentTab, pageIndices, refetching }, setTabsState] = useState({
+    currentTab: 0,
+    pageIndices: [0, 0],
+    refetching: [false, false],
   });
 
-  const openCases = openData?.getZaken.content as Zaak[] | undefined;
-  const closedCases = closedData?.getZaken.content as Zaak[] | undefined;
-  const searchParam = window.CASES_PARTIAL_SEARCH
+  // GraphQL queries
+  const [
+    {
+      data: openData,
+      loading: openLoad,
+      error: openErr,
+      refetch: openRefetch,
+      fetchMore: openMore,
+    },
+    {
+      data: closedData,
+      loading: closedLoad,
+      error: closedErr,
+      refetch: closedRefetch,
+      fetchMore: closedMore,
+    },
+  ] = [
+    useGetZakenQuery(queryOptions(true)),
+    useGetZakenQuery(queryOptions(false)),
+  ];
+
+  // Mapping GraphQL query results to array for Tabs
+  const sources = useMemo(
+    () => [
+      {
+        data: openData,
+        loading: openLoad,
+        error: openErr,
+        refetch: openRefetch,
+        fetchMore: openMore,
+      },
+      {
+        data: closedData,
+        loading: closedLoad,
+        error: closedErr,
+        refetch: closedRefetch,
+        fetchMore: closedMore,
+      },
+    ],
+    [openData, openLoad, openErr, closedData, closedLoad, closedErr],
+  );
+
+  const searchKey = window.CASES_PARTIAL_SEARCH
     ? "identificatieContains"
     : "identificatie";
 
-  const handleFormSubmit = (searchValue: string) => {
-    setOpenIndex(0);
-    setClosedIndex(0);
-    setRefetchingOpen(true);
-    setRefetchingClosed(true);
-    openRefetch({ [searchParam]: searchValue, page: undefined }).finally(() => {
-      setRefetchingOpen(false);
-      scrollTo(0, 0);
-    });
-    closedRefetch({ [searchParam]: searchValue, page: undefined }).finally(
-      () => {
-        setRefetchingClosed(false);
-        scrollTo(0, 0);
-      },
+  const handleSearch = (value: string) => {
+    // Reset pagination, enable refetching loading state
+    setTabsState((s) => ({
+      ...s,
+      pageIndices: [0, 0],
+      refetching: [true, true],
+    }));
+
+    // Refetch both tabs
+    sources.forEach(({ refetch }, idx) =>
+      refetch({ [searchKey]: value, page: undefined }).finally(() =>
+        // Disable refetching loading state
+        setTabsState((s) => {
+          const refetching = [...s.refetching];
+          refetching[idx] = false;
+          return { ...s, refetching };
+        }),
+      ),
     );
   };
 
-  const setRefetching = (start: boolean) =>
-    currentTab === 0 ? setRefetchingOpen(start) : setRefetchingClosed(start);
+  const handlePageChange = (page: number) => {
+    const { fetchMore } = sources[currentTab];
 
-  const onTabChange = (index: number) => {
-    setCurrentTab(index);
-  };
+    setTabsState((s) => {
+      const nextRefetching = [...s.refetching]; // Copy array
+      nextRefetching[currentTab] = true; // Edit copy
+      const nextIndices = [...s.pageIndices];
+      nextIndices[currentTab] = page;
+      return { ...s, pageIndices: nextIndices, refetching: nextRefetching };
+    });
 
-  const onPageChange = (index: number) => {
-    const func = currentTab === 0 ? openFetchMore : closedFetchMore;
-    if (currentTab === 0) setOpenIndex(index);
-    if (currentTab === 1) setClosedIndex(index);
-    setRefetching(true);
-    func({
-      variables: { page: index + 1 },
+    fetchMore({
+      variables: { page: page + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
         return fetchMoreResult;
       },
-    }).finally(() => {
-      setRefetching(false);
-      scrollTo(0, 0);
-    });
+    }).finally(() =>
+      setTabsState((s) => {
+        const nextRefetching = [...s.refetching];
+        nextRefetching[currentTab] = false;
+        return { ...s, refetching: nextRefetching };
+      }),
+    );
   };
+
+  const tabs = [
+    { labelId: "titles.currentCases" },
+    { labelId: "titles.completedCases" },
+  ].map((tab, i) => {
+    const { data, loading, error } = sources[i];
+    const zaakList = data?.getZaken;
+    return {
+      label: intl.formatMessage({ id: tab.labelId }),
+      panelContent: (
+        <CasesList
+          loading={loading || refetching[i]}
+          error={Boolean(error)}
+          titleTranslationId={null}
+          cases={zaakList?.content as Zaak[]}
+          totalAmount={zaakList?.totalElements}
+          index={pageIndices[i]}
+          indexLimit={(zaakList?.totalPages ?? 1) - 1}
+          onChange={handlePageChange}
+        />
+      ),
+    };
+  });
 
   return (
     <PageGrid className={styles.cases} variant="medium">
@@ -95,50 +146,13 @@ const CasesPage = () => {
         <SearchForm
           translationId="cases"
           totalElements={null}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSearch}
         />
       </PageHeader>
       <div>
         <Tabs
-          onChange={onTabChange}
-          tabData={[
-            {
-              label: intl.formatMessage({ id: "titles.currentCases" }),
-              panelContent: (
-                <CasesList
-                  loading={openLoading || refetchingOpen}
-                  error={Boolean(openError)}
-                  titleTranslationId={null}
-                  cases={openCases}
-                  totalAmount={openData?.getZaken.totalElements}
-                  index={openIndex}
-                  indexLimit={
-                    openData?.getZaken.totalPages &&
-                    openData?.getZaken.totalPages - 1
-                  }
-                  onChange={onPageChange}
-                />
-              ),
-            },
-            {
-              label: intl.formatMessage({ id: "titles.completedCases" }),
-              panelContent: (
-                <CasesList
-                  loading={closedLoading || refetchingClosed}
-                  error={Boolean(closedError)}
-                  titleTranslationId={null}
-                  cases={closedCases}
-                  totalAmount={closedData?.getZaken.totalElements}
-                  index={closedIndex}
-                  indexLimit={
-                    closedData?.getZaken.totalPages &&
-                    closedData?.getZaken.totalPages - 1
-                  }
-                  onChange={onPageChange}
-                />
-              ),
-            },
-          ]}
+          onChange={(idx) => setTabsState((s) => ({ ...s, currentTab: idx }))}
+          tabData={tabs}
         />
       </div>
     </PageGrid>
