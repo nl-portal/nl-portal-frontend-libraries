@@ -8,7 +8,7 @@ import PageGrid from "../components/PageGrid";
 import SearchForm from "../components/SearchForm";
 import { useMemo, useState } from "react";
 
-const fetchCasesLength = 4;
+const fetchCasesLength = 10;
 
 const queryOptions = (isOpen: boolean) => ({
   variables: { isOpen, pageSize: fetchCasesLength },
