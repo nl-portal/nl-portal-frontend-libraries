@@ -3,11 +3,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import PageHeader from "../components/PageHeader";
-import {
-  Zaak,
-  useGetZakenLazyQuery,
-  useGetZakenQuery,
-} from "@nl-portal/nl-portal-api";
+import { Zaak, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import PageGrid from "../components/PageGrid";
 import SearchForm from "../components/SearchForm";
 import { useState } from "react";
@@ -16,9 +12,11 @@ const CasesPage = () => {
   const intl = useIntl();
   const fetchCasesLength = 10;
   const [currentTab, setCurrentTab] = useState(0);
-  const [searchValue, setSearchValue] = useState("");
   const [openIndex, setOpenIndex] = useState(0);
   const [closedIndex, setClosedIndex] = useState(0);
+  const [refetchingOpen, setRefetchingOpen] = useState(false);
+  const [refetchingClosed, setRefetchingClosed] = useState(false);
+
   const {
     data: openData,
     loading: openLoading,
@@ -31,16 +29,13 @@ const CasesPage = () => {
       pageSize: fetchCasesLength,
     },
   });
-  const [
-    ,
-    {
-      data: closedData,
-      loading: closedLoading,
-      error: closedError,
-      refetch: closedRefetch,
-      fetchMore: closedFetchMore,
-    },
-  ] = useGetZakenLazyQuery({
+  const {
+    data: closedData,
+    loading: closedLoading,
+    error: closedError,
+    refetch: closedRefetch,
+    fetchMore: closedFetchMore,
+  } = useGetZakenQuery({
     variables: {
       isOpen: false,
       pageSize: fetchCasesLength,
@@ -53,41 +48,46 @@ const CasesPage = () => {
     ? "identificatieContains"
     : "identificatie";
 
-  const finishRefetching = () => {
-    scrollTo(0, 0);
-  };
-
   const handleFormSubmit = (searchValue: string) => {
-    const func = currentTab === 0 ? openRefetch : closedRefetch;
+    // const func = currentTab === 0 ? openRefetch : closedRefetch;
     setOpenIndex(0);
     setClosedIndex(0);
-    setSearchValue(searchValue);
-    func({ [searchParam]: searchValue, page: undefined }).finally(
-      finishRefetching,
+    setRefetchingOpen(true);
+    setRefetchingClosed(true);
+    openRefetch({ [searchParam]: searchValue, page: undefined }).finally(() => {
+      setRefetchingOpen(false);
+      scrollTo(0, 0);
+    });
+    closedRefetch({ [searchParam]: searchValue, page: undefined }).finally(
+      () => {
+        setRefetchingClosed(false);
+        scrollTo(0, 0);
+      },
     );
   };
 
+  const setRefetching = (start: boolean) =>
+    currentTab === 0 ? setRefetchingOpen(start) : setRefetchingClosed(start);
+
   const onTabChange = (index: number) => {
-    const func = index === 0 ? openRefetch : closedRefetch;
-    const pageIndex = index === 0 ? openIndex : closedIndex;
     setCurrentTab(index);
-    func({
-      [searchParam]: searchValue,
-      page: pageIndex + 1,
-    });
   };
 
   const onPageChange = (index: number) => {
     const func = currentTab === 0 ? openFetchMore : closedFetchMore;
     if (currentTab === 0) setOpenIndex(index);
     if (currentTab === 1) setClosedIndex(index);
+    setRefetching(true);
     func({
       variables: { page: index + 1 },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
         return fetchMoreResult;
       },
-    }).finally(finishRefetching);
+    }).finally(() => {
+      setRefetching(false);
+      scrollTo(0, 0);
+    });
   };
 
   return (
@@ -107,7 +107,7 @@ const CasesPage = () => {
               label: intl.formatMessage({ id: "titles.currentCases" }),
               panelContent: (
                 <CasesList
-                  loading={openLoading}
+                  loading={openLoading || refetchingOpen}
                   error={Boolean(openError)}
                   titleTranslationId={null}
                   cases={openCases}
@@ -125,7 +125,7 @@ const CasesPage = () => {
               label: intl.formatMessage({ id: "titles.completedCases" }),
               panelContent: (
                 <CasesList
-                  loading={closedLoading}
+                  loading={closedLoading || refetchingClosed}
                   error={Boolean(closedError)}
                   titleTranslationId={null}
                   cases={closedCases}
