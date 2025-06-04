@@ -24,15 +24,15 @@ export const menuItems: NavigationItem[][] = [
       icon: <CheckCircleIcon />,
     },
     {
+      titleTranslationKey: "cases",
+      path: paths.cases,
+      icon: <ArchiveIcon />,
+    },
+    {
       titleTranslationKey: "messages",
       path: paths.messages,
       icon: <InboxIcon />,
       hasMessagesCount: true,
-    },
-    {
-      titleTranslationKey: "cases",
-      path: paths.cases,
-      icon: <ArchiveIcon />,
     },
   ],
   [
