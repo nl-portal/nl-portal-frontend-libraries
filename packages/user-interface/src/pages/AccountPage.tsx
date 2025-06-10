@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
 import {
   MaatschappelijkeActiviteit,
   Persoon,
@@ -20,13 +20,12 @@ import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
 import Link from "@gemeente-denhaag/link";
 import { ArrowRightIcon, EditIcon } from "@gemeente-denhaag/icons";
-import { Paragraph } from "@gemeente-denhaag/typography";
+import { LeadParagraph, Paragraph } from "@gemeente-denhaag/typography";
 import "@gemeente-denhaag/button-group";
 import DescriptionListDetail from "../components/DescriptionListDetail";
 import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import PortalLink from "../components/PortalLink";
-import SectionHeader from "../components/SectionHeader";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
@@ -43,7 +42,6 @@ const AccountPage = ({
 }: AccountPageProps) => {
   const { formatDate } = useDateFormatter();
   const { isPerson } = useUserInfo();
-  const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
 
   const { data: contactData } = useGetBurgerProfielQuery({ skip: !isPerson });
@@ -63,12 +61,11 @@ const AccountPage = ({
     return (
       <PageGrid>
         <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
-        <div>
-          <Heading as="h3" className={styles["account__sub-header"]}>
+        <PageGrid variant="small">
+          <Heading as="h3">
             <FormattedMessage id="account.companyInfoHeader" />
           </Heading>
           <DescriptionList
-            className={styles["account__description-list--readonly"]}
             items={[
               {
                 title: <FormattedMessage id="account.detail.kvkNumber" />,
@@ -96,13 +93,12 @@ const AccountPage = ({
               },
             ]}
           ></DescriptionList>
-        </div>
-        <div>
-          <Heading as="h3" className={styles["account__sub-header"]}>
+        </PageGrid>
+        <PageGrid variant="small">
+          <Heading as="h3">
             <FormattedMessage id="account.BusinessAddressHeader" />
           </Heading>
           <DescriptionList
-            className={styles["account__description-list--readonly"]}
             items={[
               {
                 title: <FormattedMessage id="account.detail.street" />,
@@ -133,17 +129,30 @@ const AccountPage = ({
               },
             ]}
           ></DescriptionList>
-        </div>
+        </PageGrid>
       </PageGrid>
     );
 
   return (
     <PageGrid>
-      <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
-      <div>
-        <SectionHeader
-          title={intl.formatMessage({ id: "account.detail.contact" })}
-        />
+      <PageGrid variant="small">
+        <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
+        <LeadParagraph>
+          <FormattedMessage id="account.leadParagraph" />
+        </LeadParagraph>
+      </PageGrid>
+      <PageGrid variant="small">
+        <Heading as="h3" id="contact">
+          <FormattedMessage id="account.detail.contact" />
+        </Heading>
+        <Link
+          icon={<EditIcon />}
+          iconAlign="start"
+          href={paths.changeContactInfo}
+          Link={PortalLink}
+        >
+          <FormattedMessage id="account.edit" />
+        </Link>
         <DescriptionList
           items={[
             {
@@ -153,16 +162,6 @@ const AccountPage = ({
                   {contactData?.getBurgerProfiel?.emailadres}
                 </DescriptionListDetail>
               ),
-              action: (
-                <Link
-                  icon={<EditIcon />}
-                  iconAlign="start"
-                  href={paths.changeEmail}
-                  Link={PortalLink}
-                >
-                  <FormattedMessage id="account.edit" />
-                </Link>
-              ),
             },
             {
               title: <FormattedMessage id="account.detail.telefoonnummer" />,
@@ -171,69 +170,15 @@ const AccountPage = ({
                   {contactData?.getBurgerProfiel?.telefoonnummer}
                 </DescriptionListDetail>
               ),
-              action: (
-                <Link
-                  icon={<EditIcon />}
-                  iconAlign="start"
-                  href={paths.changePhonenumber}
-                  Link={PortalLink}
-                >
-                  <FormattedMessage id="account.edit" />
-                </Link>
-              ),
             },
           ]}
         />
-      </div>
-      {showNotificationSubSection && (
-        <div>
-          <SectionHeader
-            title={intl.formatMessage({ id: "account.detail.meldingen" })}
-          />
-          <Link
-            icon={<EditIcon />}
-            iconAlign="start"
-            href={paths.changeNotifications}
-            Link={PortalLink}
-          >
-            <FormattedMessage id="account.edit" />
-          </Link>
-          <DescriptionList
-            items={[
-              {
-                title: (
-                  <FormattedMessage id="account.detail.notification.form.post.title" />
-                ),
-                detail: (
-                  <DescriptionListDetail>
-                    <FormattedMessage
-                      id={`account.detail.notification.form.post.true`}
-                    />
-                  </DescriptionListDetail>
-                ),
-              },
-              {
-                title: (
-                  <FormattedMessage id="account.detail.notification.form.email.title" />
-                ),
-                detail: (
-                  <DescriptionListDetail>
-                    <FormattedMessage
-                      id={`account.detail.notification.form.email.${contactData?.getBurgerProfiel?.aanmaakkanaal === "EMAIL"}`}
-                    />
-                  </DescriptionListDetail>
-                ),
-              },
-            ]}
-          />
-        </div>
-      )}
-      <div>
-        <SectionHeader
-          title={intl.formatMessage({ id: "account.detail.persoonsgegevens" })}
-        />
+      </PageGrid>
+      <PageGrid variant="small">
+        <Heading id="persoonsgegevens" as="h3">
+          <FormattedMessage id="account.detail.persoonsgegevens" />
+        </Heading>
         <DescriptionList
-          className={styles["account__description-list--readonly"]}
           items={[
             {
               title: <FormattedMessage id="account.detail.firstNames" />,
@@ -305,13 +250,12 @@ const AccountPage = ({
             },
           ]}
         />
-      </div>
-      <div>
-        <SectionHeader
-          title={intl.formatMessage({ id: "account.detail.adres" })}
-        />
+      </PageGrid>
+      <PageGrid variant="small">
+        <Heading id="adres" as="h3">
+          <FormattedMessage id="account.detail.adres" />
+        </Heading>
         <DescriptionList
-          className={styles["account__description-list--readonly"]}
           items={[
             {
               title: <FormattedMessage id="account.detail.street" />,
@@ -371,20 +315,70 @@ const AccountPage = ({
               : []),
           ]}
         />
-        <Paragraph className={styles["account__address-research-description"]}>
-          <FormattedMessage id="account.inhabitantAmountDescription" />
-        </Paragraph>
-        {showAddressResearch && (
-          <Link
-            href={addressResearchUrl}
-            target="_blank"
-            iconAlign="start"
-            icon={<ArrowRightIcon />}
+        <div>
+          <Paragraph
+            className={styles["account__address-research-description"]}
           >
-            <FormattedMessage id="account.addressResearchRequestButton" />
+            <FormattedMessage id="account.inhabitantAmountDescription" />
+          </Paragraph>
+          {showAddressResearch && (
+            <Link
+              href={addressResearchUrl}
+              target="_blank"
+              iconAlign="start"
+              icon={<ArrowRightIcon />}
+            >
+              <FormattedMessage id="account.addressResearchRequestButton" />
+            </Link>
+          )}
+        </div>
+      </PageGrid>
+      {showNotificationSubSection && (
+        <PageGrid variant="small">
+          <Heading id="meldingen" as="h3">
+            <FormattedMessage id="account.detail.meldingen" />
+          </Heading>
+          <Link
+            icon={<EditIcon />}
+            iconAlign="start"
+            href={paths.changeNotifications}
+            Link={PortalLink}
+          >
+            <FormattedMessage id="account.edit" />
           </Link>
-        )}
-      </div>
+          <DescriptionList
+            items={[
+              {
+                title: (
+                  <FormattedMessage id="account.detail.notification.form.post.title" />
+                ),
+                detail: (
+                  <DescriptionListDetail>
+                    <FormattedMessage
+                      id={`account.detail.notification.form.post.true`}
+                    />
+                  </DescriptionListDetail>
+                ),
+              },
+              {
+                title: (
+                  <FormattedMessage id="account.detail.notification.form.email.title" />
+                ),
+                detail: (
+                  <DescriptionListDetail>
+                    <FormattedMessage
+                      id={`account.detail.notification.form.email.${contactData?.getBurgerProfiel?.aanmaakkanaal === "EMAIL"}`}
+                      values={{
+                        strong: (chunk) => <strong>{chunk}</strong>,
+                      }}
+                    />
+                  </DescriptionListDetail>
+                ),
+              },
+            ]}
+          />
+        </PageGrid>
+      )}
     </PageGrid>
   );
 };

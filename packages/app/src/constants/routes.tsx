@@ -93,12 +93,8 @@ export const routes = [
         ),
       },
       {
-        path: paths.changeEmail,
-        element: <EditContactInfoPage type="emailadres" />,
-      },
-      {
-        path: paths.changePhonenumber,
-        element: <EditContactInfoPage type="telefoonnummer" />,
+        path: paths.changeContactInfo,
+        element: <EditContactInfoPage />,
       },
       {
         path: paths.changeNotifications,
