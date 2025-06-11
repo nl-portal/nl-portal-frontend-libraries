@@ -1,13 +1,15 @@
 @use "../styles/mixins";
 
-.account__sub-header {
-  margin-block-end: var(--nlportal-space-block-2xl, 2rem) !important;
-
-  @include mixins.breakpoint(tablet) {
-    margin-block-end: var(--nlportal-space-block-md, 1rem) !important;
-  }
-}
-
 .account__label-description {
   margin-block-end: var(--nlportal-space-block-md, 2rem) !important;
+}
+
+.account__description-list {
+  word-break: break-word;
+}
+
+.account__address-research-description {
+  --utrecht-space-around: 1;
+  --utrecht-paragraph-margin-block-start: 16px;
+  --utrecht-paragraph-margin-block-end: 16px;
 }

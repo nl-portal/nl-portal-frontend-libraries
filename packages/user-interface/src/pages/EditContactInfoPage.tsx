@@ -1,0 +1,149 @@
+import { FormattedMessage } from "react-intl";
+import {
+  GetBurgerProfielDocument,
+  useGetBurgerProfielQuery,
+  useUpdateBurgerProfielMutation,
+} from "@nl-portal/nl-portal-api";
+import PageHeader from "../components/PageHeader";
+import useUserInfo from "../hooks/useUserInfo";
+import { REGEX_PATTERNS } from "../constants/regex-patterns";
+import BackLink from "../components/BackLink";
+import { useNavigate, useOutletContext } from "react-router";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
+import useInput from "../hooks/useInput";
+import Form from "../components/Form";
+import FormField from "@gemeente-denhaag/form-field";
+import FormLabel from "@gemeente-denhaag/form-label";
+import TextInput from "@gemeente-denhaag/text-input";
+import FormFieldErrorMessage from "@gemeente-denhaag/form-field-error-message";
+import styles from "./EditContactInfoPage.module.scss";
+
+const EditContactInfoPage = () => {
+  const { isPerson } = useUserInfo();
+  const { paths } = useOutletContext<RouterOutletContext>();
+  const navigate = useNavigate();
+
+  const { data: contactData } = useGetBurgerProfielQuery({
+    skip: !isPerson,
+  });
+
+  const [
+    mutateFunction,
+    {
+      loading: mutationLoading,
+      error: mutationError,
+      called: mutationCalled,
+      reset: mutationReset,
+    },
+  ] = useUpdateBurgerProfielMutation({
+    update: (cache, { data }) => {
+      cache.writeQuery({
+        query: GetBurgerProfielDocument,
+        data: {
+          getBurgerProfiel: {
+            ...data?.updateBurgerProfiel,
+          },
+        },
+      });
+    },
+  });
+
+  const {
+    value: phoneValue,
+    handleInputChange: handlePhoneInputChange,
+    handleInputBlur: handlePhoneInputBlur,
+    hasError: phoneHasError,
+    errorTranslationId: phoneErrorTranslationId,
+  } = useInput(contactData?.getBurgerProfiel?.telefoonnummer || "", [
+    {
+      validationFn: (value) => REGEX_PATTERNS.telefoonnummer.test(value),
+      errorTranslationId: "account.detail.telefoonnummer.error",
+    },
+  ]);
+  const {
+    value: emailValue,
+    handleInputChange: handleEmailInputChange,
+    handleInputBlur: handleEmailInputBlur,
+    hasError: emailHasError,
+    errorTranslationId: emailErrorTranslationId,
+  } = useInput(contactData?.getBurgerProfiel?.emailadres || "", [
+    {
+      validationFn: (value) => REGEX_PATTERNS.emailadres.test(value),
+      errorTranslationId: "account.detail.emailadres.error",
+    },
+  ]);
+
+  const onSubmit = () => {
+    mutateFunction({
+      variables: {
+        klant: {
+          emailadres: emailValue || "",
+          telefoonnummer: phoneValue || "",
+        },
+      },
+    });
+  };
+
+  const disableSubmit = emailHasError || phoneHasError || mutationLoading;
+
+  return (
+    <>
+      <BackLink href={paths.account} />
+      <PageHeader
+        title={<FormattedMessage id="pageTitles.editContactInfo" />}
+      />
+      <Form
+        id="edit-contact-info-form"
+        submitTranslationId="account.save"
+        loading={disableSubmit}
+        success={Boolean(!mutationLoading && mutationCalled && !mutationError)}
+        error={Boolean(!mutationLoading && mutationCalled && mutationError)}
+        onSubmit={(event) => {
+          event.preventDefault();
+          onSubmit();
+        }}
+        onCancel={() => navigate(paths.account)}
+        onChange={mutationReset}
+      >
+        <FormField invalid={emailHasError}>
+          <FormLabel>
+            <FormattedMessage id="account.detail.contactform.email" />
+          </FormLabel>
+          <TextInput
+            type="text"
+            name="email"
+            value={emailValue}
+            onChange={handleEmailInputChange}
+            onBlur={handleEmailInputBlur}
+            className={styles["nl-portal-edit-contact__emailadres-field"]}
+          />
+          {emailHasError && (
+            <FormFieldErrorMessage>
+              <FormattedMessage id={emailErrorTranslationId} />
+            </FormFieldErrorMessage>
+          )}
+        </FormField>
+        <FormField invalid={emailHasError}>
+          <FormLabel>
+            <FormattedMessage id="account.detail.contactform.tel" />
+          </FormLabel>
+          <TextInput
+            type="text"
+            name="telefoonnummer"
+            value={phoneValue}
+            onChange={handlePhoneInputChange}
+            onBlur={handlePhoneInputBlur}
+            className={styles["nl-portal-edit-contact__telefoonnummer-field"]}
+          />
+          {phoneHasError && (
+            <FormFieldErrorMessage>
+              <FormattedMessage id={phoneErrorTranslationId} />
+            </FormFieldErrorMessage>
+          )}
+        </FormField>
+      </Form>
+    </>
+  );
+};
+
+export default EditContactInfoPage;

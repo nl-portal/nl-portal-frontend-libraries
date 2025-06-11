@@ -153,16 +153,6 @@ export type BesluitPage = {
   totalPages: Scalars['Int']['output'];
 };
 
-export type BetrokkenActoren = {
-  __typename?: 'BetrokkenActoren';
-  actoridentificator: OpenKlant2Identificator;
-  indicatieActief: Scalars['Boolean']['output'];
-  naam: Scalars['String']['output'];
-  soortActor: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-  uuid: Scalars['String']['output'];
-};
-
 export type Betrokkene = {
   __typename?: 'Betrokkene';
   bezoekadres?: Maybe<OpenKlant2Adres>;
@@ -271,6 +261,7 @@ export type DigitaleAdresRequestInput = {
 export type DigitaleAdresResponse = {
   __typename?: 'DigitaleAdresResponse';
   omschrijving: Scalars['String']['output'];
+  referentie: Scalars['String']['output'];
   type: DigitaleAdresType;
   uuid: Scalars['UUID']['output'];
   waarde: Scalars['String']['output'];
@@ -390,25 +381,6 @@ export type Klant = {
   telefoonnummer?: Maybe<Scalars['String']['output']>;
 };
 
-export type KlantContactResponse = {
-  __typename?: 'KlantContactResponse';
-  betrokkenActoren: Array<BetrokkenActoren>;
-  betrokkenen: Array<OpenKlant2ForeignKey>;
-  gingOverOnderwerpobjecten: Array<OpenKlant2ForeignKey>;
-  indicatieContactGelukt: Scalars['Boolean']['output'];
-  inhoud: Scalars['String']['output'];
-  kanaal: Scalars['String']['output'];
-  leiddeTotInterneTaken: Array<OpenKlant2ForeignKey>;
-  nummer: Scalars['String']['output'];
-  omvatteBijlagen: Array<OpenKlant2ForeignKey>;
-  onderwerp: Scalars['String']['output'];
-  plaatsgevondenOp: Scalars['String']['output'];
-  taal: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-  uuid: Scalars['String']['output'];
-  vertrouwelijk: Scalars['Boolean']['output'];
-};
-
 export type KlantUpdateInput = {
   aanmaakkanaal?: InputMaybe<Scalars['String']['input']>;
   emailadres?: InputMaybe<Scalars['String']['input']>;
@@ -519,7 +491,6 @@ export type MutationUpdateProductVerbruiksObjectArgs = {
 
 
 export type MutationUpdateUserDigitaleAdresArgs = {
-  digitaleAdresId: Scalars['UUID']['input'];
   digitaleAdresRequest: DigitaleAdresRequestInput;
 };
 
@@ -573,6 +544,7 @@ export type OpenKlant2DigitaleAdres = {
   __typename?: 'OpenKlant2DigitaleAdres';
   adres: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
+  referentie?: Maybe<Scalars['String']['output']>;
   soortDigitaalAdres: Scalars['String']['output'];
   url?: Maybe<Scalars['String']['output']>;
   uuid?: Maybe<Scalars['UUID']['output']>;
@@ -602,6 +574,25 @@ export type OpenKlant2Identificator = {
 export type OpenKlant2IdentificeerdePartij = {
   __typename?: 'OpenKlant2IdentificeerdePartij';
   uuid: Scalars['UUID']['output'];
+};
+
+export type OpenKlant2Klantcontact = {
+  __typename?: 'OpenKlant2Klantcontact';
+  gingOverOnderwerpobjecten: Array<OpenKlant2ForeignKey>;
+  hadBetrokkenActoren: Array<HadBetrokkenActoren>;
+  hadBetrokkenen: Array<OpenKlant2ForeignKey>;
+  indicatieContactGelukt: Scalars['Boolean']['output'];
+  inhoud: Scalars['String']['output'];
+  kanaal: Scalars['String']['output'];
+  leiddeTotInterneTaken: Array<OpenKlant2ForeignKey>;
+  nummer: Scalars['String']['output'];
+  omvatteBijlagen: Array<OpenKlant2ForeignKey>;
+  onderwerp: Scalars['String']['output'];
+  plaatsgevondenOp: Scalars['String']['output'];
+  taal: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+  vertrouwelijk: Scalars['Boolean']['output'];
 };
 
 export enum OpenKlant2Landcode {
@@ -1395,9 +1386,9 @@ export type Query = {
   /** Get DigitaleAdressen of authenticated user. */
   getUserDigitaleAdresen?: Maybe<Array<DigitaleAdresResponse>>;
   /** Get KlantContact by id of authenticated user. */
-  getUserKlantContact?: Maybe<KlantContactResponse>;
+  getUserKlantContact?: Maybe<OpenKlant2Klantcontact>;
   /** Get KlantContacten of authenticated user. */
-  getUserKlantContacten: Array<KlantContactResponse>;
+  getUserKlantContacten: Array<OpenKlant2Klantcontact>;
   /** Get Partij by Id for authenticated user. */
   getUserPartij?: Maybe<OpenKlant2Partij>;
   /** Gets a zaak by id */
@@ -1959,7 +1950,7 @@ export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectCon
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', burgerservicenummer?: string | null, geslachtsaanduiding?: string | null, bewonersAantal?: number | null, naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'PersoonVerblijfplaats', straat?: string | null, huisnummer?: string | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, geboorte?: { __typename?: 'PersoonDatumLandPlaats', datum?: { __typename?: 'PersoonDatum', datum?: string | null, jaar?: number | null, maand?: number | null, dag?: number | null } | null, land?: { __typename?: 'PersoonCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten?: Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: { __typename?: 'PersoonNationaliteit', code?: string | null, omschrijving?: string | null } | null }> | null } | null };
+export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', burgerservicenummer?: string | null, geslachtsaanduiding?: string | null, bewonersAantal?: number | null, naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'PersoonVerblijfplaats', straat?: string | null, huisnummer?: string | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null, datumAanvangAdreshouding?: { __typename?: 'PersoonDatum', jaar?: number | null, maand?: number | null, dag?: number | null } | null } | null, geboorte?: { __typename?: 'PersoonDatumLandPlaats', datum?: { __typename?: 'PersoonDatum', datum?: string | null, jaar?: number | null, maand?: number | null, dag?: number | null } | null, land?: { __typename?: 'PersoonCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten?: Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: { __typename?: 'PersoonNationaliteit', code?: string | null, omschrijving?: string | null } | null }> | null } | null };
 
 export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2879,6 +2870,11 @@ export const GetPersoonDataDocument = gql`
       huisnummertoevoeging
       postcode
       woonplaats
+      datumAanvangAdreshouding {
+        jaar
+        maand
+        dag
+      }
     }
     geboorte {
       datum {

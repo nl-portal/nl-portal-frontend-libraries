@@ -16,6 +16,8 @@ export const EN_GB_MESSAGES: Messages = {
     "pageTitles.forms": "Forms",
     "pageTitles.tasks": "My action items",
     "pageTitles.task": "My action item",
+    "pageTitles.editContactInfo": "Contact details",
+    "pageTitles.editNotifications": "Edit notifications",
     "backlink.back": "Back",
     "header.logout": "Log out",
     "header.welcome": "Welcome",
@@ -23,6 +25,7 @@ export const EN_GB_MESSAGES: Messages = {
     "header.menuButton": "Menu",
     "menu.close": "Close menu",
     "menu.open": "Open menu",
+    "modal.close": "Close",
     "titles.currentCases": "Current procedures",
     "titles.completedCases": "Completed procedures",
     "noMatchPage.title": "Page not found",
@@ -61,6 +64,8 @@ export const EN_GB_MESSAGES: Messages = {
       "In order to use {applicationName}, an internet connection is required.",
     "element.loading": "Loading",
     "element.download": "Download",
+    "account.leadParagraph":
+      "On this page, you can see your personal information and how we use it to stay in touch with you.",
     "account.contactHeader": "Contact",
     "account.notificationsHeader": "Notifications and updates",
     "account.detailsHeader": "Personal details",
@@ -73,6 +78,18 @@ export const EN_GB_MESSAGES: Messages = {
     "account.edit": "Edit",
     "account.cancel": "Cancel",
     "account.save": "Save",
+    "account.detail.contact": "Contact",
+    "account.detail.contact.description":
+      "Here you will find your email address and phone number by which we can reach you.",
+    "account.detail.meldingen": "Notifications",
+    "account.detail.meldingen.description":
+      "Configure which notifications you wish to receive and how.",
+    "account.detail.persoonsgegevens": "Personal data",
+    "account.detail.persoonsgegevens.description":
+      "These are your personal details such as your name, BSN, etc.",
+    "account.detail.adres": "Address",
+    "account.detail.adres.description":
+      "These are your address details; you can also notify us of a relocation here.",
     "account.detail.emailadres": "Email address",
     "account.detail.emailadres.error": "enter a valid email address",
     "account.detail.telefoonnummer": "Telephone number",
@@ -92,11 +109,41 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.nationality": "Nationality",
     "account.detail.street": "Street",
     "account.detail.postalCodeAndCity": "Postal code and place of residence",
+    "account.detail.aanvangsDatum": "Start date",
     "account.detail.inhabitantAmount": "Number of people at your home address",
     "account.detail.kvkNumber": "Chamber of Commerce number",
     "account.detail.companyName": "Company name",
     "account.detail.legalForm": "Legal form",
+    "account.detail.emailadres.modal.toevoegen": "Add email address",
+    "account.detail.emailadres.modal.cancel": "Cancel",
+    "account.detail.emailadres.modal.confirm": "Save",
+    "account.detail.emailadres.modal.text":
+      "So that we can send you notifications by email.",
+    "account.detail.telefoonnummer.modal.toevoegen": "Add phone number",
+    "account.detail.telefoonnummer.modal.cancel": "Cancel",
+    "account.detail.telefoonnummer.modal.confirm": "Save",
+    "account.detail.telefoonnummer.modal.text":
+      "So that we can send you notifications by phone.",
+    "account.detail.notification.form.post.title": "Post",
+    "account.detail.notification.form.post.true": "Yes",
+    "account.detail.notification.form.post.label":
+      "Notifications about your affairs",
+    "account.detail.notification.form.post.description":
+      "You will always receive physical mail when a decision has been made.",
+    "account.detail.notification.form.email.title": "Email",
+    "account.detail.notification.form.email.label":
+      "Notifications about your affairs",
+    "account.detail.notification.form.email.true": "Yes",
+    "account.detail.notification.form.email.false": "No",
+    "account.detail.notification.form.email.description":
+      "You will always receive a confirmation of receipt, decision, and task via email.",
+    "account.detail.notification.form.email.fieldvalue":
+      "Receive status changes by email",
+    "account.detail.notification.form.save": "Save changes",
+    "account.detail.contactform.email": "Email address",
+    "account.detail.contactform.tel": "Phone number",
     "account.addressResearchRequestButton": "Request investigation",
+    "account.pageIndex.title": "On this page",
     "forms.listSubHeader": "Available forms",
     "tasksList.viewAll": "View all action items",
     "tasksList.fetchError": "Something went wrong, please try again later.",
@@ -163,5 +210,11 @@ export const EN_GB_MESSAGES: Messages = {
     "auth.inactive.close": "Close",
     "auth.inactive.logout": "Log out",
     "auth.inactive.stayLoggedIn": "Stay logged in",
+    "form.cancel": "Cancel",
+    "form.submit": "Submit",
+    "form.success.title": "Success",
+    "form.success.text": "Your request has been processed successfully.",
+    "form.error.title": "Something went wrong",
+    "form.error.text": "Please try again later.",
   },
 };

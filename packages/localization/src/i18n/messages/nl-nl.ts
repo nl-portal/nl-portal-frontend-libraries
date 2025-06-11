@@ -16,6 +16,8 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.forms": "Formulieren",
     "pageTitles.tasks": "Mijn Taken",
     "pageTitles.task": "Taak",
+    "pageTitles.editContactInfo": "Contactgegevens",
+    "pageTitles.editNotifications": "Meldingen",
     "backlink.back": "Terug",
     "header.logout": "Uitloggen",
     "header.welcome": "Welkom",
@@ -23,6 +25,7 @@ export const NL_NL_MESSAGES: Messages = {
     "header.menuButton": "Menu",
     "menu.close": "Menu sluiten",
     "menu.open": "Menu openen",
+    "modal.close": "Sluiten",
     "titles.currentCases": "Lopende zaken",
     "titles.completedCases": "Afgeronde zaken",
     "noMatchPage.title": "Pagina niet gevonden",
@@ -64,6 +67,8 @@ export const NL_NL_MESSAGES: Messages = {
       "Maak verbinding met het internet om gebruik te maken van {applicationName}.",
     "element.loading": "Aan het laden",
     "element.download": "Download",
+    "account.leadParagraph":
+      "Op deze pagina ziet u uw persoonlijke gegevens en hoe wij die gebruiken om contact met u te houden.",
     "account.contactHeader": "Contact",
     "account.notificationsHeader": "Meldingen en updates",
     "account.detailsHeader": "Persoonsgegevens",
@@ -73,9 +78,21 @@ export const NL_NL_MESSAGES: Messages = {
     "account.inhabitantAmountHeader": "Aantal inwoners adres",
     "account.inhabitantAmountDescription":
       "Staat er een ander aantal inwoners op uw address ingeschreven dan u verwacht? Dan kunt u een adresonderzoek aanvragen bij de gemeente. U kunt een adresonderzoek ook intrekken",
-    "account.edit": "Aanpassen",
+    "account.edit": "Wijzig",
     "account.cancel": "Annuleren",
     "account.save": "Opslaan",
+    "account.detail.contact": "Contactgegevens",
+    "account.detail.contact.description":
+      "Hier vindt u uw e-mailadres en telefoonnummer waarmee we u kunnen bereiken.",
+    "account.detail.meldingen": "Meldingen",
+    "account.detail.meldingen.description":
+      "Stel in waarvoor u meldingen wilt ontvangen en op welke manier.",
+    "account.detail.persoonsgegevens": "Persoonsgegevens",
+    "account.detail.persoonsgegevens.description":
+      "Dit zijn uw persoonsgegevens zoals naam, bsn, etc.",
+    "account.detail.adres": "Adresgegevens",
+    "account.detail.adres.description":
+      "Dit zijn uw adresgegevens; u kunt hier ook een verhuizing doorgeven.",
     "account.detail.emailadres": "E-mailadres",
     "account.detail.emailadres.error": "voer een geldig e-mailadres in",
     "account.detail.telefoonnummer": "Telefoonnummer",
@@ -95,11 +112,42 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.nationality": "Nationaliteit",
     "account.detail.street": "Straat",
     "account.detail.postalCodeAndCity": "Postcode en plaats",
+    "account.detail.aanvangsDatum": "Aanvangsdatum",
     "account.detail.inhabitantAmount": "Aantal inwoners op uw woonadres",
     "account.detail.kvkNumber": "KVK-nummer",
     "account.detail.companyName": "Naam bedrijf",
     "account.detail.legalForm": "Rechtsvorm",
+    "account.detail.emailadres.modal.toevoegen": "Emailadres toevoegen",
+    "account.detail.emailadres.modal.cancel": "Annuleren",
+    "account.detail.emailadres.modal.confirm": "Opslaan",
+    "account.detail.emailadres.modal.text":
+      "Zodat wij u meldingen per email kunnen sturen.",
+    "account.detail.telefoonnummer.modal.toevoegen": "Telefoonnummer toevoegen",
+    "account.detail.telefoonnummer.modal.cancel": "Annuleren",
+    "account.detail.telefoonnummer.modal.confirm": "Opslaan",
+    "account.detail.telefoonnummer.modal.text":
+      "Zodat wij u meldingen per telefoon kunnen sturen.",
+    "account.detail.notification.form.post.title": "Post",
+    "account.detail.notification.form.post.label": "Meldingen over uw zaken",
+    "account.detail.notification.form.post.true":
+      "U ontvangt altijd fysieke post als er een besluit is genomen.",
+    "account.detail.notification.form.post.description":
+      "U ontvangt altijd fysieke post als er een besluit is genomen.",
+    "account.detail.notification.form.email.title": "Email",
+    "account.detail.notification.form.email.label": "Meldingen over uw zaken",
+    "account.detail.notification.form.email.true":
+      "U ontvangt altijd een ontvangstbevestiging, besluit en taak per email.",
+    "account.detail.notification.form.email.false":
+      "U ontvangt <strong>géén</strong> ontvangstbevestiging, besluit en taak per email.",
+    "account.detail.notification.form.email.description":
+      "U ontvangt altijd een ontvangstbevestiging, besluit en taak per email.",
+    "account.detail.notification.form.email.fieldvalue":
+      "Ontvang statuswijzigingen per email",
+    "account.detail.notification.form.save": "Wijzigingen opslaan",
+    "account.detail.contactform.email": "Emailadres",
+    "account.detail.contactform.tel": "Telefoonnummer",
     "account.addressResearchRequestButton": "Vraag onderzoek aan",
+    "account.pageIndex.title": "Op deze pagina",
     "forms.listSubHeader": "Beschikbare formulieren",
     "tasksList.viewAll": "Bekijk alle taken",
     "tasksList.fetchError":
@@ -169,5 +217,11 @@ export const NL_NL_MESSAGES: Messages = {
     "auth.inactive.close": "Sluiten",
     "auth.inactive.logout": "Uitloggen",
     "auth.inactive.stayLoggedIn": "Ingelogd blijven",
+    "form.submit": "Verstuur",
+    "form.cancel": "Annuleren",
+    "form.success.title": "Gelukt",
+    "form.success.text": "Uw aanvraag is succesvol verwerkt.",
+    "form.error.title": "Er is iets misgegaan",
+    "form.error.text": "Probeer het later opnieuw.",
   },
 };

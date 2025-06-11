@@ -4,7 +4,7 @@ import styles from "./PageGrid.module.scss";
 interface Props {
   children: React.ReactNode;
   className?: string;
-  variant?: "large" | "medium";
+  variant?: "large" | "medium" | "small";
 }
 
 const PageGrid = ({ children, className, variant = "large" }: Props) => {
@@ -13,6 +13,7 @@ const PageGrid = ({ children, className, variant = "large" }: Props) => {
       className={classNames(
         styles["page-grid"],
         { [styles["page-grid--md"]]: variant === "medium" },
+        { [styles["page-grid--sm"]]: variant === "small" },
         className,
       )}
     >

@@ -6,7 +6,7 @@ import { NavigationItem } from "../interfaces/navigation-item";
  * shows the current page + icon below the header. In case of the childpages, the parent page + icon is shown.
  * Also the document title show this "navigation page" (first parent which is shown in the menu)
  *
- * @param matches react-router-dom useMatches
+ * @param matches react-router useMatches
  * @param navigationItems navigationItems
  * @returns current navigation page
  */

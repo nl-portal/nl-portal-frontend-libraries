@@ -17,3 +17,10 @@
     var(--nlportal-space-block-3xl, 2.5rem)
   );
 }
+
+.page-grid--sm {
+  --nlportal-page-grid-gap: var(
+    --nlportal-page-grid-gap-sm,
+    var(--nlportal-space-block-xl, 1.5rem)
+  );
+}
