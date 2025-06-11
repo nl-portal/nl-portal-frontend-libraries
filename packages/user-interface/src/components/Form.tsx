@@ -1,40 +1,32 @@
-import {
-  FormHTMLAttributes,
-  forwardRef,
-  ForwardedRef,
-  useState,
-  useEffect,
-} from "react";
+import { FormHTMLAttributes, useState, useEffect, RefAttributes } from "react";
 import styles from "./Form.module.scss";
 import Alert, { AlertProps } from "@gemeente-denhaag/alert";
 import { FormattedMessage } from "react-intl";
 import Button from "@gemeente-denhaag/button";
 import classNames from "classnames";
 
-interface Props extends FormHTMLAttributes<HTMLFormElement> {
-  loading?: boolean;
-  submitTranslationId?: string;
-  cancelTranslationId?: string;
-  success?: AlertProps | boolean;
-  error?: AlertProps | boolean;
-  onCancel?: () => void;
-}
+type Props = FormHTMLAttributes<HTMLFormElement> &
+  RefAttributes<HTMLFormElement> & {
+    loading?: boolean;
+    submitTranslationId?: string;
+    cancelTranslationId?: string;
+    success?: AlertProps | boolean;
+    error?: AlertProps | boolean;
+    onCancel?: () => void;
+  };
 
-export const Form = (
-  {
-    children,
-    className,
-    onChange,
-    loading,
-    submitTranslationId,
-    cancelTranslationId,
-    success,
-    error,
-    onCancel,
-    ...props
-  }: Props,
-  ref: ForwardedRef<HTMLFormElement>,
-) => {
+export const Form = ({
+  children,
+  className,
+  onChange,
+  loading,
+  submitTranslationId,
+  cancelTranslationId,
+  success,
+  error,
+  onCancel,
+  ...props
+}: Props) => {
   const [showAlert, setShowAlert] = useState<AlertProps | undefined>();
   const formClassName = classNames(styles["form"], className);
 
@@ -68,12 +60,7 @@ export const Form = (
   };
 
   return (
-    <form
-      ref={ref}
-      onChange={onChangeHandler}
-      className={formClassName}
-      {...props}
-    >
+    <form onChange={onChangeHandler} className={formClassName} {...props}>
       {children}
       {showAlert && <Alert {...showAlert} />}
       <div className="utrecht-button-group">
@@ -90,4 +77,4 @@ export const Form = (
   );
 };
 
-export default forwardRef(Form);
+export default Form;
