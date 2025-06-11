@@ -4,6 +4,6 @@
   gap: var(--nlportal-form-gap, var(--nlportal-space-inline-2xl, 2rem));
   margin-block-start: var(
     --nlportal-form-margin-block-start,
-    var(--nlportal-space-inline-xl)
+    var(--nlportal-space-inline-xl, 1.5rem)
   );
 }
