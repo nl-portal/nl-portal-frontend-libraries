@@ -1,4 +1,4 @@
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import {
   MaatschappelijkeActiviteit,
   Persoon,
@@ -20,6 +20,7 @@ import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
 import Link from "@gemeente-denhaag/link";
 import { ArrowRightIcon, EditIcon } from "@gemeente-denhaag/icons";
+import { PageIndex } from "@gemeente-denhaag/page-index";
 import { LeadParagraph, Paragraph } from "@gemeente-denhaag/typography";
 import "@gemeente-denhaag/button-group";
 import DescriptionListDetail from "../components/DescriptionListDetail";
@@ -43,7 +44,7 @@ const AccountPage = ({
   const { formatDate } = useDateFormatter();
   const { isPerson } = useUserInfo();
   const { paths } = useOutletContext<RouterOutletContext>();
-
+  const intl = useIntl();
   const { data: contactData } = useGetBurgerProfielQuery({ skip: !isPerson });
   const { data: personData } = useGetPersoonDataQuery({
     skip: !isPerson,
@@ -140,6 +141,29 @@ const AccountPage = ({
         <LeadParagraph>
           <FormattedMessage id="account.leadParagraph" />
         </LeadParagraph>
+        <PageIndex
+          heading={intl.formatMessage({ id: "account.pageIndex.title" })}
+          headingAs="h3"
+          headingSize="h3"
+          items={[
+            {
+              label: <FormattedMessage id="account.detail.contact" />,
+              href: "#contact",
+            },
+            {
+              label: <FormattedMessage id="account.detail.persoonsgegevens" />,
+              href: "#persoonsgegevens",
+            },
+            {
+              label: <FormattedMessage id="account.detail.adres" />,
+              href: "#adres",
+            },
+            {
+              label: <FormattedMessage id="account.detail.meldingen" />,
+              href: "#meldingen",
+            },
+          ]}
+        />
       </PageGrid>
       <PageGrid variant="small">
         <Heading as="h3" id="contact">

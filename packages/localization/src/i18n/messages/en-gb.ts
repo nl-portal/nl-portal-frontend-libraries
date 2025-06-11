@@ -143,6 +143,7 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.contactform.email": "Email address",
     "account.detail.contactform.tel": "Phone number",
     "account.addressResearchRequestButton": "Request research",
+    "account.pageIndex.title": "On this page",
     "forms.listSubHeader": "Available forms",
     "tasksList.viewAll": "View all tasks",
     "tasksList.fetchError": "Something went wrong, please try again later.",

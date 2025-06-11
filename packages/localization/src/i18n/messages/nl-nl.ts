@@ -81,7 +81,7 @@ export const NL_NL_MESSAGES: Messages = {
     "account.edit": "Wijzig",
     "account.cancel": "Annuleren",
     "account.save": "Opslaan",
-    "account.detail.contact": "Contact",
+    "account.detail.contact": "Contactgegevens",
     "account.detail.contact.description":
       "Hier vindt u uw e-mailadres en telefoonnummer waarmee we u kunnen bereiken.",
     "account.detail.meldingen": "Meldingen",
@@ -90,7 +90,7 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.persoonsgegevens": "Persoonsgegevens",
     "account.detail.persoonsgegevens.description":
       "Dit zijn uw persoonsgegevens zoals naam, bsn, etc.",
-    "account.detail.adres": "Adres",
+    "account.detail.adres": "Adresgegevens",
     "account.detail.adres.description":
       "Dit zijn uw adresgegevens; u kunt hier ook een verhuizing doorgeven.",
     "account.detail.emailadres": "E-mailadres",
@@ -147,6 +147,7 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.contactform.email": "Emailadres",
     "account.detail.contactform.tel": "Telefoonnummer",
     "account.addressResearchRequestButton": "Vraag onderzoek aan",
+    "account.pageIndex.title": "Op deze pagina",
     "forms.listSubHeader": "Beschikbare formulieren",
     "tasksList.viewAll": "Bekijk alle taken",
     "tasksList.fetchError":
