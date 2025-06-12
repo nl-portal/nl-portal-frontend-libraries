@@ -17,6 +17,8 @@ const useInput = (defaultValue: string, validations: Validation[]) => {
     );
   }, [enteredValue, validations]);
 
+  useEffect(() => setEnteredValue(defaultValue), [defaultValue]);
+
   const handleInputChange = (
     event: ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement

@@ -20,13 +20,13 @@ import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
 import Link from "@gemeente-denhaag/link";
 import { ArrowRightIcon, EditIcon } from "@gemeente-denhaag/icons";
-import { Paragraph } from "@gemeente-denhaag/typography";
+import { PageIndex } from "@gemeente-denhaag/page-index";
+import { LeadParagraph, Paragraph } from "@gemeente-denhaag/typography";
 import "@gemeente-denhaag/button-group";
 import DescriptionListDetail from "../components/DescriptionListDetail";
 import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import PortalLink from "../components/PortalLink";
-import SectionHeader from "../components/SectionHeader";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
@@ -43,14 +43,15 @@ const AccountPage = ({
 }: AccountPageProps) => {
   const { formatDate } = useDateFormatter();
   const { isPerson } = useUserInfo();
-  const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
+  const intl = useIntl();
 
-  const { data: contactData } = useGetBurgerProfielQuery({ skip: !isPerson });
-  const { data: personData } = useGetPersoonV2Query({
+  const { data: contactData, loading: contactLoading } =
+    useGetBurgerProfielQuery({ skip: !isPerson });
+  const { data: personData, loading: personLoading } = useGetPersoonV2Query({
     skip: !isPerson,
   });
-  const { data: companyData } = useGetBedrijfQuery({
+  const { data: companyData, loading: companyLoading } = useGetBedrijfQuery({
     skip: isPerson,
   });
 
@@ -63,17 +64,19 @@ const AccountPage = ({
     return (
       <PageGrid>
         <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
-        <div>
-          <Heading as="h3" className={styles["account__sub-header"]}>
+        <PageGrid variant="small">
+          <Heading as="h3">
             <FormattedMessage id="account.companyInfoHeader" />
           </Heading>
           <DescriptionList
-            className={styles["account__description-list--readonly"]}
             items={[
               {
                 title: <FormattedMessage id="account.detail.kvkNumber" />,
                 detail: (
-                  <DescriptionListDetail translate="no">
+                  <DescriptionListDetail
+                    translate="no"
+                    loading={companyLoading}
+                  >
                     {company?.kvkNummer}
                   </DescriptionListDetail>
                 ),
@@ -81,7 +84,10 @@ const AccountPage = ({
               {
                 title: <FormattedMessage id="account.detail.companyName" />,
                 detail: (
-                  <DescriptionListDetail translate="no">
+                  <DescriptionListDetail
+                    translate="no"
+                    loading={companyLoading}
+                  >
                     {company?.naam}
                   </DescriptionListDetail>
                 ),
@@ -89,25 +95,27 @@ const AccountPage = ({
               {
                 title: <FormattedMessage id="account.detail.legalForm" />,
                 detail: (
-                  <DescriptionListDetail>
+                  <DescriptionListDetail loading={companyLoading}>
                     {company?.embedded?.eigenaar?.rechtsvorm}
                   </DescriptionListDetail>
                 ),
               },
             ]}
           ></DescriptionList>
-        </div>
-        <div>
-          <Heading as="h3" className={styles["account__sub-header"]}>
+        </PageGrid>
+        <PageGrid variant="small">
+          <Heading as="h3">
             <FormattedMessage id="account.BusinessAddressHeader" />
           </Heading>
           <DescriptionList
-            className={styles["account__description-list--readonly"]}
             items={[
               {
                 title: <FormattedMessage id="account.detail.street" />,
                 detail: (
-                  <DescriptionListDetail translate="no">
+                  <DescriptionListDetail
+                    translate="no"
+                    loading={companyLoading}
+                  >
                     {getStreetString(
                       company?.embedded?.hoofdvestiging?.adressen?.[0]
                         .straatnaam,
@@ -123,7 +131,10 @@ const AccountPage = ({
                   <FormattedMessage id="account.detail.postalCodeAndCity" />
                 ),
                 detail: (
-                  <DescriptionListDetail translate="no">
+                  <DescriptionListDetail
+                    translate="no"
+                    loading={companyLoading}
+                  >
                     {getPostalCodeCityString(
                       company?.embedded?.hoofdvestiging?.adressen?.[0].postcode,
                       company?.embedded?.hoofdvestiging?.adressen?.[0].plaats,
@@ -133,107 +144,79 @@ const AccountPage = ({
               },
             ]}
           ></DescriptionList>
-        </div>
+        </PageGrid>
       </PageGrid>
     );
 
   return (
     <PageGrid>
-      <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
-      <div>
-        <SectionHeader
-          title={intl.formatMessage({ id: "account.detail.contact" })}
+      <PageGrid variant="small">
+        <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
+        <LeadParagraph>
+          <FormattedMessage id="account.leadParagraph" />
+        </LeadParagraph>
+        <PageIndex
+          heading={intl.formatMessage({ id: "account.pageIndex.title" })}
+          headingAs="h3"
+          headingSize="h3"
+          items={[
+            {
+              label: <FormattedMessage id="account.detail.contact" />,
+              href: "#contact",
+            },
+            {
+              label: <FormattedMessage id="account.detail.persoonsgegevens" />,
+              href: "#persoonsgegevens",
+            },
+            {
+              label: <FormattedMessage id="account.detail.adres" />,
+              href: "#adres",
+            },
+            {
+              label: <FormattedMessage id="account.detail.meldingen" />,
+              href: "#meldingen",
+            },
+          ]}
         />
+      </PageGrid>
+      <PageGrid variant="small">
+        <Heading as="h3" id="contact">
+          <FormattedMessage id="account.detail.contact" />
+        </Heading>
+        <Link
+          icon={<EditIcon />}
+          iconAlign="start"
+          href={paths.changeContactInfo}
+          Link={PortalLink}
+        >
+          <FormattedMessage id="account.edit" />
+        </Link>
         <DescriptionList
           items={[
             {
               title: <FormattedMessage id="account.detail.emailadres" />,
               detail: (
-                <DescriptionListDetail translate="no">
+                <DescriptionListDetail translate="no" loading={contactLoading}>
                   {contactData?.getBurgerProfiel?.emailadres}
                 </DescriptionListDetail>
-              ),
-              action: (
-                <Link
-                  icon={<EditIcon />}
-                  iconAlign="start"
-                  href={paths.changeEmail}
-                  Link={PortalLink}
-                >
-                  <FormattedMessage id="account.edit" />
-                </Link>
               ),
             },
             {
               title: <FormattedMessage id="account.detail.telefoonnummer" />,
               detail: (
-                <DescriptionListDetail translate="no">
+                <DescriptionListDetail translate="no" loading={contactLoading}>
                   {contactData?.getBurgerProfiel?.telefoonnummer}
                 </DescriptionListDetail>
-              ),
-              action: (
-                <Link
-                  icon={<EditIcon />}
-                  iconAlign="start"
-                  href={paths.changePhonenumber}
-                  Link={PortalLink}
-                >
-                  <FormattedMessage id="account.edit" />
-                </Link>
               ),
             },
           ]}
         />
-      </div>
-      {showNotificationSubSection && (
-        <div>
-          <SectionHeader
-            title={intl.formatMessage({ id: "account.detail.meldingen" })}
-          />
-          <Link
-            icon={<EditIcon />}
-            iconAlign="start"
-            href={paths.changeNotifications}
-            Link={PortalLink}
-          >
-            <FormattedMessage id="account.edit" />
-          </Link>
-          <DescriptionList
-            items={[
-              {
-                title: (
-                  <FormattedMessage id="account.detail.notification.form.post.title" />
-                ),
-                detail: (
-                  <DescriptionListDetail>
-                    <FormattedMessage
-                      id={`account.detail.notification.form.post.true`}
-                    />
-                  </DescriptionListDetail>
-                ),
-              },
-              {
-                title: (
-                  <FormattedMessage id="account.detail.notification.form.email.title" />
-                ),
-                detail: (
-                  <DescriptionListDetail>
-                    <FormattedMessage
-                      id={`account.detail.notification.form.email.${contactData?.getBurgerProfiel?.aanmaakkanaal === "EMAIL"}`}
-                    />
-                  </DescriptionListDetail>
-                ),
-              },
-            ]}
-          />
-        </div>
-      )}
-      <div>
-        <SectionHeader
-          title={intl.formatMessage({ id: "account.detail.persoonsgegevens" })}
-        />
+      </PageGrid>
+      <PageGrid variant="small">
+        <Heading id="persoonsgegevens" as="h3">
+          <FormattedMessage id="account.detail.persoonsgegevens" />
+        </Heading>
         <DescriptionList
-          className={styles["account__description-list--readonly"]}
           items={[
             {
               title: <FormattedMessage id="account.detail.firstNames" />,
@@ -241,6 +224,7 @@ const AccountPage = ({
                 <DescriptionListDetail
                   translate="no"
                   data-testid="persoonsgegevens-firstname"
+                  loading={personLoading}
                 >
                   {person?.naam.voornamen}
                 </DescriptionListDetail>
@@ -252,6 +236,7 @@ const AccountPage = ({
                 <DescriptionListDetail
                   translate="no"
                   data-testid="persoonsgegevens-lastname"
+                  loading={personLoading}
                 >
                   {person?.naam.officialLastName}
                 </DescriptionListDetail>
@@ -260,7 +245,10 @@ const AccountPage = ({
             {
               title: <FormattedMessage id="account.detail.gender" />,
               detail: (
-                <DescriptionListDetail data-testid="persoonsgegevens-gender">
+                <DescriptionListDetail
+                  data-testid="persoonsgegevens-gender"
+                  loading={personLoading}
+                >
                   {person?.geslacht?.omschrijving}
                 </DescriptionListDetail>
               ),
@@ -270,7 +258,10 @@ const AccountPage = ({
                 <FormattedMessage id="account.detail.citizenServiceNumber" />
               ),
               detail: (
-                <DescriptionListDetail data-testid="persoonsgegevens-bsn">
+                <DescriptionListDetail
+                  data-testid="persoonsgegevens-bsn"
+                  loading={personLoading}
+                >
                   {person?.burgerservicenummer}
                 </DescriptionListDetail>
               ),
@@ -278,7 +269,10 @@ const AccountPage = ({
             {
               title: <FormattedMessage id="account.detail.dateOfBirth" />,
               detail: (
-                <DescriptionListDetail data-testid="persoonsgegevens-birthdate">
+                <DescriptionListDetail
+                  data-testid="persoonsgegevens-birthdate"
+                  loading={personLoading}
+                >
                   {person?.geboorte?.datum
                     ? formatDate({
                         date: person?.geboorte?.datum.datum,
@@ -290,7 +284,10 @@ const AccountPage = ({
             {
               title: <FormattedMessage id="account.detail.countryOfBirth" />,
               detail: (
-                <DescriptionListDetail data-testid="persoonsgegevens-country">
+                <DescriptionListDetail
+                  data-testid="persoonsgegevens-country"
+                  loading={personLoading}
+                >
                   {person?.geboorte?.land?.omschrijving}
                 </DescriptionListDetail>
               ),
@@ -298,7 +295,10 @@ const AccountPage = ({
             {
               title: <FormattedMessage id="account.detail.nationality" />,
               detail: (
-                <DescriptionListDetail data-testid="persoonsgegevens-nationality">
+                <DescriptionListDetail
+                  data-testid="persoonsgegevens-nationality"
+                  loading={personLoading}
+                >
                   {getNationalitiesString(person?.nationaliteiten)}
                 </DescriptionListDetail>
               ),
@@ -319,13 +319,12 @@ const AccountPage = ({
             },
           ]}
         />
-      </div>
-      <div>
-        <SectionHeader
-          title={intl.formatMessage({ id: "account.detail.adres" })}
-        />
+      </PageGrid>
+      <PageGrid variant="small">
+        <Heading id="adres" as="h3">
+          <FormattedMessage id="account.detail.adres" />
+        </Heading>
         <DescriptionList
-          className={styles["account__description-list--readonly"]}
           items={[
             {
               title: <FormattedMessage id="account.detail.street" />,
@@ -333,6 +332,7 @@ const AccountPage = ({
                 <DescriptionListDetail
                   translate="no"
                   data-testid="persoonsgegevens-street"
+                  loading={personLoading}
                 >
                   {getStreetString(
                     person?.verblijfplaats?.verblijfadres?.officieleStraatnaam,
@@ -349,6 +349,7 @@ const AccountPage = ({
                 <DescriptionListDetail
                   translate="no"
                   data-testid="persoonsgegevens-postcode"
+                  loading={personLoading}
                 >
                   {getPostalCodeCityString(
                     person?.verblijfplaats?.verblijfadres?.postcode,
@@ -360,7 +361,7 @@ const AccountPage = ({
             {
               title: <FormattedMessage id="account.detail.aanvangsDatum" />,
               detail: (
-                <DescriptionListDetail>
+                <DescriptionListDetail loading={personLoading}>
                   {person?.verblijfplaats?.datumVan?.datum
                     ? formatDate({
                         date: person?.verblijfplaats?.datumVan?.datum,
@@ -376,7 +377,7 @@ const AccountPage = ({
                       <FormattedMessage id="account.detail.inhabitantAmount" />
                     ),
                     detail: (
-                      <DescriptionListDetail>
+                      <DescriptionListDetail loading={personLoading}>
                         {person?.bewonersAantal?.toString()}
                       </DescriptionListDetail>
                     ),
@@ -385,20 +386,70 @@ const AccountPage = ({
               : []),
           ]}
         />
-        <Paragraph className={styles["account__address-research-description"]}>
-          <FormattedMessage id="account.inhabitantAmountDescription" />
-        </Paragraph>
-        {showAddressResearch && (
-          <Link
-            href={addressResearchUrl}
-            target="_blank"
-            iconAlign="start"
-            icon={<ArrowRightIcon />}
+        <div>
+          <Paragraph
+            className={styles["account__address-research-description"]}
           >
-            <FormattedMessage id="account.addressResearchRequestButton" />
+            <FormattedMessage id="account.inhabitantAmountDescription" />
+          </Paragraph>
+          {showAddressResearch && (
+            <Link
+              href={addressResearchUrl}
+              target="_blank"
+              iconAlign="start"
+              icon={<ArrowRightIcon />}
+            >
+              <FormattedMessage id="account.addressResearchRequestButton" />
+            </Link>
+          )}
+        </div>
+      </PageGrid>
+      {showNotificationSubSection && (
+        <PageGrid variant="small">
+          <Heading id="meldingen" as="h3">
+            <FormattedMessage id="account.detail.meldingen" />
+          </Heading>
+          <Link
+            icon={<EditIcon />}
+            iconAlign="start"
+            href={paths.changeNotifications}
+            Link={PortalLink}
+          >
+            <FormattedMessage id="account.edit" />
           </Link>
-        )}
-      </div>
+          <DescriptionList
+            items={[
+              {
+                title: (
+                  <FormattedMessage id="account.detail.notification.form.post.title" />
+                ),
+                detail: (
+                  <DescriptionListDetail loading={contactLoading}>
+                    <FormattedMessage
+                      id={`account.detail.notification.form.post.true`}
+                    />
+                  </DescriptionListDetail>
+                ),
+              },
+              {
+                title: (
+                  <FormattedMessage id="account.detail.notification.form.email.title" />
+                ),
+                detail: (
+                  <DescriptionListDetail loading={contactLoading}>
+                    <FormattedMessage
+                      id={`account.detail.notification.form.email.${contactData?.getBurgerProfiel?.aanmaakkanaal === "EMAIL"}`}
+                      values={{
+                        strong: (chunk) => <strong>{chunk}</strong>,
+                      }}
+                    />
+                  </DescriptionListDetail>
+                ),
+              },
+            ]}
+          />
+        </PageGrid>
+      )}
     </PageGrid>
   );
 };

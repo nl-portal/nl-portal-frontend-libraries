@@ -1,4 +1,4 @@
-import { HTMLAttributes, PropsWithChildren, ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 import Skeleton from "react-loading-skeleton";
 
 interface DescriptionListDetailProps extends HTMLAttributes<HTMLSpanElement> {
@@ -11,7 +11,7 @@ const DescriptionListDetail = ({
   placeholder = "-",
   loading,
   ...props
-}: PropsWithChildren<DescriptionListDetailProps>) => {
+}: DescriptionListDetailProps) => {
   if (loading) {
     return <Skeleton />;
   }

@@ -1884,7 +1884,8 @@ export enum SoortPartij {
 export type StatusType = {
   __typename?: 'StatusType';
   isEindstatus?: Maybe<Scalars['Boolean']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
+  omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type Taak = {
@@ -2051,12 +2052,14 @@ export type ZaakStatusType = {
   __typename?: 'ZaakStatusType';
   isEindstatus: Scalars['Boolean']['output'];
   omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type ZaakType = {
   __typename?: 'ZaakType';
   identificatie: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
@@ -2273,7 +2276,7 @@ export type GetZaakQueryVariables = Exact<{
 }>;
 
 
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: string | null }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving: string }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
 
 export type GetZakenQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
