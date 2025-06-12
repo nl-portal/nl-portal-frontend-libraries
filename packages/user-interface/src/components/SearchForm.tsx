@@ -46,7 +46,11 @@ const SearchForm = ({
   };
 
   return (
-    <Form className={styles["search-form"]} onSubmit={handleFormSubmit}>
+    <Form
+      className={styles["search-form"]}
+      onSubmit={handleFormSubmit}
+      hideSubmit
+    >
       <FormField invalid={hasError}>
         <FormLabel htmlFor="search-input">
           <FormattedMessage id={`searchForm.${translationId}.searchLabel`} />
