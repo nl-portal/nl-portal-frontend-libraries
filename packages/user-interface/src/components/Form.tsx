@@ -12,6 +12,7 @@ type Props = FormHTMLAttributes<HTMLFormElement> &
     cancelTranslationId?: string;
     success?: AlertProps | boolean;
     error?: AlertProps | boolean;
+    hideSubmit?: boolean;
     onCancel?: () => void;
   };
 
@@ -24,6 +25,7 @@ export const Form = ({
   cancelTranslationId,
   success,
   error,
+  hideSubmit,
   onCancel,
   ...props
 }: Props) => {
@@ -63,16 +65,20 @@ export const Form = ({
     <form onChange={onChangeHandler} className={formClassName} {...props}>
       {children}
       {showAlert && <Alert {...showAlert} />}
-      <div className="utrecht-button-group">
-        <Button type="submit" disabled={loading}>
-          <FormattedMessage id={submitTranslationId || `form.submit`} />
-        </Button>
-        {onCancel && (
-          <Button variant="secondary-action" onClick={onCancel}>
-            <FormattedMessage id={cancelTranslationId || `form.cancel`} />
-          </Button>
-        )}
-      </div>
+      {(!hideSubmit || onCancel) && (
+        <div className="utrecht-button-group">
+          {!hideSubmit && (
+            <Button type="submit" disabled={loading}>
+              <FormattedMessage id={submitTranslationId || `form.submit`} />
+            </Button>
+          )}
+          {onCancel && (
+            <Button variant="secondary-action" onClick={onCancel}>
+              <FormattedMessage id={cancelTranslationId || `form.cancel`} />
+            </Button>
+          )}
+        </div>
+      )}
     </form>
   );
 };
