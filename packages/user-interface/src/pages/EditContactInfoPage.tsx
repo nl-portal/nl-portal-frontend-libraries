@@ -17,6 +17,7 @@ import FormLabel from "@gemeente-denhaag/form-label";
 import TextInput from "@gemeente-denhaag/text-input";
 import FormFieldErrorMessage from "@gemeente-denhaag/form-field-error-message";
 import styles from "./EditContactInfoPage.module.scss";
+import { useId } from "react";
 
 const EditContactInfoPage = () => {
   const { isPerson } = useUserInfo();
@@ -47,6 +48,9 @@ const EditContactInfoPage = () => {
       });
     },
   });
+
+  const emailId = useId();
+  const phoneId = useId();
 
   const {
     value: phoneValue,
@@ -106,7 +110,7 @@ const EditContactInfoPage = () => {
         onChange={mutationReset}
       >
         <FormField invalid={emailHasError}>
-          <FormLabel>
+          <FormLabel id={emailId}>
             <FormattedMessage id="account.detail.contactform.email" />
           </FormLabel>
           <TextInput
@@ -116,6 +120,7 @@ const EditContactInfoPage = () => {
             onChange={handleEmailInputChange}
             onBlur={handleEmailInputBlur}
             className={styles["nl-portal-edit-contact__emailadres-field"]}
+            aria-labelledby={emailId}
           />
           {emailHasError && (
             <FormFieldErrorMessage>
@@ -124,7 +129,7 @@ const EditContactInfoPage = () => {
           )}
         </FormField>
         <FormField invalid={emailHasError}>
-          <FormLabel>
+          <FormLabel id={phoneId}>
             <FormattedMessage id="account.detail.contactform.tel" />
           </FormLabel>
           <TextInput
@@ -134,6 +139,7 @@ const EditContactInfoPage = () => {
             onChange={handlePhoneInputChange}
             onBlur={handlePhoneInputBlur}
             className={styles["nl-portal-edit-contact__telefoonnummer-field"]}
+            aria-labelledby={phoneId}
           />
           {phoneHasError && (
             <FormFieldErrorMessage>
