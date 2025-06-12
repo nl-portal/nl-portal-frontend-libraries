@@ -22,6 +22,7 @@ export const MockCasesPage = () => (
       getZaken({ pageSize: 10, isOpen: true }),
       getZaken({ pageSize: 10, isOpen: false }),
       getZaken({ pageSize: 10, isOpen: false, page: 1 }),
+      getZaken({ pageSize: 10, isOpen: false, page: 1, identificatie: "" }),
     ]}
     routes={routes}
     initialIndex={0}
