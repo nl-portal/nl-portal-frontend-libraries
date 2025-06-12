@@ -1,8 +1,4 @@
 .bootstrap {
-  .formio-editor-read-only-content {
-    white-space: pre-wrap;
-  }
-
   /* stylelint-disable */
   :global {
     :root {
@@ -39,6 +35,11 @@
       --font-family-monospace:
         SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
         "Courier New", monospace;
+    }
+
+    // Temporary fix, adds line breaks to formio read-only textarea
+    .formio-editor-read-only-content {
+      white-space: pre-wrap;
     }
 
     *,
