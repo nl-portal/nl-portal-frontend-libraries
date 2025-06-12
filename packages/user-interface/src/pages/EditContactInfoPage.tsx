@@ -106,10 +106,11 @@ const EditContactInfoPage = () => {
         onChange={mutationReset}
       >
         <FormField invalid={emailHasError}>
-          <FormLabel>
+          <FormLabel htmlFor="contactform-email">
             <FormattedMessage id="account.detail.contactform.email" />
           </FormLabel>
           <TextInput
+            id="contactform-email"
             type="text"
             name="email"
             value={emailValue}
@@ -124,10 +125,11 @@ const EditContactInfoPage = () => {
           )}
         </FormField>
         <FormField invalid={emailHasError}>
-          <FormLabel>
+          <FormLabel htmlFor="contactform-phone">
             <FormattedMessage id="account.detail.contactform.tel" />
           </FormLabel>
           <TextInput
+            id="contactform-phone"
             type="text"
             name="telefoonnummer"
             value={phoneValue}
