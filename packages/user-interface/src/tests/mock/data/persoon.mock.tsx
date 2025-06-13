@@ -7,22 +7,34 @@ export const getPersoon = {
   },
   result: {
     data: {
-      getPersoon: {
+      getPersoonV2: {
         burgerservicenummer: "999991954",
-        geslachtsaanduiding: "vrouw",
+        geslacht: {
+          code: "6030",
+          omschrijving: "vrouw",
+        },
         naam: {
           voornamen: "Sierra",
           officialLastName: "de Kooyman - van der Maassen",
           __typename: "PersoonNaam",
         },
         verblijfplaats: {
-          straat: "Leyweg",
-          huisnummer: "61",
-          huisletter: "e",
-          huisnummertoevoeging: null,
-          postcode: "2545CC",
-          woonplaats: "'s-Gravenhage",
-          __typename: "PersoonVerblijfplaats",
+          type: "Adres",
+          functieAdres: {
+            code: "W",
+            omschrijving: "woonadres",
+          },
+          verblijfadres: {
+            officieleStraatnaam: "Leyweg 61e",
+            postcode: "2545CC",
+            woonplaats: "'s-Gravenhage",
+          },
+          datumVan: {
+            type: "Datum",
+            datum: "2018-07-01",
+            langFormaat: "1 juli 2018",
+          },
+          adresseerbaarObjectIdentificatie: 226010000038820,
         },
         geboorte: {
           datum: {

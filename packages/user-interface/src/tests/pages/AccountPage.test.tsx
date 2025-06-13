@@ -29,6 +29,7 @@ describe("AccountPage", () => {
   it("should render with all elements present and show double nationality correctly", async () => {
     render(MockAccountPage());
     await waitFor(() => {
+      console.log(screen.getByTestId("persoonsgegevens-firstname"));
       expect(
         screen.getByTestId("persoonsgegevens-firstname"),
       ).toHaveTextContent("Sierra");
