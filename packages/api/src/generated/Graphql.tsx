@@ -19,6 +19,7 @@ export type Scalars = {
   JSON: { input: any; output: any; }
   LocalDateTime: { input: any; output: any; }
   UUID: { input: any; output: any; }
+  ZonedDateTime: { input: any; output: any; }
 };
 
 export enum AanduidingNaamGebruik {
@@ -27,6 +28,18 @@ export enum AanduidingNaamGebruik {
   Partner = 'PARTNER',
   PartnerEigen = 'PARTNER_EIGEN'
 }
+
+export type ActiesPage = {
+  __typename?: 'ActiesPage';
+  content: Array<OpenProductActie>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
 
 export type Adres = {
   __typename?: 'Adres';
@@ -153,6 +166,18 @@ export type BesluitPage = {
   totalPages: Scalars['Int']['output'];
 };
 
+export type BestandenPage = {
+  __typename?: 'BestandenPage';
+  content: Array<OpenProductBestand>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
 export type Betrokkene = {
   __typename?: 'Betrokkene';
   bezoekadres?: Maybe<OpenKlant2Adres>;
@@ -212,6 +237,18 @@ export type ContactMoment = {
 export type ContactMomentPage = {
   __typename?: 'ContactMomentPage';
   content: Array<ContactMoment>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type ContactenPage = {
+  __typename?: 'ContactenPage';
+  content: Array<OpenProductContact>;
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
@@ -387,6 +424,30 @@ export type KlantUpdateInput = {
   telefoonnummer?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type LinksPage = {
+  __typename?: 'LinksPage';
+  content: Array<OpenProductLink>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type LocatiesPage = {
+  __typename?: 'LocatiesPage';
+  content: Array<OpenProductLocatie>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
 export type MaatschappelijkeActiviteit = {
   __typename?: 'MaatschappelijkeActiviteit';
   embedded?: Maybe<Embedded>;
@@ -426,6 +487,8 @@ export type Mutation = {
   submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
+  /** Update product */
+  updateProduct?: Maybe<OpenProductProduct>;
   /** Update product verbruiks object */
   updateProductVerbruiksObject: ProductVerbruiksObject;
   /** Update DigitaleAdres of User */
@@ -481,6 +544,11 @@ export type MutationSubmitTaskArgs = {
 
 export type MutationUpdateBurgerProfielArgs = {
   klant: KlantUpdateInput;
+};
+
+
+export type MutationUpdateProductArgs = {
+  productUpdateRequest: UpdateProductRequestInput;
 };
 
 
@@ -1033,6 +1101,257 @@ export type OpenKlant2Uuid = {
   uuid: Scalars['UUID']['output'];
 };
 
+export type OpenProductActie = {
+  __typename?: 'OpenProductActie';
+  mapping: Array<Scalars['JSON']['output']>;
+  naam: Scalars['String']['output'];
+  productTypeUuid?: Maybe<Scalars['UUID']['output']>;
+  url: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductBestand = {
+  __typename?: 'OpenProductBestand';
+  bestand: Scalars['String']['output'];
+  productTypeUuid: Scalars['UUID']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductContact = {
+  __typename?: 'OpenProductContact';
+  email?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  organisatie?: Maybe<OpenProductOrganisatie>;
+  postcode?: Maybe<Scalars['String']['output']>;
+  stad?: Maybe<Scalars['String']['output']>;
+  straat?: Maybe<Scalars['String']['output']>;
+  telefoonnummer?: Maybe<Scalars['String']['output']>;
+  uuid: Scalars['UUID']['output'];
+};
+
+export enum OpenProductFrequentie {
+  Actief = 'ACTIEF',
+  Gereed = 'GEREED',
+  Ingetrokken = 'INGETROKKEN'
+}
+
+export type OpenProductLink = {
+  __typename?: 'OpenProductLink';
+  naam: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductLocatie = {
+  __typename?: 'OpenProductLocatie';
+  email?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  postcode?: Maybe<Scalars['String']['output']>;
+  stad?: Maybe<Scalars['String']['output']>;
+  straat?: Maybe<Scalars['String']['output']>;
+  telefoonnummer?: Maybe<Scalars['String']['output']>;
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductOrganisatie = {
+  __typename?: 'OpenProductOrganisatie';
+  code: Scalars['String']['output'];
+  email?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  postcode?: Maybe<Scalars['String']['output']>;
+  stad?: Maybe<Scalars['String']['output']>;
+  straat?: Maybe<Scalars['String']['output']>;
+  telefoonnummer?: Maybe<Scalars['String']['output']>;
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductPrijs = {
+  __typename?: 'OpenProductPrijs';
+  actiefVanaf: Scalars['Date']['output'];
+  prijsopties: Array<OpenProductPrijsOptie>;
+  prijsregels: Array<OpenProductPrijsRegel>;
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductPrijsOptie = {
+  __typename?: 'OpenProductPrijsOptie';
+  bedrag: Scalars['Float']['output'];
+  beschrijving: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductPrijsRegel = {
+  __typename?: 'OpenProductPrijsRegel';
+  beschrijving: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductProduct = {
+  __typename?: 'OpenProductProduct';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  dataobject?: Maybe<Scalars['JSON']['output']>;
+  documenten: Array<OpenProductUrl>;
+  eigenaren: Array<OpenProductProductEigenaar>;
+  eindDatum: Scalars['Date']['output'];
+  frequentie: OpenProductFrequentie;
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  naam: Scalars['String']['output'];
+  prijs: Scalars['Float']['output'];
+  producttype: OpenProductProductProductType;
+  startDatum: Scalars['Date']['output'];
+  status: OpenProductToegestaneStatus;
+  taken?: Maybe<Array<TaakV2>>;
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  url?: Maybe<Scalars['String']['output']>;
+  uuid: Scalars['UUID']['output'];
+  verbruiksobject?: Maybe<Scalars['JSON']['output']>;
+  zaken?: Maybe<Array<Zaak>>;
+};
+
+export type OpenProductProductEigenaar = {
+  __typename?: 'OpenProductProductEigenaar';
+  bsn?: Maybe<Scalars['String']['output']>;
+  klantnummer?: Maybe<Scalars['String']['output']>;
+  kvkNummer?: Maybe<Scalars['String']['output']>;
+  uuid: Scalars['UUID']['output'];
+  vestigingsnummer?: Maybe<Scalars['String']['output']>;
+};
+
+export type OpenProductProductProductType = {
+  __typename?: 'OpenProductProductProductType';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  code: Scalars['String']['output'];
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  keywords: Array<Scalars['String']['output']>;
+  toegestaneStatussen: Array<OpenProductToegestaneStatus>;
+  uniformeProductNaam: Scalars['String']['output'];
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductProductType = {
+  __typename?: 'OpenProductProductType';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  acties: Array<OpenProductActie>;
+  bestanden: Array<OpenProductProductTypeBestand>;
+  code: Scalars['String']['output'];
+  contacten: Array<OpenProductContact>;
+  content?: Maybe<Array<OpenProductProductTypeContent>>;
+  dataObjectSchema: OpenProductSchema;
+  externCodes: Array<OpenProductProductTypeExterneCode>;
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  interneOpmerking?: Maybe<Scalars['String']['output']>;
+  keywords: Array<Scalars['String']['output']>;
+  links: Array<OpenProductLink>;
+  locaties: Array<OpenProductLocatie>;
+  naam: Scalars['String']['output'];
+  organisaties: Array<OpenProductOrganisatie>;
+  parameters: Array<OpenProductProductTypeParameter>;
+  prijzen: Array<OpenProductPrijs>;
+  processen: Array<OpenProductUrl>;
+  samenvatting: Scalars['String']['output'];
+  taal: Scalars['String']['output'];
+  themas: Array<OpenProductProductTypeThema>;
+  toegestaneStatussen: Array<OpenProductToegestaneStatus>;
+  uniformeProductNaam: Scalars['String']['output'];
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  uuid: Scalars['UUID']['output'];
+  verbruiksObjectSchema: OpenProductSchema;
+  verzoektypen: Array<OpenProductUrl>;
+  zaaktypen: Array<OpenProductUrl>;
+};
+
+export type OpenProductProductTypeBestand = {
+  __typename?: 'OpenProductProductTypeBestand';
+  bestand: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductProductTypeContent = {
+  __typename?: 'OpenProductProductTypeContent';
+  content: Scalars['String']['output'];
+  labels?: Maybe<Array<Scalars['String']['output']>>;
+  taal: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductProductTypeExterneCode = {
+  __typename?: 'OpenProductProductTypeExterneCode';
+  code: Scalars['String']['output'];
+  naam: Scalars['String']['output'];
+};
+
+export type OpenProductProductTypeParameter = {
+  __typename?: 'OpenProductProductTypeParameter';
+  naam: Scalars['String']['output'];
+  waarde: Scalars['String']['output'];
+};
+
+export type OpenProductProductTypeThema = {
+  __typename?: 'OpenProductProductTypeThema';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  beschrijving?: Maybe<Scalars['String']['output']>;
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  hoofdThema?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  producttypen: Array<OpenProductThemaProductType>;
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductSchema = {
+  __typename?: 'OpenProductSchema';
+  naam: Scalars['String']['output'];
+  schema: Scalars['JSON']['output'];
+};
+
+export type OpenProductThema = {
+  __typename?: 'OpenProductThema';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  beschrijving?: Maybe<Scalars['String']['output']>;
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  hoofdThema?: Maybe<Scalars['UUID']['output']>;
+  naam: Scalars['String']['output'];
+  producttypen: Array<OpenProductThemaProductType>;
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductThemaHierarchy = {
+  __typename?: 'OpenProductThemaHierarchy';
+  subThemas?: Maybe<Array<OpenProductThemaHierarchy>>;
+  thema: OpenProductThema;
+};
+
+export type OpenProductThemaProductType = {
+  __typename?: 'OpenProductThemaProductType';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  code: Scalars['String']['output'];
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  keywords: Array<Scalars['String']['output']>;
+  toegestaneStatussen: Array<OpenProductToegestaneStatus>;
+  uniformeProductNaam: Scalars['String']['output'];
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export enum OpenProductToegestaneStatus {
+  Actief = 'ACTIEF',
+  Gereed = 'GEREED',
+  Geweigerd = 'GEWEIGERD',
+  Ingetrokken = 'INGETROKKEN',
+  Verlopen = 'VERLOPEN'
+}
+
+export type OpenProductUrl = {
+  __typename?: 'OpenProductUrl';
+  url: Scalars['String']['output'];
+};
+
 export type OrganisatieIdentificatie = {
   __typename?: 'OrganisatieIdentificatie';
   naam?: Maybe<Scalars['String']['output']>;
@@ -1040,6 +1359,18 @@ export type OrganisatieIdentificatie = {
 
 export type OrganisatieIdentificatieInput = {
   naam?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type OrganisatiesPage = {
+  __typename?: 'OrganisatiesPage';
+  content: Array<OpenProductOrganisatie>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
 };
 
 export type PartijExpand = {
@@ -1214,6 +1545,18 @@ export type PrefillResponse = {
   objectId: Scalars['UUID']['output'];
 };
 
+export type PrijzenPage = {
+  __typename?: 'PrijzenPage';
+  content: Array<OpenProductPrijs>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
 export type Product = {
   __typename?: 'Product';
   documenten: Array<Scalars['String']['output']>;
@@ -1266,12 +1609,36 @@ export type ProductType = {
   zaaktypen: Array<Scalars['UUID']['output']>;
 };
 
+export type ProductTypesPage = {
+  __typename?: 'ProductTypesPage';
+  content: Array<OpenProductProductType>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
 export type ProductVerbruiksObject = {
   __typename?: 'ProductVerbruiksObject';
   data?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['UUID']['output']>;
   productInstantie: Scalars['String']['output'];
   soort?: Maybe<Scalars['String']['output']>;
+};
+
+export type ProductenPage = {
+  __typename?: 'ProductenPage';
+  content: Array<OpenProductProduct>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
 };
 
 export type Query = {
@@ -1334,6 +1701,60 @@ export type Query = {
   getKlantContactMomenten?: Maybe<ContactMomentPage>;
   /** Gets the contactmomenten of a object(zaak) */
   getObjectContactMomenten?: Maybe<ContactMomentPage>;
+  /** Get a Open product type by id */
+  getOpenProduct?: Maybe<OpenProductProduct>;
+  /** Get a actie */
+  getOpenProductActie?: Maybe<OpenProductActie>;
+  /** Get decision by actie naam */
+  getOpenProductActieDecision: Array<Scalars['JSON']['output']>;
+  /** Get all acties */
+  getOpenProductActies: ActiesPage;
+  /** Get a bestand */
+  getOpenProductBestand?: Maybe<OpenProductBestand>;
+  /** Get all bestanden */
+  getOpenProductBestanden: BestandenPage;
+  /** Get a contact */
+  getOpenProductContact?: Maybe<OpenProductContact>;
+  /** Get all contacten */
+  getOpenProductContacten: ContactenPage;
+  /** Get all hoofd themas */
+  getOpenProductHoofdThemas: Array<OpenProductThema>;
+  /** Get a link */
+  getOpenProductLink?: Maybe<OpenProductLink>;
+  /** Get all links */
+  getOpenProductLinks: LinksPage;
+  /** Get a locatie */
+  getOpenProductLocatie?: Maybe<OpenProductLocatie>;
+  /** Get all locaties */
+  getOpenProductLocaties: LocatiesPage;
+  /** Get a organisatie */
+  getOpenProductOrganisatie?: Maybe<OpenProductOrganisatie>;
+  /** Get all organisaties */
+  getOpenProductOrganisaties: OrganisatiesPage;
+  /** Get a prijs */
+  getOpenProductPrijs?: Maybe<OpenProductPrijs>;
+  /** Get all prijzen */
+  getOpenProductPrijzen: PrijzenPage;
+  /** Get a thema */
+  getOpenProductThema?: Maybe<OpenProductThema>;
+  /** Get thema hierarchy */
+  getOpenProductThemaHierarchy: Array<OpenProductThemaHierarchy>;
+  /** Get taken of a thema, including their hoofd themas */
+  getOpenProductThemaTaken: Array<TaakV2>;
+  /** Get zaken of a thema, including their hoofd themas */
+  getOpenProductThemaZaken: Array<Zaak>;
+  /** Get all themas */
+  getOpenProductThemas: ThemasPage;
+  /** Get all themas hierarchy */
+  getOpenProductThemasHierarchy: Array<OpenProductThemaHierarchy>;
+  /** Get a Open product type by id */
+  getOpenProductType?: Maybe<OpenProductProductType>;
+  /** Get all Open product types  */
+  getOpenProductTypes: ProductTypesPage;
+  /** Get all Open producten */
+  getOpenProducten: ProductenPage;
+  /** Get a Open producten type by thema id */
+  getOpenProductenByThema: Array<OpenProductProduct>;
   /** Gets the persoon data */
   getPersoon?: Maybe<Persoon>;
   /** Get product by id */
@@ -1507,6 +1928,155 @@ export type QueryGetObjectContactMomentenArgs = {
 };
 
 
+export type QueryGetOpenProductArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductActieArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductActieDecisionArgs = {
+  naam: Scalars['String']['input'];
+  productId: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductActiesArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductBestandArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductBestandenArgs = {
+  naam?: InputMaybe<Scalars['String']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductContactArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductContactenArgs = {
+  naam?: InputMaybe<Scalars['String']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductLinkArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductLinksArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductLocatieArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductLocatiesArgs = {
+  naam?: InputMaybe<Scalars['String']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductOrganisatieArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductOrganisatiesArgs = {
+  naam?: InputMaybe<Scalars['String']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductPrijsArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductPrijzenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductThemaArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductThemaHierarchyArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductThemaTakenArgs = {
+  id: Scalars['UUID']['input'];
+  language: Scalars['String']['input'];
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductThemaZakenArgs = {
+  id: Scalars['UUID']['input'];
+  isOpen?: InputMaybe<Scalars['Boolean']['input']>;
+  language: Scalars['String']['input'];
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductThemasArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductTypeArgs = {
+  id: Scalars['UUID']['input'];
+  language: Scalars['String']['input'];
+};
+
+
+export type QueryGetOpenProductTypesArgs = {
+  language: Scalars['String']['input'];
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductenByThemaArgs = {
+  themaId: Scalars['UUID']['input'];
+};
+
+
 export type QueryGetProductArgs = {
   id: Scalars['UUID']['input'];
 };
@@ -1641,7 +2211,8 @@ export enum SoortPartij {
 export type StatusType = {
   __typename?: 'StatusType';
   isEindstatus?: Maybe<Scalars['Boolean']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
+  omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type Taak = {
@@ -1762,6 +2333,24 @@ export enum TaakVersion {
   V2 = 'V2'
 }
 
+export type ThemasPage = {
+  __typename?: 'ThemasPage';
+  content: Array<OpenProductThema>;
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  size: Scalars['Int']['output'];
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type UpdateProductRequestInput = {
+  dataobject?: InputMaybe<Scalars['JSON']['input']>;
+  uuid: Scalars['UUID']['input'];
+  verbruiksobject?: InputMaybe<Scalars['JSON']['input']>;
+};
+
 export type Zaak = {
   __typename?: 'Zaak';
   besluiten: Array<Besluit>;
@@ -1808,12 +2397,14 @@ export type ZaakStatusType = {
   __typename?: 'ZaakStatusType';
   isEindstatus: Scalars['Boolean']['output'];
   omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type ZaakType = {
   __typename?: 'ZaakType';
   identificatie: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
@@ -1947,6 +2538,11 @@ export type GetObjectContactMomentenQueryVariables = Exact<{
 
 export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectContactMomenten?: { __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> } | null };
 
+export type GetOpenProductHoofdThemasQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetOpenProductHoofdThemasQuery = { __typename?: 'Query', getOpenProductHoofdThemas: Array<{ __typename?: 'OpenProductThema', uuid: any, naam: string, producttypen: Array<{ __typename?: 'OpenProductThemaProductType', uuid: any }> }> };
+
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2035,7 +2631,7 @@ export type GetZaakQueryVariables = Exact<{
 }>;
 
 
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: string | null }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving: string }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
 
 export type GetZakenQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -2853,6 +3449,49 @@ export type GetObjectContactMomentenQueryHookResult = ReturnType<typeof useGetOb
 export type GetObjectContactMomentenLazyQueryHookResult = ReturnType<typeof useGetObjectContactMomentenLazyQuery>;
 export type GetObjectContactMomentenSuspenseQueryHookResult = ReturnType<typeof useGetObjectContactMomentenSuspenseQuery>;
 export type GetObjectContactMomentenQueryResult = Apollo.QueryResult<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>;
+export const GetOpenProductHoofdThemasDocument = gql`
+    query getOpenProductHoofdThemas {
+  getOpenProductHoofdThemas {
+    uuid
+    naam
+    producttypen {
+      uuid
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOpenProductHoofdThemasQuery__
+ *
+ * To run a query within a React component, call `useGetOpenProductHoofdThemasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOpenProductHoofdThemasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOpenProductHoofdThemasQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetOpenProductHoofdThemasQuery(baseOptions?: Apollo.QueryHookOptions<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>(GetOpenProductHoofdThemasDocument, options);
+      }
+export function useGetOpenProductHoofdThemasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>(GetOpenProductHoofdThemasDocument, options);
+        }
+export function useGetOpenProductHoofdThemasSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>(GetOpenProductHoofdThemasDocument, options);
+        }
+export type GetOpenProductHoofdThemasQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasQuery>;
+export type GetOpenProductHoofdThemasLazyQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasLazyQuery>;
+export type GetOpenProductHoofdThemasSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasSuspenseQuery>;
+export type GetOpenProductHoofdThemasQueryResult = Apollo.QueryResult<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>;
 export const GetPersoonDataDocument = gql`
     query GetPersoonData {
   getPersoon {
