@@ -1,11 +1,14 @@
 import { FC, ReactElement, ReactNode, useContext, useEffect } from "react";
 import { StylesProvider } from "@gemeente-denhaag/stylesprovider";
-import { Page as PageWrapper, PageHeader } from "@gemeente-denhaag/page";
+import {
+  Page as PageWrapper,
+  PageHeader,
+  PageFooter,
+} from "@gemeente-denhaag/page";
 import ResponsiveContent from "@gemeente-denhaag/responsive-content";
 import Header from "./Header";
 import Menu from "./Menu";
-import { PortalFooter } from "../interfaces/portal-footer";
-import { FooterProps } from "@gemeente-denhaag/footer";
+import Footer, { FooterProps } from "@gemeente-denhaag/footer";
 import FormIoUploader from "./FormIoUploader";
 import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router";
@@ -22,11 +25,12 @@ interface LayoutComponentProps {
   customFooter?: ReactNode;
   footerData?: FooterProps;
   headerLogo?: ReactElement<HTMLImageElement>;
-  footer?: PortalFooter;
 }
 
 const LayoutComponent: FC<LayoutComponentProps> = ({
   customHeader,
+  customFooter,
+  footerData,
   navigationItems,
   paths,
 }) => {
@@ -53,6 +57,11 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
           {<Outlet context={{ paths }} />}
         </main>
       </ResponsiveContent>
+      {(footerData || customFooter) && (
+        <PageFooter>
+          {footerData ? <Footer {...footerData} /> : customFooter}
+        </PageFooter>
+      )}
     </PageWrapper>
   );
 };
@@ -63,7 +72,7 @@ const Layout: FC<LayoutComponentProps> = ({
   customHeader,
   customFooter,
   headerLogo,
-  footer,
+  footerData,
 }) => (
   <StylesProvider>
     <LayoutProvider>
@@ -73,7 +82,7 @@ const Layout: FC<LayoutComponentProps> = ({
           paths={paths}
           customHeader={customHeader}
           headerLogo={headerLogo}
-          footer={footer}
+          footerData={footerData}
           customFooter={customFooter}
         />
       </HelmetProvider>
