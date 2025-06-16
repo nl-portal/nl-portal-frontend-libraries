@@ -247,5 +247,28 @@ export const NL_NL_MESSAGES: Messages = {
     "form.success.text": "Uw aanvraag is succesvol verwerkt.",
     "form.error.title": "Er is iets misgegaan",
     "form.error.text": "Probeer het later opnieuw.",
+    "footer.legal.privacy": "Privacy",
+    "footer.legal.privacy.url":
+      "https://www.denhaag.nl/nl/algemene-privacyverklaring/",
+    "footer.legal.voorwaarden": "Voorwaarden",
+    "footer.legal.voorwaarden.url":
+      "https://www.denhaag.nl/nl/gebruiksvoorwaarden/",
+    "footer.legal.proclaimer": "Proclaimer",
+    "footer.legal.proclaimer.url": "https://www.denhaag.nl/nl/proclaimer/",
+    "footer.legal.toegankelijkheid": "Toegankelijkheid",
+    "footer.legal.toegankelijkheid.url":
+      "https://www.denhaag.nl/nl/toegankelijkheidsverklaring/",
+    "footer.legal.cookies": "Cookies",
+    "footer.legal.cookies.url": "https://www.denhaag.nl/nl/cookieverklaring/",
+    "footer.legal.vacatures": "Vacatures",
+    "footer.legal.vacatures.url": "https://werkenvoor.denhaag.nl/",
+    "footer.legal.pers": "Pers",
+    "footer.legal.pers.url": "https://www.denhaag.nl/pers",
+    "footer.contact.title": "Contact",
+    "footer.contact.telefoon": "Bel ons",
+    "footer.contact.formulier": "Stel een vraag",
+    "footer.contact.formulier.url": "#url",
+    "footer.contact.buttonlabel": "Contactpagina",
+    "footer.contact.button.url": "#url",
   },
 };

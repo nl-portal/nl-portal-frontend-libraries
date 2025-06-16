@@ -1,9 +1,14 @@
 import { ReactNode, use, useEffect, useMemo } from "react";
 import { StylesProvider } from "@gemeente-denhaag/stylesprovider";
-import { Page as PageWrapper, PageHeader } from "@gemeente-denhaag/page";
+import {
+  Page as PageWrapper,
+  PageHeader,
+  PageFooter,
+} from "@gemeente-denhaag/page";
 import ResponsiveContent from "@gemeente-denhaag/responsive-content";
 import Header from "./Header";
 import Menu from "./Menu";
+import Footer, { FooterProps } from "@gemeente-denhaag/footer";
 import FormIoUploader from "./FormIoUploader";
 import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router";
@@ -19,12 +24,16 @@ interface LayoutComponentProps {
   navigationItems: NavigationItem[][];
   paths: Paths;
   customHeader?: ReactNode;
+  customFooter?: ReactNode;
+  footerData?: FooterProps;
 }
 
 const Layout = ({
   navigationItems,
   paths,
   customHeader,
+  customFooter,
+  footerData,
 }: LayoutComponentProps) => {
   const { themes } = use(AppContext);
   const { oidcToken } = use(OidcContext);
@@ -61,6 +70,11 @@ const Layout = ({
                 {<Outlet context={{ paths }} />}
               </main>
             </ResponsiveContent>
+            {(footerData || customFooter) && (
+              <PageFooter>
+                {footerData ? <Footer {...footerData} /> : customFooter}
+              </PageFooter>
+            )}
           </PageWrapper>
         </HelmetProvider>
       </LayoutProvider>

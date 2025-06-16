@@ -5,15 +5,13 @@ import { OidcProvider } from "@nl-portal/nl-portal-authentication";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 import { ApiProvider } from "@nl-portal/nl-portal-api";
 import {
-  Layout,
   AppProvider,
   NotificationProvider,
 } from "@nl-portal/nl-portal-user-interface";
 import { CUSTOM_MESSAGES } from "./i18n/custom-messages/custom-messages";
 import { config } from "./constants/config";
-import { menuItems } from "./constants/menu-items";
-import { paths } from "./constants/paths";
 import { ScrollRestoration } from "react-router";
+import CustomLayout from "./components/CustomLayout";
 
 const authenticationMethods = {
   person: ["digid", "machtigen"],
@@ -39,7 +37,7 @@ const App = () => {
           >
             <NotificationProvider>
               <AppProvider>
-                <Layout navigationItems={menuItems} paths={paths} />
+                <CustomLayout />
               </AppProvider>
             </NotificationProvider>
           </ApiProvider>
