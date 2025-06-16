@@ -10,14 +10,12 @@ import {
   MessagesPage,
   EditContactInfoPage,
   EditNotificationsPage,
+  ThemeOverviewPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
 import { config } from "./config";
 import { Navigate, RouteObject as ReactRouteObject } from "react-router";
-import ThemeSampleOverviewPage from "../pages/ThemeSampleOverviewPage";
-import ThemeSampleListPage from "../pages/ThemeSampleListPage";
-import ThemeSampleDetailPage from "../pages/ThemeSampleDetailPage";
 
 export type RouteObject = ReactRouteObject & {
   handle: {
@@ -81,23 +79,13 @@ export const routes: RouteObject[] = [
     ],
   },
   {
-    path: paths.themeOverview("sample"),
-    handle: { label: "breadcrumb.sampleTheme" },
+    path: paths.themeOverview("belastingzaken"),
+    handle: { label: "breadcrumb.belastingzaken" },
     children: [
       {
         index: true,
-        handle: { label: "breadcrumb.sampleTheme" },
-        element: <ThemeSampleOverviewPage />,
-      },
-      {
-        path: paths.themeSub("sample", "contracten"),
-        handle: { label: "breadcrumb.sampleTheme.contracten" },
-        element: <ThemeSampleListPage />,
-      },
-      {
-        path: paths.themeDetails("sample"),
-        handle: { label: "breadcrumb.sampleTheme.details" },
-        element: <ThemeSampleDetailPage />,
+        handle: { label: "breadcrumb.belastingzaken" },
+        element: <ThemeOverviewPage slug="belastingzaken" />,
       },
     ],
   },
