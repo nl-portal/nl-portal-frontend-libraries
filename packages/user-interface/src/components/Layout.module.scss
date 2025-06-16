@@ -51,11 +51,3 @@
 .page-container__page--fullscreen {
   margin-left: 0;
 }
-
-.header-wrapper--legacy {
-  height: var(--nlportal-header-legacy-height-tablet);
-
-  @include mixins.breakpoint(tablet) {
-    height: var(--nlportal-header-legacy-height);
-  }
-}

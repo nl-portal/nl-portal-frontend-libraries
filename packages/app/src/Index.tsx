@@ -5,10 +5,13 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { routes } from "./constants/routes";
 import verifyConfig from "./util/verify-config";
 import { StrictMode } from "react";
+import { paths } from "./constants/paths";
 
 const router = createBrowserRouter([
   {
     element: <App />,
+    path: paths.overview,
+    handle: { label: "breadcrumb.overview" },
     children: routes,
   },
 ]);

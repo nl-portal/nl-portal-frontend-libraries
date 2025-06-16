@@ -11,10 +11,6 @@ import {
   useEnableMessagesCount,
 } from "@nl-portal/nl-portal-user-interface";
 import { CUSTOM_MESSAGES } from "./i18n/custom-messages/custom-messages";
-import HeaderLogo from "./assets/header-logo.svg";
-import HeaderLogoSmall from "./assets/header-logo-small.svg";
-import Facet from "./assets/facet.png";
-import { footerData } from "./constants/footer-data";
 import { config } from "./constants/config";
 import { menuItems } from "./constants/menu-items";
 import { paths } from "./constants/paths";
@@ -46,16 +42,7 @@ const App = () => {
           >
             <NotificationProvider>
               <MessagesProvider enableMessagesCount={enableMessagesCount}>
-                <Layout
-                  navigationItems={menuItems}
-                  paths={paths}
-                  headerLogo={<img src={HeaderLogo} alt="logo" />}
-                  headerLogoSmall={
-                    <img src={HeaderLogoSmall} alt="logo-small" />
-                  }
-                  facet={<img src={Facet} alt="facet" />}
-                  footer={footerData}
-                />
+                <Layout navigationItems={menuItems} paths={paths} />
               </MessagesProvider>
             </NotificationProvider>
           </ApiProvider>

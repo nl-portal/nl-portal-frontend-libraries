@@ -8,6 +8,8 @@ export { default as DescriptionList } from "./components/DescriptionList";
 export { default as DocumentsList } from "./components/DocumentsList";
 export { default as Form } from "./components/Form";
 export * from "./components/Form";
+export { default as Header } from "./components/Header";
+export * from "./components/Header";
 export { default as Heading } from "./components/Heading";
 export * from "./components/Heading";
 export { default as Layout } from "./components/Layout";
