@@ -5,7 +5,7 @@ import { useMatches } from "react-router";
 import { useIntl } from "react-intl";
 import { useLogout } from "@nl-portal/nl-portal-authentication";
 import { NavigationItem } from "../interfaces/navigation-item";
-import MessagesContext from "../contexts/MessagesContext";
+import AppContext from "../contexts/AppContext";
 import useUserInfo from "../hooks/useUserInfo";
 import PortalLink from "./PortalLink";
 
@@ -17,7 +17,7 @@ const Header = ({ menuItems }: HeaderProps) => {
   const { logout } = useLogout();
   const { currentLocale, setCurrentLocale, supportedLocales } =
     useContext(LocaleContext);
-  const { messagesCount } = useContext(MessagesContext);
+  const { messagesCount } = useContext(AppContext);
   const intl = useIntl();
   const { userName, volmachtgever } = useUserInfo();
 

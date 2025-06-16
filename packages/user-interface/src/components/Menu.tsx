@@ -11,7 +11,7 @@ import {
 import { NavigationItem } from "../interfaces/navigation-item";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 import BadgeCounter from "@gemeente-denhaag/badge-counter";
-import MessagesContext from "../contexts/MessagesContext";
+import AppContext from "../contexts/AppContext";
 
 interface Props {
   items: NavigationItem[][];
@@ -19,7 +19,7 @@ interface Props {
 
 const Menu = ({ items }: Props) => {
   const { hrefLang } = useContext(LocaleContext);
-  const { messagesCount } = useContext(MessagesContext);
+  const { messagesCount } = useContext(AppContext);
   const matches = useMatches();
   const currentNavigationItem = getCurrentNavigationPage(matches, items);
 

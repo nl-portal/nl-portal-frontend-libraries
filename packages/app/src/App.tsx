@@ -6,9 +6,8 @@ import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 import { ApiProvider } from "@nl-portal/nl-portal-api";
 import {
   Layout,
-  MessagesProvider,
+  AppProvider,
   NotificationProvider,
-  useEnableMessagesCount,
 } from "@nl-portal/nl-portal-user-interface";
 import { CUSTOM_MESSAGES } from "./i18n/custom-messages/custom-messages";
 import { config } from "./constants/config";
@@ -23,8 +22,6 @@ const authenticationMethods = {
 };
 
 const App = () => {
-  const enableMessagesCount = useEnableMessagesCount(menuItems);
-
   return (
     <div className={config.THEME_CLASS}>
       <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
@@ -41,9 +38,9 @@ const App = () => {
             restUri={config.REST_URI}
           >
             <NotificationProvider>
-              <MessagesProvider enableMessagesCount={enableMessagesCount}>
+              <AppProvider>
                 <Layout navigationItems={menuItems} paths={paths} />
-              </MessagesProvider>
+              </AppProvider>
             </NotificationProvider>
           </ApiProvider>
         </OidcProvider>
