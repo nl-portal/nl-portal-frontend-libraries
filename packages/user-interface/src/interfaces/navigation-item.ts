@@ -5,5 +5,5 @@ export type NavigationItem = {
   path: string;
   icon: ReactNode;
   hasMessagesCount?: boolean;
-  productType?: string;
+  themeSlug?: string;
 };

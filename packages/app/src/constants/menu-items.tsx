@@ -2,7 +2,7 @@ import { NavigationItem } from "@nl-portal/nl-portal-user-interface";
 import {
   ArchiveIcon,
   CheckCircleIcon,
-  DocumentIcon,
+  EuroIcon,
   GridIcon,
   InboxIcon,
   UserIcon,
@@ -37,9 +37,10 @@ export const menuItems: NavigationItem[][] = [
   ],
   [
     {
-      titleTranslationKey: "sample",
-      path: paths.themeOverview("sample"),
-      icon: <DocumentIcon />,
+      titleTranslationKey: "belastingzaken",
+      path: paths.themeOverview("belastingzaken"),
+      icon: <EuroIcon />,
+      themeSlug: "belastingzaken",
     },
   ],
   [

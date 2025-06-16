@@ -6,12 +6,12 @@ import {
 } from "@nl-portal/nl-portal-api";
 import { createContext, ReactNode, useState } from "react";
 
-type Themas = GetOpenProductHoofdThemasQuery["getOpenProductHoofdThemas"];
+type Themes = GetOpenProductHoofdThemasQuery["getOpenProductHoofdThemas"];
 
 interface AppContextType {
-  themas: Themas;
+  themes: Themes;
   messagesCount: number;
-  refetchThemas: () => void;
+  refetchThemes: () => void;
   refetchMessages: () => void;
 }
 
@@ -22,13 +22,13 @@ interface MessagesProviderProps {
 }
 
 export const AppProvider = ({ children }: MessagesProviderProps) => {
-  const [themas, setThemas] = useState<Themas>([]);
+  const [themes, setThemes] = useState<Themes>([]);
   const [messagesCount, setMessagesCount] = useState(0);
 
-  const { loading: loadingThemas, refetch: refetchThemas } =
+  const { loading: loadingThemes, refetch: refetchThemes } =
     useGetOpenProductHoofdThemasQuery({
       onCompleted: (data: GetOpenProductHoofdThemasQuery) => {
-        setThemas(data.getOpenProductHoofdThemas);
+        setThemes(data.getOpenProductHoofdThemas);
       },
     });
 
@@ -45,16 +45,16 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
       },
     });
 
-  if (loadingThemas || loadingMessages) {
+  if (loadingThemes || loadingMessages) {
     return null;
   }
 
   return (
     <AppContext.Provider
       value={{
-        themas,
+        themes,
         messagesCount,
-        refetchThemas,
+        refetchThemes,
         refetchMessages,
       }}
     >

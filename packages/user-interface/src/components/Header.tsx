@@ -26,7 +26,6 @@ const Header = ({ menuItems }: HeaderProps) => {
   };
 
   const matches = useMatches();
-  console.log(matches);
   const breadcrumbs = useMemo(() => {
     const list = matches
       .filter((item) => {

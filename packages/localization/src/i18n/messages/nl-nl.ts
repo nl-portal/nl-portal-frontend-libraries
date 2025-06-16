@@ -18,6 +18,7 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.task": "Taak",
     "pageTitles.editContactInfo": "Contactgegevens",
     "pageTitles.editNotifications": "Meldingen",
+    "pageTitles.belastingzaken": "Belastingzaken",
     "backlink.back": "Terug",
     "header.logout": "Uitloggen",
     "header.welcome": "Welkom",
