@@ -1,25 +1,18 @@
 import { useGetUnopenedBerichtenCountQuery } from "@nl-portal/nl-portal-api";
 import { createContext, ReactNode, useState } from "react";
 
-interface MessagesContextType {
+interface AppContextType {
   messagesCount: number;
-  setMessagesCount: (value: number) => void;
   refetchMessages: () => void;
 }
 
-const MessagesContext = createContext<MessagesContextType>(
-  {} as MessagesContextType,
-);
+const AppContext = createContext<AppContextType>({} as AppContextType);
 
 interface MessagesProviderProps {
   children: ReactNode;
-  enableMessagesCount?: boolean;
 }
 
-export const MessagesProvider = ({
-  children,
-  enableMessagesCount = false,
-}: MessagesProviderProps) => {
+export const AppProvider = ({ children }: MessagesProviderProps) => {
   const [messagesCount, setMessagesCount] = useState(0);
 
   const { refetch } = useGetUnopenedBerichtenCountQuery({
@@ -28,23 +21,22 @@ export const MessagesProvider = ({
     },
     pollInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 30000,
     fetchPolicy: "cache-and-network",
-    skip: !enableMessagesCount,
+    skip: window.MESSAGE_COUNT_ENABLE === "false",
     skipPollAttempt: () => {
       return !document.hasFocus();
     },
   });
 
   return (
-    <MessagesContext.Provider
+    <AppContext.Provider
       value={{
         messagesCount,
-        setMessagesCount,
         refetchMessages: () => refetch(),
       }}
     >
       {children}
-    </MessagesContext.Provider>
+    </AppContext.Provider>
   );
 };
 
-export default MessagesContext;
+export default AppContext;

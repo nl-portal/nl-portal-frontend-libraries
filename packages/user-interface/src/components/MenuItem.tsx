@@ -7,7 +7,7 @@ import { BadgeCounter } from "@gemeente-denhaag/badge-counter";
 import styles from "./MenuItem.module.scss";
 import LayoutContext from "../contexts/LayoutContext";
 import { NavigationItem } from "../interfaces/navigation-item";
-import MessagesContext from "../contexts/MessagesContext";
+import AppContext from "../contexts/AppContext";
 
 interface MenuItemProps {
   item: NavigationItem;
@@ -17,7 +17,7 @@ interface MenuItemProps {
 const MenuItem = ({ item, current = false }: MenuItemProps) => {
   const { hrefLang } = useContext(LocaleContext);
   const { hideMenu } = useContext(LayoutContext);
-  const { messagesCount } = useContext(MessagesContext);
+  const { messagesCount } = useContext(AppContext);
 
   if (!item) return null;
 

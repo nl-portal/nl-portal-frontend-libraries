@@ -7,7 +7,7 @@ import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedDate, FormattedMessage, FormattedTime } from "react-intl";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { useContext } from "react";
-import MessagesContext from "../contexts/MessagesContext";
+import MessagesContext from "../contexts/AppContext";
 import MessageContent from "../components/MessageContent";
 
 const MessageDetailsPage = () => {

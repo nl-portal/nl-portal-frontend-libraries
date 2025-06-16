@@ -20,7 +20,7 @@ import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 import Heading from "./Heading";
 import "@gemeente-denhaag/menu"; // TODO: styling needed for legacy menu, remove with legacy menu
 import BadgeCounter from "@gemeente-denhaag/badge-counter";
-import MessagesContext from "../contexts/MessagesContext";
+import AppContext from "../contexts/AppContext";
 
 interface Props {
   items: NavigationItem[][];
@@ -30,7 +30,7 @@ interface Props {
 const Menu = ({ items, legacy }: Props) => {
   const { hrefLang } = useContext(LocaleContext);
   const { menuOpened, hideMenu } = useContext(LayoutContext);
-  const { messagesCount } = useContext(MessagesContext);
+  const { messagesCount } = useContext(AppContext);
   const intl = useIntl();
   const matches = useMatches();
   const currentNavigationItem = getCurrentNavigationPage(matches, items);

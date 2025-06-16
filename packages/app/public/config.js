@@ -5,6 +5,7 @@ window.OIDC_REDIRECT_URI = 'http://localhost:3000/oidc/callback';
 window.GRAPHQL_URI = 'http://localhost:8090/graphql';
 window.REST_URI = 'http://localhost:8090/api';
 window.SHOW_INHABITANT_AMOUNT = 'true';
+window.MESSAGE_COUNT_ENABLE = 'true'
 window.MESSAGE_COUNT_POLLING_INTERVAL = 10000;
 window.CASES_PARTIAL_SEARCH = true;
 window.ADDRESS_RESEARCH_URL = 'https://www.google.nl';
