@@ -15,7 +15,6 @@ import { Outlet } from "react-router";
 import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
 import { NavigationItem } from "../interfaces/navigation-item";
-import { LayoutProvider } from "../contexts/LayoutContext";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import AppContext from "../contexts/AppContext";
 import { stringToSlug } from "../utils/string-to-slug";
@@ -57,27 +56,25 @@ const Layout = ({
 
   return (
     <StylesProvider>
-      <LayoutProvider>
-        <HelmetProvider>
-          <PageWrapper>
-            <PageHeader>
-              {customHeader || <Header menuItems={navigationItems} />}
-            </PageHeader>
-            <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
-              <Menu items={menuItems} />
-              <main className="denhaag-page-content__main">
-                <PageMetaData navigationItems={navigationItems} />
-                {<Outlet context={{ paths }} />}
-              </main>
-            </ResponsiveContent>
-            {(footerData || customFooter) && (
-              <PageFooter>
-                {footerData ? <Footer {...footerData} /> : customFooter}
-              </PageFooter>
-            )}
-          </PageWrapper>
-        </HelmetProvider>
-      </LayoutProvider>
+      <HelmetProvider>
+        <PageWrapper>
+          <PageHeader>
+            {customHeader || <Header menuItems={navigationItems} />}
+          </PageHeader>
+          <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
+            <Menu items={menuItems} />
+            <main className="denhaag-page-content__main">
+              <PageMetaData navigationItems={navigationItems} />
+              {<Outlet context={{ paths }} />}
+            </main>
+          </ResponsiveContent>
+          {(footerData || customFooter) && (
+            <PageFooter>
+              {footerData ? <Footer {...footerData} /> : customFooter}
+            </PageFooter>
+          )}
+        </PageWrapper>
+      </HelmetProvider>
     </StylesProvider>
   );
 };

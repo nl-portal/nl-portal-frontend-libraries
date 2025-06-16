@@ -30,7 +30,6 @@ export * from "./components/Skeleton";
 
 export * from "./interfaces/navigation-item";
 export * from "./interfaces/paths";
-export * from "./interfaces/portal-footer";
 
 export { default as useDownload } from "./hooks/useDownload";
 export { default as useOgonePayment } from "./hooks/useOgonePayment";

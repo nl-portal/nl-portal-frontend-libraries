@@ -11,8 +11,8 @@ import {
   RouteObject,
 } from "react-router";
 import { Paths } from "../interfaces/paths";
-import { LayoutProvider } from "../contexts/LayoutContext";
 import { NotificationProvider } from "../contexts/NotificationContext";
+import { AppProvider } from "../contexts/AppContext";
 
 export const testPaths: Paths = {
   noMatch: "/404",
@@ -43,9 +43,9 @@ const TestContent = ({
     <MockedProvider mocks={mocks} addTypename={false}>
       <LocalizationProvider>
         <NotificationProvider>
-          <LayoutProvider>
+          <AppProvider>
             <Outlet context={{ paths }} />
-          </LayoutProvider>
+          </AppProvider>
         </NotificationProvider>
       </LocalizationProvider>
     </MockedProvider>
