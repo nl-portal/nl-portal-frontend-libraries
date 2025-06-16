@@ -4,11 +4,13 @@ import {
   useGetOpenProductHoofdThemasQuery,
   useGetUnopenedBerichtenCountQuery,
 } from "@nl-portal/nl-portal-api";
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { useLocation, useNavigationType } from "react-router";
 
 type Themes = GetOpenProductHoofdThemasQuery["getOpenProductHoofdThemas"];
 
 interface AppContextType {
+  history: string[];
   themes: Themes;
   messagesCount: number;
   refetchThemes: () => void;
@@ -24,6 +26,12 @@ interface MessagesProviderProps {
 export const AppProvider = ({ children }: MessagesProviderProps) => {
   const [themes, setThemes] = useState<Themes>([]);
   const [messagesCount, setMessagesCount] = useState(0);
+  const [history, setHistory] = useState<string[]>(
+    JSON.parse(localStorage.getItem("history") || "[]"),
+  );
+
+  const location = useLocation();
+  const navType = useNavigationType();
 
   const { loading: loadingThemes, refetch: refetchThemes } =
     useGetOpenProductHoofdThemasQuery({
@@ -45,6 +53,16 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
       },
     });
 
+  useEffect(() => {
+    if (navType === "POP" || location.key === "default") return;
+    const newHistory = [...history]
+      .filter((item) => item !== location.pathname)
+      .splice(0, 1);
+    newHistory.unshift(location.pathname);
+    localStorage.setItem("history", JSON.stringify(newHistory));
+    setHistory(newHistory);
+  }, [location]);
+
   if (loadingThemes || loadingMessages) {
     return null;
   }
@@ -52,6 +70,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   return (
     <AppContext.Provider
       value={{
+        history,
         themes,
         messagesCount,
         refetchThemes,
