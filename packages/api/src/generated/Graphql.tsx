@@ -2553,6 +2553,15 @@ export type GetOpenProductThemaTakenQueryVariables = Exact<{
 
 export type GetOpenProductThemaTakenQuery = { __typename?: 'Query', getOpenProductThemaTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
 
+export type GetOpenProductThemaZakenQueryVariables = Exact<{
+  id: Scalars['UUID']['input'];
+  language: Scalars['String']['input'];
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetOpenProductThemaZakenQuery = { __typename?: 'Query', getOpenProductThemaZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> };
+
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3562,6 +3571,59 @@ export type GetOpenProductThemaTakenQueryHookResult = ReturnType<typeof useGetOp
 export type GetOpenProductThemaTakenLazyQueryHookResult = ReturnType<typeof useGetOpenProductThemaTakenLazyQuery>;
 export type GetOpenProductThemaTakenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductThemaTakenSuspenseQuery>;
 export type GetOpenProductThemaTakenQueryResult = Apollo.QueryResult<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>;
+export const GetOpenProductThemaZakenDocument = gql`
+    query getOpenProductThemaZaken($id: UUID!, $language: String!, $pageSize: Int) {
+  getOpenProductThemaZaken(id: $id, language: $language, pageSize: $pageSize) {
+    uuid
+    omschrijving
+    identificatie
+    zaaktype {
+      identificatie
+    }
+    startdatum
+    status {
+      statustype {
+        isEindstatus
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOpenProductThemaZakenQuery__
+ *
+ * To run a query within a React component, call `useGetOpenProductThemaZakenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOpenProductThemaZakenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOpenProductThemaZakenQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      language: // value for 'language'
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useGetOpenProductThemaZakenQuery(baseOptions: Apollo.QueryHookOptions<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables> & ({ variables: GetOpenProductThemaZakenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>(GetOpenProductThemaZakenDocument, options);
+      }
+export function useGetOpenProductThemaZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>(GetOpenProductThemaZakenDocument, options);
+        }
+export function useGetOpenProductThemaZakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>(GetOpenProductThemaZakenDocument, options);
+        }
+export type GetOpenProductThemaZakenQueryHookResult = ReturnType<typeof useGetOpenProductThemaZakenQuery>;
+export type GetOpenProductThemaZakenLazyQueryHookResult = ReturnType<typeof useGetOpenProductThemaZakenLazyQuery>;
+export type GetOpenProductThemaZakenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductThemaZakenSuspenseQuery>;
+export type GetOpenProductThemaZakenQueryResult = Apollo.QueryResult<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>;
 export const GetPersoonDataDocument = gql`
     query GetPersoonData {
   getPersoon {
