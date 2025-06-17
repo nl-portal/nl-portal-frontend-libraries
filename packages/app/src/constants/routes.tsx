@@ -142,6 +142,11 @@ export const routes: RouteObject[] = [
           />
         ),
       },
+      {
+        path: paths.themeDetails("inkomensondersteuning"),
+        handle: { label: "breadcrumb.inkomensondersteuning.details" },
+        element: <ThemeDetailsPage />,
+      },
     ],
   },
   {

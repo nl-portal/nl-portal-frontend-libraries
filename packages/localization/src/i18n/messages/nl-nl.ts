@@ -45,6 +45,7 @@ export const NL_NL_MESSAGES: Messages = {
     "breadcrumb.belastingzaken": "Belastingzaken",
     "breadcrumb.parkeren": "Parkeren",
     "breadcrumb.inkomensondersteuning": "Inkomensondersteuning",
+    "breadcrumb.inkomensondersteuning.details": "Details",
     "breadcrumb.noMatch": "Pagina niet gevonden",
     "language-switcher.title": "Kies uw voorkeurstaal",
     "language-switcher.shortname.en-GB": "EN",

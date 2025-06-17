@@ -45,6 +45,7 @@ export const EN_GB_MESSAGES: Messages = {
     "breadcrumb.belastingzaken": "Tax matters",
     "breadcrumb.parkeren": "Parking",
     "breadcrumb.inkomensondersteuning": "Income support",
+    "breadcrumb.inkomensondersteuning.details": "Details",
     "breadcrumb.noMatch": "Page not found",
     "language-switcher.title": "Choose your preferred language",
     "language-switcher.shortname.en-GB": "EN",
