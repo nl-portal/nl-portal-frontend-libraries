@@ -109,7 +109,7 @@ const ThemeOverviewPage = ({
           productSettings.dataMapping.map((map) => ({
             href: paths.themeDetails(slug, product.uuid),
             children: intl.formatMessage({
-              id: (product as Record<string, string>)[map],
+              id: (product as Record<string, string>)[map] || "-",
             }),
           })),
         )}
