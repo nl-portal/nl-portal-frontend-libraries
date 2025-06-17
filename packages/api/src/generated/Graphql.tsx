@@ -2577,7 +2577,7 @@ export type GetOpenProductQueryVariables = Exact<{
 }>;
 
 
-export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum: any, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs: number, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', titel: string }> | null, acties: Array<{ __typename?: 'OpenProductActie', uuid: any, naam: string, url: string }> } | null };
+export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum: any, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs: number, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> | null, acties: Array<{ __typename?: 'OpenProductActie', uuid: any, naam: string, url: string }> } | null };
 
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3717,7 +3717,21 @@ export const GetOpenProductDocument = gql`
       }
     }
     taken {
-      titel
+      id
+      soort
+      koppeling {
+        registratie
+        value
+      }
+      url {
+        uri
+      }
+      portaalformulier {
+        formulier {
+          soort
+          value
+        }
+      }
     }
     acties {
       uuid

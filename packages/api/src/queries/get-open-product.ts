@@ -38,7 +38,21 @@ export const QUERY_GET_OPEN_PRODUCT = gql`
         }
       }
       taken {
-        titel
+        id
+        soort
+        koppeling {
+          registratie
+          value
+        }
+        url {
+          uri
+        }
+        portaalformulier {
+          formulier {
+            soort
+            value
+          }
+        }
       }
       acties {
         uuid
