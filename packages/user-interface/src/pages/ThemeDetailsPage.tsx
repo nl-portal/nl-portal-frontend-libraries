@@ -14,6 +14,7 @@ import { useParams } from "react-router";
 import { capitalizeFirstLetter } from "../utils/person-data";
 import DescriptionList from "../components/DescriptionList";
 import { currencyFormat } from "../constants/currency-format";
+import DecisionsList from "../components/DecisionsList";
 
 const ThemeDetailsPage = () => {
   const intl = useIntl();
@@ -62,7 +63,7 @@ const ThemeDetailsPage = () => {
         titleTranslationId={null}
         tasks={taken}
       />
-      {/* <ActionsList loading={loading} actions={openProduct?.acties.map((item) => item.mapping)} /> */}
+      <DecisionsList loading={loading} decisions={openProduct?.decisions} />
       <CasesList
         loading={loading}
         error={Boolean(error)}

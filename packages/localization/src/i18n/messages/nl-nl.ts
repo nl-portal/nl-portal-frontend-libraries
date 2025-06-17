@@ -87,6 +87,7 @@ export const NL_NL_MESSAGES: Messages = {
     "caseDetails.statusUnknown": "niet beschikbaar",
     "caseDetails.contacttimeline.today": "vandaag",
     "caseDetails.contacttimeline.yesterday": "gisteren",
+    "decisionsList.title": "Wat kan ik regelen",
     "messageDetails.sent": "Bericht verstuurd op {date} om {time}",
     "documents.fetchError":
       "Er ging iets niet goed, probeer het later opnieuw.",
