@@ -1193,16 +1193,17 @@ export type OpenProductPrijsRegel = {
 export type OpenProductProduct = {
   __typename?: 'OpenProductProduct';
   aanmaakDatum: Scalars['ZonedDateTime']['output'];
-  acties: Array<OpenProductActie>;
+  acties?: Maybe<Array<OpenProductActie>>;
   dataobject?: Maybe<Scalars['JSON']['output']>;
+  decisions: Array<Scalars['JSON']['output']>;
   documenten: Array<OpenProductUrl>;
-  eindDatum: Scalars['Date']['output'];
+  eindDatum?: Maybe<Scalars['Date']['output']>;
   frequentie: OpenProductFrequentie;
   gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
   naam: Scalars['String']['output'];
   prijs: Scalars['Float']['output'];
   producttype: OpenProductProductProductType;
-  startDatum: Scalars['Date']['output'];
+  startDatum?: Maybe<Scalars['Date']['output']>;
   status: OpenProductToegestaneStatus;
   taken?: Maybe<Array<TaakV2>>;
   updateDatum: Scalars['ZonedDateTime']['output'];
@@ -2549,7 +2550,7 @@ export type GetOpenProductenByThemaQueryVariables = Exact<{
 }>;
 
 
-export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProductenByThema: Array<{ __typename?: 'OpenProductProduct', uuid: any, naam: string, startDatum: any, eindDatum: any }> };
+export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProductenByThema: Array<{ __typename?: 'OpenProductProduct', uuid: any, naam: string, startDatum?: any | null, eindDatum?: any | null }> };
 
 export type GetOpenProductHoofdThemasQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2577,7 +2578,7 @@ export type GetOpenProductQueryVariables = Exact<{
 }>;
 
 
-export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum: any, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs: number, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> | null, acties: Array<{ __typename?: 'OpenProductActie', uuid: any, naam: string, url: string }> } | null };
+export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs: number, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> | null } | null };
 
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3732,12 +3733,17 @@ export const GetOpenProductDocument = gql`
           value
         }
       }
+      ogonebetaling {
+        bedrag
+        betaalkenmerk
+        pspid
+      }
+      titel
+      status
+      verloopdatum
+      version
     }
-    acties {
-      uuid
-      naam
-      url
-    }
+    decisions
   }
 }
     `;

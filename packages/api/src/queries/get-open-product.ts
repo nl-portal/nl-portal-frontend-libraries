@@ -53,12 +53,17 @@ export const QUERY_GET_OPEN_PRODUCT = gql`
             value
           }
         }
+        ogonebetaling {
+          bedrag
+          betaalkenmerk
+          pspid
+        }
+        titel
+        status
+        verloopdatum
+        version
       }
-      acties {
-        uuid
-        naam
-        url
-      }
+      decisions
     }
   }
 `;
