@@ -2554,11 +2554,10 @@ export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProduc
 export type GetOpenProductHoofdThemasQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetOpenProductHoofdThemasQuery = { __typename?: 'Query', getOpenProductHoofdThemas: Array<{ __typename?: 'OpenProductThema', uuid: any, naam: string, producttypen: Array<{ __typename?: 'OpenProductThemaProductType', uuid: any }> }> };
+export type GetOpenProductHoofdThemasQuery = { __typename?: 'Query', getOpenProductHoofdThemas: Array<{ __typename?: 'OpenProductThema', uuid: any, naam: string }> };
 
 export type GetOpenProductThemaTakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
-  language: Scalars['String']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
@@ -2567,7 +2566,6 @@ export type GetOpenProductThemaTakenQuery = { __typename?: 'Query', getOpenProdu
 
 export type GetOpenProductThemaZakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
-  language: Scalars['String']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
@@ -3535,9 +3533,6 @@ export const GetOpenProductHoofdThemasDocument = gql`
   getOpenProductHoofdThemas {
     uuid
     naam
-    producttypen {
-      uuid
-    }
   }
 }
     `;
@@ -3574,8 +3569,8 @@ export type GetOpenProductHoofdThemasLazyQueryHookResult = ReturnType<typeof use
 export type GetOpenProductHoofdThemasSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasSuspenseQuery>;
 export type GetOpenProductHoofdThemasQueryResult = Apollo.QueryResult<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>;
 export const GetOpenProductThemaTakenDocument = gql`
-    query getOpenProductThemaTaken($id: UUID!, $language: String!, $pageSize: Int) {
-  getOpenProductThemaTaken(id: $id, language: $language, pageSize: $pageSize) {
+    query getOpenProductThemaTaken($id: UUID!, $pageSize: Int) {
+  getOpenProductThemaTaken(id: $id, pageSize: $pageSize) {
     id
     soort
     koppeling {
@@ -3612,7 +3607,6 @@ export const GetOpenProductThemaTakenDocument = gql`
  * const { data, loading, error } = useGetOpenProductThemaTakenQuery({
  *   variables: {
  *      id: // value for 'id'
- *      language: // value for 'language'
  *      pageSize: // value for 'pageSize'
  *   },
  * });
@@ -3634,8 +3628,8 @@ export type GetOpenProductThemaTakenLazyQueryHookResult = ReturnType<typeof useG
 export type GetOpenProductThemaTakenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductThemaTakenSuspenseQuery>;
 export type GetOpenProductThemaTakenQueryResult = Apollo.QueryResult<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>;
 export const GetOpenProductThemaZakenDocument = gql`
-    query getOpenProductThemaZaken($id: UUID!, $language: String!, $pageSize: Int) {
-  getOpenProductThemaZaken(id: $id, language: $language, pageSize: $pageSize) {
+    query getOpenProductThemaZaken($id: UUID!, $pageSize: Int) {
+  getOpenProductThemaZaken(id: $id, pageSize: $pageSize) {
     uuid
     omschrijving
     identificatie
@@ -3665,7 +3659,6 @@ export const GetOpenProductThemaZakenDocument = gql`
  * const { data, loading, error } = useGetOpenProductThemaZakenQuery({
  *   variables: {
  *      id: // value for 'id'
- *      language: // value for 'language'
  *      pageSize: // value for 'pageSize'
  *   },
  * });

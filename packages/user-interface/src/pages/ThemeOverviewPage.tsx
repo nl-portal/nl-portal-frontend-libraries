@@ -36,7 +36,9 @@ const ThemeOverviewPage = ({
   const intl = useIntl();
   const { themes } = use(AppContext);
   const { paths } = useOutletContext<RouterOutletContext>();
-  const id = themes.find((theme) => stringToSlug(theme.naam) === slug)?.uuid;
+  const id = themes.find(
+    (theme) => stringToSlug(theme.naam) === stringToSlug(slug),
+  )?.uuid;
   const {
     data: takenData,
     loading: takenLoading,
@@ -44,9 +46,9 @@ const ThemeOverviewPage = ({
   } = useGetOpenProductThemaTakenQuery({
     variables: {
       id,
-      language: intl.locale,
       pageSize: fetchTasksLength,
     },
+    skip: !id || !fetchTasksLength,
   });
   const {
     data: zakenData,
@@ -55,9 +57,9 @@ const ThemeOverviewPage = ({
   } = useGetOpenProductThemaZakenQuery({
     variables: {
       id,
-      language: intl.locale,
       pageSize: fetchCasesLength,
     },
+    skip: !id || !fetchCasesLength,
   });
   const {
     data: productenData,
@@ -67,6 +69,7 @@ const ThemeOverviewPage = ({
     variables: {
       themaId: id,
     },
+    skip: !id,
   });
 
   const loading = takenLoading || zakenLoading || productenLoading;

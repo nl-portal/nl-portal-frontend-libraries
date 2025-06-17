@@ -125,6 +125,26 @@ export const routes: RouteObject[] = [
     ],
   },
   {
+    path: paths.themeOverview("inkomensondersteuning"),
+    handle: { label: "breadcrumb.inkomensondersteuning" },
+    children: [
+      {
+        index: true,
+        handle: { label: "breadcrumb.inkomensondersteuning" },
+        element: (
+          <ThemeOverviewPage
+            slug="inkomensondersteuning"
+            productSettings={{
+              titleTranslationId: "Vergunningen",
+              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
+              dataMapping: ["naam", "startDatum", "eindDatum"],
+            }}
+          />
+        ),
+      },
+    ],
+  },
+  {
     path: paths.account,
     handle: { label: "breadcrumb.account" },
     children: [
