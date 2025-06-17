@@ -1,6 +1,7 @@
 import { NavigationItem } from "@nl-portal/nl-portal-user-interface";
 import {
   ArchiveIcon,
+  CarIcon,
   CheckCircleIcon,
   EuroIcon,
   GridIcon,
@@ -41,6 +42,12 @@ export const menuItems: NavigationItem[][] = [
       path: paths.themeOverview("belastingzaken"),
       icon: <EuroIcon />,
       themeSlug: "belastingzaken",
+    },
+    {
+      titleTranslationKey: "parkeren",
+      path: paths.themeOverview("parkeren"),
+      icon: <CarIcon />,
+      themeSlug: "parkeren",
     },
   ],
   [

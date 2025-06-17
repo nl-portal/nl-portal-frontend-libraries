@@ -13,8 +13,8 @@ import AppContext from "../contexts/AppContext";
 import { use } from "react";
 import { stringToSlug } from "../utils/string-to-slug";
 import TableList from "../components/TableList";
-// import { useOutletContext } from "react-router";
-// import { RouterOutletContext } from "../interfaces/router-outlet-context";
+import { useOutletContext } from "react-router";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 interface Props {
   slug: string;
@@ -23,7 +23,7 @@ interface Props {
   productSettings: {
     titleTranslationId: string;
     headerTranslationIds: string[];
-    dataMapping: { key: string; value: string }[];
+    dataMapping: string[];
   };
 }
 
@@ -35,7 +35,7 @@ const ThemeOverviewPage = ({
 }: Props) => {
   const intl = useIntl();
   const { themes } = use(AppContext);
-  // const { paths } = useOutletContext<RouterOutletContext>();
+  const { paths } = useOutletContext<RouterOutletContext>();
   const id = themes.find((theme) => stringToSlug(theme.naam) === slug)?.uuid;
   const {
     data: takenData,
@@ -59,18 +59,20 @@ const ThemeOverviewPage = ({
       pageSize: fetchCasesLength,
     },
   });
-  const { data } = useGetOpenProductenByThemaQuery({
+  const {
+    data: productenData,
+    loading: productenLoading,
+    error: productenError,
+  } = useGetOpenProductenByThemaQuery({
     variables: {
       themaId: id,
     },
   });
 
-  console.log(data);
-
-  const loading = takenLoading || zakenLoading;
+  const loading = takenLoading || zakenLoading || productenLoading;
   const taken = (takenData?.getOpenProductThemaTaken as TaakV2[]) || [];
   const zaken = (zakenData?.getOpenProductThemaZaken as Zaak[]) || [];
-  // const href = paths.themeDetails(slug, id);
+  const producten = productenData?.getOpenProductenByThema || [];
 
   return (
     <PageGrid>
@@ -95,14 +97,19 @@ const ThemeOverviewPage = ({
       )}
       <TableList
         loading={loading}
+        error={Boolean(productenError)}
         titleTranslationId={productSettings.titleTranslationId}
         headers={productSettings.headerTranslationIds.map((id) =>
           intl.formatMessage({ id }),
         )}
-        // rows={productSettings.dataMapping.map(([key, value]) => ({
-        //   href: paths.themeSub(key, slug),
-        //   children: intl.formatMessage({ id: value }),
-        // }))}
+        rows={producten.map((product) =>
+          productSettings.dataMapping.map((map) => ({
+            href: paths.themeDetails(slug, product.uuid),
+            children: intl.formatMessage({
+              id: (product as Record<string, string>)[map],
+            }),
+          })),
+        )}
       />
     </PageGrid>
   );
