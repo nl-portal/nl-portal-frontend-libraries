@@ -85,7 +85,20 @@ export const routes: RouteObject[] = [
       {
         index: true,
         handle: { label: "breadcrumb.belastingzaken" },
-        element: <ThemeOverviewPage slug="belastingzaken" />,
+        element: (
+          <ThemeOverviewPage
+            slug="belastingzaken"
+            productSettings={{
+              titleTranslationId: "Producten",
+              headerTranslationIds: ["Kolom 1", "Kolom 2", "Kolom 3"],
+              dataMapping: [
+                { key: "belastingzaken", value: "Belastingzaken" },
+                { key: "belastingaangifte", value: "Belastingaangifte" },
+                { key: "belastingteruggave", value: "Belastingteruggave" },
+              ],
+            }}
+          />
+        ),
       },
     ],
   },

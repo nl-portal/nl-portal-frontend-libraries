@@ -2539,6 +2539,13 @@ export type GetObjectContactMomentenQueryVariables = Exact<{
 
 export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectContactMomenten?: { __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> } | null };
 
+export type GetOpenProductenByThemaQueryVariables = Exact<{
+  themaId: Scalars['UUID']['input'];
+}>;
+
+
+export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProductenByThema: Array<{ __typename?: 'OpenProductProduct', uuid: any, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> | null, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null }> };
+
 export type GetOpenProductHoofdThemasQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3468,6 +3475,81 @@ export type GetObjectContactMomentenQueryHookResult = ReturnType<typeof useGetOb
 export type GetObjectContactMomentenLazyQueryHookResult = ReturnType<typeof useGetObjectContactMomentenLazyQuery>;
 export type GetObjectContactMomentenSuspenseQueryHookResult = ReturnType<typeof useGetObjectContactMomentenSuspenseQuery>;
 export type GetObjectContactMomentenQueryResult = Apollo.QueryResult<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>;
+export const GetOpenProductenByThemaDocument = gql`
+    query getOpenProductenByThema($themaId: UUID!) {
+  getOpenProductenByThema(themaId: $themaId) {
+    uuid
+    taken {
+      id
+      soort
+      koppeling {
+        registratie
+        value
+      }
+      url {
+        uri
+      }
+      portaalformulier {
+        formulier {
+          soort
+          value
+        }
+      }
+      titel
+      status
+      verloopdatum
+      version
+    }
+    zaken {
+      uuid
+      omschrijving
+      identificatie
+      zaaktype {
+        identificatie
+      }
+      startdatum
+      status {
+        statustype {
+          isEindstatus
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOpenProductenByThemaQuery__
+ *
+ * To run a query within a React component, call `useGetOpenProductenByThemaQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOpenProductenByThemaQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOpenProductenByThemaQuery({
+ *   variables: {
+ *      themaId: // value for 'themaId'
+ *   },
+ * });
+ */
+export function useGetOpenProductenByThemaQuery(baseOptions: Apollo.QueryHookOptions<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables> & ({ variables: GetOpenProductenByThemaQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>(GetOpenProductenByThemaDocument, options);
+      }
+export function useGetOpenProductenByThemaLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>(GetOpenProductenByThemaDocument, options);
+        }
+export function useGetOpenProductenByThemaSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>(GetOpenProductenByThemaDocument, options);
+        }
+export type GetOpenProductenByThemaQueryHookResult = ReturnType<typeof useGetOpenProductenByThemaQuery>;
+export type GetOpenProductenByThemaLazyQueryHookResult = ReturnType<typeof useGetOpenProductenByThemaLazyQuery>;
+export type GetOpenProductenByThemaSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductenByThemaSuspenseQuery>;
+export type GetOpenProductenByThemaQueryResult = Apollo.QueryResult<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>;
 export const GetOpenProductHoofdThemasDocument = gql`
     query getOpenProductHoofdThemas {
   getOpenProductHoofdThemas {
