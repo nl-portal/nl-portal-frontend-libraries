@@ -49,6 +49,12 @@ export const menuItems: NavigationItem[][] = [
       icon: <CarIcon />,
       themeSlug: "parkeren",
     },
+    {
+      titleTranslationKey: "inkomensondersteuning",
+      path: paths.themeOverview("inkomensondersteuning"),
+      icon: <EuroIcon />,
+      themeSlug: "inkomensondersteuning",
+    },
   ],
   [
     {

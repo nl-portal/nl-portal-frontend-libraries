@@ -1193,9 +1193,9 @@ export type OpenProductPrijsRegel = {
 export type OpenProductProduct = {
   __typename?: 'OpenProductProduct';
   aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  acties: Array<OpenProductActie>;
   dataobject?: Maybe<Scalars['JSON']['output']>;
   documenten: Array<OpenProductUrl>;
-  eigenaren: Array<OpenProductProductEigenaar>;
   eindDatum: Scalars['Date']['output'];
   frequentie: OpenProductFrequentie;
   gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
@@ -1210,15 +1210,6 @@ export type OpenProductProduct = {
   uuid: Scalars['UUID']['output'];
   verbruiksobject?: Maybe<Scalars['JSON']['output']>;
   zaken?: Maybe<Array<Zaak>>;
-};
-
-export type OpenProductProductEigenaar = {
-  __typename?: 'OpenProductProductEigenaar';
-  bsn?: Maybe<Scalars['String']['output']>;
-  klantnummer?: Maybe<Scalars['String']['output']>;
-  kvkNummer?: Maybe<Scalars['String']['output']>;
-  uuid: Scalars['UUID']['output'];
-  vestigingsnummer?: Maybe<Scalars['String']['output']>;
 };
 
 export type OpenProductProductProductType = {
@@ -1314,7 +1305,7 @@ export type OpenProductThema = {
   aanmaakDatum: Scalars['ZonedDateTime']['output'];
   beschrijving?: Maybe<Scalars['String']['output']>;
   gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
-  /** UUID of the hoofdthema, which is this thema is related to. */
+  /** UUID of the hoofdthema, which this thema is related to. */
   hoofdThema?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
   producttypen: Array<OpenProductThemaProductType>;
@@ -1720,6 +1711,8 @@ export type Query = {
   getOpenProductContacten: ContactenPage;
   /** Get all hoofd themas */
   getOpenProductHoofdThemas: Array<OpenProductThema>;
+  /** Get all hoofd themas by producten */
+  getOpenProductHoofdThemasByProducten: Array<OpenProductThema>;
   /** Get a link */
   getOpenProductLink?: Maybe<OpenProductLink>;
   /** Get all links */
@@ -1752,7 +1745,18 @@ export type Query = {
   getOpenProductType?: Maybe<OpenProductProductType>;
   /** Get all Open product types  */
   getOpenProductTypes: ProductTypesPage;
-  /** Get all Open producten */
+  /**
+   *
+   *         Get all Open producten
+   *         The allowed statussen:
+   *         - initieel
+   *         - gereed
+   *         - actief
+   *         - ingetrokken
+   *         - geweigerd
+   *         - verlopen
+   *
+   */
   getOpenProducten: ProductenPage;
   /** Get a Open producten type by thema id */
   getOpenProductenByThema: Array<OpenProductProduct>;
@@ -2033,7 +2037,7 @@ export type QueryGetOpenProductThemaHierarchyArgs = {
 
 export type QueryGetOpenProductThemaTakenArgs = {
   id: Scalars['UUID']['input'];
-  language: Scalars['String']['input'];
+  language?: InputMaybe<Scalars['String']['input']>;
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -2042,7 +2046,7 @@ export type QueryGetOpenProductThemaTakenArgs = {
 export type QueryGetOpenProductThemaZakenArgs = {
   id: Scalars['UUID']['input'];
   isOpen?: InputMaybe<Scalars['Boolean']['input']>;
-  language: Scalars['String']['input'];
+  language?: InputMaybe<Scalars['String']['input']>;
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -2056,12 +2060,12 @@ export type QueryGetOpenProductThemasArgs = {
 
 export type QueryGetOpenProductTypeArgs = {
   id: Scalars['UUID']['input'];
-  language: Scalars['String']['input'];
+  language?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type QueryGetOpenProductTypesArgs = {
-  language: Scalars['String']['input'];
+  language?: InputMaybe<Scalars['String']['input']>;
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -2070,6 +2074,7 @@ export type QueryGetOpenProductTypesArgs = {
 export type QueryGetOpenProductenArgs = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -2553,7 +2558,6 @@ export type GetOpenProductHoofdThemasQuery = { __typename?: 'Query', getOpenProd
 
 export type GetOpenProductThemaTakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
-  language: Scalars['String']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
@@ -2562,7 +2566,6 @@ export type GetOpenProductThemaTakenQuery = { __typename?: 'Query', getOpenProdu
 
 export type GetOpenProductThemaZakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
-  language: Scalars['String']['input'];
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
@@ -3562,8 +3565,8 @@ export type GetOpenProductHoofdThemasLazyQueryHookResult = ReturnType<typeof use
 export type GetOpenProductHoofdThemasSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasSuspenseQuery>;
 export type GetOpenProductHoofdThemasQueryResult = Apollo.QueryResult<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>;
 export const GetOpenProductThemaTakenDocument = gql`
-    query getOpenProductThemaTaken($id: UUID!, $language: String!, $pageSize: Int) {
-  getOpenProductThemaTaken(id: $id, language: $language, pageSize: $pageSize) {
+    query getOpenProductThemaTaken($id: UUID!, $pageSize: Int) {
+  getOpenProductThemaTaken(id: $id, pageSize: $pageSize) {
     id
     soort
     koppeling {
@@ -3600,7 +3603,6 @@ export const GetOpenProductThemaTakenDocument = gql`
  * const { data, loading, error } = useGetOpenProductThemaTakenQuery({
  *   variables: {
  *      id: // value for 'id'
- *      language: // value for 'language'
  *      pageSize: // value for 'pageSize'
  *   },
  * });
@@ -3622,8 +3624,8 @@ export type GetOpenProductThemaTakenLazyQueryHookResult = ReturnType<typeof useG
 export type GetOpenProductThemaTakenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductThemaTakenSuspenseQuery>;
 export type GetOpenProductThemaTakenQueryResult = Apollo.QueryResult<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>;
 export const GetOpenProductThemaZakenDocument = gql`
-    query getOpenProductThemaZaken($id: UUID!, $language: String!, $pageSize: Int) {
-  getOpenProductThemaZaken(id: $id, language: $language, pageSize: $pageSize) {
+    query getOpenProductThemaZaken($id: UUID!, $pageSize: Int) {
+  getOpenProductThemaZaken(id: $id, pageSize: $pageSize) {
     uuid
     omschrijving
     identificatie
@@ -3653,7 +3655,6 @@ export const GetOpenProductThemaZakenDocument = gql`
  * const { data, loading, error } = useGetOpenProductThemaZakenQuery({
  *   variables: {
  *      id: // value for 'id'
- *      language: // value for 'language'
  *      pageSize: // value for 'pageSize'
  *   },
  * });

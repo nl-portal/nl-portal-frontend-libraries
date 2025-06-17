@@ -59,7 +59,7 @@ const Layout = ({
       <HelmetProvider>
         <PageWrapper>
           <PageHeader>
-            {customHeader || <Header menuItems={navigationItems} />}
+            {customHeader || <Header menuItems={menuItems} />}
           </PageHeader>
           <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
             <Menu items={menuItems} />
