@@ -5,9 +5,6 @@ export const QUERY_GET_OPEN_PRODUCT_HOOFD_THEMAS = gql`
     getOpenProductHoofdThemas {
       uuid
       naam
-      producttypen {
-        uuid
-      }
     }
   }
 `;

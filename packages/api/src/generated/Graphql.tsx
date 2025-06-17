@@ -2554,7 +2554,7 @@ export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProduc
 export type GetOpenProductHoofdThemasQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetOpenProductHoofdThemasQuery = { __typename?: 'Query', getOpenProductHoofdThemas: Array<{ __typename?: 'OpenProductThema', uuid: any, naam: string, producttypen: Array<{ __typename?: 'OpenProductThemaProductType', uuid: any }> }> };
+export type GetOpenProductHoofdThemasQuery = { __typename?: 'Query', getOpenProductHoofdThemas: Array<{ __typename?: 'OpenProductThema', uuid: any, naam: string }> };
 
 export type GetOpenProductThemaTakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -3526,9 +3526,6 @@ export const GetOpenProductHoofdThemasDocument = gql`
   getOpenProductHoofdThemas {
     uuid
     naam
-    producttypen {
-      uuid
-    }
   }
 }
     `;
