@@ -28,6 +28,27 @@ const ThemeDetailsPage = () => {
   const zaken = openProduct?.zaken as Zaak[] | undefined;
   const taken = openProduct?.taken as TaakV2[] | undefined;
 
+  const descriptionItems = [
+    { title: "Startdatum", detail: openProduct?.startDatum },
+    { title: "Einddatum", detail: openProduct?.eindDatum },
+    {
+      title: "Status",
+      detail: capitalizeFirstLetter(openProduct?.status?.toLowerCase() ?? ""),
+    },
+    {
+      title: "Prijs",
+      detail: capitalizeFirstLetter(
+        intl.formatNumber(openProduct?.prijs ?? 0, currencyFormat),
+      ),
+    },
+    ...(openProduct?.dataobject?.data?.details ?? []).map(
+      (item: { key: string; value: string }) => ({
+        title: item.key,
+        detail: item.value,
+      }),
+    ),
+  ].filter(({ detail }) => detail);
+
   return (
     <PageGrid>
       <div>
@@ -49,25 +70,7 @@ const ThemeDetailsPage = () => {
         listView={false}
         cases={zaken}
       />
-      <DescriptionList
-        titleTranslationId="Details"
-        items={[
-          { title: "Startdatum", detail: openProduct?.startDatum },
-          { title: "Einddatum", detail: openProduct?.eindDatum },
-          {
-            title: "Status",
-            detail: capitalizeFirstLetter(
-              openProduct?.status.toLocaleLowerCase() || "-",
-            ),
-          },
-          {
-            title: "Prijs",
-            detail: capitalizeFirstLetter(
-              intl.formatNumber(openProduct?.prijs || 0, currencyFormat) || "-",
-            ),
-          },
-        ]}
-      />
+      <DescriptionList titleTranslationId="Details" items={descriptionItems} />
       <TasksList
         loading={loading}
         showEmpty={false}
