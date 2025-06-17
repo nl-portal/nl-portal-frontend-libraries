@@ -11,6 +11,7 @@ import {
   EditContactInfoPage,
   EditNotificationsPage,
   ThemeOverviewPage,
+  ThemeDetailsPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
@@ -115,6 +116,11 @@ export const routes: RouteObject[] = [
             }}
           />
         ),
+      },
+      {
+        path: paths.themeDetails("parkeren"),
+        handle: { label: "breadcrumb.parkeren.details" },
+        element: <ThemeDetailsPage />,
       },
     ],
   },
