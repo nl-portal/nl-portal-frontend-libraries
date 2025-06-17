@@ -38,13 +38,32 @@ export const QUERY_GET_OPEN_PRODUCT = gql`
         }
       }
       taken {
+        id
+        soort
+        koppeling {
+          registratie
+          value
+        }
+        url {
+          uri
+        }
+        portaalformulier {
+          formulier {
+            soort
+            value
+          }
+        }
+        ogonebetaling {
+          bedrag
+          betaalkenmerk
+          pspid
+        }
         titel
+        status
+        verloopdatum
+        version
       }
-      acties {
-        uuid
-        naam
-        url
-      }
+      decisions
     }
   }
 `;
