@@ -90,12 +90,28 @@ export const routes: RouteObject[] = [
             slug="belastingzaken"
             productSettings={{
               titleTranslationId: "Producten",
-              headerTranslationIds: ["Kolom 1", "Kolom 2", "Kolom 3"],
-              dataMapping: [
-                { key: "belastingzaken", value: "Belastingzaken" },
-                { key: "belastingaangifte", value: "Belastingaangifte" },
-                { key: "belastingteruggave", value: "Belastingteruggave" },
-              ],
+              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
+              dataMapping: ["naam", "startDatum", "eindDatum"],
+            }}
+          />
+        ),
+      },
+    ],
+  },
+  {
+    path: paths.themeOverview("parkeren"),
+    handle: { label: "breadcrumb.parkeren" },
+    children: [
+      {
+        index: true,
+        handle: { label: "breadcrumb.parkeren" },
+        element: (
+          <ThemeOverviewPage
+            slug="parkeren"
+            productSettings={{
+              titleTranslationId: "Vergunningen",
+              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
+              dataMapping: ["naam", "startDatum", "eindDatum"],
             }}
           />
         ),

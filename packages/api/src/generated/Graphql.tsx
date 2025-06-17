@@ -2544,7 +2544,7 @@ export type GetOpenProductenByThemaQueryVariables = Exact<{
 }>;
 
 
-export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProductenByThema: Array<{ __typename?: 'OpenProductProduct', uuid: any, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> | null, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null }> };
+export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProductenByThema: Array<{ __typename?: 'OpenProductProduct', uuid: any, naam: string, startDatum: any, eindDatum: any }> };
 
 export type GetOpenProductHoofdThemasQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3479,41 +3479,9 @@ export const GetOpenProductenByThemaDocument = gql`
     query getOpenProductenByThema($themaId: UUID!) {
   getOpenProductenByThema(themaId: $themaId) {
     uuid
-    taken {
-      id
-      soort
-      koppeling {
-        registratie
-        value
-      }
-      url {
-        uri
-      }
-      portaalformulier {
-        formulier {
-          soort
-          value
-        }
-      }
-      titel
-      status
-      verloopdatum
-      version
-    }
-    zaken {
-      uuid
-      omschrijving
-      identificatie
-      zaaktype {
-        identificatie
-      }
-      startdatum
-      status {
-        statustype {
-          isEindstatus
-        }
-      }
-    }
+    naam
+    startDatum
+    eindDatum
   }
 }
     `;
