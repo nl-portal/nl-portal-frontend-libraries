@@ -18,5 +18,7 @@ export declare global {
     THEME_CLASS: string;
     MESSAGE_COUNT_POLLING_INTERVAL: number;
     CASES_PARTIAL_SEARCH: boolean;
+    OPEN_KLANT_VERSION: string;
+    OPEN_KLANT_REFERENTIE: string;
   }
 }

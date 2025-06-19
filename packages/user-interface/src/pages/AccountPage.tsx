@@ -3,8 +3,8 @@ import {
   MaatschappelijkeActiviteit,
   Persoon,
   useGetBedrijfQuery,
-  useGetBurgerProfielQuery,
   useGetPersoonDataQuery,
+  useUserContactQuery,
 } from "@nl-portal/nl-portal-api";
 import styles from "./AccountPage.module.scss";
 import {
@@ -45,8 +45,9 @@ const AccountPage = ({
   const { isPerson } = useUserInfo();
   const { paths } = useOutletContext<RouterOutletContext>();
   const intl = useIntl();
-  const { data: contactData, loading: contactLoading } =
-    useGetBurgerProfielQuery({ skip: !isPerson });
+  const { data: contactData, loading: contactLoading } = useUserContactQuery({
+    skip: !isPerson,
+  });
   const { data: personData, loading: personLoading } = useGetPersoonDataQuery({
     skip: !isPerson,
   });
@@ -196,7 +197,7 @@ const AccountPage = ({
               title: <FormattedMessage id="account.detail.emailadres" />,
               detail: (
                 <DescriptionListDetail translate="no" loading={contactLoading}>
-                  {contactData?.getBurgerProfiel?.emailadres}
+                  {contactData?.emailadres}
                 </DescriptionListDetail>
               ),
             },
@@ -204,7 +205,7 @@ const AccountPage = ({
               title: <FormattedMessage id="account.detail.telefoonnummer" />,
               detail: (
                 <DescriptionListDetail translate="no" loading={contactLoading}>
-                  {contactData?.getBurgerProfiel?.telefoonnummer}
+                  {contactData?.telefoonnummer}
                 </DescriptionListDetail>
               ),
             },
@@ -423,7 +424,7 @@ const AccountPage = ({
                 detail: (
                   <DescriptionListDetail loading={contactLoading}>
                     <FormattedMessage
-                      id={`account.detail.notification.form.email.${contactData?.getBurgerProfiel?.aanmaakkanaal === "EMAIL"}`}
+                      id={`account.detail.notification.form.email.${contactData?.aanmaakkanaal === "EMAIL"}`}
                       values={{
                         strong: (chunk) => <strong>{chunk}</strong>,
                       }}
