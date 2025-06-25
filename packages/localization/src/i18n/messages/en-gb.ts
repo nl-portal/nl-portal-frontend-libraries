@@ -167,7 +167,7 @@ export const EN_GB_MESSAGES: Messages = {
     "overview.subTitle": "Authorised for",
     "overviewpage.paragraph":
       "In the NL-portal you can arrange your personal affairs yourself when it suits you. For example, you can pay your bills and see when your application is ready.",
-    "overviewpage.casesTitle": "My current procedures",
+    "overviewpage.casesTitle": "My procedures",
     "actionLabels.today": "today",
     "actionLabels.yesterday": "yesterday",
     "actionLabels.before": "before",

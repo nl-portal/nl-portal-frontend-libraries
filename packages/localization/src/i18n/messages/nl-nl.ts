@@ -7,7 +7,7 @@ export const NL_NL_MESSAGES: Messages = {
     "locales.en-GB": "English",
     "locales.nl-NL": "Nederlands",
     "pageTitles.overview": "Overzicht",
-    "pageTitles.cases": "Mijn lopende zaken",
+    "pageTitles.cases": "Mijn zaken",
     "pageTitles.messages": "Mijn berichten",
     "pageTitles.documents": "Documenten",
     "pageTitles.offline": "Geen internetverbinding",
@@ -172,7 +172,7 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.subTitle": "Gemachtigd voor",
     "overviewpage.paragraph":
       "In de NL-portal  kunt u zelf uw persoonlijke zaken regelen wanneer het u uitkomt. U kunt bijvoorbeeld uw rekeningen betalen en zien wanneer uw aanvraag klaar is.",
-    "overviewpage.casesTitle": "Mijn lopende zaken",
+    "overviewpage.casesTitle": "Mijn zaken",
     "actionLabels.today": "vandaag",
     "actionLabels.yesterday": "gisteren",
     "actionLabels.before": "vóór",
