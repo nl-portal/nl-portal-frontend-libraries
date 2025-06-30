@@ -1,4 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+// Om normale GraphQL queries die 1 op 1 te vervangen zijn backwards compatible te maken, is de variant met hook, variables en result voldoende.
+//
+// Om ingewikkeldere queries die niet 1 op 1 te vervangen te zijn backwards compatible te houden, is de variant met de hook, execute en result.
+// In de execute kun je bijvoorbeeld meerdere calls in v1 vervangen door 1 call in de v2, of andersom.
+
 export type VersionConfig<
   Hook extends (...a: any[]) => readonly [any, any],
   UnifiedVars,

@@ -2416,6 +2416,20 @@ export type ZaakType = {
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
 
+export type CreateUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresRequest: DigitaleAdresRequestInput;
+}>;
+
+
+export type CreateUserDigitaleAdresMutation = { __typename?: 'Mutation', createUserDigitaleAdres?: { __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string } | null };
+
+export type DeleteUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresId: Scalars['UUID']['input'];
+}>;
+
+
+export type DeleteUserDigitaleAdresMutation = { __typename?: 'Mutation', deleteUserDigitaleAdres?: boolean | null };
+
 export type GenerateOgonePaymentMutationVariables = Exact<{
   amount: Scalars['Float']['input'];
   failureUrl: Scalars['String']['input'];
@@ -2665,6 +2679,74 @@ export const FormulierFieldsFragmentDoc = gql`
   value
 }
     `;
+export const CreateUserDigitaleAdresDocument = gql`
+    mutation CreateUserDigitaleAdres($digitaleAdresRequest: DigitaleAdresRequestInput!) {
+  createUserDigitaleAdres(digitaleAdresRequest: $digitaleAdresRequest) {
+    uuid
+    waarde
+    type
+    omschrijving
+    referentie
+  }
+}
+    `;
+export type CreateUserDigitaleAdresMutationFn = Apollo.MutationFunction<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useCreateUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useCreateUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserDigitaleAdresMutation, { data, loading, error }] = useCreateUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresRequest: // value for 'digitaleAdresRequest'
+ *   },
+ * });
+ */
+export function useCreateUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>(CreateUserDigitaleAdresDocument, options);
+      }
+export type CreateUserDigitaleAdresMutationHookResult = ReturnType<typeof useCreateUserDigitaleAdresMutation>;
+export type CreateUserDigitaleAdresMutationResult = Apollo.MutationResult<CreateUserDigitaleAdresMutation>;
+export type CreateUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>;
+export const DeleteUserDigitaleAdresDocument = gql`
+    mutation DeleteUserDigitaleAdres($digitaleAdresId: UUID!) {
+  deleteUserDigitaleAdres(digitaleAdresId: $digitaleAdresId)
+}
+    `;
+export type DeleteUserDigitaleAdresMutationFn = Apollo.MutationFunction<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useDeleteUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useDeleteUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserDigitaleAdresMutation, { data, loading, error }] = useDeleteUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresId: // value for 'digitaleAdresId'
+ *   },
+ * });
+ */
+export function useDeleteUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>(DeleteUserDigitaleAdresDocument, options);
+      }
+export type DeleteUserDigitaleAdresMutationHookResult = ReturnType<typeof useDeleteUserDigitaleAdresMutation>;
+export type DeleteUserDigitaleAdresMutationResult = Apollo.MutationResult<DeleteUserDigitaleAdresMutation>;
+export type DeleteUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>;
 export const GenerateOgonePaymentDocument = gql`
     mutation GenerateOgonePayment($amount: Float!, $failureUrl: String!, $langId: String!, $orderId: String!, $pspId: String!, $reference: String!, $successUrl: String!, $title: String!) {
   generateOgonePayment(
