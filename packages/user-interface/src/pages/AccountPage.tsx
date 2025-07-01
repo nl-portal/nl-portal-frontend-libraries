@@ -39,7 +39,7 @@ const AccountPage = ({
   showInhabitantAmount,
   showAddressResearch = true,
   addressResearchUrl,
-  showNotificationSubSection = true,
+  //showNotificationSubSection = true,
 }: AccountPageProps) => {
   const { formatDate } = useDateFormatter();
   const { isPerson } = useUserInfo();
@@ -390,6 +390,7 @@ const AccountPage = ({
           )}
         </div>
       </PageGrid>
+      {/* Disabled until OpenKlant supports notifications/meldingen
       {showNotificationSubSection && (
         <PageGrid variant="small">
           <Heading id="meldingen" as="h3">
@@ -435,7 +436,7 @@ const AccountPage = ({
             ]}
           />
         </PageGrid>
-      )}
+      )} */}
     </PageGrid>
   );
 };
