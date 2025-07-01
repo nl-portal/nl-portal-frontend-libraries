@@ -18,16 +18,16 @@ export const useUserInfo = () => {
     authenticationMethods?.proxy?.includes(authenticationMethod) ?? false;
 
   const { data: persoonData, loading: persoonLoading } = useGetPersoonV2Query({
-    skip: !isPerson || !authenticationMethod,
+    skip: !isPerson,
   });
 
   const { data: bedrijfData, loading: bedrijfLoading } = useGetBedrijfQuery({
-    skip: isPerson || !authenticationMethod,
+    skip: isPerson,
   });
 
   const { data: gemachtigdeData, loading: gemachtigdeLoading } =
     useGetGemachtigdeV2Query({
-      skip: !isVolmachtLogin || !authenticationMethod,
+      skip: !isVolmachtLogin,
     });
 
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
