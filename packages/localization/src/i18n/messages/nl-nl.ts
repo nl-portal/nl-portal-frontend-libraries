@@ -67,6 +67,8 @@ export const NL_NL_MESSAGES: Messages = {
       "Maak verbinding met het internet om gebruik te maken van {applicationName}.",
     "element.loading": "Aan het laden",
     "element.download": "Download",
+    "account.noDataAvailable":
+      "Het is helaas niet gelukt om uw gegevens op te halen. Ververs de pagina of probeer het later nog eens.",
     "account.leadParagraph":
       "Op deze pagina ziet u uw persoonlijke gegevens en hoe wij die gebruiken om contact met u te houden.",
     "account.contactHeader": "Contact",

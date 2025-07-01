@@ -27,6 +27,7 @@ import DescriptionListDetail from "../components/DescriptionListDetail";
 import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import PortalLink from "../components/PortalLink";
+import Notification from "../components/Notification";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
@@ -59,6 +60,20 @@ const AccountPage = ({
   const company = companyData?.getBedrijf as
     | MaatschappelijkeActiviteit
     | undefined;
+
+  if ((isPerson && !person) || (!isPerson && !company)) {
+    return (
+      <div>
+        <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
+        <Notification
+          variant="error"
+          title=""
+          text={intl.formatMessage({ id: "account.noDataAvailable" })}
+          closable={false}
+        />
+      </div>
+    );
+  }
 
   if (!isPerson)
     return (
