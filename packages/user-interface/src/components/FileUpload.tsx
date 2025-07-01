@@ -10,6 +10,7 @@ export interface UploadedFile {
 }
 
 interface FileUploadProps {
+  id: string;
   context: object;
   disabled: boolean;
   multiple: boolean;
@@ -18,6 +19,7 @@ interface FileUploadProps {
 }
 
 const FileUpload = ({
+  id,
   context,
   disabled,
   multiple,
@@ -99,6 +101,7 @@ const FileUpload = ({
   return (
     <div>
       <input
+        id={id}
         type="file"
         name="file"
         onChange={onChangeHandler}
