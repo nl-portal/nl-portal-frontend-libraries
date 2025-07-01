@@ -2,7 +2,6 @@ import {
   useGetBurgerProfielQuery,
   useGetUserDigitaleAdressenQuery,
   DigitaleAdresType,
-  DigitaleAdresResponse,
 } from "../generated/Graphql";
 import { createVersionedHook } from "../utils/createVersionedHook";
 
@@ -21,10 +20,6 @@ export const useUserContactQuery = (() => {
       ? "v1"
       : "v2";
 
-  const matchReferentie = (digitaleAdres: DigitaleAdresResponse) =>
-    typeof window !== "undefined" &&
-    window.OPEN_KLANT_REFERENTIE === digitaleAdres.referentie;
-
   return createVersionedHook({
     selected: getSelected(),
     v1: {
@@ -40,11 +35,10 @@ export const useUserContactQuery = (() => {
       hook: useGetUserDigitaleAdressenQuery,
       map: (d) => {
         const email = d?.getUserDigitaleAdresen?.find(
-          (a) => a.type === DigitaleAdresType.Email && matchReferentie(a),
+          (a) => a.type === DigitaleAdresType.Email,
         );
         const phone = d?.getUserDigitaleAdresen?.find(
-          (a) =>
-            a.type === DigitaleAdresType.Telefoonnummer && matchReferentie(a),
+          (a) => a.type === DigitaleAdresType.Telefoonnummer,
         );
         return {
           emailadresId: email?.uuid,
