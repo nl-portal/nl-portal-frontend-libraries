@@ -107,6 +107,10 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.dateOfBirth": "Date of birth",
     "account.detail.countryOfBirth": "Country of birth",
     "account.detail.nationality": "Nationality",
+    "account.detail.confidentialityOfPersonalData":
+      "Confidentiality of personal data",
+    "account.detail.confidentialityOfPersonalData.true": "Yes",
+    "account.detail.confidentialityOfPersonalData.false": "No",
     "account.detail.street": "Street",
     "account.detail.postalCodeAndCity": "Postal code and place of residence",
     "account.detail.aanvangsDatum": "Start date",

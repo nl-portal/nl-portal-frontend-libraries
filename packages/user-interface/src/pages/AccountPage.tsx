@@ -1,10 +1,10 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import {
+  BrpPersoon,
   MaatschappelijkeActiviteit,
-  Persoon,
   useGetBedrijfQuery,
   useGetBurgerProfielQuery,
-  useGetPersoonDataQuery,
+  useGetPersoonV2Query,
 } from "@nl-portal/nl-portal-api";
 import styles from "./AccountPage.module.scss";
 import {
@@ -45,16 +45,17 @@ const AccountPage = ({
   const { isPerson } = useUserInfo();
   const { paths } = useOutletContext<RouterOutletContext>();
   const intl = useIntl();
+
   const { data: contactData, loading: contactLoading } =
     useGetBurgerProfielQuery({ skip: !isPerson });
-  const { data: personData, loading: personLoading } = useGetPersoonDataQuery({
+  const { data: personData, loading: personLoading } = useGetPersoonV2Query({
     skip: !isPerson,
   });
   const { data: companyData, loading: companyLoading } = useGetBedrijfQuery({
     skip: isPerson,
   });
 
-  const person = personData?.getPersoon as Persoon | undefined;
+  const person = personData?.getPersoonV2 as BrpPersoon | undefined;
   const company = companyData?.getBedrijf as
     | MaatschappelijkeActiviteit
     | undefined;
@@ -248,7 +249,7 @@ const AccountPage = ({
                   data-testid="persoonsgegevens-gender"
                   loading={personLoading}
                 >
-                  {person?.geslachtsaanduiding}
+                  {person?.geslacht?.omschrijving}
                 </DescriptionListDetail>
               ),
             },
@@ -274,7 +275,7 @@ const AccountPage = ({
                 >
                   {person?.geboorte?.datum
                     ? formatDate({
-                        date: `${person?.geboorte?.datum?.jaar}-${String(person?.geboorte?.datum?.maand).padStart(2, "0")}-${String(person?.geboorte?.datum?.dag).padStart(2, "0")}`,
+                        date: person?.geboorte?.datum.datum,
                       })
                     : ""}
                 </DescriptionListDetail>
@@ -302,6 +303,20 @@ const AccountPage = ({
                 </DescriptionListDetail>
               ),
             },
+            {
+              title: (
+                <FormattedMessage id="account.detail.confidentialityOfPersonalData" />
+              ),
+              detail: (
+                <DescriptionListDetail data-testid="persoonsgegevens-confidentialityOfPersonalData">
+                  {
+                    <FormattedMessage
+                      id={`account.detail.confidentialityOfPersonalData.${person?.geheimhoudingPersoonsgegevens ?? false}`}
+                    />
+                  }
+                </DescriptionListDetail>
+              ),
+            },
           ]}
         />
       </PageGrid>
@@ -320,10 +335,10 @@ const AccountPage = ({
                   loading={personLoading}
                 >
                   {getStreetString(
-                    person?.verblijfplaats?.straat,
-                    person?.verblijfplaats?.huisnummer,
-                    person?.verblijfplaats?.huisletter,
-                    person?.verblijfplaats?.huisnummertoevoeging,
+                    person?.verblijfplaats?.verblijfadres?.officieleStraatnaam,
+                    person?.verblijfplaats?.verblijfadres?.huisnummer?.toString(),
+                    person?.verblijfplaats?.verblijfadres?.huisletter,
+                    person?.verblijfplaats?.verblijfadres?.huisnummertoevoeging,
                   )}
                 </DescriptionListDetail>
               ),
@@ -337,8 +352,8 @@ const AccountPage = ({
                   loading={personLoading}
                 >
                   {getPostalCodeCityString(
-                    person?.verblijfplaats?.postcode,
-                    person?.verblijfplaats?.woonplaats,
+                    person?.verblijfplaats?.verblijfadres?.postcode,
+                    person?.verblijfplaats?.verblijfadres?.woonplaats,
                   )}
                 </DescriptionListDetail>
               ),
@@ -347,9 +362,9 @@ const AccountPage = ({
               title: <FormattedMessage id="account.detail.aanvangsDatum" />,
               detail: (
                 <DescriptionListDetail loading={personLoading}>
-                  {person?.verblijfplaats?.datumAanvangAdreshouding
+                  {person?.verblijfplaats?.datumVan?.datum
                     ? formatDate({
-                        date: `${person?.verblijfplaats?.datumAanvangAdreshouding?.jaar}-${String(person?.verblijfplaats?.datumAanvangAdreshouding?.maand).padStart(2, "0")}-${String(person?.verblijfplaats?.datumAanvangAdreshouding?.dag).padStart(2, "0")}`,
+                        date: person?.verblijfplaats?.datumVan?.datum,
                       })
                     : ""}
                 </DescriptionListDetail>

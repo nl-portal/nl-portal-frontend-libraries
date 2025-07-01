@@ -110,6 +110,10 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.dateOfBirth": "Geboortedatum",
     "account.detail.countryOfBirth": "Geboorteland",
     "account.detail.nationality": "Nationaliteit",
+    "account.detail.confidentialityOfPersonalData":
+      "Geheimhouding persoonsgegevens",
+    "account.detail.confidentialityOfPersonalData.true": "Ja",
+    "account.detail.confidentialityOfPersonalData.false": "Nee",
     "account.detail.street": "Straat",
     "account.detail.postalCodeAndCity": "Postcode en plaats",
     "account.detail.aanvangsDatum": "Aanvangsdatum",
