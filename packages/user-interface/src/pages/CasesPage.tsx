@@ -31,15 +31,12 @@ const CasesPage = () => {
       pageSize: fetchCasesLength,
     },
   });
-  const [
-    ,
-    {
-      data: closedData,
-      loading: closedLoading,
-      error: closedError,
-      refetch: closedRefetch,
-    },
-  ] = useGetZakenLazyQuery({
+  const {
+    data: closedData,
+    loading: closedLoading,
+    error: closedError,
+    refetch: closedRefetch,
+  } = useGetZakenQuery({
     variables: {
       isOpen: false,
       pageSize: fetchCasesLength,
