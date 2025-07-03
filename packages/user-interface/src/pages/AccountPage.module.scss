@@ -8,6 +8,11 @@
   word-break: break-word;
 }
 
+.account__link-list {
+  --utrecht-space-around: 1;
+  --utrecht-link-list-margin-block-start: 16px;
+}
+
 .account__address-research-description {
   --utrecht-space-around: 1;
   --utrecht-paragraph-margin-block-start: 16px;

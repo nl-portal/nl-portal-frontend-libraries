@@ -152,7 +152,19 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.notification.form.save": "Wijzigingen opslaan",
     "account.detail.contactform.email": "Emailadres",
     "account.detail.contactform.tel": "Telefoonnummer",
-    "account.addressResearchRequestButton": "Vraag onderzoek aan",
+    "account.adres.links.addressResearchRequest": "Vraag onderzoek aan",
+    "account.persoonsgegevens.links.changeInUseOfSurname":
+      "Verandering naamgebruik aanvragen",
+    "account.adres.links.changeRegisteredGender":
+      "Vermelding geslacht wijzigen",
+    "account.adres.links.reportChangeOfAddress": "Verhuizing doorgeven",
+    "account.detail.wijzigingenBrp": "Wijzigingen en aanvragen BRP",
+    "account.wijzigingEnAanvragenBRP.links.addressResearchMoreInfo":
+      "Adresonderzoek aanvragen",
+    "account.wijzigingEnAanvragenBRP.links.requestForChangeBrpInfo":
+      "Persoonsgegevens BRP aanpassen",
+    "account.wijzigingEnAanvragenBRP.links.requestConfidentialityOfDataInfo":
+      "Geheimhouding persoonsgegevens aanvragen of intrekken",
     "account.pageIndex.title": "Op deze pagina",
     "forms.listSubHeader": "Beschikbare formulieren",
     "tasksList.viewAll": "Bekijk alle taken",

@@ -148,7 +148,19 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.notification.form.save": "Save changes",
     "account.detail.contactform.email": "Email address",
     "account.detail.contactform.tel": "Phone number",
-    "account.addressResearchRequestButton": "Request investigation",
+    "account.adres.links.addressResearchRequest": "Request investigation",
+    "account.persoonsgegevens.links.changeInUseOfSurname":
+      "Request a change in the use of your surname",
+    "account.adres.links.changeRegisteredGender":
+      "Change your registered gender",
+    "account.adres.links.reportChangeOfAddress": "Report your move",
+    "account.detail.wijzigingenBrp": "Changes and requests BRP",
+    "account.wijzigingEnAanvragenBRP.links.addressResearchMoreInfo":
+      "Request address investigation",
+    "account.wijzigingEnAanvragenBRP.links.requestForChangeBrpInfo":
+      "Change personal data in the BRP",
+    "account.wijzigingEnAanvragenBRP.links.requestConfidentialityOfDataInfo":
+      "Request to keep data confidential",
     "account.pageIndex.title": "On this page",
     "forms.listSubHeader": "Available forms",
     "tasksList.viewAll": "View all action items",
