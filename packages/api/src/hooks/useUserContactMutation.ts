@@ -9,6 +9,9 @@ import {
   CreateUserDigitaleAdresMutation,
   useDeleteUserDigitaleAdresMutation,
   DeleteUserDigitaleAdresMutation,
+  GetBurgerProfielDocument,
+  GetUserDigitaleAdressenDocument,
+  GetUserDigitaleAdressenQuery,
 } from "../generated/Graphql";
 import { createVersionedMutationHook } from "../utils/createVersionedMutationHook";
 
@@ -19,14 +22,23 @@ type Contact = {
   telefoonnummer?: string | null;
 };
 
-function useCreateOrUpdateDigitaleAdresMutations() {
-  const [updateMutate, updateRes] = useUpdateUserDigitaleAdresMutation();
-  const [createMutate] = useCreateUserDigitaleAdresMutation();
-  const [deleteMutate] = useDeleteUserDigitaleAdresMutation();
+function useDigitaleAdresMutations() {
+  const [updateMutate, updateResult] = useUpdateUserDigitaleAdresMutation();
+  const [createMutate, createResult] = useCreateUserDigitaleAdresMutation();
+  const [deleteMutate, deleteResult] = useDeleteUserDigitaleAdresMutation();
+
+  const combinedResult = {
+    loading:
+      updateResult.loading || createResult.loading || deleteResult.loading,
+    called: updateResult.called || createResult.called || deleteResult.called,
+    error: updateResult.error || createResult.error || deleteResult.error,
+
+    data: updateResult.data ?? createResult.data ?? deleteResult.data,
+  } as const;
 
   return [
     { update: updateMutate, create: createMutate, remove: deleteMutate },
-    updateRes,
+    combinedResult,
   ] as const;
 }
 
@@ -68,9 +80,18 @@ export const useUserContactMutation = (() => {
         emailadres: d?.updateBurgerProfiel?.emailadres ?? null,
         telefoonnummer: d?.updateBurgerProfiel?.telefoonnummer ?? null,
       }),
+      mutationOptions: () => ({
+        update(cache, { data }) {
+          if (!data?.updateBurgerProfiel) return;
+          cache.writeQuery({
+            query: GetBurgerProfielDocument,
+            data: { getBurgerProfiel: { ...data.updateBurgerProfiel } },
+          });
+        },
+      }),
     },
     v2: {
-      hook: useCreateOrUpdateDigitaleAdresMutations,
+      hook: useDigitaleAdresMutations,
       mapResult: (d): Contact => ({
         emailadres:
           d?.updateUserDigitaleAdres?.type === DigitaleAdresType.Email
@@ -88,7 +109,24 @@ export const useUserContactMutation = (() => {
           type: DigitaleAdresType,
         ) => {
           if (!value && id) {
-            return remove({ variables: { digitaleAdresId: id } });
+            return remove({
+              variables: { digitaleAdresId: id },
+              update(cache) {
+                const existing = cache.readQuery<GetUserDigitaleAdressenQuery>({
+                  query: GetUserDigitaleAdressenDocument,
+                });
+                if (!existing) return;
+                cache.writeQuery({
+                  query: GetUserDigitaleAdressenDocument,
+                  data: {
+                    getUserDigitaleAdresen:
+                      existing?.getUserDigitaleAdresen?.filter(
+                        (a) => a.uuid !== id,
+                      ) ?? [],
+                  },
+                });
+              },
+            });
           }
           if (value && id) {
             return update({
@@ -101,6 +139,23 @@ export const useUserContactMutation = (() => {
                     type === DigitaleAdresType.Email ? "email" : "tel",
                 },
               },
+              update(cache, { data }) {
+                const updated = data?.updateUserDigitaleAdres;
+                if (!updated) return;
+                const existing = cache.readQuery<GetUserDigitaleAdressenQuery>({
+                  query: GetUserDigitaleAdressenDocument,
+                });
+                if (!existing) return;
+                cache.writeQuery({
+                  query: GetUserDigitaleAdressenDocument,
+                  data: {
+                    getUserDigitaleAdresen:
+                      existing?.getUserDigitaleAdresen?.map((a) =>
+                        a.uuid === updated.uuid ? updated : a,
+                      ) ?? [],
+                  },
+                });
+              },
             });
           }
           if (value && !id) {
@@ -112,6 +167,22 @@ export const useUserContactMutation = (() => {
                   omschrijving:
                     type === DigitaleAdresType.Email ? "email" : "tel",
                 },
+              },
+              update(cache, { data }) {
+                const created = data?.createUserDigitaleAdres;
+                if (!created) return;
+                const existing = cache.readQuery<GetUserDigitaleAdressenQuery>({
+                  query: GetUserDigitaleAdressenDocument,
+                });
+                cache.writeQuery({
+                  query: GetUserDigitaleAdressenDocument,
+                  data: {
+                    getUserDigitaleAdresen: [
+                      ...(existing?.getUserDigitaleAdresen ?? []),
+                      created,
+                    ],
+                  },
+                });
               },
             });
           }

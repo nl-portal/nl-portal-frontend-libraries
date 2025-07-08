@@ -14,6 +14,7 @@ export type VersionConfig<
       hook: Hook;
       mapVariables: (v: UnifiedVars) => Parameters<Hook>[0];
       mapResult: (d: any) => UnifiedData;
+      mutationOptions?: (v: UnifiedVars) => Parameters<Hook>[0];
       execute?: never;
     }
   | {
@@ -22,8 +23,9 @@ export type VersionConfig<
         mutate: ReturnType<Hook>[0],
         vars: UnifiedVars,
       ) => Promise<{ result: any; data: UnifiedData }>;
-      mapVariables?: never;
       mapResult?: (d: any) => UnifiedData;
+      mutationOptions?: never;
+      mapVariables?: never;
     };
 
 export function createVersionedMutationHook<
@@ -42,14 +44,16 @@ export function createVersionedMutationHook<
   >(config: VersionConfig<Hook, UnifiedVars, UnifiedData>, baseOpts?: Opts) {
     const [mutateFn, result] = config.hook(baseOpts as Opts);
 
-    const mutate: (
+    const mutate = async (
       vars: UnifiedVars,
-    ) => Promise<{ result: any; data: UnifiedData }> = config.execute
-      ? (vars) => config.execute(mutateFn, vars)
-      : async (vars) => {
-          const result = await mutateFn(config.mapVariables(vars));
-          return { result, data: config.mapResult(result.data) };
-        };
+    ): Promise<{ result: any; data: UnifiedData }> => {
+      if (config.execute) return config.execute(mutateFn, vars);
+      const base = config.mapVariables(vars);
+      const extra = config.mutationOptions ? config.mutationOptions(vars) : {};
+      const result = await mutateFn({ ...base, ...extra } as any);
+
+      return { result, data: config.mapResult(result.data) };
+    };
 
     const resultWithUnifiedData = {
       ...result,
