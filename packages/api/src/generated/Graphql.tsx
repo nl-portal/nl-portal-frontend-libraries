@@ -19,23 +19,6 @@ export type Scalars = {
   JSON: { input: any; output: any; }
   LocalDateTime: { input: any; output: any; }
   UUID: { input: any; output: any; }
-  ZonedDateTime: { input: any; output: any; }
-};
-
-export type ActiesPage = {
-  __typename?: 'ActiesPage';
-  /** The elements on this page */
-  content: Array<OpenProductActie>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
 };
 
 export type Adres = {
@@ -87,15 +70,11 @@ export enum BerichtType {
 
 export type BerichtenPage = {
   __typename?: 'BerichtenPage';
-  /** The elements on this page */
   content: Array<Bericht>;
-  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -157,31 +136,11 @@ export type BesluitDocument = {
 
 export type BesluitPage = {
   __typename?: 'BesluitPage';
-  /** The elements on this page */
   content: Array<Besluit>;
-  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type BestandenPage = {
-  __typename?: 'BestandenPage';
-  /** The elements on this page */
-  content: Array<OpenProductBestand>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -278,7 +237,7 @@ export type BrpDatum = {
 export type BrpDatumLandPlaats = {
   __typename?: 'BrpDatumLandPlaats';
   datum?: Maybe<BrpDatum>;
-  inOnderzoek: BrpDatumLandPlaatsInOnderzoek;
+  inOnderzoek?: Maybe<BrpDatumLandPlaatsInOnderzoek>;
   land?: Maybe<BrpCodeOmschrijving>;
   plaats?: Maybe<BrpCodeOmschrijving>;
 };
@@ -335,7 +294,7 @@ export type BrpGezagOuder = {
 export type BrpImigratie = {
   __typename?: 'BrpImigratie';
   datumVestigingInNederland?: Maybe<BrpDatum>;
-  inOnderzoek: BrpImigratieInOnderzoek;
+  inOnderzoek?: Maybe<BrpImigratieInOnderzoek>;
   indicatieVestigingVanuitBuitenland?: Maybe<Scalars['Boolean']['output']>;
   landVanwaarIngeschreven?: Maybe<BrpCodeOmschrijving>;
   vanuitVerblijfplaatsOnbekend?: Maybe<Scalars['Boolean']['output']>;
@@ -447,7 +406,7 @@ export type BrpPartner = {
 export type BrpPartnerHuwelijkAangaan = {
   __typename?: 'BrpPartnerHuwelijkAangaan';
   datum?: Maybe<BrpDatum>;
-  inOnderzoek: BrpPartnerHuwelijkAangaanInOnderzoek;
+  inOnderzoek?: Maybe<BrpPartnerHuwelijkAangaanInOnderzoek>;
   land?: Maybe<BrpCodeOmschrijving>;
   plaats?: Maybe<BrpCodeOmschrijving>;
   soortVerbintenis?: Maybe<BrpCodeOmschrijving>;
@@ -465,7 +424,7 @@ export type BrpPartnerHuwelijkAangaanInOnderzoek = {
 export type BrpPartnerHuwelijkOntbinding = {
   __typename?: 'BrpPartnerHuwelijkOntbinding';
   datum?: Maybe<BrpDatum>;
-  inOnderzoek: BrpPartnerHuwelijkOntbindingInOnderzoek;
+  inOnderzoek?: Maybe<BrpPartnerHuwelijkOntbindingInOnderzoek>;
 };
 
 export type BrpPartnerHuwelijkOntbindingInOnderzoek = {
@@ -614,31 +573,11 @@ export type ContactMoment = {
 
 export type ContactMomentPage = {
   __typename?: 'ContactMomentPage';
-  /** The elements on this page */
   content: Array<ContactMoment>;
-  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type ContactenPage = {
-  __typename?: 'ContactenPage';
-  /** The elements on this page */
-  content: Array<OpenProductContact>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -810,38 +749,6 @@ export type KlantUpdateInput = {
   telefoonnummer?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type LinksPage = {
-  __typename?: 'LinksPage';
-  /** The elements on this page */
-  content: Array<OpenProductLink>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type LocatiesPage = {
-  __typename?: 'LocatiesPage';
-  /** The elements on this page */
-  content: Array<OpenProductLocatie>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
 export type MaatschappelijkeActiviteit = {
   __typename?: 'MaatschappelijkeActiviteit';
   embedded?: Maybe<Embedded>;
@@ -881,8 +788,6 @@ export type Mutation = {
   submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
-  /** Update product */
-  updateProduct?: Maybe<OpenProductProduct>;
   /** Update product verbruiks object */
   updateProductVerbruiksObject: ProductVerbruiksObject;
   /** Update DigitaleAdres of User */
@@ -938,11 +843,6 @@ export type MutationSubmitTaskArgs = {
 
 export type MutationUpdateBurgerProfielArgs = {
   klant: KlantUpdateInput;
-};
-
-
-export type MutationUpdateProductArgs = {
-  productUpdateRequest: UpdateProductRequestInput;
 };
 
 
@@ -1487,254 +1387,6 @@ export type OpenKlant2Uuid = {
   uuid: Scalars['UUID']['output'];
 };
 
-export type OpenProductActie = {
-  __typename?: 'OpenProductActie';
-  mapping: Scalars['JSON']['output'];
-  naam: Scalars['String']['output'];
-  productTypeUuid?: Maybe<Scalars['UUID']['output']>;
-  url: Scalars['String']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductBestand = {
-  __typename?: 'OpenProductBestand';
-  bestand: Scalars['String']['output'];
-  productTypeUuid: Scalars['UUID']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductContact = {
-  __typename?: 'OpenProductContact';
-  email?: Maybe<Scalars['String']['output']>;
-  huisnummer?: Maybe<Scalars['String']['output']>;
-  naam: Scalars['String']['output'];
-  organisatie?: Maybe<OpenProductOrganisatie>;
-  postcode?: Maybe<Scalars['String']['output']>;
-  stad?: Maybe<Scalars['String']['output']>;
-  straat?: Maybe<Scalars['String']['output']>;
-  telefoonnummer?: Maybe<Scalars['String']['output']>;
-  uuid: Scalars['UUID']['output'];
-};
-
-export enum OpenProductFrequentie {
-  Actief = 'ACTIEF',
-  Gereed = 'GEREED',
-  Ingetrokken = 'INGETROKKEN'
-}
-
-export type OpenProductLink = {
-  __typename?: 'OpenProductLink';
-  naam: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductLocatie = {
-  __typename?: 'OpenProductLocatie';
-  email?: Maybe<Scalars['String']['output']>;
-  huisnummer?: Maybe<Scalars['String']['output']>;
-  naam: Scalars['String']['output'];
-  postcode?: Maybe<Scalars['String']['output']>;
-  stad?: Maybe<Scalars['String']['output']>;
-  straat?: Maybe<Scalars['String']['output']>;
-  telefoonnummer?: Maybe<Scalars['String']['output']>;
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductOrganisatie = {
-  __typename?: 'OpenProductOrganisatie';
-  code: Scalars['String']['output'];
-  email?: Maybe<Scalars['String']['output']>;
-  huisnummer?: Maybe<Scalars['String']['output']>;
-  naam: Scalars['String']['output'];
-  postcode?: Maybe<Scalars['String']['output']>;
-  stad?: Maybe<Scalars['String']['output']>;
-  straat?: Maybe<Scalars['String']['output']>;
-  telefoonnummer?: Maybe<Scalars['String']['output']>;
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductPrijs = {
-  __typename?: 'OpenProductPrijs';
-  actiefVanaf: Scalars['Date']['output'];
-  prijsopties: Array<OpenProductPrijsOptie>;
-  prijsregels: Array<OpenProductPrijsRegel>;
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductPrijsOptie = {
-  __typename?: 'OpenProductPrijsOptie';
-  bedrag: Scalars['Float']['output'];
-  beschrijving: Scalars['String']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductPrijsRegel = {
-  __typename?: 'OpenProductPrijsRegel';
-  beschrijving: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductProduct = {
-  __typename?: 'OpenProductProduct';
-  aanmaakDatum: Scalars['ZonedDateTime']['output'];
-  acties?: Maybe<Array<OpenProductActie>>;
-  dataobject?: Maybe<Scalars['JSON']['output']>;
-  decisions: Array<Scalars['JSON']['output']>;
-  documenten: Array<OpenProductUrl>;
-  eindDatum?: Maybe<Scalars['Date']['output']>;
-  frequentie: OpenProductFrequentie;
-  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
-  naam: Scalars['String']['output'];
-  prijs?: Maybe<Scalars['Float']['output']>;
-  producttype: OpenProductProductProductType;
-  startDatum?: Maybe<Scalars['Date']['output']>;
-  status: OpenProductToegestaneStatus;
-  taken?: Maybe<Array<TaakV2>>;
-  updateDatum: Scalars['ZonedDateTime']['output'];
-  url?: Maybe<Scalars['String']['output']>;
-  uuid: Scalars['UUID']['output'];
-  verbruiksobject?: Maybe<Scalars['JSON']['output']>;
-  zaken?: Maybe<Array<Zaak>>;
-};
-
-export type OpenProductProductProductType = {
-  __typename?: 'OpenProductProductProductType';
-  aanmaakDatum: Scalars['ZonedDateTime']['output'];
-  code: Scalars['String']['output'];
-  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
-  keywords: Array<Scalars['String']['output']>;
-  toegestaneStatussen: Array<OpenProductToegestaneStatus>;
-  uniformeProductNaam: Scalars['String']['output'];
-  updateDatum: Scalars['ZonedDateTime']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductProductType = {
-  __typename?: 'OpenProductProductType';
-  aanmaakDatum: Scalars['ZonedDateTime']['output'];
-  acties: Array<OpenProductActie>;
-  bestanden: Array<OpenProductProductTypeBestand>;
-  code: Scalars['String']['output'];
-  contacten: Array<OpenProductContact>;
-  content?: Maybe<Array<OpenProductProductTypeContent>>;
-  dataObjectSchema: OpenProductSchema;
-  externCodes: Array<OpenProductProductTypeExterneCode>;
-  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
-  interneOpmerking?: Maybe<Scalars['String']['output']>;
-  keywords: Array<Scalars['String']['output']>;
-  links: Array<OpenProductLink>;
-  locaties: Array<OpenProductLocatie>;
-  naam: Scalars['String']['output'];
-  organisaties: Array<OpenProductOrganisatie>;
-  parameters: Array<OpenProductProductTypeParameter>;
-  prijzen: Array<OpenProductPrijs>;
-  processen: Array<OpenProductUrl>;
-  samenvatting: Scalars['String']['output'];
-  taal: Scalars['String']['output'];
-  themas: Array<OpenProductProductTypeThema>;
-  toegestaneStatussen: Array<OpenProductToegestaneStatus>;
-  uniformeProductNaam: Scalars['String']['output'];
-  updateDatum: Scalars['ZonedDateTime']['output'];
-  uuid: Scalars['UUID']['output'];
-  verbruiksObjectSchema: OpenProductSchema;
-  verzoektypen: Array<OpenProductUrl>;
-  zaaktypen: Array<OpenProductUrl>;
-};
-
-export type OpenProductProductTypeBestand = {
-  __typename?: 'OpenProductProductTypeBestand';
-  bestand: Scalars['String']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductProductTypeContent = {
-  __typename?: 'OpenProductProductTypeContent';
-  content: Scalars['String']['output'];
-  labels?: Maybe<Array<Scalars['String']['output']>>;
-  taal: Scalars['String']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductProductTypeExterneCode = {
-  __typename?: 'OpenProductProductTypeExterneCode';
-  code: Scalars['String']['output'];
-  naam: Scalars['String']['output'];
-};
-
-export type OpenProductProductTypeParameter = {
-  __typename?: 'OpenProductProductTypeParameter';
-  naam: Scalars['String']['output'];
-  waarde: Scalars['String']['output'];
-};
-
-export type OpenProductProductTypeThema = {
-  __typename?: 'OpenProductProductTypeThema';
-  aanmaakDatum: Scalars['ZonedDateTime']['output'];
-  beschrijving?: Maybe<Scalars['String']['output']>;
-  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
-  hoofdThema?: Maybe<Scalars['String']['output']>;
-  naam: Scalars['String']['output'];
-  producttypen: Array<OpenProductThemaProductType>;
-  updateDatum: Scalars['ZonedDateTime']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
-export type OpenProductSchema = {
-  __typename?: 'OpenProductSchema';
-  naam: Scalars['String']['output'];
-  schema: Scalars['JSON']['output'];
-};
-
-export type OpenProductThema = {
-  __typename?: 'OpenProductThema';
-  aanmaakDatum: Scalars['ZonedDateTime']['output'];
-  beschrijving?: Maybe<Scalars['String']['output']>;
-  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
-  /** UUID of the hoofdthema, which this thema is related to. */
-  hoofdThema?: Maybe<Scalars['UUID']['output']>;
-  naam: Scalars['String']['output'];
-  producten?: Maybe<Array<OpenProductProduct>>;
-  producttypen: Array<OpenProductThemaProductType>;
-  taken?: Maybe<Array<TaakV2>>;
-  updateDatum: Scalars['ZonedDateTime']['output'];
-  uuid: Scalars['UUID']['output'];
-  zaken?: Maybe<Array<Zaak>>;
-};
-
-export type OpenProductThemaHierarchy = {
-  __typename?: 'OpenProductThemaHierarchy';
-  subThemas?: Maybe<Array<OpenProductThemaHierarchy>>;
-  thema: OpenProductThema;
-};
-
-export type OpenProductThemaProductType = {
-  __typename?: 'OpenProductThemaProductType';
-  aanmaakDatum: Scalars['ZonedDateTime']['output'];
-  code: Scalars['String']['output'];
-  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
-  keywords: Array<Scalars['String']['output']>;
-  toegestaneStatussen: Array<OpenProductToegestaneStatus>;
-  uniformeProductNaam: Scalars['String']['output'];
-  updateDatum: Scalars['ZonedDateTime']['output'];
-  uuid: Scalars['UUID']['output'];
-};
-
-export enum OpenProductToegestaneStatus {
-  Actief = 'ACTIEF',
-  Gereed = 'GEREED',
-  Geweigerd = 'GEWEIGERD',
-  Ingetrokken = 'INGETROKKEN',
-  Initieel = 'INITIEEL',
-  Verlopen = 'VERLOPEN'
-}
-
-export type OpenProductUrl = {
-  __typename?: 'OpenProductUrl';
-  url: Scalars['String']['output'];
-};
-
 export type OrganisatieIdentificatie = {
   __typename?: 'OrganisatieIdentificatie';
   naam?: Maybe<Scalars['String']['output']>;
@@ -1742,22 +1394,6 @@ export type OrganisatieIdentificatie = {
 
 export type OrganisatieIdentificatieInput = {
   naam?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type OrganisatiesPage = {
-  __typename?: 'OrganisatiesPage';
-  /** The elements on this page */
-  content: Array<OpenProductOrganisatie>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
 };
 
 export type PartijExpand = {
@@ -1821,22 +1457,6 @@ export type PrefillResponse = {
   objectId: Scalars['UUID']['output'];
 };
 
-export type PrijzenPage = {
-  __typename?: 'PrijzenPage';
-  /** The elements on this page */
-  content: Array<OpenProductPrijs>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
 export type Product = {
   __typename?: 'Product';
   documenten: Array<Scalars['String']['output']>;
@@ -1864,15 +1484,11 @@ export type ProductDetails = {
 
 export type ProductPage = {
   __typename?: 'ProductPage';
-  /** The elements on this page */
   content: Array<Product>;
-  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -1893,44 +1509,12 @@ export type ProductType = {
   zaaktypen: Array<Scalars['UUID']['output']>;
 };
 
-export type ProductTypesPage = {
-  __typename?: 'ProductTypesPage';
-  /** The elements on this page */
-  content: Array<OpenProductProductType>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
 export type ProductVerbruiksObject = {
   __typename?: 'ProductVerbruiksObject';
   data?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['UUID']['output']>;
   productInstantie: Scalars['String']['output'];
   soort?: Maybe<Scalars['String']['output']>;
-};
-
-export type ProductenPage = {
-  __typename?: 'ProductenPage';
-  /** The elements on this page */
-  content: Array<OpenProductProduct>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
 };
 
 export type Query = {
@@ -1993,73 +1577,6 @@ export type Query = {
   getKlantContactMomenten?: Maybe<ContactMomentPage>;
   /** Gets the contactmomenten of a object(zaak) */
   getObjectContactMomenten?: Maybe<ContactMomentPage>;
-  /** Get a Open product type by id */
-  getOpenProduct?: Maybe<OpenProductProduct>;
-  /** Get a actie */
-  getOpenProductActie?: Maybe<OpenProductActie>;
-  /** Get decision by actie naam */
-  getOpenProductActieDecision: Array<Scalars['JSON']['output']>;
-  /** Get all acties */
-  getOpenProductActies: ActiesPage;
-  /** Get a bestand */
-  getOpenProductBestand?: Maybe<OpenProductBestand>;
-  /** Get all bestanden */
-  getOpenProductBestanden: BestandenPage;
-  /** Get a contact */
-  getOpenProductContact?: Maybe<OpenProductContact>;
-  /** Get all contacten */
-  getOpenProductContacten: ContactenPage;
-  /** Get all hoofd themas */
-  getOpenProductHoofdThemas: Array<OpenProductThema>;
-  /** Get all hoofd themas by producten */
-  getOpenProductHoofdThemasByProducten: Array<OpenProductThema>;
-  /** Get a link */
-  getOpenProductLink?: Maybe<OpenProductLink>;
-  /** Get all links */
-  getOpenProductLinks: LinksPage;
-  /** Get a locatie */
-  getOpenProductLocatie?: Maybe<OpenProductLocatie>;
-  /** Get all locaties */
-  getOpenProductLocaties: LocatiesPage;
-  /** Get a organisatie */
-  getOpenProductOrganisatie?: Maybe<OpenProductOrganisatie>;
-  /** Get all organisaties */
-  getOpenProductOrganisaties: OrganisatiesPage;
-  /** Get a prijs */
-  getOpenProductPrijs?: Maybe<OpenProductPrijs>;
-  /** Get all prijzen */
-  getOpenProductPrijzen: PrijzenPage;
-  /** Get a thema */
-  getOpenProductThema?: Maybe<OpenProductThema>;
-  /** Get thema hierarchy */
-  getOpenProductThemaHierarchy: Array<OpenProductThemaHierarchy>;
-  /** Get taken of a thema, including their parent themas */
-  getOpenProductThemaTaken: Array<TaakV2>;
-  /** Get zaken of a thema, including their parent themas */
-  getOpenProductThemaZaken: Array<Zaak>;
-  /** Get all themas */
-  getOpenProductThemas: ThemasPage;
-  /** Get all themas hierarchy */
-  getOpenProductThemasHierarchy: Array<OpenProductThemaHierarchy>;
-  /** Get a Open product type by id */
-  getOpenProductType?: Maybe<OpenProductProductType>;
-  /** Get all Open product types  */
-  getOpenProductTypes: ProductTypesPage;
-  /**
-   *
-   *         Get all Open producten
-   *         The allowed statussen:
-   *         - initieel
-   *         - gereed
-   *         - actief
-   *         - ingetrokken
-   *         - geweigerd
-   *         - verlopen
-   *
-   */
-  getOpenProducten: ProductenPage;
-  /** Get a Open producten type by thema id */
-  getOpenProductenByThema: Array<OpenProductProduct>;
   /** Gets the persoon data */
   getPersoonV2?: Maybe<BrpPersoon>;
   /** Get product by id */
@@ -2230,152 +1747,6 @@ export type QueryGetKlantContactMomentenArgs = {
 export type QueryGetObjectContactMomentenArgs = {
   objectUrl: Scalars['String']['input'];
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetOpenProductArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductActieArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductActieDecisionArgs = {
-  naam: Scalars['String']['input'];
-  productId: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductActiesArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetOpenProductBestandArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductBestandenArgs = {
-  naam?: InputMaybe<Scalars['String']['input']>;
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetOpenProductContactArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductContactenArgs = {
-  naam?: InputMaybe<Scalars['String']['input']>;
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetOpenProductLinkArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductLinksArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetOpenProductLocatieArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductLocatiesArgs = {
-  naam?: InputMaybe<Scalars['String']['input']>;
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetOpenProductOrganisatieArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductOrganisatiesArgs = {
-  naam?: InputMaybe<Scalars['String']['input']>;
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetOpenProductPrijsArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductPrijzenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetOpenProductThemaArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductThemaHierarchyArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetOpenProductThemaTakenArgs = {
-  id: Scalars['UUID']['input'];
-  language?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryGetOpenProductThemaZakenArgs = {
-  id: Scalars['UUID']['input'];
-  isOpen?: InputMaybe<Scalars['Boolean']['input']>;
-  language?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryGetOpenProductThemasArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetOpenProductTypeArgs = {
-  id: Scalars['UUID']['input'];
-  language?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryGetOpenProductTypesArgs = {
-  language?: InputMaybe<Scalars['String']['input']>;
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetOpenProductenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-  status?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryGetOpenProductenByThemaArgs = {
-  themaId: Scalars['UUID']['input'];
 };
 
 
@@ -2573,15 +1944,11 @@ export type TaakKoppeling = {
 
 export type TaakPage = {
   __typename?: 'TaakPage';
-  /** The elements on this page */
   content: Array<Taak>;
-  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -2589,15 +1956,11 @@ export type TaakPage = {
 
 export type TaakPageV2 = {
   __typename?: 'TaakPageV2';
-  /** The elements on this page */
   content: Array<TaakV2>;
-  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -2643,28 +2006,6 @@ export enum TaakVersion {
   V2 = 'V2'
 }
 
-export type ThemasPage = {
-  __typename?: 'ThemasPage';
-  /** The elements on this page */
-  content: Array<OpenProductThema>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type UpdateProductRequestInput = {
-  dataobject?: InputMaybe<Scalars['JSON']['input']>;
-  uuid: Scalars['UUID']['input'];
-  verbruiksobject?: InputMaybe<Scalars['JSON']['input']>;
-};
-
 export type Zaak = {
   __typename?: 'Zaak';
   besluiten: Array<Besluit>;
@@ -2690,15 +2031,11 @@ export type ZaakDetails = {
 
 export type ZaakPage = {
   __typename?: 'ZaakPage';
-  /** The elements on this page */
   content: Array<Zaak>;
-  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
