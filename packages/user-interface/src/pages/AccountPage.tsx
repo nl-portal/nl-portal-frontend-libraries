@@ -1,9 +1,9 @@
 import { FormattedMessage, useIntl } from "react-intl";
 import {
+  BrpPersoon,
   MaatschappelijkeActiviteit,
-  Persoon,
   useGetBedrijfQuery,
-  useGetPersoonDataQuery,
+  useGetPersoonV2Query,
   useUserContactQuery,
 } from "@nl-portal/nl-portal-api";
 import styles from "./AccountPage.module.scss";
@@ -19,26 +19,39 @@ import useUserInfo from "../hooks/useUserInfo";
 import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
 import Link from "@gemeente-denhaag/link";
-import { ArrowRightIcon, EditIcon } from "@gemeente-denhaag/icons";
+import { EditIcon } from "@gemeente-denhaag/icons";
 import { PageIndex } from "@gemeente-denhaag/page-index";
-import { LeadParagraph, Paragraph } from "@gemeente-denhaag/typography";
+import { LeadParagraph } from "@gemeente-denhaag/typography";
 import "@gemeente-denhaag/button-group";
 import DescriptionListDetail from "../components/DescriptionListDetail";
 import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import PortalLink from "../components/PortalLink";
+import Notification from "../components/Notification";
+import LinkList from "@gemeente-denhaag/link-list";
 
+// Temporary props, this should be moved to the config portal in the future
 interface AccountPageProps {
   showInhabitantAmount?: string;
-  showAddressResearch?: boolean;
   addressResearchUrl?: string;
+  reportChangeOfAddressUrl?: string;
+  changeInUseOfSurnameUrl?: string;
+  changeRegisteredGenderUrl?: string;
+  addressResearchMoreInfoUrl?: string;
+  requestForChangeBrpInfoUrl?: string;
+  requestConfidentialityOfDataUrl?: string;
   showNotificationSubSection?: boolean;
 }
 
 const AccountPage = ({
   showInhabitantAmount,
-  showAddressResearch = true,
   addressResearchUrl,
+  reportChangeOfAddressUrl,
+  changeInUseOfSurnameUrl,
+  changeRegisteredGenderUrl,
+  addressResearchMoreInfoUrl,
+  requestForChangeBrpInfoUrl,
+  requestConfidentialityOfDataUrl,
   //showNotificationSubSection = true,
 }: AccountPageProps) => {
   const { formatDate } = useDateFormatter();
@@ -48,17 +61,31 @@ const AccountPage = ({
   const { data: contactData, loading: contactLoading } = useUserContactQuery({
     skip: !isPerson,
   });
-  const { data: personData, loading: personLoading } = useGetPersoonDataQuery({
+  const { data: personData, loading: personLoading } = useGetPersoonV2Query({
     skip: !isPerson,
   });
   const { data: companyData, loading: companyLoading } = useGetBedrijfQuery({
     skip: isPerson,
   });
 
-  const person = personData?.getPersoon as Persoon | undefined;
+  const person = personData?.getPersoonV2 as BrpPersoon | undefined;
   const company = companyData?.getBedrijf as
     | MaatschappelijkeActiviteit
     | undefined;
+
+  if ((isPerson && !person) || (!isPerson && !company)) {
+    return (
+      <div>
+        <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
+        <Notification
+          variant="error"
+          title=""
+          text={intl.formatMessage({ id: "account.noDataAvailable" })}
+          closable={false}
+        />
+      </div>
+    );
+  }
 
   if (!isPerson)
     return (
@@ -249,7 +276,7 @@ const AccountPage = ({
                   data-testid="persoonsgegevens-gender"
                   loading={personLoading}
                 >
-                  {person?.geslachtsaanduiding}
+                  {person?.geslacht?.omschrijving}
                 </DescriptionListDetail>
               ),
             },
@@ -275,7 +302,7 @@ const AccountPage = ({
                 >
                   {person?.geboorte?.datum
                     ? formatDate({
-                        date: `${person?.geboorte?.datum?.jaar}-${String(person?.geboorte?.datum?.maand).padStart(2, "0")}-${String(person?.geboorte?.datum?.dag).padStart(2, "0")}`,
+                        date: person?.geboorte?.datum.datum,
                       })
                     : ""}
                 </DescriptionListDetail>
@@ -303,8 +330,50 @@ const AccountPage = ({
                 </DescriptionListDetail>
               ),
             },
+            {
+              title: (
+                <FormattedMessage id="account.detail.confidentialityOfPersonalData" />
+              ),
+              detail: (
+                <DescriptionListDetail data-testid="persoonsgegevens-confidentialityOfPersonalData">
+                  {
+                    <FormattedMessage
+                      id={`account.detail.confidentialityOfPersonalData.${person?.geheimhoudingPersoonsgegevens ?? false}`}
+                    />
+                  }
+                </DescriptionListDetail>
+              ),
+            },
           ]}
         />
+        {(changeInUseOfSurnameUrl || changeRegisteredGenderUrl) && (
+          <div>
+            <Heading as="h4">
+              <FormattedMessage id="linkList.title" />
+            </Heading>
+            <LinkList
+              className={styles["account__link-list"]}
+              items={[
+                {
+                  label: (
+                    <FormattedMessage id="account.persoonsgegevens.links.changeInUseOfSurname" />
+                  ),
+                  href: changeInUseOfSurnameUrl,
+                  external: true,
+                },
+                {
+                  label: (
+                    <FormattedMessage id="account.adres.links.changeRegisteredGender" />
+                  ),
+                  href: changeRegisteredGenderUrl,
+                  external: true,
+                },
+              ].filter((item): item is typeof item & { href: string } =>
+                Boolean(item.href),
+              )}
+            />
+          </div>
+        )}
       </PageGrid>
       <PageGrid variant="small">
         <Heading id="adres" as="h3">
@@ -321,10 +390,10 @@ const AccountPage = ({
                   loading={personLoading}
                 >
                   {getStreetString(
-                    person?.verblijfplaats?.straat,
-                    person?.verblijfplaats?.huisnummer,
-                    person?.verblijfplaats?.huisletter,
-                    person?.verblijfplaats?.huisnummertoevoeging,
+                    person?.verblijfplaats?.verblijfadres?.officieleStraatnaam,
+                    person?.verblijfplaats?.verblijfadres?.huisnummer?.toString(),
+                    person?.verblijfplaats?.verblijfadres?.huisletter,
+                    person?.verblijfplaats?.verblijfadres?.huisnummertoevoeging,
                   )}
                 </DescriptionListDetail>
               ),
@@ -338,8 +407,8 @@ const AccountPage = ({
                   loading={personLoading}
                 >
                   {getPostalCodeCityString(
-                    person?.verblijfplaats?.postcode,
-                    person?.verblijfplaats?.woonplaats,
+                    person?.verblijfplaats?.verblijfadres?.postcode,
+                    person?.verblijfplaats?.verblijfadres?.woonplaats,
                   )}
                 </DescriptionListDetail>
               ),
@@ -348,9 +417,9 @@ const AccountPage = ({
               title: <FormattedMessage id="account.detail.aanvangsDatum" />,
               detail: (
                 <DescriptionListDetail loading={personLoading}>
-                  {person?.verblijfplaats?.datumAanvangAdreshouding
+                  {person?.verblijfplaats?.datumVan?.datum
                     ? formatDate({
-                        date: `${person?.verblijfplaats?.datumAanvangAdreshouding?.jaar}-${String(person?.verblijfplaats?.datumAanvangAdreshouding?.maand).padStart(2, "0")}-${String(person?.verblijfplaats?.datumAanvangAdreshouding?.dag).padStart(2, "0")}`,
+                        date: person?.verblijfplaats?.datumVan?.datum,
                       })
                     : ""}
                 </DescriptionListDetail>
@@ -372,23 +441,34 @@ const AccountPage = ({
               : []),
           ]}
         />
-        <div>
-          <Paragraph
-            className={styles["account__address-research-description"]}
-          >
-            <FormattedMessage id="account.inhabitantAmountDescription" />
-          </Paragraph>
-          {showAddressResearch && (
-            <Link
-              href={addressResearchUrl}
-              target="_blank"
-              iconAlign="start"
-              icon={<ArrowRightIcon />}
-            >
-              <FormattedMessage id="account.addressResearchRequestButton" />
-            </Link>
-          )}
-        </div>
+        {(reportChangeOfAddressUrl || addressResearchUrl) && (
+          <div>
+            <Heading as="h4">
+              <FormattedMessage id="linkList.title" />
+            </Heading>
+            <LinkList
+              className={styles["account__link-list"]}
+              items={[
+                {
+                  label: (
+                    <FormattedMessage id="account.adres.links.reportChangeOfAddress" />
+                  ),
+                  href: reportChangeOfAddressUrl,
+                  external: true,
+                },
+                {
+                  label: (
+                    <FormattedMessage id="account.adres.links.addressResearchRequest" />
+                  ),
+                  href: addressResearchUrl,
+                  external: true,
+                },
+              ].filter((item): item is typeof item & { href: string } =>
+                Boolean(item.href),
+              )}
+            />
+          </div>
+        )}
       </PageGrid>
       {/* Disabled until OpenKlant supports notifications/meldingen
       {showNotificationSubSection && (
@@ -437,6 +517,43 @@ const AccountPage = ({
           />
         </PageGrid>
       )} */}
+      <div>
+        <Heading id="wijzigingen-en-aanvragen-brp" as="h3">
+          <FormattedMessage id="account.detail.wijzigingenBrp" />
+        </Heading>
+        {(addressResearchMoreInfoUrl ||
+          requestForChangeBrpInfoUrl ||
+          requestConfidentialityOfDataUrl) && (
+          <LinkList
+            className={styles["account__link-list"]}
+            items={[
+              {
+                label: (
+                  <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.addressResearchMoreInfo" />
+                ),
+                href: addressResearchMoreInfoUrl,
+                external: true,
+              },
+              {
+                label: (
+                  <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.requestForChangeBrpInfo" />
+                ),
+                href: requestForChangeBrpInfoUrl,
+                external: true,
+              },
+              {
+                label: (
+                  <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.requestConfidentialityOfDataInfo" />
+                ),
+                href: requestConfidentialityOfDataUrl,
+                external: true,
+              },
+            ].filter((item): item is typeof item & { href: string } =>
+              Boolean(item.href),
+            )}
+          />
+        )}
+      </div>
     </PageGrid>
   );
 };
