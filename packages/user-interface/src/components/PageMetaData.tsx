@@ -8,6 +8,7 @@ interface PageMetaDataProps {
   navigationItems: NavigationItem[][];
 }
 
+// TODO: heeft wat aandacht nodig, React heeft nieuwe api waar dit makkelijker kan
 const PageMetaData = ({ navigationItems }: PageMetaDataProps) => {
   const intl = useIntl();
   const matches = useMatches();
