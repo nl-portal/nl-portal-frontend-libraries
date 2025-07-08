@@ -44,7 +44,8 @@ const EditContactInfoPage = () => {
     errorTranslationId: phoneErrorTranslationId,
   } = useInput(contactData?.telefoonnummer || "", [
     {
-      validationFn: (value) => REGEX_PATTERNS.telefoonnummer.test(value),
+      validationFn: (value) =>
+        value === "" || REGEX_PATTERNS.telefoonnummer.test(value),
       errorTranslationId: "account.detail.telefoonnummer.error",
     },
   ]);
@@ -56,7 +57,8 @@ const EditContactInfoPage = () => {
     errorTranslationId: emailErrorTranslationId,
   } = useInput(contactData?.emailadres || "", [
     {
-      validationFn: (value) => REGEX_PATTERNS.emailadres.test(value),
+      validationFn: (value) =>
+        value === "" || REGEX_PATTERNS.emailadres.test(value),
       errorTranslationId: "account.detail.emailadres.error",
     },
   ]);
