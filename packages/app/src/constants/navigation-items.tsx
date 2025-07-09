@@ -10,7 +10,7 @@ import {
 } from "@gemeente-denhaag/icons";
 import { paths } from "./paths";
 
-export const menuItems: NavigationItem[][] = [
+export const navigationItems: NavigationItem[][] = [
   [
     {
       titleTranslationKey: "overview",

@@ -21,6 +21,6 @@
     "noFallthroughCasesInSwitch": true,
     "types": ["vitest/globals"]
   },
-  "include": ["src"],
+  "include": ["src", "../user-interface/src/contexts/RouterContext.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

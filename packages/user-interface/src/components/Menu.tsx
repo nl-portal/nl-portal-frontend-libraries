@@ -8,24 +8,24 @@ import {
   SidenavLinkLabel,
   SidenavList,
 } from "@gemeente-denhaag/sidenav";
-import { NavigationItem } from "../interfaces/navigation-item";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 import BadgeCounter from "@gemeente-denhaag/badge-counter";
 import AppContext from "../contexts/AppContext";
+import RouterContext from "../contexts/RouterContext";
 
-interface Props {
-  items: NavigationItem[][];
-}
-
-const Menu = ({ items }: Props) => {
+const Menu = () => {
   const { hrefLang } = useContext(LocaleContext);
   const { messagesCount } = useContext(AppContext);
+  const { navigationItems } = useContext(RouterContext);
   const matches = useMatches();
-  const currentNavigationItem = getCurrentNavigationPage(matches, items);
+  const currentNavigationItem = getCurrentNavigationPage(
+    matches,
+    navigationItems,
+  );
 
   return (
     <Sidenav>
-      {items.map((array, index) => (
+      {navigationItems.map((array, index) => (
         <SidenavList key={`sidenav-list-${index}`}>
           {array.map((item) => {
             const current = item === currentNavigationItem;

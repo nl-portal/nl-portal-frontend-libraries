@@ -25,7 +25,6 @@ export const testPaths: Paths = {
   message: (id = ":id") => `/berichten/bericht/${id}`,
   themeOverview: (type = ":type") => `/${type}`,
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
-  themeSub: (type = ":type", slug = ":slug") => `/${type}/${slug}`,
   account: "/account",
   changeContactInfo: "/account/wijzig/contact",
   changeNotifications: "/account/wijzig/notificaties",
