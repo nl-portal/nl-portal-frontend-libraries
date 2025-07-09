@@ -83,7 +83,8 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   }, [location]);
 
   if (loadingThemes || loadingMessages) {
-    return <>Loading...</>;
+    // TODO: Add fullscreen loading component
+    return null;
   }
 
   return (
