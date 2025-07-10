@@ -1,4 +1,4 @@
-import Link from "@gemeente-denhaag/link";
+import { Link } from "@gemeente-denhaag/link";
 import PortalLink from "../components/PortalLink";
 
 const urlRegex = /(https?:\/\/[^\s]+)/g;

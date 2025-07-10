@@ -1,8 +1,8 @@
 import { useIntl } from "react-intl";
 import Skeleton from "./Skeleton";
 import SectionHeader from "./SectionHeader";
-import Link, { LinkProps } from "@gemeente-denhaag/link";
-import LinkListComponent, { LinkListItem } from "@gemeente-denhaag/link-list";
+import { Link, LinkProps } from "@gemeente-denhaag/link";
+import { LinkListBase, LinkListItem } from "@gemeente-denhaag/link-list";
 import PortalLink from "./PortalLink";
 import { listViewHeight } from "../constants/skeleton";
 
@@ -40,13 +40,13 @@ const LinkList = ({
   return (
     <section>
       <SectionHeader title={title} />
-      <LinkListComponent>
+      <LinkListBase>
         {links.map((link, index) => (
           <LinkListItem key={index}>
             <Link {...link} Link={PortalLink} />
           </LinkListItem>
         ))}
-      </LinkListComponent>
+      </LinkListBase>
     </section>
   );
 };

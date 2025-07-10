@@ -31,6 +31,7 @@ export default defineConfig({
         },
       },
     },
+    commonjsOptions: { transformMixedEsModules: true },
   },
   test: {
     globals: true,
