@@ -15,6 +15,7 @@ interface FileUploadProps {
   disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
+  attributes?: Record<string, string>;
   informatieobjecttype?: string;
 }
 
@@ -24,6 +25,7 @@ const FileUpload = ({
   disabled,
   multiple,
   onChange,
+  attributes,
   informatieobjecttype,
 }: FileUploadProps) => {
   const [isLoading, setLoading] = useState(false);
@@ -106,6 +108,7 @@ const FileUpload = ({
         name="file"
         onChange={onChangeHandler}
         disabled={disabled || isLoading}
+        {...attributes}
       />
       <>
         {isLoading ||
