@@ -44,5 +44,9 @@
     "stylelint-selector-bem-pattern": "4.0.1",
     "typescript": "5.8.3",
     "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": "^22",
+    "pnpm": "^10"
   }
 }

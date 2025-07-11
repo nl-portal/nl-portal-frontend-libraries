@@ -3,7 +3,7 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
-import pkg from "./package.json" assert { type: "json" };
+import pkg from "./package.json";
 
 const externals = [
   ...Object.keys(pkg.dependencies ?? {}),
