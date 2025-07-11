@@ -3,6 +3,12 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
+import pkg from "./package.json" assert { type: "json" };
+
+const externals = [
+  ...Object.keys(pkg.dependencies ?? {}),
+  ...Object.keys(pkg.peerDependencies ?? {}),
+];
 
 export default defineConfig({
   plugins: [react(), dts()],
@@ -14,7 +20,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "react-dom", "@nl-portal/nl-portal-authentication"],
+      external: externals,
       output: {
         entryFileNames: "[name].js",
         globals: {
