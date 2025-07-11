@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Formio } from "@formio/js/embed";
 import { Form } from "@formio/react";
+import ProtectedEval from "@formio/protected-eval";
 import { merge } from "lodash-es";
 import {
   useSubmitTaakV2Mutation,
@@ -16,9 +18,7 @@ import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
 import styles from "./TaskPage.module.scss";
 import { useParams } from "react-router";
-import BackLink from "../components/BackLink";
-import ProtectedEval from "@formio/protected-eval";
-import { Formio } from "formiojs";
+import { BackLink } from "../components/BackLink";
 
 //eslint-disable-next-line react-hooks/rules-of-hooks
 Formio.use(ProtectedEval);
@@ -184,13 +184,13 @@ const TaskDetailsPage = () => {
       <BackLink />
       <div className={styles.bootstrap}>
         <Form
-          form={
+          src={
             formDefinitionUrl?.getFormDefinitionByObjectenApiUrl
               ?.formDefinition ||
             formDefinitionId?.getFormDefinitionById?.formDefinition
           }
           //eslint-disable-next-line @typescript-eslint/no-explicit-any
-          formReady={(form: any) => {
+          onFormReady={(form: any) => {
             form.triggerRedraw();
           }} // TODO: here because customConditional don't work, update FormIO
           submission={submission}

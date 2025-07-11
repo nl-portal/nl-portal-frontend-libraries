@@ -184,6 +184,9 @@ importers:
       vite:
         specifier: ^6.3.5
         version: 6.3.5(@types/node@22.13.1)(jiti@2.4.2)(sass@1.89.0)(yaml@2.7.0)
+      vite-bundle-visualizer:
+        specifier: ^1.2.1
+        version: 1.2.1(rollup@4.41.0)
       vitest:
         specifier: ^3.1.2
         version: 3.1.4(@types/node@22.13.1)(@vitest/ui@3.1.4)(jiti@2.4.2)(jsdom@26.1.0)(sass@1.89.0)(yaml@2.7.0)
@@ -300,12 +303,15 @@ importers:
       '@apollo/client':
         specifier: 3.13.5
         version: 3.13.5(@types/react@19.1.4)(graphql-ws@5.16.2(graphql@16.10.0))(graphql@16.10.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@formio/js':
+        specifier: ^5.2.0
+        version: 5.2.0(@popperjs/core@2.11.8)
       '@formio/protected-eval':
-        specifier: 2.0.0-rc.1
-        version: 2.0.0-rc.1(@formio/js@5.1.2(@popperjs/core@2.11.8))
+        specifier: 2.0.0-rc.3
+        version: 2.0.0-rc.3(@formio/js@5.2.0(@popperjs/core@2.11.8))
       '@formio/react':
-        specifier: ^5.3.0
-        version: 5.3.0(formiojs@4.21.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: ^6.0.1
+        version: 6.0.1(@formio/core@2.6.0-rc.2)(@formio/js@5.2.0(@popperjs/core@2.11.8))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@gemeente-denhaag/action':
         specifier: 3.1.0
         version: 3.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -450,15 +456,9 @@ importers:
       font-awesome:
         specifier: '4.7'
         version: 4.7.0
-      formiojs:
-        specifier: ^4.21.6
-        version: 4.21.6
-      lodash.clonedeep:
-        specifier: ^4.5.0
-        version: 4.5.0
-      lodash.merge:
-        specifier: ^4.6.2
-        version: 4.6.2
+      lodash-es:
+        specifier: 4.17.21
+        version: 4.17.21
       pretty-bytes:
         specifier: ^6.1.1
         version: 6.1.1
@@ -490,12 +490,9 @@ importers:
       '@testing-library/react':
         specifier: ^16.2.0
         version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.1.5(@types/react@19.1.4))(@types/react@19.1.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@types/lodash.clonedeep':
-        specifier: ^4.5.9
-        version: 4.5.9
-      '@types/lodash.merge':
-        specifier: ^4.6.9
-        version: 4.6.9
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       '@types/react':
         specifier: ^19.1.0
         version: 19.1.4
@@ -1253,35 +1250,36 @@ packages:
       typescript:
         optional: true
 
-  '@formio/bootstrap3@2.12.4-rc.1':
-    resolution: {integrity: sha512-4B5rs+w9tAk5i+wbdw2/NrTxPqnDX7/W19tiTd9lfXnIGQmaj0ecMEVqDmOJg8pIlyU02g3c4ih6JnA/JVmUbA==}
-
   '@formio/bootstrap@3.1.1':
     resolution: {integrity: sha512-VXm5P5Ic3q7d5tkWaweIRAaPtBjDoov6Vv28y5aHKbR2Ri8ykMINtQJ70NwPHghW+csZmjmtKDDGDXENQVhIbA==}
 
   '@formio/choices.js@10.2.1':
     resolution: {integrity: sha512-NCE5u7jG3XGokJP16MyAbVSUptKu/mpJYAxd4PPIoLiO/l9Do5uoOQ0MgNb9qG9qABJiOX+qNRE8q8RybY/SwQ==}
 
-  '@formio/core@2.4.1':
-    resolution: {integrity: sha512-Pflixmv30hrFJorL6nAHL41aqljsr9pePsEr/WnqVnwTgR+Fn3qLu46g79WQblghXqUWaLtab+2Dd6StLNfEGg==}
+  '@formio/core@2.5.0':
+    resolution: {integrity: sha512-UFX0ThWtW6uUaweWUd/CHCbmAW7jSnFKJ9i+9uhVny75SXF2V8vCi/B6eHQpSAash3ZKG9GV1jYMmq2uCJTuVQ==}
 
-  '@formio/js@5.1.2':
-    resolution: {integrity: sha512-rlyBiMqSDRNSwf/HI6LuisYkVgL16FuDOn9TD6Qx2wU+ctTrPVb8Kg2CfiUJRSjMCZ3QjevCQpugiOmLamqvhw==}
+  '@formio/core@2.6.0-rc.2':
+    resolution: {integrity: sha512-ZULRAZTdDJ9P97SviLwGeVfK7U+tORQsCfRtWYp3rvnUAHZ8ynyfufzu5YQoAR5X/jLhC+cZla8R1BmZFLBQLA==}
 
-  '@formio/protected-eval@2.0.0-rc.1':
-    resolution: {integrity: sha512-u1gkTaG8skAdK7q4wbBOsk+SkqHVaykOe3dRbGNEot5hZZhUtAhL2pkyboktpbsQ23rzqFLHFNNqV1ER8pF17g==}
+  '@formio/js-interpreter@1.1.0-formio.4':
+    resolution: {integrity: sha512-Gm3rRYumQq/yr58Ry21XRbQeWOTNoauK8EPJDcdEMiAG4s+DkLsQciEjwBZkFe8hzqedW4DCmDvh0PJfNAy+gg==}
+
+  '@formio/js@5.2.0':
+    resolution: {integrity: sha512-tEZfzyKm2RCAZMyVsA4MagDGfi7f2LuSb1aDSgtjIkcLX2oIB4H1AtanxBVMUkdKFRqwWubJb7hzRTNqZUMdLw==}
+
+  '@formio/protected-eval@2.0.0-rc.3':
+    resolution: {integrity: sha512-Yv1p0LPc34JFtd1PDBsdtL8LJq5ySBuflvwpjeWGd8HQB/UKJeZlOu7ITFQw9FEYEhVwJ5DpZtOnN4c2BdRghw==}
     peerDependencies:
-      '@formio/js': ^5.0.0-rc.54
+      '@formio/js': ^5.0.1
 
-  '@formio/react@5.3.0':
-    resolution: {integrity: sha512-C5TGhvMb7qD18gINvktG1STkbaDIW0/uqgti216sJCziIX8w5K+RzATrVtxUAQrGxtPF90gxYLglQGYmKhZjnQ==}
+  '@formio/react@6.0.1':
+    resolution: {integrity: sha512-4orV40cyO7yEnRKc8wtQpwQBMjbrx+3tjsxN8T7ml9Z2NkrVit4vC/qTh+JokGRBUHGN+JZEW5OxJGL8nRaxbQ==}
     peerDependencies:
-      formiojs: ^4.15.1
+      '@formio/core': 2.3.2
+      '@formio/js': 5.0.1
       react: ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.1.0
       react-dom: ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.1.0
-
-  '@formio/semantic@2.6.1':
-    resolution: {integrity: sha512-obp1BT5UnzD+uYBbqmnsTfO2hGxI2A2iR/cj3P5JUFLYSBpnr3TS2ShQ7Ee5GCRRtJPu0JnljuJj+YSKLCMuhg==}
 
   '@formio/text-mask-addons@3.8.0-formio.4':
     resolution: {integrity: sha512-vhkeIyuL+1rtC9S4IW8O3JCwroPtvJrkrcMO4wyELNqMIgQRKbiyBAitZfUP4tY04xdB5lxAinbzdwb+NMdX6w==}
@@ -2338,11 +2336,8 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
-  '@types/lodash.clonedeep@4.5.9':
-    resolution: {integrity: sha512-19429mWC+FyaAhOLzsS8kZUsI+/GmBAQ0HFiCPsKGU+7pBXOQWhyrY6xNNDwUSX8SMZMJvuFVMF9O5dQOlQK9Q==}
-
-  '@types/lodash.merge@4.6.9':
-    resolution: {integrity: sha512-23sHDPmzd59kUgWyKGiOMO2Qb9YtqRO/x4IhkgNUiPQ1+5MUVqi6bCZeq9nBJ17msjIMbEIO5u+XW4Kz6aGUhQ==}
+  '@types/lodash-es@4.17.12':
+    resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
 
   '@types/lodash@4.17.15':
     resolution: {integrity: sha512-w/P33JFeySuhN6JLkysYUK2gEmy9kHHFN7E8ro0tkfmlDOgxBDzWEZ/J8cWA+fHqFevpswDTFZnDx+R9lbL6xw==}
@@ -2422,6 +2417,9 @@ packages:
   '@typescript-eslint/visitor-keys@8.32.1':
     resolution: {integrity: sha512-ar0tjQfObzhSaW3C3QNmTc5ofj0hDoNQ5XWrCy6zDyabdr0TWhCkClp+rywGNj/odAFBVzzJrK4tEq5M4Hmu4w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@ungap/structured-clone@1.3.0':
+    resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
 
   '@utrecht/accordion-css@1.6.0':
     resolution: {integrity: sha512-0PLGWCgRvFyR8kINBE4v8dsQxxdfKbmC5oEolOF2jGJ7NlmeTE29ODAzlcqwiocWOjM45jgXDK8aRVAle2DObg==}
@@ -3402,9 +3400,6 @@ packages:
     resolution: {integrity: sha512-Hdw8qdNiqdJ8LqT0iK0sVzkFbzg6fhnQqqfWhBDxcHZvU75+B+ayzTy8x+k5Ix0Y92XOhOUlx74ps+bA6BeYMQ==}
     engines: {node: '>=8'}
 
-  autocompleter@7.1.0:
-    resolution: {integrity: sha512-uCToOnq7eAD/GJAteDbYuQ7ksDtrYWOy5CIAq43wh0dT+5frMpPlyD9tp+y5fz8KIcsP+zR2MjzoTAdW5aJESw==}
-
   autocompleter@8.0.4:
     resolution: {integrity: sha512-q334YswwucSBphN5djVkEt3beVhHotrCtPGNIXmyilw9UnXV9Cb+gNAZ2yhZSfiBSzP6rxHLLT2gpr57xgbcwQ==}
 
@@ -3426,16 +3421,10 @@ packages:
   babel-plugin-syntax-trailing-function-commas@7.0.0-beta.0:
     resolution: {integrity: sha512-Xj9XuRuz3nTSbaTXWv3itLOcxyF4oPD8douBBmj7U9BBC6nEBYfyOJYQMf/8PJAFotC62UY5dFfIGEPr7WswzQ==}
 
-  babel-polyfill@6.26.0:
-    resolution: {integrity: sha512-F2rZGQnAdaHWQ8YAoeRbukc7HS9QgdgeyJ0rQDd485v9opwuPvjpPFcOOT/WmkKTdgy9ESgSPXDcTNpzrGr6iQ==}
-
   babel-preset-fbjs@3.4.0:
     resolution: {integrity: sha512-9ywCsCvo1ojrw0b+XYk7aFvTH6D9064t0RIL1rtMf3nsa02Xw41MS7sZw216Im35xj/UY0PDBQsa1brUDDF1Ow==}
     peerDependencies:
       '@babel/core': ^7.0.0
-
-  babel-runtime@6.26.0:
-    resolution: {integrity: sha512-ITKNuq2wKlW1fJg9sSW52eepoYgZBggvOAHC0u/CYu/qxQ9EVzThCgR69BnSXLHjy2f7SY5zaQ4yt7H9ZVxY2g==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -3638,9 +3627,6 @@ packages:
   compare-func@2.0.0:
     resolution: {integrity: sha512-zHig5N+tPWARooBnb0Zx1MFcdfpyJrfTJ3Y5L+IFvUm8rM74hHz66z0gw0x4tijh5CorKkKUCnW82R2vmpeCRA==}
 
-  compare-versions@5.0.3:
-    resolution: {integrity: sha512-4UZlZP8Z99MGEY+Ovg/uJxJuvoXuN4M6B3hKaiackiHrgzQFEe3diJi1mf1PNHbFujM7FvLrK2bpgIaImbtZ1A==}
-
   compare-versions@6.1.1:
     resolution: {integrity: sha512-4hm4VPpIecmlg59CHXnRDnqGplJFrbLG4aFEl5vl6cK1u76ws3LLvX7ikFnTDl5vo39sjWD6AaDPYodJp/NNHg==}
 
@@ -3678,10 +3664,6 @@ packages:
   cookie@1.0.2:
     resolution: {integrity: sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==}
     engines: {node: '>=18'}
-
-  core-js@2.6.12:
-    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
-    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
 
   core-js@3.40.0:
     resolution: {integrity: sha512-7vsMc/Lty6AGnn7uFpYT56QesI5D2Y/UkgKounk87OP9Z2H9Z8kj6jzcSGAxFmUtDOS0ntK6lbQz+Nsa0Jj6mQ==}
@@ -3751,9 +3733,6 @@ packages:
 
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
-
-  custom-event-polyfill@1.0.7:
-    resolution: {integrity: sha512-TDDkd5DkaZxZFM8p+1I3yAlvM3rSr1wbrOliG4yJiwinMZN8z/iGL7BTlDkrJcYTmgUSb4ywVCc3ZaUtOtC76w==}
 
   custom-event@1.0.1:
     resolution: {integrity: sha512-GAj5FOq0Hd+RsCGVJxZuKaIDXDf3h6GQoNEjFgbLLI/trgtavwUbSnZ5pVfg27DVCaWjIohryS0JFwIJyT2cMg==}
@@ -3845,6 +3824,10 @@ packages:
   define-data-property@1.1.4:
     resolution: {integrity: sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==}
     engines: {node: '>= 0.4'}
+
+  define-lazy-prop@2.0.0:
+    resolution: {integrity: sha512-Ds09qNh8yw3khSjiJjiUInaGX9xlqZDY7JVryGxdxV7NPeuqQfplOpQ66yJFZut3jLa5zOwkXw1g9EI2uKh4Og==}
+    engines: {node: '>=8'}
 
   define-properties@1.2.1:
     resolution: {integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg==}
@@ -4117,12 +4100,6 @@ packages:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
 
-  eventemitter2@6.4.9:
-    resolution: {integrity: sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg==}
-
-  eventemitter3@4.0.7:
-    resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
-
   eventemitter3@5.0.1:
     resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
 
@@ -4273,9 +4250,6 @@ packages:
   formdata-polyfill@4.0.10:
     resolution: {integrity: sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==}
     engines: {node: '>=12.20.0'}
-
-  formiojs@4.21.6:
-    resolution: {integrity: sha512-Ky2lGjxO5ujk4vKu0V8OJyI79qyJxacEMWjGJcu6FTiUbT70o61Q5pZxo87tTwMpaw6uzncGlkhMr6t4pzby7A==}
 
   fs-extra@11.3.0:
     resolution: {integrity: sha512-Z4XaCL6dUDHfP/jT25jJKMmtxvuwbkrD1vNSMFlo9lNLY2c5FHYSQgHPRZUjAB26TpDEoW9HCOgplrdbaPV/ew==}
@@ -4500,9 +4474,6 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  i18next@22.4.12:
-    resolution: {integrity: sha512-2lE+vRXxQ3lGLub1CVbwgO0IfkLHmUSDVOAVdPh22CsxttMXi+35n2qgxh2wZIkKl6t/NMzPfgFPRDiFQOmiCg==}
-
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -4535,6 +4506,10 @@ packages:
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
     engines: {node: '>=6'}
+
+  import-from-esm@1.3.4:
+    resolution: {integrity: sha512-7EyUlPFC0HOlBDpUFGfYstsU7XHxZJKAAMzCT8wZ0hMW7b+hG51LIKTDcsgtz8Pu6YC0HqRVbX+rVUtsGMUKvg==}
+    engines: {node: '>=16.20'}
 
   import-from@4.0.0:
     resolution: {integrity: sha512-P9J71vT5nLlDeV8FHs5nNxaLbrpfAV5cF5srvbZfpwpcJoM/xZR3hiv+q+SAnuSmuGbXMWud063iIMx/V/EWZQ==}
@@ -4627,6 +4602,11 @@ packages:
   is-date-object@1.1.0:
     resolution: {integrity: sha512-PwwhEakHVKTdRNVOw+/Gyh0+MzlCl4R6qKvkhuvLtPMggI1WAHt9sOwZxQLSGpUaDnrdyDsomoRgNnCfKNSXXg==}
     engines: {node: '>= 0.4'}
+
+  is-docker@2.2.1:
+    resolution: {integrity: sha512-F+i2BKsFrH66iaUFc0woD8sLy8getkwTwtOBjvs56Cx4CgJDeKQeqfz8wAYiSb8JOprWhHH5p77PbmYCvvUuXQ==}
+    engines: {node: '>=8'}
+    hasBin: true
 
   is-extglob@2.1.1:
     resolution: {integrity: sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ==}
@@ -4749,6 +4729,10 @@ packages:
     resolution: {integrity: sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==}
     engines: {node: '>=0.10.0'}
 
+  is-wsl@2.2.0:
+    resolution: {integrity: sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==}
+    engines: {node: '>=8'}
+
   isarray@2.0.5:
     resolution: {integrity: sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==}
 
@@ -4810,10 +4794,6 @@ packages:
 
   jose@5.9.6:
     resolution: {integrity: sha512-AMlnetc9+CV9asI19zHmrgS/WYsWUwCn2R7RzlbJWD7F9eWYUTGyBmU9o6PxngtLGOiDGPRu+Uc4fhKzbpteZQ==}
-
-  js-interpreter@https://codeload.github.com/formio/JS-Interpreter/tar.gz/c24e6a0d7d06fd42776c783edfd691d793effed7:
-    resolution: {tarball: https://codeload.github.com/formio/JS-Interpreter/tar.gz/c24e6a0d7d06fd42776c783edfd691d793effed7}
-    version: 1.1.0-formio.3
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -5171,9 +5151,6 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  native-promise-only@0.8.1:
-    resolution: {integrity: sha512-zkVhZUA3y8mbz652WrL5x0fB0ehrBkulWT3TomAQ9iDtyXZvzKeEA6GPxAItBYeNYl5yngKRX612qHOhvMkDeg==}
-
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
@@ -5289,6 +5266,10 @@ packages:
   onetime@7.0.0:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
+
+  open@8.4.2:
+    resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
+    engines: {node: '>=12'}
 
   optimism@0.18.1:
     resolution: {integrity: sha512-mLXNwWPa9dgFyDqkNi54sjDyNJ9/fTI6WGBLgnXku1vdKY/jovHfZT5r+aiVeFFLOz+foPNOm5YJ4mqgld2GBQ==}
@@ -5621,12 +5602,6 @@ packages:
     resolution: {integrity: sha512-00o4I+DVrefhv+nX0ulyi3biSHCPDe+yLv5o/p6d/UVlirijB8E16FtfwSAi4g3tcqrQ4lRAqQSoFEZJehYEcw==}
     engines: {node: '>= 0.4'}
 
-  regenerator-runtime@0.10.5:
-    resolution: {integrity: sha512-02YopEIhAgiBHWeoTiA8aitHDt8z6w+rQqNuIftlM+ZtvSl/brTouaU7DW6GO/cHtvxJvS4Hwv2ibKdxIRi24w==}
-
-  regenerator-runtime@0.11.1:
-    resolution: {integrity: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==}
-
   regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
 
@@ -5668,9 +5643,6 @@ packages:
   require-main-filename@2.0.0:
     resolution: {integrity: sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==}
 
-  resize-observer-polyfill@1.5.1:
-    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
-
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
@@ -5707,6 +5679,19 @@ packages:
     resolution: {integrity: sha512-9dkvaxAsk/xNXSJzMgFqqMCuFgt2+KsOFek3TMLfo8NCPfWpBmqwyNn5Y+NX56QUYfCtsyhF3ayiboEoUmJk/A==}
     engines: {node: 20 || >=22}
     hasBin: true
+
+  rollup-plugin-visualizer@5.14.0:
+    resolution: {integrity: sha512-VlDXneTDaKsHIw8yzJAFWtrzguoJ/LnQ+lMpoVfYJ3jJF4Ihe5oYLAqLklIK/35lgUY+1yEzCkHyZ1j4A5w5fA==}
+    engines: {node: '>=18'}
+    hasBin: true
+    peerDependencies:
+      rolldown: 1.x
+      rollup: 2.x || 3.x || 4.x
+    peerDependenciesMeta:
+      rolldown:
+        optional: true
+      rollup:
+        optional: true
 
   rollup@4.41.0:
     resolution: {integrity: sha512-HqMFpUbWlf/tvcxBFNKnJyzc7Lk+XO3FGc3pbNBLqEbOz0gPLRgcrlS3UF4MfUrVlstOaP/q0kM6GVvi+LrLRg==}
@@ -5881,6 +5866,10 @@ packages:
   source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
+
+  source-map@0.7.4:
+    resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==}
+    engines: {node: '>= 8'}
 
   spark-md5@2.0.2:
     resolution: {integrity: sha512-9WfT+FYBEvlrOOBEs484/zmbtSX4BlGjzXih1qIEWA1yhHbcqgcMHkiwXoWk2Sq1aJjLpcs6ZKV7JxrDNjIlNg==}
@@ -6128,6 +6117,10 @@ packages:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
     engines: {node: '>=0.6.0'}
 
+  tmp@0.2.3:
+    resolution: {integrity: sha512-nZD7m9iCPC5g0pYmcaxogYKggSfLsdxl8of3Q/oIbqCqLLIO9IAF0GWjX1z9NZRHPiXv8Wex4yDCaZsgEw0Y8w==}
+    engines: {node: '>=14.14'}
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
@@ -6280,6 +6273,11 @@ packages:
 
   vanilla-picker@2.12.3:
     resolution: {integrity: sha512-qVkT1E7yMbUsB2mmJNFmaXMWE2hF8ffqzMMwe9zdAikd8u2VfnsVY2HQcOUi2F38bgbxzlJBEdS1UUhOXdF9GQ==}
+
+  vite-bundle-visualizer@1.2.1:
+    resolution: {integrity: sha512-cwz/Pg6+95YbgIDp+RPwEToc4TKxfsFWSG/tsl2DSZd9YZicUag1tQXjJ5xcL7ydvEoaC2FOZeaXOU60t9BRXw==}
+    engines: {node: ^18.19.0 || >=20.6.0}
+    hasBin: true
 
   vite-node@3.1.4:
     resolution: {integrity: sha512-6enNwYnpyDo4hEgytbmc6mYWHXDHYEn0D1/rw4Q+tnHUGtKTJsn8T1YkX6Q18wI5LCrS8CTYlBaiCqxOy2kvUA==}
@@ -7561,10 +7559,6 @@ snapshots:
     optionalDependencies:
       typescript: 5.8.3
 
-  '@formio/bootstrap3@2.12.4-rc.1':
-    dependencies:
-      resize-observer-polyfill: 1.5.1
-
   '@formio/bootstrap@3.1.1': {}
 
   '@formio/choices.js@10.2.1':
@@ -7573,7 +7567,7 @@ snapshots:
       fuse.js: 6.6.2
       redux: 4.2.1
 
-  '@formio/core@2.4.1':
+  '@formio/core@2.5.0':
     dependencies:
       browser-cookies: 1.2.0
       core-js: 3.40.0
@@ -7589,11 +7583,31 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@formio/js@5.1.2(@popperjs/core@2.11.8)':
+  '@formio/core@2.6.0-rc.2':
+    dependencies:
+      browser-cookies: 1.2.0
+      core-js: 3.40.0
+      dayjs: 1.11.13
+      dompurify: 3.2.4
+      eventemitter3: 5.0.1
+      fast-json-patch: 3.1.1
+      fetch-ponyfill: 7.1.0
+      inputmask: 5.0.9
+      json-logic-js: 2.0.5
+      lodash: 4.17.21
+      moment: 2.30.1
+    transitivePeerDependencies:
+      - encoding
+
+  '@formio/js-interpreter@1.1.0-formio.4':
+    dependencies:
+      acorn: 8.14.0
+
+  '@formio/js@5.2.0(@popperjs/core@2.11.8)':
     dependencies:
       '@formio/bootstrap': 3.1.1
       '@formio/choices.js': 10.2.1
-      '@formio/core': 2.4.1
+      '@formio/core': 2.5.0
       '@formio/text-mask-addons': 3.8.0-formio.4
       '@formio/vanilla-text-mask': 5.1.1-formio.1
       abortcontroller-polyfill: 1.7.8
@@ -7630,25 +7644,23 @@ snapshots:
       - '@popperjs/core'
       - encoding
 
-  '@formio/protected-eval@2.0.0-rc.1(@formio/js@5.1.2(@popperjs/core@2.11.8))':
+  '@formio/protected-eval@2.0.0-rc.3(@formio/js@5.2.0(@popperjs/core@2.11.8))':
     dependencies:
-      '@formio/js': 5.1.2(@popperjs/core@2.11.8)
-      js-interpreter: https://codeload.github.com/formio/JS-Interpreter/tar.gz/c24e6a0d7d06fd42776c783edfd691d793effed7
+      '@formio/js': 5.2.0(@popperjs/core@2.11.8)
+      '@formio/js-interpreter': 1.1.0-formio.4
       lodash: 4.17.21
       vm-browserify: 1.1.2
 
-  '@formio/react@5.3.0(formiojs@4.21.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@formio/react@6.0.1(@formio/core@2.6.0-rc.2)(@formio/js@5.2.0(@popperjs/core@2.11.8))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      babel-polyfill: 6.26.0
+      '@formio/core': 2.6.0-rc.2
+      '@formio/js': 5.2.0(@popperjs/core@2.11.8)
+      '@ungap/structured-clone': 1.3.0
       core-js: 3.40.0
-      eventemitter2: 6.4.9
-      formiojs: 4.21.6
       lodash: 4.17.21
       prop-types: 15.8.1
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-
-  '@formio/semantic@2.6.1': {}
 
   '@formio/text-mask-addons@3.8.0-formio.4': {}
 
@@ -9128,11 +9140,7 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
-  '@types/lodash.clonedeep@4.5.9':
-    dependencies:
-      '@types/lodash': 4.17.15
-
-  '@types/lodash.merge@4.6.9':
+  '@types/lodash-es@4.17.12':
     dependencies:
       '@types/lodash': 4.17.15
 
@@ -9243,6 +9251,8 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.32.1
       eslint-visitor-keys: 4.2.0
+
+  '@ungap/structured-clone@1.3.0': {}
 
   '@utrecht/accordion-css@1.6.0': {}
 
@@ -10290,8 +10300,6 @@ snapshots:
 
   auto-bind@4.0.0: {}
 
-  autocompleter@7.1.0: {}
-
   autocompleter@8.0.4: {}
 
   available-typed-arrays@1.0.7:
@@ -10311,12 +10319,6 @@ snapshots:
   axobject-query@4.1.0: {}
 
   babel-plugin-syntax-trailing-function-commas@7.0.0-beta.0: {}
-
-  babel-polyfill@6.26.0:
-    dependencies:
-      babel-runtime: 6.26.0
-      core-js: 2.6.12
-      regenerator-runtime: 0.10.5
 
   babel-preset-fbjs@3.4.0(@babel/core@7.26.7):
     dependencies:
@@ -10383,11 +10385,6 @@ snapshots:
       babel-plugin-syntax-trailing-function-commas: 7.0.0-beta.0
     transitivePeerDependencies:
       - supports-color
-
-  babel-runtime@6.26.0:
-    dependencies:
-      core-js: 2.6.12
-      regenerator-runtime: 0.11.1
 
   balanced-match@1.0.2: {}
 
@@ -10626,8 +10623,6 @@ snapshots:
       array-ify: 1.0.0
       dot-prop: 5.3.0
 
-  compare-versions@5.0.3: {}
-
   compare-versions@6.1.1: {}
 
   concat-map@0.0.1: {}
@@ -10665,8 +10660,6 @@ snapshots:
   convert-source-map@2.0.0: {}
 
   cookie@1.0.2: {}
-
-  core-js@2.6.12: {}
 
   core-js@3.40.0: {}
 
@@ -10736,8 +10729,6 @@ snapshots:
       rrweb-cssom: 0.8.0
 
   csstype@3.1.3: {}
-
-  custom-event-polyfill@1.0.7: {}
 
   custom-event@1.0.1: {}
 
@@ -10811,6 +10802,8 @@ snapshots:
       es-define-property: 1.0.1
       es-errors: 1.3.0
       gopd: 1.2.0
+
+  define-lazy-prop@2.0.0: {}
 
   define-properties@1.2.1:
     dependencies:
@@ -11219,10 +11212,6 @@ snapshots:
 
   esutils@2.0.3: {}
 
-  eventemitter2@6.4.9: {}
-
-  eventemitter3@4.0.7: {}
-
   eventemitter3@5.0.1: {}
 
   execa@8.0.1:
@@ -11387,49 +11376,6 @@ snapshots:
   formdata-polyfill@4.0.10:
     dependencies:
       fetch-blob: 3.2.0
-
-  formiojs@4.21.6:
-    dependencies:
-      '@formio/bootstrap3': 2.12.4-rc.1
-      '@formio/choices.js': 10.2.1
-      '@formio/semantic': 2.6.1
-      '@formio/text-mask-addons': 3.8.0-formio.4
-      '@formio/vanilla-text-mask': 5.1.1-formio.1
-      abortcontroller-polyfill: 1.7.8
-      autocompleter: 7.1.0
-      browser-cookies: 1.2.0
-      browser-md5-file: 1.1.1
-      compare-versions: 5.0.3
-      core-js: 3.40.0
-      custom-event-polyfill: 1.0.7
-      dialog-polyfill: 0.5.6
-      dom-autoscroller: 2.3.4
-      dompurify: 3.2.4
-      downloadjs: 1.4.7
-      dragula: 3.7.3
-      eventemitter3: 4.0.7
-      fast-deep-equal: 3.1.3
-      fast-json-patch: 3.1.1
-      fetch-ponyfill: 7.1.0
-      i18next: 22.4.12
-      idb: 7.1.1
-      inputmask: 5.0.9
-      ismobilejs: 1.1.1
-      json-logic-js: 2.0.5
-      jstimezonedetect: 1.0.7
-      jwt-decode: 3.1.2
-      lodash: 4.17.21
-      moment: 2.30.1
-      moment-timezone: 0.5.47
-      native-promise-only: 0.8.1
-      quill: 2.0.3
-      signature_pad: 4.2.0
-      string-hash: 1.1.3
-      tippy.js: 6.3.7
-      uuid: 9.0.1
-      vanilla-picker: 2.12.3
-    transitivePeerDependencies:
-      - encoding
 
   fs-extra@11.3.0:
     dependencies:
@@ -11665,10 +11611,6 @@ snapshots:
 
   husky@9.1.7: {}
 
-  i18next@22.4.12:
-    dependencies:
-      '@babel/runtime': 7.26.7
-
   iconv-lite@0.4.24:
     dependencies:
       safer-buffer: 2.1.2
@@ -11693,6 +11635,13 @@ snapshots:
     dependencies:
       parent-module: 1.0.1
       resolve-from: 4.0.0
+
+  import-from-esm@1.3.4:
+    dependencies:
+      debug: 4.4.0
+      import-meta-resolve: 4.1.0
+    transitivePeerDependencies:
+      - supports-color
 
   import-from@4.0.0: {}
 
@@ -11801,6 +11750,8 @@ snapshots:
       call-bound: 1.0.3
       has-tostringtag: 1.0.2
 
+  is-docker@2.2.1: {}
+
   is-extglob@2.1.1: {}
 
   is-finalizationregistry@1.1.1:
@@ -11908,6 +11859,10 @@ snapshots:
 
   is-windows@1.0.2: {}
 
+  is-wsl@2.2.0:
+    dependencies:
+      is-docker: 2.2.1
+
   isarray@2.0.5: {}
 
   iselement@1.1.4: {}
@@ -11985,10 +11940,6 @@ snapshots:
       '@sideway/pinpoint': 2.0.0
 
   jose@5.9.6: {}
-
-  js-interpreter@https://codeload.github.com/formio/JS-Interpreter/tar.gz/c24e6a0d7d06fd42776c783edfd691d793effed7:
-    dependencies:
-      acorn: 8.14.0
 
   js-tokens@4.0.0: {}
 
@@ -12321,8 +12272,6 @@ snapshots:
 
   nanoid@3.3.8: {}
 
-  native-promise-only@0.8.1: {}
-
   natural-compare@1.4.0: {}
 
   no-case@3.0.4:
@@ -12429,6 +12378,12 @@ snapshots:
   onetime@7.0.0:
     dependencies:
       mimic-function: 5.0.1
+
+  open@8.4.2:
+    dependencies:
+      define-lazy-prop: 2.0.0
+      is-docker: 2.2.1
+      is-wsl: 2.2.0
 
   optimism@0.18.1:
     dependencies:
@@ -12767,10 +12722,6 @@ snapshots:
       get-proto: 1.0.1
       which-builtin-type: 1.2.1
 
-  regenerator-runtime@0.10.5: {}
-
-  regenerator-runtime@0.11.1: {}
-
   regenerator-runtime@0.14.1: {}
 
   regexp.prototype.flags@1.5.4:
@@ -12807,8 +12758,6 @@ snapshots:
 
   require-main-filename@2.0.0: {}
 
-  resize-observer-polyfill@1.5.1: {}
-
   resolve-from@4.0.0: {}
 
   resolve-from@5.0.0: {}
@@ -12843,6 +12792,15 @@ snapshots:
     dependencies:
       glob: 11.0.1
       package-json-from-dist: 1.0.1
+
+  rollup-plugin-visualizer@5.14.0(rollup@4.41.0):
+    dependencies:
+      open: 8.4.2
+      picomatch: 4.0.2
+      source-map: 0.7.4
+      yargs: 17.7.2
+    optionalDependencies:
+      rollup: 4.41.0
 
   rollup@4.41.0:
     dependencies:
@@ -13053,6 +13011,8 @@ snapshots:
   source-map-js@1.2.1: {}
 
   source-map@0.6.1: {}
+
+  source-map@0.7.4: {}
 
   spark-md5@2.0.2: {}
 
@@ -13347,6 +13307,8 @@ snapshots:
     dependencies:
       os-tmpdir: 1.0.2
 
+  tmp@0.2.3: {}
+
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
@@ -13490,6 +13452,17 @@ snapshots:
   vanilla-picker@2.12.3:
     dependencies:
       '@sphinxxxx/color-conversion': 2.2.2
+
+  vite-bundle-visualizer@1.2.1(rollup@4.41.0):
+    dependencies:
+      cac: 6.7.14
+      import-from-esm: 1.3.4
+      rollup-plugin-visualizer: 5.14.0(rollup@4.41.0)
+      tmp: 0.2.3
+    transitivePeerDependencies:
+      - rolldown
+      - rollup
+      - supports-color
 
   vite-node@3.1.4(@types/node@22.13.1)(jiti@2.4.2)(sass@1.89.0)(yaml@2.7.0):
     dependencies:
