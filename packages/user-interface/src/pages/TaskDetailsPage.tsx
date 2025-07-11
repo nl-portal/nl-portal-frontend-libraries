@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form } from "@formio/react";
-import merge from "lodash.merge";
+import { merge } from "lodash-es";
 import {
   useSubmitTaakV2Mutation,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,

@@ -6,7 +6,7 @@ import { getZaak } from "../data/zaak.mock";
 import { getObjectContactMomenten } from "../data/contactMomenten.mock";
 import { getTakenById } from "../data/taken.mock";
 import { getPersoon } from "../data/persoon.mock";
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash-es";
 
 const caseId = "82cb13cf-d2f9-4e3e-ac07-751373035ecb";
 
