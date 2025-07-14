@@ -68,14 +68,18 @@ const AccountPage = ({
     skip: isPerson,
   });
 
+  const loading = contactLoading || personLoading || companyLoading;
   const person = personData?.getPersoonV2 as BrpPersoon | undefined;
   const company = companyData?.getBedrijf as
     | MaatschappelijkeActiviteit
     | undefined;
 
+  if (loading)
+    return <PageHeader title={<FormattedMessage id="pageTitles.account" />} />;
+
   if ((isPerson && !person) || (!isPerson && !company)) {
     return (
-      <div>
+      <>
         <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
         <Notification
           variant="error"
@@ -83,7 +87,7 @@ const AccountPage = ({
           text={intl.formatMessage({ id: "account.noDataAvailable" })}
           closable={false}
         />
-      </div>
+      </>
     );
   }
 
