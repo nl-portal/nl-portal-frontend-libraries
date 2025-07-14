@@ -237,7 +237,7 @@ export type BrpDatum = {
 export type BrpDatumLandPlaats = {
   __typename?: 'BrpDatumLandPlaats';
   datum?: Maybe<BrpDatum>;
-  inOnderzoek: BrpDatumLandPlaatsInOnderzoek;
+  inOnderzoek?: Maybe<BrpDatumLandPlaatsInOnderzoek>;
   land?: Maybe<BrpCodeOmschrijving>;
   plaats?: Maybe<BrpCodeOmschrijving>;
 };
@@ -294,7 +294,7 @@ export type BrpGezagOuder = {
 export type BrpImigratie = {
   __typename?: 'BrpImigratie';
   datumVestigingInNederland?: Maybe<BrpDatum>;
-  inOnderzoek: BrpImigratieInOnderzoek;
+  inOnderzoek?: Maybe<BrpImigratieInOnderzoek>;
   indicatieVestigingVanuitBuitenland?: Maybe<Scalars['Boolean']['output']>;
   landVanwaarIngeschreven?: Maybe<BrpCodeOmschrijving>;
   vanuitVerblijfplaatsOnbekend?: Maybe<Scalars['Boolean']['output']>;
@@ -406,7 +406,7 @@ export type BrpPartner = {
 export type BrpPartnerHuwelijkAangaan = {
   __typename?: 'BrpPartnerHuwelijkAangaan';
   datum?: Maybe<BrpDatum>;
-  inOnderzoek: BrpPartnerHuwelijkAangaanInOnderzoek;
+  inOnderzoek?: Maybe<BrpPartnerHuwelijkAangaanInOnderzoek>;
   land?: Maybe<BrpCodeOmschrijving>;
   plaats?: Maybe<BrpCodeOmschrijving>;
   soortVerbintenis?: Maybe<BrpCodeOmschrijving>;
@@ -424,7 +424,7 @@ export type BrpPartnerHuwelijkAangaanInOnderzoek = {
 export type BrpPartnerHuwelijkOntbinding = {
   __typename?: 'BrpPartnerHuwelijkOntbinding';
   datum?: Maybe<BrpDatum>;
-  inOnderzoek: BrpPartnerHuwelijkOntbindingInOnderzoek;
+  inOnderzoek?: Maybe<BrpPartnerHuwelijkOntbindingInOnderzoek>;
 };
 
 export type BrpPartnerHuwelijkOntbindingInOnderzoek = {
@@ -2064,6 +2064,20 @@ export type ZaakType = {
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
 
+export type CreateUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresRequest: DigitaleAdresRequestInput;
+}>;
+
+
+export type CreateUserDigitaleAdresMutation = { __typename?: 'Mutation', createUserDigitaleAdres?: { __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string } | null };
+
+export type DeleteUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresId: Scalars['UUID']['input'];
+}>;
+
+
+export type DeleteUserDigitaleAdresMutation = { __typename?: 'Mutation', deleteUserDigitaleAdres?: boolean | null };
+
 export type GenerateOgonePaymentMutationVariables = Exact<{
   amount: Scalars['Float']['input'];
   failureUrl: Scalars['String']['input'];
@@ -2101,6 +2115,13 @@ export type UpdateBurgerProfielMutationVariables = Exact<{
 
 
 export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
+
+export type UpdateUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresRequest: DigitaleAdresRequestInput;
+}>;
+
+
+export type UpdateUserDigitaleAdresMutation = { __typename?: 'Mutation', updateUserDigitaleAdres?: { __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string } | null };
 
 export type UpdateProductVerbruiksObjectMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -2271,6 +2292,11 @@ export type GetTakenQueryVariables = Exact<{
 
 export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, data: any, zaak?: string | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
+export type GetUserDigitaleAdressenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdresen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string }> | null };
+
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
 }>;
@@ -2296,6 +2322,74 @@ export const FormulierFieldsFragmentDoc = gql`
   value
 }
     `;
+export const CreateUserDigitaleAdresDocument = gql`
+    mutation CreateUserDigitaleAdres($digitaleAdresRequest: DigitaleAdresRequestInput!) {
+  createUserDigitaleAdres(digitaleAdresRequest: $digitaleAdresRequest) {
+    uuid
+    waarde
+    type
+    omschrijving
+    referentie
+  }
+}
+    `;
+export type CreateUserDigitaleAdresMutationFn = Apollo.MutationFunction<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useCreateUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useCreateUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserDigitaleAdresMutation, { data, loading, error }] = useCreateUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresRequest: // value for 'digitaleAdresRequest'
+ *   },
+ * });
+ */
+export function useCreateUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>(CreateUserDigitaleAdresDocument, options);
+      }
+export type CreateUserDigitaleAdresMutationHookResult = ReturnType<typeof useCreateUserDigitaleAdresMutation>;
+export type CreateUserDigitaleAdresMutationResult = Apollo.MutationResult<CreateUserDigitaleAdresMutation>;
+export type CreateUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>;
+export const DeleteUserDigitaleAdresDocument = gql`
+    mutation DeleteUserDigitaleAdres($digitaleAdresId: UUID!) {
+  deleteUserDigitaleAdres(digitaleAdresId: $digitaleAdresId)
+}
+    `;
+export type DeleteUserDigitaleAdresMutationFn = Apollo.MutationFunction<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useDeleteUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useDeleteUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserDigitaleAdresMutation, { data, loading, error }] = useDeleteUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresId: // value for 'digitaleAdresId'
+ *   },
+ * });
+ */
+export function useDeleteUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>(DeleteUserDigitaleAdresDocument, options);
+      }
+export type DeleteUserDigitaleAdresMutationHookResult = ReturnType<typeof useDeleteUserDigitaleAdresMutation>;
+export type DeleteUserDigitaleAdresMutationResult = Apollo.MutationResult<DeleteUserDigitaleAdresMutation>;
+export type DeleteUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>;
 export const GenerateOgonePaymentDocument = gql`
     mutation GenerateOgonePayment($amount: Float!, $failureUrl: String!, $langId: String!, $orderId: String!, $pspId: String!, $reference: String!, $successUrl: String!, $title: String!) {
   generateOgonePayment(
@@ -2462,6 +2556,43 @@ export function useUpdateBurgerProfielMutation(baseOptions?: Apollo.MutationHook
 export type UpdateBurgerProfielMutationHookResult = ReturnType<typeof useUpdateBurgerProfielMutation>;
 export type UpdateBurgerProfielMutationResult = Apollo.MutationResult<UpdateBurgerProfielMutation>;
 export type UpdateBurgerProfielMutationOptions = Apollo.BaseMutationOptions<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>;
+export const UpdateUserDigitaleAdresDocument = gql`
+    mutation UpdateUserDigitaleAdres($digitaleAdresRequest: DigitaleAdresRequestInput!) {
+  updateUserDigitaleAdres(digitaleAdresRequest: $digitaleAdresRequest) {
+    uuid
+    waarde
+    type
+    omschrijving
+    referentie
+  }
+}
+    `;
+export type UpdateUserDigitaleAdresMutationFn = Apollo.MutationFunction<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useUpdateUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserDigitaleAdresMutation, { data, loading, error }] = useUpdateUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresRequest: // value for 'digitaleAdresRequest'
+ *   },
+ * });
+ */
+export function useUpdateUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>(UpdateUserDigitaleAdresDocument, options);
+      }
+export type UpdateUserDigitaleAdresMutationHookResult = ReturnType<typeof useUpdateUserDigitaleAdresMutation>;
+export type UpdateUserDigitaleAdresMutationResult = Apollo.MutationResult<UpdateUserDigitaleAdresMutation>;
+export type UpdateUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>;
 export const UpdateProductVerbruiksObjectDocument = gql`
     mutation UpdateProductVerbruiksObject($id: UUID!, $submission: JSON!) {
   updateProductVerbruiksObject(id: $id, submission: $submission) {
@@ -3721,6 +3852,49 @@ export type GetTakenQueryHookResult = ReturnType<typeof useGetTakenQuery>;
 export type GetTakenLazyQueryHookResult = ReturnType<typeof useGetTakenLazyQuery>;
 export type GetTakenSuspenseQueryHookResult = ReturnType<typeof useGetTakenSuspenseQuery>;
 export type GetTakenQueryResult = Apollo.QueryResult<GetTakenQuery, GetTakenQueryVariables>;
+export const GetUserDigitaleAdressenDocument = gql`
+    query GetUserDigitaleAdressen {
+  getUserDigitaleAdresen {
+    uuid
+    waarde
+    type
+    omschrijving
+    referentie
+  }
+}
+    `;
+
+/**
+ * __useGetUserDigitaleAdressenQuery__
+ *
+ * To run a query within a React component, call `useGetUserDigitaleAdressenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserDigitaleAdressenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserDigitaleAdressenQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserDigitaleAdressenQuery(baseOptions?: Apollo.QueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+      }
+export function useGetUserDigitaleAdressenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+        }
+export function useGetUserDigitaleAdressenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+        }
+export type GetUserDigitaleAdressenQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenQuery>;
+export type GetUserDigitaleAdressenLazyQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenLazyQuery>;
+export type GetUserDigitaleAdressenSuspenseQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenSuspenseQuery>;
+export type GetUserDigitaleAdressenQueryResult = Apollo.QueryResult<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>;
 export const GetZaakDocument = gql`
     query GetZaak($id: UUID!) {
   getZaak(id: $id) {

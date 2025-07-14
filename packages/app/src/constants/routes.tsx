@@ -9,7 +9,6 @@ import {
   TaskDetailsPage,
   MessagesPage,
   EditContactInfoPage,
-  EditNotificationsPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
@@ -103,10 +102,6 @@ export const routes = [
       {
         path: paths.changeContactInfo,
         element: <EditContactInfoPage />,
-      },
-      {
-        path: paths.changeNotifications,
-        element: <EditNotificationsPage />,
       },
     ],
   },

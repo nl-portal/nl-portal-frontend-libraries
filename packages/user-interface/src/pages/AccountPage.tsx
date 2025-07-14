@@ -3,8 +3,8 @@ import {
   BrpPersoon,
   MaatschappelijkeActiviteit,
   useGetBedrijfQuery,
-  useGetBurgerProfielQuery,
   useGetPersoonV2Query,
+  useUserContactQuery,
 } from "@nl-portal/nl-portal-api";
 import styles from "./AccountPage.module.scss";
 import {
@@ -52,15 +52,15 @@ const AccountPage = ({
   addressResearchMoreInfoUrl,
   requestForChangeBrpInfoUrl,
   requestConfidentialityOfDataUrl,
-  showNotificationSubSection = true,
+  //showNotificationSubSection = true,
 }: AccountPageProps) => {
   const { formatDate } = useDateFormatter();
   const { isPerson } = useUserInfo();
   const { paths } = useOutletContext<RouterOutletContext>();
   const intl = useIntl();
-
-  const { data: contactData, loading: contactLoading } =
-    useGetBurgerProfielQuery({ skip: !isPerson });
+  const { data: contactData, loading: contactLoading } = useUserContactQuery({
+    skip: !isPerson,
+  });
   const { data: personData, loading: personLoading } = useGetPersoonV2Query({
     skip: !isPerson,
   });
@@ -228,7 +228,7 @@ const AccountPage = ({
               title: <FormattedMessage id="account.detail.emailadres" />,
               detail: (
                 <DescriptionListDetail translate="no" loading={contactLoading}>
-                  {contactData?.getBurgerProfiel?.emailadres}
+                  {contactData?.emailadres}
                 </DescriptionListDetail>
               ),
             },
@@ -236,7 +236,7 @@ const AccountPage = ({
               title: <FormattedMessage id="account.detail.telefoonnummer" />,
               detail: (
                 <DescriptionListDetail translate="no" loading={contactLoading}>
-                  {contactData?.getBurgerProfiel?.telefoonnummer}
+                  {contactData?.telefoonnummer}
                 </DescriptionListDetail>
               ),
             },
@@ -474,6 +474,7 @@ const AccountPage = ({
           </div>
         )}
       </PageGrid>
+      {/* Disabled until OpenKlant supports notifications/meldingen
       {showNotificationSubSection && (
         <PageGrid variant="small">
           <Heading id="meldingen" as="h3">
@@ -508,7 +509,7 @@ const AccountPage = ({
                 detail: (
                   <DescriptionListDetail loading={contactLoading}>
                     <FormattedMessage
-                      id={`account.detail.notification.form.email.${contactData?.getBurgerProfiel?.aanmaakkanaal === "EMAIL"}`}
+                      id={`account.detail.notification.form.email.${contactData?.aanmaakkanaal === "EMAIL"}`}
                       values={{
                         strong: (chunk) => <strong>{chunk}</strong>,
                       }}
@@ -519,7 +520,7 @@ const AccountPage = ({
             ]}
           />
         </PageGrid>
-      )}
+      )} */}
       <div>
         <Heading id="wijzigingen-en-aanvragen-brp" as="h3">
           <FormattedMessage id="account.detail.wijzigingenBrp" />

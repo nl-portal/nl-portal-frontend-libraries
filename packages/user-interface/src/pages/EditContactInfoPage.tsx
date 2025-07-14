@@ -1,8 +1,7 @@
 import { FormattedMessage } from "react-intl";
 import {
-  GetBurgerProfielDocument,
-  useGetBurgerProfielQuery,
-  useUpdateBurgerProfielMutation,
+  useUserContactMutation,
+  useUserContactQuery,
 } from "@nl-portal/nl-portal-api";
 import PageHeader from "../components/PageHeader";
 import useUserInfo from "../hooks/useUserInfo";
@@ -23,7 +22,7 @@ const EditContactInfoPage = () => {
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
 
-  const { data: contactData } = useGetBurgerProfielQuery({
+  const { data: contactData } = useUserContactQuery({
     skip: !isPerson,
   });
 
@@ -35,18 +34,7 @@ const EditContactInfoPage = () => {
       called: mutationCalled,
       reset: mutationReset,
     },
-  ] = useUpdateBurgerProfielMutation({
-    update: (cache, { data }) => {
-      cache.writeQuery({
-        query: GetBurgerProfielDocument,
-        data: {
-          getBurgerProfiel: {
-            ...data?.updateBurgerProfiel,
-          },
-        },
-      });
-    },
-  });
+  ] = useUserContactMutation();
 
   const {
     value: phoneValue,
@@ -54,9 +42,10 @@ const EditContactInfoPage = () => {
     handleInputBlur: handlePhoneInputBlur,
     hasError: phoneHasError,
     errorTranslationId: phoneErrorTranslationId,
-  } = useInput(contactData?.getBurgerProfiel?.telefoonnummer || "", [
+  } = useInput(contactData?.telefoonnummer || "", [
     {
-      validationFn: (value) => REGEX_PATTERNS.telefoonnummer.test(value),
+      validationFn: (value) =>
+        value === "" || REGEX_PATTERNS.telefoonnummer.test(value),
       errorTranslationId: "account.detail.telefoonnummer.error",
     },
   ]);
@@ -66,21 +55,20 @@ const EditContactInfoPage = () => {
     handleInputBlur: handleEmailInputBlur,
     hasError: emailHasError,
     errorTranslationId: emailErrorTranslationId,
-  } = useInput(contactData?.getBurgerProfiel?.emailadres || "", [
+  } = useInput(contactData?.emailadres || "", [
     {
-      validationFn: (value) => REGEX_PATTERNS.emailadres.test(value),
+      validationFn: (value) =>
+        value === "" || REGEX_PATTERNS.emailadres.test(value),
       errorTranslationId: "account.detail.emailadres.error",
     },
   ]);
 
   const onSubmit = () => {
     mutateFunction({
-      variables: {
-        klant: {
-          emailadres: emailValue || "",
-          telefoonnummer: phoneValue || "",
-        },
-      },
+      emailadresId: contactData?.emailadresId,
+      emailadres: emailValue || "",
+      telefoonnummerId: contactData?.telefoonnummerId,
+      telefoonnummer: phoneValue || "",
     });
   };
 

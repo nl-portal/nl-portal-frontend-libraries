@@ -8,3 +8,4 @@ graphql.tsx
 .github
 lerna.json
 pnpm-lock.yaml
+CONTRIBUTING.md
