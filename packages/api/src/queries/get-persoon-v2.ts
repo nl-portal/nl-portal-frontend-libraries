@@ -8,6 +8,7 @@ export const QUERY_GET_PERSOON_V2 = gql`
         omschrijving
       }
       bewonersAantal
+      geheimhoudingPersoonsgegevens
       naam {
         voornamen
         officialLastName
