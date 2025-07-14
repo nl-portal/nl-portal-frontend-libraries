@@ -2217,7 +2217,7 @@ export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectCon
 export type GetPersoonV2QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonV2Query = { __typename?: 'Query', getPersoonV2?: { __typename?: 'BrpPersoon', burgerservicenummer: string, bewonersAantal?: number | null, geslacht?: { __typename?: 'BrpCodeOmschrijving', omschrijving?: string | null } | null, naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'BrpVerblijfplaats', verblijfadres?: { __typename?: 'Brp2Adres', officieleStraatnaam?: string | null, huisnummer?: number | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, datumVan?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null } | null, geboorte?: { __typename?: 'BrpDatumLandPlaats', datum?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null, land?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null, plaats?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten: Array<{ __typename?: 'BrpNationaliteit', nationaliteit?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null }> } | null };
+export type GetPersoonV2Query = { __typename?: 'Query', getPersoonV2?: { __typename?: 'BrpPersoon', burgerservicenummer: string, bewonersAantal?: number | null, geheimhoudingPersoonsgegevens?: boolean | null, geslacht?: { __typename?: 'BrpCodeOmschrijving', omschrijving?: string | null } | null, naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'BrpVerblijfplaats', verblijfadres?: { __typename?: 'Brp2Adres', officieleStraatnaam?: string | null, huisnummer?: number | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, datumVan?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null } | null, geboorte?: { __typename?: 'BrpDatumLandPlaats', datum?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null, land?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null, plaats?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten: Array<{ __typename?: 'BrpNationaliteit', nationaliteit?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null }> } | null };
 
 export type GetProductTakenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -3233,6 +3233,7 @@ export const GetPersoonV2Document = gql`
       omschrijving
     }
     bewonersAantal
+    geheimhoudingPersoonsgegevens
     naam {
       voornamen
       officialLastName
