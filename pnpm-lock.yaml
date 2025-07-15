@@ -129,12 +129,6 @@ importers:
       '@gemeente-denhaag/icons':
         specifier: 3.1.0
         version: 3.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@gemeente-denhaag/link':
-        specifier: 3.1.0
-        version: 3.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@gemeente-denhaag/typography':
-        specifier: 2.1.0
-        version: 2.1.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@nl-portal/nl-portal-api':
         specifier: workspace:*
         version: link:../api
@@ -363,27 +357,15 @@ importers:
       '@gemeente-denhaag/header':
         specifier: ^3.1.0
         version: 3.1.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@gemeente-denhaag/iconbutton':
-        specifier: 2.1.0
-        version: 2.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@gemeente-denhaag/icons':
         specifier: 3.1.0
         version: 3.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@gemeente-denhaag/link':
         specifier: 3.1.0
         version: 3.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@gemeente-denhaag/link-button':
-        specifier: 2.1.0
-        version: 2.1.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@gemeente-denhaag/link-list':
         specifier: ^5.1.0
         version: 5.1.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@gemeente-denhaag/menu':
-        specifier: 3.1.0
-        version: 3.1.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@gemeente-denhaag/modal':
-        specifier: ^2.1.0
-        version: 2.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@gemeente-denhaag/page':
         specifier: 1.1.0
         version: 1.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -396,9 +378,6 @@ importers:
       '@gemeente-denhaag/process-steps':
         specifier: 3.1.0
         version: 3.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@gemeente-denhaag/radio-button':
-        specifier: 2.1.0
-        version: 2.1.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@gemeente-denhaag/responsive-content':
         specifier: 1.1.0
         version: 1.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -423,12 +402,6 @@ importers:
       '@gemeente-denhaag/typography':
         specifier: 2.1.0
         version: 2.1.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@gemeente-denhaag/unorderedlist':
-        specifier: 2.1.0
-        version: 2.1.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@gemeente-denhaag/utils':
-        specifier: 2.1.0
-        version: 2.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@nl-portal/nl-portal-api':
         specifier: workspace:*
         version: link:../api
@@ -438,12 +411,6 @@ importers:
       '@nl-portal/nl-portal-localization':
         specifier: workspace:*
         version: link:../localization
-      '@react-hook/size':
-        specifier: ^2.1.2
-        version: 2.1.2(react@19.1.0)
-      '@react-hook/window-scroll':
-        specifier: ^1.3.0
-        version: 1.3.0(react@19.1.0)
       '@utrecht/component-library-css':
         specifier: 7.3.0
         version: 7.3.0
@@ -477,9 +444,6 @@ importers:
       react-router:
         specifier: ^7.6.3
         version: 7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      usehooks-ts:
-        specifier: ^3.1.1
-        version: 3.1.1(react@19.1.0)
     devDependencies:
       '@testing-library/jest-dom':
         specifier: ^6.6.3
@@ -1389,12 +1353,6 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/link-button@2.1.0':
-    resolution: {integrity: sha512-B91/TRvvAWCbKHMle8UDVUIBzOJWh7Fp9guX573HSjhtEPmxE3EEAKNjf8DndzsrAL3fBrBvWuuw0G0NB3ePtw==}
-    peerDependencies:
-      react: 18 || 19
-      react-dom: 18 || 19
-
   '@gemeente-denhaag/link-group@1.2.0':
     resolution: {integrity: sha512-2YnSJkaI7DviuRkSS2V13JgvUgK0S1IkKGWvZZOEnHiAmEvhFwULxvMjJX8NoLuTZX9V8MG0vONVtL+9gaQEXg==}
     peerDependencies:
@@ -1463,12 +1421,6 @@ packages:
 
   '@gemeente-denhaag/process-steps@3.1.0':
     resolution: {integrity: sha512-lZNGh701y/NasQMKYhWX/SItrb/OHAjW7JjSugpAPzjRfCIS7bMraMsak33+VhhLvWmlJi3lCSub1f0HKIreUA==}
-    peerDependencies:
-      react: 18 || 19
-      react-dom: 18 || 19
-
-  '@gemeente-denhaag/radio-button@2.1.0':
-    resolution: {integrity: sha512-HF5kE1Div8CZ4giyOcMZlPXBFcXc+PqF/04Jb3DZd+YMRLxbk8K6ZgX/hlGvdRBDixzq2XX87vSmrB4vMQicXg==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1891,9 +1843,6 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@juggle/resize-observer@3.4.0':
-    resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
-
   '@keyv/serialize@1.0.3':
     resolution: {integrity: sha512-qnEovoOp5Np2JDGonIDL6Ayihw0RhnRh6vxPuHo4RDn1UOzwEo4AeIfpL6UGIrsceWrCMiVPgwRjbHu4vYFc3g==}
 
@@ -2009,41 +1958,6 @@ packages:
 
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-
-  '@react-hook/event@1.2.6':
-    resolution: {integrity: sha512-JUL5IluaOdn5w5Afpe/puPa1rj8X6udMlQ9dt4hvMuKmTrBS1Ya6sb4sVgvfe2eU4yDuOfAhik8xhbcCekbg9Q==}
-    peerDependencies:
-      react: '>=16.8'
-
-  '@react-hook/latest@1.0.3':
-    resolution: {integrity: sha512-dy6duzl+JnAZcDbNTfmaP3xHiKtbXYOaz3G51MGVljh548Y8MWzTr+PHLOfvpypEVW9zwvl+VyKjbWKEVbV1Rg==}
-    peerDependencies:
-      react: '>=16.8'
-
-  '@react-hook/passive-layout-effect@1.2.1':
-    resolution: {integrity: sha512-IwEphTD75liO8g+6taS+4oqz+nnroocNfWVHWz7j+N+ZO2vYrc6PV1q7GQhuahL0IOR7JccFTsFKQ/mb6iZWAg==}
-    peerDependencies:
-      react: '>=16.8'
-
-  '@react-hook/resize-observer@1.2.6':
-    resolution: {integrity: sha512-DlBXtLSW0DqYYTW3Ft1/GQFZlTdKY5VAFIC4+km6IK5NiPPDFchGbEJm1j6pSgMqPRHbUQgHJX7RaR76ic1LWA==}
-    peerDependencies:
-      react: '>=16.8'
-
-  '@react-hook/size@2.1.2':
-    resolution: {integrity: sha512-BmE5asyRDxSuQ9p14FUKJ0iBRgV9cROjqNG9jT/EjCM+xHha1HVqbPoT+14FQg1K7xIydabClCibUY4+1tw/iw==}
-    peerDependencies:
-      react: '>=16.8'
-
-  '@react-hook/throttle@2.2.0':
-    resolution: {integrity: sha512-LJ5eg+yMV8lXtqK3lR+OtOZ2WH/EfWvuiEEu0M3bhR7dZRfTyEJKxH1oK9uyBxiXPtWXiQggWbZirMCXam51tg==}
-    peerDependencies:
-      react: '>=16.8'
-
-  '@react-hook/window-scroll@1.3.0':
-    resolution: {integrity: sha512-LdYnCL22pFI+LTs85Fi2OQHSKWkzIuHFgv8lA+wwuaPxLOEhWR5bzJ21iygUH9X4meeLVRZKEbfpYi3OWWD4GQ==}
-    peerDependencies:
-      react: '>=16.8'
 
   '@repeaterjs/repeater@3.0.6':
     resolution: {integrity: sha512-Javneu5lsuhwNCryN+pXH93VPQ8g0dBX7wItHFgYiwQmzE1sVdg5tWHiOgHywzL2W21XQopa7IwIEnNbmeUJYA==}
@@ -4938,9 +4852,6 @@ packages:
   lodash.clonedeep@4.5.0:
     resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
 
-  lodash.debounce@4.0.8:
-    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
-
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
     deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
@@ -6241,12 +6152,6 @@ packages:
 
   urlpattern-polyfill@10.0.0:
     resolution: {integrity: sha512-H/A06tKD7sS1O1X2SshBVeA5FLycRpjqiBeqGKmBwBDBy28EnRjORxTNe269KSSr5un5qyWi1iL61wLxpd+ZOg==}
-
-  usehooks-ts@3.1.1:
-    resolution: {integrity: sha512-I4diPp9Cq6ieSUH2wu+fDAVQO43xwtulo+fKEidHUwZPnYImbtkTjzIJYcDcJqxgmX31GVqNFURodvcgHcW0pA==}
-    engines: {node: '>=16.15.0'}
-    peerDependencies:
-      react: ^16.8.0  || ^17 || ^18 || ^19 || ^19.0.0-rc
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -7677,18 +7582,6 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/link-button@2.1.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
-    dependencies:
-      '@utrecht/component-library-react': 9.0.1(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@utrecht/components': 7.4.0
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-    transitivePeerDependencies:
-      - '@babel/runtime'
-      - date-fns
-      - react-vega
-      - vega
-
   '@gemeente-denhaag/link-group@1.2.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@gemeente-denhaag/icons': 3.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -7793,18 +7686,6 @@ snapshots:
       clsx: 2.1.1
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-
-  '@gemeente-denhaag/radio-button@2.1.0(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
-    dependencies:
-      '@utrecht/component-library-react': 9.0.1(@babel/runtime@7.26.7)(date-fns@2.30.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@utrecht/components': 7.4.0
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-    transitivePeerDependencies:
-      - '@babel/runtime'
-      - date-fns
-      - react-vega
-      - vega
 
   '@gemeente-denhaag/responsive-content@1.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
@@ -8507,8 +8388,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@juggle/resize-observer@3.4.0': {}
-
   '@keyv/serialize@1.0.3':
     dependencies:
       buffer: 6.0.3
@@ -8624,42 +8503,6 @@ snapshots:
   '@polka/url@1.0.0-next.28': {}
 
   '@popperjs/core@2.11.8': {}
-
-  '@react-hook/event@1.2.6(react@19.1.0)':
-    dependencies:
-      react: 19.1.0
-
-  '@react-hook/latest@1.0.3(react@19.1.0)':
-    dependencies:
-      react: 19.1.0
-
-  '@react-hook/passive-layout-effect@1.2.1(react@19.1.0)':
-    dependencies:
-      react: 19.1.0
-
-  '@react-hook/resize-observer@1.2.6(react@19.1.0)':
-    dependencies:
-      '@juggle/resize-observer': 3.4.0
-      '@react-hook/latest': 1.0.3(react@19.1.0)
-      '@react-hook/passive-layout-effect': 1.2.1(react@19.1.0)
-      react: 19.1.0
-
-  '@react-hook/size@2.1.2(react@19.1.0)':
-    dependencies:
-      '@react-hook/passive-layout-effect': 1.2.1(react@19.1.0)
-      '@react-hook/resize-observer': 1.2.6(react@19.1.0)
-      react: 19.1.0
-
-  '@react-hook/throttle@2.2.0(react@19.1.0)':
-    dependencies:
-      '@react-hook/latest': 1.0.3(react@19.1.0)
-      react: 19.1.0
-
-  '@react-hook/window-scroll@1.3.0(react@19.1.0)':
-    dependencies:
-      '@react-hook/event': 1.2.6(react@19.1.0)
-      '@react-hook/throttle': 2.2.0(react@19.1.0)
-      react: 19.1.0
 
   '@repeaterjs/repeater@3.0.6': {}
 
@@ -11918,8 +11761,6 @@ snapshots:
 
   lodash.clonedeep@4.5.0: {}
 
-  lodash.debounce@4.0.8: {}
-
   lodash.isequal@4.5.0: {}
 
   lodash.isplainobject@4.0.6: {}
@@ -13247,11 +13088,6 @@ snapshots:
       punycode: 2.3.1
 
   urlpattern-polyfill@10.0.0: {}
-
-  usehooks-ts@3.1.1(react@19.1.0):
-    dependencies:
-      lodash.debounce: 4.0.8
-      react: 19.1.0
 
   util-deprecate@1.0.2: {}
 

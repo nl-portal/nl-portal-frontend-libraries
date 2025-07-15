@@ -42,8 +42,6 @@ export default defineConfig({
           "@gemeente-denhaag/form-field-error-message",
           "@gemeente-denhaag/form-field",
           "@gemeente-denhaag/form-label",
-          "@gemeente-denhaag/link-button",
-          "@gemeente-denhaag/radio-button",
           "@gemeente-denhaag/status-badge",
           "@gemeente-denhaag/text-input",
         ],
