@@ -203,10 +203,10 @@ const AccountPage = ({
               label: <FormattedMessage id="account.detail.adres" />,
               href: "#adres",
             },
-            {
-              label: <FormattedMessage id="account.detail.meldingen" />,
-              href: "#meldingen",
-            },
+            // {
+            //   label: <FormattedMessage id="account.detail.meldingen" />,
+            //   href: "#meldingen",
+            // },
           ]}
         />
       </PageGrid>
