@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-user-interface",
-  "version": "2.0.0-next-major-202507141144-b60b90fc-SNAPSHOT",
+  "version": "2.0.0-RC-202507170711-ca55f3a9-SNAPSHOT",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
