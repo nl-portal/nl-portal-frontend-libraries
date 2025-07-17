@@ -76,7 +76,7 @@ jobs:
                     branch=${GITHUB_REF##*/}
                     sha=${GITHUB_SHA::8}
                     ts=$(date +'%Y%m%d%H%M')
-                    echo "VERSION=${{ steps.get-project-version.outputs.PROJECT_VERSION }}-${branch}-${ts}-${sha}-SNAPSHOT" >> "$GITHUB_OUTPUT"
+                    echo "VERSION=${{ steps.get-project-version.outputs.PROJECT_VERSION }}-${{ startsWith(github.ref_name, 'rc/') && 'RC' || '${branch}' }}-${ts}-${sha}-SNAPSHOT" >> "$GITHUB_OUTPUT"
             -   name: Log version
                 run: echo "::notice::Using version - \"${{ steps.generate-snapshot-version.outputs.VERSION }}\"."
     publish-npm:
