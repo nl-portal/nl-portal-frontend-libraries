@@ -1,13 +1,11 @@
 import AccountPage from "../../../pages/AccountPage";
-import TestProvider, {
-  testPaths as paths,
-} from "../../../providers/TestProvider";
+import TestProvider, { testPaths } from "../../../providers/TestProvider";
 import { getBurgerProfiel } from "../data/burger.mock";
 import { getPersoon } from "../data/persoon.mock";
 
 const routes = [
   {
-    path: paths.account,
+    path: testPaths.account,
     children: [
       {
         index: true,
@@ -22,6 +20,6 @@ export const MockAccountPage = () => (
     mocks={[getPersoon, getBurgerProfiel]}
     routes={routes}
     initialIndex={0}
-    initialEntries={[paths.account]}
+    initialEntries={[testPaths.account]}
   ></TestProvider>
 );

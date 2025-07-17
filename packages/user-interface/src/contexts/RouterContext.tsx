@@ -1,6 +1,7 @@
 import React, { ReactNode, useMemo, useState } from "react";
 import {
   createBrowserRouter,
+  createMemoryRouter,
   RouterProvider as ReactRouterProvider,
   RouteObject,
 } from "react-router";
@@ -21,27 +22,34 @@ interface Props {
   element: ReactNode;
   routes: RouteObject[];
   navigationItems: NavigationItem[][];
+  test?: {
+    initialIndex?: number;
+    initialEntries?: string[];
+  };
 }
 
 export const RouterProvider = ({
   element,
   routes: initRoutes,
   navigationItems: initNavigationItems,
+  test = {
+    initialIndex: 0,
+    initialEntries: [initRoutes[0].path || "/"],
+  },
 }: Props) => {
   const [routes, setRoutes] = useState(initRoutes);
   const [navigationItems, setNavigationItems] = useState(initNavigationItems);
 
-  const router = useMemo(
-    () =>
-      createBrowserRouter([
-        {
-          element,
-          children: routes,
-          handle: { label: "breadcrumb.overview" },
-        },
-      ]),
-    [routes],
-  );
+  const router = useMemo(() => {
+    const route = {
+      element,
+      children: routes,
+      handle: { label: "breadcrumb.overview" },
+    };
+
+    if (test) return createMemoryRouter([route], test);
+    return createBrowserRouter([route]);
+  }, [routes]);
 
   const updateRoutes = (newRoutes: RouteObject[]) => {
     setRoutes(newRoutes);
