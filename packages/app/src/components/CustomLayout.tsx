@@ -1,5 +1,4 @@
 import { Layout } from "@nl-portal/nl-portal-user-interface";
-import { menuItems } from "../constants/menu-items";
 import { paths } from "../constants/paths";
 import { useIntl } from "react-intl";
 
@@ -53,13 +52,7 @@ const CustomLayout = () => {
     href: intl.formatMessage({ id: "footer.contact.button.url" }),
   };
 
-  return (
-    <Layout
-      navigationItems={menuItems}
-      paths={paths}
-      footerData={{ legalData, contactData }}
-    />
-  );
+  return <Layout paths={paths} footerData={{ legalData, contactData }} />;
 };
 
 export default CustomLayout;

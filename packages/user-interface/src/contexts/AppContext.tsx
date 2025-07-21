@@ -4,8 +4,16 @@ import {
   useGetOpenProductHoofdThemasQuery,
   useGetUnopenedBerichtenCountQuery,
 } from "@nl-portal/nl-portal-api";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useLocation, useNavigationType } from "react-router";
+import { stringToSlug } from "../utils/string-to-slug";
+import RouterContext from "./RouterContext";
 
 type Themes = GetOpenProductHoofdThemasQuery["getOpenProductHoofdThemas"];
 
@@ -26,6 +34,7 @@ interface MessagesProviderProps {
 export const AppProvider = ({ children }: MessagesProviderProps) => {
   const [themes, setThemes] = useState<Themes>([]);
   const [messagesCount, setMessagesCount] = useState(0);
+  const { navigationItems, updateNavigationItems } = useContext(RouterContext);
   const [history, setHistory] = useState<string[]>(
     JSON.parse(localStorage.getItem("history") || "[]"),
   );
@@ -37,6 +46,16 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     useGetOpenProductHoofdThemasQuery({
       onCompleted: (data: GetOpenProductHoofdThemasQuery) => {
         setThemes(data.getOpenProductHoofdThemas);
+        const activeThemes =
+          data.getOpenProductHoofdThemas.map((theme) =>
+            stringToSlug(theme.naam),
+          ) || [];
+        const newNavigationItems = navigationItems.map((group) =>
+          group.filter(
+            (item) => !item.themeSlug || activeThemes.includes(item.themeSlug),
+          ),
+        );
+        updateNavigationItems(newNavigationItems);
       },
     });
 
@@ -64,6 +83,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   }, [location]);
 
   if (loadingThemes || loadingMessages) {
+    // TODO: Add fullscreen loading component
     return null;
   }
 

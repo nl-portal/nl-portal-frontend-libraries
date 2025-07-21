@@ -11,7 +11,6 @@ interface Props {
 const MockWrapper = ({ children }: Props) => {
   const [currentLocale, setCurrentLocale] = useState(DEFAULT_LOCALES.ENGLISH);
   const [supportedLocales] = useState(Object.values([DEFAULT_LOCALES.ENGLISH]));
-
   const hrefLang = "en";
   const messages = DEFAULT_MESSAGES[currentLocale];
 

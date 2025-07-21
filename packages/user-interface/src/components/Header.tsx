@@ -4,20 +4,17 @@ import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useMatches } from "react-router";
 import { useIntl } from "react-intl";
 import { useLogout } from "@nl-portal/nl-portal-authentication";
-import { NavigationItem } from "../interfaces/navigation-item";
 import AppContext from "../contexts/AppContext";
 import useUserInfo from "../hooks/useUserInfo";
 import PortalLink from "./PortalLink";
+import RouterContext from "../contexts/RouterContext";
 
-export interface HeaderProps {
-  menuItems: NavigationItem[][];
-}
-
-const Header = ({ menuItems }: HeaderProps) => {
+const Header = () => {
   const { logout } = useLogout();
   const { currentLocale, setCurrentLocale, supportedLocales } =
     useContext(LocaleContext);
   const { messagesCount } = useContext(AppContext);
+  const { navigationItems } = useContext(RouterContext);
   const intl = useIntl();
   const { userName, volmachtgever } = useUserInfo();
 
@@ -77,7 +74,7 @@ const Header = ({ menuItems }: HeaderProps) => {
   const mijnDenHaagMenu = useMemo(
     () => ({
       label: intl.formatMessage({ id: "app.appName" }),
-      navigation: menuItems.flat().map((item) => {
+      navigation: navigationItems.flat().map((item) => {
         const navItem = {
           label: intl.formatMessage({
             id: `pageTitles.${item.titleTranslationKey}`,
@@ -90,13 +87,13 @@ const Header = ({ menuItems }: HeaderProps) => {
         return navItem;
       }),
     }),
-    [menuItems, intl],
+    [navigationItems, intl],
   );
 
   const mijnDenHaagMobileMenu = useMemo(
     () => ({
       defaultExpanded: true,
-      navigation: menuItems.flat().map((item) => {
+      navigation: navigationItems.flat().map((item) => {
         const navItem = {
           label: intl.formatMessage({
             id: `pageTitles.${item.titleTranslationKey}`,
@@ -109,7 +106,7 @@ const Header = ({ menuItems }: HeaderProps) => {
         return navItem;
       }),
     }),
-    [menuItems, intl],
+    [navigationItems, intl],
   );
 
   const welcomeLabel = intl.formatMessage({ id: "menu.welcome" });
