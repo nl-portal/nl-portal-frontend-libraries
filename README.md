@@ -12,6 +12,7 @@ municipality with their own unique environment and data.
 
 All such configuration takes place in the implementation [@nl-portal/nl-portal-app](./packages/app).
 
+
 ## Development
 
 To contribute to this repository, first [clone](https://git-scm.com/docs/git-clone) it to your
