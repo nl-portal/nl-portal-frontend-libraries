@@ -47,6 +47,9 @@ importers:
       prettier:
         specifier: 3.6.2
         version: 3.6.2
+      rollup-plugin-peer-deps-external:
+        specifier: 2.2.4
+        version: 2.2.4(rollup@4.41.0)
       stylelint:
         specifier: 16.22.0
         version: 16.22.0(typescript@5.8.3)
@@ -5354,6 +5357,11 @@ packages:
     resolution: {integrity: sha512-9dkvaxAsk/xNXSJzMgFqqMCuFgt2+KsOFek3TMLfo8NCPfWpBmqwyNn5Y+NX56QUYfCtsyhF3ayiboEoUmJk/A==}
     engines: {node: 20 || >=22}
     hasBin: true
+
+  rollup-plugin-peer-deps-external@2.2.4:
+    resolution: {integrity: sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g==}
+    peerDependencies:
+      rollup: '*'
 
   rollup-plugin-visualizer@5.14.0:
     resolution: {integrity: sha512-VlDXneTDaKsHIw8yzJAFWtrzguoJ/LnQ+lMpoVfYJ3jJF4Ihe5oYLAqLklIK/35lgUY+1yEzCkHyZ1j4A5w5fA==}
@@ -12337,6 +12345,10 @@ snapshots:
     dependencies:
       glob: 11.0.1
       package-json-from-dist: 1.0.1
+
+  rollup-plugin-peer-deps-external@2.2.4(rollup@4.41.0):
+    dependencies:
+      rollup: 4.41.0
 
   rollup-plugin-visualizer@5.14.0(rollup@4.41.0):
     dependencies:

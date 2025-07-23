@@ -3,15 +3,10 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
-import pkg from "./package.json";
-
-const externals = [
-  ...Object.keys(pkg.dependencies ?? {}),
-  ...Object.keys(pkg.peerDependencies ?? {}),
-];
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
 export default defineConfig({
-  plugins: [react(), dts()],
+  plugins: [peerDepsExternal({ includeDependencies: true }), react(), dts()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -20,7 +15,6 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: externals,
       output: {
         entryFileNames: "[name].js",
         globals: {
