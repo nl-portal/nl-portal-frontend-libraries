@@ -1,4 +1,4 @@
-import { ReactNode, use, useEffect, useMemo } from "react";
+import { ReactNode, use, useEffect } from "react";
 import { StylesProvider } from "@gemeente-denhaag/stylesprovider";
 import {
   Page as PageWrapper,
@@ -14,14 +14,10 @@ import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router";
 import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
-import { NavigationItem } from "../interfaces/navigation-item";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
-import AppContext from "../contexts/AppContext";
-import { stringToSlug } from "../utils/string-to-slug";
 import "@utrecht/document-css";
 
 interface LayoutComponentProps {
-  navigationItems: NavigationItem[][];
   paths: Paths;
   customHeader?: ReactNode;
   customFooter?: ReactNode;
@@ -29,13 +25,11 @@ interface LayoutComponentProps {
 }
 
 const Layout = ({
-  navigationItems,
   paths,
   customHeader,
   customFooter,
   footerData,
 }: LayoutComponentProps) => {
-  const { themes } = use(AppContext);
   const { oidcToken } = use(OidcContext);
 
   useEffect(() => {
@@ -46,26 +40,15 @@ const Layout = ({
     FormIoUploader.setOidcToken(oidcToken);
   }, [oidcToken]);
 
-  const menuItems = useMemo(() => {
-    const activeThemes = themes.map((theme) => stringToSlug(theme.naam)) || [];
-    return navigationItems.map((group) =>
-      group.filter(
-        (item) => !item.themeSlug || activeThemes.includes(item.themeSlug),
-      ),
-    );
-  }, [themes]);
-
   return (
     <StylesProvider>
       <HelmetProvider>
         <PageWrapper>
-          <PageHeader>
-            {customHeader || <Header menuItems={menuItems} />}
-          </PageHeader>
+          <PageHeader>{customHeader || <Header />}</PageHeader>
           <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
-            <Menu items={menuItems} />
+            <Menu />
             <main className="denhaag-page-content__main">
-              <PageMetaData navigationItems={navigationItems} />
+              <PageMetaData />
               {<Outlet context={{ paths }} />}
             </main>
           </ResponsiveContent>

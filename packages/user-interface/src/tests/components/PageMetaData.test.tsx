@@ -1,52 +1,17 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { render } from "@testing-library/react";
-import { MockWrapper } from "@nl-portal/nl-portal-localization";
-import PageMetaData from "../../components/PageMetaData";
-import { NavigationItem } from "../../interfaces/navigation-item";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
-import { testPaths as paths } from "../../providers/TestProvider";
-
-let container!: HTMLElement | undefined;
-
-const navigationItems: NavigationItem[][] = [
-  [
-    {
-      titleTranslationKey: "overview",
-      path: paths.overview,
-      icon: <span />,
-    },
-  ],
-];
-
-const route = {
-  path: paths.overview,
-  element: <PageMetaData navigationItems={navigationItems} />,
-};
-
-const router = createBrowserRouter([
-  {
-    element: <Outlet />,
-    children: [route],
-  },
-]);
+import { describe, it, expect } from "vitest";
+import { render, waitFor, screen } from "@testing-library/react";
+import { MockOverviewPage } from "../mock/pages/OverviewPage.mock";
 
 describe("Page", () => {
-  beforeEach(() => {
-    container = document.createElement("div");
-    document.body.appendChild(container);
-  });
+  const openZaak1 = () => screen.getByText("case.OPENZAAK1.title");
 
-  afterEach(() => {
-    document.body.removeChild(container!);
-    container = undefined;
-  });
+  it("should correctly set the document title", async () => {
+    render(MockOverviewPage());
 
-  it("should correctly set the document title", () => {
-    render(<RouterProvider router={router} />, {
-      wrapper: MockWrapper as React.ComponentType,
-      container,
+    await waitFor(() => {
+      expect(openZaak1()).toBeVisible();
     });
 
-    expect(document.title).toContain("Overview");
+    expect(document.title).toContain("Overzicht - NL Portal");
   });
 });

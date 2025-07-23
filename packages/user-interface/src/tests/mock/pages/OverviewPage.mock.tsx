@@ -45,8 +45,6 @@ export const MockOverviewPage = () => (
   <TestProvider
     mocks={[getZaken({ pageSize: 4, isOpen: true }), getTaken({ pageSize: 5 })]}
     routes={route}
-    initialIndex={0}
-    initialEntries={[paths.overview]}
   ></TestProvider>
 );
 
@@ -54,8 +52,6 @@ export const MockOverviewPageLessTasks = () => (
   <TestProvider
     mocks={[getZaken({ pageSize: 4, isOpen: true }), getTaken({ pageSize: 2 })]}
     routes={routeShowLessTasks}
-    initialIndex={0}
-    initialEntries={[paths.overview]}
   ></TestProvider>
 );
 
@@ -63,8 +59,6 @@ export const MockOverviewPageLessCases = () => (
   <TestProvider
     mocks={[getZaken({ pageSize: 1, isOpen: true }), getTaken({ pageSize: 5 })]}
     routes={routeShowLessCases}
-    initialIndex={0}
-    initialEntries={[paths.overview]}
   ></TestProvider>
 );
 
@@ -75,7 +69,5 @@ export const MockOverviewPagePagination = () => (
       getTaken({ pageSize: 5 }),
     ]}
     routes={route}
-    initialIndex={0}
-    initialEntries={[paths.overview]}
   ></TestProvider>
 );

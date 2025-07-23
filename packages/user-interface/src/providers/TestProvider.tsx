@@ -4,15 +4,22 @@ import {
   MockWrapper,
 } from "@nl-portal/nl-portal-localization";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
-import {
-  createMemoryRouter,
-  Outlet,
-  RouterProvider,
-  RouteObject,
-} from "react-router";
+import { Outlet, RouteObject } from "react-router";
 import { Paths } from "../interfaces/paths";
 import { NotificationProvider } from "../contexts/NotificationContext";
 import { AppProvider } from "../contexts/AppContext";
+import { RouterProvider } from "../contexts/RouterContext";
+import { NavigationItem } from "../interfaces/navigation-item";
+import {
+  ArchiveIcon,
+  CarIcon,
+  CheckCircleIcon,
+  EuroIcon,
+  GridIcon,
+  InboxIcon,
+  UserIcon,
+} from "@gemeente-denhaag/icons";
+import PageMetaData from "../components/PageMetaData";
 
 export const testPaths: Paths = {
   noMatch: "/404",
@@ -25,11 +32,65 @@ export const testPaths: Paths = {
   message: (id = ":id") => `/berichten/bericht/${id}`,
   themeOverview: (type = ":type") => `/${type}`,
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
-  themeSub: (type = ":type", slug = ":slug") => `/${type}/${slug}`,
   account: "/account",
   changeContactInfo: "/account/wijzig/contact",
   changeNotifications: "/account/wijzig/notificaties",
 };
+
+export const testNavigationItems: NavigationItem[][] = [
+  [
+    {
+      titleTranslationKey: "overview",
+      path: testPaths.overview,
+      icon: <GridIcon />,
+    },
+  ],
+  [
+    {
+      titleTranslationKey: "tasks",
+      path: testPaths.tasks,
+      icon: <CheckCircleIcon />,
+    },
+    {
+      titleTranslationKey: "cases",
+      path: testPaths.cases,
+      icon: <ArchiveIcon />,
+    },
+    {
+      titleTranslationKey: "messages",
+      path: testPaths.messages,
+      icon: <InboxIcon />,
+      hasMessagesCount: true,
+    },
+  ],
+  [
+    {
+      titleTranslationKey: "belastingzaken",
+      path: testPaths.themeOverview("belastingzaken"),
+      icon: <EuroIcon />,
+      themeSlug: "belastingzaken",
+    },
+    {
+      titleTranslationKey: "parkeren",
+      path: testPaths.themeOverview("parkeren"),
+      icon: <CarIcon />,
+      themeSlug: "parkeren",
+    },
+    {
+      titleTranslationKey: "inkomensondersteuning",
+      path: testPaths.themeOverview("inkomensondersteuning"),
+      icon: <EuroIcon />,
+      themeSlug: "inkomensondersteuning",
+    },
+  ],
+  [
+    {
+      titleTranslationKey: "account",
+      path: testPaths.account,
+      icon: <UserIcon />,
+    },
+  ],
+];
 
 const TestContent = ({
   mocks,
@@ -38,43 +99,47 @@ const TestContent = ({
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   mocks: MockedResponse<Record<string, any>>[];
   paths: Paths;
-}) => (
-  <MockWrapper>
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <LocalizationProvider>
-        <NotificationProvider>
-          <AppProvider>
-            <Outlet context={{ paths }} />
-          </AppProvider>
-        </NotificationProvider>
-      </LocalizationProvider>
-    </MockedProvider>
-  </MockWrapper>
-);
+}) => {
+  return (
+    <MockWrapper>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <LocalizationProvider>
+          <NotificationProvider>
+            <AppProvider>
+              <PageMetaData />
+              <Outlet context={{ paths }} />
+            </AppProvider>
+          </NotificationProvider>
+        </LocalizationProvider>
+      </MockedProvider>
+    </MockWrapper>
+  );
+};
 
 const TestProvider = ({
   mocks,
   paths = testPaths,
   routes,
-  initialEntries,
   initialIndex,
+  initialEntries,
 }: {
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  mocks: MockedResponse<Record<string, any>>[];
+  mocks: MockedResponse<Record<string, unknown>>[];
   paths?: Paths;
   routes: RouteObject[];
-  initialEntries: string[];
-  initialIndex: number;
+  initialIndex?: number;
+  initialEntries?: string[];
 }): ReactElement => {
-  const testRouter = [
-    { element: <TestContent mocks={mocks} paths={paths} />, children: routes },
-  ];
-  const router = createMemoryRouter(testRouter, {
-    initialEntries,
-    initialIndex,
-  });
-
-  return <RouterProvider router={router} />;
+  return (
+    <RouterProvider
+      element={<TestContent mocks={mocks} paths={paths} />}
+      routes={routes}
+      navigationItems={testNavigationItems}
+      test={{
+        initialIndex,
+        initialEntries,
+      }}
+    />
+  );
 };
 
 export default TestProvider;

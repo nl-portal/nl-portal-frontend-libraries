@@ -9,3 +9,5 @@ export * from "./queries/get-object-contact-momenten";
 export * from "./queries/get-persoon-data";
 export * from "./queries/get-burger-profiel";
 export * from "./queries/get-zaak";
+export * from "./queries/get-open-product-hoofd-themas";
+export * from "./queries/berichten/get-unopened-berichten-count";
