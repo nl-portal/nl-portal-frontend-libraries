@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "clean": "rimraf dist",
     "wait": "wait-on ../api/dist/index.js && wait-on ../authentication/dist/index.js && wait-on ../localization/dist/index.js && wait-on ../user-interface/dist/index.js",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "test:watch": "vitest --watch",
     "typecheck": "tsc --noEmit"
   },
