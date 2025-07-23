@@ -93,6 +93,8 @@ export const EN_GB_MESSAGES: Messages = {
       "In order to use {applicationName}, an internet connection is required.",
     "element.loading": "Loading",
     "element.download": "Download",
+    "account.noDataAvailable":
+      "The system was unfortunately not able to retrieve your data. Please refresh the page or try again later.",
     "account.leadParagraph":
       "On this page, you can see your personal information and how we use it to stay in touch with you.",
     "account.contactHeader": "Contact",
@@ -136,6 +138,10 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.dateOfBirth": "Date of birth",
     "account.detail.countryOfBirth": "Country of birth",
     "account.detail.nationality": "Nationality",
+    "account.detail.confidentialityOfPersonalData":
+      "Confidentiality of personal data",
+    "account.detail.confidentialityOfPersonalData.true": "Yes",
+    "account.detail.confidentialityOfPersonalData.false": "No",
     "account.detail.street": "Street",
     "account.detail.postalCodeAndCity": "Postal code and place of residence",
     "account.detail.aanvangsDatum": "Start date",
@@ -171,7 +177,19 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.notification.form.save": "Save changes",
     "account.detail.contactform.email": "Email address",
     "account.detail.contactform.tel": "Phone number",
-    "account.addressResearchRequestButton": "Request investigation",
+    "account.adres.links.addressResearchRequest": "Request investigation",
+    "account.persoonsgegevens.links.changeInUseOfSurname":
+      "Request a change in the use of your surname",
+    "account.adres.links.changeRegisteredGender":
+      "Change your registered gender",
+    "account.adres.links.reportChangeOfAddress": "Report your move",
+    "account.detail.wijzigingenBrp": "Changes and requests BRP",
+    "account.wijzigingEnAanvragenBRP.links.addressResearchMoreInfo":
+      "Request address investigation",
+    "account.wijzigingEnAanvragenBRP.links.requestForChangeBrpInfo":
+      "Change personal data in the BRP",
+    "account.wijzigingEnAanvragenBRP.links.requestConfidentialityOfDataInfo":
+      "Request to keep data confidential",
     "account.pageIndex.title": "On this page",
     "forms.listSubHeader": "Available forms",
     "tasksList.viewAll": "View all action items",
@@ -196,7 +214,7 @@ export const EN_GB_MESSAGES: Messages = {
     "overview.subTitle": "Authorised for",
     "overviewpage.paragraph":
       "In the NL-portal you can arrange your personal affairs yourself when it suits you. For example, you can pay your bills and see when your application is ready.",
-    "overviewpage.casesTitle": "My current procedures",
+    "overviewpage.casesTitle": "My procedures",
     "actionLabels.today": "today",
     "actionLabels.yesterday": "yesterday",
     "actionLabels.before": "before",

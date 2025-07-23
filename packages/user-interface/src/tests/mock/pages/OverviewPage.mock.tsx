@@ -29,43 +29,24 @@ const routeShowLessTasks = [
   },
 ];
 
-const routeShowLessCases = [
-  {
-    path: paths.overview,
-    children: [
-      {
-        index: true,
-        element: <OverviewPage showIntro={true} fetchCasesLength={1} />,
-      },
-    ],
-  },
-];
-
 export const MockOverviewPage = () => (
   <TestProvider
-    mocks={[getZaken({ pageSize: 4, isOpen: true }), getTaken({ pageSize: 5 })]}
+    mocks={[getZaken({ pageSize: 4 }), getTaken({ pageSize: 5 })]}
     routes={route}
   ></TestProvider>
 );
 
 export const MockOverviewPageLessTasks = () => (
   <TestProvider
-    mocks={[getZaken({ pageSize: 4, isOpen: true }), getTaken({ pageSize: 2 })]}
+    mocks={[getZaken({ pageSize: 4 }), getTaken({ pageSize: 2 })]}
     routes={routeShowLessTasks}
-  ></TestProvider>
-);
-
-export const MockOverviewPageLessCases = () => (
-  <TestProvider
-    mocks={[getZaken({ pageSize: 1, isOpen: true }), getTaken({ pageSize: 5 })]}
-    routes={routeShowLessCases}
   ></TestProvider>
 );
 
 export const MockOverviewPagePagination = () => (
   <TestProvider
     mocks={[
-      getZaken({ pageSize: 4, isOpen: true, totalElements: 20 }),
+      getZaken({ pageSize: 4, totalElements: 20 }),
       getTaken({ pageSize: 5 }),
     ]}
     routes={route}

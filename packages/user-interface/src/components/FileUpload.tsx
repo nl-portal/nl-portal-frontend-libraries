@@ -9,18 +9,22 @@ export interface UploadedFile {
 }
 
 interface FileUploadProps {
+  id: string;
   context: object;
   disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
+  attributes?: Record<string, string>;
   informatieobjecttype?: string;
 }
 
 const FileUpload = ({
+  id,
   context,
   disabled,
   multiple,
   onChange,
+  attributes,
   informatieobjecttype,
 }: FileUploadProps) => {
   const [isLoading, setLoading] = useState(false);
@@ -98,10 +102,12 @@ const FileUpload = ({
   return (
     <div>
       <input
+        id={id}
         type="file"
         name="file"
         onChange={onChangeHandler}
         disabled={disabled || isLoading}
+        {...attributes}
       />
       <>
         {isLoading ||

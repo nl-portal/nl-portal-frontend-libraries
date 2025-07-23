@@ -1,7 +1,7 @@
-import { PersoonNaam, PersoonNationaliteiten } from "@nl-portal/nl-portal-api";
+import { BrpNaam, BrpNationaliteit } from "@nl-portal/nl-portal-api";
 
 const getNationalitiesString = (
-  nationalities: Array<PersoonNationaliteiten> | undefined | null,
+  nationalities: Array<BrpNationaliteit> | undefined | null,
 ): string => {
   if (Array.isArray(nationalities)) {
     return nationalities
@@ -47,7 +47,7 @@ const capitalizeFirstLetter = (text: string): string =>
   text.charAt(0).toUpperCase() + text.slice(1);
 
 const getFullName = (
-  name?: Pick<PersoonNaam, "voornamen" | "officialLastName">,
+  name?: Pick<BrpNaam, "voornamen" | "officialLastName">,
 ) => {
   const firstNames = name?.voornamen;
   const officialLastName = name?.officialLastName;

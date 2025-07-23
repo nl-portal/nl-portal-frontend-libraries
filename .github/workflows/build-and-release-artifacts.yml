@@ -4,6 +4,7 @@ on:
         branches:
             - "next-minor"
             - "next-major"
+            - "rc/*"
             - "release/*"
 jobs:
     detect-variables:
@@ -13,7 +14,7 @@ jobs:
         steps:
             -   name: Detect scope
                 id: detect-scope
-                run: echo "SCOPE=$(if ${{ github.ref_name == 'next-minor' || github.ref_name == 'next-major' }} ; then echo "SNAPSHOT" ; elif ${{ startsWith(github.ref-name, 'release/') }} ; then echo "RELEASE" ; else echo "UNKNOWN" ; fi)" >> $GITHUB_OUTPUT
+                run: echo "SCOPE=$(if ${{ github.ref_name == 'next-minor' || github.ref_name == 'next-major' || startsWith(github.ref_name, 'rc/') }} ; then echo "SNAPSHOT" ; elif ${{ startsWith(github.ref_name, 'release/') }} ; then echo "RELEASE" ; else echo "UNKNOWN" ; fi)" >> $GITHUB_OUTPUT
             -   name: Log scope
                 run: echo "::notice::Using scope - \"${{ steps.detect-scope.outputs.SCOPE }}\"."
     publish-snapshot:

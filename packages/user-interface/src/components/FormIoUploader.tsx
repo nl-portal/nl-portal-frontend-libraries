@@ -66,10 +66,12 @@ class FormIoUploader extends ReactComponent {
     this.element = createRoot(element);
     this.element.render(
       <FileUpload
+        id={`${this.component.id}-${this.component.key}`}
         context={this.data}
         disabled={this.component.disabled}
         multiple={this.component.multipleFiles}
         onChange={this.onChangeHandler}
+        attributes={this.component.attributes}
         informatieobjecttype={this.component.informatieobjecttype || ""}
       />,
     );
