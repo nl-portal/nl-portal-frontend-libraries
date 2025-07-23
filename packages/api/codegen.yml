@@ -1,6 +1,7 @@
 overwrite: true
+noSilentErrors: true
 schema: "http://localhost:8090/graphql"
-documents: "./src/**/*.{ts,tsx}"
+documents: "./src/{fragments,mutations,queries}/**/*.{ts,tsx}"
 generates:
   src/generated/Graphql.tsx:
     plugins:

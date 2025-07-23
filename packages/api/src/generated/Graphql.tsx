@@ -1352,7 +1352,7 @@ export type OpenKlant2Partij = {
   digitaleAdressen?: Maybe<Array<OpenKlant2ForeignKey>>;
   expand?: Maybe<PartijExpand>;
   indicatieActief: Scalars['Boolean']['output'];
-  indicatieGeheimhouding: Scalars['Boolean']['output'];
+  indicatieGeheimhouding?: Maybe<Scalars['Boolean']['output']>;
   interneNotitie?: Maybe<Scalars['String']['output']>;
   nummer?: Maybe<Scalars['String']['output']>;
   partijIdentificatie: PartijIdentificatie;
@@ -1420,7 +1420,7 @@ export type PartijResponse = {
   contactpersoonIdentificatie?: Maybe<ContactpersoonIdentificatie>;
   digitaleAdressen?: Maybe<Array<OpenKlant2DigitaleAdres>>;
   indicatieActief: Scalars['Boolean']['output'];
-  indicatieGeheimhouding: Scalars['Boolean']['output'];
+  indicatieGeheimhouding?: Maybe<Scalars['Boolean']['output']>;
   klantcontacten?: Maybe<Array<HadKlantcontact>>;
   organisatieIdentificatie?: Maybe<OrganisatieIdentificatie>;
   persoonsIdentificatie?: Maybe<PersoonsIdentificatie>;
@@ -2078,19 +2078,17 @@ export type DeleteUserDigitaleAdresMutationVariables = Exact<{
 
 export type DeleteUserDigitaleAdresMutation = { __typename?: 'Mutation', deleteUserDigitaleAdres?: boolean | null };
 
-export type GenerateOgonePaymentMutationVariables = Exact<{
+export type DoDirectPaymentMutationVariables = Exact<{
   amount: Scalars['Float']['input'];
-  failureUrl: Scalars['String']['input'];
-  langId: Scalars['String']['input'];
+  identifier: Scalars['String']['input'];
+  langId?: InputMaybe<Scalars['String']['input']>;
   orderId: Scalars['String']['input'];
-  pspId: Scalars['String']['input'];
   reference: Scalars['String']['input'];
-  successUrl: Scalars['String']['input'];
-  title: Scalars['String']['input'];
+  returnUrl?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GenerateOgonePaymentMutation = { __typename?: 'Mutation', generateOgonePayment: { __typename?: 'OgonePayment', formAction: string, formFields: Array<{ __typename?: 'PaymentField', name: string, value: string }> } };
+export type DoDirectPaymentMutation = { __typename?: 'Mutation', doDirectPayment: { __typename?: 'DirectPaymentResponse', redirectUrl: string } };
 
 export type SubmitTaakV2MutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -2390,52 +2388,46 @@ export function useDeleteUserDigitaleAdresMutation(baseOptions?: Apollo.Mutation
 export type DeleteUserDigitaleAdresMutationHookResult = ReturnType<typeof useDeleteUserDigitaleAdresMutation>;
 export type DeleteUserDigitaleAdresMutationResult = Apollo.MutationResult<DeleteUserDigitaleAdresMutation>;
 export type DeleteUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>;
-export const GenerateOgonePaymentDocument = gql`
-    mutation GenerateOgonePayment($amount: Float!, $failureUrl: String!, $langId: String!, $orderId: String!, $pspId: String!, $reference: String!, $successUrl: String!, $title: String!) {
-  generateOgonePayment(
-    paymentRequest: {amount: $amount, failureUrl: $failureUrl, langId: $langId, orderId: $orderId, pspId: $pspId, reference: $reference, successUrl: $successUrl, title: $title}
+export const DoDirectPaymentDocument = gql`
+    mutation DoDirectPayment($amount: Float!, $identifier: String!, $langId: String, $orderId: String!, $reference: String!, $returnUrl: String) {
+  doDirectPayment(
+    paymentRequest: {amount: $amount, identifier: $identifier, langId: $langId, orderId: $orderId, reference: $reference, returnUrl: $returnUrl}
   ) {
-    formAction
-    formFields {
-      name
-      value
-    }
+    redirectUrl
   }
 }
     `;
-export type GenerateOgonePaymentMutationFn = Apollo.MutationFunction<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>;
+export type DoDirectPaymentMutationFn = Apollo.MutationFunction<DoDirectPaymentMutation, DoDirectPaymentMutationVariables>;
 
 /**
- * __useGenerateOgonePaymentMutation__
+ * __useDoDirectPaymentMutation__
  *
- * To run a mutation, you first call `useGenerateOgonePaymentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useGenerateOgonePaymentMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useDoDirectPaymentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDoDirectPaymentMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [generateOgonePaymentMutation, { data, loading, error }] = useGenerateOgonePaymentMutation({
+ * const [doDirectPaymentMutation, { data, loading, error }] = useDoDirectPaymentMutation({
  *   variables: {
  *      amount: // value for 'amount'
- *      failureUrl: // value for 'failureUrl'
+ *      identifier: // value for 'identifier'
  *      langId: // value for 'langId'
  *      orderId: // value for 'orderId'
- *      pspId: // value for 'pspId'
  *      reference: // value for 'reference'
- *      successUrl: // value for 'successUrl'
- *      title: // value for 'title'
+ *      returnUrl: // value for 'returnUrl'
  *   },
  * });
  */
-export function useGenerateOgonePaymentMutation(baseOptions?: Apollo.MutationHookOptions<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>) {
+export function useDoDirectPaymentMutation(baseOptions?: Apollo.MutationHookOptions<DoDirectPaymentMutation, DoDirectPaymentMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>(GenerateOgonePaymentDocument, options);
+        return Apollo.useMutation<DoDirectPaymentMutation, DoDirectPaymentMutationVariables>(DoDirectPaymentDocument, options);
       }
-export type GenerateOgonePaymentMutationHookResult = ReturnType<typeof useGenerateOgonePaymentMutation>;
-export type GenerateOgonePaymentMutationResult = Apollo.MutationResult<GenerateOgonePaymentMutation>;
-export type GenerateOgonePaymentMutationOptions = Apollo.BaseMutationOptions<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>;
+export type DoDirectPaymentMutationHookResult = ReturnType<typeof useDoDirectPaymentMutation>;
+export type DoDirectPaymentMutationResult = Apollo.MutationResult<DoDirectPaymentMutation>;
+export type DoDirectPaymentMutationOptions = Apollo.BaseMutationOptions<DoDirectPaymentMutation, DoDirectPaymentMutationVariables>;
 export const SubmitTaakV2Document = gql`
     mutation SubmitTaakV2($id: UUID!, $submission: JSON!, $version: TaakVersion!) {
   submitTaakV2(id: $id, submission: $submission, version: $version) {
