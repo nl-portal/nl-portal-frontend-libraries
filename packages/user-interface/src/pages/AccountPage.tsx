@@ -18,7 +18,7 @@ import Heading from "../components/Heading";
 import useUserInfo from "../hooks/useUserInfo";
 import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
-import Link from "@gemeente-denhaag/link";
+import { Link } from "@gemeente-denhaag/link";
 import { ArrowRightIcon, EditIcon } from "@gemeente-denhaag/icons";
 import { PageIndex } from "@gemeente-denhaag/page-index";
 import { LeadParagraph, Paragraph } from "@gemeente-denhaag/typography";

@@ -1,4 +1,4 @@
-import { Formio, ReactComponent } from "@formio/react";
+import { Components, ReactComponent } from "@formio/react";
 import { formIoUploaderEditForm } from "./FormIoUploaderEditForm";
 import FileUpload, { UploadedFile } from "./FileUpload";
 import { Root, createRoot } from "react-dom/client";
@@ -34,19 +34,13 @@ class FormIoUploader extends ReactComponent {
   }
 
   static schema() {
-    // @ts-expect-error ReactComponent has no schema, docs say it does
-    return ReactComponent.schema({
+    return Components.components.field.schema({
       type: "portalFileUpload",
     });
   }
 
   static register: () => void = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    Formio.use({
-      components: {
-        portalFileUpload: FormIoUploader,
-      },
-    });
+    Components.addComponent("portalFileUpload", FormIoUploader);
   };
 
   static editForm = formIoUploaderEditForm;

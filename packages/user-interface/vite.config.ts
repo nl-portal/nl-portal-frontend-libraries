@@ -3,9 +3,10 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
 export default defineConfig({
-  plugins: [react(), dts()],
+  plugins: [peerDepsExternal({ includeDependencies: true }), react(), dts()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -14,16 +15,6 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "react-intl",
-        "react-router",
-        "@apollo/client",
-        "@nl-portal/nl-portal-api",
-        "@nl-portal/nl-portal-authentication",
-        "@nl-portal/nl-portal-localization",
-      ],
       output: {
         entryFileNames: "[name].js",
         globals: {
@@ -31,6 +22,7 @@ export default defineConfig({
         },
       },
     },
+    commonjsOptions: { transformMixedEsModules: true },
   },
   test: {
     globals: true,
@@ -39,14 +31,10 @@ export default defineConfig({
     server: {
       deps: {
         inline: [
-          "@gemeente-denhaag/badge-counter",
           "@gemeente-denhaag/button-link",
           "@gemeente-denhaag/form-field-error-message",
           "@gemeente-denhaag/form-field",
           "@gemeente-denhaag/form-label",
-          "@gemeente-denhaag/link-button",
-          "@gemeente-denhaag/radio-button",
-          "@gemeente-denhaag/status-badge",
           "@gemeente-denhaag/text-input",
         ],
       },

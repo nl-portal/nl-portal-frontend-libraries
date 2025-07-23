@@ -3,13 +3,13 @@ import { Link, useMatches } from "react-router";
 import { FormattedMessage } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import {
-  Sidenav,
-  SidenavItem,
-  SidenavLinkLabel,
-  SidenavList,
-} from "@gemeente-denhaag/sidenav";
+  SideNavigationBase,
+  SideNavigationItem,
+  SideNavigationLinkLabel,
+  SideNavigationList,
+} from "@gemeente-denhaag/side-navigation";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
-import BadgeCounter from "@gemeente-denhaag/badge-counter";
+import { NumberBadge } from "@gemeente-denhaag/number-badge";
 import AppContext from "../contexts/AppContext";
 import RouterContext from "../contexts/RouterContext";
 
@@ -24,34 +24,34 @@ const Menu = () => {
   );
 
   return (
-    <Sidenav>
+    <SideNavigationBase>
       {navigationItems.map((array, index) => (
-        <SidenavList key={`sidenav-list-${index}`}>
+        <SideNavigationList key={`sidenav-list-${index}`}>
           {array.map((item) => {
             const current = item === currentNavigationItem;
-            const className = `denhaag-sidenav__link ${
-              current && "denhaag-sidenav__link--current"
+            const className = `denhaag-side-navigation__link ${
+              current && "denhaag-side-navigation__link--current"
             }`;
 
             return (
-              <SidenavItem key={item.path}>
+              <SideNavigationItem key={item.path}>
                 <Link className={className} hrefLang={hrefLang} to={item.path}>
                   {item.icon}
-                  <SidenavLinkLabel>
+                  <SideNavigationLinkLabel>
                     <FormattedMessage
                       id={`pageTitles.${item.titleTranslationKey}`}
                     />
                     {item.hasMessagesCount && messagesCount > 0 && (
-                      <BadgeCounter>{messagesCount}</BadgeCounter>
+                      <NumberBadge>{messagesCount}</NumberBadge>
                     )}
-                  </SidenavLinkLabel>
+                  </SideNavigationLinkLabel>
                 </Link>
-              </SidenavItem>
+              </SideNavigationItem>
             );
           })}
-        </SidenavList>
+        </SideNavigationList>
       ))}
-    </Sidenav>
+    </SideNavigationBase>
   );
 };
 
