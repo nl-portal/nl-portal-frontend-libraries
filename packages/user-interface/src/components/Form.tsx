@@ -1,8 +1,8 @@
 import { FormHTMLAttributes, useState, useEffect, RefAttributes } from "react";
 import styles from "./Form.module.scss";
-import Alert, { AlertProps } from "@gemeente-denhaag/alert";
+import { Alert, AlertProps } from "@gemeente-denhaag/alert";
 import { FormattedMessage } from "react-intl";
-import Button from "@gemeente-denhaag/button";
+import { Button } from "@gemeente-denhaag/button";
 import classNames from "classnames";
 
 type Props = FormHTMLAttributes<HTMLFormElement> &

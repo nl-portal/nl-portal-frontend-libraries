@@ -14,8 +14,8 @@ import {
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router";
-import ContactTimeline from "@gemeente-denhaag/contact-timeline";
 import "@utrecht/component-library-css";
+import { ContactTimeline } from "@gemeente-denhaag/contact-timeline";
 import DocumentsList from "../components/DocumentsList";
 import StatusHistory from "../components/StatusHistory";
 import BackLink from "../components/BackLink";
@@ -27,7 +27,7 @@ import useOgonePaymentRegistration, {
   PaymentStatus,
 } from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
-import ExtraCaseDetails, { Details } from "../components/ExtraCaseDetails";
+import { ExtraCaseDetails, Details } from "../components/ExtraCaseDetails";
 import NotificationContext from "../contexts/NotificationContext";
 
 interface CasePageProps {

@@ -10,7 +10,7 @@ import {
 } from "@gemeente-denhaag/side-navigation";
 import { NavigationItem } from "../interfaces/navigation-item";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
-import BadgeCounter from "@gemeente-denhaag/badge-counter";
+import { NumberBadge } from "@gemeente-denhaag/number-badge";
 import AppContext from "../contexts/AppContext";
 
 interface Props {
@@ -42,7 +42,7 @@ const Menu = ({ items }: Props) => {
                       id={`pageTitles.${item.titleTranslationKey}`}
                     />
                     {item.hasMessagesCount && messagesCount > 0 && (
-                      <BadgeCounter>{messagesCount}</BadgeCounter>
+                      <NumberBadge>{messagesCount}</NumberBadge>
                     )}
                   </SideNavigationLinkLabel>
                 </Link>

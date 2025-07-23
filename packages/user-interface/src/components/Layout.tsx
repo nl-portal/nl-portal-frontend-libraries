@@ -5,10 +5,10 @@ import {
   PageHeader,
   PageFooter,
 } from "@gemeente-denhaag/page";
-import ResponsiveContent from "@gemeente-denhaag/responsive-content";
+import { ResponsiveContent } from "@gemeente-denhaag/responsive-content";
 import Header from "./Header";
 import Menu from "./Menu";
-import Footer, { FooterProps } from "@gemeente-denhaag/footer";
+import { Footer, FooterProps } from "@gemeente-denhaag/footer";
 import FormIoUploader from "./FormIoUploader";
 import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router";
@@ -18,6 +18,7 @@ import { NavigationItem } from "../interfaces/navigation-item";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import AppContext from "../contexts/AppContext";
 import { stringToSlug } from "../utils/string-to-slug";
+import "@utrecht/document-css";
 
 interface LayoutComponentProps {
   navigationItems: NavigationItem[][];

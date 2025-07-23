@@ -27,7 +27,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@gemeente-denhaag/utils": "2.1.0",
+    "@gemeente-denhaag/utils": "3.0.0",
     "deepmerge": "^4.3.1",
     "react-intl": "^7.1.11"
   },
@@ -35,10 +35,10 @@
     "@types/jest": "^30.0.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.6.0",
+    "@vitejs/plugin-react": "^4.7.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
-    "vite": "^7.0.4",
+    "vite": "^7.0.5",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.4"
   },
