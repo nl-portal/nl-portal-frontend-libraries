@@ -1,14 +1,20 @@
 export declare global {
   interface Window {
-    KEYCLOAK_URL: string;
-    KEYCLOAK_REALM: string;
-    KEYCLOAK_CLIENT_ID: string;
-    KEYCLOAK_REDIRECT_URI: string;
+    OIDC_URL: string;
+    OIDC_REALM: string;
+    OIDC_CLIENT_ID: string;
+    OIDC_REDIRECT_URI: string;
+    OIDC_POST_LOGOUT_REDIRECT_URI?: string;
     GRAPHQL_URI: string;
     REST_URI: string;
     SHOW_INHABITANT_AMOUNT: string;
-    SHOW_ADDRESS_RESEARCH: string;
     ADDRESS_RESEARCH_URL: string;
+    REPORT_CHANGE_OF_ADDRESS_URL: string;
+    CHANGE_IN_USE_OF_SURNAME_URL: string;
+    CHANGE_REGISTERED_GENDER_URL: string;
+    ADDRESS_RESEARCH_MORE_INFO_URL: string;
+    REQUEST_FOR_CHANGE_BRP_INFO_URL: string;
+    REQUEST_CONFIDENTIALITY_OF_DATA_URL: string;
     ACCOUNT_SHOW_NOTIFICATION_SUBSECTION: string;
     OVERVIEW_SHOW_INTRO: string;
     OVERVIEW_SHOW_MAINTENANCE_ALERT: string;
@@ -17,5 +23,6 @@ export declare global {
     THEME_CLASS: string;
     MESSAGE_COUNT_POLLING_INTERVAL: number;
     CASES_PARTIAL_SEARCH: boolean;
+    OPEN_KLANT_VERSION: string;
   }
 }

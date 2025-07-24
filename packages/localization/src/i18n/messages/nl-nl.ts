@@ -7,7 +7,7 @@ export const NL_NL_MESSAGES: Messages = {
     "locales.en-GB": "English",
     "locales.nl-NL": "Nederlands",
     "pageTitles.overview": "Overzicht",
-    "pageTitles.cases": "Mijn lopende zaken",
+    "pageTitles.cases": "Mijn zaken",
     "pageTitles.messages": "Mijn berichten",
     "pageTitles.documents": "Documenten",
     "pageTitles.offline": "Geen internetverbinding",
@@ -16,6 +16,8 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.forms": "Formulieren",
     "pageTitles.tasks": "Mijn Taken",
     "pageTitles.task": "Taak",
+    "pageTitles.editContactInfo": "Contactgegevens",
+    "pageTitles.editNotifications": "Meldingen",
     "backlink.back": "Terug",
     "header.logout": "Uitloggen",
     "header.welcome": "Welkom",
@@ -23,6 +25,7 @@ export const NL_NL_MESSAGES: Messages = {
     "header.menuButton": "Menu",
     "menu.close": "Menu sluiten",
     "menu.open": "Menu openen",
+    "modal.close": "Sluiten",
     "titles.currentCases": "Lopende zaken",
     "titles.completedCases": "Afgeronde zaken",
     "noMatchPage.title": "Pagina niet gevonden",
@@ -64,6 +67,10 @@ export const NL_NL_MESSAGES: Messages = {
       "Maak verbinding met het internet om gebruik te maken van {applicationName}.",
     "element.loading": "Aan het laden",
     "element.download": "Download",
+    "account.noDataAvailable":
+      "Het is helaas niet gelukt om uw gegevens op te halen. Ververs de pagina of probeer het later nog eens.",
+    "account.leadParagraph":
+      "Op deze pagina ziet u uw persoonlijke gegevens en hoe wij die gebruiken om contact met u te houden.",
     "account.contactHeader": "Contact",
     "account.notificationsHeader": "Meldingen en updates",
     "account.detailsHeader": "Persoonsgegevens",
@@ -73,9 +80,21 @@ export const NL_NL_MESSAGES: Messages = {
     "account.inhabitantAmountHeader": "Aantal inwoners adres",
     "account.inhabitantAmountDescription":
       "Staat er een ander aantal inwoners op uw address ingeschreven dan u verwacht? Dan kunt u een adresonderzoek aanvragen bij de gemeente. U kunt een adresonderzoek ook intrekken",
-    "account.edit": "Aanpassen",
+    "account.edit": "Wijzig",
     "account.cancel": "Annuleren",
     "account.save": "Opslaan",
+    "account.detail.contact": "Contactgegevens",
+    "account.detail.contact.description":
+      "Hier vindt u uw e-mailadres en telefoonnummer waarmee we u kunnen bereiken.",
+    "account.detail.meldingen": "Meldingen",
+    "account.detail.meldingen.description":
+      "Stel in waarvoor u meldingen wilt ontvangen en op welke manier.",
+    "account.detail.persoonsgegevens": "Persoonsgegevens",
+    "account.detail.persoonsgegevens.description":
+      "Dit zijn uw persoonsgegevens zoals naam, bsn, etc.",
+    "account.detail.adres": "Adresgegevens",
+    "account.detail.adres.description":
+      "Dit zijn uw adresgegevens; u kunt hier ook een verhuizing doorgeven.",
     "account.detail.emailadres": "E-mailadres",
     "account.detail.emailadres.error": "voer een geldig e-mailadres in",
     "account.detail.telefoonnummer": "Telefoonnummer",
@@ -93,13 +112,60 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.dateOfBirth": "Geboortedatum",
     "account.detail.countryOfBirth": "Geboorteland",
     "account.detail.nationality": "Nationaliteit",
+    "account.detail.confidentialityOfPersonalData":
+      "Geheimhouding persoonsgegevens",
+    "account.detail.confidentialityOfPersonalData.true": "Ja",
+    "account.detail.confidentialityOfPersonalData.false": "Nee",
     "account.detail.street": "Straat",
     "account.detail.postalCodeAndCity": "Postcode en plaats",
+    "account.detail.aanvangsDatum": "Aanvangsdatum",
     "account.detail.inhabitantAmount": "Aantal inwoners op uw woonadres",
     "account.detail.kvkNumber": "KVK-nummer",
     "account.detail.companyName": "Naam bedrijf",
     "account.detail.legalForm": "Rechtsvorm",
-    "account.addressResearchRequestButton": "Vraag onderzoek aan",
+    "account.detail.emailadres.modal.toevoegen": "Emailadres toevoegen",
+    "account.detail.emailadres.modal.cancel": "Annuleren",
+    "account.detail.emailadres.modal.confirm": "Opslaan",
+    "account.detail.emailadres.modal.text":
+      "Zodat wij u meldingen per email kunnen sturen.",
+    "account.detail.telefoonnummer.modal.toevoegen": "Telefoonnummer toevoegen",
+    "account.detail.telefoonnummer.modal.cancel": "Annuleren",
+    "account.detail.telefoonnummer.modal.confirm": "Opslaan",
+    "account.detail.telefoonnummer.modal.text":
+      "Zodat wij u meldingen per telefoon kunnen sturen.",
+    "account.detail.notification.form.post.title": "Post",
+    "account.detail.notification.form.post.label": "Meldingen over uw zaken",
+    "account.detail.notification.form.post.true":
+      "U ontvangt altijd fysieke post als er een besluit is genomen.",
+    "account.detail.notification.form.post.description":
+      "U ontvangt altijd fysieke post als er een besluit is genomen.",
+    "account.detail.notification.form.email.title": "Email",
+    "account.detail.notification.form.email.label": "Meldingen over uw zaken",
+    "account.detail.notification.form.email.true":
+      "U ontvangt altijd een ontvangstbevestiging, besluit en taak per email.",
+    "account.detail.notification.form.email.false":
+      "U ontvangt <strong>géén</strong> ontvangstbevestiging, besluit en taak per email.",
+    "account.detail.notification.form.email.description":
+      "U ontvangt altijd een ontvangstbevestiging, besluit en taak per email.",
+    "account.detail.notification.form.email.fieldvalue":
+      "Ontvang statuswijzigingen per email",
+    "account.detail.notification.form.save": "Wijzigingen opslaan",
+    "account.detail.contactform.email": "Emailadres",
+    "account.detail.contactform.tel": "Telefoonnummer",
+    "account.adres.links.addressResearchRequest": "Vraag onderzoek aan",
+    "account.persoonsgegevens.links.changeInUseOfSurname":
+      "Verandering naamgebruik aanvragen",
+    "account.adres.links.changeRegisteredGender":
+      "Vermelding geslacht wijzigen",
+    "account.adres.links.reportChangeOfAddress": "Verhuizing doorgeven",
+    "account.detail.wijzigingenBrp": "Wijzigingen en aanvragen BRP",
+    "account.wijzigingEnAanvragenBRP.links.addressResearchMoreInfo":
+      "Adresonderzoek aanvragen",
+    "account.wijzigingEnAanvragenBRP.links.requestForChangeBrpInfo":
+      "Persoonsgegevens BRP aanpassen",
+    "account.wijzigingEnAanvragenBRP.links.requestConfidentialityOfDataInfo":
+      "Geheimhouding persoonsgegevens aanvragen of intrekken",
+    "account.pageIndex.title": "Op deze pagina",
     "forms.listSubHeader": "Beschikbare formulieren",
     "tasksList.viewAll": "Bekijk alle taken",
     "tasksList.fetchError":
@@ -124,7 +190,7 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.subTitle": "Gemachtigd voor",
     "overviewpage.paragraph":
       "In de NL-portal  kunt u zelf uw persoonlijke zaken regelen wanneer het u uitkomt. U kunt bijvoorbeeld uw rekeningen betalen en zien wanneer uw aanvraag klaar is.",
-    "overviewpage.casesTitle": "Mijn lopende zaken",
+    "overviewpage.casesTitle": "Mijn zaken",
     "actionLabels.today": "vandaag",
     "actionLabels.yesterday": "gisteren",
     "actionLabels.before": "vóór",
@@ -163,5 +229,17 @@ export const NL_NL_MESSAGES: Messages = {
     "searchForm.messages.searchButton": "Zoeken",
     "searchForm.messages.totalElements": "{total} berichten",
     "searchForm.messages.totalElements.singular": "{total} bericht",
+    "auth.inactive.title": "Wilt u ingelogd blijven?",
+    "auth.inactive.text":
+      "U heeft 10 minuten niets gedaan. U wordt binnenkort automatisch uitgelogd uit de beveiligde omgeving. Als u gegevens heeft ingevuld, dan gaan deze verloren. Klik op 'Ingelogd blijven' om verder te gaan of op 'Uitloggen' om te stoppen.",
+    "auth.inactive.close": "Sluiten",
+    "auth.inactive.logout": "Uitloggen",
+    "auth.inactive.stayLoggedIn": "Ingelogd blijven",
+    "form.submit": "Verstuur",
+    "form.cancel": "Annuleren",
+    "form.success.title": "Gelukt",
+    "form.success.text": "Uw aanvraag is succesvol verwerkt.",
+    "form.error.title": "Er is iets misgegaan",
+    "form.error.text": "Probeer het later opnieuw.",
   },
 };

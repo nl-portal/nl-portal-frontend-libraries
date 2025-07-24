@@ -1,4 +1,4 @@
-@import "../styles/mixins";
+@use "../styles/mixins";
 
 .list-item-skeleton {
   padding-block-end: var(--nlportal-list-item-skeleton-padding-block, 12px);

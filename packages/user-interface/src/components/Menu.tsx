@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useContext } from "react";
-import { Link, useMatches } from "react-router-dom";
+import { Link, useMatches } from "react-router";
 import { FormattedMessage, useIntl } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import {

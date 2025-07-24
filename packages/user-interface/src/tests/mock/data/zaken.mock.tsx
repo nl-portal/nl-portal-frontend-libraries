@@ -376,6 +376,7 @@ interface Props {
   pageSize?: number;
   page?: number;
   isOpen?: boolean;
+  identificatie?: string;
   totalElements?: number;
 }
 
@@ -383,6 +384,7 @@ export const getZaken = ({
   pageSize,
   isOpen,
   page,
+  identificatie,
   totalElements = 10,
 }: Props) => {
   let variables = {};
@@ -391,6 +393,8 @@ export const getZaken = ({
   if (pageSize) variables = { ...variables, pageSize };
   if (typeof isOpen == "boolean") variables = { ...variables, isOpen };
   if (page) variables = { ...variables, page };
+  if (typeof identificatie !== undefined)
+    variables = { ...variables, identificatie };
 
   return {
     request: {

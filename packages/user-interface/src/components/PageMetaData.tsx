@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useIntl } from "react-intl";
 import { NavigationItem } from "../interfaces/navigation-item";
-import { useMatches } from "react-router-dom";
+import { useMatches } from "react-router";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
 
 interface PageMetaDataProps {

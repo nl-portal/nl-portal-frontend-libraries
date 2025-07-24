@@ -2,18 +2,18 @@ import {
   AccountPage,
   CaseDetailsPage,
   CasesPage,
-  EditAccountPage,
   MessageDetailsPage,
   NoMatchPage,
   OverviewPage,
   TasksPage,
   TaskDetailsPage,
   MessagesPage,
+  EditContactInfoPage,
 } from "@nl-portal/nl-portal-user-interface";
-import { KeycloakCallbackPage } from "@nl-portal/nl-portal-authentication";
+import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
 import { config } from "./config";
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 import ThemeSampleOverviewPage from "../pages/ThemeSampleOverviewPage";
 import ThemeSampleListPage from "../pages/ThemeSampleListPage";
 import ThemeSampleDetailPage from "../pages/ThemeSampleDetailPage";
@@ -88,18 +88,26 @@ export const routes = [
           <AccountPage
             showInhabitantAmount={config.SHOW_INHABITANT_AMOUNT}
             addressResearchUrl={config.ADDRESS_RESEARCH_URL}
+            reportChangeOfAddressUrl={config.REPORT_CHANGE_OF_ADDRESS_URL}
+            changeInUseOfSurnameUrl={config.CHANGE_IN_USE_OF_SURNAME_URL}
+            changeRegisteredGenderUrl={config.CHANGE_REGISTERED_GENDER_URL}
+            addressResearchMoreInfoUrl={config.ADDRESS_RESEARCH_MORE_INFO_URL}
+            requestForChangeBrpInfoUrl={config.REQUEST_FOR_CHANGE_BRP_INFO_URL}
+            requestConfidentialityOfDataUrl={
+              config.REQUEST_CONFIDENTIALITY_OF_DATA_URL
+            }
           />
         ),
       },
       {
-        path: paths.editAccount,
-        element: <EditAccountPage />,
+        path: paths.changeContactInfo,
+        element: <EditContactInfoPage />,
       },
     ],
   },
   {
-    path: new URL(window.KEYCLOAK_REDIRECT_URI).pathname,
-    element: <KeycloakCallbackPage />,
+    path: new URL(window.OIDC_REDIRECT_URI).pathname,
+    element: <OidcCallbackPage />,
   },
   {
     path: paths.noMatch,

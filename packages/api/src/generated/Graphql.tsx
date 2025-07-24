@@ -21,13 +21,6 @@ export type Scalars = {
   UUID: { input: any; output: any; }
 };
 
-export enum AanduidingNaamGebruik {
-  Eigen = 'EIGEN',
-  EigenPartner = 'EIGEN_PARTNER',
-  Partner = 'PARTNER',
-  PartnerEigen = 'PARTNER_EIGEN'
-}
-
 export type Adres = {
   __typename?: 'Adres';
   huisnummer?: Maybe<Scalars['Int']['output']>;
@@ -153,16 +146,6 @@ export type BesluitPage = {
   totalPages: Scalars['Int']['output'];
 };
 
-export type BetrokkenActoren = {
-  __typename?: 'BetrokkenActoren';
-  actoridentificator: OpenKlant2Identificator;
-  indicatieActief: Scalars['Boolean']['output'];
-  naam: Scalars['String']['output'];
-  soortActor: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-  uuid: Scalars['String']['output'];
-};
-
 export type Betrokkene = {
   __typename?: 'Betrokkene';
   bezoekadres?: Maybe<OpenKlant2Adres>;
@@ -177,6 +160,375 @@ export type Betrokkene = {
   uuid: Scalars['String']['output'];
   volledigeNaam: Scalars['String']['output'];
   wasPartij?: Maybe<OpenKlant2ForeignKey>;
+};
+
+export type Brp2Adres = {
+  __typename?: 'Brp2Adres';
+  aanduidingBijHuisnummer?: Maybe<BrpCodeOmschrijving>;
+  huisletter?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['Int']['output']>;
+  huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
+  inOnderzoek?: Maybe<Brp2AdresInOnderzoek>;
+  korteStraatnaam?: Maybe<Scalars['String']['output']>;
+  officieleStraatnaam?: Maybe<Scalars['String']['output']>;
+  postcode?: Maybe<Scalars['String']['output']>;
+  woonplaats?: Maybe<Scalars['String']['output']>;
+};
+
+export type Brp2AdresInOnderzoek = {
+  __typename?: 'Brp2AdresInOnderzoek';
+  aanduidingBijHuisnummer?: Maybe<Scalars['Boolean']['output']>;
+  huisletter?: Maybe<Scalars['Boolean']['output']>;
+  huisnummer?: Maybe<Scalars['Boolean']['output']>;
+  huisnummertoevoeging?: Maybe<Scalars['Boolean']['output']>;
+  korteStraatnaam?: Maybe<Scalars['Boolean']['output']>;
+  officieleStraatnaam?: Maybe<Scalars['Boolean']['output']>;
+  postcode?: Maybe<Scalars['Boolean']['output']>;
+  woonplaats?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type Brp2NationaliteitInOnderzoek = {
+  __typename?: 'Brp2NationaliteitInOnderzoek';
+  datumIngangGeldigheid?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  nationaliteit?: Maybe<Scalars['Boolean']['output']>;
+  redenOpname?: Maybe<Scalars['Boolean']['output']>;
+  type?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpAdellijkeTitelPredicaat = {
+  __typename?: 'BrpAdellijkeTitelPredicaat';
+  code: Scalars['String']['output'];
+  omschrijving: Scalars['String']['output'];
+  soort: Scalars['String']['output'];
+};
+
+export type BrpAdressering = {
+  __typename?: 'BrpAdressering';
+  aanhef?: Maybe<Scalars['String']['output']>;
+  aanschrijfwijze?: Maybe<BrpAdresseringAanschrijfwijze>;
+  adresregel1?: Maybe<Scalars['String']['output']>;
+  adresregel2?: Maybe<Scalars['String']['output']>;
+  adresregel3?: Maybe<Scalars['String']['output']>;
+  gebruikInLopendeTekst?: Maybe<Scalars['String']['output']>;
+  indicatieVastgesteldVerblijftNietOpAdres?: Maybe<Scalars['Boolean']['output']>;
+  land?: Maybe<BrpCodeOmschrijving>;
+};
+
+export type BrpAdresseringAanschrijfwijze = {
+  __typename?: 'BrpAdresseringAanschrijfwijze';
+  aanspreekvorm?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpCodeOmschrijving = {
+  __typename?: 'BrpCodeOmschrijving';
+  code?: Maybe<Scalars['String']['output']>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpDatum = {
+  __typename?: 'BrpDatum';
+  datum: Scalars['Date']['output'];
+  langFormaat: Scalars['String']['output'];
+  type: Scalars['String']['output'];
+};
+
+export type BrpDatumLandPlaats = {
+  __typename?: 'BrpDatumLandPlaats';
+  datum?: Maybe<BrpDatum>;
+  inOnderzoek?: Maybe<BrpDatumLandPlaatsInOnderzoek>;
+  land?: Maybe<BrpCodeOmschrijving>;
+  plaats?: Maybe<BrpCodeOmschrijving>;
+};
+
+export type BrpDatumLandPlaatsInOnderzoek = {
+  __typename?: 'BrpDatumLandPlaatsInOnderzoek';
+  datum?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  land?: Maybe<Scalars['Boolean']['output']>;
+  plaats?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpEuropeesKiesrecht = {
+  __typename?: 'BrpEuropeesKiesrecht';
+  aanduiding?: Maybe<BrpCodeOmschrijving>;
+  einddatumUitsluiting?: Maybe<BrpDatum>;
+};
+
+export type BrpGezag = {
+  __typename?: 'BrpGezag';
+  derde?: Maybe<BrpGezagDerde>;
+  derden?: Maybe<Array<BrpGezagDerde>>;
+  minderjarige?: Maybe<BrpGezagMinderjarige>;
+  ouder?: Maybe<BrpGezagOuder>;
+  ouders?: Maybe<Array<BrpGezagOuder>>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpGezagDerde = {
+  __typename?: 'BrpGezagDerde';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<BrpGezagNaam>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpGezagMinderjarige = {
+  __typename?: 'BrpGezagMinderjarige';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  leeftijd?: Maybe<Scalars['Int']['output']>;
+  naam?: Maybe<BrpGezagNaam>;
+};
+
+export type BrpGezagNaam = {
+  __typename?: 'BrpGezagNaam';
+  volledigeNaam?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpGezagOuder = {
+  __typename?: 'BrpGezagOuder';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<BrpGezagNaam>;
+};
+
+export type BrpImigratie = {
+  __typename?: 'BrpImigratie';
+  datumVestigingInNederland?: Maybe<BrpDatum>;
+  inOnderzoek?: Maybe<BrpImigratieInOnderzoek>;
+  indicatieVestigingVanuitBuitenland?: Maybe<Scalars['Boolean']['output']>;
+  landVanwaarIngeschreven?: Maybe<BrpCodeOmschrijving>;
+  vanuitVerblijfplaatsOnbekend?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpImigratieInOnderzoek = {
+  __typename?: 'BrpImigratieInOnderzoek';
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  datumVestigingInNederland?: Maybe<Scalars['Boolean']['output']>;
+  indicatieVestigingVanuitBuitenland?: Maybe<Scalars['Boolean']['output']>;
+  landVanwaarIngeschreven?: Maybe<Scalars['Boolean']['output']>;
+  vanuitVerblijfplaatsOnbekend?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpInOnderzoek = {
+  __typename?: 'BrpInOnderzoek';
+  burgerservicenummer?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoekGemeente?: Maybe<BrpDatum>;
+  datumIngangOnderzoekGezag?: Maybe<BrpDatum>;
+  datumIngangOnderzoekPersoon?: Maybe<BrpDatum>;
+  datumInschrijvingInGemeente?: Maybe<Scalars['Boolean']['output']>;
+  gemeenteVanInschrijving?: Maybe<Scalars['Boolean']['output']>;
+  geslacht?: Maybe<Scalars['Boolean']['output']>;
+  indicatieCurateleRegister?: Maybe<Scalars['Boolean']['output']>;
+  indicatieGezagMinderjarige?: Maybe<Scalars['Boolean']['output']>;
+  leeftijd?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpKind = {
+  __typename?: 'BrpKind';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  geboorte?: Maybe<BrpDatumLandPlaats>;
+  inOnderzoek?: Maybe<BrpKindInOnderzoek>;
+  naam?: Maybe<BrpNaam>;
+};
+
+export type BrpKindInOnderzoek = {
+  __typename?: 'BrpKindInOnderzoek';
+  burgerservicenummer?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+};
+
+export type BrpNaam = {
+  __typename?: 'BrpNaam';
+  aanduidingNaamgebruik?: Maybe<BrpCodeOmschrijving>;
+  adellijkeTitelPredicaat?: Maybe<BrpAdellijkeTitelPredicaat>;
+  geslachtsnaam?: Maybe<Scalars['String']['output']>;
+  inOnderzoek?: Maybe<BrpNaamInOnderzoek>;
+  lastName: Scalars['String']['output'];
+  officialLastName?: Maybe<Scalars['String']['output']>;
+  volledigeNaam?: Maybe<Scalars['String']['output']>;
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voornamen?: Maybe<Scalars['String']['output']>;
+  voorvoegsel?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpNaamInOnderzoek = {
+  __typename?: 'BrpNaamInOnderzoek';
+  aanduidingNaamgebruik?: Maybe<Scalars['Boolean']['output']>;
+  adellijkeTitelPredicaat?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  geslachtsnaam?: Maybe<Scalars['Boolean']['output']>;
+  volledigeNaam?: Maybe<Scalars['Boolean']['output']>;
+  voorletters?: Maybe<Scalars['Boolean']['output']>;
+  voornamen?: Maybe<Scalars['Boolean']['output']>;
+  voorvoegsel?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpNationaliteit = {
+  __typename?: 'BrpNationaliteit';
+  datumIngangGeldigheid?: Maybe<BrpCodeOmschrijving>;
+  inOnderzoek?: Maybe<Brp2NationaliteitInOnderzoek>;
+  nationaliteit?: Maybe<BrpCodeOmschrijving>;
+  redenOpname: BrpCodeOmschrijving;
+  type: Scalars['String']['output'];
+};
+
+export type BrpOuder = {
+  __typename?: 'BrpOuder';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  datumIngangFamilierechtelijkeBetrekking?: Maybe<BrpDatum>;
+  geboorte?: Maybe<BrpDatumLandPlaats>;
+  geslacht?: Maybe<BrpCodeOmschrijving>;
+  inOnderzoek?: Maybe<BrpOuderInOnderzoek>;
+  naam?: Maybe<BrpNaam>;
+  ouderAanduiding?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpOuderInOnderzoek = {
+  __typename?: 'BrpOuderInOnderzoek';
+  burgerservicenummer?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangFamilierechtelijkeBetrekking?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  geslacht?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpPartner = {
+  __typename?: 'BrpPartner';
+  aangaanHuwelijkPartnerschap?: Maybe<BrpPartnerHuwelijkAangaan>;
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  geboorte?: Maybe<BrpDatumLandPlaats>;
+  geslacht?: Maybe<BrpCodeOmschrijving>;
+  inOnderzoek?: Maybe<BrpPartnerInOnderzoek>;
+  naam?: Maybe<BrpNaam>;
+  ontbindingHuwelijkPartnerschap?: Maybe<BrpPartnerHuwelijkOntbinding>;
+  soortVerbintenis?: Maybe<BrpCodeOmschrijving>;
+};
+
+export type BrpPartnerHuwelijkAangaan = {
+  __typename?: 'BrpPartnerHuwelijkAangaan';
+  datum?: Maybe<BrpDatum>;
+  inOnderzoek?: Maybe<BrpPartnerHuwelijkAangaanInOnderzoek>;
+  land?: Maybe<BrpCodeOmschrijving>;
+  plaats?: Maybe<BrpCodeOmschrijving>;
+  soortVerbintenis?: Maybe<BrpCodeOmschrijving>;
+};
+
+export type BrpPartnerHuwelijkAangaanInOnderzoek = {
+  __typename?: 'BrpPartnerHuwelijkAangaanInOnderzoek';
+  datum?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  land?: Maybe<Scalars['Boolean']['output']>;
+  plaats?: Maybe<Scalars['Boolean']['output']>;
+  soortVerbintenis?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpPartnerHuwelijkOntbinding = {
+  __typename?: 'BrpPartnerHuwelijkOntbinding';
+  datum?: Maybe<BrpDatum>;
+  inOnderzoek?: Maybe<BrpPartnerHuwelijkOntbindingInOnderzoek>;
+};
+
+export type BrpPartnerHuwelijkOntbindingInOnderzoek = {
+  __typename?: 'BrpPartnerHuwelijkOntbindingInOnderzoek';
+  datum?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+};
+
+export type BrpPartnerInOnderzoek = {
+  __typename?: 'BrpPartnerInOnderzoek';
+  burgerservicenummer?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  geslacht?: Maybe<Scalars['Boolean']['output']>;
+  soortVerbintenis?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpPersoon = {
+  __typename?: 'BrpPersoon';
+  adressering?: Maybe<BrpAdressering>;
+  bewonersAantal?: Maybe<Scalars['Int']['output']>;
+  burgerservicenummer: Scalars['String']['output'];
+  datumEersteInschrijvingGBA?: Maybe<BrpDatum>;
+  datumInschrijvingInGemeente?: Maybe<BrpDatum>;
+  europeesKiesrecht?: Maybe<BrpEuropeesKiesrecht>;
+  geboorte?: Maybe<BrpDatumLandPlaats>;
+  geheimhoudingPersoonsgegevens?: Maybe<Scalars['Boolean']['output']>;
+  gemeenteVanInschrijving?: Maybe<BrpCodeOmschrijving>;
+  geslacht?: Maybe<BrpCodeOmschrijving>;
+  gezag?: Maybe<Array<BrpGezag>>;
+  imigratie?: Maybe<BrpImigratie>;
+  inOnderzoek?: Maybe<BrpInOnderzoek>;
+  indicatieCurateleRegister?: Maybe<Scalars['Boolean']['output']>;
+  indicatieGezagMinderjarige?: Maybe<BrpCodeOmschrijving>;
+  kinderen?: Maybe<Array<BrpKind>>;
+  leeftijd: Scalars['Int']['output'];
+  naam: BrpNaam;
+  nationaliteiten: Array<BrpNationaliteit>;
+  ouders?: Maybe<Array<BrpOuder>>;
+  overlijden?: Maybe<BrpDatumLandPlaats>;
+  partners?: Maybe<Array<BrpPartner>>;
+  rni?: Maybe<Array<BrpPersoonRni>>;
+  uitsluitingKiesrecht?: Maybe<BrpUitsluitingKiesrecht>;
+  verblijfplaats?: Maybe<BrpVerblijfplaats>;
+  verblijfstitel?: Maybe<BrpVerblijfsTitel>;
+  verificatie?: Maybe<BrpPersoonVerificatie>;
+};
+
+export type BrpPersoonRni = {
+  __typename?: 'BrpPersoonRni';
+  categorie?: Maybe<Scalars['String']['output']>;
+  deelnemer?: Maybe<BrpCodeOmschrijving>;
+  omschrijvingVerdrag?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpPersoonVerificatie = {
+  __typename?: 'BrpPersoonVerificatie';
+  datum?: Maybe<BrpDatum>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpUitsluitingKiesrecht = {
+  __typename?: 'BrpUitsluitingKiesrecht';
+  einddatum: BrpDatum;
+  uitgeslotenVanKiesrecht: Scalars['Boolean']['output'];
+};
+
+export type BrpVerblijfplaats = {
+  __typename?: 'BrpVerblijfplaats';
+  adresseerbaarObjectIdentificatie?: Maybe<Scalars['String']['output']>;
+  datumVan?: Maybe<BrpDatum>;
+  functieAdres?: Maybe<BrpCodeOmschrijving>;
+  inOnderzoek?: Maybe<BrpVerblijfplaatsInOnderzoek>;
+  indicatieVastgesteldVerblijftNietOpAdres?: Maybe<Scalars['Boolean']['output']>;
+  nummeraanduidingIdentificatie?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+  verblijfadres?: Maybe<Brp2Adres>;
+};
+
+export type BrpVerblijfplaatsInOnderzoek = {
+  __typename?: 'BrpVerblijfplaatsInOnderzoek';
+  adresseerbaarObjectIdentificatie?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  datumVan?: Maybe<Scalars['Boolean']['output']>;
+  functieAdres?: Maybe<Scalars['Boolean']['output']>;
+  indicatieVastgesteldVerblijftNietOpAdres?: Maybe<Scalars['Boolean']['output']>;
+  nummeraanduidingIdentificatie?: Maybe<Scalars['Boolean']['output']>;
+  type?: Maybe<Scalars['Boolean']['output']>;
+  verblijfplaats?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpVerblijfsTitel = {
+  __typename?: 'BrpVerblijfsTitel';
+  aanduiding?: Maybe<BrpCodeOmschrijving>;
+  datumEinde?: Maybe<BrpDatum>;
+  datumIngang?: Maybe<BrpDatum>;
+  inOnderzoek?: Maybe<BrpVerblijfsTitelInOnderzoek>;
+};
+
+export type BrpVerblijfsTitelInOnderzoek = {
+  __typename?: 'BrpVerblijfsTitelInOnderzoek';
+  aanduiding?: Maybe<Scalars['Boolean']['output']>;
+  datumEinde?: Maybe<Scalars['Boolean']['output']>;
+  datumIngang?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
 };
 
 export type Categorie = {
@@ -271,6 +623,7 @@ export type DigitaleAdresRequestInput = {
 export type DigitaleAdresResponse = {
   __typename?: 'DigitaleAdresResponse';
   omschrijving: Scalars['String']['output'];
+  referentie: Scalars['String']['output'];
   type: DigitaleAdresType;
   uuid: Scalars['UUID']['output'];
   waarde: Scalars['String']['output'];
@@ -281,6 +634,20 @@ export enum DigitaleAdresType {
   Overig = 'OVERIG',
   Telefoonnummer = 'TELEFOONNUMMER'
 }
+
+export type DirectPaymentRequestInput = {
+  amount: Scalars['Float']['input'];
+  identifier: Scalars['String']['input'];
+  langId?: InputMaybe<Scalars['String']['input']>;
+  orderId: Scalars['String']['input'];
+  reference: Scalars['String']['input'];
+  returnUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DirectPaymentResponse = {
+  __typename?: 'DirectPaymentResponse';
+  redirectUrl: Scalars['String']['output'];
+};
 
 export type Document = {
   __typename?: 'Document';
@@ -317,10 +684,10 @@ export type FormDefinition = {
   formDefinition: Scalars['JSON']['output'];
 };
 
-export type Gemachtigde = {
-  __typename?: 'Gemachtigde';
+export type GemachtigdeV2 = {
+  __typename?: 'GemachtigdeV2';
   bedrijf?: Maybe<MaatschappelijkeActiviteit>;
-  persoon?: Maybe<Persoon>;
+  persoon?: Maybe<BrpPersoon>;
 };
 
 export type HadBetrokkenActoren = {
@@ -376,25 +743,6 @@ export type Klant = {
   telefoonnummer?: Maybe<Scalars['String']['output']>;
 };
 
-export type KlantContactResponse = {
-  __typename?: 'KlantContactResponse';
-  betrokkenActoren: Array<BetrokkenActoren>;
-  betrokkenen: Array<OpenKlant2ForeignKey>;
-  gingOverOnderwerpobjecten: Array<OpenKlant2ForeignKey>;
-  indicatieContactGelukt: Scalars['Boolean']['output'];
-  inhoud: Scalars['String']['output'];
-  kanaal: Scalars['String']['output'];
-  leiddeTotInterneTaken: Array<OpenKlant2ForeignKey>;
-  nummer: Scalars['String']['output'];
-  omvatteBijlagen: Array<OpenKlant2ForeignKey>;
-  onderwerp: Scalars['String']['output'];
-  plaatsgevondenOp: Scalars['String']['output'];
-  taal: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-  uuid: Scalars['String']['output'];
-  vertrouwelijk: Scalars['Boolean']['output'];
-};
-
 export type KlantUpdateInput = {
   aanmaakkanaal?: InputMaybe<Scalars['String']['input']>;
   emailadres?: InputMaybe<Scalars['String']['input']>;
@@ -428,6 +776,8 @@ export type Mutation = {
   createUserPartij?: Maybe<PartijResponse>;
   /** Delete DigitaleAdres of User by Id */
   deleteUserDigitaleAdres?: Maybe<Scalars['Boolean']['output']>;
+  /** Do Worldline Direct payment */
+  doDirectPayment: DirectPaymentResponse;
   /** Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
   /** Submit a task */
@@ -459,6 +809,11 @@ export type MutationCreateUserPartijArgs = {
 
 export type MutationDeleteUserDigitaleAdresArgs = {
   digitaleAdresId: Scalars['UUID']['input'];
+};
+
+
+export type MutationDoDirectPaymentArgs = {
+  paymentRequest: DirectPaymentRequestInput;
 };
 
 
@@ -498,21 +853,12 @@ export type MutationUpdateProductVerbruiksObjectArgs = {
 
 
 export type MutationUpdateUserDigitaleAdresArgs = {
-  digitaleAdresId: Scalars['UUID']['input'];
   digitaleAdresRequest: DigitaleAdresRequestInput;
 };
 
 
 export type MutationUpdateUserPartijArgs = {
   partijRequest: PartijRequestInput;
-};
-
-export type Naam = {
-  __typename?: 'Naam';
-  geslachtsnaam?: Maybe<Scalars['String']['output']>;
-  lastName: Scalars['String']['output'];
-  voorletters?: Maybe<Scalars['String']['output']>;
-  voorvoegsel?: Maybe<Scalars['String']['output']>;
 };
 
 export type OgoneBetaling = {
@@ -552,6 +898,7 @@ export type OpenKlant2DigitaleAdres = {
   __typename?: 'OpenKlant2DigitaleAdres';
   adres: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
+  referentie?: Maybe<Scalars['String']['output']>;
   soortDigitaalAdres: Scalars['String']['output'];
   url?: Maybe<Scalars['String']['output']>;
   uuid?: Maybe<Scalars['UUID']['output']>;
@@ -576,6 +923,30 @@ export type OpenKlant2Identificator = {
   codeRegister: Scalars['String']['output'];
   codeSoortObjectId: Scalars['String']['output'];
   objectId: Scalars['String']['output'];
+};
+
+export type OpenKlant2IdentificeerdePartij = {
+  __typename?: 'OpenKlant2IdentificeerdePartij';
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenKlant2Klantcontact = {
+  __typename?: 'OpenKlant2Klantcontact';
+  gingOverOnderwerpobjecten: Array<OpenKlant2ForeignKey>;
+  hadBetrokkenActoren: Array<HadBetrokkenActoren>;
+  hadBetrokkenen: Array<OpenKlant2ForeignKey>;
+  indicatieContactGelukt: Scalars['Boolean']['output'];
+  inhoud: Scalars['String']['output'];
+  kanaal: Scalars['String']['output'];
+  leiddeTotInterneTaken: Array<OpenKlant2ForeignKey>;
+  nummer: Scalars['String']['output'];
+  omvatteBijlagen: Array<OpenKlant2ForeignKey>;
+  onderwerp: Scalars['String']['output'];
+  plaatsgevondenOp: Scalars['String']['output'];
+  taal: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+  vertrouwelijk: Scalars['Boolean']['output'];
 };
 
 export enum OpenKlant2Landcode {
@@ -985,7 +1356,7 @@ export type OpenKlant2Partij = {
   interneNotitie?: Maybe<Scalars['String']['output']>;
   nummer?: Maybe<Scalars['String']['output']>;
   partijIdentificatie: PartijIdentificatie;
-  partijIdentificatoren?: Maybe<Array<OpenKlant2ForeignKey>>;
+  partijIdentificatoren?: Maybe<Array<OpenKlant2PartijIdentificator>>;
   rekeningnummers?: Maybe<Array<OpenKlant2ForeignKey>>;
   soortPartij: SoortPartij;
   url?: Maybe<Scalars['String']['output']>;
@@ -994,6 +1365,21 @@ export type OpenKlant2Partij = {
   voorkeursDigitaalAdres?: Maybe<OpenKlant2ForeignKey>;
   voorkeursRekeningnummer?: Maybe<OpenKlant2ForeignKey>;
   voorkeurstaal?: Maybe<Scalars['String']['output']>;
+};
+
+export type OpenKlant2PartijIdentificator = {
+  __typename?: 'OpenKlant2PartijIdentificator';
+  anderePartijIdentificator?: Maybe<Scalars['String']['output']>;
+  identificeerdePartij?: Maybe<OpenKlant2IdentificeerdePartij>;
+  partijIdentificator?: Maybe<OpenKlant2Identificator>;
+  subIdentificatorVan?: Maybe<OpenKlant2SubIdentificatorVan>;
+  url?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['UUID']['output']>;
+};
+
+export type OpenKlant2SubIdentificatorVan = {
+  __typename?: 'OpenKlant2SubIdentificatorVan';
+  uuid: Scalars['UUID']['output'];
 };
 
 export type OpenKlant2Uuid = {
@@ -1051,117 +1437,6 @@ export type PaymentField = {
   __typename?: 'PaymentField';
   name: Scalars['String']['output'];
   value: Scalars['String']['output'];
-};
-
-export type Persoon = {
-  __typename?: 'Persoon';
-  bewonersAantal?: Maybe<Scalars['Int']['output']>;
-  burgerservicenummer?: Maybe<Scalars['String']['output']>;
-  geboorte?: Maybe<PersoonDatumLandPlaats>;
-  geheimhoudingPersoonsgegevens?: Maybe<Scalars['Boolean']['output']>;
-  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
-  kinderen?: Maybe<Array<PersoonKind>>;
-  naam: PersoonNaam;
-  nationaliteiten?: Maybe<Array<PersoonNationaliteiten>>;
-  opschortingBijhouding?: Maybe<PersoonOpschortingBijhouding>;
-  ouders?: Maybe<Array<PersoonOuder>>;
-  partners?: Maybe<Array<PersoonPartner>>;
-  reisdocumentnummers?: Maybe<Array<Scalars['String']['output']>>;
-  verblijfplaats?: Maybe<PersoonVerblijfplaats>;
-};
-
-export type PersoonCodeOmschrijving = {
-  __typename?: 'PersoonCodeOmschrijving';
-  code?: Maybe<Scalars['String']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonDatum = {
-  __typename?: 'PersoonDatum';
-  dag?: Maybe<Scalars['Int']['output']>;
-  datum?: Maybe<Scalars['String']['output']>;
-  jaar?: Maybe<Scalars['Int']['output']>;
-  maand?: Maybe<Scalars['Int']['output']>;
-};
-
-export type PersoonDatumLandPlaats = {
-  __typename?: 'PersoonDatumLandPlaats';
-  datum?: Maybe<PersoonDatum>;
-  land?: Maybe<PersoonCodeOmschrijving>;
-  plaats?: Maybe<PersoonCodeOmschrijving>;
-};
-
-export type PersoonKind = {
-  __typename?: 'PersoonKind';
-  burgerservicenummer?: Maybe<Scalars['String']['output']>;
-  geboorte?: Maybe<PersoonDatumLandPlaats>;
-  leeftijd?: Maybe<Scalars['Int']['output']>;
-  naam?: Maybe<Naam>;
-};
-
-export type PersoonNaam = {
-  __typename?: 'PersoonNaam';
-  aanduidingNaamgebruik?: Maybe<AanduidingNaamGebruik>;
-  aanhef?: Maybe<Scalars['String']['output']>;
-  geslachtsnaam?: Maybe<Scalars['String']['output']>;
-  lastName: Scalars['String']['output'];
-  officialLastName?: Maybe<Scalars['String']['output']>;
-  voorletters?: Maybe<Scalars['String']['output']>;
-  voornamen?: Maybe<Scalars['String']['output']>;
-  voorvoegsel?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonNationaliteit = {
-  __typename?: 'PersoonNationaliteit';
-  code?: Maybe<Scalars['String']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonNationaliteiten = {
-  __typename?: 'PersoonNationaliteiten';
-  nationaliteit?: Maybe<PersoonNationaliteit>;
-};
-
-export type PersoonOpschortingBijhouding = {
-  __typename?: 'PersoonOpschortingBijhouding';
-  datum?: Maybe<PersoonDatum>;
-  reden?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonOuder = {
-  __typename?: 'PersoonOuder';
-  burgerservicenummer?: Maybe<Scalars['String']['output']>;
-  datumIngangFamilierechtelijkeBetrekking?: Maybe<PersoonDatum>;
-  geboorte?: Maybe<PersoonDatumLandPlaats>;
-  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
-  naam?: Maybe<Naam>;
-  ouderAanduiding?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonPartner = {
-  __typename?: 'PersoonPartner';
-  aangaanHuwelijkPartnerschap?: Maybe<PersoonDatumLandPlaats>;
-  burgerservicenummer?: Maybe<Scalars['String']['output']>;
-  datumIngangFamilierechtelijkeBetrekking?: Maybe<PersoonDatum>;
-  geboorte?: Maybe<PersoonDatumLandPlaats>;
-  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
-  naam?: Maybe<Naam>;
-  soortVerbintenis?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonVerblijfplaats = {
-  __typename?: 'PersoonVerblijfplaats';
-  adresseerbaarObjectIdentificatie?: Maybe<Scalars['String']['output']>;
-  datumAanvangAdreshouding?: Maybe<PersoonDatum>;
-  datumIngangGeldigheid?: Maybe<PersoonDatum>;
-  datumInschrijvingInGemeente?: Maybe<PersoonDatum>;
-  datumVestigingInNederland?: Maybe<PersoonDatum>;
-  huisletter?: Maybe<Scalars['String']['output']>;
-  huisnummer?: Maybe<Scalars['String']['output']>;
-  huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
-  postcode?: Maybe<Scalars['String']['output']>;
-  straat?: Maybe<Scalars['String']['output']>;
-  woonplaats?: Maybe<Scalars['String']['output']>;
 };
 
 export type PersoonsIdentificatie = {
@@ -1275,7 +1550,7 @@ export type Query = {
   /** Get all besluiten */
   getBesluiten: BesluitPage;
   /** Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
-  getBewonersAantal?: Maybe<Scalars['Int']['output']>;
+  getBewonersAantalV2?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
   getBurgerProfiel?: Maybe<Klant>;
   /**
@@ -1297,13 +1572,13 @@ export type Query = {
   /** find single form definition from the Objecten API */
   getFormDefinitionByObjectenApiUrl?: Maybe<FormDefinition>;
   /** Gets the data of the gemachtigde */
-  getGemachtigde: Gemachtigde;
+  getGemachtigdeV2: GemachtigdeV2;
   /** Gets the contactmomenten of a klant */
   getKlantContactMomenten?: Maybe<ContactMomentPage>;
   /** Gets the contactmomenten of a object(zaak) */
   getObjectContactMomenten?: Maybe<ContactMomentPage>;
   /** Gets the persoon data */
-  getPersoon?: Maybe<Persoon>;
+  getPersoonV2?: Maybe<BrpPersoon>;
   /** Get product by id */
   getProduct?: Maybe<Product>;
   /**
@@ -1354,9 +1629,9 @@ export type Query = {
   /** Get DigitaleAdressen of authenticated user. */
   getUserDigitaleAdresen?: Maybe<Array<DigitaleAdresResponse>>;
   /** Get KlantContact by id of authenticated user. */
-  getUserKlantContact?: Maybe<KlantContactResponse>;
+  getUserKlantContact?: Maybe<OpenKlant2Klantcontact>;
   /** Get KlantContacten of authenticated user. */
-  getUserKlantContacten: Array<KlantContactResponse>;
+  getUserKlantContacten: Array<OpenKlant2Klantcontact>;
   /** Get Partij by Id for authenticated user. */
   getUserPartij?: Maybe<OpenKlant2Partij>;
   /** Gets a zaak by id */
@@ -1429,7 +1704,7 @@ export type QueryGetBesluitenArgs = {
 };
 
 
-export type QueryGetBewonersAantalArgs = {
+export type QueryGetBewonersAantalV2Args = {
   adresseerbaarObjectIdentificatie: Scalars['String']['input'];
 };
 
@@ -1609,7 +1884,8 @@ export enum SoortPartij {
 export type StatusType = {
   __typename?: 'StatusType';
   isEindstatus?: Maybe<Scalars['Boolean']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
+  omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type Taak = {
@@ -1776,15 +2052,31 @@ export type ZaakStatusType = {
   __typename?: 'ZaakStatusType';
   isEindstatus: Scalars['Boolean']['output'];
   omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type ZaakType = {
   __typename?: 'ZaakType';
   identificatie: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
+
+export type CreateUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresRequest: DigitaleAdresRequestInput;
+}>;
+
+
+export type CreateUserDigitaleAdresMutation = { __typename?: 'Mutation', createUserDigitaleAdres?: { __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string } | null };
+
+export type DeleteUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresId: Scalars['UUID']['input'];
+}>;
+
+
+export type DeleteUserDigitaleAdresMutation = { __typename?: 'Mutation', deleteUserDigitaleAdres?: boolean | null };
 
 export type GenerateOgonePaymentMutationVariables = Exact<{
   amount: Scalars['Float']['input'];
@@ -1823,6 +2115,13 @@ export type UpdateBurgerProfielMutationVariables = Exact<{
 
 
 export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
+
+export type UpdateUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresRequest: DigitaleAdresRequestInput;
+}>;
+
+
+export type UpdateUserDigitaleAdresMutation = { __typename?: 'Mutation', updateUserDigitaleAdres?: { __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string } | null };
 
 export type UpdateProductVerbruiksObjectMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1898,10 +2197,10 @@ export type GetPortaalFormulierByIdV2QueryVariables = Exact<{
 
 export type GetPortaalFormulierByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
-export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetGemachtigdeV2QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetGemachtigdeQuery = { __typename?: 'Query', getGemachtigde: { __typename?: 'Gemachtigde', persoon?: { __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null } } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } };
+export type GetGemachtigdeV2Query = { __typename?: 'Query', getGemachtigdeV2: { __typename?: 'GemachtigdeV2', persoon?: { __typename?: 'BrpPersoon', naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null } } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } };
 
 export type GetKlantContactMomentenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1915,15 +2214,10 @@ export type GetObjectContactMomentenQueryVariables = Exact<{
 
 export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectContactMomenten?: { __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> } | null };
 
-export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetPersoonV2QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', burgerservicenummer?: string | null, geslachtsaanduiding?: string | null, bewonersAantal?: number | null, naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'PersoonVerblijfplaats', straat?: string | null, huisnummer?: string | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, geboorte?: { __typename?: 'PersoonDatumLandPlaats', datum?: { __typename?: 'PersoonDatum', datum?: string | null, jaar?: number | null, maand?: number | null, dag?: number | null } | null, land?: { __typename?: 'PersoonCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten?: Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: { __typename?: 'PersoonNationaliteit', code?: string | null, omschrijving?: string | null } | null }> | null } | null };
-
-export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null } } | null };
+export type GetPersoonV2Query = { __typename?: 'Query', getPersoonV2?: { __typename?: 'BrpPersoon', burgerservicenummer: string, bewonersAantal?: number | null, geheimhoudingPersoonsgegevens?: boolean | null, geslacht?: { __typename?: 'BrpCodeOmschrijving', omschrijving?: string | null } | null, naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'BrpVerblijfplaats', verblijfadres?: { __typename?: 'Brp2Adres', officieleStraatnaam?: string | null, huisnummer?: number | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, datumVan?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null } | null, geboorte?: { __typename?: 'BrpDatumLandPlaats', datum?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null, land?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null, plaats?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten: Array<{ __typename?: 'BrpNationaliteit', nationaliteit?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null }> } | null };
 
 export type GetProductTakenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -1998,12 +2292,17 @@ export type GetTakenQueryVariables = Exact<{
 
 export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, data: any, zaak?: string | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
+export type GetUserDigitaleAdressenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdresen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string }> | null };
+
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
 }>;
 
 
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: string | null }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving: string }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
 
 export type GetZakenQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -2023,6 +2322,74 @@ export const FormulierFieldsFragmentDoc = gql`
   value
 }
     `;
+export const CreateUserDigitaleAdresDocument = gql`
+    mutation CreateUserDigitaleAdres($digitaleAdresRequest: DigitaleAdresRequestInput!) {
+  createUserDigitaleAdres(digitaleAdresRequest: $digitaleAdresRequest) {
+    uuid
+    waarde
+    type
+    omschrijving
+    referentie
+  }
+}
+    `;
+export type CreateUserDigitaleAdresMutationFn = Apollo.MutationFunction<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useCreateUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useCreateUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserDigitaleAdresMutation, { data, loading, error }] = useCreateUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresRequest: // value for 'digitaleAdresRequest'
+ *   },
+ * });
+ */
+export function useCreateUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>(CreateUserDigitaleAdresDocument, options);
+      }
+export type CreateUserDigitaleAdresMutationHookResult = ReturnType<typeof useCreateUserDigitaleAdresMutation>;
+export type CreateUserDigitaleAdresMutationResult = Apollo.MutationResult<CreateUserDigitaleAdresMutation>;
+export type CreateUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>;
+export const DeleteUserDigitaleAdresDocument = gql`
+    mutation DeleteUserDigitaleAdres($digitaleAdresId: UUID!) {
+  deleteUserDigitaleAdres(digitaleAdresId: $digitaleAdresId)
+}
+    `;
+export type DeleteUserDigitaleAdresMutationFn = Apollo.MutationFunction<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useDeleteUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useDeleteUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserDigitaleAdresMutation, { data, loading, error }] = useDeleteUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresId: // value for 'digitaleAdresId'
+ *   },
+ * });
+ */
+export function useDeleteUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>(DeleteUserDigitaleAdresDocument, options);
+      }
+export type DeleteUserDigitaleAdresMutationHookResult = ReturnType<typeof useDeleteUserDigitaleAdresMutation>;
+export type DeleteUserDigitaleAdresMutationResult = Apollo.MutationResult<DeleteUserDigitaleAdresMutation>;
+export type DeleteUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>;
 export const GenerateOgonePaymentDocument = gql`
     mutation GenerateOgonePayment($amount: Float!, $failureUrl: String!, $langId: String!, $orderId: String!, $pspId: String!, $reference: String!, $successUrl: String!, $title: String!) {
   generateOgonePayment(
@@ -2189,6 +2556,43 @@ export function useUpdateBurgerProfielMutation(baseOptions?: Apollo.MutationHook
 export type UpdateBurgerProfielMutationHookResult = ReturnType<typeof useUpdateBurgerProfielMutation>;
 export type UpdateBurgerProfielMutationResult = Apollo.MutationResult<UpdateBurgerProfielMutation>;
 export type UpdateBurgerProfielMutationOptions = Apollo.BaseMutationOptions<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>;
+export const UpdateUserDigitaleAdresDocument = gql`
+    mutation UpdateUserDigitaleAdres($digitaleAdresRequest: DigitaleAdresRequestInput!) {
+  updateUserDigitaleAdres(digitaleAdresRequest: $digitaleAdresRequest) {
+    uuid
+    waarde
+    type
+    omschrijving
+    referentie
+  }
+}
+    `;
+export type UpdateUserDigitaleAdresMutationFn = Apollo.MutationFunction<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useUpdateUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserDigitaleAdresMutation, { data, loading, error }] = useUpdateUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresRequest: // value for 'digitaleAdresRequest'
+ *   },
+ * });
+ */
+export function useUpdateUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>(UpdateUserDigitaleAdresDocument, options);
+      }
+export type UpdateUserDigitaleAdresMutationHookResult = ReturnType<typeof useUpdateUserDigitaleAdresMutation>;
+export type UpdateUserDigitaleAdresMutationResult = Apollo.MutationResult<UpdateUserDigitaleAdresMutation>;
+export type UpdateUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>;
 export const UpdateProductVerbruiksObjectDocument = gql`
     mutation UpdateProductVerbruiksObject($id: UUID!, $submission: JSON!) {
   updateProductVerbruiksObject(id: $id, submission: $submission) {
@@ -2271,8 +2675,8 @@ export function useGetBerichtLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBerichtQuery, GetBerichtQueryVariables>(GetBerichtDocument, options);
         }
-export function useGetBerichtSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBerichtQuery, GetBerichtQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBerichtSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBerichtQuery, GetBerichtQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBerichtQuery, GetBerichtQueryVariables>(GetBerichtDocument, options);
         }
 export type GetBerichtQueryHookResult = ReturnType<typeof useGetBerichtQuery>;
@@ -2325,8 +2729,8 @@ export function useGetBerichtenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBerichtenQuery, GetBerichtenQueryVariables>(GetBerichtenDocument, options);
         }
-export function useGetBerichtenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBerichtenQuery, GetBerichtenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBerichtenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBerichtenQuery, GetBerichtenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBerichtenQuery, GetBerichtenQueryVariables>(GetBerichtenDocument, options);
         }
 export type GetBerichtenQueryHookResult = ReturnType<typeof useGetBerichtenQuery>;
@@ -2362,8 +2766,8 @@ export function useGetUnopenedBerichtenCountLazyQuery(baseOptions?: Apollo.LazyQ
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
         }
-export function useGetUnopenedBerichtenCountSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetUnopenedBerichtenCountSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
         }
 export type GetUnopenedBerichtenCountQueryHookResult = ReturnType<typeof useGetUnopenedBerichtenCountQuery>;
@@ -2415,8 +2819,8 @@ export function useGetBedrijfLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
         }
-export function useGetBedrijfSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBedrijfSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
         }
 export type GetBedrijfQueryHookResult = ReturnType<typeof useGetBedrijfQuery>;
@@ -2456,8 +2860,8 @@ export function useGetBurgerProfielLazyQuery(baseOptions?: Apollo.LazyQueryHookO
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
         }
-export function useGetBurgerProfielSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBurgerProfielSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
         }
 export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProfielQuery>;
@@ -2508,8 +2912,8 @@ export function useGetDocumentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetDocumentenQuery, GetDocumentenQueryVariables>(GetDocumentenDocument, options);
         }
-export function useGetDocumentenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetDocumentenQuery, GetDocumentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetDocumentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetDocumentenQuery, GetDocumentenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetDocumentenQuery, GetDocumentenQueryVariables>(GetDocumentenDocument, options);
         }
 export type GetDocumentenQueryHookResult = ReturnType<typeof useGetDocumentenQuery>;
@@ -2548,8 +2952,8 @@ export function useGetFormDefinitionByIdLazyQuery(baseOptions?: Apollo.LazyQuery
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>(GetFormDefinitionByIdDocument, options);
         }
-export function useGetFormDefinitionByIdSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetFormDefinitionByIdSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>(GetFormDefinitionByIdDocument, options);
         }
 export type GetFormDefinitionByIdQueryHookResult = ReturnType<typeof useGetFormDefinitionByIdQuery>;
@@ -2588,8 +2992,8 @@ export function useGetFormDefinitionByObjectenApiUrlLazyQuery(baseOptions?: Apol
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>(GetFormDefinitionByObjectenApiUrlDocument, options);
         }
-export function useGetFormDefinitionByObjectenApiUrlSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetFormDefinitionByObjectenApiUrlSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>(GetFormDefinitionByObjectenApiUrlDocument, options);
         }
 export type GetFormDefinitionByObjectenApiUrlQueryHookResult = ReturnType<typeof useGetFormDefinitionByObjectenApiUrlQuery>;
@@ -2628,8 +3032,8 @@ export function useGetFormDefinitionByNameLazyQuery(baseOptions?: Apollo.LazyQue
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>(GetFormDefinitionByNameDocument, options);
         }
-export function useGetFormDefinitionByNameSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetFormDefinitionByNameSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>(GetFormDefinitionByNameDocument, options);
         }
 export type GetFormDefinitionByNameQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameQuery>;
@@ -2679,17 +3083,17 @@ export function useGetPortaalFormulierByIdV2LazyQuery(baseOptions?: Apollo.LazyQ
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>(GetPortaalFormulierByIdV2Document, options);
         }
-export function useGetPortaalFormulierByIdV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetPortaalFormulierByIdV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>(GetPortaalFormulierByIdV2Document, options);
         }
 export type GetPortaalFormulierByIdV2QueryHookResult = ReturnType<typeof useGetPortaalFormulierByIdV2Query>;
 export type GetPortaalFormulierByIdV2LazyQueryHookResult = ReturnType<typeof useGetPortaalFormulierByIdV2LazyQuery>;
 export type GetPortaalFormulierByIdV2SuspenseQueryHookResult = ReturnType<typeof useGetPortaalFormulierByIdV2SuspenseQuery>;
 export type GetPortaalFormulierByIdV2QueryResult = Apollo.QueryResult<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>;
-export const GetGemachtigdeDocument = gql`
-    query GetGemachtigde {
-  getGemachtigde {
+export const GetGemachtigdeV2Document = gql`
+    query GetGemachtigdeV2 {
+  getGemachtigdeV2 {
     persoon {
       naam {
         voornamen
@@ -2704,36 +3108,36 @@ export const GetGemachtigdeDocument = gql`
     `;
 
 /**
- * __useGetGemachtigdeQuery__
+ * __useGetGemachtigdeV2Query__
  *
- * To run a query within a React component, call `useGetGemachtigdeQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetGemachtigdeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetGemachtigdeV2Query` and pass it any options that fit your needs.
+ * When your component renders, `useGetGemachtigdeV2Query` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetGemachtigdeQuery({
+ * const { data, loading, error } = useGetGemachtigdeV2Query({
  *   variables: {
  *   },
  * });
  */
-export function useGetGemachtigdeQuery(baseOptions?: Apollo.QueryHookOptions<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>) {
+export function useGetGemachtigdeV2Query(baseOptions?: Apollo.QueryHookOptions<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>(GetGemachtigdeDocument, options);
+        return Apollo.useQuery<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>(GetGemachtigdeV2Document, options);
       }
-export function useGetGemachtigdeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>) {
+export function useGetGemachtigdeV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>(GetGemachtigdeDocument, options);
+          return Apollo.useLazyQuery<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>(GetGemachtigdeV2Document, options);
         }
-export function useGetGemachtigdeSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>(GetGemachtigdeDocument, options);
+export function useGetGemachtigdeV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>(GetGemachtigdeV2Document, options);
         }
-export type GetGemachtigdeQueryHookResult = ReturnType<typeof useGetGemachtigdeQuery>;
-export type GetGemachtigdeLazyQueryHookResult = ReturnType<typeof useGetGemachtigdeLazyQuery>;
-export type GetGemachtigdeSuspenseQueryHookResult = ReturnType<typeof useGetGemachtigdeSuspenseQuery>;
-export type GetGemachtigdeQueryResult = Apollo.QueryResult<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>;
+export type GetGemachtigdeV2QueryHookResult = ReturnType<typeof useGetGemachtigdeV2Query>;
+export type GetGemachtigdeV2LazyQueryHookResult = ReturnType<typeof useGetGemachtigdeV2LazyQuery>;
+export type GetGemachtigdeV2SuspenseQueryHookResult = ReturnType<typeof useGetGemachtigdeV2SuspenseQuery>;
+export type GetGemachtigdeV2QueryResult = Apollo.QueryResult<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>;
 export const GetKlantContactMomentenDocument = gql`
     query GetKlantContactMomenten {
   getKlantContactMomenten {
@@ -2769,8 +3173,8 @@ export function useGetKlantContactMomentenLazyQuery(baseOptions?: Apollo.LazyQue
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
         }
-export function useGetKlantContactMomentenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetKlantContactMomentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
         }
 export type GetKlantContactMomentenQueryHookResult = ReturnType<typeof useGetKlantContactMomentenQuery>;
@@ -2813,40 +3217,53 @@ export function useGetObjectContactMomentenLazyQuery(baseOptions?: Apollo.LazyQu
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
         }
-export function useGetObjectContactMomentenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetObjectContactMomentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
         }
 export type GetObjectContactMomentenQueryHookResult = ReturnType<typeof useGetObjectContactMomentenQuery>;
 export type GetObjectContactMomentenLazyQueryHookResult = ReturnType<typeof useGetObjectContactMomentenLazyQuery>;
 export type GetObjectContactMomentenSuspenseQueryHookResult = ReturnType<typeof useGetObjectContactMomentenSuspenseQuery>;
 export type GetObjectContactMomentenQueryResult = Apollo.QueryResult<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>;
-export const GetPersoonDataDocument = gql`
-    query GetPersoonData {
-  getPersoon {
+export const GetPersoonV2Document = gql`
+    query GetPersoonV2 {
+  getPersoonV2 {
     burgerservicenummer
-    geslachtsaanduiding
+    geslacht {
+      omschrijving
+    }
     bewonersAantal
+    geheimhoudingPersoonsgegevens
     naam {
       voornamen
       officialLastName
     }
     verblijfplaats {
-      straat
-      huisnummer
-      huisletter
-      huisnummertoevoeging
-      postcode
-      woonplaats
+      verblijfadres {
+        officieleStraatnaam
+        huisnummer
+        huisletter
+        huisnummertoevoeging
+        postcode
+        woonplaats
+      }
+      datumVan {
+        datum
+        langFormaat
+        type
+      }
     }
     geboorte {
       datum {
         datum
-        jaar
-        maand
-        dag
+        langFormaat
+        type
       }
       land {
+        code
+        omschrijving
+      }
+      plaats {
         code
         omschrijving
       }
@@ -2862,78 +3279,36 @@ export const GetPersoonDataDocument = gql`
     `;
 
 /**
- * __useGetPersoonDataQuery__
+ * __useGetPersoonV2Query__
  *
- * To run a query within a React component, call `useGetPersoonDataQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPersoonDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetPersoonV2Query` and pass it any options that fit your needs.
+ * When your component renders, `useGetPersoonV2Query` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetPersoonDataQuery({
+ * const { data, loading, error } = useGetPersoonV2Query({
  *   variables: {
  *   },
  * });
  */
-export function useGetPersoonDataQuery(baseOptions?: Apollo.QueryHookOptions<GetPersoonDataQuery, GetPersoonDataQueryVariables>) {
+export function useGetPersoonV2Query(baseOptions?: Apollo.QueryHookOptions<GetPersoonV2Query, GetPersoonV2QueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetPersoonDataQuery, GetPersoonDataQueryVariables>(GetPersoonDataDocument, options);
+        return Apollo.useQuery<GetPersoonV2Query, GetPersoonV2QueryVariables>(GetPersoonV2Document, options);
       }
-export function useGetPersoonDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPersoonDataQuery, GetPersoonDataQueryVariables>) {
+export function useGetPersoonV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPersoonV2Query, GetPersoonV2QueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetPersoonDataQuery, GetPersoonDataQueryVariables>(GetPersoonDataDocument, options);
+          return Apollo.useLazyQuery<GetPersoonV2Query, GetPersoonV2QueryVariables>(GetPersoonV2Document, options);
         }
-export function useGetPersoonDataSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetPersoonDataQuery, GetPersoonDataQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetPersoonDataQuery, GetPersoonDataQueryVariables>(GetPersoonDataDocument, options);
+export function useGetPersoonV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetPersoonV2Query, GetPersoonV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetPersoonV2Query, GetPersoonV2QueryVariables>(GetPersoonV2Document, options);
         }
-export type GetPersoonDataQueryHookResult = ReturnType<typeof useGetPersoonDataQuery>;
-export type GetPersoonDataLazyQueryHookResult = ReturnType<typeof useGetPersoonDataLazyQuery>;
-export type GetPersoonDataSuspenseQueryHookResult = ReturnType<typeof useGetPersoonDataSuspenseQuery>;
-export type GetPersoonDataQueryResult = Apollo.QueryResult<GetPersoonDataQuery, GetPersoonDataQueryVariables>;
-export const GetPersoonDocument = gql`
-    query GetPersoon {
-  getPersoon {
-    naam {
-      voornamen
-      officialLastName
-    }
-  }
-}
-    `;
-
-/**
- * __useGetPersoonQuery__
- *
- * To run a query within a React component, call `useGetPersoonQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPersoonQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetPersoonQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetPersoonQuery(baseOptions?: Apollo.QueryHookOptions<GetPersoonQuery, GetPersoonQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetPersoonQuery, GetPersoonQueryVariables>(GetPersoonDocument, options);
-      }
-export function useGetPersoonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPersoonQuery, GetPersoonQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetPersoonQuery, GetPersoonQueryVariables>(GetPersoonDocument, options);
-        }
-export function useGetPersoonSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetPersoonQuery, GetPersoonQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetPersoonQuery, GetPersoonQueryVariables>(GetPersoonDocument, options);
-        }
-export type GetPersoonQueryHookResult = ReturnType<typeof useGetPersoonQuery>;
-export type GetPersoonLazyQueryHookResult = ReturnType<typeof useGetPersoonLazyQuery>;
-export type GetPersoonSuspenseQueryHookResult = ReturnType<typeof useGetPersoonSuspenseQuery>;
-export type GetPersoonQueryResult = Apollo.QueryResult<GetPersoonQuery, GetPersoonQueryVariables>;
+export type GetPersoonV2QueryHookResult = ReturnType<typeof useGetPersoonV2Query>;
+export type GetPersoonV2LazyQueryHookResult = ReturnType<typeof useGetPersoonV2LazyQuery>;
+export type GetPersoonV2SuspenseQueryHookResult = ReturnType<typeof useGetPersoonV2SuspenseQuery>;
+export type GetPersoonV2QueryResult = Apollo.QueryResult<GetPersoonV2Query, GetPersoonV2QueryVariables>;
 export const GetProductTakenDocument = gql`
     query GetProductTaken($productName: String!, $pageSize: Int) {
   getProductTaken(productName: $productName, pageSize: $pageSize) {
@@ -2985,8 +3360,8 @@ export function useGetProductTakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductTakenQuery, GetProductTakenQueryVariables>(GetProductTakenDocument, options);
         }
-export function useGetProductTakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductTakenQuery, GetProductTakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductTakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductTakenQuery, GetProductTakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductTakenQuery, GetProductTakenQueryVariables>(GetProductTakenDocument, options);
         }
 export type GetProductTakenQueryHookResult = ReturnType<typeof useGetProductTakenQuery>;
@@ -3028,8 +3403,8 @@ export function useGetProductVerbruiksObjectenLazyQuery(baseOptions?: Apollo.Laz
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>(GetProductVerbruiksObjectenDocument, options);
         }
-export function useGetProductVerbruiksObjectenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductVerbruiksObjectenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>(GetProductVerbruiksObjectenDocument, options);
         }
 export type GetProductVerbruiksObjectenQueryHookResult = ReturnType<typeof useGetProductVerbruiksObjectenQuery>;
@@ -3081,8 +3456,8 @@ export function useGetProductZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductZakenQuery, GetProductZakenQueryVariables>(GetProductZakenDocument, options);
         }
-export function useGetProductZakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductZakenQuery, GetProductZakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductZakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductZakenQuery, GetProductZakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductZakenQuery, GetProductZakenQueryVariables>(GetProductZakenDocument, options);
         }
 export type GetProductZakenQueryHookResult = ReturnType<typeof useGetProductZakenQuery>;
@@ -3174,8 +3549,8 @@ export function useGetProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, options);
         }
-export function useGetProductSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, options);
         }
 export type GetProductQueryHookResult = ReturnType<typeof useGetProductQuery>;
@@ -3233,8 +3608,8 @@ export function useGetProductenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductenQuery, GetProductenQueryVariables>(GetProductenDocument, options);
         }
-export function useGetProductenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductenQuery, GetProductenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductenQuery, GetProductenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductenQuery, GetProductenQueryVariables>(GetProductenDocument, options);
         }
 export type GetProductenQueryHookResult = ReturnType<typeof useGetProductenQuery>;
@@ -3292,8 +3667,8 @@ export function useGetTaakByIdV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>(GetTaakByIdV2Document, options);
         }
-export function useGetTaakByIdV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTaakByIdV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>(GetTaakByIdV2Document, options);
         }
 export type GetTaakByIdV2QueryHookResult = ReturnType<typeof useGetTaakByIdV2Query>;
@@ -3339,8 +3714,8 @@ export function useGetTaakByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
         }
-export function useGetTaakByIdSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTaakByIdSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
         }
 export type GetTaakByIdQueryHookResult = ReturnType<typeof useGetTaakByIdQuery>;
@@ -3414,8 +3789,8 @@ export function useGetTakenV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTakenV2Query, GetTakenV2QueryVariables>(GetTakenV2Document, options);
         }
-export function useGetTakenV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTakenV2Query, GetTakenV2QueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTakenV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTakenV2Query, GetTakenV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTakenV2Query, GetTakenV2QueryVariables>(GetTakenV2Document, options);
         }
 export type GetTakenV2QueryHookResult = ReturnType<typeof useGetTakenV2Query>;
@@ -3470,14 +3845,57 @@ export function useGetTakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
         }
-export function useGetTakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
         }
 export type GetTakenQueryHookResult = ReturnType<typeof useGetTakenQuery>;
 export type GetTakenLazyQueryHookResult = ReturnType<typeof useGetTakenLazyQuery>;
 export type GetTakenSuspenseQueryHookResult = ReturnType<typeof useGetTakenSuspenseQuery>;
 export type GetTakenQueryResult = Apollo.QueryResult<GetTakenQuery, GetTakenQueryVariables>;
+export const GetUserDigitaleAdressenDocument = gql`
+    query GetUserDigitaleAdressen {
+  getUserDigitaleAdresen {
+    uuid
+    waarde
+    type
+    omschrijving
+    referentie
+  }
+}
+    `;
+
+/**
+ * __useGetUserDigitaleAdressenQuery__
+ *
+ * To run a query within a React component, call `useGetUserDigitaleAdressenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserDigitaleAdressenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserDigitaleAdressenQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserDigitaleAdressenQuery(baseOptions?: Apollo.QueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+      }
+export function useGetUserDigitaleAdressenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+        }
+export function useGetUserDigitaleAdressenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+        }
+export type GetUserDigitaleAdressenQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenQuery>;
+export type GetUserDigitaleAdressenLazyQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenLazyQuery>;
+export type GetUserDigitaleAdressenSuspenseQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenSuspenseQuery>;
+export type GetUserDigitaleAdressenQueryResult = Apollo.QueryResult<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>;
 export const GetZaakDocument = gql`
     query GetZaak($id: UUID!) {
   getZaak(id: $id) {
@@ -3549,8 +3967,8 @@ export function useGetZaakLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ge
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetZaakQuery, GetZaakQueryVariables>(GetZaakDocument, options);
         }
-export function useGetZaakSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetZaakQuery, GetZaakQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetZaakSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetZaakQuery, GetZaakQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetZaakQuery, GetZaakQueryVariables>(GetZaakDocument, options);
         }
 export type GetZaakQueryHookResult = ReturnType<typeof useGetZaakQuery>;
@@ -3616,8 +4034,8 @@ export function useGetZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetZakenQuery, GetZakenQueryVariables>(GetZakenDocument, options);
         }
-export function useGetZakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetZakenQuery, GetZakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetZakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetZakenQuery, GetZakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetZakenQuery, GetZakenQueryVariables>(GetZakenDocument, options);
         }
 export type GetZakenQueryHookResult = ReturnType<typeof useGetZakenQuery>;

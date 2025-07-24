@@ -3,14 +3,10 @@ import { FormattedMessage, useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import PageHeader from "../components/PageHeader";
-import {
-  Zaak,
-  useGetZakenLazyQuery,
-  useGetZakenQuery,
-} from "@nl-portal/nl-portal-api";
+import { Zaak, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import PageGrid from "../components/PageGrid";
 import SearchForm from "../components/SearchForm";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 const CasesPage = () => {
   const intl = useIntl();
@@ -19,28 +15,24 @@ const CasesPage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [openIndex, setOpenIndex] = useState(0);
   const [closedIndex, setClosedIndex] = useState(0);
+  const [isPending, startTransition] = useTransition();
   const {
     data: openData,
     loading: openLoading,
     error: openError,
     refetch: openRefetch,
-    fetchMore: openFetchMore,
   } = useGetZakenQuery({
     variables: {
       isOpen: true,
       pageSize: fetchCasesLength,
     },
   });
-  const [
-    ,
-    {
-      data: closedData,
-      loading: closedLoading,
-      error: closedError,
-      refetch: closedRefetch,
-      fetchMore: closedFetchMore,
-    },
-  ] = useGetZakenLazyQuery({
+  const {
+    data: closedData,
+    loading: closedLoading,
+    error: closedError,
+    refetch: closedRefetch,
+  } = useGetZakenQuery({
     variables: {
       isOpen: false,
       pageSize: fetchCasesLength,
@@ -53,42 +45,37 @@ const CasesPage = () => {
     ? "identificatieContains"
     : "identificatie";
 
-  const finishRefetching = () => {
-    scrollTo(0, 0);
-  };
-
   const handleFormSubmit = (searchValue: string) => {
-    const func = currentTab === 0 ? openRefetch : closedRefetch;
-    setOpenIndex(0);
-    setClosedIndex(0);
-    setSearchValue(searchValue);
-    func({ [searchParam]: searchValue, page: undefined }).finally(
-      finishRefetching,
-    );
+    startTransition(async () => {
+      const func = currentTab === 0 ? openRefetch : closedRefetch;
+      setOpenIndex(0);
+      setClosedIndex(0);
+      setSearchValue(searchValue);
+      await func({ [searchParam]: searchValue, page: undefined });
+    });
   };
 
   const onTabChange = (index: number) => {
-    const func = index === 0 ? openRefetch : closedRefetch;
-    const pageIndex = index === 0 ? openIndex : closedIndex;
-    const search = searchValue ? { [searchParam]: searchValue } : {};
-    setCurrentTab(index);
-    func({
-      ...search,
-      page: pageIndex + 1,
+    startTransition(async () => {
+      const func = index === 0 ? openRefetch : closedRefetch;
+      const pageIndex = index === 0 ? openIndex : closedIndex;
+      setCurrentTab(index);
+      await func({
+        [searchParam]: searchValue,
+        page: pageIndex + 1,
+      });
     });
   };
 
   const onPageChange = (index: number) => {
-    const func = currentTab === 0 ? openFetchMore : closedFetchMore;
-    if (currentTab === 0) setOpenIndex(index);
-    if (currentTab === 1) setClosedIndex(index);
-    func({
-      variables: { page: index + 1 },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prev;
-        return fetchMoreResult;
-      },
-    }).finally(finishRefetching);
+    startTransition(async () => {
+      const func = currentTab === 0 ? openRefetch : closedRefetch;
+      if (currentTab === 0) setOpenIndex(index);
+      if (currentTab === 1) setClosedIndex(index);
+      await func({
+        page: index + 1,
+      });
+    });
   };
 
   return (
@@ -108,15 +95,16 @@ const CasesPage = () => {
               label: intl.formatMessage({ id: "titles.currentCases" }),
               panelContent: (
                 <CasesList
-                  loading={openLoading}
+                  loading={isPending || openLoading}
                   error={Boolean(openError)}
                   titleTranslationId={null}
                   cases={openCases}
                   totalAmount={openData?.getZaken.totalElements}
                   index={openIndex}
                   indexLimit={
-                    openData?.getZaken.totalPages &&
-                    openData?.getZaken.totalPages - 1
+                    !isPending && openData?.getZaken.totalPages
+                      ? openData?.getZaken.totalPages - 1
+                      : undefined
                   }
                   onChange={onPageChange}
                 />
@@ -126,15 +114,16 @@ const CasesPage = () => {
               label: intl.formatMessage({ id: "titles.completedCases" }),
               panelContent: (
                 <CasesList
-                  loading={closedLoading}
+                  loading={isPending || closedLoading}
                   error={Boolean(closedError)}
                   titleTranslationId={null}
                   cases={closedCases}
                   totalAmount={closedData?.getZaken.totalElements}
                   index={closedIndex}
                   indexLimit={
-                    closedData?.getZaken.totalPages &&
-                    closedData?.getZaken.totalPages - 1
+                    !isPending && closedData?.getZaken.totalPages
+                      ? closedData?.getZaken.totalPages - 1
+                      : undefined
                   }
                   onChange={onPageChange}
                 />

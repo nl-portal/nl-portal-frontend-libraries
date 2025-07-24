@@ -1,7 +1,7 @@
-import React, { FC, Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Utils } from "@formio/react";
-import { TOKEN_KEY, TOKEN_OBJECT } from "@nl-portal/nl-portal-api";
 import _ = Utils._;
+import FormIoUploader from "./FormIoUploader";
 
 export interface UploadedFile {
   url: string;
@@ -10,26 +10,29 @@ export interface UploadedFile {
 }
 
 interface FileUploadProps {
+  id: string;
   context: object;
   disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
+  attributes?: Record<string, string>;
   informatieobjecttype?: string;
 }
 
-const FileUpload: FC<FileUploadProps> = ({
+const FileUpload = ({
+  id,
   context,
   disabled,
   multiple,
   onChange,
+  attributes,
   informatieobjecttype,
-}) => {
+}: FileUploadProps) => {
   const [isLoading, setLoading] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>([]);
   const [dataContext, setDataContext] = useState(context);
 
   const uploadFile = (file: File) => {
-    const keycloakToken = TOKEN_OBJECT[TOKEN_KEY];
     const restUri = sessionStorage.getItem("REST_URI");
     const uploadLink = `${restUri}/document/content`;
     setLoading(true);
@@ -45,7 +48,9 @@ const FileUpload: FC<FileUploadProps> = ({
 
     fetch(uploadLink, {
       method: "POST",
-      headers: { Authorization: `Bearer ${keycloakToken}` },
+      headers: {
+        Authorization: `Bearer ${FormIoUploader.getOidcToken()}`,
+      },
       body: formData,
     }).then(async (response) => {
       if (!response.ok) {
@@ -98,12 +103,14 @@ const FileUpload: FC<FileUploadProps> = ({
   return (
     <div>
       <input
+        id={id}
         type="file"
         name="file"
         onChange={onChangeHandler}
         disabled={disabled || isLoading}
+        {...attributes}
       />
-      <Fragment>
+      <>
         {isLoading ||
           fileList.map((file) => (
             <div key={file.url}>
@@ -111,7 +118,7 @@ const FileUpload: FC<FileUploadProps> = ({
               <p>Filesize: {file.size}</p>
             </div>
           ))}
-      </Fragment>
+      </>
       {!isLoading || <p>Loading</p>}
     </div>
   );

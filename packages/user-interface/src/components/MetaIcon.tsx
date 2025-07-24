@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FC, ReactElement } from "react";
+import { ReactElement } from "react";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "react-loading-skeleton";
 import classNames from "classnames";
@@ -9,16 +9,16 @@ import styles from "./MetaIcon.module.scss";
 interface MetaIconProps {
   title: string;
   subtitle?: string | ReactElement;
-  icon: ReactElement;
+  icon: ReactElement<HTMLDivElement>;
   showRightBorder?: boolean;
 }
 
-const MetaIcon: FC<MetaIconProps> = ({
+const MetaIcon = ({
   title,
   subtitle,
   icon,
   showRightBorder,
-}) => {
+}: MetaIconProps) => {
   const intl = useIntl();
 
   return (

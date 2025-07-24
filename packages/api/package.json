@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-api",
-  "version": "1.6.0-next-minor-202505191024-38dc833d-SNAPSHOT",
+  "version": "2.0.0",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -24,29 +24,30 @@
     "preinstall": "npx only-allow pnpm",
     "wait": "wait-on ../authentication/dist/index.js",
     "test": "vitest run",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@apollo/client": "3.11.1"
+    "@apollo/client": "3.13.5"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^5.0.2",
-    "@graphql-codegen/typescript-operations": "4.2.3",
-    "@graphql-codegen/typescript-react-apollo": "4.3.0",
-    "@types/jest": "^29.5.12",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@graphql-codegen/cli": "^5.0.5",
+    "@graphql-codegen/typescript-operations": "4.6.0",
+    "@graphql-codegen/typescript-react-apollo": "4.3.2",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.1",
+    "@vitejs/plugin-react": "^4.5.2",
     "rimraf": "^6.0.1",
-    "typescript": "^5.5.4",
-    "vite": "^5.3.5",
-    "vite-plugin-dts": "^3.9.1",
-    "vitest": "^2.0.4",
-    "wait-on": "^7.2.0"
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^3.1.2",
+    "wait-on": "^8.0.3"
   },
   "peerDependencies": {
     "@nl-portal/nl-portal-authentication": "workspace:*",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
