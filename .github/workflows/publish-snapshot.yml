@@ -87,6 +87,8 @@ jobs:
         if: ${{ contains(fromJSON(inputs.targets),'github-npm')}}
         env:
             ARTIFACT_VERSION: ${{ needs.detect-variables.outputs.version }}
+        permissions:
+            packages: write
         steps:
             -   name: Generate github app token
                 id: generate_token
@@ -137,7 +139,7 @@ jobs:
                     lerna version ${{ env.ARTIFACT_VERSION }} --no-changelog --no-private --no-commit-hooks --message 'chore: released %s [skip ci]' --yes
             -   name: lerna publish
                 env:
-                    NPM_ACCESS_TOKEN: ${{ steps.generate_token.outputs.token }}
+                    NPM_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 run: |
                     npm config set "//npm.pkg.github.com/:_authToken" "${NPM_ACCESS_TOKEN}"
                     npm config set access public
