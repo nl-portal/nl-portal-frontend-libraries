@@ -29,7 +29,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@formio/protected-eval": "2.0.0-rc.1",
+    "@formio/protected-eval": "2.0.0-rc.3",
     "@formio/react": "^5.3.0",
     "@gemeente-denhaag/action": "2.0.3",
     "@gemeente-denhaag/alert": "2.0.7",
