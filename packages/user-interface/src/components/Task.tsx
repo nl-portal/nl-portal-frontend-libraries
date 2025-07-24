@@ -22,7 +22,8 @@ interface Props {
 const Task = ({ task, openInContext }: Props) => {
   const labels = useActionLabels();
   const { currentLocale } = useContext(LocaleContext);
-  const { startPayment, loading } = useOgonePayment();
+  const { startPayment, loading, renderPaymentRedirectForm } =
+    useOgonePayment();
   const taskUrl = useTaskUrl(task, openInContext) ?? "";
   const handleClick = useLinkClickHandler(taskUrl);
 
@@ -61,9 +62,10 @@ const Task = ({ task, openInContext }: Props) => {
         if (task.ogonebetaling) {
           const paymentRequestPayload = {
             amount: task.ogonebetaling.bedrag,
-            identifier: task.ogonebetaling.pspid,
+            pspId: task.ogonebetaling.pspid,
             orderId: task.id,
             reference: task.ogonebetaling.betaalkenmerk,
+            title: task.titel,
           };
 
           return (
@@ -72,6 +74,7 @@ const Task = ({ task, openInContext }: Props) => {
               disabled={loading}
             >
               <FormattedMessage id="task.ogonebetaling.button" />
+              {renderPaymentRedirectForm()}
             </Button>
           );
         }

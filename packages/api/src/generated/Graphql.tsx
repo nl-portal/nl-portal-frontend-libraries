@@ -2090,6 +2090,20 @@ export type DoDirectPaymentMutationVariables = Exact<{
 
 export type DoDirectPaymentMutation = { __typename?: 'Mutation', doDirectPayment: { __typename?: 'DirectPaymentResponse', redirectUrl: string } };
 
+export type GenerateOgonePaymentMutationVariables = Exact<{
+  amount: Scalars['Float']['input'];
+  failureUrl?: InputMaybe<Scalars['String']['input']>;
+  langId?: InputMaybe<Scalars['String']['input']>;
+  orderId: Scalars['String']['input'];
+  pspId: Scalars['String']['input'];
+  reference: Scalars['String']['input'];
+  successUrl?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GenerateOgonePaymentMutation = { __typename?: 'Mutation', generateOgonePayment: { __typename?: 'OgonePayment', formAction: string, formFields: Array<{ __typename?: 'PaymentField', name: string, value: string }> } };
+
 export type SubmitTaakV2MutationVariables = Exact<{
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
@@ -2428,6 +2442,52 @@ export function useDoDirectPaymentMutation(baseOptions?: Apollo.MutationHookOpti
 export type DoDirectPaymentMutationHookResult = ReturnType<typeof useDoDirectPaymentMutation>;
 export type DoDirectPaymentMutationResult = Apollo.MutationResult<DoDirectPaymentMutation>;
 export type DoDirectPaymentMutationOptions = Apollo.BaseMutationOptions<DoDirectPaymentMutation, DoDirectPaymentMutationVariables>;
+export const GenerateOgonePaymentDocument = gql`
+    mutation GenerateOgonePayment($amount: Float!, $failureUrl: String, $langId: String, $orderId: String!, $pspId: String!, $reference: String!, $successUrl: String, $title: String) {
+  generateOgonePayment(
+    paymentRequest: {amount: $amount, failureUrl: $failureUrl, langId: $langId, orderId: $orderId, pspId: $pspId, reference: $reference, successUrl: $successUrl, title: $title}
+  ) {
+    formAction
+    formFields {
+      name
+      value
+    }
+  }
+}
+    `;
+export type GenerateOgonePaymentMutationFn = Apollo.MutationFunction<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>;
+
+/**
+ * __useGenerateOgonePaymentMutation__
+ *
+ * To run a mutation, you first call `useGenerateOgonePaymentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGenerateOgonePaymentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [generateOgonePaymentMutation, { data, loading, error }] = useGenerateOgonePaymentMutation({
+ *   variables: {
+ *      amount: // value for 'amount'
+ *      failureUrl: // value for 'failureUrl'
+ *      langId: // value for 'langId'
+ *      orderId: // value for 'orderId'
+ *      pspId: // value for 'pspId'
+ *      reference: // value for 'reference'
+ *      successUrl: // value for 'successUrl'
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useGenerateOgonePaymentMutation(baseOptions?: Apollo.MutationHookOptions<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>(GenerateOgonePaymentDocument, options);
+      }
+export type GenerateOgonePaymentMutationHookResult = ReturnType<typeof useGenerateOgonePaymentMutation>;
+export type GenerateOgonePaymentMutationResult = Apollo.MutationResult<GenerateOgonePaymentMutation>;
+export type GenerateOgonePaymentMutationOptions = Apollo.BaseMutationOptions<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>;
 export const SubmitTaakV2Document = gql`
     mutation SubmitTaakV2($id: UUID!, $submission: JSON!, $version: TaakVersion!) {
   submitTaakV2(id: $id, submission: $submission, version: $version) {
