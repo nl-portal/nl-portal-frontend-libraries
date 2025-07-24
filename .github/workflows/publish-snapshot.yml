@@ -8,7 +8,7 @@ on:
                 type: string
             targets:
                 description: "The target repositories to publish to. See default for options and input format."
-                default: "['npm', 'github-npm']"
+                default: "['github-npm']"
                 type: string
 
 env:
@@ -79,11 +79,12 @@ jobs:
                     echo "VERSION=${{ steps.get-project-version.outputs.PROJECT_VERSION }}-${{ startsWith(github.ref_name, 'rc/') && 'RC' || '${branch}' }}-${ts}-${sha}-SNAPSHOT" >> "$GITHUB_OUTPUT"
             -   name: Log version
                 run: echo "::notice::Using version - \"${{ steps.generate-snapshot-version.outputs.VERSION }}\"."
-    publish-npm:
+    publish-github:
         runs-on: ubuntu-latest
         needs:
             - build
             - detect-variables
+        if: ${{ contains(fromJSON(inputs.targets),'github-npm')}}
         env:
             ARTIFACT_VERSION: ${{ needs.detect-variables.outputs.version }}
         steps:
@@ -99,6 +100,7 @@ jobs:
             -   name: Set up Node.js ${{ env.NODE_VERSION }}
                 uses: actions/setup-node@v4
                 with:
+                    registry-url: 'https://npm.pkg.github.com'
                     node-version: ${{ env.NODE_VERSION }}
             -   name: Install
                 run: |
@@ -135,9 +137,9 @@ jobs:
                     lerna version ${{ env.ARTIFACT_VERSION }} --no-changelog --no-private --no-commit-hooks --message 'chore: released %s [skip ci]' --yes
             -   name: lerna publish
                 env:
-                    NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+                    NPM_ACCESS_TOKEN: ${{ steps.generate_token.outputs.token }}
                 run: |
-                    npm config set "//registry.npmjs.org/:_authToken" "${NPM_ACCESS_TOKEN}"
+                    npm config set "//npm.pkg.github.com/:_authToken" "${NPM_ACCESS_TOKEN}"
                     npm config set access public
                     npm run publish -- --no-verify-access --yes
-                    npm config delete "//registry.npmjs.org/:_authToken"
+                    npm config delete "//npm.pkg.github.com/:_authToken"
