@@ -9,5 +9,6 @@ export * from "./queries/get-gemachtigde-v2";
 export * from "./queries/get-object-contact-momenten";
 export * from "./queries/get-burger-profiel";
 export * from "./queries/get-zaak";
+export * from "./hooks/useUserContactMomentenQuery";
 export * from "./hooks/useUserContactQuery";
 export * from "./hooks/useUserContactMutation";
