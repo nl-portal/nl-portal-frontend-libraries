@@ -3,11 +3,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { getFullName } from "../utils/person-data";
 import {
   GetBedrijfQuery,
-  GetGemachtigdeQuery,
-  GetPersoonQuery,
+  GetGemachtigdeV2Query,
+  GetPersoonV2Query,
   useGetBedrijfLazyQuery,
-  useGetGemachtigdeLazyQuery,
-  useGetPersoonLazyQuery,
+  useGetGemachtigdeV2LazyQuery,
+  useGetPersoonV2LazyQuery,
 } from "@nl-portal/nl-portal-api";
 
 export interface UserContextInterface {
@@ -29,10 +29,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [username, setUserName] = useState("");
   const [usernameVolmacht, setUsernameVolmacht] = useState("");
 
-  const [loadPersoon, { loading: persoonLoading }] = useGetPersoonLazyQuery();
+  const [loadPersoon, { loading: persoonLoading }] = useGetPersoonV2LazyQuery();
   const [loadBedrijf, { loading: bedrijfLoading }] = useGetBedrijfLazyQuery();
   const [loadGemachtigde, { loading: gemachtigdeLoading }] =
-    useGetGemachtigdeLazyQuery();
+    useGetGemachtigdeV2LazyQuery();
 
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
 
@@ -43,8 +43,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (authenticationMethods.person?.includes(authenticationMethod)) {
       setIsPerson(true);
       loadPersoon({
-        onCompleted: (data: GetPersoonQuery) => {
-          const name = getFullName(data?.getPersoon?.naam);
+        onCompleted: (data: GetPersoonV2Query) => {
+          const name = getFullName(data?.getPersoonV2?.naam);
           if (authenticationMethods?.proxy?.includes(authenticationMethod))
             return setUsernameVolmacht(name);
           setUserName(name);
@@ -67,13 +67,13 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (authenticationMethods.proxy?.includes(authenticationMethod)) {
       setisVolmacht(true);
       loadGemachtigde({
-        onCompleted: (data: GetGemachtigdeQuery) => {
+        onCompleted: (data: GetGemachtigdeV2Query) => {
           const name =
-            (data?.getGemachtigde?.persoon
-              ? getFullName(data?.getGemachtigde?.persoon.naam)
-              : data?.getGemachtigde?.bedrijf?.naam) || "";
+            (data?.getGemachtigdeV2?.persoon
+              ? getFullName(data?.getGemachtigdeV2?.persoon.naam)
+              : data?.getGemachtigdeV2?.bedrijf?.naam) || "";
 
-          if (data?.getGemachtigde?.persoon) return setUserName(name);
+          if (data?.getGemachtigdeV2?.persoon) return setUserName(name);
           setUserName(name);
         },
       });
