@@ -13,9 +13,9 @@ import {
 export interface UserContextInterface {
   isLoading: boolean;
   isPerson: boolean;
-  isVolmachtLogin: boolean;
-  userName: string;
-  volmachtgever: string;
+  isVolmacht: boolean;
+  username: string;
+  usernameVolmacht: string;
 }
 
 const UserContext = createContext<UserContextInterface>(
@@ -23,33 +23,22 @@ const UserContext = createContext<UserContextInterface>(
 );
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+  const { decodedToken, authenticationMethods } = useContext(OidcContext);
   const [isPerson, setIsPerson] = useState(true);
-  const [isVolmachtLogin, setisVolmachtLogin] = useState(false);
-  const [volmachtgever, setVolmachtgever] = useState("");
-  const [userName, setUserName] = useState("");
+  const [isVolmacht, setisVolmacht] = useState(false);
+  const [username, setUserName] = useState("");
+  const [usernameVolmacht, setUsernameVolmacht] = useState("");
 
   const [loadPersoon, { loading: persoonLoading }] = useGetPersoonLazyQuery();
   const [loadBedrijf, { loading: bedrijfLoading }] = useGetBedrijfLazyQuery();
   const [loadGemachtigde, { loading: gemachtigdeLoading }] =
     useGetGemachtigdeLazyQuery();
 
-  const { decodedToken, authenticationMethods } = useContext(OidcContext);
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
 
-  console.log("UserContext initialized", {
-    isPerson,
-    isVolmachtLogin,
-    userName,
-    volmachtgever,
-  });
-
   useEffect(() => {
-    console.log("middel", decodedToken?.middel);
-
     if (!decodedToken?.middel || !authenticationMethods) return;
     const authenticationMethod = decodedToken.middel;
-
-    console.log("Authentication method:", authenticationMethod);
 
     if (authenticationMethods.person?.includes(authenticationMethod)) {
       setIsPerson(true);
@@ -57,7 +46,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         onCompleted: (data: GetPersoonQuery) => {
           const name = getFullName(data?.getPersoon?.naam);
           if (authenticationMethods?.proxy?.includes(authenticationMethod))
-            return setVolmachtgever(name);
+            return setUsernameVolmacht(name);
           setUserName(name);
         },
       });
@@ -69,14 +58,14 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         onCompleted: (data: GetBedrijfQuery) => {
           const name = data?.getBedrijf?.naam || "";
           if (authenticationMethods?.proxy?.includes(authenticationMethod))
-            return setVolmachtgever(name);
+            return setUsernameVolmacht(name);
           setUserName(name);
         },
       });
     }
 
     if (authenticationMethods.proxy?.includes(authenticationMethod)) {
-      setisVolmachtLogin(true);
+      setisVolmacht(true);
       loadGemachtigde({
         onCompleted: (data: GetGemachtigdeQuery) => {
           const name =
@@ -96,9 +85,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         isLoading,
         isPerson,
-        isVolmachtLogin,
-        userName,
-        volmachtgever,
+        isVolmacht,
+        username,
+        usernameVolmacht,
       }}
     >
       {children}

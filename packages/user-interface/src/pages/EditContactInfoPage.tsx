@@ -5,7 +5,6 @@ import {
   useUpdateBurgerProfielMutation,
 } from "@nl-portal/nl-portal-api";
 import PageHeader from "../components/PageHeader";
-import useUserInfo from "../hooks/useUserInfo";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
 import BackLink from "../components/BackLink";
 import { useNavigate, useOutletContext } from "react-router";
@@ -17,9 +16,11 @@ import FormLabel from "@gemeente-denhaag/form-label";
 import TextInput from "@gemeente-denhaag/text-input";
 import FormFieldErrorMessage from "@gemeente-denhaag/form-field-error-message";
 import styles from "./EditContactInfoPage.module.scss";
+import UserContext from "../contexts/UserContext";
+import { useContext } from "react";
 
 const EditContactInfoPage = () => {
-  const { isPerson } = useUserInfo();
+  const { isPerson } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
 

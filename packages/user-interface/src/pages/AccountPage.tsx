@@ -15,7 +15,6 @@ import {
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
 import Heading from "../components/Heading";
-import useUserInfo from "../hooks/useUserInfo";
 import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
 import Link from "@gemeente-denhaag/link";
@@ -27,6 +26,8 @@ import DescriptionListDetail from "../components/DescriptionListDetail";
 import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import PortalLink from "../components/PortalLink";
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
@@ -42,7 +43,7 @@ const AccountPage = ({
   showNotificationSubSection = true,
 }: AccountPageProps) => {
   const { formatDate } = useDateFormatter();
-  const { isPerson } = useUserInfo();
+  const { isPerson } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const intl = useIntl();
   const { data: contactData, loading: contactLoading } =
