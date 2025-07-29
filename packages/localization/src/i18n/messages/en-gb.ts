@@ -186,6 +186,10 @@ export const EN_GB_MESSAGES: Messages = {
     "overviewpage.paragraph":
       "In the NL-portal you can arrange your personal affairs yourself when it suits you. For example, you can pay your bills and see when your application is ready.",
     "overviewpage.casesTitle": "My procedures",
+    "overviewpage.noEmail.title": "No email address",
+    "overviewpage.noEmail.text":
+      "Enter your email address. The municipality will then be able to send you important messages. For example, about your application or other current procedures.",
+    "overviewpage.noEmail.text.button": "Enter email address",
     "actionLabels.today": "today",
     "actionLabels.yesterday": "yesterday",
     "actionLabels.before": "before",
