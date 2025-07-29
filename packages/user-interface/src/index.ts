@@ -56,6 +56,8 @@ export { default as ThemeSubPage } from "./pages/ThemeSubPage";
 
 export { default as AppContext } from "./contexts/AppContext";
 export * from "./contexts/AppContext";
+export { default as UserContext } from "./contexts/UserContext";
+export * from "./contexts/UserContext";
 export { default as RouterContext } from "./contexts/RouterContext";
 export * from "./contexts/RouterContext";
 export { default as NotificationContext } from "./contexts/NotificationContext";

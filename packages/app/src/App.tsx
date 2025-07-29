@@ -6,6 +6,7 @@ import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 import { ApiProvider } from "@nl-portal/nl-portal-api";
 import {
   AppProvider,
+  UserProvider,
   NotificationProvider,
 } from "@nl-portal/nl-portal-user-interface";
 import { CUSTOM_MESSAGES } from "./i18n/custom-messages/custom-messages";
@@ -36,9 +37,11 @@ const App = () => {
             restUri={config.REST_URI}
           >
             <NotificationProvider>
-              <AppProvider>
-                <CustomLayout />
-              </AppProvider>
+              <UserProvider>
+                <AppProvider>
+                  <CustomLayout />
+                </AppProvider>
+              </UserProvider>
             </NotificationProvider>
           </ApiProvider>
         </OidcProvider>

@@ -14,6 +14,7 @@ import {
 import { useLocation, useNavigationType } from "react-router";
 import { stringToSlug } from "../utils/string-to-slug";
 import RouterContext from "./RouterContext";
+import UserContext from "./UserContext";
 
 type Themes = GetOpenProductHoofdThemasQuery["getOpenProductHoofdThemas"];
 
@@ -32,15 +33,15 @@ interface MessagesProviderProps {
 }
 
 export const AppProvider = ({ children }: MessagesProviderProps) => {
+  const location = useLocation();
+  const navType = useNavigationType();
   const [themes, setThemes] = useState<Themes>([]);
   const [messagesCount, setMessagesCount] = useState(0);
   const { navigationItems, updateNavigationItems } = useContext(RouterContext);
+  const { isLoading: loadingUser } = useContext(UserContext);
   const [history, setHistory] = useState<string[]>(
     JSON.parse(localStorage.getItem("history") || "[]"),
   );
-
-  const location = useLocation();
-  const navType = useNavigationType();
 
   const { loading: loadingThemes, refetch: refetchThemes } =
     useGetOpenProductHoofdThemasQuery({
@@ -82,7 +83,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     setHistory(newHistory);
   }, [location]);
 
-  if (loadingThemes || loadingMessages) {
+  if (loadingThemes || loadingMessages || loadingUser) {
     // TODO: Add fullscreen loading component
     return null;
   }
