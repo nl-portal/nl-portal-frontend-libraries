@@ -1,13 +1,9 @@
-import Tabs from "@gemeente-denhaag/tab";
+import { Tabs } from "@gemeente-denhaag/tab";
 import { FormattedMessage, useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import PageHeader from "../components/PageHeader";
-import {
-  Zaak,
-  useGetZakenLazyQuery,
-  useGetZakenQuery,
-} from "@nl-portal/nl-portal-api";
+import { Zaak, useGetZakenQuery } from "@nl-portal/nl-portal-api";
 import PageGrid from "../components/PageGrid";
 import SearchForm from "../components/SearchForm";
 import { useState, useTransition } from "react";
@@ -31,15 +27,12 @@ const CasesPage = () => {
       pageSize: fetchCasesLength,
     },
   });
-  const [
-    ,
-    {
-      data: closedData,
-      loading: closedLoading,
-      error: closedError,
-      refetch: closedRefetch,
-    },
-  ] = useGetZakenLazyQuery({
+  const {
+    data: closedData,
+    loading: closedLoading,
+    error: closedError,
+    refetch: closedRefetch,
+  } = useGetZakenQuery({
     variables: {
       isOpen: false,
       pageSize: fetchCasesLength,

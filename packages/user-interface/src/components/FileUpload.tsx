@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Utils } from "@formio/react";
-import _ = Utils._;
+import { get } from "lodash-es";
 import FormIoUploader from "./FormIoUploader";
 
 export interface UploadedFile {
@@ -10,18 +9,22 @@ export interface UploadedFile {
 }
 
 interface FileUploadProps {
+  id: string;
   context: object;
   disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
+  attributes?: Record<string, string>;
   informatieobjecttype?: string;
 }
 
 const FileUpload = ({
+  id,
   context,
   disabled,
   multiple,
   onChange,
+  attributes,
   informatieobjecttype,
 }: FileUploadProps) => {
   const [isLoading, setLoading] = useState(false);
@@ -87,7 +90,7 @@ const FileUpload = ({
       return url.replace(
         /({{\s*(.*?)\s*}})/g,
         (input, _capturedTemplate, capturedPath) => {
-          let value = _.get(dataContext, capturedPath);
+          let value = get(dataContext, capturedPath);
           return value ? value : input;
         },
       );
@@ -99,10 +102,12 @@ const FileUpload = ({
   return (
     <div>
       <input
+        id={id}
         type="file"
         name="file"
         onChange={onChangeHandler}
         disabled={disabled || isLoading}
+        {...attributes}
       />
       <>
         {isLoading ||

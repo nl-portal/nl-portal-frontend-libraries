@@ -4,7 +4,7 @@ import { getZaak } from "../data/zaak.mock";
 import { getObjectContactMomenten } from "../data/contactMomenten.mock";
 import { getTakenById } from "../data/taken.mock";
 import { getPersoon } from "../data/persoon.mock";
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash-es";
 import { getProduct } from "../data/product.mock";
 import { getUnopenedBerichten } from "../data/unopened-berichten";
 

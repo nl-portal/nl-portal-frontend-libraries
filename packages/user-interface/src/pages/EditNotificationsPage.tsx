@@ -12,11 +12,11 @@ import BackLink from "../components/BackLink";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import Form from "../components/Form";
 import Heading from "../components/Heading";
-import FormField from "@gemeente-denhaag/form-field";
-import FormLabel from "@gemeente-denhaag/form-label";
-import FormFieldDescription from "@gemeente-denhaag/form-field-description";
-import Fieldset, { FieldsetLegend } from "@gemeente-denhaag/form-fieldset";
-import Checkbox from "@gemeente-denhaag/checkbox";
+import { FormField } from "@gemeente-denhaag/form-field";
+import { FormLabel } from "@gemeente-denhaag/form-label";
+import { FormFieldDescription } from "@gemeente-denhaag/form-field-description";
+import { Fieldset, FieldsetLegend } from "@gemeente-denhaag/form-fieldset";
+import { Checkbox } from "@gemeente-denhaag/checkbox";
 import UserContext from "../contexts/UserContext";
 
 const EditNotificationsPage = () => {

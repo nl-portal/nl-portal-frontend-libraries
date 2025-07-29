@@ -12,7 +12,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const BackLink = ({ href, children }: Props) => {
+export const BackLink = ({ href, children }: Props) => {
   const { hrefLang } = useContext(LocaleContext);
   const { history } = useContext(AppContext);
 

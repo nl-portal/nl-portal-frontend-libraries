@@ -7,7 +7,7 @@ export const NL_NL_MESSAGES: Messages = {
     "locales.en-GB": "English",
     "locales.nl-NL": "Nederlands",
     "pageTitles.overview": "Overzicht",
-    "pageTitles.cases": "Mijn lopende zaken",
+    "pageTitles.cases": "Mijn zaken",
     "pageTitles.messages": "Mijn berichten",
     "pageTitles.documents": "Documenten",
     "pageTitles.offline": "Geen internetverbinding",
@@ -97,6 +97,8 @@ export const NL_NL_MESSAGES: Messages = {
       "Maak verbinding met het internet om gebruik te maken van {applicationName}.",
     "element.loading": "Aan het laden",
     "element.download": "Download",
+    "account.noDataAvailable":
+      "Het is helaas niet gelukt om uw gegevens op te halen. Ververs de pagina of probeer het later nog eens.",
     "account.leadParagraph":
       "Op deze pagina ziet u uw persoonlijke gegevens en hoe wij die gebruiken om contact met u te houden.",
     "account.contactHeader": "Contact",
@@ -140,6 +142,10 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.dateOfBirth": "Geboortedatum",
     "account.detail.countryOfBirth": "Geboorteland",
     "account.detail.nationality": "Nationaliteit",
+    "account.detail.confidentialityOfPersonalData":
+      "Geheimhouding persoonsgegevens",
+    "account.detail.confidentialityOfPersonalData.true": "Ja",
+    "account.detail.confidentialityOfPersonalData.false": "Nee",
     "account.detail.street": "Straat",
     "account.detail.postalCodeAndCity": "Postcode en plaats",
     "account.detail.aanvangsDatum": "Aanvangsdatum",
@@ -176,7 +182,19 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.notification.form.save": "Wijzigingen opslaan",
     "account.detail.contactform.email": "Emailadres",
     "account.detail.contactform.tel": "Telefoonnummer",
-    "account.addressResearchRequestButton": "Vraag onderzoek aan",
+    "account.adres.links.addressResearchRequest": "Vraag onderzoek aan",
+    "account.persoonsgegevens.links.changeInUseOfSurname":
+      "Verandering naamgebruik aanvragen",
+    "account.adres.links.changeRegisteredGender":
+      "Vermelding geslacht wijzigen",
+    "account.adres.links.reportChangeOfAddress": "Verhuizing doorgeven",
+    "account.detail.wijzigingenBrp": "Wijzigingen en aanvragen BRP",
+    "account.wijzigingEnAanvragenBRP.links.addressResearchMoreInfo":
+      "Adresonderzoek aanvragen",
+    "account.wijzigingEnAanvragenBRP.links.requestForChangeBrpInfo":
+      "Persoonsgegevens BRP aanpassen",
+    "account.wijzigingEnAanvragenBRP.links.requestConfidentialityOfDataInfo":
+      "Geheimhouding persoonsgegevens aanvragen of intrekken",
     "account.pageIndex.title": "Op deze pagina",
     "forms.listSubHeader": "Beschikbare formulieren",
     "tasksList.viewAll": "Bekijk alle taken",
@@ -202,7 +220,7 @@ export const NL_NL_MESSAGES: Messages = {
     "overview.subTitle": "Gemachtigd voor",
     "overviewpage.paragraph":
       "In de NL-portal  kunt u zelf uw persoonlijke zaken regelen wanneer het u uitkomt. U kunt bijvoorbeeld uw rekeningen betalen en zien wanneer uw aanvraag klaar is.",
-    "overviewpage.casesTitle": "Mijn lopende zaken",
+    "overviewpage.casesTitle": "Mijn zaken",
     "actionLabels.today": "vandaag",
     "actionLabels.yesterday": "gisteren",
     "actionLabels.before": "vóór",

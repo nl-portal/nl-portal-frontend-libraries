@@ -1,20 +1,19 @@
 import { FormattedMessage } from "react-intl";
 import {
-  GetBurgerProfielDocument,
-  useGetBurgerProfielQuery,
-  useUpdateBurgerProfielMutation,
+  useUserContactMutation,
+  useUserContactQuery,
 } from "@nl-portal/nl-portal-api";
 import PageHeader from "../components/PageHeader";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
-import BackLink from "../components/BackLink";
+import { BackLink } from "../components/BackLink";
 import { useNavigate, useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import useInput from "../hooks/useInput";
-import Form from "../components/Form";
-import FormField from "@gemeente-denhaag/form-field";
-import FormLabel from "@gemeente-denhaag/form-label";
-import TextInput from "@gemeente-denhaag/text-input";
-import FormFieldErrorMessage from "@gemeente-denhaag/form-field-error-message";
+import { Form } from "../components/Form";
+import { FormField } from "@gemeente-denhaag/form-field";
+import { FormLabel } from "@gemeente-denhaag/form-label";
+import { TextInput } from "@gemeente-denhaag/text-input";
+import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 import styles from "./EditContactInfoPage.module.scss";
 import UserContext from "../contexts/UserContext";
 import { useContext } from "react";
@@ -24,7 +23,7 @@ const EditContactInfoPage = () => {
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
 
-  const { data: contactData } = useGetBurgerProfielQuery({
+  const { data: contactData } = useUserContactQuery({
     skip: !isPerson,
   });
 
@@ -36,18 +35,7 @@ const EditContactInfoPage = () => {
       called: mutationCalled,
       reset: mutationReset,
     },
-  ] = useUpdateBurgerProfielMutation({
-    update: (cache, { data }) => {
-      cache.writeQuery({
-        query: GetBurgerProfielDocument,
-        data: {
-          getBurgerProfiel: {
-            ...data?.updateBurgerProfiel,
-          },
-        },
-      });
-    },
-  });
+  ] = useUserContactMutation();
 
   const {
     value: phoneValue,
@@ -55,9 +43,10 @@ const EditContactInfoPage = () => {
     handleInputBlur: handlePhoneInputBlur,
     hasError: phoneHasError,
     errorTranslationId: phoneErrorTranslationId,
-  } = useInput(contactData?.getBurgerProfiel?.telefoonnummer || "", [
+  } = useInput(contactData?.telefoonnummer || "", [
     {
-      validationFn: (value) => REGEX_PATTERNS.telefoonnummer.test(value),
+      validationFn: (value) =>
+        value === "" || REGEX_PATTERNS.telefoonnummer.test(value),
       errorTranslationId: "account.detail.telefoonnummer.error",
     },
   ]);
@@ -67,21 +56,20 @@ const EditContactInfoPage = () => {
     handleInputBlur: handleEmailInputBlur,
     hasError: emailHasError,
     errorTranslationId: emailErrorTranslationId,
-  } = useInput(contactData?.getBurgerProfiel?.emailadres || "", [
+  } = useInput(contactData?.emailadres || "", [
     {
-      validationFn: (value) => REGEX_PATTERNS.emailadres.test(value),
+      validationFn: (value) =>
+        value === "" || REGEX_PATTERNS.emailadres.test(value),
       errorTranslationId: "account.detail.emailadres.error",
     },
   ]);
 
   const onSubmit = () => {
     mutateFunction({
-      variables: {
-        klant: {
-          emailadres: emailValue || "",
-          telefoonnummer: phoneValue || "",
-        },
-      },
+      emailadresId: contactData?.emailadresId,
+      emailadres: emailValue || "",
+      telefoonnummerId: contactData?.telefoonnummerId,
+      telefoonnummer: phoneValue || "",
     });
   };
 
