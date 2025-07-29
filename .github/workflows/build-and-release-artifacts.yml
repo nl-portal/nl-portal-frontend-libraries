@@ -24,7 +24,7 @@ jobs:
         uses: ./.github/workflows/publish-snapshot.yml
         with:
             nodeVersion: "20.x"
-            targets: "['npm']"
+            targets: "['github-npm']"
         secrets: inherit
     publish-release:
         needs:
