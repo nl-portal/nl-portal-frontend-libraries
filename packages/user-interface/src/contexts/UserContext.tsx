@@ -18,7 +18,6 @@ export interface UserContextInterface {
   usernameVolmacht: string;
   persoon: GetPersoonV2Query["getPersoonV2"];
   bedrijf: GetBedrijfQuery["getBedrijf"];
-  volmacht?: GetGemachtigdeV2Query["getGemachtigdeV2"];
 }
 
 const UserContext = createContext<UserContextInterface>(
@@ -36,7 +35,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     useGetPersoonV2LazyQuery();
   const [loadBedrijf, { loading: bedrijfLoading, data: bedrijfData }] =
     useGetBedrijfLazyQuery();
-  const [loadGemachtigde, { loading: gemachtigdeLoading, data: volmachtData }] =
+  const [loadGemachtigde, { loading: gemachtigdeLoading }] =
     useGetGemachtigdeV2LazyQuery();
 
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
@@ -95,7 +94,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         usernameVolmacht,
         persoon: persoonData?.getPersoonV2,
         bedrijf: bedrijfData?.getBedrijf,
-        volmacht: volmachtData?.getGemachtigdeV2,
       }}
     >
       {children}
