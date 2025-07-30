@@ -2,9 +2,11 @@ import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import { createContext, useContext, useEffect, useState } from "react";
 import { getFullName } from "../utils/person-data";
 import {
+  BrpPersoon,
   GetBedrijfQuery,
   GetGemachtigdeV2Query,
   GetPersoonV2Query,
+  MaatschappelijkeActiviteit,
   useGetBedrijfLazyQuery,
   useGetGemachtigdeV2LazyQuery,
   useGetPersoonV2LazyQuery,
@@ -16,8 +18,8 @@ export interface UserContextInterface {
   isVolmacht: boolean;
   username: string;
   usernameVolmacht: string;
-  persoon: GetPersoonV2Query["getPersoonV2"];
-  bedrijf: GetBedrijfQuery["getBedrijf"];
+  persoon?: BrpPersoon;
+  bedrijf?: MaatschappelijkeActiviteit;
 }
 
 const UserContext = createContext<UserContextInterface>(
@@ -92,8 +94,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         isVolmacht,
         username,
         usernameVolmacht,
-        persoon: persoonData?.getPersoonV2,
-        bedrijf: bedrijfData?.getBedrijf,
+        persoon: persoonData?.getPersoonV2 as BrpPersoon | undefined,
+        bedrijf: bedrijfData?.getBedrijf as
+          | MaatschappelijkeActiviteit
+          | undefined,
       }}
     >
       {children}
