@@ -1,5 +1,5 @@
 module.exports = {
-  // "*.{js,jsx,ts,tsx}": ["eslint", "prettier --check"],
+  "*.{js,jsx,ts,tsx}": ["eslint", "prettier --check"],
   "**/*.{ts,tsx}": [
     () => "tsc --noEmit --project ./packages/user-interface/tsconfig.json",
   ],
