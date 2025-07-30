@@ -21,12 +21,12 @@ import UserContext from "../contexts/UserContext";
 
 const EditNotificationsPage = () => {
   const id = useId();
-  const { isPerson } = useContext(UserContext);
+  const { isPersoon } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
 
   const { data: contactData } = useGetBurgerProfielQuery({
-    skip: !isPerson,
+    skip: !isPersoon,
   });
 
   const [

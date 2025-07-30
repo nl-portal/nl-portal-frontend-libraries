@@ -12,10 +12,13 @@ import {
 
 export interface UserContextInterface {
   isLoading: boolean;
-  isPerson: boolean;
+  isPersoon: boolean;
   isVolmacht: boolean;
   username: string;
   usernameVolmacht: string;
+  persoon: GetPersoonV2Query["getPersoonV2"];
+  bedrijf: GetBedrijfQuery["getBedrijf"];
+  volmacht?: GetGemachtigdeV2Query["getGemachtigdeV2"];
 }
 
 const UserContext = createContext<UserContextInterface>(
@@ -24,14 +27,16 @@ const UserContext = createContext<UserContextInterface>(
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { decodedToken, authenticationMethods } = useContext(OidcContext);
-  const [isPerson, setIsPerson] = useState(true);
+  const [isPersoon, setIsPersoon] = useState(true);
   const [isVolmacht, setisVolmacht] = useState(false);
   const [username, setUserName] = useState("");
   const [usernameVolmacht, setUsernameVolmacht] = useState("");
 
-  const [loadPersoon, { loading: persoonLoading }] = useGetPersoonV2LazyQuery();
-  const [loadBedrijf, { loading: bedrijfLoading }] = useGetBedrijfLazyQuery();
-  const [loadGemachtigde, { loading: gemachtigdeLoading }] =
+  const [loadPersoon, { loading: persoonLoading, data: persoonData }] =
+    useGetPersoonV2LazyQuery();
+  const [loadBedrijf, { loading: bedrijfLoading, data: bedrijfData }] =
+    useGetBedrijfLazyQuery();
+  const [loadGemachtigde, { loading: gemachtigdeLoading, data: volmachtData }] =
     useGetGemachtigdeV2LazyQuery();
 
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
@@ -41,7 +46,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const authenticationMethod = decodedToken.middel;
 
     if (authenticationMethods.person?.includes(authenticationMethod)) {
-      setIsPerson(true);
+      setIsPersoon(true);
       loadPersoon({
         onCompleted: (data: GetPersoonV2Query) => {
           const name = getFullName(data?.getPersoonV2?.naam);
@@ -53,7 +58,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     if (authenticationMethods.company?.includes(authenticationMethod)) {
-      setIsPerson(false);
+      setIsPersoon(false);
       loadBedrijf({
         onCompleted: (data: GetBedrijfQuery) => {
           const name = data?.getBedrijf?.naam || "";
@@ -84,10 +89,13 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     <UserContext.Provider
       value={{
         isLoading,
-        isPerson,
+        isPersoon,
         isVolmacht,
         username,
         usernameVolmacht,
+        persoon: persoonData?.getPersoonV2,
+        bedrijf: bedrijfData?.getBedrijf,
+        volmacht: volmachtData?.getGemachtigdeV2,
       }}
     >
       {children}

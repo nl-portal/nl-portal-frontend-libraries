@@ -19,12 +19,12 @@ import UserContext from "../contexts/UserContext";
 import { useContext } from "react";
 
 const EditContactInfoPage = () => {
-  const { isPerson } = useContext(UserContext);
+  const { isPersoon } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
 
   const { data: contactData } = useUserContactQuery({
-    skip: !isPerson,
+    skip: !isPersoon,
   });
 
   const [
