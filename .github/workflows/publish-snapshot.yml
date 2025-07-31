@@ -103,7 +103,6 @@ jobs:
             -   name: Install
                 run: |
                     npm install -g pnpm lerna@7.4.2
-            -   uses: actions/checkout@v4
             -   name: lerna version
                 env:
                     GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
