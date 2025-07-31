@@ -112,7 +112,7 @@ jobs:
                     GIT_COMMITTER_NAME: "nl-portal"
                 run: |
                     git push --set-upstream origin HEAD
-                    lerna version ${{ env.ARTIFACT_VERSION }} --no-changelog --no-private --no-commit-hooks --message 'chore: released %s [skip ci]' --yes
+                    lerna version ${{ env.ARTIFACT_VERSION }} --no-changelog --no-private --no-commit-hooks --message 'chore: incremented package versions to %s [skip ci]' --yes
     publish-github:
         runs-on: ubuntu-latest
         needs:
@@ -177,7 +177,7 @@ jobs:
                     node-version: ${{ env.NODE_VERSION }}
             -   name: Install
                 run: |
-                    npm install -g pnpm lerna@7.4.2
+                    npm install -g pnpm lerna@7.4.2 && pnpm install
             -   name: "Restore build artifact: api"
                 uses: actions/download-artifact@v4
                 with:
