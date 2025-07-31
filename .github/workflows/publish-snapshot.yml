@@ -87,6 +87,23 @@ jobs:
         env:
             ARTIFACT_VERSION: ${{ needs.detect-variables.outputs.version }}
         steps:
+            -   name: Generate github app token
+                id: generate_token
+                uses: actions/create-github-app-token@v1
+                with:
+                    app-id: ${{ secrets.APP_ID }}
+                    private-key: ${{ secrets.APP_PRIVATE_KEY }}
+            -   uses: actions/checkout@v4
+                with:
+                    token: ${{ steps.generate_token.outputs.token }}
+            -   name: Set up Node.js ${{ env.NODE_VERSION }}
+                uses: actions/setup-node@v4
+                with:
+                    registry-url: 'https://npm.pkg.github.com'
+                    node-version: ${{ env.NODE_VERSION }}
+            -   name: Install
+                run: |
+                    npm install -g pnpm lerna@7.4.2
             -   uses: actions/checkout@v4
             -   name: lerna version
                 env:
@@ -108,15 +125,7 @@ jobs:
         permissions:
             packages: write
         steps:
-            -   name: Generate github app token
-                id: generate_token
-                uses: actions/create-github-app-token@v1
-                with:
-                    app-id: ${{ secrets.APP_ID }}
-                    private-key: ${{ secrets.APP_PRIVATE_KEY }}
             -   uses: actions/checkout@v4
-                with:
-                    token: ${{ steps.generate_token.outputs.token }}
             -   name: Set up Node.js ${{ env.NODE_VERSION }}
                 uses: actions/setup-node@v4
                 with:
@@ -167,6 +176,9 @@ jobs:
                 uses: actions/setup-node@v4
                 with:
                     node-version: ${{ env.NODE_VERSION }}
+            -   name: Install
+                run: |
+                    npm install -g pnpm lerna@7.4.2
             -   name: "Restore build artifact: api"
                 uses: actions/download-artifact@v4
                 with:
