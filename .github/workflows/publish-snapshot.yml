@@ -153,6 +153,7 @@ jobs:
                 uses: actions/download-artifact@v4
                 with:
                     name: nl-portal-user-interface
+                    path: packages/user-interface/dist/
             -   name: lerna publish
                 env:
                     NPM_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
