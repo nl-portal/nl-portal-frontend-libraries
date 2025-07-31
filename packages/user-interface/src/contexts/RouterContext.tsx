@@ -32,10 +32,7 @@ export const RouterProvider = ({
   element,
   routes: initRoutes,
   navigationItems: initNavigationItems,
-  test = {
-    initialIndex: 0,
-    initialEntries: [initRoutes[0].path || "/"],
-  },
+  test,
 }: Props) => {
   const [routes, setRoutes] = useState(initRoutes);
   const [navigationItems, setNavigationItems] = useState(initNavigationItems);
