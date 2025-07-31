@@ -159,6 +159,8 @@ jobs:
             - detect-variables
             - up-version
         if: ${{ contains(fromJSON(inputs.targets),'s3-snapshots')}}
+        permissions:
+            contents: read
         steps:
             -   uses: actions/checkout@v4
             -   name: Set up Node.js ${{ env.NODE_VERSION }}
