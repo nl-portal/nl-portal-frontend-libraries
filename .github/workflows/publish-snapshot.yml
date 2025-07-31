@@ -99,7 +99,6 @@ jobs:
             -   name: Set up Node.js ${{ env.NODE_VERSION }}
                 uses: actions/setup-node@v4
                 with:
-                    registry-url: 'https://npm.pkg.github.com'
                     node-version: ${{ env.NODE_VERSION }}
             -   name: Install
                 run: |
