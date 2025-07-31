@@ -2,9 +2,11 @@ import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import { createContext, useContext, useEffect, useState } from "react";
 import { getFullName } from "../utils/person-data";
 import {
+  BrpPersoon,
   GetBedrijfQuery,
   GetGemachtigdeV2Query,
   GetPersoonV2Query,
+  MaatschappelijkeActiviteit,
   useGetBedrijfLazyQuery,
   useGetGemachtigdeV2LazyQuery,
   useGetPersoonV2LazyQuery,
@@ -16,8 +18,8 @@ export interface UserContextInterface {
   isVolmacht: boolean;
   username: string;
   usernameVolmacht: string;
-  persoon: GetPersoonV2Query["getPersoonV2"];
-  bedrijf: GetBedrijfQuery["getBedrijf"];
+  persoon?: BrpPersoon | null;
+  bedrijf?: MaatschappelijkeActiviteit | null;
 }
 
 const UserContext = createContext<UserContextInterface>(
@@ -41,10 +43,19 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const isLoading = persoonLoading || bedrijfLoading || gemachtigdeLoading;
 
   useEffect(() => {
-    if (!decodedToken?.middel || !authenticationMethods) return;
-    const authenticationMethod = decodedToken.middel;
+    const authenticationMethod = decodedToken?.middel || "";
 
-    if (authenticationMethods.person?.includes(authenticationMethod)) {
+    if (authenticationMethods?.company?.includes(authenticationMethod)) {
+      setIsPersoon(false);
+      loadBedrijf({
+        onCompleted: (data: GetBedrijfQuery) => {
+          const name = data?.getBedrijf?.naam || "";
+          if (authenticationMethods?.proxy?.includes(authenticationMethod))
+            return setUsernameVolmacht(name);
+          setUserName(name);
+        },
+      });
+    } else {
       setIsPersoon(true);
       loadPersoon({
         onCompleted: (data: GetPersoonV2Query) => {
@@ -56,19 +67,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       });
     }
 
-    if (authenticationMethods.company?.includes(authenticationMethod)) {
-      setIsPersoon(false);
-      loadBedrijf({
-        onCompleted: (data: GetBedrijfQuery) => {
-          const name = data?.getBedrijf?.naam || "";
-          if (authenticationMethods?.proxy?.includes(authenticationMethod))
-            return setUsernameVolmacht(name);
-          setUserName(name);
-        },
-      });
-    }
-
-    if (authenticationMethods.proxy?.includes(authenticationMethod)) {
+    if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
       setisVolmacht(true);
       loadGemachtigde({
         onCompleted: (data: GetGemachtigdeV2Query) => {
@@ -92,8 +91,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         isVolmacht,
         username,
         usernameVolmacht,
-        persoon: persoonData?.getPersoonV2,
-        bedrijf: bedrijfData?.getBedrijf,
+        persoon: persoonData?.getPersoonV2 as BrpPersoon | null,
+        bedrijf: bedrijfData?.getBedrijf as MaatschappelijkeActiviteit | null,
       }}
     >
       {children}
