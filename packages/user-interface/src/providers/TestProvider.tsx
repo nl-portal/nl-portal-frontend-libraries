@@ -20,6 +20,7 @@ import {
   UserIcon,
 } from "@gemeente-denhaag/icons";
 import PageMetaData from "../components/PageMetaData";
+import { UserProvider } from "../contexts/UserContext";
 
 export const testPaths: Paths = {
   noMatch: "/404",
@@ -105,10 +106,12 @@ const TestContent = ({
       <MockedProvider mocks={mocks} addTypename={false}>
         <LocalizationProvider>
           <NotificationProvider>
-            <AppProvider>
-              <PageMetaData />
-              <Outlet context={{ paths }} />
-            </AppProvider>
+            <UserProvider>
+              <AppProvider>
+                <PageMetaData />
+                <Outlet context={{ paths }} />
+              </AppProvider>
+            </UserProvider>
           </NotificationProvider>
         </LocalizationProvider>
       </MockedProvider>

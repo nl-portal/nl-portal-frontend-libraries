@@ -4,6 +4,8 @@ import { MockAccountPage } from "../mock/pages/AccountPage.mock";
 
 describe("AccountPage", () => {
   beforeAll(() => {
+    window.scrollTo = vi.fn();
+
     if (!HTMLDialogElement.prototype.showModal) {
       HTMLDialogElement.prototype.showModal = function () {};
     }

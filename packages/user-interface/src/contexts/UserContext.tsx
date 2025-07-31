@@ -18,8 +18,8 @@ export interface UserContextInterface {
   isVolmacht: boolean;
   username: string;
   usernameVolmacht: string;
-  persoon?: BrpPersoon | null;
-  bedrijf?: MaatschappelijkeActiviteit | null;
+  persoon?: BrpPersoon;
+  bedrijf?: MaatschappelijkeActiviteit;
 }
 
 const UserContext = createContext<UserContextInterface>(
@@ -91,8 +91,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         isVolmacht,
         username,
         usernameVolmacht,
-        persoon: persoonData?.getPersoonV2 as BrpPersoon | null,
-        bedrijf: bedrijfData?.getBedrijf as MaatschappelijkeActiviteit | null,
+        persoon: persoonData?.getPersoonV2 as BrpPersoon | undefined,
+        bedrijf: bedrijfData?.getBedrijf as
+          | MaatschappelijkeActiviteit
+          | undefined,
       }}
     >
       {children}
