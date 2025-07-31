@@ -204,9 +204,9 @@ jobs:
                 run: pnpm -r --filter=\!./packages/app pack
             -   name: push artifacts to s3
                 env:
-                    AWS_ACCESS_KEY_ID: ${{ secret.AWS_ACCESS_KEY_ID }}
-                    AWS_SECRET_ACCESS_KEY: ${{ secret.AWS_SECRET_ACCESS_KEY }}
+                    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                     AWS_DEFAULT_REGION: 'eu-central-1'
-                    BUCKET_NAME: ${{ secret.AWS_SNAPSHOTS_BUCKET }}
+                    BUCKET_NAME: ${{ secrets.AWS_SNAPSHOTS_BUCKET }}
                     ARTIFACT_VERSION: ${{ needs.detect-variables.outputs.version }}
                 run: aws s3 cp --recursive --exclude "*" --include "*.tgz" . s3://${{env.BUCKET_NAME}}/${{env.ARTIFACT_VERSION}}/
