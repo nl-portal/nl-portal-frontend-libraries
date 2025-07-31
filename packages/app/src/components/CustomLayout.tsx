@@ -1,9 +1,17 @@
-import { Layout } from "@nl-portal/nl-portal-user-interface";
+import { Layout, PortalLink } from "@nl-portal/nl-portal-user-interface";
 import { paths } from "../constants/paths";
 import { useIntl } from "react-intl";
+import { HeaderLogo } from "./HeaderLogo";
 
 const CustomLayout = () => {
   const intl = useIntl();
+
+  const logo = {
+    href: paths.overview,
+    children: <HeaderLogo />,
+    "aria-label": "NL Portal",
+    Link: PortalLink,
+  };
 
   const legalData = [
     {
@@ -52,7 +60,13 @@ const CustomLayout = () => {
     href: intl.formatMessage({ id: "footer.contact.button.url" }),
   };
 
-  return <Layout paths={paths} footerData={{ legalData, contactData }} />;
+  return (
+    <Layout
+      paths={paths}
+      footerData={{ legalData, contactData }}
+      headerLogo={logo}
+    />
+  );
 };
 
 export default CustomLayout;

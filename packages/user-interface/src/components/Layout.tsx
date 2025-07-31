@@ -1,4 +1,4 @@
-import { ReactNode, use, useEffect } from "react";
+import { AnchorHTMLAttributes, ReactNode, use, useEffect } from "react";
 import { StylesProvider } from "@gemeente-denhaag/stylesprovider";
 import {
   Page as PageWrapper,
@@ -19,6 +19,7 @@ import "@utrecht/document-css";
 
 interface LayoutComponentProps {
   paths: Paths;
+  headerLogo?: AnchorHTMLAttributes<HTMLAnchorElement>;
   customHeader?: ReactNode;
   customFooter?: ReactNode;
   footerData?: FooterProps;
@@ -26,6 +27,7 @@ interface LayoutComponentProps {
 
 const Layout = ({
   paths,
+  headerLogo,
   customHeader,
   customFooter,
   footerData,
@@ -44,7 +46,9 @@ const Layout = ({
     <StylesProvider>
       <HelmetProvider>
         <PageWrapper>
-          <PageHeader>{customHeader || <Header />}</PageHeader>
+          <PageHeader>
+            {customHeader || <Header logo={headerLogo} />}
+          </PageHeader>
           <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
             <Menu />
             <main className="denhaag-page-content__main">

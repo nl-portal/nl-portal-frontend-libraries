@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { AnchorHTMLAttributes, useContext, useMemo } from "react";
 import { HeaderLogic, HeaderLogicProps } from "@gemeente-denhaag/header";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { useMatches } from "react-router";
@@ -9,7 +9,11 @@ import PortalLink from "./PortalLink";
 import RouterContext from "../contexts/RouterContext";
 import UserContext from "../contexts/UserContext";
 
-const Header = () => {
+type HeaderProps = {
+  logo?: AnchorHTMLAttributes<HTMLAnchorElement>;
+};
+
+const Header = ({ logo }: HeaderProps) => {
   const { logout } = useLogout();
   const { currentLocale, setCurrentLocale, supportedLocales } =
     useContext(LocaleContext);
@@ -147,6 +151,7 @@ const Header = () => {
   return (
     <HeaderLogic
       {...headerProps}
+      logo={logo}
       languageSwitcherMenu={languageSwitcherMenu}
       breadcrumbs={breadcrumbs}
     />
