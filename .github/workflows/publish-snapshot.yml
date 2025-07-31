@@ -203,11 +203,11 @@ jobs:
                     path: packages/user-interface/dist/
             -   name: package artifacts
                 run: pnpm -r --filter=\!./packages/app --out=%s.tgz pack
-            -   name: push artifacts to s3
+            -   name: push artifacts to s3fron
                 env:
                     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                     AWS_DEFAULT_REGION: 'eu-central-1'
                 run: aws s3 cp --recursive --exclude "*" --include "*.tgz" . s3://${{ env.BUCKET_NAME }}/${{ env.ARTIFACT_VERSION }}/
             -   name: Log link to bucket
-                run: echo "::notice::Uploaded artifacts to - https://${{ env.BUCKET_NAME }}.s3.eu-central-1.amazonaws.com/?prefix=${{ env.ARTIFACT_VERSION }}/"
+                run: echo "::notice::Uploaded artifacts to - https://${{ env.BUCKET_NAME }}.s3.eu-central-1.amazonaws.com/index.html?prefix=${{ env.ARTIFACT_VERSION }}/"
