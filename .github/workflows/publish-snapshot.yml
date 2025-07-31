@@ -168,7 +168,7 @@ jobs:
             - up-version
         if: ${{ contains(fromJSON(inputs.targets),'s3-snapshots')}}
         env:
-            BUCKET_NAME: ${{ env.AWS_SNAPSHOTS_BUCKET }}
+            BUCKET_NAME: ${{ vars.AWS_SNAPSHOTS_BUCKET }}
             ARTIFACT_VERSION: ${{ needs.detect-variables.outputs.version }}
         permissions:
             contents: read
