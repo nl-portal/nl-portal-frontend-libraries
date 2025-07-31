@@ -5,8 +5,7 @@ import {
   useUpdateBurgerProfielMutation,
 } from "@nl-portal/nl-portal-api";
 import PageHeader from "../components/PageHeader";
-import useUserInfo from "../hooks/useUserInfo";
-import { FormEvent, useId } from "react";
+import { FormEvent, useContext, useId } from "react";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { useNavigate, useOutletContext } from "react-router";
 import BackLink from "../components/BackLink";
@@ -18,15 +17,16 @@ import { FormLabel } from "@gemeente-denhaag/form-label";
 import { FormFieldDescription } from "@gemeente-denhaag/form-field-description";
 import { Fieldset, FieldsetLegend } from "@gemeente-denhaag/form-fieldset";
 import { Checkbox } from "@gemeente-denhaag/checkbox";
+import UserContext from "../contexts/UserContext";
 
 const EditNotificationsPage = () => {
   const id = useId();
-  const { isPerson } = useUserInfo();
+  const { isPersoon } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
 
   const { data: contactData } = useGetBurgerProfielQuery({
-    skip: !isPerson,
+    skip: !isPersoon,
   });
 
   const [

@@ -35,7 +35,6 @@ export { default as useDownload } from "./hooks/useDownload";
 export { default as useOgonePayment } from "./hooks/useOgonePayment";
 export { default as useOgonePaymentRegistration } from "./hooks/useOgonePaymentRegistration";
 export * from "./hooks/useOgonePaymentRegistration";
-export { default as useUserInfo } from "./hooks/useUserInfo";
 export { default as useInput } from "./hooks/useInput";
 export * from "./hooks/useInput";
 
@@ -55,6 +54,8 @@ export { default as ThemeSubPage } from "./pages/ThemeSubPage";
 
 export { default as AppContext } from "./contexts/AppContext";
 export * from "./contexts/AppContext";
+export { default as UserContext } from "./contexts/UserContext";
+export * from "./contexts/UserContext";
 export { default as RouterContext } from "./contexts/RouterContext";
 export * from "./contexts/RouterContext";
 export { default as NotificationContext } from "./contexts/NotificationContext";

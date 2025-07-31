@@ -5,9 +5,9 @@ import { useMatches } from "react-router";
 import { useIntl } from "react-intl";
 import { useLogout } from "@nl-portal/nl-portal-authentication";
 import AppContext from "../contexts/AppContext";
-import useUserInfo from "../hooks/useUserInfo";
 import PortalLink from "./PortalLink";
 import RouterContext from "../contexts/RouterContext";
+import UserContext from "../contexts/UserContext";
 
 const Header = () => {
   const { logout } = useLogout();
@@ -15,8 +15,8 @@ const Header = () => {
     useContext(LocaleContext);
   const { messagesCount } = useContext(AppContext);
   const { navigationItems } = useContext(RouterContext);
+  const { username, usernameVolmacht } = useContext(UserContext);
   const intl = useIntl();
-  const { userName, volmachtgever } = useUserInfo();
 
   type HandleObject = {
     label: string;
@@ -121,12 +121,12 @@ const Header = () => {
     userprofileMenu: {
       label: (
         <>
-          {welcomeLabel} <span translate="no">{userName}</span>
+          {welcomeLabel} <span translate="no">{username}</span>
         </>
       ),
-      authorisedLoginLabel: volmachtgever ? (
+      authorisedLoginLabel: usernameVolmacht ? (
         <>
-          {authorisedLoginLabel} <span translate="no">{volmachtgever}</span>
+          {authorisedLoginLabel} <span translate="no">{usernameVolmacht}</span>
         </>
       ) : null,
       CustomLink: PortalLink,

@@ -24,11 +24,15 @@ export type Scalars = {
 
 export type ActiesPage = {
   __typename?: 'ActiesPage';
+  /** The elements on this page */
   content: Array<OpenProductActie>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -83,11 +87,15 @@ export enum BerichtType {
 
 export type BerichtenPage = {
   __typename?: 'BerichtenPage';
+  /** The elements on this page */
   content: Array<Bericht>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -96,7 +104,7 @@ export type BerichtenPage = {
 export type Besluit = {
   __typename?: 'Besluit';
   auditTrails: Array<BesluitAuditTrail>;
-  besluittype: Scalars['String']['output'];
+  besluittype: BesluitType;
   bestuursorgaan?: Maybe<Scalars['String']['output']>;
   datum: Scalars['Date']['output'];
   documenten: Array<BesluitDocument>;
@@ -149,23 +157,45 @@ export type BesluitDocument = {
 
 export type BesluitPage = {
   __typename?: 'BesluitPage';
+  /** The elements on this page */
   content: Array<Besluit>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
+export type BesluitType = {
+  __typename?: 'BesluitType';
+  besluitcategorie: Scalars['String']['output'];
+  omschrijving?: Maybe<Scalars['String']['output']>;
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
+  publicatieIndicatie: Scalars['Boolean']['output'];
+  publicatietekst?: Maybe<Scalars['String']['output']>;
+  publicatietermijn?: Maybe<Scalars['String']['output']>;
+  reactietermijn?: Maybe<Scalars['String']['output']>;
+  toelichting?: Maybe<Scalars['String']['output']>;
+  url: Scalars['String']['output'];
+  zaaktypen: Array<Scalars['String']['output']>;
+};
+
 export type BestandenPage = {
   __typename?: 'BestandenPage';
+  /** The elements on this page */
   content: Array<OpenProductBestand>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -598,11 +628,15 @@ export type ContactMoment = {
 
 export type ContactMomentPage = {
   __typename?: 'ContactMomentPage';
+  /** The elements on this page */
   content: Array<ContactMoment>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -610,11 +644,15 @@ export type ContactMomentPage = {
 
 export type ContactenPage = {
   __typename?: 'ContactenPage';
+  /** The elements on this page */
   content: Array<OpenProductContact>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -788,11 +826,15 @@ export type KlantUpdateInput = {
 
 export type LinksPage = {
   __typename?: 'LinksPage';
+  /** The elements on this page */
   content: Array<OpenProductLink>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -800,11 +842,15 @@ export type LinksPage = {
 
 export type LocatiesPage = {
   __typename?: 'LocatiesPage';
+  /** The elements on this page */
   content: Array<OpenProductLocatie>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -952,6 +998,11 @@ export type OgonePaymentRequestInput = {
   successUrl?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
+
+export enum OnderwerpObjectIndentificatorType {
+  Product = 'PRODUCT',
+  Zaak = 'ZAAK'
+}
 
 export type OpenKlant2Adres = {
   __typename?: 'OpenKlant2Adres';
@@ -1457,7 +1508,7 @@ export type OpenKlant2Uuid = {
 
 export type OpenProductActie = {
   __typename?: 'OpenProductActie';
-  mapping: Array<Scalars['JSON']['output']>;
+  mapping: Scalars['JSON']['output'];
   naam: Scalars['String']['output'];
   productTypeUuid?: Maybe<Scalars['UUID']['output']>;
   url: Scalars['String']['output'];
@@ -1555,7 +1606,7 @@ export type OpenProductProduct = {
   frequentie: OpenProductFrequentie;
   gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
   naam: Scalars['String']['output'];
-  prijs: Scalars['Float']['output'];
+  prijs?: Maybe<Scalars['Float']['output']>;
   producttype: OpenProductProductProductType;
   startDatum?: Maybe<Scalars['Date']['output']>;
   status: OpenProductToegestaneStatus;
@@ -1663,9 +1714,12 @@ export type OpenProductThema = {
   /** UUID of the hoofdthema, which this thema is related to. */
   hoofdThema?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
+  producten?: Maybe<Array<OpenProductProduct>>;
   producttypen: Array<OpenProductThemaProductType>;
+  taken?: Maybe<Array<TaakV2>>;
   updateDatum: Scalars['ZonedDateTime']['output'];
   uuid: Scalars['UUID']['output'];
+  zaken?: Maybe<Array<Zaak>>;
 };
 
 export type OpenProductThemaHierarchy = {
@@ -1691,6 +1745,8 @@ export enum OpenProductToegestaneStatus {
   Gereed = 'GEREED',
   Geweigerd = 'GEWEIGERD',
   Ingetrokken = 'INGETROKKEN',
+  Initieel = 'INITIEEL',
+  InAanvraag = 'IN_AANVRAAG',
   Verlopen = 'VERLOPEN'
 }
 
@@ -1710,11 +1766,15 @@ export type OrganisatieIdentificatieInput = {
 
 export type OrganisatiesPage = {
   __typename?: 'OrganisatiesPage';
+  /** The elements on this page */
   content: Array<OpenProductOrganisatie>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -1783,11 +1843,15 @@ export type PrefillResponse = {
 
 export type PrijzenPage = {
   __typename?: 'PrijzenPage';
+  /** The elements on this page */
   content: Array<OpenProductPrijs>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -1820,11 +1884,15 @@ export type ProductDetails = {
 
 export type ProductPage = {
   __typename?: 'ProductPage';
+  /** The elements on this page */
   content: Array<Product>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -1847,11 +1915,15 @@ export type ProductType = {
 
 export type ProductTypesPage = {
   __typename?: 'ProductTypesPage';
+  /** The elements on this page */
   content: Array<OpenProductProductType>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -1867,11 +1939,15 @@ export type ProductVerbruiksObject = {
 
 export type ProductenPage = {
   __typename?: 'ProductenPage';
+  /** The elements on this page */
   content: Array<OpenProductProduct>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -1977,9 +2053,9 @@ export type Query = {
   getOpenProductThema?: Maybe<OpenProductThema>;
   /** Get thema hierarchy */
   getOpenProductThemaHierarchy: Array<OpenProductThemaHierarchy>;
-  /** Get taken of a thema, including their hoofd themas */
+  /** Get taken of a thema, including their parent themas */
   getOpenProductThemaTaken: Array<TaakV2>;
-  /** Get zaken of a thema, including their hoofd themas */
+  /** Get zaken of a thema, including their parent themas */
   getOpenProductThemaZaken: Array<Zaak>;
   /** Get all themas */
   getOpenProductThemas: ThemasPage;
@@ -2057,7 +2133,13 @@ export type Query = {
   getUserDigitaleAdresen?: Maybe<Array<DigitaleAdresResponse>>;
   /** Get KlantContact by id of authenticated user. */
   getUserKlantContact?: Maybe<OpenKlant2Klantcontact>;
-  /** Get KlantContacten of authenticated user. */
+  /**
+   *
+   *         Get KlantContacten of authenticated user and optional filter on .
+   *         identificatorType, like zaak or product
+   *         identificatorId, the uuid of the zaak or product
+   *
+   */
   getUserKlantContacten: Array<OpenKlant2Klantcontact>;
   /** Get Partij by Id for authenticated user. */
   getUserPartij?: Maybe<OpenKlant2Partij>;
@@ -2282,8 +2364,6 @@ export type QueryGetOpenProductThemaHierarchyArgs = {
 export type QueryGetOpenProductThemaTakenArgs = {
   id: Scalars['UUID']['input'];
   language?: InputMaybe<Scalars['String']['input']>;
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -2291,8 +2371,6 @@ export type QueryGetOpenProductThemaZakenArgs = {
   id: Scalars['UUID']['input'];
   isOpen?: InputMaybe<Scalars['Boolean']['input']>;
   language?: InputMaybe<Scalars['String']['input']>;
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -2416,6 +2494,12 @@ export type QueryGetUserKlantContactArgs = {
 };
 
 
+export type QueryGetUserKlantContactenArgs = {
+  identificatorId?: InputMaybe<Scalars['UUID']['input']>;
+  identificatorType?: InputMaybe<OnderwerpObjectIndentificatorType>;
+};
+
+
 export type QueryGetUserPartijArgs = {
   partijId: Scalars['UUID']['input'];
 };
@@ -2443,6 +2527,18 @@ export type QueryProductPrefillArgs = {
   productTypeId?: InputMaybe<Scalars['UUID']['input']>;
   sources?: InputMaybe<Scalars['JSON']['input']>;
   staticData?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type ResultaatType = {
+  __typename?: 'ResultaatType';
+  omschrijving?: Maybe<Scalars['String']['output']>;
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
+  resultaattypeomschrijving: Scalars['String']['output'];
+  selectielijstklasse: Scalars['String']['output'];
+  toelichting?: Maybe<Scalars['String']['output']>;
+  url: Scalars['String']['output'];
+  zaaktype: Scalars['String']['output'];
+  zaaktypeIdentificatie?: Maybe<Scalars['String']['output']>;
 };
 
 export type SbiActiviteit = {
@@ -2521,11 +2617,15 @@ export type TaakKoppeling = {
 
 export type TaakPage = {
   __typename?: 'TaakPage';
+  /** The elements on this page */
   content: Array<Taak>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -2533,11 +2633,15 @@ export type TaakPage = {
 
 export type TaakPageV2 = {
   __typename?: 'TaakPageV2';
+  /** The elements on this page */
   content: Array<TaakV2>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -2585,11 +2689,15 @@ export enum TaakVersion {
 
 export type ThemasPage = {
   __typename?: 'ThemasPage';
+  /** The elements on this page */
   content: Array<OpenProductThema>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -2608,6 +2716,7 @@ export type Zaak = {
   einddatum?: Maybe<Scalars['Date']['output']>;
   identificatie: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
+  resultaat?: Maybe<ZaakResultaat>;
   startdatum: Scalars['Date']['output'];
   status?: Maybe<ZaakStatus>;
   statusGeschiedenis: Array<ZaakStatus>;
@@ -2626,14 +2735,27 @@ export type ZaakDetails = {
 
 export type ZaakPage = {
   __typename?: 'ZaakPage';
+  /** The elements on this page */
   content: Array<Zaak>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
+};
+
+export type ZaakResultaat = {
+  __typename?: 'ZaakResultaat';
+  resultaattype: ResultaatType;
+  toelichting?: Maybe<Scalars['String']['output']>;
+  url: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+  zaak: Scalars['String']['output'];
 };
 
 export type ZaakStatus = {
@@ -2823,7 +2945,6 @@ export type GetOpenProductHoofdThemasQuery = { __typename?: 'Query', getOpenProd
 
 export type GetOpenProductThemaTakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -2831,7 +2952,6 @@ export type GetOpenProductThemaTakenQuery = { __typename?: 'Query', getOpenProdu
 
 export type GetOpenProductThemaZakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -2842,7 +2962,7 @@ export type GetOpenProductQueryVariables = Exact<{
 }>;
 
 
-export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs: number, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> | null } | null };
+export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> | null } | null };
 
 export type GetPersoonV2QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3939,8 +4059,8 @@ export type GetOpenProductHoofdThemasLazyQueryHookResult = ReturnType<typeof use
 export type GetOpenProductHoofdThemasSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasSuspenseQuery>;
 export type GetOpenProductHoofdThemasQueryResult = Apollo.QueryResult<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>;
 export const GetOpenProductThemaTakenDocument = gql`
-    query getOpenProductThemaTaken($id: UUID!, $pageSize: Int) {
-  getOpenProductThemaTaken(id: $id, pageSize: $pageSize) {
+    query getOpenProductThemaTaken($id: UUID!) {
+  getOpenProductThemaTaken(id: $id) {
     id
     soort
     koppeling {
@@ -3977,7 +4097,6 @@ export const GetOpenProductThemaTakenDocument = gql`
  * const { data, loading, error } = useGetOpenProductThemaTakenQuery({
  *   variables: {
  *      id: // value for 'id'
- *      pageSize: // value for 'pageSize'
  *   },
  * });
  */
@@ -3998,8 +4117,8 @@ export type GetOpenProductThemaTakenLazyQueryHookResult = ReturnType<typeof useG
 export type GetOpenProductThemaTakenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductThemaTakenSuspenseQuery>;
 export type GetOpenProductThemaTakenQueryResult = Apollo.QueryResult<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>;
 export const GetOpenProductThemaZakenDocument = gql`
-    query getOpenProductThemaZaken($id: UUID!, $pageSize: Int) {
-  getOpenProductThemaZaken(id: $id, pageSize: $pageSize) {
+    query getOpenProductThemaZaken($id: UUID!) {
+  getOpenProductThemaZaken(id: $id) {
     uuid
     omschrijving
     identificatie
@@ -4029,7 +4148,6 @@ export const GetOpenProductThemaZakenDocument = gql`
  * const { data, loading, error } = useGetOpenProductThemaZakenQuery({
  *   variables: {
  *      id: // value for 'id'
- *      pageSize: // value for 'pageSize'
  *   },
  * });
  */

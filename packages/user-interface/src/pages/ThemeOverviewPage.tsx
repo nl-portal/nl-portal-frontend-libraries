@@ -46,7 +46,6 @@ const ThemeOverviewPage = ({
   } = useGetOpenProductThemaTakenQuery({
     variables: {
       id,
-      pageSize: fetchTasksLength,
     },
     skip: !id || !fetchTasksLength,
   });
@@ -57,7 +56,6 @@ const ThemeOverviewPage = ({
   } = useGetOpenProductThemaZakenQuery({
     variables: {
       id,
-      pageSize: fetchCasesLength,
     },
     skip: !id || !fetchCasesLength,
   });

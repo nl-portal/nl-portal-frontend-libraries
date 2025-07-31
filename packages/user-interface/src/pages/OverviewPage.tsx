@@ -1,6 +1,5 @@
 import { Alert } from "@gemeente-denhaag/alert";
 import { FormattedMessage, useIntl } from "react-intl";
-import useUserInfo from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PageHeader from "../components/PageHeader";
 import {
@@ -12,7 +11,8 @@ import {
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
 import { Paragraph } from "@gemeente-denhaag/typography";
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
+import UserContext from "../contexts/UserContext";
 
 interface OverviewPageProps {
   showAlert?: boolean;
@@ -32,7 +32,7 @@ const OverviewPage = ({
   children,
 }: OverviewPageProps) => {
   const intl = useIntl();
-  const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
+  const { username, usernameVolmacht, isVolmacht } = useContext(UserContext);
   const {
     data: tasksData,
     loading: tasksLoading,
@@ -67,14 +67,14 @@ const OverviewPage = ({
           title={
             <>
               <FormattedMessage id="overviewpage.title" />{" "}
-              <span translate="no">{userName}</span>
+              <span translate="no">{username}</span>
             </>
           }
           subTitle={
-            isVolmachtLogin && (
+            isVolmacht && (
               <>
                 <FormattedMessage id="overview.subTitle" />{" "}
-                <span translate="no">{volmachtgever}</span>
+                <span translate="no">{usernameVolmacht}</span>
               </>
             )
           }
