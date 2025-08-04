@@ -16,7 +16,7 @@
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "publish": "lerna publish from-package",
-    "release": "lerna version 2.0.0 --no-changelog --no-private --no-commit-hooks --message 'chore: released %s [skip ci]'",
+    "release": "lerna version 2.1.0 --no-changelog --no-private --no-commit-hooks --message 'chore: released %s [skip ci]'",
     "test": "pnpm run --recursive --parallel test",
     "typecheck": "pnpm run --recursive --parallel typecheck",
     "update-patch": "npm-check-updates --configFileName .ncurc.patch.js",
