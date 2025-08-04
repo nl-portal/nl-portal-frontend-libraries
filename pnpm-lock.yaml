@@ -127,8 +127,8 @@ importers:
   packages/app:
     dependencies:
       '@gemeente-denhaag/design-tokens-components':
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       '@gemeente-denhaag/icons':
         specifier: 4.0.0
         version: 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -310,8 +310,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/alert':
-        specifier: 4.0.1
-        version: 4.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 4.0.2
+        version: 4.0.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/button':
         specifier: 3.0.0
         version: 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1219,8 +1219,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/alert@4.0.1':
-    resolution: {integrity: sha512-pzP0wVobHbucSdOSrMwHR2eQWhgTpAVSoItHb8fQTRCGh16YnfOZnscdxGntebJL+isyeOyBm41Anph1ybXUHg==}
+  '@gemeente-denhaag/alert@4.0.2':
+    resolution: {integrity: sha512-zBQ6bs33YseZ6Th1Kr1Gj/z6/3BSllcvkb1f0ktmpZmEFclqQl10h5l2lzlUgRldWthE40pnvgKVGlzXJG/CSg==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1276,8 +1276,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/design-tokens-components@5.0.0':
-    resolution: {integrity: sha512-dxnB7ZX2EKmWD4fjbJmryiUnvKukiqkTzDXzeR+LIIOT54iPK9qtdflBUTENsYkkDacd4oVCZ5kqEF1xa1PlVg==}
+  '@gemeente-denhaag/design-tokens-components@5.0.1':
+    resolution: {integrity: sha512-MUBveVHSAmS0yUaixvUH87A8VyCwgpEGi+qoc3fsVCptKbDDt0kb+IKUwLRtZJIt4omzb3RABOApKR2NV/lxGA==}
 
   '@gemeente-denhaag/file@2.0.0':
     resolution: {integrity: sha512-y4zM6cBhxCk38tYV5Hzu/HoMELoGIwccUGWwt6oKDjMAbQF1uG+pfiHAveSb68AqFqWxtGEQF3XCBHXqQWNUPQ==}
@@ -6966,7 +6966,7 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
-  '@gemeente-denhaag/alert@4.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@gemeente-denhaag/alert@4.0.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@gemeente-denhaag/button': 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/heading': 2.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -7050,7 +7050,7 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
-  '@gemeente-denhaag/design-tokens-components@5.0.0': {}
+  '@gemeente-denhaag/design-tokens-components@5.0.1': {}
 
   '@gemeente-denhaag/file@2.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:

@@ -34,7 +34,7 @@
     "@formio/react": "^6.1.0",
     "@utrecht/component-library-css": "7.4.1",
     "@gemeente-denhaag/action": "4.0.0",
-    "@gemeente-denhaag/alert": "4.0.1",
+    "@gemeente-denhaag/alert": "4.0.2",
     "@gemeente-denhaag/button": "3.0.0",
     "@gemeente-denhaag/button-group": "^2.0.0",
     "@gemeente-denhaag/button-link": "3.0.0",

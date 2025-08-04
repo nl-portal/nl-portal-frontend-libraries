@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-components": "5.0.0",
+    "@gemeente-denhaag/design-tokens-components": "5.0.1",
     "@gemeente-denhaag/icons": "4.0.0",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
