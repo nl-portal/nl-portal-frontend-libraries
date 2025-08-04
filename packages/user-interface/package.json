@@ -96,9 +96,9 @@
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-intl": "^7.1.11",
-    "react-router": "^7.7.0"
+    "react-router": "^7.7.1"
   }
 }
