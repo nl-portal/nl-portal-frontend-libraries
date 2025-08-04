@@ -21,7 +21,7 @@ const cloneZaken = () => {
 const cloneContactmomenten = () => {
   const cloneConctactmomenten = cloneDeep(getObjectContactMomenten);
   if (cloneConctactmomenten.result.data) {
-    cloneConctactmomenten.result.data.getObjectContactMomenten.content = [];
+    cloneConctactmomenten.result.data.getUserKlantContacten = [];
   }
   return cloneConctactmomenten;
 };

@@ -3047,6 +3047,14 @@ export type GetUserDigitaleAdressenQueryVariables = Exact<{ [key: string]: never
 
 export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdresen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string }> | null };
 
+export type GetUserKlantContactenQueryVariables = Exact<{
+  identificatorType: OnderwerpObjectIndentificatorType;
+  identificatorId: Scalars['UUID']['input'];
+}>;
+
+
+export type GetUserKlantContactenQuery = { __typename?: 'Query', getUserKlantContacten: Array<{ __typename?: 'OpenKlant2Klantcontact', uuid: string, inhoud: string, kanaal: string, onderwerp: string, plaatsgevondenOp: string }> };
+
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
 }>;
@@ -4960,6 +4968,54 @@ export type GetUserDigitaleAdressenQueryHookResult = ReturnType<typeof useGetUse
 export type GetUserDigitaleAdressenLazyQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenLazyQuery>;
 export type GetUserDigitaleAdressenSuspenseQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenSuspenseQuery>;
 export type GetUserDigitaleAdressenQueryResult = Apollo.QueryResult<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>;
+export const GetUserKlantContactenDocument = gql`
+    query GetUserKlantContacten($identificatorType: OnderwerpObjectIndentificatorType!, $identificatorId: UUID!) {
+  getUserKlantContacten(
+    identificatorType: $identificatorType
+    identificatorId: $identificatorId
+  ) {
+    uuid
+    inhoud
+    kanaal
+    onderwerp
+    plaatsgevondenOp
+  }
+}
+    `;
+
+/**
+ * __useGetUserKlantContactenQuery__
+ *
+ * To run a query within a React component, call `useGetUserKlantContactenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserKlantContactenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserKlantContactenQuery({
+ *   variables: {
+ *      identificatorType: // value for 'identificatorType'
+ *      identificatorId: // value for 'identificatorId'
+ *   },
+ * });
+ */
+export function useGetUserKlantContactenQuery(baseOptions: Apollo.QueryHookOptions<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables> & ({ variables: GetUserKlantContactenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>(GetUserKlantContactenDocument, options);
+      }
+export function useGetUserKlantContactenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>(GetUserKlantContactenDocument, options);
+        }
+export function useGetUserKlantContactenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>(GetUserKlantContactenDocument, options);
+        }
+export type GetUserKlantContactenQueryHookResult = ReturnType<typeof useGetUserKlantContactenQuery>;
+export type GetUserKlantContactenLazyQueryHookResult = ReturnType<typeof useGetUserKlantContactenLazyQuery>;
+export type GetUserKlantContactenSuspenseQueryHookResult = ReturnType<typeof useGetUserKlantContactenSuspenseQuery>;
+export type GetUserKlantContactenQueryResult = Apollo.QueryResult<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>;
 export const GetZaakDocument = gql`
     query GetZaak($id: UUID!) {
   getZaak(id: $id) {

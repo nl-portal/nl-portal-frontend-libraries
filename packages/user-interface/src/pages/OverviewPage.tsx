@@ -7,16 +7,20 @@ import {
   Zaak,
   useGetTakenV2Query,
   useGetZakenQuery,
+  useUserContactQuery,
 } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { ReactNode, useContext } from "react";
 import UserContext from "../contexts/UserContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
+import { useNavigate, useOutletContext } from "react-router";
 
 interface OverviewPageProps {
   showAlert?: boolean;
   alertType?: "error" | "info" | "success" | "warning";
+  showNoEmailAlert?: boolean;
   showIntro?: boolean;
   fetchTasksLength?: number;
   fetchCasesLength?: number;
@@ -25,6 +29,7 @@ interface OverviewPageProps {
 
 const OverviewPage = ({
   showAlert = false,
+  showNoEmailAlert = false,
   alertType = "warning",
   showIntro = false,
   fetchTasksLength = 5,
@@ -32,7 +37,8 @@ const OverviewPage = ({
   children,
 }: OverviewPageProps) => {
   const intl = useIntl();
-  const { username, usernameVolmacht, isVolmacht } = useContext(UserContext);
+  const { username, usernameVolmacht, isPersoon, isVolmacht } =
+    useContext(UserContext);
   const {
     data: tasksData,
     loading: tasksLoading,
@@ -49,6 +55,12 @@ const OverviewPage = ({
     variables: { pageSize: fetchCasesLength },
     skip: !fetchCasesLength,
   });
+  const { data: contactData, loading: contactLoading } = useUserContactQuery({
+    skip: !isPersoon || !showNoEmailAlert,
+  });
+  const { paths } = useOutletContext<RouterOutletContext>();
+  const navigate = useNavigate();
+
   const loading = tasksLoading || casesLoading;
   const tasks = tasksData?.getTakenV2.content as TaakV2[] | undefined;
   const cases = casesData?.getZaken.content as Zaak[] | undefined;
@@ -60,6 +72,19 @@ const OverviewPage = ({
           variant={alertType}
           title={intl.formatMessage({ id: "overview.alertTitle" })}
           text={intl.formatMessage({ id: "overview.alertText" })}
+        />
+      )}
+      {showNoEmailAlert && !contactLoading && !contactData?.emailadres && (
+        <Alert
+          title={<FormattedMessage id="overviewpage.noEmail.title" />}
+          text={<FormattedMessage id="overviewpage.noEmail.text" />}
+          variant="warning"
+          action={{
+            buttonText: intl.formatMessage({
+              id: "overviewpage.noEmail.text.button",
+            }),
+            onClick: () => navigate(paths.changeContactInfo),
+          }}
         />
       )}
       {showIntro && (

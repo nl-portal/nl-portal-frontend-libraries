@@ -221,6 +221,10 @@ export const NL_NL_MESSAGES: Messages = {
     "overviewpage.paragraph":
       "In de NL-portal  kunt u zelf uw persoonlijke zaken regelen wanneer het u uitkomt. U kunt bijvoorbeeld uw rekeningen betalen en zien wanneer uw aanvraag klaar is.",
     "overviewpage.casesTitle": "Mijn zaken",
+    "overviewpage.noEmail.title": "Geen e-mailadres",
+    "overviewpage.noEmail.text":
+      "Vul uw e-mailadres in. De gemeente kan u dan belangrijke meldingen sturen. Bijvoorbeeld over uw aanvraag of andere lopende zaken.",
+    "overviewpage.noEmail.text.button": "E-mailadres invullen",
     "actionLabels.today": "vandaag",
     "actionLabels.yesterday": "gisteren",
     "actionLabels.before": "vóór",

@@ -5,6 +5,7 @@ on:
         branches:
             - "next-minor"
             - "next-major"
+            - "rc/*"
             - "release/*"
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref || github.run_id }}

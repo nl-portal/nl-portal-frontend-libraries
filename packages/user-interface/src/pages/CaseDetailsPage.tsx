@@ -2,10 +2,10 @@ import React, { useContext, useEffect } from "react";
 import {
   useGetZaakQuery,
   useGetTakenV2Query,
-  useGetObjectContactMomentenLazyQuery,
   TaakV2,
-  ContactMoment,
   ZaakStatus,
+  useContactMomentsLazyQuery,
+  OnderwerpObjectIndentificatorType,
 } from "@nl-portal/nl-portal-api";
 import {
   LocaleContext,
@@ -46,7 +46,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     variables: { id },
   });
   const [getMomenten, { data: momentsData, loading: momentsLoading }] =
-    useGetObjectContactMomentenLazyQuery();
+    useContactMomentsLazyQuery();
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
@@ -106,16 +106,14 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   }, [caseData, currentLocale]);
 
   const contactItems = React.useMemo(() => {
-    if (!momentsData?.getObjectContactMomenten) return [];
+    if (!momentsData) return [];
 
-    return momentsData?.getObjectContactMomenten?.content.map(
-      (contact: ContactMoment, index: number) => ({
-        id: index,
-        title: contact.tekst,
-        channel: contact.kanaal,
-        isoDate: contact.registratiedatum,
-      }),
-    );
+    return momentsData.map((contact, index) => ({
+      id: index,
+      title: contact.tekst,
+      channel: contact.kanaal,
+      isoDate: contact.registratiedatum,
+    }));
   }, [momentsData]);
 
   const contactLabels = {
@@ -127,7 +125,13 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
 
   React.useEffect(() => {
     if (!caseData) return;
-    getMomenten({ variables: { objectUrl: caseData.getZaak.url } });
+    getMomenten({
+      variables: {
+        objectUrl: caseData.getZaak.url,
+        identificatorType: OnderwerpObjectIndentificatorType.Zaak,
+        identificatorId: caseData.getZaak.uuid,
+      },
+    });
   }, [caseData]);
 
   if (!caseError) {
