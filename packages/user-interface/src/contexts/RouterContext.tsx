@@ -9,6 +9,7 @@ import { NavigationItem } from "../interfaces/navigation-item";
 
 export interface RouterContextInterface {
   routes: RouteObject[];
+  initNavigationItems: NavigationItem[][];
   navigationItems: NavigationItem[][];
   updateRoutes: (newRoutes: RouteObject[]) => void;
   updateNavigationItems: (newNavigationItems: NavigationItem[][]) => void;
@@ -35,7 +36,9 @@ export const RouterProvider = ({
   test,
 }: Props) => {
   const [routes, setRoutes] = useState(initRoutes);
-  const [navigationItems, setNavigationItems] = useState(initNavigationItems);
+  const [navigationItems, setNavigationItems] = useState(
+    initNavigationItems.map((group) => group.filter((item) => !item.themeSlug)),
+  );
 
   const router = useMemo(() => {
     const route = {
@@ -60,6 +63,7 @@ export const RouterProvider = ({
     <RouterContext.Provider
       value={{
         routes,
+        initNavigationItems,
         navigationItems,
         updateRoutes,
         updateNavigationItems,

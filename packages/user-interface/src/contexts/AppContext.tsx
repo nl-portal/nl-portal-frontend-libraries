@@ -37,7 +37,8 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   const navType = useNavigationType();
   const [themes, setThemes] = useState<Themes>([]);
   const [messagesCount, setMessagesCount] = useState(0);
-  const { navigationItems, updateNavigationItems } = useContext(RouterContext);
+  const { initNavigationItems, updateNavigationItems } =
+    useContext(RouterContext);
   const { isLoading: loadingUser } = useContext(UserContext);
   const [history, setHistory] = useState<string[]>(
     JSON.parse(localStorage.getItem("history") || "[]"),
@@ -52,7 +53,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
           data.getOpenProductHoofdThemas.map((theme) =>
             stringToSlug(theme.naam),
           ) || [];
-        const newNavigationItems = navigationItems.map((group) =>
+        const newNavigationItems = initNavigationItems.map((group) =>
           group.filter(
             (item) => !item.themeSlug || activeThemes.includes(item.themeSlug),
           ),
