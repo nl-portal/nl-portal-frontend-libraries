@@ -2,11 +2,7 @@ import { useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
-import {
-  useGetOpenProductenByThemaQuery,
-  useGetOpenProductThemaTakenQuery,
-  useGetOpenProductThemaZakenQuery,
-} from "@nl-portal/nl-portal-api";
+import { useGetOpenProductenByThemaQuery } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import AppContext from "../contexts/AppContext";
@@ -40,26 +36,6 @@ const ThemeOverviewPage = ({
     (theme) => stringToSlug(theme.naam) === stringToSlug(slug),
   )?.uuid;
   const {
-    data: takenData,
-    loading: takenLoading,
-    error: takenError,
-  } = useGetOpenProductThemaTakenQuery({
-    variables: {
-      id,
-    },
-    skip: !id || !fetchTasksLength,
-  });
-  const {
-    data: zakenData,
-    loading: zakenLoading,
-    error: zakenError,
-  } = useGetOpenProductThemaZakenQuery({
-    variables: {
-      id,
-    },
-    skip: !id || !fetchCasesLength,
-  });
-  const {
     data: productenData,
     loading: productenLoading,
     error: productenError,
@@ -70,10 +46,14 @@ const ThemeOverviewPage = ({
     skip: !id,
   });
 
-  const loading = takenLoading || zakenLoading || productenLoading;
-  const taken = (takenData?.getOpenProductThemaTaken as TaakV2[]) || [];
-  const zaken = (zakenData?.getOpenProductThemaZaken as Zaak[]) || [];
+  const loading = productenLoading;
   const producten = productenData?.getOpenProductenByThema || [];
+  const taken = producten?.flatMap(
+    (product) => (product.taken as TaakV2[]) ?? [],
+  );
+  const zaken = producten?.flatMap(
+    (product) => (product.zaken as Zaak[]) ?? [],
+  );
 
   return (
     <PageGrid>
@@ -81,7 +61,6 @@ const ThemeOverviewPage = ({
       {Boolean(fetchTasksLength) && (
         <TasksList
           loading={loading}
-          error={Boolean(takenError)}
           showEmpty={false}
           tasks={taken}
           openInContext={true}
@@ -90,7 +69,6 @@ const ThemeOverviewPage = ({
       {Boolean(fetchCasesLength) && (
         <CasesList
           loading={loading}
-          error={Boolean(zakenError)}
           showEmpty={false}
           listView={false}
           cases={zaken}
@@ -107,7 +85,7 @@ const ThemeOverviewPage = ({
           productSettings.dataMapping.map((map) => ({
             href: paths.themeDetails(slug, product.uuid),
             children: intl.formatMessage({
-              id: (product as Record<string, string>)[map] || "-",
+              id: (product as unknown as Record<string, string>)[map] || "-",
             }),
           })),
         )}

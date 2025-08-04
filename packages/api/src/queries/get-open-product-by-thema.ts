@@ -7,6 +7,28 @@ export const QUERY_GET_OPEN_PRODUCT_BY_THEMA = gql`
       naam
       startDatum
       eindDatum
+      taken {
+        id
+        titel
+        verloopdatum
+        koppeling {
+          registratie
+          value
+        }
+      }
+      zaken {
+        uuid
+        omschrijving
+        identificatie
+        status {
+          statustype {
+            isEindstatus
+          }
+        }
+        zaaktype {
+          identificatie
+        }
+      }
     }
   }
 `;

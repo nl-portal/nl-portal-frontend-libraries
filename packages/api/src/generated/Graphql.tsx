@@ -2936,7 +2936,7 @@ export type GetOpenProductenByThemaQueryVariables = Exact<{
 }>;
 
 
-export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProductenByThema: Array<{ __typename?: 'OpenProductProduct', uuid: any, naam: string, startDatum?: any | null, eindDatum?: any | null }> };
+export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProductenByThema: Array<{ __typename?: 'OpenProductProduct', uuid: any, naam: string, startDatum?: any | null, eindDatum?: any | null, taken?: Array<{ __typename?: 'TaakV2', id: any, titel: string, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null } }> | null, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null, zaaktype: { __typename?: 'ZaakType', identificatie: string } }> | null }> };
 
 export type GetOpenProductHoofdThemasQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3982,6 +3982,28 @@ export const GetOpenProductenByThemaDocument = gql`
     naam
     startDatum
     eindDatum
+    taken {
+      id
+      titel
+      verloopdatum
+      koppeling {
+        registratie
+        value
+      }
+    }
+    zaken {
+      uuid
+      omschrijving
+      identificatie
+      status {
+        statustype {
+          isEindstatus
+        }
+      }
+      zaaktype {
+        identificatie
+      }
+    }
   }
 }
     `;
