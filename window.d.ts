@@ -26,6 +26,7 @@ declare global {
     CASES_PARTIAL_SEARCH: boolean;
     OPEN_KLANT_VERSION: string;
     OPEN_PRODUCTEN: boolean;
+    USE_LEGACY_OGONE_PAYMENT: boolean;
   }
 }
 
