@@ -3,7 +3,7 @@ import { ActionSingle } from "@gemeente-denhaag/action";
 import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { FormattedMessage } from "react-intl";
-import { StatusBadge } from "@gemeente-denhaag/status-badge";
+import { DataBadge } from "@gemeente-denhaag/data-badge";
 import styles from "./Message.module.scss";
 import { Bericht } from "@nl-portal/nl-portal-api";
 import { useContext } from "react";
@@ -33,9 +33,9 @@ const Message = ({ message }: Props) => {
         message.onderwerp
       ) : (
         <>
-          <StatusBadge className={styles["message__badge"]}>
+          <DataBadge status="neutral" className={styles["message__badge"]}>
             <FormattedMessage id="messagesList.new" />
-          </StatusBadge>
+          </DataBadge>
           <b>{message.onderwerp}</b>
         </>
       )}

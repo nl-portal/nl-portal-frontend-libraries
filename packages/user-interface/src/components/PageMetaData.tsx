@@ -1,16 +1,14 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useIntl } from "react-intl";
-import { NavigationItem } from "../interfaces/navigation-item";
 import { useMatches } from "react-router";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
+import RouterContext from "../contexts/RouterContext";
 
-interface PageMetaDataProps {
-  navigationItems: NavigationItem[][];
-}
-
-const PageMetaData = ({ navigationItems }: PageMetaDataProps) => {
+// TODO: heeft wat aandacht nodig, React heeft nieuwe api waar dit makkelijker kan
+const PageMetaData = () => {
   const intl = useIntl();
   const matches = useMatches();
+  const { navigationItems } = useContext(RouterContext);
   const currentPage =
     getCurrentNavigationPage(matches, navigationItems) || navigationItems[0][0];
   const pageTitle = intl.formatMessage({

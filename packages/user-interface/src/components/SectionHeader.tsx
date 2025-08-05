@@ -1,6 +1,6 @@
 import styles from "./SectionHeader.module.scss";
 import PortalLink from "./PortalLink";
-import Link from "@gemeente-denhaag/link";
+import { Link } from "@gemeente-denhaag/link";
 import classnames from "classnames";
 import { ArrowRightIcon } from "@gemeente-denhaag/icons";
 import Heading from "./Heading";

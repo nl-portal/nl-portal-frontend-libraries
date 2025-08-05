@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Utils } from "@formio/react";
-import _ = Utils._;
+import { get } from "lodash-es";
 import FormIoUploader from "./FormIoUploader";
 
 export interface UploadedFile {
@@ -91,7 +90,7 @@ const FileUpload = ({
       return url.replace(
         /({{\s*(.*?)\s*}})/g,
         (input, _capturedTemplate, capturedPath) => {
-          let value = _.get(dataContext, capturedPath);
+          let value = get(dataContext, capturedPath);
           return value ? value : input;
         },
       );

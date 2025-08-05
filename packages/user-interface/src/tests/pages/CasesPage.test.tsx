@@ -45,6 +45,10 @@ describe("The CasesPage", () => {
   it("should allow me to go to the overview of closed cases", async () => {
     render(MockCasesPage());
 
+    await waitFor(() => {
+      expect(openZaak1()).toBeVisible();
+    });
+
     fireEvent.click(tabAfgerondeZaken());
 
     await waitFor(() => {

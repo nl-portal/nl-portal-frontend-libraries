@@ -1,12 +1,10 @@
 import TasksPage from "../../../pages/TasksPage";
-import TestProvider, {
-  testPaths as paths,
-} from "../../../providers/TestProvider";
+import TestProvider, { testPaths } from "../../../providers/TestProvider";
 import { getTaken } from "../data/taken.mock";
 
-const route = [
+const routes = [
   {
-    path: paths.tasks,
+    path: testPaths.tasks,
     children: [
       {
         index: true,
@@ -15,11 +13,12 @@ const route = [
     ],
   },
 ];
+
 export const MockTasksPage = () => (
   <TestProvider
     mocks={[getTaken({})]}
-    routes={route}
-    initialIndex={1}
-    initialEntries={[paths.tasks]}
+    routes={routes}
+    initialIndex={0}
+    initialEntries={[testPaths.tasks]}
   ></TestProvider>
 );

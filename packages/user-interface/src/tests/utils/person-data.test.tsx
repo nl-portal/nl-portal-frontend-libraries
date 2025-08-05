@@ -7,8 +7,8 @@ import {
 } from "../../utils/person-data";
 
 describe("getNationalitiesString", () => {
-  it("should return empty string when input is null", () => {
-    const nationalitiesString = getNationalitiesString(null);
+  it("should return empty string when input is undefined", () => {
+    const nationalitiesString = getNationalitiesString(undefined);
     expect(nationalitiesString).toBe("");
   });
 

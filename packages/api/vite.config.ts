@@ -3,9 +3,10 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
 export default defineConfig({
-  plugins: [react(), dts()],
+  plugins: [peerDepsExternal({ includeDependencies: true }), react(), dts()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -14,7 +15,6 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "react-dom", "@nl-portal/nl-portal-authentication"],
       output: {
         entryFileNames: "[name].js",
         globals: {
@@ -22,6 +22,7 @@ export default defineConfig({
         },
       },
     },
+    commonjsOptions: { transformMixedEsModules: true },
   },
   test: {
     globals: true,
