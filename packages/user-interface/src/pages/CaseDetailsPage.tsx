@@ -29,6 +29,8 @@ import useOgonePaymentRegistration, {
 import DescriptionList from "../components/DescriptionList";
 import { ExtraCaseDetails, Details } from "../components/ExtraCaseDetails";
 import NotificationContext from "../contexts/NotificationContext";
+import { stringToSlug } from "../utils/string-to-slug";
+import { caseResults } from "../constants/case-results";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -62,6 +64,21 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   ) as TaakV2[] | undefined;
 
   const { pushNotification } = useContext(NotificationContext);
+
+  useEffect(() => {
+    if (!caseData?.getZaak?.resultaat?.resultaattype?.omschrijvingGeneriek)
+      return;
+    const slug = stringToSlug(
+      caseData?.getZaak.resultaat?.resultaattype.omschrijvingGeneriek,
+    );
+
+    pushNotification("caseResult", {
+      variant: caseResults[slug as keyof typeof caseResults] ?? "info",
+      title: <FormattedMessage id={`caseDetails.resultAlert.${slug}`} />,
+      text: "",
+      closable: false,
+    });
+  }, [caseData]);
 
   useEffect(() => {
     if (paymentStatus === PaymentStatus.SUCCESS) {
@@ -101,6 +118,21 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
         title: intl.formatMessage({ id: "caseDetails.description" }),
         detail: caseData?.getZaak.omschrijving || "",
       });
+
+    if (caseData?.getZaak.resultaat?.resultaattype.omschrijvingGeneriek) {
+      array.push({
+        title: intl.formatMessage({ id: "caseDetails.resultaat" }),
+        detail:
+          caseData?.getZaak.resultaat?.resultaattype.omschrijvingGeneriek || "",
+      });
+    }
+
+    if (caseData?.getZaak.resultaat?.toelichting) {
+      array.push({
+        title: intl.formatMessage({ id: "caseDetails.resultaatToelichting" }),
+        detail: caseData?.getZaak.resultaat.toelichting || "",
+      });
+    }
 
     return array;
   }, [caseData, currentLocale]);
