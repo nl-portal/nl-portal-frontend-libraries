@@ -75,6 +75,8 @@ export const EN_GB_MESSAGES: Messages = {
     "casesList.fetchError": "Something went wrong, please try again later.",
     "caseDetails.caseNumber": "Procedure number",
     "caseDetails.description": "Description",
+    "caseDetails.resultaat": "Result",
+    "caseDetails.resultaatToelichting": "Result explanation",
     "caseDetails.creationDate": "Application date",
     "caseDetails.status": "status",
     "caseDetails.documents": "documents",

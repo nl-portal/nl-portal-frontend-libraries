@@ -102,6 +102,21 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
         detail: caseData?.getZaak.omschrijving || "",
       });
 
+    if (caseData?.getZaak.resultaat?.resultaattype.omschrijvingGeneriek) {
+      array.push({
+        title: intl.formatMessage({ id: "caseDetails.resultaat" }),
+        detail:
+          caseData?.getZaak.resultaat?.resultaattype.omschrijvingGeneriek || "",
+      });
+    }
+
+    if (caseData?.getZaak.resultaat?.toelichting) {
+      array.push({
+        title: intl.formatMessage({ id: "caseDetails.resultaatToelichting" }),
+        detail: caseData?.getZaak.resultaat.toelichting || "",
+      });
+    }
+
     return array;
   }, [caseData, currentLocale]);
 

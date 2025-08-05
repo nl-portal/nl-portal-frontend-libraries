@@ -76,6 +76,8 @@ export const NL_NL_MESSAGES: Messages = {
       "Er ging iets niet goed, probeer het later opnieuw.",
     "caseDetails.caseNumber": "Zaaknummer",
     "caseDetails.description": "Omschrijving",
+    "caseDetails.resultaat": "Resultaat",
+    "caseDetails.resultaatToelichting": "Toelichting resultaat",
     "caseDetails.creationDate": "Aanvraagdatum",
     "caseDetails.status": "status",
     "caseDetails.documents": "documenten",
