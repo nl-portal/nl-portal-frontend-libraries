@@ -5,16 +5,16 @@ import { Link } from "@gemeente-denhaag/link";
 import { ChevronLeftIcon } from "@gemeente-denhaag/icons";
 import styles from "./BackLink.module.scss";
 import PortalLink from "./PortalLink";
-import LayoutContext from "../contexts/LayoutContext";
+import AppContext from "../contexts/AppContext";
 
 interface Props {
   href?: string;
   children?: React.ReactNode;
 }
 
-const BackLink = ({ href, children }: Props) => {
+export const BackLink = ({ href, children }: Props) => {
   const { hrefLang } = useContext(LocaleContext);
-  const { history } = useContext(LayoutContext);
+  const { history } = useContext(AppContext);
 
   if (!href && !history[1]) return null;
 

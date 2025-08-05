@@ -1,7 +1,7 @@
 import { useIntl } from "react-intl";
 import Skeleton from "./Skeleton";
 import SectionHeader from "./SectionHeader";
-import Link, { LinkProps } from "@gemeente-denhaag/link";
+import { Link, LinkProps } from "@gemeente-denhaag/link";
 import { LinkListBase, LinkListItem } from "@gemeente-denhaag/link-list";
 import PortalLink from "./PortalLink";
 import { listViewHeight } from "../constants/skeleton";

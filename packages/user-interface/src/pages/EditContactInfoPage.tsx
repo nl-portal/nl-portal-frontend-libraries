@@ -4,26 +4,27 @@ import {
   useUserContactQuery,
 } from "@nl-portal/nl-portal-api";
 import PageHeader from "../components/PageHeader";
-import useUserInfo from "../hooks/useUserInfo";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
-import BackLink from "../components/BackLink";
+import { BackLink } from "../components/BackLink";
 import { useNavigate, useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import useInput from "../hooks/useInput";
-import Form from "../components/Form";
-import FormField from "@gemeente-denhaag/form-field";
-import FormLabel from "@gemeente-denhaag/form-label";
-import TextInput from "@gemeente-denhaag/text-input";
-import FormFieldErrorMessage from "@gemeente-denhaag/form-field-error-message";
+import { Form } from "../components/Form";
+import { FormField } from "@gemeente-denhaag/form-field";
+import { FormLabel } from "@gemeente-denhaag/form-label";
+import { TextInput } from "@gemeente-denhaag/text-input";
+import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 import styles from "./EditContactInfoPage.module.scss";
+import UserContext from "../contexts/UserContext";
+import { useContext } from "react";
 
 const EditContactInfoPage = () => {
-  const { isPerson } = useUserInfo();
+  const { isPersoon } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
 
   const { data: contactData } = useUserContactQuery({
-    skip: !isPerson,
+    skip: !isPersoon,
   });
 
   const [

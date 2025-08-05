@@ -1,56 +1,38 @@
-import { FC, ReactElement, ReactNode, useContext, useEffect } from "react";
+import { AnchorHTMLAttributes, ReactNode, use, useEffect } from "react";
 import { StylesProvider } from "@gemeente-denhaag/stylesprovider";
 import {
   Page as PageWrapper,
   PageHeader,
   PageFooter,
 } from "@gemeente-denhaag/page";
-import ResponsiveContent from "@gemeente-denhaag/responsive-content";
-import classNames from "classnames";
+import { ResponsiveContent } from "@gemeente-denhaag/responsive-content";
 import Header from "./Header";
 import Menu from "./Menu";
-import { PortalFooter } from "../interfaces/portal-footer";
-import Footer from "./Footer";
+import { Footer, FooterProps } from "@gemeente-denhaag/footer";
 import FormIoUploader from "./FormIoUploader";
-import styles from "./Layout.module.scss";
 import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router";
 import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
-import { NavigationItem } from "../interfaces/navigation-item";
-import { LayoutProvider } from "../contexts/LayoutContext";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
+import "@utrecht/document-css";
 
 interface LayoutComponentProps {
-  navigationItems: NavigationItem[][];
   paths: Paths;
+  headerLogo?: AnchorHTMLAttributes<HTMLAnchorElement>;
   customHeader?: ReactNode;
   customFooter?: ReactNode;
-  headerLogo?: ReactElement<HTMLImageElement>;
-  headerLogoSmall?: ReactElement<HTMLImageElement>;
-  facet?: ReactElement<HTMLImageElement>;
-  footer?: PortalFooter;
-  offline?: boolean;
+  footerData?: FooterProps;
 }
 
-const LayoutComponent: FC<LayoutComponentProps> = ({
+const Layout = ({
+  paths,
+  headerLogo,
   customHeader,
   customFooter,
-  headerLogo,
-  facet,
-  navigationItems,
-  paths,
-  footer,
-  offline,
-  headerLogoSmall,
-}) => {
-  const { oidcToken } = useContext(OidcContext);
-  const online = !offline;
-  const legacy = customHeader === undefined && customFooter === undefined;
-  let pageHeaderClassnames = "";
-  if (legacy) {
-    pageHeaderClassnames = classNames(styles["header-wrapper--legacy"]);
-  }
+  footerData,
+}: LayoutComponentProps) => {
+  const { oidcToken } = use(OidcContext);
 
   useEffect(() => {
     FormIoUploader.register();
@@ -61,65 +43,28 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   }, [oidcToken]);
 
   return (
-    <PageWrapper>
-      <PageHeader className={pageHeaderClassnames}>
-        {customHeader ||
-          (headerLogo && headerLogoSmall ? (
-            <Header
-              logo={headerLogo}
-              logoSmall={headerLogoSmall}
-              facet={facet}
-              navigationItems={navigationItems}
-              offline={offline}
-            />
-          ) : (
-            ""
-          ))}
-      </PageHeader>
-      <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
-        <Menu items={navigationItems} legacy={legacy} />
-        <main className="denhaag-page-content__main">
-          <PageMetaData navigationItems={navigationItems} />
-          {<Outlet context={{ paths }} />}
-        </main>
-      </ResponsiveContent>
-      {online && (
-        <PageFooter>
-          {customFooter || (footer && <Footer footer={footer} facet={facet} />)}
-        </PageFooter>
-      )}
-    </PageWrapper>
+    <StylesProvider>
+      <HelmetProvider>
+        <PageWrapper>
+          <PageHeader>
+            {customHeader || <Header logo={headerLogo} />}
+          </PageHeader>
+          <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
+            <Menu />
+            <main className="denhaag-page-content__main">
+              <PageMetaData />
+              {<Outlet context={{ paths }} />}
+            </main>
+          </ResponsiveContent>
+          {(footerData || customFooter) && (
+            <PageFooter>
+              {footerData ? <Footer {...footerData} /> : customFooter}
+            </PageFooter>
+          )}
+        </PageWrapper>
+      </HelmetProvider>
+    </StylesProvider>
   );
 };
-
-const Layout: FC<LayoutComponentProps> = ({
-  navigationItems,
-  paths,
-  customHeader,
-  customFooter,
-  headerLogo,
-  facet,
-  footer,
-  offline,
-  headerLogoSmall,
-}) => (
-  <StylesProvider>
-    <LayoutProvider>
-      <HelmetProvider>
-        <LayoutComponent
-          navigationItems={navigationItems}
-          paths={paths}
-          customHeader={customHeader}
-          headerLogo={headerLogo}
-          headerLogoSmall={headerLogoSmall}
-          footer={footer}
-          customFooter={customFooter}
-          facet={facet}
-          offline={offline}
-        />
-      </HelmetProvider>
-    </LayoutProvider>
-  </StylesProvider>
-);
 
 export default Layout;

@@ -1,4 +1,5 @@
 overwrite: true
+noSilentErrors: true
 schema: "http://localhost:8090/graphql"
 documents: "./src/**/*.{ts,tsx}"
 generates:

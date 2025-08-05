@@ -1,4 +1,4 @@
-import Alert, { AlertProps } from "@gemeente-denhaag/alert";
+import { Alert, AlertProps } from "@gemeente-denhaag/alert";
 import styles from "./Notification.module.scss";
 import { useEffect, useState } from "react";
 import classNames from "classnames";

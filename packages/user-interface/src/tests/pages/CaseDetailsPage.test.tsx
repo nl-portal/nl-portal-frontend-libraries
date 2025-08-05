@@ -2,6 +2,7 @@ import { describe, it, expect, beforeAll } from "vitest";
 import {
   render,
   screen,
+  waitFor,
   waitForElementToBeRemoved,
 } from "@testing-library/react";
 import {
@@ -11,6 +12,8 @@ import {
 } from "../mock/pages/CaseDetailsPage.mock.tsx";
 
 describe("CaseDetailsPage", () => {
+  const skeleton = () => screen.getAllByLabelText("Aan het laden");
+
   beforeAll(() => {
     Object.defineProperty(window, "matchMedia", {
       writable: true,
@@ -30,9 +33,8 @@ describe("CaseDetailsPage", () => {
   it("should render with all elements present", async () => {
     render(MockCaseDetailsPage());
 
-    await waitForElementToBeRemoved(() =>
-      screen.getAllByLabelText("Aan het laden"),
-    );
+    await waitFor(skeleton);
+    await waitForElementToBeRemoved(skeleton);
 
     expect(screen.getByText("Certificaat WWJB")).toBeVisible();
     expect(screen.getByText("case.B0756.title")).toBeVisible();
@@ -46,9 +48,8 @@ describe("CaseDetailsPage", () => {
   it("should render without any documents present and show message that no documents are present", async () => {
     render(MockCaseDetailsPageWithoutDocuments());
 
-    await waitForElementToBeRemoved(() =>
-      screen.getAllByLabelText("Aan het laden"),
-    );
+    await waitFor(skeleton);
+    await waitForElementToBeRemoved(skeleton);
 
     expect(screen.queryByText("Certificaat WWJB")).toBeNull();
     expect(
@@ -60,9 +61,8 @@ describe("CaseDetailsPage", () => {
   it("should render without any contactmoments present and not show header contactmoments", async () => {
     render(MockCaseDetailsPageWithoutContactMoments());
 
-    await waitForElementToBeRemoved(() =>
-      screen.getAllByLabelText("Aan het laden"),
-    );
+    await waitFor(skeleton);
+    await waitForElementToBeRemoved(skeleton);
 
     expect(screen.getByText("Documenten"));
     expect(screen.getByText("Certificaat WWJB")).toBeVisible();

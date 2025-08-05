@@ -1,4 +1,4 @@
-import Tabs from "@gemeente-denhaag/tab";
+import { Tabs } from "@gemeente-denhaag/tab";
 import { FormattedMessage, useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";

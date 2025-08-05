@@ -2,55 +2,58 @@ import { useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
+import { useGetOpenProductenByThemaQuery } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
-import {
-  TaakV2,
-  Zaak,
-  useGetProductTakenQuery,
-  useGetProductZakenQuery,
-} from "@nl-portal/nl-portal-api";
+import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
+import AppContext from "../contexts/AppContext";
+import { use } from "react";
+import { stringToSlug } from "../utils/string-to-slug";
+import TableList from "../components/TableList";
+import { useOutletContext } from "react-router";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 interface Props {
   slug: string;
-  productType: string;
-  loading?: boolean;
   fetchTasksLength?: number;
   fetchCasesLength?: number;
-  children?: React.ReactNode;
+  productSettings: {
+    titleTranslationId: string;
+    headerTranslationIds: string[];
+    dataMapping: string[];
+  };
 }
 
 const ThemeOverviewPage = ({
   slug,
-  productType,
-  loading: loadingProp,
   fetchTasksLength = 5,
   fetchCasesLength = 4,
-  children,
+  productSettings,
 }: Props) => {
   const intl = useIntl();
+  const { themes } = use(AppContext);
+  const { paths } = useOutletContext<RouterOutletContext>();
+  const id = themes.find(
+    (theme) => stringToSlug(theme.naam) === stringToSlug(slug),
+  )?.uuid;
   const {
-    data: tasksData,
-    loading: taskLoading,
-    error: taskError,
-  } = useGetProductTakenQuery({
-    variables: { productName: productType, pageSize: fetchTasksLength },
-    skip: !fetchTasksLength,
-  });
-  const {
-    data: casesData,
-    loading: casesLoading,
-    error: casesError,
-  } = useGetProductZakenQuery({
+    data: productenData,
+    loading: productenLoading,
+    error: productenError,
+  } = useGetOpenProductenByThemaQuery({
     variables: {
-      productName: productType,
-      pageSize: fetchCasesLength,
+      themaId: id,
     },
-    skip: !fetchCasesLength,
+    skip: !id,
   });
 
-  const loading = loadingProp || taskLoading || casesLoading;
-  const tasks = tasksData?.getProductTaken as TaakV2[] | undefined;
-  const cases = casesData?.getProductZaken as Zaak[] | undefined;
+  const loading = productenLoading;
+  const producten = productenData?.getOpenProductenByThema || [];
+  const taken = producten?.flatMap(
+    (product) => (product.taken as TaakV2[]) ?? [],
+  );
+  const zaken = producten?.flatMap(
+    (product) => (product.zaken as Zaak[]) ?? [],
+  );
 
   return (
     <PageGrid>
@@ -58,22 +61,35 @@ const ThemeOverviewPage = ({
       {Boolean(fetchTasksLength) && (
         <TasksList
           loading={loading}
-          error={Boolean(taskError)}
           showEmpty={false}
-          tasks={tasks}
+          tasks={taken}
           openInContext={true}
         />
       )}
       {Boolean(fetchCasesLength) && (
         <CasesList
           loading={loading}
-          error={Boolean(casesError)}
           showEmpty={false}
           listView={false}
-          cases={cases}
+          cases={zaken}
         />
       )}
-      {children}
+      <TableList
+        loading={loading}
+        error={Boolean(productenError)}
+        titleTranslationId={productSettings.titleTranslationId}
+        headers={productSettings.headerTranslationIds.map((id) =>
+          intl.formatMessage({ id }),
+        )}
+        rows={producten.map((product) =>
+          productSettings.dataMapping.map((map) => ({
+            href: paths.themeDetails(slug, product.uuid),
+            children: intl.formatMessage({
+              id: (product as unknown as Record<string, string>)[map] || "-",
+            }),
+          })),
+        )}
+      />
     </PageGrid>
   );
 };

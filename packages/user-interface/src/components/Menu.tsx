@@ -1,104 +1,57 @@
-import * as React from "react";
 import { useContext } from "react";
 import { Link, useMatches } from "react-router";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import {
-  Sidenav,
-  SidenavItem,
-  SidenavLinkLabel,
-  SidenavList,
-} from "@gemeente-denhaag/sidenav";
-import { IconButton } from "@gemeente-denhaag/iconbutton";
-import { CloseIcon } from "@gemeente-denhaag/icons";
-import classNames from "classnames";
-import LayoutContext from "../contexts/LayoutContext";
-import styles from "./Menu.module.scss";
-import MenuItem from "./MenuItem";
-import { NavigationItem } from "../interfaces/navigation-item";
+  SideNavigationBase,
+  SideNavigationItem,
+  SideNavigationLinkLabel,
+  SideNavigationList,
+} from "@gemeente-denhaag/side-navigation";
 import { getCurrentNavigationPage } from "../utils/get-current-navigation-page";
-import Heading from "./Heading";
-import "@gemeente-denhaag/menu"; // TODO: styling needed for legacy menu, remove with legacy menu
-import BadgeCounter from "@gemeente-denhaag/badge-counter";
-import MessagesContext from "../contexts/MessagesContext";
+import { NumberBadge } from "@gemeente-denhaag/number-badge";
+import AppContext from "../contexts/AppContext";
+import RouterContext from "../contexts/RouterContext";
 
-interface Props {
-  items: NavigationItem[][];
-  legacy?: boolean;
-}
-
-const Menu = ({ items, legacy }: Props) => {
+const Menu = () => {
   const { hrefLang } = useContext(LocaleContext);
-  const { menuOpened, hideMenu } = useContext(LayoutContext);
-  const { messagesCount } = useContext(MessagesContext);
-  const intl = useIntl();
+  const { messagesCount } = useContext(AppContext);
+  const { navigationItems } = useContext(RouterContext);
   const matches = useMatches();
-  const currentNavigationItem = getCurrentNavigationPage(matches, items);
-
-  if (legacy) {
-    return (
-      <aside
-        className={classNames(styles.menu, {
-          [styles["menu--hidden"]]: !menuOpened,
-        })}
-      >
-        <div className={styles.menu__inner}>
-          <header className={styles.menu__header}>
-            <Heading as="h4">
-              <FormattedMessage id="app.appName" />
-            </Heading>
-            {React.cloneElement(
-              <IconButton onClick={hideMenu}>
-                <CloseIcon />
-              </IconButton>,
-              { title: intl.formatMessage({ id: "menu.close" }) },
-            )}
-          </header>
-          <nav className={styles.menu__items}>
-            {items.map((array) =>
-              array.map((item) => (
-                <MenuItem
-                  key={item.path}
-                  item={item}
-                  current={item === currentNavigationItem}
-                />
-              )),
-            )}
-          </nav>
-        </div>
-      </aside>
-    );
-  }
+  const currentNavigationItem = getCurrentNavigationPage(
+    matches,
+    navigationItems,
+  );
 
   return (
-    <Sidenav>
-      {items.map((array, index) => (
-        <SidenavList key={`sidenav-list-${index}`}>
+    <SideNavigationBase>
+      {navigationItems.map((array, index) => (
+        <SideNavigationList key={`sidenav-list-${index}`}>
           {array.map((item) => {
             const current = item === currentNavigationItem;
-            const className = `denhaag-sidenav__link ${
-              current && "denhaag-sidenav__link--current"
+            const className = `denhaag-side-navigation__link ${
+              current && "denhaag-side-navigation__link--current"
             }`;
 
             return (
-              <SidenavItem key={item.path}>
+              <SideNavigationItem key={item.path}>
                 <Link className={className} hrefLang={hrefLang} to={item.path}>
                   {item.icon}
-                  <SidenavLinkLabel>
+                  <SideNavigationLinkLabel>
                     <FormattedMessage
                       id={`pageTitles.${item.titleTranslationKey}`}
                     />
                     {item.hasMessagesCount && messagesCount > 0 && (
-                      <BadgeCounter>{messagesCount}</BadgeCounter>
+                      <NumberBadge>{messagesCount}</NumberBadge>
                     )}
-                  </SidenavLinkLabel>
+                  </SideNavigationLinkLabel>
                 </Link>
-              </SidenavItem>
+              </SideNavigationItem>
             );
           })}
-        </SidenavList>
+        </SideNavigationList>
       ))}
-    </Sidenav>
+    </SideNavigationBase>
   );
 };
 

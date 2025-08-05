@@ -1,15 +1,15 @@
-import FormField from "@gemeente-denhaag/form-field";
-import Form from "./Form";
-import FormLabel from "@gemeente-denhaag/form-label";
-import TextInput from "@gemeente-denhaag/text-input";
+import { FormField } from "@gemeente-denhaag/form-field";
+import { Form } from "./Form";
+import { FormLabel } from "@gemeente-denhaag/form-label";
+import { TextInput } from "@gemeente-denhaag/text-input";
 import { SearchIcon } from "@gemeente-denhaag/icons";
-import Button from "@gemeente-denhaag/button";
+import { Button } from "@gemeente-denhaag/button";
 import useInput, { Validation } from "../hooks/useInput";
 import { FormEvent } from "react";
 import styles from "./SearchForm.module.scss";
 import { FormattedMessage } from "react-intl";
 import { Paragraph } from "@gemeente-denhaag/typography";
-import FormFieldErrorMessage from "@gemeente-denhaag/form-field-error-message";
+import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 
 interface SearchFormProps {
   translationId: string;

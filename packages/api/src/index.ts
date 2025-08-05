@@ -10,6 +10,8 @@ export * from "./queries/get-object-contact-momenten";
 export * from "./queries/get-user-klant-contacten";
 export * from "./queries/get-burger-profiel";
 export * from "./queries/get-zaak";
+export * from "./queries/get-open-product-hoofd-themas";
+export * from "./queries/berichten/get-unopened-berichten-count";
 export * from "./hooks/useUserContactMomentenQuery";
 export * from "./hooks/useUserContactQuery";
 export * from "./hooks/useUserContactMutation";
