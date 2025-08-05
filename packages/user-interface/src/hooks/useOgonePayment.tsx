@@ -46,7 +46,7 @@ const useOgonePayment = () => {
   const startPayment = (paymentRequestPayload: PaymentRequestPayload) => {
     setLoading(true);
 
-    if (window.OGONE_DIRECT_PAYMENT) {
+    if (!window.USE_LEGACY_OGONE_PAYMENT) {
       mutateDirectFunction({
         variables: {
           amount: paymentRequestPayload.amount,
