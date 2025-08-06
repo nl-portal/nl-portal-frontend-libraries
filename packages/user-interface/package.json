@@ -33,7 +33,7 @@
     "@formio/protected-eval": "2.0.0-rc.3",
     "@formio/react": "^6.1.0",
     "@gemeente-denhaag/action": "4.0.0",
-    "@gemeente-denhaag/alert": "4.0.2",
+    "@gemeente-denhaag/alert": "4.0.3",
     "@gemeente-denhaag/button": "3.0.0",
     "@gemeente-denhaag/button-group": "^2.0.0",
     "@gemeente-denhaag/button-link": "3.0.0",
