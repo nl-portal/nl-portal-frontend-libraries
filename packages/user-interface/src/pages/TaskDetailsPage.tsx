@@ -19,6 +19,7 @@ import { useIntl } from "react-intl";
 import styles from "./TaskPage.module.scss";
 import { useParams } from "react-router";
 import { BackLink } from "../components/BackLink";
+import { Paragraph } from "@gemeente-denhaag/typography";
 
 //eslint-disable-next-line react-hooks/rules-of-hooks
 Formio.use(ProtectedEval);
@@ -160,7 +161,11 @@ const TaskDetailsPage = () => {
         <Alert
           variant="success"
           title={intl.formatMessage({ id: "taskDetails.completeTitle" })}
-          text={intl.formatMessage({ id: "taskDetails.completeDescription" })}
+          text={
+            <Paragraph>
+              {intl.formatMessage({ id: "taskDetails.completeDescription" })}
+            </Paragraph>
+          }
         />
       </>
     );
