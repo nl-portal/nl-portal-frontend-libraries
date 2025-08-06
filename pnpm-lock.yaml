@@ -423,9 +423,6 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
-      font-awesome:
-        specifier: '4.7'
-        version: 4.7.0
       lodash-es:
         specifier: 4.17.21
         version: 4.17.21
@@ -3836,10 +3833,6 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
-
-  font-awesome@4.7.0:
-    resolution: {integrity: sha512-U6kGnykA/6bFmg1M/oT9EkFeIYv7JlX3bozwQJWiiLz6L0w3F5vBVPxHlwyX/vtNq1ckcpRKOB9f2Qal/VtFpg==}
-    engines: {node: '>=0.10.3'}
 
   for-each@0.3.5:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
@@ -10348,8 +10341,6 @@ snapshots:
   flatted@3.3.3: {}
 
   follow-redirects@1.15.11: {}
-
-  font-awesome@4.7.0: {}
 
   for-each@0.3.5:
     dependencies:
