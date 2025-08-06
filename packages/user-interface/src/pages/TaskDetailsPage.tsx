@@ -12,7 +12,6 @@ import {
   useGetPortaalFormulierByIdV2Query,
   GetPortaalFormulierByIdV2Document,
 } from "@nl-portal/nl-portal-api";
-// TODO: Formio need this old version (4.7) of awesome font
 import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
 import styles from "./TaskPage.module.scss";
