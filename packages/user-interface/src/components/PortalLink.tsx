@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { AnchorHTMLAttributes } from "react";
 import { Link } from "react-router";
+import { Link as DHLink } from "@gemeente-denhaag/link";
 
 // A generic wrapper around the React Router Link, which will possibly be used a lot in implementations to pass to components from design systems.
 // For example in breadcrumbs, headers and footers.
@@ -23,9 +24,9 @@ const PortalLink = ({
     );
   }
   return (
-    <a href={href} {...props}>
+    <DHLink href={href} className={className} {...props}>
       {props.children}
-    </a>
+    </DHLink>
   );
 };
 

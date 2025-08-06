@@ -71,13 +71,21 @@ const OverviewPage = ({
         <Alert
           variant={alertType}
           title={intl.formatMessage({ id: "overview.alertTitle" })}
-          text={intl.formatMessage({ id: "overview.alertText" })}
+          text={
+            <Paragraph>
+              {intl.formatMessage({ id: "overview.alertText" })}
+            </Paragraph>
+          }
         />
       )}
       {showNoEmailAlert && !contactLoading && !contactData?.emailadres && (
         <Alert
           title={<FormattedMessage id="overviewpage.noEmail.title" />}
-          text={<FormattedMessage id="overviewpage.noEmail.text" />}
+          text={
+            <Paragraph>
+              <FormattedMessage id="overviewpage.noEmail.text" />
+            </Paragraph>
+          }
           variant="warning"
           action={{
             buttonText: intl.formatMessage({
