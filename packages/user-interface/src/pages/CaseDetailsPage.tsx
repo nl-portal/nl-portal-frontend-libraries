@@ -142,7 +142,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
 
     return momentsData.map((contact, index) => ({
       id: index,
-      title: contact.tekst,
+      title: contact.onderwerp,
       channel: contact.kanaal,
       isoDate: contact.registratiedatum,
     }));

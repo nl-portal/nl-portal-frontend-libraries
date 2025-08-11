@@ -53,9 +53,9 @@ const AccountPage = ({
   const { isPersoon, persoon, bedrijf } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const intl = useIntl();
-  const { data: contactData, loading: contactLoading } = useUserContactQuery({
-    skip: !isPersoon,
-  });
+  const { data: contactData, loading: contactLoading } = useUserContactQuery(
+    {},
+  );
 
   const loading = contactLoading;
 
@@ -80,6 +80,45 @@ const AccountPage = ({
     return (
       <PageGrid>
         <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
+        <PageGrid variant="small">
+          <Heading as="h3" id="contact">
+            <FormattedMessage id="account.detail.contact" />
+          </Heading>
+          <Link
+            icon={<EditIcon />}
+            iconAlign="start"
+            href={paths.changeContactInfo}
+            Link={PortalLink}
+          >
+            <FormattedMessage id="account.edit" />
+          </Link>
+          <DescriptionList
+            items={[
+              {
+                title: <FormattedMessage id="account.detail.emailadres" />,
+                detail: (
+                  <DescriptionListDetail
+                    translate="no"
+                    loading={contactLoading}
+                  >
+                    {contactData?.emailadres}
+                  </DescriptionListDetail>
+                ),
+              },
+              {
+                title: <FormattedMessage id="account.detail.telefoonnummer" />,
+                detail: (
+                  <DescriptionListDetail
+                    translate="no"
+                    loading={contactLoading}
+                  >
+                    {contactData?.telefoonnummer}
+                  </DescriptionListDetail>
+                ),
+              },
+            ]}
+          />
+        </PageGrid>
         <PageGrid variant="small">
           <Heading as="h3">
             <FormattedMessage id="account.companyInfoHeader" />

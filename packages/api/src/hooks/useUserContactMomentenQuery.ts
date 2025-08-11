@@ -13,7 +13,7 @@ type Request =
   | GetUserKlantContactenQueryVariables;
 
 type Response = {
-  tekst: string;
+  onderwerp: string;
   kanaal: string;
   registratiedatum: string;
 };
@@ -67,8 +67,8 @@ export const useContactMomentsLazyQuery = (() => {
       hook: useContactMomentsLazyV1,
       map: (d) =>
         d?.getObjectContactMomenten?.content.map(
-          ({ tekst, kanaal, registratiedatum }) => ({
-            tekst,
+          ({ tekst: onderwerp, kanaal, registratiedatum }) => ({
+            onderwerp,
             kanaal,
             registratiedatum,
           }),
@@ -78,8 +78,8 @@ export const useContactMomentsLazyQuery = (() => {
       hook: useContactMomentsLazyV2,
       map: (d) =>
         d?.getUserKlantContacten?.map(
-          ({ inhoud, kanaal, plaatsgevondenOp }) => ({
-            tekst: inhoud,
+          ({ onderwerp, kanaal, plaatsgevondenOp }) => ({
+            onderwerp,
             kanaal,
             registratiedatum: plaatsgevondenOp,
           }),
