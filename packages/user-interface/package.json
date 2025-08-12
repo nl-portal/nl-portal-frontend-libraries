@@ -55,7 +55,7 @@
     "@gemeente-denhaag/link-list": "^6.0.0",
     "@gemeente-denhaag/number-badge": "2.0.1",
     "@gemeente-denhaag/page": "2.0.0",
-    "@gemeente-denhaag/page-index": "^3.0.0",
+    "@gemeente-denhaag/page-index": "^3.0.1",
     "@gemeente-denhaag/pagination": "3.0.0",
     "@gemeente-denhaag/process-steps": "4.0.0",
     "@gemeente-denhaag/responsive-content": "2.0.0",

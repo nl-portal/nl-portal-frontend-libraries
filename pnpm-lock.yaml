@@ -376,8 +376,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/page-index':
-        specifier: ^3.0.0
-        version: 3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^3.0.1
+        version: 3.0.1(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/pagination':
         specifier: 3.0.0
         version: 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1402,8 +1402,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/page-index@3.0.0':
-    resolution: {integrity: sha512-mCQfxyQ1/Vk1snS9BUDWaYI5nzpyeGIe007TFGQsY22/rfRnP2K5Su6f6JdR/SA4m5wfjA1obmSVGMegoaeEmA==}
+  '@gemeente-denhaag/page-index@3.0.1':
+    resolution: {integrity: sha512-nWmA5TgHEWpsxsUUqPFal2m6L6QRKRyMALoekKTK3IbK3r/hoZ551rwHvlgYYdnymkK9V3M/1EjyIvtEQLeI+g==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1486,8 +1486,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/unorderedlist@3.0.0':
-    resolution: {integrity: sha512-PjTNiSGQ2RAgP5fFdQzg8lWAVADXw6iu52pZW51O8NjyE+mM1CpJ2NVITxrdmwSOmRiYO+V45adUadozFavttw==}
+  '@gemeente-denhaag/unorderedlist@3.0.1':
+    resolution: {integrity: sha512-rXdox0q1somsvicYlfunDaUHeYQ3vwAM+V0jjBdsClD10o/knCYw9Nj+fJMnMdTC7rU/GZckWLj1/zarW4AFRQ==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -7254,11 +7254,11 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
-  '@gemeente-denhaag/page-index@3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@gemeente-denhaag/page-index@3.0.1(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@gemeente-denhaag/link': 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/typography': 3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@gemeente-denhaag/unorderedlist': 3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@gemeente-denhaag/unorderedlist': 3.0.1(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       clsx: 2.1.1
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
@@ -7371,7 +7371,7 @@ snapshots:
       - react-vega
       - vega
 
-  '@gemeente-denhaag/unorderedlist@3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@gemeente-denhaag/unorderedlist@3.0.1(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@utrecht/component-library-react': 10.2.2(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@utrecht/unordered-list-css': 1.5.1
