@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Formio } from "@formio/js/embed";
+import ProtectedEval from "../formio/protected-eval-extension";
+import { Formio } from "@formio/js";
 import { Form } from "@formio/react";
-import ProtectedEval from "@formio/protected-eval";
 import { merge } from "lodash-es";
 import {
   useSubmitTaakV2Mutation,

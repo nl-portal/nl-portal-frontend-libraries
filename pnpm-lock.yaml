@@ -298,13 +298,13 @@ importers:
         specifier: 3.13.8
         version: 3.13.8(@types/react@19.1.9)(graphql-ws@6.0.6(graphql@16.11.0)(ws@8.18.3))(graphql@16.11.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@formio/js':
-        specifier: ^5.2.0
+        specifier: 5.2.0
         version: 5.2.0(@popperjs/core@2.11.8)
       '@formio/protected-eval':
         specifier: 2.0.0-rc.3
         version: 2.0.0-rc.3(@formio/js@5.2.0(@popperjs/core@2.11.8))
       '@formio/react':
-        specifier: ^6.1.0
+        specifier: 6.1.0
         version: 6.1.0(@formio/core@2.5.0)(@formio/js@5.2.0(@popperjs/core@2.11.8))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/action':
         specifier: 4.0.0
