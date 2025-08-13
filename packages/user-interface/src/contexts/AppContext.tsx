@@ -35,6 +35,7 @@ interface MessagesProviderProps {
 export const AppProvider = ({ children }: MessagesProviderProps) => {
   const location = useLocation();
   const navType = useNavigationType();
+  const [firstLoad, setFirstLoad] = useState(true);
   const [themes, setThemes] = useState<Themes>([]);
   const [messagesCount, setMessagesCount] = useState(0);
   const { initNavigationItems, updateNavigationItems } =
@@ -75,6 +76,14 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
       },
     });
 
+  const loading = loadingThemes || loadingMessages || loadingUser;
+
+  useEffect(() => {
+    if (!firstLoad) return;
+    if (loading) return;
+    setFirstLoad(false);
+  }, [loading]);
+
   useEffect(() => {
     if (navType === "POP" || location.key === "default") return;
     const newHistory = [...history]
@@ -85,7 +94,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     setHistory(newHistory);
   }, [location]);
 
-  if (loadingThemes || loadingMessages || loadingUser) {
+  if (firstLoad && loading) {
     // TODO: Add fullscreen loading component
     return null;
   }
