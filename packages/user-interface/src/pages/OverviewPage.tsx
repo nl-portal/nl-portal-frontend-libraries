@@ -7,7 +7,6 @@ import {
   Zaak,
   useGetTakenV2Query,
   useGetZakenQuery,
-  useUserContactQuery,
 } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
@@ -37,7 +36,7 @@ const OverviewPage = ({
   children,
 }: OverviewPageProps) => {
   const intl = useIntl();
-  const { username, usernameVolmacht, isPersoon, isVolmacht } =
+  const { username, usernameVolmacht, isVolmacht, contact } =
     useContext(UserContext);
   const {
     data: tasksData,
@@ -54,9 +53,6 @@ const OverviewPage = ({
   } = useGetZakenQuery({
     variables: { pageSize: fetchCasesLength },
     skip: !fetchCasesLength,
-  });
-  const { data: contactData, loading: contactLoading } = useUserContactQuery({
-    skip: !isPersoon || !showNoEmailAlert,
   });
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
@@ -78,7 +74,7 @@ const OverviewPage = ({
           }
         />
       )}
-      {showNoEmailAlert && !contactLoading && !contactData?.emailadres && (
+      {showNoEmailAlert && !contact?.emailadres && (
         <Alert
           title={<FormattedMessage id="overviewpage.noEmail.title" />}
           text={

@@ -23,10 +23,10 @@ declare global {
     THEME_CLASS: string;
     MESSAGE_COUNT_ENABLE: string;
     MESSAGE_COUNT_POLLING_INTERVAL: number;
-    CASES_PARTIAL_SEARCH: boolean;
+    CASES_PARTIAL_SEARCH: string;
     OPEN_KLANT_VERSION: string;
-    OPEN_PRODUCTEN: boolean;
-    USE_LEGACY_OGONE_PAYMENT: boolean;
+    OPEN_PRODUCTEN: string;
+    USE_LEGACY_OGONE_PAYMENT: string;
   }
 }
 
