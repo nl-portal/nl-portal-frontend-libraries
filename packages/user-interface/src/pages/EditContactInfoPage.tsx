@@ -1,8 +1,5 @@
 import { FormattedMessage } from "react-intl";
-import {
-  useUserContactMutation,
-  useUserContactQuery,
-} from "@nl-portal/nl-portal-api";
+import { useUserContactMutation } from "@nl-portal/nl-portal-api";
 import PageHeader from "../components/PageHeader";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
 import { BackLink } from "../components/BackLink";
@@ -19,13 +16,9 @@ import UserContext from "../contexts/UserContext";
 import { useContext } from "react";
 
 const EditContactInfoPage = () => {
-  const { isPersoon } = useContext(UserContext);
+  const { contact } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
-
-  const { data: contactData } = useUserContactQuery({
-    skip: !isPersoon,
-  });
 
   const [
     mutateFunction,
@@ -43,7 +36,7 @@ const EditContactInfoPage = () => {
     handleInputBlur: handlePhoneInputBlur,
     hasError: phoneHasError,
     errorTranslationId: phoneErrorTranslationId,
-  } = useInput(contactData?.telefoonnummer || "", [
+  } = useInput(contact?.telefoonnummer || "", [
     {
       validationFn: (value) =>
         value === "" || REGEX_PATTERNS.telefoonnummer.test(value),
@@ -56,7 +49,7 @@ const EditContactInfoPage = () => {
     handleInputBlur: handleEmailInputBlur,
     hasError: emailHasError,
     errorTranslationId: emailErrorTranslationId,
-  } = useInput(contactData?.emailadres || "", [
+  } = useInput(contact?.emailadres || "", [
     {
       validationFn: (value) =>
         value === "" || REGEX_PATTERNS.emailadres.test(value),
@@ -66,9 +59,9 @@ const EditContactInfoPage = () => {
 
   const onSubmit = () => {
     mutateFunction({
-      emailadresId: contactData?.emailadresId,
+      emailadresId: contact?.emailadresId,
       emailadres: emailValue || "",
-      telefoonnummerId: contactData?.telefoonnummerId,
+      telefoonnummerId: contact?.telefoonnummerId,
       telefoonnummer: phoneValue || "",
     });
   };
