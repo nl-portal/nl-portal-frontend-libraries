@@ -47,7 +47,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
 
   const { loading: loadingThemes, refetch: refetchThemes } =
     useGetOpenProductHoofdThemasQuery({
-      skip: !window.OPEN_PRODUCTEN,
+      skip: window.OPEN_PRODUCTEN !== "true",
       onCompleted: (data: GetOpenProductHoofdThemasQuery) => {
         setThemes(data.getOpenProductHoofdThemas);
         const activeThemes =

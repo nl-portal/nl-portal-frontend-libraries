@@ -28,7 +28,7 @@ export const routes: RouteObject[] = [
   {
     path: paths.overview,
     handle: { label: "breadcrumb.overview" },
-    element: <OverviewPage showIntro />,
+    element: <OverviewPage showIntro showNoEmailAlert />,
   },
   {
     path: paths.cases,
