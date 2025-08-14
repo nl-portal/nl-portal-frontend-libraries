@@ -1,5 +1,4 @@
 import { FormattedMessage, useIntl } from "react-intl";
-import { useUserContactQuery } from "@nl-portal/nl-portal-api";
 import styles from "./AccountPage.module.scss";
 import {
   getNationalitiesString,
@@ -50,17 +49,9 @@ const AccountPage = ({
   //showNotificationSubSection = true,
 }: AccountPageProps) => {
   const { formatDate } = useDateFormatter();
-  const { isPersoon, persoon, bedrijf } = useContext(UserContext);
+  const { isPersoon, persoon, bedrijf, contact } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const intl = useIntl();
-  const { data: contactData, loading: contactLoading } = useUserContactQuery(
-    {},
-  );
-
-  const loading = contactLoading;
-
-  if (loading)
-    return <PageHeader title={<FormattedMessage id="pageTitles.account" />} />;
 
   if ((isPersoon && !persoon) || (!isPersoon && !bedrijf)) {
     return (
@@ -97,22 +88,16 @@ const AccountPage = ({
               {
                 title: <FormattedMessage id="account.detail.emailadres" />,
                 detail: (
-                  <DescriptionListDetail
-                    translate="no"
-                    loading={contactLoading}
-                  >
-                    {contactData?.emailadres}
+                  <DescriptionListDetail translate="no">
+                    {contact?.emailadres}
                   </DescriptionListDetail>
                 ),
               },
               {
                 title: <FormattedMessage id="account.detail.telefoonnummer" />,
                 detail: (
-                  <DescriptionListDetail
-                    translate="no"
-                    loading={contactLoading}
-                  >
-                    {contactData?.telefoonnummer}
+                  <DescriptionListDetail translate="no">
+                    {contact?.telefoonnummer}
                   </DescriptionListDetail>
                 ),
               },
@@ -239,16 +224,16 @@ const AccountPage = ({
             {
               title: <FormattedMessage id="account.detail.emailadres" />,
               detail: (
-                <DescriptionListDetail translate="no" loading={contactLoading}>
-                  {contactData?.emailadres}
+                <DescriptionListDetail translate="no">
+                  {contact?.emailadres}
                 </DescriptionListDetail>
               ),
             },
             {
               title: <FormattedMessage id="account.detail.telefoonnummer" />,
               detail: (
-                <DescriptionListDetail translate="no" loading={contactLoading}>
-                  {contactData?.telefoonnummer}
+                <DescriptionListDetail translate="no">
+                  {contact?.telefoonnummer}
                 </DescriptionListDetail>
               ),
             },
