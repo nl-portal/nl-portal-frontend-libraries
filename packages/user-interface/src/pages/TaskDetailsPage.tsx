@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ProtectedEval from "../formio/protected-eval-extension";
+import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "@formio/js";
 import { Form } from "@formio/react";
 import { merge } from "lodash-es";
