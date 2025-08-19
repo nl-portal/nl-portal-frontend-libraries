@@ -1,5 +1,9 @@
 # nl-portal-libraries
 
+![Version 2.0.0](https://img.shields.io/badge/Version-2.0.0-blue)  
+![Node 20](https://img.shields.io/badge/Node-20-green)
+![React 19.1.0](https://img.shields.io/badge/React-19.1.0-green)
+
 `nl-portal-libraries` is a collection of packages aimed at providing a configurable portal
 implementation for municipalities.
 
@@ -21,12 +25,19 @@ Make sure to [install pnpm](https://pnpmpkg.com/getting-started/install).
 
 ### Installing dependencies
 
-Install dependencies for all projects in the [packages](./packages) directory with the command
-`pnpm install` from the project root.
+Install dependencies for all projects in the [packages](./packages) directory with the following command:
+
+```shell
+pnpm install
+```
 
 ### Starting the project
 
-After installing dependencies, start the project with `pnpm dev` from the project root.
+After installing dependencies, start the project with:
+
+```shell
+pnpm dev
+```
 
 This commands runs all the `start` scripts of each of the individual packages in the
 [packages](./packages) directory in parallel.
@@ -161,15 +172,17 @@ const App = () => {
 ...
 return (
     <div className={config.THEME_CLASS}>
-      <KeycloakWrapper
-        clientId={config.KEYCLOAK_CLIENT_ID}
-        realm={config.KEYCLOAK_REALM}
-        url={config.KEYCLOAK_URL}
-        redirectUri={config.KEYCLOAK_REDIRECT_URI}
-        authenticationMethods={authenticationMethods}
-      >
-      ...
-      </KeycloakWrapper>
+      <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
+        <OidcProvider
+          clientId={config.OIDC_CLIENT_ID}
+          realm={config.OIDC_REALM}
+          url={config.OIDC_URL}
+          redirectUri={config.OIDC_REDIRECT_URI}
+          authenticationMethods={authenticationMethods}
+        >
+        ...
+        </OidcProvider>
+      </LocalizationProvider>
     </div>
   );
 };
@@ -179,7 +192,7 @@ return (
 When starting the app through Docker, these values can be optionally overridden, i.e.:
 
 ```
-docker run --name test -e KEYCLOAK_URL=thekeycloakurl -e KEYCLOAK_REALM=therealrealm -e KEYCLOAK_CLIENT_ID=theclientid -e KEYCLOAK_REDIRECT_URI=theredirecturi GRAPHQL_URI=thegraphqluri -dp 3000:3000 test1
+docker run --name test -e OIDC_URL=thekeycloakurl -e OIDC_REALM=therealrealm -e OIDC_CLIENT_ID=theclientid -e OIDC_REDIRECT_URI=theredirecturi GRAPHQL_URI=thegraphqluri -dp 3000:3000 test1
 ```
 
 ### GraphQL

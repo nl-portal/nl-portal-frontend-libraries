@@ -36,7 +36,7 @@ export const QUERY_GET_PRODUCTEN = gql`
         soort
         koppeling {
           registratie
-          uuid
+          value
         }
         url {
           uri

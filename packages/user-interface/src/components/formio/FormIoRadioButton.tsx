@@ -1,5 +1,5 @@
 import { Components } from "@formio/react";
-import { ExtendedComponentSchema, Formio } from "formiojs";
+import { Formio } from "@formio/js";
 import { useId } from "react";
 import { Container } from "react-dom/client";
 
@@ -9,11 +9,11 @@ import useFormIoState, {
   FormIoRefProp,
   useFormIoStateProps,
 } from "./useFormIoState";
-import FormField from "@gemeente-denhaag/form-field";
-import FormLabel from "@gemeente-denhaag/form-label";
-import Fieldset, { FieldsetLegend } from "@gemeente-denhaag/form-fieldset";
+import { FormField } from "@gemeente-denhaag/form-field";
+import { FormLabel } from "@gemeente-denhaag/form-label";
+import { Fieldset, FieldsetLegend } from "@gemeente-denhaag/form-fieldset";
 import { Paragraph } from "@gemeente-denhaag/typography";
-import RadioButton from "@gemeente-denhaag/radio-button";
+import { RadioButton } from "@gemeente-denhaag/radio-button";
 
 type RadioOption = {
   label: string;
@@ -97,7 +97,7 @@ export default class FormIoRadioWrapper extends BaseFormIoComponent {
     });
   };
 
-  static schema(sources: ExtendedComponentSchema = {}) {
+  static schema(sources: any = {}) {
     return Components.components.field.schema({
       type: "radio",
       ...sources,

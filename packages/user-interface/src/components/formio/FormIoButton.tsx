@@ -1,10 +1,10 @@
 import { Components } from "@formio/react";
-import { ExtendedComponentSchema, Formio } from "formiojs";
+import { Formio } from "@formio/js";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import { FormIoRefProp, useFormIoStateProps } from "./useFormIoState";
 import BaseFormIoComponent from "./BaseFormIoComponent";
-import Button from "@gemeente-denhaag/button";
+import { Button } from "@gemeente-denhaag/button";
 
 type FormIoButtonProps = BasicFormIoComponentSchema &
   useFormIoStateProps & {
@@ -32,7 +32,7 @@ export default class FormIoButtonWrapper extends BaseFormIoComponent {
     });
   };
 
-  static schema(sources: ExtendedComponentSchema = {}) {
+  static schema(sources: any = {}) {
     return Components.components.field.schema({
       type: "button",
       action: "submit",

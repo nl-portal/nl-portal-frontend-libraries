@@ -3,6 +3,7 @@ import { Paragraph } from "@gemeente-denhaag/typography";
 import Skeleton from "./Skeleton";
 import { FormattedMessage } from "react-intl";
 import { parseLinks } from "../utils/parse-links";
+import { messageContentHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -14,7 +15,7 @@ const MessageContent = ({ loading, error, messageText }: Props) => {
   if (loading) {
     return (
       <div>
-        <Skeleton height={120} />
+        <Skeleton height={messageContentHeight} />
       </div>
     );
   }

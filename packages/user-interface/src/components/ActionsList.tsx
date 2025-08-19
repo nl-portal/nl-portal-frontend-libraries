@@ -4,6 +4,7 @@ import SectionHeader from "./SectionHeader";
 import { ActionSingle } from "@gemeente-denhaag/action";
 import { useActionLabels } from "@nl-portal/nl-portal-localization";
 import PortalLink from "./PortalLink";
+import { listViewHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -26,9 +27,9 @@ const ActionsList = ({
     return (
       <section>
         <SectionHeader title={title} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
+        <Skeleton height={listViewHeight} />
       </section>
     );
   }

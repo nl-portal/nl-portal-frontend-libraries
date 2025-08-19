@@ -1,4 +1,4 @@
-import { ReactComponent, Formio } from "@formio/react";
+import { Components, ReactComponent } from "@formio/react";
 import { formIoUploaderEditForm } from "../FormIoUploaderEditForm";
 import FileUpload, { UploadedFile } from "../FileUpload";
 import { Root, createRoot } from "react-dom/client";
@@ -7,12 +7,13 @@ class FormIoUploader extends ReactComponent {
   private component: any;
   private data: object;
   private element: Root | null;
+  static globalOidcToken: string = "";
 
   constructor(component: any, options: any, data: any) {
     super(component, options, data);
     this.component = component;
-    this.element = null;
     this.data = data;
+    this.element = null;
 
     if (this.component.multipleFiles === undefined) {
       this.component.multipleFiles = true;
@@ -31,23 +32,26 @@ class FormIoUploader extends ReactComponent {
   }
 
   static schema() {
-    // @ts-expect-error ReactComponent has no schema, docs say it does
-    return ReactComponent.schema({
+    return Components.components.field.schema({
       type: "portalFileUpload",
     });
   }
 
   static register: () => void = () => {
-    Formio.use({
-      components: {
-        portalFileUpload: FormIoUploader,
-      },
-    });
+    Components.addComponent("portalFileUpload", FormIoUploader);
   };
 
   static editForm = formIoUploaderEditForm;
 
   static emptyValue = []; // set empty value to force formio to accept arrays as valid input value for this field type
+
+  static setOidcToken = (oidcToken: string) => {
+    FormIoUploader.globalOidcToken = oidcToken;
+  };
+
+  static getOidcToken = () => {
+    return FormIoUploader.globalOidcToken;
+  };
 
   onChangeHandler = (files: Array<UploadedFile>) => {
     this.updateValue(
@@ -60,10 +64,12 @@ class FormIoUploader extends ReactComponent {
     this.element = createRoot(element);
     this.element.render(
       <FileUpload
+        id={`${this.component.id}-${this.component.key}`}
         context={this.data}
         disabled={this.component.disabled}
         multiple={this.component.multipleFiles}
         onChange={this.onChangeHandler}
+        attributes={this.component.attributes}
         informatieobjecttype={this.component.informatieobjecttype || ""}
       />,
     );

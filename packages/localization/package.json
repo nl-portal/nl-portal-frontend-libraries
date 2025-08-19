@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-localization",
-  "version": "0.2.0-alpha.39",
+  "version": "2.1.0-next-minor-202508181430-08783093-SNAPSHOT",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -23,26 +23,27 @@
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
     "test": "vitest run",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@gemeente-denhaag/utils": "1.1.0",
+    "@gemeente-denhaag/utils": "3.0.0",
     "deepmerge": "^4.3.1",
-    "react-intl": "^6.6.8"
+    "react-intl": "^7.1.11"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^4.7.0",
     "rimraf": "^6.0.1",
-    "typescript": "^5.5.4",
-    "vite": "^5.3.5",
-    "vite-plugin-dts": "^3.9.1",
-    "vitest": "^2.0.4"
+    "typescript": "^5.8.3",
+    "vite": "^7.0.6",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   }
 }

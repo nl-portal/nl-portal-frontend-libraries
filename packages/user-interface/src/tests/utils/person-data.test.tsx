@@ -7,8 +7,8 @@ import {
 } from "../../utils/person-data";
 
 describe("getNationalitiesString", () => {
-  it("should return empty string when input is null", () => {
-    const nationalitiesString = getNationalitiesString(null);
+  it("should return empty string when input is undefined", () => {
+    const nationalitiesString = getNationalitiesString(undefined);
     expect(nationalitiesString).toBe("");
   });
 
@@ -19,26 +19,95 @@ describe("getNationalitiesString", () => {
 
   it("should return correct string when input is single nationality", () => {
     const nationalitiesString = getNationalitiesString([
-      { nationaliteit: { omschrijving: "Nederlandse" } },
+      {
+        type: "string",
+        redenOpname: {
+          code: "6030",
+          omschrijving: "Nederland",
+        },
+        nationaliteit: {
+          code: "1000",
+          omschrijving: "Nederlandse",
+        },
+      },
     ]);
     expect(nationalitiesString).toBe("Nederlandse");
   });
 
   it("should return correct string when input is multiple nationalities", () => {
     const nationalitiesString = getNationalitiesString([
-      { nationaliteit: { omschrijving: "Nederlandse" } },
-      { nationaliteit: { omschrijving: "Britse" } },
-      { nationaliteit: { omschrijving: "Chinese" } },
+      {
+        type: "string",
+        redenOpname: {
+          code: "6030",
+          omschrijving: "Nederland",
+        },
+        nationaliteit: {
+          code: "1000",
+          omschrijving: "Nederlandse",
+        },
+      },
+      {
+        type: "string",
+        redenOpname: {
+          code: "6030",
+          omschrijving: "Nederland",
+        },
+        nationaliteit: {
+          code: "1000",
+          omschrijving: "Britse",
+        },
+      },
+      {
+        type: "string",
+        redenOpname: {
+          code: "6030",
+          omschrijving: "Nederland",
+        },
+        nationaliteit: {
+          code: "1000",
+          omschrijving: "Chinese",
+        },
+      },
     ]);
     expect(nationalitiesString).toBe("Nederlandse, Britse, Chinese");
   });
 
   it("should return correct string when input is multiple nationalities with empty values", () => {
     const nationalitiesString = getNationalitiesString([
-      { nationaliteit: { omschrijving: "Nederlandse" } },
-      { nationaliteit: {} },
-      { nationaliteit: { omschrijving: "Chinese" } },
-      { nationaliteit: {} },
+      {
+        type: "string",
+        redenOpname: {
+          code: "6030",
+          omschrijving: "Nederland",
+        },
+        nationaliteit: {
+          code: "1000",
+          omschrijving: "Nederlandse",
+        },
+      },
+      {
+        type: "string",
+        redenOpname: {
+          code: "6030",
+          omschrijving: "",
+        },
+        nationaliteit: {
+          code: "1000",
+          omschrijving: "",
+        },
+      },
+      {
+        type: "string",
+        redenOpname: {
+          code: "6030",
+          omschrijving: "Nederland",
+        },
+        nationaliteit: {
+          code: "1000",
+          omschrijving: "Chinese",
+        },
+      },
     ]);
     expect(nationalitiesString).toBe("Nederlandse, Chinese");
   });
@@ -63,6 +132,11 @@ describe("getStreetString", () => {
   it("should return street name, number and letter when only street, number and letter inputs are valid", () => {
     const streetString = getStreetString("Kerkweg", "1", "A", null);
     expect(streetString).toBe("Kerkweg 1A");
+  });
+
+  it("should return street name, number and addition when only street, number and addition inputs are valid", () => {
+    const streetString = getStreetString("Kerkweg", "1", null, "20");
+    expect(streetString).toBe("Kerkweg 1 20");
   });
 
   it("should return street name, number, letter and addition when all inputs are valid", () => {

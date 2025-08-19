@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Formio } from "@formio/js/embed";
 import { Form } from "@formio/react";
-import merge from "lodash.merge";
+import ProtectedEval from "@formio/protected-eval";
+import { merge } from "lodash-es";
 import {
   useSubmitTaakV2Mutation,
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
@@ -10,15 +12,12 @@ import {
   useGetPortaalFormulierByIdV2Query,
   GetPortaalFormulierByIdV2Document,
 } from "@nl-portal/nl-portal-api";
-// TODO: Formio need this old version (4.7) of awesome font
-import "font-awesome/css/font-awesome.min.css";
 import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
-import styles from "./TaskDetailsPage.module.scss";
-import { useParams } from "react-router-dom";
-import BackLink from "../components/BackLink";
-import ProtectedEval from "@formio/protected-eval";
-import { Formio } from "formiojs";
+import styles from "./TaskPage.module.scss";
+import { useParams } from "react-router";
+import { BackLink } from "../components/BackLink";
+import { Paragraph } from "@gemeente-denhaag/typography";
 
 //eslint-disable-next-line react-hooks/rules-of-hooks
 Formio.use(ProtectedEval);
@@ -180,7 +179,11 @@ const TaskDetailsPage = () => {
         <Alert
           variant="success"
           title={intl.formatMessage({ id: "taskDetails.completeTitle" })}
-          text={intl.formatMessage({ id: "taskDetails.completeDescription" })}
+          text={
+            <Paragraph>
+              {intl.formatMessage({ id: "taskDetails.completeDescription" })}
+            </Paragraph>
+          }
         />
       </>
     );
@@ -204,13 +207,13 @@ const TaskDetailsPage = () => {
       <BackLink />
       <div className={styles["task-details-page"]}>
         <Form
-          form={
+          src={
             formDefinitionUrl?.getFormDefinitionByObjectenApiUrl
               ?.formDefinition ||
             formDefinitionId?.getFormDefinitionById?.formDefinition
           }
           //eslint-disable-next-line @typescript-eslint/no-explicit-any
-          formReady={(form: any) => {
+          onFormReady={(form: any) => {
             form.triggerRedraw();
           }} // TODO: here because customConditional don't work, update FormIO
           submission={submission}

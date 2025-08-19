@@ -3,13 +3,13 @@ import { gql } from "@apollo/client";
 export const MUTATION_GENERATE_PAYMENT = gql`
   mutation GenerateOgonePayment(
     $amount: Float!
-    $failureUrl: String!
-    $langId: String!
+    $failureUrl: String
+    $langId: String
     $orderId: String!
     $pspId: String!
     $reference: String!
-    $successUrl: String!
-    $title: String!
+    $successUrl: String
+    $title: String
   ) {
     generateOgonePayment(
       paymentRequest: {

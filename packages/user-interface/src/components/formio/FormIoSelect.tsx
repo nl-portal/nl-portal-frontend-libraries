@@ -1,16 +1,16 @@
 import { Components } from "@formio/react";
-import { ExtendedComponentSchema, Formio } from "formiojs";
+import { Formio } from "@formio/js";
 import { ChangeEvent, useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
-import FormField from "@gemeente-denhaag/form-field";
-import FormLabel from "@gemeente-denhaag/form-label";
+import { FormField } from "@gemeente-denhaag/form-field";
+import { FormLabel } from "@gemeente-denhaag/form-label";
 import useFormIoState, {
   FormIoRefProp,
   useFormIoStateProps,
 } from "./useFormIoState";
 import BaseFormIoComponent from "./BaseFormIoComponent";
-import Select, { SelectOption } from "@gemeente-denhaag/select";
+import { Select, SelectOption } from "@gemeente-denhaag/select";
 
 type FormIoSelectProps = BasicFormIoComponentSchema &
   useFormIoStateProps & {
@@ -78,7 +78,7 @@ export default class FormIoSelectWrapper extends BaseFormIoComponent {
     });
   };
 
-  static schema(sources: ExtendedComponentSchema = {}) {
+  static schema(sources: any = {}) {
     return Components.components.field.schema({
       type: "select",
       hideLabel: true,

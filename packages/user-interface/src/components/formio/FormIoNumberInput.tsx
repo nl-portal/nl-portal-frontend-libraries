@@ -1,11 +1,11 @@
 import { Components } from "@formio/react";
-import TextInput from "@gemeente-denhaag/text-input";
-import { ExtendedComponentSchema, Formio } from "formiojs";
+import { TextInput } from "@gemeente-denhaag/text-input";
+import { Formio } from "@formio/js";
 import { useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
-import FormField from "@gemeente-denhaag/form-field";
-import FormLabel from "@gemeente-denhaag/form-label";
+import { FormField } from "@gemeente-denhaag/form-field";
+import { FormLabel } from "@gemeente-denhaag/form-label";
 import useFormIoState, {
   FormIoRefProp,
   useFormIoStateProps,
@@ -48,7 +48,7 @@ export default class FormIoNumberInputWrapper extends BaseFormIoComponent {
     });
   };
 
-  static schema(sources: ExtendedComponentSchema = {}) {
+  static schema(sources: any = {}) {
     return Components.components.field.schema({
       type: "number",
       hideLabel: true,

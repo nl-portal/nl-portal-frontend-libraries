@@ -1,0 +1,44 @@
+name: Build and Publish Artifacts
+on:
+    push:
+        branches:
+            - "next-minor"
+            - "next-major"
+            - "rc/*"
+            - "release/*"
+jobs:
+    detect-variables:
+        runs-on: ubuntu-latest
+        outputs:
+            scope: ${{ steps.detect-scope.outputs.SCOPE }}
+        steps:
+            -   name: Detect scope
+                id: detect-scope
+                run: echo "SCOPE=$(if ${{ github.ref_name == 'next-minor' || github.ref_name == 'next-major' || startsWith(github.ref_name, 'rc/') }} ; then echo "SNAPSHOT" ; elif ${{ startsWith(github.ref_name, 'release/') }} ; then echo "RELEASE" ; else echo "UNKNOWN" ; fi)" >> $GITHUB_OUTPUT
+            -   name: Log scope
+                run: echo "::notice::Using scope - \"${{ steps.detect-scope.outputs.SCOPE }}\"."
+    publish-snapshot:
+        needs:
+            - detect-variables
+        if: ${{ needs.detect-variables.outputs.scope == 'SNAPSHOT' }}
+        uses: ./.github/workflows/publish-snapshot.yml
+        with:
+            nodeVersion: "20.x"
+            targets: "['github-npm','s3-snapshots']"
+        secrets: inherit
+    publish-release:
+        needs:
+            - detect-variables
+        if: ${{ needs.detect-variables.outputs.scope == 'RELEASE' }}
+        uses: ./.github/workflows/publish-release.yml
+        with:
+            nodeVersion: "20.x"
+        secrets: inherit
+    unknown-scope:
+        needs:
+            - detect-variables
+        if: ${{ needs.detect-variables.outputs.scope == 'UNKNOWN' }}
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Fail on invalid scope
+                run: echo "::error::Failed to detect scope for this branch. Please make sure this workflow is ran against the correct branches."  && exit 1

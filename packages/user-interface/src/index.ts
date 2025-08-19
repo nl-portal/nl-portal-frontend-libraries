@@ -6,6 +6,10 @@ export { default as BackLink } from "./components/BackLink";
 export { default as CasesList } from "./components/CasesList";
 export { default as DescriptionList } from "./components/DescriptionList";
 export { default as DocumentsList } from "./components/DocumentsList";
+export { default as Form } from "./components/Form";
+export * from "./components/Form";
+export { default as Header } from "./components/Header";
+export * from "./components/Header";
 export { default as Heading } from "./components/Heading";
 export * from "./components/Heading";
 export { default as Layout } from "./components/Layout";
@@ -26,21 +30,18 @@ export * from "./components/Skeleton";
 
 export * from "./interfaces/navigation-item";
 export * from "./interfaces/paths";
-export * from "./interfaces/portal-footer";
 
 export { default as useDownload } from "./hooks/useDownload";
-export { default as useEnableMessagesCount } from "./hooks/useEnableMessagesCount";
 export { default as useOgonePayment } from "./hooks/useOgonePayment";
 export { default as useOgonePaymentRegistration } from "./hooks/useOgonePaymentRegistration";
 export * from "./hooks/useOgonePaymentRegistration";
-export { default as useUserInfo } from "./hooks/useUserInfo";
 export { default as useInput } from "./hooks/useInput";
 export * from "./hooks/useInput";
 
 export { default as AccountPage } from "./pages/AccountPage";
 export { default as CaseDetailsPage } from "./pages/CaseDetailsPage";
 export { default as CasesPage } from "./pages/CasesPage";
-export { default as EditAccountPage } from "./pages/EditAccountPage";
+export { default as EditContactInfoPage } from "./pages/EditContactInfoPage";
 export { default as MessagesPage } from "./pages/MessagesPage";
 export { default as MessageDetailsPage } from "./pages/MessageDetailsPage";
 export { default as NoMatchPage } from "./pages/NoMatchPage";
@@ -51,7 +52,11 @@ export { default as ThemeDetailsPage } from "./pages/ThemeDetailsPage";
 export { default as ThemeOverviewPage } from "./pages/ThemeOverviewPage";
 export { default as ThemeSubPage } from "./pages/ThemeSubPage";
 
-export { default as MessagesContext } from "./contexts/MessagesContext";
-export * from "./contexts/MessagesContext";
+export { default as AppContext } from "./contexts/AppContext";
+export * from "./contexts/AppContext";
+export { default as UserContext } from "./contexts/UserContext";
+export * from "./contexts/UserContext";
+export { default as RouterContext } from "./contexts/RouterContext";
+export * from "./contexts/RouterContext";
 export { default as NotificationContext } from "./contexts/NotificationContext";
 export * from "./contexts/NotificationContext";

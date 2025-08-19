@@ -4,9 +4,7 @@ import {
   SkeletonProps,
 } from "react-loading-skeleton";
 
-interface Props extends SkeletonProps {}
-
-const Skeleton = ({ className, ...props }: Props) => {
+const Skeleton = ({ className, ...props }: SkeletonProps) => {
   const intl = useIntl();
 
   return (

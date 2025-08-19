@@ -6,7 +6,7 @@ import { ButtonLink } from "@gemeente-denhaag/button-link";
 import { ChevronRightIcon } from "@gemeente-denhaag/icons";
 import useOgonePayment from "../hooks/useOgonePayment";
 import { Button } from "@gemeente-denhaag/button";
-import { useLinkClickHandler } from "react-router-dom";
+import { useLinkClickHandler } from "react-router";
 import { FormattedMessage } from "react-intl";
 import {
   LocaleContext,
@@ -22,7 +22,7 @@ interface Props {
 const Task = ({ task, openInContext }: Props) => {
   const labels = useActionLabels();
   const { currentLocale } = useContext(LocaleContext);
-  const { startPayment, renderPaymentRedirectForm, loading } =
+  const { startPayment, loading, renderPaymentRedirectForm } =
     useOgonePayment();
   const taskUrl = useTaskUrl(task, openInContext) ?? "";
   const handleClick = useLinkClickHandler(taskUrl);
@@ -62,9 +62,9 @@ const Task = ({ task, openInContext }: Props) => {
         if (task.ogonebetaling) {
           const paymentRequestPayload = {
             amount: task.ogonebetaling.bedrag,
+            pspId: task.ogonebetaling.pspid,
             orderId: task.id,
             reference: task.ogonebetaling.betaalkenmerk,
-            pspId: task.ogonebetaling.pspid,
             title: task.titel,
           };
 

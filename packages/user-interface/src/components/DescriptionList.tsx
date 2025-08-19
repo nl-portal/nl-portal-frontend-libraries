@@ -4,6 +4,7 @@ import { useIntl } from "react-intl";
 import Skeleton from "./Skeleton";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import styles from "./DescriptionList.module.scss";
+import { listViewHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -40,9 +41,9 @@ const DescriptionList = ({
       <section>
         <SectionHeader title={title} />
         <div>
-          <Skeleton height={60} />
-          <Skeleton height={60} />
-          <Skeleton height={60} />
+          <Skeleton height={listViewHeight} />
+          <Skeleton height={listViewHeight} />
+          <Skeleton height={listViewHeight} />
         </div>
       </section>
     );

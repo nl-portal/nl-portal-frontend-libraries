@@ -1,7 +1,8 @@
 import { createContext, ReactNode, useLayoutEffect, useState } from "react";
 import Notification, { NotificationProps } from "../components/Notification";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { FormattedMessage } from "react-intl";
+import { Paragraph } from "@gemeente-denhaag/typography";
 
 interface NotificationContextType {
   getNotifications: () => ReactNode[];
@@ -34,7 +35,11 @@ export const NotificationProvider = ({
       const { key, titleMessage, textMessage, variant } = notificationState;
       pushNotification(key, {
         title: <FormattedMessage {...titleMessage} />,
-        text: <FormattedMessage {...textMessage} />,
+        text: (
+          <Paragraph>
+            <FormattedMessage {...textMessage} />
+          </Paragraph>
+        ),
         variant: variant,
       });
     }

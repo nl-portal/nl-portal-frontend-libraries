@@ -1,17 +1,20 @@
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { routes } from "./constants/routes";
 import verifyConfig from "./util/verify-config";
-
-const router = createBrowserRouter([
-  {
-    element: <App />,
-    children: routes,
-  },
-]);
+import { StrictMode } from "react";
+import { routes } from "./constants/routes";
+import { RouterProvider } from "@nl-portal/nl-portal-user-interface";
+import App from "./App";
+import { navigationItems } from "./constants/navigation-items";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  verifyConfig() ? <RouterProvider router={router} /> : null,
+  verifyConfig() ? (
+    <StrictMode>
+      <RouterProvider
+        element={<App />}
+        routes={routes}
+        navigationItems={navigationItems}
+      />
+    </StrictMode>
+  ) : null,
 );

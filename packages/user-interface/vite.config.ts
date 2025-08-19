@@ -3,9 +3,10 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
 export default defineConfig({
-  plugins: [react(), dts()],
+  plugins: [peerDepsExternal({ includeDependencies: true }), react(), dts()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -14,33 +15,14 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "react-intl",
-        "react-router-dom",
-        "@apollo/client",
-        "@nl-portal/nl-portal-api",
-        "@nl-portal/nl-portal-authentication",
-        "@nl-portal/nl-portal-localization",
-        "@react-keycloak/web",
-      ],
       output: {
         entryFileNames: "[name].js",
         globals: {
           react: "React",
         },
-        manualChunks: (id) => {
-          if (id.includes("node_modules")) {
-            return id
-              .toString()
-              .split("node_modules/.pnpm/")[1]
-              .split("/")[0]
-              .toString();
-          }
-        },
       },
     },
+    commonjsOptions: { transformMixedEsModules: true },
   },
   test: {
     globals: true,

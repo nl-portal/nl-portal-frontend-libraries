@@ -43,6 +43,12 @@ export const QUERY_GET_ZAAK = gql`
         data
         zaak
       }
+      resultaat {
+        toelichting
+        resultaattype {
+          omschrijvingGeneriek
+        }
+      }
     }
   }
 `;

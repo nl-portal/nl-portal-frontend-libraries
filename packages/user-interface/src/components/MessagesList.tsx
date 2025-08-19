@@ -6,6 +6,7 @@ import { Pagination } from "@gemeente-denhaag/pagination";
 import Message from "./Message";
 import Table from "./Table";
 import { Bericht } from "@nl-portal/nl-portal-api";
+import { listViewHeight } from "../constants/skeleton";
 
 interface Props {
   loading?: boolean;
@@ -38,30 +39,22 @@ const MessagesList = ({
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
 
-  if (loading) {
-    return (
-      <section className={styles["messages-list"]}>
-        <Skeleton height={60} />
-        <Skeleton height={60} />
-        <Skeleton height={60} />
-      </section>
-    );
-  }
+  if (!loading) {
+    if (error)
+      return (
+        <section className={styles["messages-list"]}>
+          <Paragraph>{errorMessage}</Paragraph>
+        </section>
+      );
 
-  if (error)
-    return (
-      <section className={styles["messages-list"]}>
-        <Paragraph>{errorMessage}</Paragraph>
-      </section>
-    );
-
-  if (!messages || messages.length === 0) {
-    if (!showEmpty) return null;
-    return (
-      <section className={styles["messages-list"]}>
-        <Paragraph>{emptyMessage}</Paragraph>
-      </section>
-    );
+    if (!messages || messages.length === 0) {
+      if (!showEmpty) return null;
+      return (
+        <section className={styles["messages-list"]}>
+          <Paragraph>{emptyMessage}</Paragraph>
+        </section>
+      );
+    }
   }
 
   return (
@@ -81,9 +74,17 @@ const MessagesList = ({
           },
         ]}
       />
-      {messages.map((message) => (
-        <Message key={message.id} message={message} />
-      ))}
+      {loading ? (
+        <>
+          {[...Array(3)].map((_, index) => (
+            <Skeleton key={index} height={listViewHeight} />
+          ))}
+        </>
+      ) : (
+        messages?.map((message) => (
+          <Message key={message.id} message={message} />
+        ))
+      )}
       {indexLimit ? (
         <Pagination
           className={`denhaag-pagination--center ${styles["messages-list__pagination"]}`}

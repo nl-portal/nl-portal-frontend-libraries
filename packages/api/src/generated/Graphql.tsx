@@ -15,132 +15,23 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  BigDecimal: { input: any; output: any; }
-  BigInteger: { input: any; output: any; }
   Date: { input: any; output: any; }
   JSON: { input: any; output: any; }
   LocalDateTime: { input: any; output: any; }
-  Long: { input: any; output: any; }
   UUID: { input: any; output: any; }
+  ZonedDateTime: { input: any; output: any; }
 };
 
-export enum AanduidingNaamGebruik {
-  Eigen = 'EIGEN',
-  EigenPartner = 'EIGEN_PARTNER',
-  Partner = 'PARTNER',
-  PartnerEigen = 'PARTNER_EIGEN'
-}
-
-export type Aanslag = {
-  __typename?: 'Aanslag';
-  aanslagbiljetsoort?: Maybe<Scalars['String']['output']>;
-  aanslagnummer?: Maybe<Scalars['Long']['output']>;
-  bedragaanslag?: Maybe<Scalars['BigDecimal']['output']>;
-  belastingjaar?: Maybe<Scalars['Date']['output']>;
-  dagtekening?: Maybe<Scalars['Date']['output']>;
-  openstaandeInvordering?: Maybe<Scalars['String']['output']>;
-  saldoAanslag?: Maybe<Scalars['BigDecimal']['output']>;
-  statusBezwaar?: Maybe<Scalars['String']['output']>;
-  vervolgactie?: Maybe<Scalars['String']['output']>;
-  vervolgactieOmschrijving?: Maybe<Scalars['String']['output']>;
-};
-
-export type AanslagBestand = {
-  __typename?: 'AanslagBestand';
-  aanslagbiljetsoort?: Maybe<Scalars['String']['output']>;
-  aanslagnummer?: Maybe<Scalars['Long']['output']>;
-  belastingjaar?: Maybe<Scalars['Date']['output']>;
-  dagtekening?: Maybe<Scalars['Date']['output']>;
-  laatsteOphaalDatum?: Maybe<Scalars['Date']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
-  publicatieDatum?: Maybe<Scalars['Date']['output']>;
-  volgNummerBijlage?: Maybe<Scalars['Int']['output']>;
-};
-
-export type AanslagBestandenPage = {
-  __typename?: 'AanslagBestandenPage';
-  content: Array<AanslagBestand>;
+export type ActiesPage = {
+  __typename?: 'ActiesPage';
+  /** The elements on this page */
+  content: Array<OpenProductActie>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type AanslagBiljet = {
-  __typename?: 'AanslagBiljet';
-  aanslagBiljetOmschrijving?: Maybe<Scalars['String']['output']>;
-  aanslagNummer?: Maybe<Scalars['Long']['output']>;
-  aanslagRegel?: Maybe<Array<AanslagRegel>>;
-  belastingjaar?: Maybe<Scalars['String']['output']>;
-  bijlageAanwezig?: Maybe<Scalars['String']['output']>;
-  dagtekening?: Maybe<Scalars['Date']['output']>;
-  eersteVervalDatum?: Maybe<Scalars['Date']['output']>;
-  geboorteDatum?: Maybe<Scalars['Date']['output']>;
-  geslacht?: Maybe<Scalars['String']['output']>;
-  huisLetter?: Maybe<Scalars['String']['output']>;
-  huisNummer?: Maybe<Scalars['Int']['output']>;
-  kwijtscheldingsVerzoek?: Maybe<Scalars['String']['output']>;
-  land?: Maybe<Scalars['String']['output']>;
-  locatie1?: Maybe<Scalars['String']['output']>;
-  locatie2?: Maybe<Scalars['String']['output']>;
-  muteerStatus?: Maybe<Scalars['String']['output']>;
-  naam?: Maybe<Scalars['String']['output']>;
-  postcode?: Maybe<Scalars['String']['output']>;
-  samengesteldAdres?: Maybe<Scalars['String']['output']>;
-  sofiNummer?: Maybe<Scalars['Int']['output']>;
-  straatNaam?: Maybe<Scalars['String']['output']>;
-  subjectNummer?: Maybe<Scalars['Int']['output']>;
-  tijdvakWOZ?: Maybe<Scalars['String']['output']>;
-  tweedeVervalDatum?: Maybe<Scalars['Date']['output']>;
-  volledigeNaam?: Maybe<Scalars['String']['output']>;
-  voorletters?: Maybe<Scalars['String']['output']>;
-  voorvoegsels?: Maybe<Scalars['String']['output']>;
-  waardePeilDatum?: Maybe<Scalars['Date']['output']>;
-  woonplaats?: Maybe<Scalars['String']['output']>;
-};
-
-export type AanslagDetails = {
-  __typename?: 'AanslagDetails';
-  aanslagBiljet?: Maybe<AanslagBiljet>;
-  aanslagBiljetTotaal?: Maybe<Scalars['BigDecimal']['output']>;
-  automatischeIncasso?: Maybe<AutomatischeIncasso>;
-  betalingen?: Maybe<Array<Betaling>>;
-  invorderingsDetails?: Maybe<InvorderingsDetails>;
-  openstaandeInvordering?: Maybe<Scalars['String']['output']>;
-};
-
-export type AanslagRegel = {
-  __typename?: 'AanslagRegel';
-  aanslagRegelBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  aanslagRegelOmschrijving?: Maybe<Scalars['String']['output']>;
-  belastingJaar?: Maybe<Scalars['Int']['output']>;
-  bezwaarAanwezig?: Maybe<Scalars['String']['output']>;
-  categorie?: Maybe<Scalars['String']['output']>;
-  codeBezwaarOmschrijving?: Maybe<Scalars['String']['output']>;
-  grondslag?: Maybe<Scalars['BigDecimal']['output']>;
-  heffing?: Maybe<Scalars['String']['output']>;
-  heffingOmschrijving?: Maybe<Scalars['String']['output']>;
-  objectAdres?: Maybe<Scalars['String']['output']>;
-  objectNummer?: Maybe<Scalars['Int']['output']>;
-  tijdvak?: Maybe<Scalars['String']['output']>;
-  volgNummer?: Maybe<Scalars['Int']['output']>;
-};
-
-export type Aanslagen = {
-  __typename?: 'Aanslagen';
-  aanslagen?: Maybe<Array<Aanslag>>;
-  digitaleBestandenAanwezig?: Maybe<Scalars['Boolean']['output']>;
-  geboortedatum?: Maybe<Scalars['Date']['output']>;
-  naam?: Maybe<Scalars['String']['output']>;
-  number: Scalars['Int']['output'];
-  openstaandeInvordering?: Maybe<Scalars['String']['output']>;
-  size: Scalars['Int']['output'];
-  sofiNummer?: Maybe<Scalars['Int']['output']>;
-  subjectNummer?: Maybe<Scalars['BigInteger']['output']>;
-  totaalsaldo?: Maybe<Scalars['BigDecimal']['output']>;
   /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
@@ -149,33 +40,15 @@ export type Aanslagen = {
 
 export type Adres = {
   __typename?: 'Adres';
-  huisnummer: Scalars['Int']['output'];
+  huisnummer?: Maybe<Scalars['Int']['output']>;
   indAfgeschermd: Scalars['String']['output'];
   land: Scalars['String']['output'];
   plaats: Scalars['String']['output'];
-  postbusnummer: Scalars['Int']['output'];
+  postbusnummer?: Maybe<Scalars['Int']['output']>;
   postcode: Scalars['String']['output'];
-  straatnaam: Scalars['String']['output'];
+  straatnaam?: Maybe<Scalars['String']['output']>;
   type: Scalars['String']['output'];
   volledigAdres: Scalars['String']['output'];
-};
-
-export type AutomatischIncassoResponse = {
-  __typename?: 'AutomatischIncassoResponse';
-  iban?: Maybe<Scalars['String']['output']>;
-  klantnummer?: Maybe<Scalars['Int']['output']>;
-  message?: Maybe<Scalars['String']['output']>;
-};
-
-export type AutomatischeIncasso = {
-  __typename?: 'AutomatischeIncasso';
-  aantalStornos?: Maybe<Scalars['Int']['output']>;
-  aantalTermijnen?: Maybe<Scalars['Int']['output']>;
-  ingangsdatum?: Maybe<Scalars['Date']['output']>;
-  rekeningNummer?: Maybe<Scalars['Long']['output']>;
-  stopzettingsCode?: Maybe<Scalars['String']['output']>;
-  termijnBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  verwerkteTermijnen?: Maybe<Scalars['Int']['output']>;
 };
 
 export type Bericht = {
@@ -214,11 +87,15 @@ export enum BerichtType {
 
 export type BerichtenPage = {
   __typename?: 'BerichtenPage';
+  /** The elements on this page */
   content: Array<Bericht>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -227,7 +104,7 @@ export type BerichtenPage = {
 export type Besluit = {
   __typename?: 'Besluit';
   auditTrails: Array<BesluitAuditTrail>;
-  besluittype: Scalars['String']['output'];
+  besluittype: BesluitType;
   bestuursorgaan?: Maybe<Scalars['String']['output']>;
   datum: Scalars['Date']['output'];
   documenten: Array<BesluitDocument>;
@@ -280,61 +157,459 @@ export type BesluitDocument = {
 
 export type BesluitPage = {
   __typename?: 'BesluitPage';
+  /** The elements on this page */
   content: Array<Besluit>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
-export type Betaling = {
-  __typename?: 'Betaling';
-  bedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  boekDatum?: Maybe<Scalars['Date']['output']>;
-  dagboek?: Maybe<Scalars['String']['output']>;
-  factuurDatum?: Maybe<Scalars['Date']['output']>;
+export type BesluitType = {
+  __typename?: 'BesluitType';
+  besluitcategorie: Scalars['String']['output'];
+  omschrijving?: Maybe<Scalars['String']['output']>;
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
+  publicatieIndicatie: Scalars['Boolean']['output'];
+  publicatietekst?: Maybe<Scalars['String']['output']>;
+  publicatietermijn?: Maybe<Scalars['String']['output']>;
+  reactietermijn?: Maybe<Scalars['String']['output']>;
+  toelichting?: Maybe<Scalars['String']['output']>;
+  url: Scalars['String']['output'];
+  zaaktypen: Array<Scalars['String']['output']>;
+};
+
+export type BestandenPage = {
+  __typename?: 'BestandenPage';
+  /** The elements on this page */
+  content: Array<OpenProductBestand>;
+  /** The requested page number */
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
+  size: Scalars['Int']['output'];
+  /** The total number of elements */
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type Betrokkene = {
+  __typename?: 'Betrokkene';
+  bezoekadres?: Maybe<OpenKlant2Adres>;
+  contactnaam?: Maybe<Contactnaam>;
+  correspondentieadres?: Maybe<OpenKlant2Adres>;
+  digitaleAdressen: Array<OpenKlant2ForeignKey>;
+  hadKlantcontact: OpenKlant2ForeignKey;
+  initiator: Scalars['Boolean']['output'];
+  organisatienaam: Scalars['String']['output'];
+  rol: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+  volledigeNaam: Scalars['String']['output'];
+  wasPartij?: Maybe<OpenKlant2ForeignKey>;
+};
+
+export type Brp2Adres = {
+  __typename?: 'Brp2Adres';
+  aanduidingBijHuisnummer?: Maybe<BrpCodeOmschrijving>;
+  huisletter?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['Int']['output']>;
+  huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
+  inOnderzoek?: Maybe<Brp2AdresInOnderzoek>;
+  korteStraatnaam?: Maybe<Scalars['String']['output']>;
+  officieleStraatnaam?: Maybe<Scalars['String']['output']>;
+  postcode?: Maybe<Scalars['String']['output']>;
+  woonplaats?: Maybe<Scalars['String']['output']>;
+};
+
+export type Brp2AdresInOnderzoek = {
+  __typename?: 'Brp2AdresInOnderzoek';
+  aanduidingBijHuisnummer?: Maybe<Scalars['Boolean']['output']>;
+  huisletter?: Maybe<Scalars['Boolean']['output']>;
+  huisnummer?: Maybe<Scalars['Boolean']['output']>;
+  huisnummertoevoeging?: Maybe<Scalars['Boolean']['output']>;
+  korteStraatnaam?: Maybe<Scalars['Boolean']['output']>;
+  officieleStraatnaam?: Maybe<Scalars['Boolean']['output']>;
+  postcode?: Maybe<Scalars['Boolean']['output']>;
+  woonplaats?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type Brp2NationaliteitInOnderzoek = {
+  __typename?: 'Brp2NationaliteitInOnderzoek';
+  datumIngangGeldigheid?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  nationaliteit?: Maybe<Scalars['Boolean']['output']>;
+  redenOpname?: Maybe<Scalars['Boolean']['output']>;
+  type?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpAdellijkeTitelPredicaat = {
+  __typename?: 'BrpAdellijkeTitelPredicaat';
+  code: Scalars['String']['output'];
+  omschrijving: Scalars['String']['output'];
+  soort: Scalars['String']['output'];
+};
+
+export type BrpAdressering = {
+  __typename?: 'BrpAdressering';
+  aanhef?: Maybe<Scalars['String']['output']>;
+  aanschrijfwijze?: Maybe<BrpAdresseringAanschrijfwijze>;
+  adresregel1?: Maybe<Scalars['String']['output']>;
+  adresregel2?: Maybe<Scalars['String']['output']>;
+  adresregel3?: Maybe<Scalars['String']['output']>;
+  gebruikInLopendeTekst?: Maybe<Scalars['String']['output']>;
+  indicatieVastgesteldVerblijftNietOpAdres?: Maybe<Scalars['Boolean']['output']>;
+  land?: Maybe<BrpCodeOmschrijving>;
+};
+
+export type BrpAdresseringAanschrijfwijze = {
+  __typename?: 'BrpAdresseringAanschrijfwijze';
+  aanspreekvorm?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpCodeOmschrijving = {
+  __typename?: 'BrpCodeOmschrijving';
+  code?: Maybe<Scalars['String']['output']>;
   omschrijving?: Maybe<Scalars['String']['output']>;
 };
 
-export type CancelEmandateRequestInput = {
-  categorie: Scalars['String']['input'];
-  customParameters?: InputMaybe<Scalars['JSON']['input']>;
-  failureUrl?: InputMaybe<Scalars['String']['input']>;
-  mandateId: Scalars['String']['input'];
-  purchaseId?: InputMaybe<Scalars['String']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  successUrl?: InputMaybe<Scalars['String']['input']>;
+export type BrpDatum = {
+  __typename?: 'BrpDatum';
+  datum: Scalars['Date']['output'];
+  langFormaat: Scalars['String']['output'];
+  type: Scalars['String']['output'];
 };
 
-export type CaseCreated = {
-  __typename?: 'CaseCreated';
-  caseId: Scalars['UUID']['output'];
+export type BrpDatumLandPlaats = {
+  __typename?: 'BrpDatumLandPlaats';
+  datum?: Maybe<BrpDatum>;
+  inOnderzoek?: Maybe<BrpDatumLandPlaatsInOnderzoek>;
+  land?: Maybe<BrpCodeOmschrijving>;
+  plaats?: Maybe<BrpCodeOmschrijving>;
 };
 
-export type CaseDefinition = {
-  __typename?: 'CaseDefinition';
-  id: Scalars['String']['output'];
-  schema: Scalars['JSON']['output'];
-  statusDefinition: Array<Scalars['String']['output']>;
+export type BrpDatumLandPlaatsInOnderzoek = {
+  __typename?: 'BrpDatumLandPlaatsInOnderzoek';
+  datum?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  land?: Maybe<Scalars['Boolean']['output']>;
+  plaats?: Maybe<Scalars['Boolean']['output']>;
 };
 
-export type CaseInstance = {
-  __typename?: 'CaseInstance';
-  caseDefinitionId: Scalars['String']['output'];
-  createdOn: Scalars['String']['output'];
-  externalId?: Maybe<Scalars['String']['output']>;
-  id: Scalars['UUID']['output'];
-  status?: Maybe<Status>;
-  statusHistory?: Maybe<Array<HistoricStatus>>;
-  submission: Scalars['JSON']['output'];
-  userId: Scalars['String']['output'];
+export type BrpEuropeesKiesrecht = {
+  __typename?: 'BrpEuropeesKiesrecht';
+  aanduiding?: Maybe<BrpCodeOmschrijving>;
+  einddatumUitsluiting?: Maybe<BrpDatum>;
 };
 
-export type CaseInstanceOrderingInput = {
-  createdOn: Sort;
+export type BrpGezag = {
+  __typename?: 'BrpGezag';
+  derde?: Maybe<BrpGezagDerde>;
+  derden?: Maybe<Array<BrpGezagDerde>>;
+  minderjarige?: Maybe<BrpGezagMinderjarige>;
+  ouder?: Maybe<BrpGezagOuder>;
+  ouders?: Maybe<Array<BrpGezagOuder>>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpGezagDerde = {
+  __typename?: 'BrpGezagDerde';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<BrpGezagNaam>;
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpGezagMinderjarige = {
+  __typename?: 'BrpGezagMinderjarige';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  leeftijd?: Maybe<Scalars['Int']['output']>;
+  naam?: Maybe<BrpGezagNaam>;
+};
+
+export type BrpGezagNaam = {
+  __typename?: 'BrpGezagNaam';
+  volledigeNaam?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpGezagOuder = {
+  __typename?: 'BrpGezagOuder';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<BrpGezagNaam>;
+};
+
+export type BrpImigratie = {
+  __typename?: 'BrpImigratie';
+  datumVestigingInNederland?: Maybe<BrpDatum>;
+  inOnderzoek?: Maybe<BrpImigratieInOnderzoek>;
+  indicatieVestigingVanuitBuitenland?: Maybe<Scalars['Boolean']['output']>;
+  landVanwaarIngeschreven?: Maybe<BrpCodeOmschrijving>;
+  vanuitVerblijfplaatsOnbekend?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpImigratieInOnderzoek = {
+  __typename?: 'BrpImigratieInOnderzoek';
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  datumVestigingInNederland?: Maybe<Scalars['Boolean']['output']>;
+  indicatieVestigingVanuitBuitenland?: Maybe<Scalars['Boolean']['output']>;
+  landVanwaarIngeschreven?: Maybe<Scalars['Boolean']['output']>;
+  vanuitVerblijfplaatsOnbekend?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpInOnderzoek = {
+  __typename?: 'BrpInOnderzoek';
+  burgerservicenummer?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoekGemeente?: Maybe<BrpDatum>;
+  datumIngangOnderzoekGezag?: Maybe<BrpDatum>;
+  datumIngangOnderzoekPersoon?: Maybe<BrpDatum>;
+  datumInschrijvingInGemeente?: Maybe<Scalars['Boolean']['output']>;
+  gemeenteVanInschrijving?: Maybe<Scalars['Boolean']['output']>;
+  geslacht?: Maybe<Scalars['Boolean']['output']>;
+  indicatieCurateleRegister?: Maybe<Scalars['Boolean']['output']>;
+  indicatieGezagMinderjarige?: Maybe<Scalars['Boolean']['output']>;
+  leeftijd?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpKind = {
+  __typename?: 'BrpKind';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  geboorte?: Maybe<BrpDatumLandPlaats>;
+  inOnderzoek?: Maybe<BrpKindInOnderzoek>;
+  naam?: Maybe<BrpNaam>;
+};
+
+export type BrpKindInOnderzoek = {
+  __typename?: 'BrpKindInOnderzoek';
+  burgerservicenummer?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+};
+
+export type BrpNaam = {
+  __typename?: 'BrpNaam';
+  aanduidingNaamgebruik?: Maybe<BrpCodeOmschrijving>;
+  adellijkeTitelPredicaat?: Maybe<BrpAdellijkeTitelPredicaat>;
+  geslachtsnaam?: Maybe<Scalars['String']['output']>;
+  inOnderzoek?: Maybe<BrpNaamInOnderzoek>;
+  lastName: Scalars['String']['output'];
+  officialLastName?: Maybe<Scalars['String']['output']>;
+  volledigeNaam?: Maybe<Scalars['String']['output']>;
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voornamen?: Maybe<Scalars['String']['output']>;
+  voorvoegsel?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpNaamInOnderzoek = {
+  __typename?: 'BrpNaamInOnderzoek';
+  aanduidingNaamgebruik?: Maybe<Scalars['Boolean']['output']>;
+  adellijkeTitelPredicaat?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  geslachtsnaam?: Maybe<Scalars['Boolean']['output']>;
+  volledigeNaam?: Maybe<Scalars['Boolean']['output']>;
+  voorletters?: Maybe<Scalars['Boolean']['output']>;
+  voornamen?: Maybe<Scalars['Boolean']['output']>;
+  voorvoegsel?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpNationaliteit = {
+  __typename?: 'BrpNationaliteit';
+  datumIngangGeldigheid?: Maybe<BrpCodeOmschrijving>;
+  inOnderzoek?: Maybe<Brp2NationaliteitInOnderzoek>;
+  nationaliteit?: Maybe<BrpCodeOmschrijving>;
+  redenOpname?: Maybe<BrpCodeOmschrijving>;
+  type: Scalars['String']['output'];
+};
+
+export type BrpOuder = {
+  __typename?: 'BrpOuder';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  datumIngangFamilierechtelijkeBetrekking?: Maybe<BrpDatum>;
+  geboorte?: Maybe<BrpDatumLandPlaats>;
+  geslacht?: Maybe<BrpCodeOmschrijving>;
+  inOnderzoek?: Maybe<BrpOuderInOnderzoek>;
+  naam?: Maybe<BrpNaam>;
+  ouderAanduiding?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpOuderInOnderzoek = {
+  __typename?: 'BrpOuderInOnderzoek';
+  burgerservicenummer?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangFamilierechtelijkeBetrekking?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  geslacht?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpPartner = {
+  __typename?: 'BrpPartner';
+  aangaanHuwelijkPartnerschap?: Maybe<BrpPartnerHuwelijkAangaan>;
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  geboorte?: Maybe<BrpDatumLandPlaats>;
+  geslacht?: Maybe<BrpCodeOmschrijving>;
+  inOnderzoek?: Maybe<BrpPartnerInOnderzoek>;
+  naam?: Maybe<BrpNaam>;
+  ontbindingHuwelijkPartnerschap?: Maybe<BrpPartnerHuwelijkOntbinding>;
+  soortVerbintenis?: Maybe<BrpCodeOmschrijving>;
+};
+
+export type BrpPartnerHuwelijkAangaan = {
+  __typename?: 'BrpPartnerHuwelijkAangaan';
+  datum?: Maybe<BrpDatum>;
+  inOnderzoek?: Maybe<BrpPartnerHuwelijkAangaanInOnderzoek>;
+  land?: Maybe<BrpCodeOmschrijving>;
+  plaats?: Maybe<BrpCodeOmschrijving>;
+  soortVerbintenis?: Maybe<BrpCodeOmschrijving>;
+};
+
+export type BrpPartnerHuwelijkAangaanInOnderzoek = {
+  __typename?: 'BrpPartnerHuwelijkAangaanInOnderzoek';
+  datum?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  land?: Maybe<Scalars['Boolean']['output']>;
+  plaats?: Maybe<Scalars['Boolean']['output']>;
+  soortVerbintenis?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpPartnerHuwelijkOntbinding = {
+  __typename?: 'BrpPartnerHuwelijkOntbinding';
+  datum?: Maybe<BrpDatum>;
+  inOnderzoek?: Maybe<BrpPartnerHuwelijkOntbindingInOnderzoek>;
+};
+
+export type BrpPartnerHuwelijkOntbindingInOnderzoek = {
+  __typename?: 'BrpPartnerHuwelijkOntbindingInOnderzoek';
+  datum?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+};
+
+export type BrpPartnerInOnderzoek = {
+  __typename?: 'BrpPartnerInOnderzoek';
+  burgerservicenummer?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  geslacht?: Maybe<Scalars['Boolean']['output']>;
+  soortVerbintenis?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpPersoon = {
+  __typename?: 'BrpPersoon';
+  adressering?: Maybe<BrpAdressering>;
+  bewonersAantal?: Maybe<Scalars['Int']['output']>;
+  burgerservicenummer: Scalars['String']['output'];
+  datumEersteInschrijvingGBA?: Maybe<BrpDatum>;
+  datumInschrijvingInGemeente?: Maybe<BrpDatum>;
+  europeesKiesrecht?: Maybe<BrpEuropeesKiesrecht>;
+  geboorte?: Maybe<BrpDatumLandPlaats>;
+  geheimhoudingPersoonsgegevens?: Maybe<Scalars['Boolean']['output']>;
+  gemeenteVanInschrijving?: Maybe<BrpCodeOmschrijving>;
+  geslacht?: Maybe<BrpCodeOmschrijving>;
+  gezag?: Maybe<Array<BrpGezag>>;
+  imigratie?: Maybe<BrpImigratie>;
+  inOnderzoek?: Maybe<BrpInOnderzoek>;
+  indicatieCurateleRegister?: Maybe<Scalars['Boolean']['output']>;
+  indicatieGezagMinderjarige?: Maybe<BrpCodeOmschrijving>;
+  kinderen?: Maybe<Array<BrpKind>>;
+  leeftijd: Scalars['Int']['output'];
+  naam: BrpNaam;
+  nationaliteiten: Array<BrpNationaliteit>;
+  ouders?: Maybe<Array<BrpOuder>>;
+  overlijden?: Maybe<BrpDatumLandPlaats>;
+  partners?: Maybe<Array<BrpPartner>>;
+  rni?: Maybe<Array<BrpPersoonRni>>;
+  uitsluitingKiesrecht?: Maybe<BrpUitsluitingKiesrecht>;
+  verblijfplaats?: Maybe<BrpVerblijfplaats>;
+  verblijfstitel?: Maybe<BrpVerblijfsTitel>;
+  verificatie?: Maybe<BrpPersoonVerificatie>;
+};
+
+export type BrpPersoonRni = {
+  __typename?: 'BrpPersoonRni';
+  categorie?: Maybe<Scalars['String']['output']>;
+  deelnemer?: Maybe<BrpCodeOmschrijving>;
+  omschrijvingVerdrag?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpPersoonVerificatie = {
+  __typename?: 'BrpPersoonVerificatie';
+  datum?: Maybe<BrpDatum>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
+};
+
+export type BrpUitsluitingKiesrecht = {
+  __typename?: 'BrpUitsluitingKiesrecht';
+  einddatum: BrpDatum;
+  uitgeslotenVanKiesrecht: Scalars['Boolean']['output'];
+};
+
+export type BrpVerblijfplaats = {
+  __typename?: 'BrpVerblijfplaats';
+  adresseerbaarObjectIdentificatie?: Maybe<Scalars['String']['output']>;
+  datumVan?: Maybe<BrpDatum>;
+  functieAdres?: Maybe<BrpCodeOmschrijving>;
+  inOnderzoek?: Maybe<BrpVerblijfplaatsInOnderzoek>;
+  indicatieVastgesteldVerblijftNietOpAdres?: Maybe<Scalars['Boolean']['output']>;
+  nummeraanduidingIdentificatie?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+  verblijfadres?: Maybe<Brp2Adres>;
+};
+
+export type BrpVerblijfplaatsInOnderzoek = {
+  __typename?: 'BrpVerblijfplaatsInOnderzoek';
+  adresseerbaarObjectIdentificatie?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+  datumVan?: Maybe<Scalars['Boolean']['output']>;
+  functieAdres?: Maybe<Scalars['Boolean']['output']>;
+  indicatieVastgesteldVerblijftNietOpAdres?: Maybe<Scalars['Boolean']['output']>;
+  nummeraanduidingIdentificatie?: Maybe<Scalars['Boolean']['output']>;
+  type?: Maybe<Scalars['Boolean']['output']>;
+  verblijfplaats?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type BrpVerblijfsTitel = {
+  __typename?: 'BrpVerblijfsTitel';
+  aanduiding?: Maybe<BrpCodeOmschrijving>;
+  datumEinde?: Maybe<BrpDatum>;
+  datumIngang?: Maybe<BrpDatum>;
+  inOnderzoek?: Maybe<BrpVerblijfsTitelInOnderzoek>;
+};
+
+export type BrpVerblijfsTitelInOnderzoek = {
+  __typename?: 'BrpVerblijfsTitelInOnderzoek';
+  aanduiding?: Maybe<Scalars['Boolean']['output']>;
+  datumEinde?: Maybe<Scalars['Boolean']['output']>;
+  datumIngang?: Maybe<Scalars['Boolean']['output']>;
+  datumIngangOnderzoek?: Maybe<BrpDatum>;
+};
+
+export type Categorie = {
+  __typename?: 'Categorie';
+  naam: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+};
+
+export type CategorieRelatie = {
+  __typename?: 'CategorieRelatie';
+  beginDatum?: Maybe<Scalars['Date']['output']>;
+  categorie?: Maybe<Categorie>;
+  eindDatum?: Maybe<Scalars['Date']['output']>;
+  partij?: Maybe<OpenKlant2ForeignKey>;
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+};
+
+export type CategorieRelatieForeignKey = {
+  __typename?: 'CategorieRelatieForeignKey';
+  beginDatum?: Maybe<Scalars['Date']['output']>;
+  categorieNaam: Scalars['String']['output'];
+  eindDatum?: Maybe<Scalars['Date']['output']>;
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
 };
 
 export type ContactMoment = {
@@ -353,56 +628,100 @@ export type ContactMoment = {
 
 export type ContactMomentPage = {
   __typename?: 'ContactMomentPage';
+  /** The elements on this page */
   content: Array<ContactMoment>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
-export type Contract = {
-  __typename?: 'Contract';
-  automatischeIncasso: Array<AutomatischIncassoResponse>;
-  beginDatum: Scalars['String']['output'];
-  eindDatum?: Maybe<Scalars['String']['output']>;
-  id: Scalars['Int']['output'];
-  klanten: Array<NeaKlant>;
-  taken: Array<TaakV2>;
-  zakelijkRechten: Array<ZakelijkRecht>;
-  zaken: Array<Zaak>;
-};
-
-export type ContractBeperkt = {
-  __typename?: 'ContractBeperkt';
-  adressen: Array<NeaAdres>;
-  id: Scalars['Int']['output'];
-};
-
-export type ContractBeperktPage = {
-  __typename?: 'ContractBeperktPage';
-  content: Array<ContractBeperkt>;
+export type ContactenPage = {
+  __typename?: 'ContactenPage';
+  /** The elements on this page */
+  content: Array<OpenProductContact>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
-export type CreateEmandateRequestInput = {
-  categorie: Scalars['String']['input'];
-  customParameters?: InputMaybe<Scalars['JSON']['input']>;
-  failureUrl?: InputMaybe<Scalars['String']['input']>;
-  language?: InputMaybe<Scalars['String']['input']>;
-  purchaseId?: InputMaybe<Scalars['String']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  reference?: InputMaybe<Scalars['String']['input']>;
-  sequenceType?: InputMaybe<Scalars['Int']['input']>;
-  successUrl?: InputMaybe<Scalars['String']['input']>;
+export type Contactnaam = {
+  __typename?: 'Contactnaam';
+  achternaam?: Maybe<Scalars['String']['output']>;
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voornaam?: Maybe<Scalars['String']['output']>;
+  voorvoegselAchternaam?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactnaamInput = {
+  achternaam?: InputMaybe<Scalars['String']['input']>;
+  voorletters?: InputMaybe<Scalars['String']['input']>;
+  voornaam?: InputMaybe<Scalars['String']['input']>;
+  voorvoegselAchternaam?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactpersoonIdentificatie = {
+  __typename?: 'ContactpersoonIdentificatie';
+  contactnaam?: Maybe<Contactnaam>;
+  uuid?: Maybe<Scalars['UUID']['output']>;
+  volledigeNaam?: Maybe<Scalars['String']['output']>;
+  werkteVoorPartij?: Maybe<OpenKlant2ForeignKey>;
+};
+
+export type ContactpersoonIdentificatieInput = {
+  contactnaam?: InputMaybe<ContactnaamInput>;
+  uuid?: InputMaybe<Scalars['UUID']['input']>;
+  volledigeNaam?: InputMaybe<Scalars['String']['input']>;
+  werkteVoorPartij?: InputMaybe<OpenKlant2ForeignKeyInput>;
+};
+
+export type DigitaleAdresRequestInput = {
+  omschrijving: Scalars['String']['input'];
+  type: DigitaleAdresType;
+  uuid?: InputMaybe<Scalars['UUID']['input']>;
+  waarde: Scalars['String']['input'];
+};
+
+export type DigitaleAdresResponse = {
+  __typename?: 'DigitaleAdresResponse';
+  omschrijving: Scalars['String']['output'];
+  referentie: Scalars['String']['output'];
+  type: DigitaleAdresType;
+  uuid: Scalars['UUID']['output'];
+  waarde: Scalars['String']['output'];
+};
+
+export enum DigitaleAdresType {
+  Email = 'EMAIL',
+  Overig = 'OVERIG',
+  Telefoonnummer = 'TELEFOONNUMMER'
+}
+
+export type DirectPaymentRequestInput = {
+  amount: Scalars['Float']['input'];
+  identifier: Scalars['String']['input'];
+  langId?: InputMaybe<Scalars['String']['input']>;
+  orderId: Scalars['String']['input'];
+  reference: Scalars['String']['input'];
+  returnUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DirectPaymentResponse = {
+  __typename?: 'DirectPaymentResponse';
+  redirectUrl: Scalars['String']['output'];
 };
 
 export type Document = {
@@ -429,58 +748,6 @@ export type Eigenaar = {
   uitgebreideRechtsvorm: Scalars['String']['output'];
 };
 
-export type EmandateObject = {
-  __typename?: 'EmandateObject';
-  bankId?: Maybe<Scalars['String']['output']>;
-  bankName?: Maybe<Scalars['String']['output']>;
-  categorie: Scalars['String']['output'];
-  iban?: Maybe<Scalars['String']['output']>;
-  lastUpdate?: Maybe<Scalars['LocalDateTime']['output']>;
-  mandateId: Scalars['String']['output'];
-  reference?: Maybe<Scalars['String']['output']>;
-  sequenceType?: Maybe<Scalars['Int']['output']>;
-  status: EmandateStatus;
-  subcategories?: Maybe<Array<EmandateSubCategorie>>;
-};
-
-export type EmandateResponse = {
-  __typename?: 'EmandateResponse';
-  mandateId: Scalars['String']['output'];
-  redirectUrl: Scalars['String']['output'];
-};
-
-export enum EmandateStatus {
-  Active = 'ACTIVE',
-  Cancelled = 'CANCELLED',
-  Draft = 'DRAFT'
-}
-
-export type EmandateStatusResponse = {
-  __typename?: 'EmandateStatusResponse';
-  mandateId?: Maybe<Scalars['String']['output']>;
-  statusCode: EmandateStatusResponseCode;
-  statusSubCode: EmandateStatusResponseCode;
-};
-
-export type EmandateStatusResponseCode = {
-  __typename?: 'EmandateStatusResponseCode';
-  code: Scalars['String']['output'];
-  description: Scalars['String']['output'];
-};
-
-export type EmandateSubCategorie = {
-  __typename?: 'EmandateSubCategorie';
-  incasso: Scalars['Boolean']['output'];
-  key: Scalars['String']['output'];
-  naam?: Maybe<Scalars['String']['output']>;
-};
-
-export type EmandateSubCategorieInput = {
-  incasso: Scalars['Boolean']['input'];
-  key: Scalars['String']['input'];
-  naam?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type Embedded = {
   __typename?: 'Embedded';
   eigenaar: Eigenaar;
@@ -492,22 +759,45 @@ export type FormDefinition = {
   formDefinition: Scalars['JSON']['output'];
 };
 
-export type Gemachtigde = {
-  __typename?: 'Gemachtigde';
+export type GemachtigdeV2 = {
+  __typename?: 'GemachtigdeV2';
   bedrijf?: Maybe<MaatschappelijkeActiviteit>;
-  persoon?: Maybe<Persoon>;
+  persoon?: Maybe<BrpPersoon>;
+};
+
+export type HadBetrokkenActoren = {
+  __typename?: 'HadBetrokkenActoren';
+  actoridentificator: OpenKlant2Identificator;
+  indicatieActief: Scalars['Boolean']['output'];
+  naam: Scalars['String']['output'];
+  soortActor: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+};
+
+export type HadKlantcontact = {
+  __typename?: 'HadKlantcontact';
+  gingOverOnderwerpobjecten: Array<OpenKlant2ForeignKey>;
+  hadBetrokkenActoren: Array<HadBetrokkenActoren>;
+  hadBetrokkenen: Array<OpenKlant2ForeignKey>;
+  indicatieContactGelukt: Scalars['Boolean']['output'];
+  inhoud: Scalars['String']['output'];
+  kanaal: Scalars['String']['output'];
+  leiddeTotInterneTaken: Array<OpenKlant2ForeignKey>;
+  nummer: Scalars['String']['output'];
+  omvatteBijlagen: Array<OpenKlant2ForeignKey>;
+  onderwerp: Scalars['String']['output'];
+  plaatsgevondenOp: Scalars['String']['output'];
+  taal: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+  vertrouwelijk: Scalars['Boolean']['output'];
 };
 
 export type HandelsNaam = {
   __typename?: 'HandelsNaam';
   naam: Scalars['String']['output'];
   volgorde: Scalars['Int']['output'];
-};
-
-export type HistoricStatus = {
-  __typename?: 'HistoricStatus';
-  createdOn: Scalars['String']['output'];
-  status: Status;
 };
 
 export type Hoofdvestiging = {
@@ -521,45 +811,6 @@ export type Hoofdvestiging = {
   vestigingsnummer: Scalars['String']['output'];
 };
 
-export type InvorderingsDetails = {
-  __typename?: 'InvorderingsDetails';
-  aanslagBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  aanslagBetaald?: Maybe<Scalars['BigDecimal']['output']>;
-  adres?: Maybe<Scalars['String']['output']>;
-  datumAanmaning?: Maybe<Scalars['Date']['output']>;
-  datumDwangbevel?: Maybe<Scalars['Date']['output']>;
-  kostenBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  kostenBetaald?: Maybe<Scalars['BigDecimal']['output']>;
-  kwijtscheldingsBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  land?: Maybe<Scalars['String']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
-  oninbaarBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  opdrachtgever?: Maybe<Scalars['String']['output']>;
-  openStaandeInvordering?: Maybe<Scalars['String']['output']>;
-  openstaandSaldo?: Maybe<Scalars['BigDecimal']['output']>;
-  postcode?: Maybe<Scalars['String']['output']>;
-  renteBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  renteBetaald?: Maybe<Scalars['BigDecimal']['output']>;
-  saldoBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  saldoTextLabel?: Maybe<Scalars['String']['output']>;
-  schuldenaarStatus?: Maybe<Scalars['String']['output']>;
-  totaalBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  totaalBetaald?: Maybe<Scalars['BigDecimal']['output']>;
-  uitstelBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  verminderingsBedrag?: Maybe<Scalars['BigDecimal']['output']>;
-  vervolgActie?: Maybe<Scalars['String']['output']>;
-  vervolgActieCode?: Maybe<Scalars['String']['output']>;
-  vervolgOpmerking?: Maybe<Scalars['String']['output']>;
-  woonplaats?: Maybe<Scalars['String']['output']>;
-};
-
-export type KadastraalObject = {
-  __typename?: 'KadastraalObject';
-  aanduiding: Scalars['String']['output'];
-  adressen: Array<NeaAdres>;
-  identificatie: Scalars['String']['output'];
-};
-
 export type Klant = {
   __typename?: 'Klant';
   aanmaakkanaal?: Maybe<Scalars['String']['output']>;
@@ -571,6 +822,38 @@ export type KlantUpdateInput = {
   aanmaakkanaal?: InputMaybe<Scalars['String']['input']>;
   emailadres?: InputMaybe<Scalars['String']['input']>;
   telefoonnummer?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type LinksPage = {
+  __typename?: 'LinksPage';
+  /** The elements on this page */
+  content: Array<OpenProductLink>;
+  /** The requested page number */
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
+  size: Scalars['Int']['output'];
+  /** The total number of elements */
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type LocatiesPage = {
+  __typename?: 'LocatiesPage';
+  /** The elements on this page */
+  content: Array<OpenProductLocatie>;
+  /** The requested page number */
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
+  size: Scalars['Int']['output'];
+  /** The total number of elements */
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
 };
 
 export type MaatschappelijkeActiviteit = {
@@ -592,26 +875,18 @@ export type MaterieleRegistratie = {
   datumAanvang: Scalars['String']['output'];
 };
 
-export type ModifyEmandateRequestInput = {
-  categorie: Scalars['String']['input'];
-  customParameters?: InputMaybe<Scalars['JSON']['input']>;
-  failureUrl?: InputMaybe<Scalars['String']['input']>;
-  mandateId: Scalars['String']['input'];
-  successUrl?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  /** Cancel an eMandate */
-  cancelEmandate: EmandateResponse;
-  /** Create an eMandate */
-  createEmandate: EmandateResponse;
+  /** Create DigitaleAdres for User */
+  createUserDigitaleAdres?: Maybe<DigitaleAdresResponse>;
+  /** Create Partij for user */
+  createUserPartij?: Maybe<PartijResponse>;
+  /** Delete DigitaleAdres of User by Id */
+  deleteUserDigitaleAdres?: Maybe<Scalars['Boolean']['output']>;
+  /** Do Worldline Direct payment */
+  doDirectPayment: DirectPaymentResponse;
   /** Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
-  /** Modify an eMandate */
-  modifyEmandate: EmandateResponse;
-  /** Convert submission to json return resulting data */
-  processSubmission: CaseCreated;
   /** Submit a task */
   submitTaak: Taak;
   /** Submit a task */
@@ -620,39 +895,39 @@ export type Mutation = {
   submitTask: Taak;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
-  /** Update subcategories of eMandate */
-  updateEmandateSubCategories?: Maybe<EmandateObject>;
+  /** Update product */
+  updateProduct?: Maybe<OpenProductProduct>;
   /** Update product verbruiks object */
   updateProductVerbruiksObject: ProductVerbruiksObject;
-  /** Pincode wijzigen van vergunning */
-  wijzigVergunningPincode: WijzigVergunningResponse;
+  /** Update DigitaleAdres of User */
+  updateUserDigitaleAdres?: Maybe<DigitaleAdresResponse>;
+  /** Update user Partij */
+  updateUserPartij?: Maybe<PartijResponse>;
 };
 
 
-export type MutationCancelEmandateArgs = {
-  emandate: CancelEmandateRequestInput;
+export type MutationCreateUserDigitaleAdresArgs = {
+  digitaleAdresRequest: DigitaleAdresRequestInput;
 };
 
 
-export type MutationCreateEmandateArgs = {
-  emandate: CreateEmandateRequestInput;
+export type MutationCreateUserPartijArgs = {
+  partijRequest: PartijRequestInput;
+};
+
+
+export type MutationDeleteUserDigitaleAdresArgs = {
+  digitaleAdresId: Scalars['UUID']['input'];
+};
+
+
+export type MutationDoDirectPaymentArgs = {
+  paymentRequest: DirectPaymentRequestInput;
 };
 
 
 export type MutationGenerateOgonePaymentArgs = {
   paymentRequest: OgonePaymentRequestInput;
-};
-
-
-export type MutationModifyEmandateArgs = {
-  emandate: ModifyEmandateRequestInput;
-};
-
-
-export type MutationProcessSubmissionArgs = {
-  caseDefinitionId: Scalars['String']['input'];
-  initialStatus?: InputMaybe<Scalars['String']['input']>;
-  submission: Scalars['JSON']['input'];
 };
 
 
@@ -680,8 +955,8 @@ export type MutationUpdateBurgerProfielArgs = {
 };
 
 
-export type MutationUpdateEmandateSubCategoriesArgs = {
-  updatedSubCategories: UpdateEmandateSubCategoriesInput;
+export type MutationUpdateProductArgs = {
+  productUpdateRequest: UpdateProductRequestInput;
 };
 
 
@@ -691,102 +966,13 @@ export type MutationUpdateProductVerbruiksObjectArgs = {
 };
 
 
-export type MutationWijzigVergunningPincodeArgs = {
-  pincode: Scalars['Int']['input'];
-  vergunningnummer: Scalars['Int']['input'];
+export type MutationUpdateUserDigitaleAdresArgs = {
+  digitaleAdresRequest: DigitaleAdresRequestInput;
 };
 
-export type Naam = {
-  __typename?: 'Naam';
-  geslachtsnaam?: Maybe<Scalars['String']['output']>;
-  lastName: Scalars['String']['output'];
-  voorletters?: Maybe<Scalars['String']['output']>;
-  voorvoegsel?: Maybe<Scalars['String']['output']>;
-};
 
-export type Naheffing = {
-  __typename?: 'Naheffing';
-  aanslagNummer: Scalars['Long']['output'];
-  bedragNaheffing: Scalars['Long']['output'];
-  datumConstatering: Scalars['Date']['output'];
-  datumDagtekening: Scalars['Date']['output'];
-  kenteken: Scalars['String']['output'];
-  kleur: Scalars['String']['output'];
-  latitude?: Maybe<Scalars['String']['output']>;
-  longitude?: Maybe<Scalars['String']['output']>;
-  merk: Scalars['String']['output'];
-  nadereAanduiding: Scalars['String']['output'];
-  straatconstatering: Scalars['String']['output'];
-  ticketnummer?: Maybe<Scalars['String']['output']>;
-  tijdConstatering: Scalars['String']['output'];
-};
-
-export type Naheffingen = {
-  __typename?: 'Naheffingen';
-  aanslagNummer: Scalars['Long']['output'];
-  bedragNaheffing: Scalars['Long']['output'];
-  bonNummer: Scalars['String']['output'];
-  datumConstatering: Scalars['Date']['output'];
-  kenteken: Scalars['String']['output'];
-  landcode: Scalars['String']['output'];
-  openstaandSaldo: Scalars['Long']['output'];
-  tijdConstatering: Scalars['String']['output'];
-};
-
-export type NaheffingenPage = {
-  __typename?: 'NaheffingenPage';
-  content: Array<Naheffingen>;
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  size: Scalars['Int']['output'];
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type NeaAdres = {
-  __typename?: 'NeaAdres';
-  adresBuitenland?: Maybe<NeaAdresBuitenland>;
-  adresseerbaarObjectId?: Maybe<Scalars['String']['output']>;
-  huisletter?: Maybe<Scalars['String']['output']>;
-  huisnummer?: Maybe<Scalars['Int']['output']>;
-  huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
-  land?: Maybe<Scalars['String']['output']>;
-  nummeraanduidingId?: Maybe<Scalars['String']['output']>;
-  postbusnummer?: Maybe<Scalars['String']['output']>;
-  postcode?: Maybe<Scalars['String']['output']>;
-  straatnaam?: Maybe<Scalars['String']['output']>;
-  woonplaats?: Maybe<Scalars['String']['output']>;
-};
-
-export type NeaAdresBuitenland = {
-  __typename?: 'NeaAdresBuitenland';
-  land?: Maybe<Scalars['String']['output']>;
-  postcodeWoonplaats?: Maybe<Scalars['String']['output']>;
-  regio?: Maybe<Scalars['String']['output']>;
-  straatnaamHuisnummer?: Maybe<Scalars['String']['output']>;
-};
-
-export type NeaKlant = {
-  __typename?: 'NeaKlant';
-  organisatie?: Maybe<Organisatie>;
-  persoon?: Maybe<NeaPersoon>;
-};
-
-export type NeaPersoon = {
-  __typename?: 'NeaPersoon';
-  achterNaam: Scalars['String']['output'];
-  correspondentieAdres?: Maybe<NeaAdres>;
-  emailAdres?: Maybe<Scalars['String']['output']>;
-  klantnummer: Scalars['Int']['output'];
-  subjectId: Scalars['Int']['output'];
-  telefoonNummer?: Maybe<Scalars['String']['output']>;
-  verblijfAdres: NeaAdres;
-  volledigeNaam: Scalars['String']['output'];
-  voorNaam?: Maybe<Scalars['String']['output']>;
-  voorletters?: Maybe<Scalars['String']['output']>;
-  voorvoegselAchternaam?: Maybe<Scalars['String']['output']>;
+export type MutationUpdateUserPartijArgs = {
+  partijRequest: PartijRequestInput;
 };
 
 export type OgoneBetaling = {
@@ -813,16 +999,823 @@ export type OgonePaymentRequestInput = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Organisatie = {
-  __typename?: 'Organisatie';
-  bezoekAdres: NeaAdres;
-  correspondentieAdres?: Maybe<NeaAdres>;
-  klantnummer: Scalars['Int']['output'];
-  kvkNummer?: Maybe<Scalars['String']['output']>;
-  naam: Scalars['String']['output'];
-  rsin?: Maybe<Scalars['String']['output']>;
-  vestigingsnummer?: Maybe<Scalars['String']['output']>;
+export enum OnderwerpObjectIndentificatorType {
+  Product = 'PRODUCT',
+  Zaak = 'ZAAK'
+}
+
+export type OpenKlant2Adres = {
+  __typename?: 'OpenKlant2Adres';
+  adresregel1?: Maybe<Scalars['String']['output']>;
+  adresregel2?: Maybe<Scalars['String']['output']>;
+  adresregel3?: Maybe<Scalars['String']['output']>;
+  land?: Maybe<OpenKlant2Landcode>;
+  nummeraanduidingId?: Maybe<Scalars['String']['output']>;
 };
+
+export type OpenKlant2DigitaleAdres = {
+  __typename?: 'OpenKlant2DigitaleAdres';
+  adres: Scalars['String']['output'];
+  omschrijving: Scalars['String']['output'];
+  referentie?: Maybe<Scalars['String']['output']>;
+  soortDigitaalAdres: Scalars['String']['output'];
+  url?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['UUID']['output']>;
+  verstrektDoorBetrokkene?: Maybe<OpenKlant2Uuid>;
+  verstrektDoorPartij?: Maybe<OpenKlant2Uuid>;
+};
+
+export type OpenKlant2ForeignKey = {
+  __typename?: 'OpenKlant2ForeignKey';
+  url: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenKlant2ForeignKeyInput = {
+  url: Scalars['String']['input'];
+  uuid: Scalars['UUID']['input'];
+};
+
+export type OpenKlant2Identificator = {
+  __typename?: 'OpenKlant2Identificator';
+  codeObjecttype: Scalars['String']['output'];
+  codeRegister: Scalars['String']['output'];
+  codeSoortObjectId: Scalars['String']['output'];
+  objectId: Scalars['String']['output'];
+};
+
+export type OpenKlant2IdentificeerdePartij = {
+  __typename?: 'OpenKlant2IdentificeerdePartij';
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenKlant2Klantcontact = {
+  __typename?: 'OpenKlant2Klantcontact';
+  gingOverOnderwerpobjecten: Array<OpenKlant2ForeignKey>;
+  hadBetrokkenActoren: Array<HadBetrokkenActoren>;
+  hadBetrokkenen: Array<OpenKlant2ForeignKey>;
+  indicatieContactGelukt: Scalars['Boolean']['output'];
+  inhoud: Scalars['String']['output'];
+  kanaal: Scalars['String']['output'];
+  leiddeTotInterneTaken: Array<OpenKlant2ForeignKey>;
+  nummer: Scalars['String']['output'];
+  omvatteBijlagen: Array<OpenKlant2ForeignKey>;
+  onderwerp: Scalars['String']['output'];
+  plaatsgevondenOp: Scalars['String']['output'];
+  taal: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+  vertrouwelijk: Scalars['Boolean']['output'];
+};
+
+export enum OpenKlant2Landcode {
+  Abessinie = 'ABESSINIE',
+  AbuDhabi = 'ABU_DHABI',
+  Aden = 'ADEN',
+  Afghanistan = 'AFGHANISTAN',
+  Ajman = 'AJMAN',
+  Albanie = 'ALBANIE',
+  Algerije = 'ALGERIJE',
+  AmerikaanseMaagdeneilanden = 'AMERIKAANSE_MAAGDENEILANDEN',
+  Amerikaanssamoa = 'AMERIKAANSSAMOA',
+  Andorra = 'ANDORRA',
+  Angola = 'ANGOLA',
+  Anguilla = 'ANGUILLA',
+  Antigua = 'ANTIGUA',
+  AntiguaEnBarbuda = 'ANTIGUA_EN_BARBUDA',
+  Argentinie = 'ARGENTINIE',
+  Armenie = 'ARMENIE',
+  Aruba = 'ARUBA',
+  Ascension = 'ASCENSION',
+  Australie = 'AUSTRALIE',
+  AustralischeSalomonseilanden = 'AUSTRALISCHE_SALOMONSEILANDEN',
+  AustralischNieuwguinea = 'AUSTRALISCH_NIEUWGUINEA',
+  Azerbeidzjan = 'AZERBEIDZJAN',
+  Azoren = 'AZOREN',
+  Bahamas = 'BAHAMAS',
+  Bahrein = 'BAHREIN',
+  Bangladesh = 'BANGLADESH',
+  Barbados = 'BARBADOS',
+  Basutoland = 'BASUTOLAND',
+  Bechuanaland = 'BECHUANALAND',
+  Belarus = 'BELARUS',
+  Belau = 'BELAU',
+  Belgie = 'BELGIE',
+  Belgischcongo = 'BELGISCHCONGO',
+  Belize = 'BELIZE',
+  Benin = 'BENIN',
+  Bermuda = 'BERMUDA',
+  Bhutan = 'BHUTAN',
+  Bolivia = 'BOLIVIA',
+  Bonaire = 'BONAIRE',
+  BondsrepubliekDuitsland = 'BONDSREPUBLIEK_DUITSLAND',
+  Bosnieherzegovina = 'BOSNIEHERZEGOVINA',
+  Botswana = 'BOTSWANA',
+  Brazilie = 'BRAZILIE',
+  Britsafrika = 'BRITSAFRIKA',
+  Britsborneo = 'BRITSBORNEO',
+  BritseAntillen = 'BRITSE_ANTILLEN',
+  BritseMaagdeneilanden = 'BRITSE_MAAGDENEILANDEN',
+  BritseSalomonseilanden = 'BRITSE_SALOMONSEILANDEN',
+  Britsguyana = 'BRITSGUYANA',
+  Britshonduras = 'BRITSHONDURAS',
+  Britsindie = 'BRITSINDIE',
+  Britskameroen = 'BRITSKAMEROEN',
+  Britssomaliland = 'BRITSSOMALILAND',
+  BritsAntarctischTerritorium = 'BRITS_ANTARCTISCH_TERRITORIUM',
+  BritsIndischeOceaanterritorium = 'BRITS_INDISCHE_OCEAANTERRITORIUM',
+  BritsNoordborneo = 'BRITS_NOORDBORNEO',
+  BritsOostafrika = 'BRITS_OOSTAFRIKA',
+  BritsWestborneo = 'BRITS_WESTBORNEO',
+  BritsWestindie = 'BRITS_WESTINDIE',
+  Brunei = 'BRUNEI',
+  Bulgarije = 'BULGARIJE',
+  BurkinaFaso = 'BURKINA_FASO',
+  Burma = 'BURMA',
+  Burundi = 'BURUNDI',
+  Cabinda = 'CABINDA',
+  Caicoseilanden = 'CAICOSEILANDEN',
+  Cambodja = 'CAMBODJA',
+  Canada = 'CANADA',
+  CanarischeEilanden = 'CANARISCHE_EILANDEN',
+  CantonEnEnderbury = 'CANTON_EN_ENDERBURY',
+  Caymaneilanden = 'CAYMANEILANDEN',
+  CentraalafrikaanseRepubliek = 'CENTRAALAFRIKAANSE_REPUBLIEK',
+  Ceylon = 'CEYLON',
+  Chili = 'CHILI',
+  China = 'CHINA',
+  Christmaseiland = 'CHRISTMASEILAND',
+  Cocoseilanden = 'COCOSEILANDEN',
+  Colombia = 'COLOMBIA',
+  Comoren = 'COMOREN',
+  Congo = 'CONGO',
+  Congobrazzaville = 'CONGOBRAZZAVILLE',
+  Congokinshasa = 'CONGOKINSHASA',
+  Cookeilanden = 'COOKEILANDEN',
+  CostaRica = 'COSTA_RICA',
+  Cuba = 'CUBA',
+  Curacao = 'CURACAO',
+  Cyprus = 'CYPRUS',
+  Dahomey = 'DAHOMEY',
+  Dantzig = 'DANTZIG',
+  DemocratischeRepubliekCongo = 'DEMOCRATISCHE_REPUBLIEK_CONGO',
+  Denemarken = 'DENEMARKEN',
+  Djibouti = 'DJIBOUTI',
+  Dominica = 'DOMINICA',
+  DominicaanseRepubliek = 'DOMINICAANSE_REPUBLIEK',
+  Dubai = 'DUBAI',
+  DuitseDemocratischeRepubliek = 'DUITSE_DEMOCRATISCHE_REPUBLIEK',
+  Duitsland = 'DUITSLAND',
+  DuitsOostafrika = 'DUITS_OOSTAFRIKA',
+  DuitsZuidwestafrika = 'DUITS_ZUIDWESTAFRIKA',
+  Ecuador = 'ECUADOR',
+  Egypte = 'EGYPTE',
+  ElSalvador = 'EL_SALVADOR',
+  Equatoriaalguinea = 'EQUATORIAALGUINEA',
+  Eritrea = 'ERITREA',
+  Estland = 'ESTLAND',
+  Eswatini = 'ESWATINI',
+  Ethiopie = 'ETHIOPIE',
+  Faeroer = 'FAEROER',
+  Falklandeilanden = 'FALKLANDEILANDEN',
+  FederaleRepubliekJoegoslavie = 'FEDERALE_REPUBLIEK_JOEGOSLAVIE',
+  Fiji = 'FIJI',
+  Filipijnen = 'FILIPIJNEN',
+  Finland = 'FINLAND',
+  Frankrijk = 'FRANKRIJK',
+  Franscongo = 'FRANSCONGO',
+  Fransguyana = 'FRANSGUYANA',
+  Fransindie = 'FRANSINDIE',
+  Franskameroen = 'FRANSKAMEROEN',
+  Franspolynesie = 'FRANSPOLYNESIE',
+  Franssomaliland = 'FRANSSOMALILAND',
+  FransEquatoriaalafrika = 'FRANS_EQUATORIAALAFRIKA',
+  FransIndochina = 'FRANS_INDOCHINA',
+  FransTerritoriumVoorAfarsEnIssas = 'FRANS_TERRITORIUM_VOOR_AFARS_EN_ISSAS',
+  FransWestafrika = 'FRANS_WESTAFRIKA',
+  Fujairah = 'FUJAIRAH',
+  Gabon = 'GABON',
+  Gambia = 'GAMBIA',
+  GazastrookEnWestelijkeJordaanoever = 'GAZASTROOK_EN_WESTELIJKE_JORDAANOEVER',
+  Georgie = 'GEORGIE',
+  Ghana = 'GHANA',
+  Gibraltar = 'GIBRALTAR',
+  Gilberteilanden = 'GILBERTEILANDEN',
+  GilbertEnElliceeilanden = 'GILBERT_EN_ELLICEEILANDEN',
+  Goa = 'GOA',
+  Goudkust = 'GOUDKUST',
+  Grenada = 'GRENADA',
+  Griekenland = 'GRIEKENLAND',
+  Groenland = 'GROENLAND',
+  Guadeloupe = 'GUADELOUPE',
+  Guam = 'GUAM',
+  Guatemala = 'GUATEMALA',
+  Guinee = 'GUINEE',
+  Guineebissau = 'GUINEEBISSAU',
+  Guyana = 'GUYANA',
+  Haiti = 'HAITI',
+  Hawaiieilanden = 'HAWAIIEILANDEN',
+  Honduras = 'HONDURAS',
+  Hongarije = 'HONGARIJE',
+  Hongkong = 'HONGKONG',
+  Ierland = 'IERLAND',
+  Ifni = 'IFNI',
+  Ijsland = 'IJSLAND',
+  India = 'INDIA',
+  Indochina = 'INDOCHINA',
+  Indonesie = 'INDONESIE',
+  InternationaalGebied = 'INTERNATIONAAL_GEBIED',
+  Irak = 'IRAK',
+  Iran = 'IRAN',
+  Israel = 'ISRAEL',
+  Italiaanssomaliland = 'ITALIAANSSOMALILAND',
+  Italie = 'ITALIE',
+  Ivoorkust = 'IVOORKUST',
+  Jamaica = 'JAMAICA',
+  Japan = 'JAPAN',
+  Jemen = 'JEMEN',
+  Joegoslavie = 'JOEGOSLAVIE',
+  Johnston = 'JOHNSTON',
+  Johore = 'JOHORE',
+  Jordanie = 'JORDANIE',
+  Kaapverdie = 'KAAPVERDIE',
+  KaapverdischeEilanden = 'KAAPVERDISCHE_EILANDEN',
+  Kameroen = 'KAMEROEN',
+  Kanaaleilanden = 'KANAALEILANDEN',
+  Kashmir = 'KASHMIR',
+  Kazachstan = 'KAZACHSTAN',
+  Kedah = 'KEDAH',
+  KeizerWilhelmsland = 'KEIZER_WILHELMSLAND',
+  Kelantan = 'KELANTAN',
+  Kenya = 'KENYA',
+  Kirgizie = 'KIRGIZIE',
+  Kiribati = 'KIRIBATI',
+  Koeweit = 'KOEWEIT',
+  Korea = 'KOREA',
+  Kosovo = 'KOSOVO',
+  Kroatie = 'KROATIE',
+  Labuan = 'LABUAN',
+  Laos = 'LAOS',
+  Leewardeilanden = 'LEEWARDEILANDEN',
+  Lesotho = 'LESOTHO',
+  Letland = 'LETLAND',
+  Libanon = 'LIBANON',
+  Liberia = 'LIBERIA',
+  Libie = 'LIBIE',
+  Liechtenstein = 'LIECHTENSTEIN',
+  Litouwen = 'LITOUWEN',
+  Luxemburg = 'LUXEMBURG',
+  Macau = 'MACAU',
+  Macedonie = 'MACEDONIE',
+  Madagaskar = 'MADAGASKAR',
+  Madeiraeilanden = 'MADEIRAEILANDEN',
+  Malakka = 'MALAKKA',
+  Malawi = 'MALAWI',
+  Maldiven = 'MALDIVEN',
+  Maleisie = 'MALEISIE',
+  Mali = 'MALI',
+  Malta = 'MALTA',
+  Man = 'MAN',
+  Marianen = 'MARIANEN',
+  Marokko = 'MAROKKO',
+  Marshalleilanden = 'MARSHALLEILANDEN',
+  Martinique = 'MARTINIQUE',
+  Mauritanie = 'MAURITANIE',
+  Mauritius = 'MAURITIUS',
+  Mayotte = 'MAYOTTE',
+  Mexico = 'MEXICO',
+  Micronesia = 'MICRONESIA',
+  Midway = 'MIDWAY',
+  Moldavie = 'MOLDAVIE',
+  Monaco = 'MONACO',
+  Mongolie = 'MONGOLIE',
+  Montenegro = 'MONTENEGRO',
+  Montserrat = 'MONTSERRAT',
+  Mozambique = 'MOZAMBIQUE',
+  MuscatEnOman = 'MUSCAT_EN_OMAN',
+  Myanmar = 'MYANMAR',
+  Namibie = 'NAMIBIE',
+  Nauru = 'NAURU',
+  Nederland = 'NEDERLAND',
+  NederlandseAntillen = 'NEDERLANDSE_ANTILLEN',
+  Nederlandsindie = 'NEDERLANDSINDIE',
+  NederlandsNieuwguinea = 'NEDERLANDS_NIEUWGUINEA',
+  NegriSembilan = 'NEGRI_SEMBILAN',
+  Nepal = 'NEPAL',
+  Newfoundland = 'NEWFOUNDLAND',
+  Nicaragua = 'NICARAGUA',
+  Nieuwcaledonie = 'NIEUWCALEDONIE',
+  NieuweHebriden = 'NIEUWE_HEBRIDEN',
+  Nieuwzeeland = 'NIEUWZEELAND',
+  Niger = 'NIGER',
+  Nigeria = 'NIGERIA',
+  Niue = 'NIUE',
+  None = 'NONE',
+  Noordjemen = 'NOORDJEMEN',
+  Noordkorea = 'NOORDKOREA',
+  Noordrhodesie = 'NOORDRHODESIE',
+  Noordvietnam = 'NOORDVIETNAM',
+  Noorwegen = 'NOORWEGEN',
+  Norfolk = 'NORFOLK',
+  Nyasaland = 'NYASALAND',
+  Oekraine = 'OEKRAINE',
+  Oezbekistan = 'OEZBEKISTAN',
+  Oman = 'OMAN',
+  Oostenrijk = 'OOSTENRIJK',
+  Oostenrijkhongarije = 'OOSTENRIJKHONGARIJE',
+  Oppervolta = 'OPPERVOLTA',
+  Pacificeilanden = 'PACIFICEILANDEN',
+  Pahang = 'PAHANG',
+  Pakistan = 'PAKISTAN',
+  Palau = 'PALAU',
+  Palestina = 'PALESTINA',
+  Panama = 'PANAMA',
+  Panamakanaalzone = 'PANAMAKANAALZONE',
+  Papoeanieuwguinea = 'PAPOEANIEUWGUINEA',
+  Paraguay = 'PARAGUAY',
+  Perak = 'PERAK',
+  Perlis = 'PERLIS',
+  Peru = 'PERU',
+  Phoenixeilanden = 'PHOENIXEILANDEN',
+  Pitcairneilanden = 'PITCAIRNEILANDEN',
+  Polen = 'POLEN',
+  Portugal = 'PORTUGAL',
+  Portugeesafrika = 'PORTUGEESAFRIKA',
+  Portugeesguinee = 'PORTUGEESGUINEE',
+  Portugeesindie = 'PORTUGEESINDIE',
+  Portugeestimor = 'PORTUGEESTIMOR',
+  PortugeesOostafrika = 'PORTUGEES_OOSTAFRIKA',
+  PortugeesWestafrika = 'PORTUGEES_WESTAFRIKA',
+  PuertoRico = 'PUERTO_RICO',
+  Qatar = 'QATAR',
+  RasAlkhaimah = 'RAS_ALKHAIMAH',
+  RepubliekNoordmacedonie = 'REPUBLIEK_NOORDMACEDONIE',
+  Reunion = 'REUNION',
+  Rhodesie = 'RHODESIE',
+  Riukiueilanden = 'RIUKIUEILANDEN',
+  Roemenie = 'ROEMENIE',
+  Ruandaurundi = 'RUANDAURUNDI',
+  Rusland = 'RUSLAND',
+  RuslandOud = 'RUSLAND_OUD',
+  Rwanda = 'RWANDA',
+  Saarland = 'SAARLAND',
+  Saba = 'SABA',
+  Sabah = 'SABAH',
+  SaintKittsEnNevis = 'SAINT_KITTS_EN_NEVIS',
+  SaintKittsNevisEnAnguilla = 'SAINT_KITTS_NEVIS_EN_ANGUILLA',
+  SaintLucia = 'SAINT_LUCIA',
+  SaintPierreEnMiquelon = 'SAINT_PIERRE_EN_MIQUELON',
+  SaintVincent = 'SAINT_VINCENT',
+  SaintVincentEnDeGrenadines = 'SAINT_VINCENT_EN_DE_GRENADINES',
+  Salomonseilanden = 'SALOMONSEILANDEN',
+  Samoa = 'SAMOA',
+  SanMarino = 'SAN_MARINO',
+  Saoediarabie = 'SAOEDIARABIE',
+  SaoTomeEnPrincipe = 'SAO_TOME_EN_PRINCIPE',
+  Sarawak = 'SARAWAK',
+  Selangor = 'SELANGOR',
+  Senegal = 'SENEGAL',
+  Servie = 'SERVIE',
+  ServieEnMontenegro = 'SERVIE_EN_MONTENEGRO',
+  Seychellen = 'SEYCHELLEN',
+  SeychellenEnAmiranten = 'SEYCHELLEN_EN_AMIRANTEN',
+  Sharjah = 'SHARJAH',
+  Siam = 'SIAM',
+  SierraLeone = 'SIERRA_LEONE',
+  Sikkim = 'SIKKIM',
+  Singapore = 'SINGAPORE',
+  Sinthelena = 'SINTHELENA',
+  SintEustatius = 'SINT_EUSTATIUS',
+  SintMaarten = 'SINT_MAARTEN',
+  Slovenie = 'SLOVENIE',
+  Slowakije = 'SLOWAKIJE',
+  Soedan = 'SOEDAN',
+  Somalie = 'SOMALIE',
+  Sovjetunie = 'SOVJETUNIE',
+  SpaanseSahara = 'SPAANSE_SAHARA',
+  Spaansguinee = 'SPAANSGUINEE',
+  SpaansNoordafrika = 'SPAANS_NOORDAFRIKA',
+  Spanje = 'SPANJE',
+  Spitsbergen = 'SPITSBERGEN',
+  SriLanka = 'SRI_LANKA',
+  StraitsSettlements = 'STRAITS_SETTLEMENTS',
+  Suriname = 'SURINAME',
+  Svalbardeilanden = 'SVALBARDEILANDEN',
+  Swaziland = 'SWAZILAND',
+  Syrie = 'SYRIE',
+  Tadzjikistan = 'TADZJIKISTAN',
+  Taiwan = 'TAIWAN',
+  Tanganyika = 'TANGANYIKA',
+  Tanzania = 'TANZANIA',
+  Tasmanie = 'TASMANIE',
+  Thailand = 'THAILAND',
+  Tibet = 'TIBET',
+  TimorLeste = 'TIMOR_LESTE',
+  Togo = 'TOGO',
+  Tokelau = 'TOKELAU',
+  Tonga = 'TONGA',
+  Transjordanie = 'TRANSJORDANIE',
+  Trengganu = 'TRENGGANU',
+  TrinidadEnTobago = 'TRINIDAD_EN_TOBAGO',
+  TristanDaCunha = 'TRISTAN_DA_CUNHA',
+  TrucialOman = 'TRUCIAL_OMAN',
+  Tsjaad = 'TSJAAD',
+  Tsjechie = 'TSJECHIE',
+  Tsjechoslowakije = 'TSJECHOSLOWAKIJE',
+  Tunesie = 'TUNESIE',
+  Turkije = 'TURKIJE',
+  Turkmenistan = 'TURKMENISTAN',
+  Turkseilanden = 'TURKSEILANDEN',
+  TurksEnCaicoseilanden = 'TURKS_EN_CAICOSEILANDEN',
+  Tuvalu = 'TUVALU',
+  Uganda = 'UGANDA',
+  UmmAlqaiwain = 'UMM_ALQAIWAIN',
+  Uruguay = 'URUGUAY',
+  Urundi = 'URUNDI',
+  Vanuatu = 'VANUATU',
+  Vaticaanstad = 'VATICAANSTAD',
+  Venezuela = 'VENEZUELA',
+  VerenigdeArabischeEmiraten = 'VERENIGDE_ARABISCHE_EMIRATEN',
+  VerenigdeArabischeRepubliek = 'VERENIGDE_ARABISCHE_REPUBLIEK',
+  VerenigdeStatenVanAmerika = 'VERENIGDE_STATEN_VAN_AMERIKA',
+  VerenigdKoninkrijk = 'VERENIGD_KONINKRIJK',
+  Vietnam = 'VIETNAM',
+  Wake = 'WAKE',
+  WallisEnFutuna = 'WALLIS_EN_FUTUNA',
+  WestelijkeSahara = 'WESTELIJKE_SAHARA',
+  Westsamoa = 'WESTSAMOA',
+  Windwardeilanden = 'WINDWARDEILANDEN',
+  Zaire = 'ZAIRE',
+  Zambia = 'ZAMBIA',
+  Zanzibar = 'ZANZIBAR',
+  Zimbabwe = 'ZIMBABWE',
+  Zuidafrika = 'ZUIDAFRIKA',
+  ZuidarabischeFederatie = 'ZUIDARABISCHE_FEDERATIE',
+  Zuidjemen = 'ZUIDJEMEN',
+  Zuidkorea = 'ZUIDKOREA',
+  Zuidrhodesie = 'ZUIDRHODESIE',
+  Zuidsoedan = 'ZUIDSOEDAN',
+  Zuidvietnam = 'ZUIDVIETNAM',
+  Zuidwestafrika = 'ZUIDWESTAFRIKA',
+  Zweden = 'ZWEDEN',
+  Zwitserland = 'ZWITSERLAND'
+}
+
+/** A Type that represents a Klantinteracties API Partij object */
+export type OpenKlant2Partij = {
+  __typename?: 'OpenKlant2Partij';
+  betrokkenen?: Maybe<Array<OpenKlant2ForeignKey>>;
+  bezoekadres?: Maybe<OpenKlant2Adres>;
+  categorieRelaties?: Maybe<Array<CategorieRelatieForeignKey>>;
+  correspondentieadres?: Maybe<OpenKlant2Adres>;
+  digitaleAdressen?: Maybe<Array<OpenKlant2ForeignKey>>;
+  expand?: Maybe<PartijExpand>;
+  indicatieActief: Scalars['Boolean']['output'];
+  indicatieGeheimhouding?: Maybe<Scalars['Boolean']['output']>;
+  interneNotitie?: Maybe<Scalars['String']['output']>;
+  nummer?: Maybe<Scalars['String']['output']>;
+  partijIdentificatie: PartijIdentificatie;
+  partijIdentificatoren?: Maybe<Array<OpenKlant2PartijIdentificator>>;
+  rekeningnummers?: Maybe<Array<OpenKlant2ForeignKey>>;
+  soortPartij: SoortPartij;
+  url?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['UUID']['output']>;
+  vertegenwoordigden?: Maybe<Array<OpenKlant2ForeignKey>>;
+  voorkeursDigitaalAdres?: Maybe<OpenKlant2ForeignKey>;
+  voorkeursRekeningnummer?: Maybe<OpenKlant2ForeignKey>;
+  voorkeurstaal?: Maybe<Scalars['String']['output']>;
+};
+
+export type OpenKlant2PartijIdentificator = {
+  __typename?: 'OpenKlant2PartijIdentificator';
+  anderePartijIdentificator?: Maybe<Scalars['String']['output']>;
+  identificeerdePartij?: Maybe<OpenKlant2IdentificeerdePartij>;
+  partijIdentificator?: Maybe<OpenKlant2Identificator>;
+  subIdentificatorVan?: Maybe<OpenKlant2SubIdentificatorVan>;
+  url?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['UUID']['output']>;
+};
+
+export type OpenKlant2SubIdentificatorVan = {
+  __typename?: 'OpenKlant2SubIdentificatorVan';
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenKlant2Uuid = {
+  __typename?: 'OpenKlant2UUID';
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductActie = {
+  __typename?: 'OpenProductActie';
+  mapping: Scalars['JSON']['output'];
+  naam: Scalars['String']['output'];
+  productTypeUuid?: Maybe<Scalars['UUID']['output']>;
+  url: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductBestand = {
+  __typename?: 'OpenProductBestand';
+  bestand: Scalars['String']['output'];
+  productTypeUuid: Scalars['UUID']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductContact = {
+  __typename?: 'OpenProductContact';
+  email?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  organisatie?: Maybe<OpenProductOrganisatie>;
+  postcode?: Maybe<Scalars['String']['output']>;
+  stad?: Maybe<Scalars['String']['output']>;
+  straat?: Maybe<Scalars['String']['output']>;
+  telefoonnummer?: Maybe<Scalars['String']['output']>;
+  uuid: Scalars['UUID']['output'];
+};
+
+export enum OpenProductFrequentie {
+  Actief = 'ACTIEF',
+  Gereed = 'GEREED',
+  Ingetrokken = 'INGETROKKEN'
+}
+
+export type OpenProductLink = {
+  __typename?: 'OpenProductLink';
+  naam: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductLocatie = {
+  __typename?: 'OpenProductLocatie';
+  email?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  postcode?: Maybe<Scalars['String']['output']>;
+  stad?: Maybe<Scalars['String']['output']>;
+  straat?: Maybe<Scalars['String']['output']>;
+  telefoonnummer?: Maybe<Scalars['String']['output']>;
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductOrganisatie = {
+  __typename?: 'OpenProductOrganisatie';
+  code: Scalars['String']['output'];
+  email?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  postcode?: Maybe<Scalars['String']['output']>;
+  stad?: Maybe<Scalars['String']['output']>;
+  straat?: Maybe<Scalars['String']['output']>;
+  telefoonnummer?: Maybe<Scalars['String']['output']>;
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductPrijs = {
+  __typename?: 'OpenProductPrijs';
+  actiefVanaf: Scalars['Date']['output'];
+  prijsopties: Array<OpenProductPrijsOptie>;
+  prijsregels: Array<OpenProductPrijsRegel>;
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductPrijsOptie = {
+  __typename?: 'OpenProductPrijsOptie';
+  bedrag: Scalars['Float']['output'];
+  beschrijving: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductPrijsRegel = {
+  __typename?: 'OpenProductPrijsRegel';
+  beschrijving: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductProduct = {
+  __typename?: 'OpenProductProduct';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  acties?: Maybe<Array<OpenProductActie>>;
+  dataobject?: Maybe<Scalars['JSON']['output']>;
+  decisions: Array<Scalars['JSON']['output']>;
+  documenten: Array<OpenProductUrl>;
+  eindDatum?: Maybe<Scalars['Date']['output']>;
+  frequentie: OpenProductFrequentie;
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  naam: Scalars['String']['output'];
+  prijs?: Maybe<Scalars['Float']['output']>;
+  producttype: OpenProductProductProductType;
+  startDatum?: Maybe<Scalars['Date']['output']>;
+  status: OpenProductToegestaneStatus;
+  taken?: Maybe<Array<TaakV2>>;
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  url?: Maybe<Scalars['String']['output']>;
+  uuid: Scalars['UUID']['output'];
+  verbruiksobject?: Maybe<Scalars['JSON']['output']>;
+  zaken?: Maybe<Array<Zaak>>;
+};
+
+export type OpenProductProductProductType = {
+  __typename?: 'OpenProductProductProductType';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  code: Scalars['String']['output'];
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  keywords: Array<Scalars['String']['output']>;
+  toegestaneStatussen: Array<OpenProductToegestaneStatus>;
+  uniformeProductNaam: Scalars['String']['output'];
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductProductType = {
+  __typename?: 'OpenProductProductType';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  acties: Array<OpenProductActie>;
+  bestanden: Array<OpenProductProductTypeBestand>;
+  code: Scalars['String']['output'];
+  contacten: Array<OpenProductContact>;
+  content?: Maybe<Array<OpenProductProductTypeContent>>;
+  dataObjectSchema: OpenProductSchema;
+  externCodes: Array<OpenProductProductTypeExterneCode>;
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  interneOpmerking?: Maybe<Scalars['String']['output']>;
+  keywords: Array<Scalars['String']['output']>;
+  links: Array<OpenProductLink>;
+  locaties: Array<OpenProductLocatie>;
+  naam: Scalars['String']['output'];
+  organisaties: Array<OpenProductOrganisatie>;
+  parameters: Array<OpenProductProductTypeParameter>;
+  prijzen: Array<OpenProductPrijs>;
+  processen: Array<OpenProductUrl>;
+  samenvatting: Scalars['String']['output'];
+  taal: Scalars['String']['output'];
+  themas: Array<OpenProductProductTypeThema>;
+  toegestaneStatussen: Array<OpenProductToegestaneStatus>;
+  uniformeProductNaam: Scalars['String']['output'];
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  uuid: Scalars['UUID']['output'];
+  verbruiksObjectSchema: OpenProductSchema;
+  verzoektypen: Array<OpenProductUrl>;
+  zaaktypen: Array<OpenProductUrl>;
+};
+
+export type OpenProductProductTypeBestand = {
+  __typename?: 'OpenProductProductTypeBestand';
+  bestand: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductProductTypeContent = {
+  __typename?: 'OpenProductProductTypeContent';
+  content: Scalars['String']['output'];
+  labels?: Maybe<Array<Scalars['String']['output']>>;
+  taal: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductProductTypeExterneCode = {
+  __typename?: 'OpenProductProductTypeExterneCode';
+  code: Scalars['String']['output'];
+  naam: Scalars['String']['output'];
+};
+
+export type OpenProductProductTypeParameter = {
+  __typename?: 'OpenProductProductTypeParameter';
+  naam: Scalars['String']['output'];
+  waarde: Scalars['String']['output'];
+};
+
+export type OpenProductProductTypeThema = {
+  __typename?: 'OpenProductProductTypeThema';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  beschrijving?: Maybe<Scalars['String']['output']>;
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  hoofdThema?: Maybe<Scalars['String']['output']>;
+  naam: Scalars['String']['output'];
+  producttypen: Array<OpenProductThemaProductType>;
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export type OpenProductSchema = {
+  __typename?: 'OpenProductSchema';
+  naam: Scalars['String']['output'];
+  schema: Scalars['JSON']['output'];
+};
+
+export type OpenProductThema = {
+  __typename?: 'OpenProductThema';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  beschrijving?: Maybe<Scalars['String']['output']>;
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  /** UUID of the hoofdthema, which this thema is related to. */
+  hoofdThema?: Maybe<Scalars['UUID']['output']>;
+  naam: Scalars['String']['output'];
+  producten?: Maybe<Array<OpenProductProduct>>;
+  producttypen: Array<OpenProductThemaProductType>;
+  taken?: Maybe<Array<TaakV2>>;
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  uuid: Scalars['UUID']['output'];
+  zaken?: Maybe<Array<Zaak>>;
+};
+
+export type OpenProductThemaHierarchy = {
+  __typename?: 'OpenProductThemaHierarchy';
+  subThemas?: Maybe<Array<OpenProductThemaHierarchy>>;
+  thema: OpenProductThema;
+};
+
+export type OpenProductThemaProductType = {
+  __typename?: 'OpenProductThemaProductType';
+  aanmaakDatum: Scalars['ZonedDateTime']['output'];
+  code: Scalars['String']['output'];
+  gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
+  keywords: Array<Scalars['String']['output']>;
+  toegestaneStatussen: Array<OpenProductToegestaneStatus>;
+  uniformeProductNaam: Scalars['String']['output'];
+  updateDatum: Scalars['ZonedDateTime']['output'];
+  uuid: Scalars['UUID']['output'];
+};
+
+export enum OpenProductToegestaneStatus {
+  Actief = 'ACTIEF',
+  Gereed = 'GEREED',
+  Geweigerd = 'GEWEIGERD',
+  Ingetrokken = 'INGETROKKEN',
+  Initieel = 'INITIEEL',
+  InAanvraag = 'IN_AANVRAAG',
+  Verlopen = 'VERLOPEN'
+}
+
+export type OpenProductUrl = {
+  __typename?: 'OpenProductUrl';
+  url: Scalars['String']['output'];
+};
+
+export type OrganisatieIdentificatie = {
+  __typename?: 'OrganisatieIdentificatie';
+  naam?: Maybe<Scalars['String']['output']>;
+};
+
+export type OrganisatieIdentificatieInput = {
+  naam?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type OrganisatiesPage = {
+  __typename?: 'OrganisatiesPage';
+  /** The elements on this page */
+  content: Array<OpenProductOrganisatie>;
+  /** The requested page number */
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
+  size: Scalars['Int']['output'];
+  /** The total number of elements */
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
+export type PartijExpand = {
+  __typename?: 'PartijExpand';
+  betrokkenen?: Maybe<Array<Betrokkene>>;
+  categorieRelaties?: Maybe<Array<CategorieRelatie>>;
+  digitaleAdressen?: Maybe<Array<OpenKlant2DigitaleAdres>>;
+  hadKlantcontact?: Maybe<Array<HadKlantcontact>>;
+};
+
+export type PartijIdentificatie = ContactpersoonIdentificatie | OrganisatieIdentificatie | PersoonsIdentificatie;
+
+export type PartijRequestInput = {
+  contactpersoonIdentificatie?: InputMaybe<ContactpersoonIdentificatieInput>;
+  indicatieActief: Scalars['Boolean']['input'];
+  indicatieGeheimhouding: Scalars['Boolean']['input'];
+  organisatieIdentificatie?: InputMaybe<OrganisatieIdentificatieInput>;
+  persoonsIdentificatie?: InputMaybe<PersoonsIdentificatieInput>;
+  type: PartijType;
+};
+
+export type PartijResponse = {
+  __typename?: 'PartijResponse';
+  contactpersoonIdentificatie?: Maybe<ContactpersoonIdentificatie>;
+  digitaleAdressen?: Maybe<Array<OpenKlant2DigitaleAdres>>;
+  indicatieActief: Scalars['Boolean']['output'];
+  indicatieGeheimhouding?: Maybe<Scalars['Boolean']['output']>;
+  klantcontacten?: Maybe<Array<HadKlantcontact>>;
+  organisatieIdentificatie?: Maybe<OrganisatieIdentificatie>;
+  persoonsIdentificatie?: Maybe<PersoonsIdentificatie>;
+  type: PartijType;
+};
+
+export enum PartijType {
+  Contactpersoon = 'CONTACTPERSOON',
+  Organisatie = 'ORGANISATIE',
+  Persoon = 'PERSOON'
+}
 
 export type PaymentField = {
   __typename?: 'PaymentField';
@@ -830,115 +1823,15 @@ export type PaymentField = {
   value: Scalars['String']['output'];
 };
 
-export type Persoon = {
-  __typename?: 'Persoon';
-  bewonersAantal?: Maybe<Scalars['Int']['output']>;
-  burgerservicenummer?: Maybe<Scalars['String']['output']>;
-  geboorte?: Maybe<PersoonDatumLandPlaats>;
-  geheimhoudingPersoonsgegevens?: Maybe<Scalars['Boolean']['output']>;
-  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
-  kinderen?: Maybe<Array<PersoonKind>>;
-  naam: PersoonNaam;
-  nationaliteiten?: Maybe<Array<PersoonNationaliteiten>>;
-  opschortingBijhouding?: Maybe<PersoonOpschortingBijhouding>;
-  ouders?: Maybe<Array<PersoonOuder>>;
-  partners?: Maybe<Array<PersoonPartner>>;
-  reisdocumentnummers?: Maybe<Array<Scalars['String']['output']>>;
-  verblijfplaats?: Maybe<PersoonVerblijfplaats>;
+export type PersoonsIdentificatie = {
+  __typename?: 'PersoonsIdentificatie';
+  contactnaam?: Maybe<Contactnaam>;
+  volledigeNaam?: Maybe<Scalars['String']['output']>;
 };
 
-export type PersoonCodeOmschrijving = {
-  __typename?: 'PersoonCodeOmschrijving';
-  code?: Maybe<Scalars['String']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonDatum = {
-  __typename?: 'PersoonDatum';
-  dag?: Maybe<Scalars['Int']['output']>;
-  datum?: Maybe<Scalars['String']['output']>;
-  jaar?: Maybe<Scalars['Int']['output']>;
-  maand?: Maybe<Scalars['Int']['output']>;
-};
-
-export type PersoonDatumLandPlaats = {
-  __typename?: 'PersoonDatumLandPlaats';
-  datum?: Maybe<PersoonDatum>;
-  land?: Maybe<PersoonCodeOmschrijving>;
-  plaats?: Maybe<PersoonCodeOmschrijving>;
-};
-
-export type PersoonKind = {
-  __typename?: 'PersoonKind';
-  burgerservicenummer?: Maybe<Scalars['String']['output']>;
-  geboorte?: Maybe<PersoonDatumLandPlaats>;
-  leeftijd?: Maybe<Scalars['Int']['output']>;
-  naam?: Maybe<Naam>;
-};
-
-export type PersoonNaam = {
-  __typename?: 'PersoonNaam';
-  aanduidingNaamgebruik?: Maybe<AanduidingNaamGebruik>;
-  aanhef?: Maybe<Scalars['String']['output']>;
-  geslachtsnaam?: Maybe<Scalars['String']['output']>;
-  lastName: Scalars['String']['output'];
-  officialLastName?: Maybe<Scalars['String']['output']>;
-  voorletters?: Maybe<Scalars['String']['output']>;
-  voornamen?: Maybe<Scalars['String']['output']>;
-  voorvoegsel?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonNationaliteit = {
-  __typename?: 'PersoonNationaliteit';
-  code?: Maybe<Scalars['String']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonNationaliteiten = {
-  __typename?: 'PersoonNationaliteiten';
-  nationaliteit?: Maybe<PersoonNationaliteit>;
-};
-
-export type PersoonOpschortingBijhouding = {
-  __typename?: 'PersoonOpschortingBijhouding';
-  datum?: Maybe<PersoonDatum>;
-  reden?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonOuder = {
-  __typename?: 'PersoonOuder';
-  burgerservicenummer?: Maybe<Scalars['String']['output']>;
-  datumIngangFamilierechtelijkeBetrekking?: Maybe<PersoonDatum>;
-  geboorte?: Maybe<PersoonDatumLandPlaats>;
-  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
-  naam?: Maybe<Naam>;
-  ouderAanduiding?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonPartner = {
-  __typename?: 'PersoonPartner';
-  aangaanHuwelijkPartnerschap?: Maybe<PersoonDatumLandPlaats>;
-  burgerservicenummer?: Maybe<Scalars['String']['output']>;
-  datumIngangFamilierechtelijkeBetrekking?: Maybe<PersoonDatum>;
-  geboorte?: Maybe<PersoonDatumLandPlaats>;
-  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
-  naam?: Maybe<Naam>;
-  soortVerbintenis?: Maybe<Scalars['String']['output']>;
-};
-
-export type PersoonVerblijfplaats = {
-  __typename?: 'PersoonVerblijfplaats';
-  adresseerbaarObjectIdentificatie?: Maybe<Scalars['String']['output']>;
-  datumAanvangAdreshouding?: Maybe<PersoonDatum>;
-  datumIngangGeldigheid?: Maybe<PersoonDatum>;
-  datumInschrijvingInGemeente?: Maybe<PersoonDatum>;
-  datumVestigingInNederland?: Maybe<PersoonDatum>;
-  huisletter?: Maybe<Scalars['String']['output']>;
-  huisnummer?: Maybe<Scalars['String']['output']>;
-  huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
-  postcode?: Maybe<Scalars['String']['output']>;
-  straat?: Maybe<Scalars['String']['output']>;
-  woonplaats?: Maybe<Scalars['String']['output']>;
+export type PersoonsIdentificatieInput = {
+  contactnaam?: InputMaybe<ContactnaamInput>;
+  volledigeNaam?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PrefillResponse = {
@@ -946,6 +1839,22 @@ export type PrefillResponse = {
   formulierUrl: Scalars['String']['output'];
   hash: Scalars['String']['output'];
   objectId: Scalars['UUID']['output'];
+};
+
+export type PrijzenPage = {
+  __typename?: 'PrijzenPage';
+  /** The elements on this page */
+  content: Array<OpenProductPrijs>;
+  /** The requested page number */
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
+  size: Scalars['Int']['output'];
+  /** The total number of elements */
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
 };
 
 export type Product = {
@@ -975,11 +1884,15 @@ export type ProductDetails = {
 
 export type ProductPage = {
   __typename?: 'ProductPage';
+  /** The elements on this page */
   content: Array<Product>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -1000,6 +1913,22 @@ export type ProductType = {
   zaaktypen: Array<Scalars['UUID']['output']>;
 };
 
+export type ProductTypesPage = {
+  __typename?: 'ProductTypesPage';
+  /** The elements on this page */
+  content: Array<OpenProductProductType>;
+  /** The requested page number */
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
+  size: Scalars['Int']['output'];
+  /** The total number of elements */
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
 export type ProductVerbruiksObject = {
   __typename?: 'ProductVerbruiksObject';
   data?: Maybe<Scalars['JSON']['output']>;
@@ -1008,33 +1937,33 @@ export type ProductVerbruiksObject = {
   soort?: Maybe<Scalars['String']['output']>;
 };
 
+export type ProductenPage = {
+  __typename?: 'ProductenPage';
+  /** The elements on this page */
+  content: Array<OpenProductProduct>;
+  /** The requested page number */
+  number: Scalars['Int']['output'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
+  size: Scalars['Int']['output'];
+  /** The total number of elements */
+  totalElements: Scalars['Int']['output'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  /** retrieves all available case definitions */
-  allCaseDefinitions: Array<CaseDefinition>;
-  /** retrieves all available case instances */
-  allCaseInstances: Array<CaseInstance>;
   /**
    * find all form definitions from repository
    * @deprecated This method is not used by the NL Portal frontend and is not being replaced.
    */
   allFormDefinitions: Array<FormDefinition>;
-  /** Do prefill for belasting aanslag */
-  belastingAanslagPrefill: PrefillResponse;
-  /** Do prefill for erfpacht contract */
-  erfpachtContractPrefill: PrefillResponse;
-  /** Check automatische incasso by klantnummer */
-  getAutomatischeIncasso: AutomatischIncassoResponse;
+  /** Find the Partij of the authenticated user. */
+  findUserPartij?: Maybe<OpenKlant2Partij>;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
-  /** Gets belasting aanslag bestanden */
-  getBelastingAanslagBestanden: AanslagBestandenPage;
-  /** Gets Dmn decision for belasting aanslag */
-  getBelastingAanslagDecision: Array<Scalars['JSON']['output']>;
-  /** Gets belasting aanslag details */
-  getBelastingAanslagDetails: AanslagDetails;
-  /** Gets belasting aanslagen of user */
-  getBelastingAanslagen: Aanslagen;
   /** Gets a single Bericht by Id */
   getBericht?: Maybe<Bericht>;
   /**
@@ -1057,11 +1986,9 @@ export type Query = {
   /** Get all besluiten */
   getBesluiten: BesluitPage;
   /** Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
-  getBewonersAantal?: Maybe<Scalars['Int']['output']>;
+  getBewonersAantalV2?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
   getBurgerProfiel?: Maybe<Klant>;
-  /** retrieves single case instance from repository */
-  getCaseInstance?: Maybe<CaseInstance>;
   /**
    *
    *         Get Decision by key and json as source
@@ -1071,18 +1998,6 @@ export type Query = {
   getDecision: Array<Scalars['JSON']['output']>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
-  /** Gets emandate by category, can be used to display all the subcategories */
-  getEmandateByCategory?: Maybe<EmandateObject>;
-  /** Gets status of mandateId */
-  getEmandateStatus: EmandateStatusResponse;
-  /** Gets list of emandates */
-  getEmandates: Array<EmandateObject>;
-  /** Get erfpacht contract by UUID */
-  getErfpachtContract: Contract;
-  /** Gets Dmn decision for erfpacht contract */
-  getErfpachtContractDecision: Array<Scalars['JSON']['output']>;
-  /** Gets all erfpacht contracten of user or rsin */
-  getErfpachtContracten: ContractBeperktPage;
   /**
    * find single form definition from repository or Objecten API
    * @deprecated Replaced by getFormDefinitionByName and getFormDefinitionByObjectenApiUrl, replace with getFormDefinitionByName or getFormDefinitionByObjectenApiUrl
@@ -1093,19 +2008,80 @@ export type Query = {
   /** find single form definition from the Objecten API */
   getFormDefinitionByObjectenApiUrl?: Maybe<FormDefinition>;
   /** Gets the data of the gemachtigde */
-  getGemachtigde: Gemachtigde;
+  getGemachtigdeV2: GemachtigdeV2;
   /** Gets the contactmomenten of a klant */
   getKlantContactMomenten?: Maybe<ContactMomentPage>;
-  /** Gets naheffing */
-  getNaheffing: Naheffing;
-  /** Gets Dmn decision for naheffing */
-  getNaheffingDecision: Array<Scalars['JSON']['output']>;
-  /** Gets naheffingen of user */
-  getNaheffingen: NaheffingenPage;
   /** Gets the contactmomenten of a object(zaak) */
   getObjectContactMomenten?: Maybe<ContactMomentPage>;
+  /** Get a Open product type by id */
+  getOpenProduct?: Maybe<OpenProductProduct>;
+  /** Get a actie */
+  getOpenProductActie?: Maybe<OpenProductActie>;
+  /** Get decision by actie naam */
+  getOpenProductActieDecision: Array<Scalars['JSON']['output']>;
+  /** Get all acties */
+  getOpenProductActies: ActiesPage;
+  /** Get a bestand */
+  getOpenProductBestand?: Maybe<OpenProductBestand>;
+  /** Get all bestanden */
+  getOpenProductBestanden: BestandenPage;
+  /** Get a contact */
+  getOpenProductContact?: Maybe<OpenProductContact>;
+  /** Get all contacten */
+  getOpenProductContacten: ContactenPage;
+  /** Get all hoofd themas */
+  getOpenProductHoofdThemas: Array<OpenProductThema>;
+  /** Get all hoofd themas by producten */
+  getOpenProductHoofdThemasByProducten: Array<OpenProductThema>;
+  /** Get a link */
+  getOpenProductLink?: Maybe<OpenProductLink>;
+  /** Get all links */
+  getOpenProductLinks: LinksPage;
+  /** Get a locatie */
+  getOpenProductLocatie?: Maybe<OpenProductLocatie>;
+  /** Get all locaties */
+  getOpenProductLocaties: LocatiesPage;
+  /** Get a organisatie */
+  getOpenProductOrganisatie?: Maybe<OpenProductOrganisatie>;
+  /** Get all organisaties */
+  getOpenProductOrganisaties: OrganisatiesPage;
+  /** Get a prijs */
+  getOpenProductPrijs?: Maybe<OpenProductPrijs>;
+  /** Get all prijzen */
+  getOpenProductPrijzen: PrijzenPage;
+  /** Get a thema */
+  getOpenProductThema?: Maybe<OpenProductThema>;
+  /** Get thema hierarchy */
+  getOpenProductThemaHierarchy: Array<OpenProductThemaHierarchy>;
+  /** Get taken of a thema, including their parent themas */
+  getOpenProductThemaTaken: Array<TaakV2>;
+  /** Get zaken of a thema, including their parent themas */
+  getOpenProductThemaZaken: Array<Zaak>;
+  /** Get all themas */
+  getOpenProductThemas: ThemasPage;
+  /** Get all themas hierarchy */
+  getOpenProductThemasHierarchy: Array<OpenProductThemaHierarchy>;
+  /** Get a Open product type by id */
+  getOpenProductType?: Maybe<OpenProductProductType>;
+  /** Get all Open product types  */
+  getOpenProductTypes: ProductTypesPage;
+  /**
+   *
+   *         Get all Open producten
+   *         The allowed statussen:
+   *         - initieel
+   *         - gereed
+   *         - actief
+   *         - ingetrokken
+   *         - geweigerd
+   *         - verlopen
+   *
+   */
+  getOpenProducten: ProductenPage;
+  /** Get a Open producten type by thema id */
+  getOpenProductenByThema: Array<OpenProductProduct>;
   /** Gets the persoon data */
-  getPersoon?: Maybe<Persoon>;
+  getPersoonV2?: Maybe<BrpPersoon>;
   /** Get product by id */
   getProduct?: Maybe<Product>;
   /**
@@ -1153,20 +2129,20 @@ export type Query = {
   getTasks: TaakPage;
   /** Returns the total amount of unopened Berichten */
   getUnopenedBerichtenCount: Scalars['Int']['output'];
+  /** Get DigitaleAdressen of authenticated user. */
+  getUserDigitaleAdresen?: Maybe<Array<DigitaleAdresResponse>>;
+  /** Get KlantContact by id of authenticated user. */
+  getUserKlantContact?: Maybe<OpenKlant2Klantcontact>;
   /**
    *
-   *         Get vergunning by vergunningNummer and enddate
+   *         Get KlantContacten of authenticated user and optional filter on .
+   *         identificatorType, like zaak or product
+   *         identificatorId, the uuid of the zaak or product
    *
    */
-  getVergunning: VergunningDetail;
-  /** Gets Dmn decision for vergunning */
-  getVergunningDecision: Array<Scalars['JSON']['output']>;
-  /** Gets vergunningen of user */
-  getVergunningen: VergunningenPage;
-  /** Gets Dmn decision for WOZ taxatie */
-  getWozTaxatieDecision: Array<Scalars['JSON']['output']>;
-  /** Gets woz taxaties of user and jaar */
-  getWozTaxaties: WozObjectPage;
+  getUserKlantContacten: Array<OpenKlant2Klantcontact>;
+  /** Get Partij by Id for authenticated user. */
+  getUserPartij?: Maybe<OpenKlant2Partij>;
   /** Gets a zaak by id */
   getZaak: Zaak;
   /**
@@ -1175,75 +2151,17 @@ export type Query = {
    *         isOpen is optional, when not available, all zaken will be returned
    *         isOpen is true, only zaken without enddate will be returned
    *         isOpen is false, only zaken with an enddate will be returned
+   *         omschrijving: partial search of this property. Since OpenZaak 1.18.0
+   *         identificatieContains: partial search of this property. Since OpenZaak 1.18.0
    *
    */
   getZaken: ZaakPage;
-  /** Do prefill for naheffing */
-  naheffingPrefill: PrefillResponse;
   /**
    *
    *         Prefill data to start a form.
    *
    */
   productPrefill: PrefillResponse;
-  /** Do prefill for vergunning */
-  vergunningPrefill: PrefillResponse;
-  /** Do prefill for WOZ taxatie */
-  wozTaxatiePrefill: PrefillResponse;
-};
-
-
-export type QueryAllCaseInstancesArgs = {
-  orderBy: CaseInstanceOrderingInput;
-};
-
-
-export type QueryBelastingAanslagPrefillArgs = {
-  aanslagnummer: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  staticData?: InputMaybe<Scalars['JSON']['input']>;
-};
-
-
-export type QueryErfpachtContractPrefillArgs = {
-  id: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  staticData?: InputMaybe<Scalars['JSON']['input']>;
-};
-
-
-export type QueryGetAutomatischeIncassoArgs = {
-  klantnummer?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetBelastingAanslagBestandenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetBelastingAanslagDecisionArgs = {
-  aanslagnummer: Scalars['String']['input'];
-  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-
-export type QueryGetBelastingAanslagDetailsArgs = {
-  aanslagnummer: Scalars['String']['input'];
-};
-
-
-export type QueryGetBelastingAanslagenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -1295,13 +2213,8 @@ export type QueryGetBesluitenArgs = {
 };
 
 
-export type QueryGetBewonersAantalArgs = {
+export type QueryGetBewonersAantalV2Args = {
   adresseerbaarObjectIdentificatie: Scalars['String']['input'];
-};
-
-
-export type QueryGetCaseInstanceArgs = {
-  id: Scalars['UUID']['input'];
 };
 
 
@@ -1317,38 +2230,6 @@ export type QueryGetDecisionArgs = {
 export type QueryGetDocumentContentArgs = {
   documentApi: Scalars['String']['input'];
   id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetEmandateByCategoryArgs = {
-  categorie: Scalars['String']['input'];
-};
-
-
-export type QueryGetEmandateStatusArgs = {
-  category: Scalars['String']['input'];
-  mandateId: Scalars['String']['input'];
-};
-
-
-export type QueryGetErfpachtContractArgs = {
-  id: Scalars['String']['input'];
-};
-
-
-export type QueryGetErfpachtContractDecisionArgs = {
-  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
-  id: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-
-export type QueryGetErfpachtContractenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-  rsin?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -1372,30 +2253,155 @@ export type QueryGetKlantContactMomentenArgs = {
 };
 
 
-export type QueryGetNaheffingArgs = {
-  bonNummer: Scalars['String']['input'];
-  kenteken?: InputMaybe<Scalars['String']['input']>;
+export type QueryGetObjectContactMomentenArgs = {
+  objectUrl: Scalars['String']['input'];
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type QueryGetNaheffingDecisionArgs = {
-  bonNummer: Scalars['String']['input'];
-  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
+export type QueryGetOpenProductArgs = {
+  id: Scalars['UUID']['input'];
 };
 
 
-export type QueryGetNaheffingenArgs = {
+export type QueryGetOpenProductActieArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductActieDecisionArgs = {
+  naam: Scalars['String']['input'];
+  productId: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductActiesArgs = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type QueryGetObjectContactMomentenArgs = {
-  objectUrl: Scalars['String']['input'];
+export type QueryGetOpenProductBestandArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductBestandenArgs = {
+  naam?: InputMaybe<Scalars['String']['input']>;
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductContactArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductContactenArgs = {
+  naam?: InputMaybe<Scalars['String']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductLinkArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductLinksArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductLocatieArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductLocatiesArgs = {
+  naam?: InputMaybe<Scalars['String']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductOrganisatieArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductOrganisatiesArgs = {
+  naam?: InputMaybe<Scalars['String']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductPrijsArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductPrijzenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductThemaArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductThemaHierarchyArgs = {
+  id: Scalars['UUID']['input'];
+};
+
+
+export type QueryGetOpenProductThemaTakenArgs = {
+  id: Scalars['UUID']['input'];
+  language?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGetOpenProductThemaZakenArgs = {
+  id: Scalars['UUID']['input'];
+  isOpen?: InputMaybe<Scalars['Boolean']['input']>;
+  language?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGetOpenProductThemasArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductTypeArgs = {
+  id: Scalars['UUID']['input'];
+  language?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGetOpenProductTypesArgs = {
+  language?: InputMaybe<Scalars['String']['input']>;
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type QueryGetOpenProductenArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGetOpenProductenByThemaArgs = {
+  themaId: Scalars['UUID']['input'];
 };
 
 
@@ -1483,39 +2489,19 @@ export type QueryGetTasksArgs = {
 };
 
 
-export type QueryGetVergunningArgs = {
-  vergunningnummer: Scalars['Int']['input'];
+export type QueryGetUserKlantContactArgs = {
+  klantContactId: Scalars['UUID']['input'];
 };
 
 
-export type QueryGetVergunningDecisionArgs = {
-  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  vergunningnummer: Scalars['Int']['input'];
+export type QueryGetUserKlantContactenArgs = {
+  identificatorId?: InputMaybe<Scalars['UUID']['input']>;
+  identificatorType?: InputMaybe<OnderwerpObjectIndentificatorType>;
 };
 
 
-export type QueryGetVergunningenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetWozTaxatieDecisionArgs = {
-  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
-  jaar: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  objectNummer: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-
-export type QueryGetWozTaxatiesArgs = {
-  jaar?: InputMaybe<Scalars['String']['input']>;
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
+export type QueryGetUserPartijArgs = {
+  partijId: Scalars['UUID']['input'];
 };
 
 
@@ -1526,18 +2512,12 @@ export type QueryGetZaakArgs = {
 
 export type QueryGetZakenArgs = {
   identificatie?: InputMaybe<Scalars['String']['input']>;
+  identificatieContains?: InputMaybe<Scalars['String']['input']>;
   isOpen?: InputMaybe<Scalars['Boolean']['input']>;
+  omschrijving?: InputMaybe<Scalars['String']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
   zaakTypeUrl?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryNaheffingPrefillArgs = {
-  bonNummer: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  staticData?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 
@@ -1549,23 +2529,16 @@ export type QueryProductPrefillArgs = {
   staticData?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-
-export type QueryVergunningPrefillArgs = {
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  staticData?: InputMaybe<Scalars['JSON']['input']>;
-  vergunningnummer: Scalars['Int']['input'];
-};
-
-
-export type QueryWozTaxatiePrefillArgs = {
-  jaar: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  objectNummer: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  staticData?: InputMaybe<Scalars['JSON']['input']>;
+export type ResultaatType = {
+  __typename?: 'ResultaatType';
+  omschrijving?: Maybe<Scalars['String']['output']>;
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
+  resultaattypeomschrijving: Scalars['String']['output'];
+  selectielijstklasse: Scalars['String']['output'];
+  toelichting?: Maybe<Scalars['String']['output']>;
+  url: Scalars['String']['output'];
+  zaaktype: Scalars['String']['output'];
+  zaaktypeIdentificatie?: Maybe<Scalars['String']['output']>;
 };
 
 export type SbiActiviteit = {
@@ -1575,21 +2548,17 @@ export type SbiActiviteit = {
   sbiOmschrijving: Scalars['String']['output'];
 };
 
-export enum Sort {
-  Asc = 'ASC',
-  Desc = 'DESC'
+export enum SoortPartij {
+  Contactpersoon = 'CONTACTPERSOON',
+  Organisatie = 'ORGANISATIE',
+  Persoon = 'PERSOON'
 }
-
-export type Status = {
-  __typename?: 'Status';
-  createdOn: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-};
 
 export type StatusType = {
   __typename?: 'StatusType';
   isEindstatus?: Maybe<Scalars['Boolean']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
+  omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type Taak = {
@@ -1643,16 +2612,20 @@ export type TaakIdentificatie = {
 export type TaakKoppeling = {
   __typename?: 'TaakKoppeling';
   registratie: Scalars['String']['output'];
-  uuid?: Maybe<Scalars['UUID']['output']>;
+  value?: Maybe<Scalars['String']['output']>;
 };
 
 export type TaakPage = {
   __typename?: 'TaakPage';
+  /** The elements on this page */
   content: Array<Taak>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -1660,11 +2633,15 @@ export type TaakPage = {
 
 export type TaakPageV2 = {
   __typename?: 'TaakPageV2';
+  /** The elements on this page */
   content: Array<TaakV2>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
@@ -1710,125 +2687,14 @@ export enum TaakVersion {
   V2 = 'V2'
 }
 
-export type UpdateEmandateSubCategoriesInput = {
-  category: Scalars['String']['input'];
-  subcategories: Array<EmandateSubCategorieInput>;
-};
-
-export type Vergunning = {
-  __typename?: 'Vergunning';
-  betaalMethodeToekomst?: Maybe<Scalars['String']['output']>;
-  betaaldExtraTegoed?: Maybe<Scalars['Long']['output']>;
-  betaalkenmerk?: Maybe<Scalars['String']['output']>;
-  codeGebied?: Maybe<Scalars['Int']['output']>;
-  codeSubGebied?: Maybe<Scalars['String']['output']>;
-  geldigTot?: Maybe<Scalars['Date']['output']>;
-  iban18?: Maybe<Scalars['String']['output']>;
-  kenteken?: Maybe<Scalars['String']['output']>;
-  kostenExtraTegoed?: Maybe<Scalars['Long']['output']>;
-  machtigingAutomatischeIncasso?: Maybe<Scalars['Boolean']['output']>;
-  mandaatId?: Maybe<Scalars['String']['output']>;
-  meldnummer?: Maybe<Scalars['Int']['output']>;
-  naamSubGebied?: Maybe<Scalars['String']['output']>;
-  nogTeBetalen?: Maybe<Scalars['Long']['output']>;
-  omschrijvingVergunning?: Maybe<Scalars['String']['output']>;
-  pin?: Maybe<Scalars['Int']['output']>;
-  taalCode?: Maybe<Scalars['String']['output']>;
-  tegoedActueel?: Maybe<Scalars['Int']['output']>;
-  tegoedExtra?: Maybe<Scalars['Int']['output']>;
-  tegoedInitieel?: Maybe<Scalars['Int']['output']>;
-  toelichting?: Maybe<Scalars['String']['output']>;
-  vergunningNummer?: Maybe<Scalars['Int']['output']>;
-  vergunningenSoort?: Maybe<Scalars['String']['output']>;
-  verschuldigBedrag?: Maybe<Scalars['Long']['output']>;
-  werkingtijdTm?: Maybe<Scalars['Int']['output']>;
-  werkingtijdVanaf?: Maybe<Scalars['Int']['output']>;
-};
-
-export type VergunningDetail = {
-  __typename?: 'VergunningDetail';
-  burgerservicenummer?: Maybe<Scalars['String']['output']>;
-  codeBIC?: Maybe<Scalars['String']['output']>;
-  codeGebied?: Maybe<Scalars['Int']['output']>;
-  codeIBAN?: Maybe<Scalars['String']['output']>;
-  codeSubGebied?: Maybe<Scalars['String']['output']>;
-  einddatumPeriode?: Maybe<Scalars['Date']['output']>;
-  geboorteDatum?: Maybe<Scalars['Date']['output']>;
-  geslacht?: Maybe<Scalars['String']['output']>;
-  huisletter?: Maybe<Scalars['String']['output']>;
-  huisnummer: Scalars['Int']['output'];
-  ingangsdatumPeriode?: Maybe<Scalars['Date']['output']>;
-  kentekenVergunning?: Maybe<Scalars['String']['output']>;
-  kostenStraatParkeren?: Maybe<Scalars['Long']['output']>;
-  kostenperiode?: Maybe<Scalars['Long']['output']>;
-  machtigingAutomatischeIncasso?: Maybe<Scalars['Boolean']['output']>;
-  naam: Scalars['String']['output'];
-  naamSubGebied?: Maybe<Scalars['String']['output']>;
-  parkeerTegoed?: Maybe<Scalars['Int']['output']>;
-  pasnummer: Scalars['Int']['output'];
-  pincode?: Maybe<Scalars['Int']['output']>;
-  plaats?: Maybe<Scalars['String']['output']>;
-  postcode: Scalars['String']['output'];
-  restitutieBedrag?: Maybe<Scalars['Long']['output']>;
-  soortVergunning?: Maybe<Scalars['String']['output']>;
-  straatnaam?: Maybe<Scalars['String']['output']>;
-  /** Get subject of vergunning. */
-  subject: VergunningSubject;
-  subjectnummer?: Maybe<Scalars['Long']['output']>;
-  tegoed?: Maybe<Scalars['Long']['output']>;
-  tegoedextra?: Maybe<Scalars['Long']['output']>;
-  tegoedinitieel?: Maybe<Scalars['Long']['output']>;
-  telefoonnummer?: Maybe<Scalars['String']['output']>;
-  vergunningNummer: Scalars['Int']['output'];
-  vergunningomschrijving?: Maybe<Scalars['String']['output']>;
-  vestigingsnummer?: Maybe<Scalars['Int']['output']>;
-};
-
-export type VergunningSubject = {
-  __typename?: 'VergunningSubject';
-  codeGebied: Scalars['Int']['output'];
-  codeSubGebied: Scalars['String']['output'];
-  eigenPlaatsen: Scalars['Int']['output'];
-  emailadres?: Maybe<Scalars['String']['output']>;
-  geboortedatum?: Maybe<Scalars['Date']['output']>;
-  geslacht?: Maybe<Scalars['String']['output']>;
-  huisletter?: Maybe<Scalars['String']['output']>;
-  huisnummer: Scalars['Int']['output'];
-  naam: Scalars['String']['output'];
-  naamSubGebied: Scalars['String']['output'];
-  plaats?: Maybe<Scalars['String']['output']>;
-  postcode: Scalars['String']['output'];
-  straatnaam: Scalars['String']['output'];
-  subjectnummer: Scalars['Int']['output'];
-  telefoonnummer?: Maybe<Scalars['String']['output']>;
-  uitgegevenBedrijven: Scalars['Int']['output'];
-  uitgegevenBewoners: Scalars['Int']['output'];
-  uitgegevenBezoekers: Scalars['Int']['output'];
-};
-
-export type VergunningenPage = {
-  __typename?: 'VergunningenPage';
-  content: Array<Vergunning>;
+export type ThemasPage = {
+  __typename?: 'ThemasPage';
+  /** The elements on this page */
+  content: Array<OpenProductThema>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  size: Scalars['Int']['output'];
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type WijzigVergunningResponse = {
-  __typename?: 'WijzigVergunningResponse';
-  indicatieVerwerkt: Scalars['Boolean']['output'];
-};
-
-export type WozObjectPage = {
-  __typename?: 'WozObjectPage';
-  /** The elements on this page */
-  content: Array<WozObjectSub>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
   /** The requested page size */
   size: Scalars['Int']['output'];
   /** The total number of elements */
@@ -1837,11 +2703,10 @@ export type WozObjectPage = {
   totalPages: Scalars['Int']['output'];
 };
 
-export type WozObjectSub = {
-  __typename?: 'WozObjectSub';
-  objectAdres: Scalars['String']['output'];
-  objectNummer: Scalars['String']['output'];
-  objectSoortOmschrijving: Scalars['String']['output'];
+export type UpdateProductRequestInput = {
+  dataobject?: InputMaybe<Scalars['JSON']['input']>;
+  uuid: Scalars['UUID']['input'];
+  verbruiksobject?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 export type Zaak = {
@@ -1851,6 +2716,7 @@ export type Zaak = {
   einddatum?: Maybe<Scalars['Date']['output']>;
   identificatie: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
+  resultaat?: Maybe<ZaakResultaat>;
   startdatum: Scalars['Date']['output'];
   status?: Maybe<ZaakStatus>;
   statusGeschiedenis: Array<ZaakStatus>;
@@ -1869,14 +2735,27 @@ export type ZaakDetails = {
 
 export type ZaakPage = {
   __typename?: 'ZaakPage';
+  /** The elements on this page */
   content: Array<Zaak>;
+  /** The requested page number */
   number: Scalars['Int']['output'];
   /** The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
+  /** The requested page size */
   size: Scalars['Int']['output'];
+  /** The total number of elements */
   totalElements: Scalars['Int']['output'];
   /** The total number of available pages */
   totalPages: Scalars['Int']['output'];
+};
+
+export type ZaakResultaat = {
+  __typename?: 'ZaakResultaat';
+  resultaattype: ResultaatType;
+  toelichting?: Maybe<Scalars['String']['output']>;
+  url: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+  zaak: Scalars['String']['output'];
 };
 
 export type ZaakStatus = {
@@ -1890,32 +2769,53 @@ export type ZaakStatusType = {
   __typename?: 'ZaakStatusType';
   isEindstatus: Scalars['Boolean']['output'];
   omschrijving: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type ZaakType = {
   __typename?: 'ZaakType';
   identificatie: Scalars['String']['output'];
   omschrijving: Scalars['String']['output'];
-};
-
-export type ZakelijkRecht = {
-  __typename?: 'ZakelijkRecht';
-  id: Scalars['Int']['output'];
-  kadastraalObjecten: Array<KadastraalObject>;
-  naam: Scalars['String']['output'];
+  omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
 
+export type CreateUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresRequest: DigitaleAdresRequestInput;
+}>;
+
+
+export type CreateUserDigitaleAdresMutation = { __typename?: 'Mutation', createUserDigitaleAdres?: { __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string } | null };
+
+export type DeleteUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresId: Scalars['UUID']['input'];
+}>;
+
+
+export type DeleteUserDigitaleAdresMutation = { __typename?: 'Mutation', deleteUserDigitaleAdres?: boolean | null };
+
+export type DoDirectPaymentMutationVariables = Exact<{
+  amount: Scalars['Float']['input'];
+  identifier: Scalars['String']['input'];
+  langId?: InputMaybe<Scalars['String']['input']>;
+  orderId: Scalars['String']['input'];
+  reference: Scalars['String']['input'];
+  returnUrl?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type DoDirectPaymentMutation = { __typename?: 'Mutation', doDirectPayment: { __typename?: 'DirectPaymentResponse', redirectUrl: string } };
+
 export type GenerateOgonePaymentMutationVariables = Exact<{
   amount: Scalars['Float']['input'];
-  failureUrl: Scalars['String']['input'];
-  langId: Scalars['String']['input'];
+  failureUrl?: InputMaybe<Scalars['String']['input']>;
+  langId?: InputMaybe<Scalars['String']['input']>;
   orderId: Scalars['String']['input'];
   pspId: Scalars['String']['input'];
   reference: Scalars['String']['input'];
-  successUrl: Scalars['String']['input'];
-  title: Scalars['String']['input'];
+  successUrl?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -1944,6 +2844,13 @@ export type UpdateBurgerProfielMutationVariables = Exact<{
 
 
 export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
+
+export type UpdateUserDigitaleAdresMutationVariables = Exact<{
+  digitaleAdresRequest: DigitaleAdresRequestInput;
+}>;
+
+
+export type UpdateUserDigitaleAdresMutation = { __typename?: 'Mutation', updateUserDigitaleAdres?: { __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string } | null };
 
 export type UpdateProductVerbruiksObjectMutationVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -1977,7 +2884,7 @@ export type GetUnopenedBerichtenCountQuery = { __typename?: 'Query', getUnopened
 export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string, kvkNummer: string, embedded?: { __typename?: 'Embedded', eigenaar: { __typename?: 'Eigenaar', rechtsvorm: string }, hoofdvestiging: { __typename?: 'Hoofdvestiging', adressen?: Array<{ __typename?: 'Adres', straatnaam: string, huisnummer: number, postcode: string, plaats: string }> | null } } | null } | null };
+export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string, kvkNummer: string, embedded?: { __typename?: 'Embedded', eigenaar: { __typename?: 'Eigenaar', rechtsvorm: string }, hoofdvestiging: { __typename?: 'Hoofdvestiging', adressen?: Array<{ __typename?: 'Adres', straatnaam?: string | null, huisnummer?: number | null, postcode: string, plaats: string }> | null } } | null } | null };
 
 export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2019,10 +2926,10 @@ export type GetPortaalFormulierByIdV2QueryVariables = Exact<{
 
 export type GetPortaalFormulierByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
-export type GetGemachtigdeQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetGemachtigdeV2QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetGemachtigdeQuery = { __typename?: 'Query', getGemachtigde: { __typename?: 'Gemachtigde', persoon?: { __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null } } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } };
+export type GetGemachtigdeV2Query = { __typename?: 'Query', getGemachtigdeV2: { __typename?: 'GemachtigdeV2', persoon?: { __typename?: 'BrpPersoon', naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null } } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } };
 
 export type GetKlantContactMomentenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2036,15 +2943,43 @@ export type GetObjectContactMomentenQueryVariables = Exact<{
 
 export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectContactMomenten?: { __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> } | null };
 
-export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetOpenProductenByThemaQueryVariables = Exact<{
+  themaId: Scalars['UUID']['input'];
+}>;
 
 
-export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', burgerservicenummer?: string | null, geslachtsaanduiding?: string | null, bewonersAantal?: number | null, naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'PersoonVerblijfplaats', straat?: string | null, huisnummer?: string | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, geboorte?: { __typename?: 'PersoonDatumLandPlaats', datum?: { __typename?: 'PersoonDatum', datum?: string | null, jaar?: number | null, maand?: number | null, dag?: number | null } | null, land?: { __typename?: 'PersoonCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten?: Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: { __typename?: 'PersoonNationaliteit', code?: string | null, omschrijving?: string | null } | null }> | null } | null };
+export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProductenByThema: Array<{ __typename?: 'OpenProductProduct', uuid: any, naam: string, startDatum?: any | null, eindDatum?: any | null, taken?: Array<{ __typename?: 'TaakV2', id: any, titel: string, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null } }> | null, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null, zaaktype: { __typename?: 'ZaakType', identificatie: string } }> | null }> };
 
-export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetOpenProductHoofdThemasQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: { __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', voornamen?: string | null, officialLastName?: string | null } } | null };
+export type GetOpenProductHoofdThemasQuery = { __typename?: 'Query', getOpenProductHoofdThemas: Array<{ __typename?: 'OpenProductThema', uuid: any, naam: string }> };
+
+export type GetOpenProductThemaTakenQueryVariables = Exact<{
+  id: Scalars['UUID']['input'];
+}>;
+
+
+export type GetOpenProductThemaTakenQuery = { __typename?: 'Query', getOpenProductThemaTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
+
+export type GetOpenProductThemaZakenQueryVariables = Exact<{
+  id: Scalars['UUID']['input'];
+}>;
+
+
+export type GetOpenProductThemaZakenQuery = { __typename?: 'Query', getOpenProductThemaZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> };
+
+export type GetOpenProductQueryVariables = Exact<{
+  id: Scalars['UUID']['input'];
+}>;
+
+
+export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> | null } | null };
+
+export type GetPersoonV2QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPersoonV2Query = { __typename?: 'Query', getPersoonV2?: { __typename?: 'BrpPersoon', burgerservicenummer: string, bewonersAantal?: number | null, geheimhoudingPersoonsgegevens?: boolean | null, geslacht?: { __typename?: 'BrpCodeOmschrijving', omschrijving?: string | null } | null, naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'BrpVerblijfplaats', verblijfadres?: { __typename?: 'Brp2Adres', officieleStraatnaam?: string | null, huisnummer?: number | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, datumVan?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null } | null, geboorte?: { __typename?: 'BrpDatumLandPlaats', datum?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null, land?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null, plaats?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten: Array<{ __typename?: 'BrpNationaliteit', nationaliteit?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null }> } | null };
 
 export type GetProductTakenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -2052,7 +2987,7 @@ export type GetProductTakenQueryVariables = Exact<{
 }>;
 
 
-export type GetProductTakenQuery = { __typename?: 'Query', getProductTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
+export type GetProductTakenQuery = { __typename?: 'Query', getProductTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
 
 export type GetProductVerbruiksObjectenQueryVariables = Exact<{
   productId: Scalars['UUID']['input'];
@@ -2075,7 +3010,7 @@ export type GetProductQueryVariables = Exact<{
 }>;
 
 
-export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } | null };
+export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } | null };
 
 export type GetProductenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -2091,7 +3026,7 @@ export type GetTaakByIdV2QueryVariables = Exact<{
 }>;
 
 
-export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
+export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
 export type GetTaakByIdQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -2108,7 +3043,7 @@ export type GetTakenV2QueryVariables = Exact<{
 }>;
 
 
-export type GetTakenV2Query = { __typename?: 'Query', getTakenV2: { __typename?: 'TaakPageV2', totalElements: number, totalPages: number, content: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, uuid?: any | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } };
+export type GetTakenV2Query = { __typename?: 'Query', getTakenV2: { __typename?: 'TaakPageV2', totalElements: number, totalPages: number, content: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } };
 
 export type GetTakenQueryVariables = Exact<{
   zaakId?: InputMaybe<Scalars['UUID']['input']>;
@@ -2119,18 +3054,33 @@ export type GetTakenQueryVariables = Exact<{
 
 export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, data: any, zaak?: string | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
 
+export type GetUserDigitaleAdressenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdresen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string }> | null };
+
+export type GetUserKlantContactenQueryVariables = Exact<{
+  identificatorType: OnderwerpObjectIndentificatorType;
+  identificatorId: Scalars['UUID']['input'];
+}>;
+
+
+export type GetUserKlantContactenQuery = { __typename?: 'Query', getUserKlantContacten: Array<{ __typename?: 'OpenKlant2Klantcontact', uuid: string, inhoud: string, kanaal: string, onderwerp: string, plaatsgevondenOp: string }> };
+
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
 }>;
 
 
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: string | null }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string } } };
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving: string }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string }, resultaat?: { __typename?: 'ZaakResultaat', toelichting?: string | null, resultaattype: { __typename?: 'ResultaatType', omschrijvingGeneriek?: string | null } } | null } };
 
 export type GetZakenQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
   zaakTypeUrl?: InputMaybe<Scalars['String']['input']>;
   isOpen?: InputMaybe<Scalars['Boolean']['input']>;
   identificatie?: InputMaybe<Scalars['String']['input']>;
+  identificatieContains?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -2142,8 +3092,116 @@ export const FormulierFieldsFragmentDoc = gql`
   value
 }
     `;
+export const CreateUserDigitaleAdresDocument = gql`
+    mutation CreateUserDigitaleAdres($digitaleAdresRequest: DigitaleAdresRequestInput!) {
+  createUserDigitaleAdres(digitaleAdresRequest: $digitaleAdresRequest) {
+    uuid
+    waarde
+    type
+    omschrijving
+    referentie
+  }
+}
+    `;
+export type CreateUserDigitaleAdresMutationFn = Apollo.MutationFunction<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useCreateUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useCreateUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserDigitaleAdresMutation, { data, loading, error }] = useCreateUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresRequest: // value for 'digitaleAdresRequest'
+ *   },
+ * });
+ */
+export function useCreateUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>(CreateUserDigitaleAdresDocument, options);
+      }
+export type CreateUserDigitaleAdresMutationHookResult = ReturnType<typeof useCreateUserDigitaleAdresMutation>;
+export type CreateUserDigitaleAdresMutationResult = Apollo.MutationResult<CreateUserDigitaleAdresMutation>;
+export type CreateUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>;
+export const DeleteUserDigitaleAdresDocument = gql`
+    mutation DeleteUserDigitaleAdres($digitaleAdresId: UUID!) {
+  deleteUserDigitaleAdres(digitaleAdresId: $digitaleAdresId)
+}
+    `;
+export type DeleteUserDigitaleAdresMutationFn = Apollo.MutationFunction<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useDeleteUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useDeleteUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserDigitaleAdresMutation, { data, loading, error }] = useDeleteUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresId: // value for 'digitaleAdresId'
+ *   },
+ * });
+ */
+export function useDeleteUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>(DeleteUserDigitaleAdresDocument, options);
+      }
+export type DeleteUserDigitaleAdresMutationHookResult = ReturnType<typeof useDeleteUserDigitaleAdresMutation>;
+export type DeleteUserDigitaleAdresMutationResult = Apollo.MutationResult<DeleteUserDigitaleAdresMutation>;
+export type DeleteUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>;
+export const DoDirectPaymentDocument = gql`
+    mutation DoDirectPayment($amount: Float!, $identifier: String!, $langId: String, $orderId: String!, $reference: String!, $returnUrl: String) {
+  doDirectPayment(
+    paymentRequest: {amount: $amount, identifier: $identifier, langId: $langId, orderId: $orderId, reference: $reference, returnUrl: $returnUrl}
+  ) {
+    redirectUrl
+  }
+}
+    `;
+export type DoDirectPaymentMutationFn = Apollo.MutationFunction<DoDirectPaymentMutation, DoDirectPaymentMutationVariables>;
+
+/**
+ * __useDoDirectPaymentMutation__
+ *
+ * To run a mutation, you first call `useDoDirectPaymentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDoDirectPaymentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [doDirectPaymentMutation, { data, loading, error }] = useDoDirectPaymentMutation({
+ *   variables: {
+ *      amount: // value for 'amount'
+ *      identifier: // value for 'identifier'
+ *      langId: // value for 'langId'
+ *      orderId: // value for 'orderId'
+ *      reference: // value for 'reference'
+ *      returnUrl: // value for 'returnUrl'
+ *   },
+ * });
+ */
+export function useDoDirectPaymentMutation(baseOptions?: Apollo.MutationHookOptions<DoDirectPaymentMutation, DoDirectPaymentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DoDirectPaymentMutation, DoDirectPaymentMutationVariables>(DoDirectPaymentDocument, options);
+      }
+export type DoDirectPaymentMutationHookResult = ReturnType<typeof useDoDirectPaymentMutation>;
+export type DoDirectPaymentMutationResult = Apollo.MutationResult<DoDirectPaymentMutation>;
+export type DoDirectPaymentMutationOptions = Apollo.BaseMutationOptions<DoDirectPaymentMutation, DoDirectPaymentMutationVariables>;
 export const GenerateOgonePaymentDocument = gql`
-    mutation GenerateOgonePayment($amount: Float!, $failureUrl: String!, $langId: String!, $orderId: String!, $pspId: String!, $reference: String!, $successUrl: String!, $title: String!) {
+    mutation GenerateOgonePayment($amount: Float!, $failureUrl: String, $langId: String, $orderId: String!, $pspId: String!, $reference: String!, $successUrl: String, $title: String) {
   generateOgonePayment(
     paymentRequest: {amount: $amount, failureUrl: $failureUrl, langId: $langId, orderId: $orderId, pspId: $pspId, reference: $reference, successUrl: $successUrl, title: $title}
   ) {
@@ -2308,6 +3366,43 @@ export function useUpdateBurgerProfielMutation(baseOptions?: Apollo.MutationHook
 export type UpdateBurgerProfielMutationHookResult = ReturnType<typeof useUpdateBurgerProfielMutation>;
 export type UpdateBurgerProfielMutationResult = Apollo.MutationResult<UpdateBurgerProfielMutation>;
 export type UpdateBurgerProfielMutationOptions = Apollo.BaseMutationOptions<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>;
+export const UpdateUserDigitaleAdresDocument = gql`
+    mutation UpdateUserDigitaleAdres($digitaleAdresRequest: DigitaleAdresRequestInput!) {
+  updateUserDigitaleAdres(digitaleAdresRequest: $digitaleAdresRequest) {
+    uuid
+    waarde
+    type
+    omschrijving
+    referentie
+  }
+}
+    `;
+export type UpdateUserDigitaleAdresMutationFn = Apollo.MutationFunction<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>;
+
+/**
+ * __useUpdateUserDigitaleAdresMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserDigitaleAdresMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserDigitaleAdresMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserDigitaleAdresMutation, { data, loading, error }] = useUpdateUserDigitaleAdresMutation({
+ *   variables: {
+ *      digitaleAdresRequest: // value for 'digitaleAdresRequest'
+ *   },
+ * });
+ */
+export function useUpdateUserDigitaleAdresMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>(UpdateUserDigitaleAdresDocument, options);
+      }
+export type UpdateUserDigitaleAdresMutationHookResult = ReturnType<typeof useUpdateUserDigitaleAdresMutation>;
+export type UpdateUserDigitaleAdresMutationResult = Apollo.MutationResult<UpdateUserDigitaleAdresMutation>;
+export type UpdateUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<UpdateUserDigitaleAdresMutation, UpdateUserDigitaleAdresMutationVariables>;
 export const UpdateProductVerbruiksObjectDocument = gql`
     mutation UpdateProductVerbruiksObject($id: UUID!, $submission: JSON!) {
   updateProductVerbruiksObject(id: $id, submission: $submission) {
@@ -2390,8 +3485,8 @@ export function useGetBerichtLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBerichtQuery, GetBerichtQueryVariables>(GetBerichtDocument, options);
         }
-export function useGetBerichtSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBerichtQuery, GetBerichtQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBerichtSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBerichtQuery, GetBerichtQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBerichtQuery, GetBerichtQueryVariables>(GetBerichtDocument, options);
         }
 export type GetBerichtQueryHookResult = ReturnType<typeof useGetBerichtQuery>;
@@ -2444,8 +3539,8 @@ export function useGetBerichtenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBerichtenQuery, GetBerichtenQueryVariables>(GetBerichtenDocument, options);
         }
-export function useGetBerichtenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBerichtenQuery, GetBerichtenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBerichtenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBerichtenQuery, GetBerichtenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBerichtenQuery, GetBerichtenQueryVariables>(GetBerichtenDocument, options);
         }
 export type GetBerichtenQueryHookResult = ReturnType<typeof useGetBerichtenQuery>;
@@ -2481,8 +3576,8 @@ export function useGetUnopenedBerichtenCountLazyQuery(baseOptions?: Apollo.LazyQ
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
         }
-export function useGetUnopenedBerichtenCountSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetUnopenedBerichtenCountSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetUnopenedBerichtenCountQuery, GetUnopenedBerichtenCountQueryVariables>(GetUnopenedBerichtenCountDocument, options);
         }
 export type GetUnopenedBerichtenCountQueryHookResult = ReturnType<typeof useGetUnopenedBerichtenCountQuery>;
@@ -2534,8 +3629,8 @@ export function useGetBedrijfLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
         }
-export function useGetBedrijfSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBedrijfSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
         }
 export type GetBedrijfQueryHookResult = ReturnType<typeof useGetBedrijfQuery>;
@@ -2575,8 +3670,8 @@ export function useGetBurgerProfielLazyQuery(baseOptions?: Apollo.LazyQueryHookO
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
         }
-export function useGetBurgerProfielSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetBurgerProfielSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
         }
 export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProfielQuery>;
@@ -2627,8 +3722,8 @@ export function useGetDocumentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetDocumentenQuery, GetDocumentenQueryVariables>(GetDocumentenDocument, options);
         }
-export function useGetDocumentenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetDocumentenQuery, GetDocumentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetDocumentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetDocumentenQuery, GetDocumentenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetDocumentenQuery, GetDocumentenQueryVariables>(GetDocumentenDocument, options);
         }
 export type GetDocumentenQueryHookResult = ReturnType<typeof useGetDocumentenQuery>;
@@ -2667,8 +3762,8 @@ export function useGetFormDefinitionByIdLazyQuery(baseOptions?: Apollo.LazyQuery
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>(GetFormDefinitionByIdDocument, options);
         }
-export function useGetFormDefinitionByIdSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetFormDefinitionByIdSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>(GetFormDefinitionByIdDocument, options);
         }
 export type GetFormDefinitionByIdQueryHookResult = ReturnType<typeof useGetFormDefinitionByIdQuery>;
@@ -2707,8 +3802,8 @@ export function useGetFormDefinitionByObjectenApiUrlLazyQuery(baseOptions?: Apol
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>(GetFormDefinitionByObjectenApiUrlDocument, options);
         }
-export function useGetFormDefinitionByObjectenApiUrlSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetFormDefinitionByObjectenApiUrlSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetFormDefinitionByObjectenApiUrlQuery, GetFormDefinitionByObjectenApiUrlQueryVariables>(GetFormDefinitionByObjectenApiUrlDocument, options);
         }
 export type GetFormDefinitionByObjectenApiUrlQueryHookResult = ReturnType<typeof useGetFormDefinitionByObjectenApiUrlQuery>;
@@ -2747,8 +3842,8 @@ export function useGetFormDefinitionByNameLazyQuery(baseOptions?: Apollo.LazyQue
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>(GetFormDefinitionByNameDocument, options);
         }
-export function useGetFormDefinitionByNameSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetFormDefinitionByNameSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>(GetFormDefinitionByNameDocument, options);
         }
 export type GetFormDefinitionByNameQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameQuery>;
@@ -2798,17 +3893,17 @@ export function useGetPortaalFormulierByIdV2LazyQuery(baseOptions?: Apollo.LazyQ
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>(GetPortaalFormulierByIdV2Document, options);
         }
-export function useGetPortaalFormulierByIdV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetPortaalFormulierByIdV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>(GetPortaalFormulierByIdV2Document, options);
         }
 export type GetPortaalFormulierByIdV2QueryHookResult = ReturnType<typeof useGetPortaalFormulierByIdV2Query>;
 export type GetPortaalFormulierByIdV2LazyQueryHookResult = ReturnType<typeof useGetPortaalFormulierByIdV2LazyQuery>;
 export type GetPortaalFormulierByIdV2SuspenseQueryHookResult = ReturnType<typeof useGetPortaalFormulierByIdV2SuspenseQuery>;
 export type GetPortaalFormulierByIdV2QueryResult = Apollo.QueryResult<GetPortaalFormulierByIdV2Query, GetPortaalFormulierByIdV2QueryVariables>;
-export const GetGemachtigdeDocument = gql`
-    query GetGemachtigde {
-  getGemachtigde {
+export const GetGemachtigdeV2Document = gql`
+    query GetGemachtigdeV2 {
+  getGemachtigdeV2 {
     persoon {
       naam {
         voornamen
@@ -2823,36 +3918,36 @@ export const GetGemachtigdeDocument = gql`
     `;
 
 /**
- * __useGetGemachtigdeQuery__
+ * __useGetGemachtigdeV2Query__
  *
- * To run a query within a React component, call `useGetGemachtigdeQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetGemachtigdeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetGemachtigdeV2Query` and pass it any options that fit your needs.
+ * When your component renders, `useGetGemachtigdeV2Query` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetGemachtigdeQuery({
+ * const { data, loading, error } = useGetGemachtigdeV2Query({
  *   variables: {
  *   },
  * });
  */
-export function useGetGemachtigdeQuery(baseOptions?: Apollo.QueryHookOptions<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>) {
+export function useGetGemachtigdeV2Query(baseOptions?: Apollo.QueryHookOptions<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>(GetGemachtigdeDocument, options);
+        return Apollo.useQuery<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>(GetGemachtigdeV2Document, options);
       }
-export function useGetGemachtigdeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>) {
+export function useGetGemachtigdeV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>(GetGemachtigdeDocument, options);
+          return Apollo.useLazyQuery<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>(GetGemachtigdeV2Document, options);
         }
-export function useGetGemachtigdeSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>(GetGemachtigdeDocument, options);
+export function useGetGemachtigdeV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>(GetGemachtigdeV2Document, options);
         }
-export type GetGemachtigdeQueryHookResult = ReturnType<typeof useGetGemachtigdeQuery>;
-export type GetGemachtigdeLazyQueryHookResult = ReturnType<typeof useGetGemachtigdeLazyQuery>;
-export type GetGemachtigdeSuspenseQueryHookResult = ReturnType<typeof useGetGemachtigdeSuspenseQuery>;
-export type GetGemachtigdeQueryResult = Apollo.QueryResult<GetGemachtigdeQuery, GetGemachtigdeQueryVariables>;
+export type GetGemachtigdeV2QueryHookResult = ReturnType<typeof useGetGemachtigdeV2Query>;
+export type GetGemachtigdeV2LazyQueryHookResult = ReturnType<typeof useGetGemachtigdeV2LazyQuery>;
+export type GetGemachtigdeV2SuspenseQueryHookResult = ReturnType<typeof useGetGemachtigdeV2SuspenseQuery>;
+export type GetGemachtigdeV2QueryResult = Apollo.QueryResult<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>;
 export const GetKlantContactMomentenDocument = gql`
     query GetKlantContactMomenten {
   getKlantContactMomenten {
@@ -2888,8 +3983,8 @@ export function useGetKlantContactMomentenLazyQuery(baseOptions?: Apollo.LazyQue
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
         }
-export function useGetKlantContactMomentenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetKlantContactMomentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
         }
 export type GetKlantContactMomentenQueryHookResult = ReturnType<typeof useGetKlantContactMomentenQuery>;
@@ -2932,40 +4027,367 @@ export function useGetObjectContactMomentenLazyQuery(baseOptions?: Apollo.LazyQu
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
         }
-export function useGetObjectContactMomentenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetObjectContactMomentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
         }
 export type GetObjectContactMomentenQueryHookResult = ReturnType<typeof useGetObjectContactMomentenQuery>;
 export type GetObjectContactMomentenLazyQueryHookResult = ReturnType<typeof useGetObjectContactMomentenLazyQuery>;
 export type GetObjectContactMomentenSuspenseQueryHookResult = ReturnType<typeof useGetObjectContactMomentenSuspenseQuery>;
 export type GetObjectContactMomentenQueryResult = Apollo.QueryResult<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>;
-export const GetPersoonDataDocument = gql`
-    query GetPersoonData {
-  getPersoon {
+export const GetOpenProductenByThemaDocument = gql`
+    query getOpenProductenByThema($themaId: UUID!) {
+  getOpenProductenByThema(themaId: $themaId) {
+    uuid
+    naam
+    startDatum
+    eindDatum
+    taken {
+      id
+      titel
+      verloopdatum
+      koppeling {
+        registratie
+        value
+      }
+    }
+    zaken {
+      uuid
+      omschrijving
+      identificatie
+      status {
+        statustype {
+          isEindstatus
+        }
+      }
+      zaaktype {
+        identificatie
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOpenProductenByThemaQuery__
+ *
+ * To run a query within a React component, call `useGetOpenProductenByThemaQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOpenProductenByThemaQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOpenProductenByThemaQuery({
+ *   variables: {
+ *      themaId: // value for 'themaId'
+ *   },
+ * });
+ */
+export function useGetOpenProductenByThemaQuery(baseOptions: Apollo.QueryHookOptions<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables> & ({ variables: GetOpenProductenByThemaQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>(GetOpenProductenByThemaDocument, options);
+      }
+export function useGetOpenProductenByThemaLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>(GetOpenProductenByThemaDocument, options);
+        }
+export function useGetOpenProductenByThemaSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>(GetOpenProductenByThemaDocument, options);
+        }
+export type GetOpenProductenByThemaQueryHookResult = ReturnType<typeof useGetOpenProductenByThemaQuery>;
+export type GetOpenProductenByThemaLazyQueryHookResult = ReturnType<typeof useGetOpenProductenByThemaLazyQuery>;
+export type GetOpenProductenByThemaSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductenByThemaSuspenseQuery>;
+export type GetOpenProductenByThemaQueryResult = Apollo.QueryResult<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>;
+export const GetOpenProductHoofdThemasDocument = gql`
+    query getOpenProductHoofdThemas {
+  getOpenProductHoofdThemas {
+    uuid
+    naam
+  }
+}
+    `;
+
+/**
+ * __useGetOpenProductHoofdThemasQuery__
+ *
+ * To run a query within a React component, call `useGetOpenProductHoofdThemasQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOpenProductHoofdThemasQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOpenProductHoofdThemasQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetOpenProductHoofdThemasQuery(baseOptions?: Apollo.QueryHookOptions<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>(GetOpenProductHoofdThemasDocument, options);
+      }
+export function useGetOpenProductHoofdThemasLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>(GetOpenProductHoofdThemasDocument, options);
+        }
+export function useGetOpenProductHoofdThemasSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>(GetOpenProductHoofdThemasDocument, options);
+        }
+export type GetOpenProductHoofdThemasQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasQuery>;
+export type GetOpenProductHoofdThemasLazyQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasLazyQuery>;
+export type GetOpenProductHoofdThemasSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasSuspenseQuery>;
+export type GetOpenProductHoofdThemasQueryResult = Apollo.QueryResult<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>;
+export const GetOpenProductThemaTakenDocument = gql`
+    query getOpenProductThemaTaken($id: UUID!) {
+  getOpenProductThemaTaken(id: $id) {
+    id
+    soort
+    koppeling {
+      registratie
+      value
+    }
+    url {
+      uri
+    }
+    portaalformulier {
+      formulier {
+        soort
+        value
+      }
+    }
+    titel
+    status
+    verloopdatum
+    version
+  }
+}
+    `;
+
+/**
+ * __useGetOpenProductThemaTakenQuery__
+ *
+ * To run a query within a React component, call `useGetOpenProductThemaTakenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOpenProductThemaTakenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOpenProductThemaTakenQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetOpenProductThemaTakenQuery(baseOptions: Apollo.QueryHookOptions<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables> & ({ variables: GetOpenProductThemaTakenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>(GetOpenProductThemaTakenDocument, options);
+      }
+export function useGetOpenProductThemaTakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>(GetOpenProductThemaTakenDocument, options);
+        }
+export function useGetOpenProductThemaTakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>(GetOpenProductThemaTakenDocument, options);
+        }
+export type GetOpenProductThemaTakenQueryHookResult = ReturnType<typeof useGetOpenProductThemaTakenQuery>;
+export type GetOpenProductThemaTakenLazyQueryHookResult = ReturnType<typeof useGetOpenProductThemaTakenLazyQuery>;
+export type GetOpenProductThemaTakenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductThemaTakenSuspenseQuery>;
+export type GetOpenProductThemaTakenQueryResult = Apollo.QueryResult<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>;
+export const GetOpenProductThemaZakenDocument = gql`
+    query getOpenProductThemaZaken($id: UUID!) {
+  getOpenProductThemaZaken(id: $id) {
+    uuid
+    omschrijving
+    identificatie
+    zaaktype {
+      identificatie
+    }
+    startdatum
+    status {
+      statustype {
+        isEindstatus
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOpenProductThemaZakenQuery__
+ *
+ * To run a query within a React component, call `useGetOpenProductThemaZakenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOpenProductThemaZakenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOpenProductThemaZakenQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetOpenProductThemaZakenQuery(baseOptions: Apollo.QueryHookOptions<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables> & ({ variables: GetOpenProductThemaZakenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>(GetOpenProductThemaZakenDocument, options);
+      }
+export function useGetOpenProductThemaZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>(GetOpenProductThemaZakenDocument, options);
+        }
+export function useGetOpenProductThemaZakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>(GetOpenProductThemaZakenDocument, options);
+        }
+export type GetOpenProductThemaZakenQueryHookResult = ReturnType<typeof useGetOpenProductThemaZakenQuery>;
+export type GetOpenProductThemaZakenLazyQueryHookResult = ReturnType<typeof useGetOpenProductThemaZakenLazyQuery>;
+export type GetOpenProductThemaZakenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductThemaZakenSuspenseQuery>;
+export type GetOpenProductThemaZakenQueryResult = Apollo.QueryResult<GetOpenProductThemaZakenQuery, GetOpenProductThemaZakenQueryVariables>;
+export const GetOpenProductDocument = gql`
+    query GetOpenProduct($id: UUID!) {
+  getOpenProduct(id: $id) {
+    uuid
+    url
+    naam
+    startDatum
+    gepubliceerd
+    aanmaakDatum
+    producttype {
+      code
+      uniformeProductNaam
+      toegestaneStatussen
+    }
+    prijs
+    gepubliceerd
+    status
+    documenten {
+      url
+    }
+    frequentie
+    verbruiksobject
+    dataobject
+    zaken {
+      uuid
+      omschrijving
+      identificatie
+      zaaktype {
+        identificatie
+      }
+      startdatum
+      status {
+        statustype {
+          isEindstatus
+        }
+      }
+    }
+    taken {
+      id
+      soort
+      koppeling {
+        registratie
+        value
+      }
+      url {
+        uri
+      }
+      portaalformulier {
+        formulier {
+          soort
+          value
+        }
+      }
+      ogonebetaling {
+        bedrag
+        betaalkenmerk
+        pspid
+      }
+      titel
+      status
+      verloopdatum
+      version
+    }
+    decisions
+  }
+}
+    `;
+
+/**
+ * __useGetOpenProductQuery__
+ *
+ * To run a query within a React component, call `useGetOpenProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOpenProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOpenProductQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetOpenProductQuery(baseOptions: Apollo.QueryHookOptions<GetOpenProductQuery, GetOpenProductQueryVariables> & ({ variables: GetOpenProductQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOpenProductQuery, GetOpenProductQueryVariables>(GetOpenProductDocument, options);
+      }
+export function useGetOpenProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductQuery, GetOpenProductQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOpenProductQuery, GetOpenProductQueryVariables>(GetOpenProductDocument, options);
+        }
+export function useGetOpenProductSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductQuery, GetOpenProductQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOpenProductQuery, GetOpenProductQueryVariables>(GetOpenProductDocument, options);
+        }
+export type GetOpenProductQueryHookResult = ReturnType<typeof useGetOpenProductQuery>;
+export type GetOpenProductLazyQueryHookResult = ReturnType<typeof useGetOpenProductLazyQuery>;
+export type GetOpenProductSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductSuspenseQuery>;
+export type GetOpenProductQueryResult = Apollo.QueryResult<GetOpenProductQuery, GetOpenProductQueryVariables>;
+export const GetPersoonV2Document = gql`
+    query GetPersoonV2 {
+  getPersoonV2 {
     burgerservicenummer
-    geslachtsaanduiding
+    geslacht {
+      omschrijving
+    }
     bewonersAantal
+    geheimhoudingPersoonsgegevens
     naam {
       voornamen
       officialLastName
     }
     verblijfplaats {
-      straat
-      huisnummer
-      huisletter
-      huisnummertoevoeging
-      postcode
-      woonplaats
+      verblijfadres {
+        officieleStraatnaam
+        huisnummer
+        huisletter
+        huisnummertoevoeging
+        postcode
+        woonplaats
+      }
+      datumVan {
+        datum
+        langFormaat
+        type
+      }
     }
     geboorte {
       datum {
         datum
-        jaar
-        maand
-        dag
+        langFormaat
+        type
       }
       land {
+        code
+        omschrijving
+      }
+      plaats {
         code
         omschrijving
       }
@@ -2981,78 +4403,36 @@ export const GetPersoonDataDocument = gql`
     `;
 
 /**
- * __useGetPersoonDataQuery__
+ * __useGetPersoonV2Query__
  *
- * To run a query within a React component, call `useGetPersoonDataQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPersoonDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetPersoonV2Query` and pass it any options that fit your needs.
+ * When your component renders, `useGetPersoonV2Query` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetPersoonDataQuery({
+ * const { data, loading, error } = useGetPersoonV2Query({
  *   variables: {
  *   },
  * });
  */
-export function useGetPersoonDataQuery(baseOptions?: Apollo.QueryHookOptions<GetPersoonDataQuery, GetPersoonDataQueryVariables>) {
+export function useGetPersoonV2Query(baseOptions?: Apollo.QueryHookOptions<GetPersoonV2Query, GetPersoonV2QueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetPersoonDataQuery, GetPersoonDataQueryVariables>(GetPersoonDataDocument, options);
+        return Apollo.useQuery<GetPersoonV2Query, GetPersoonV2QueryVariables>(GetPersoonV2Document, options);
       }
-export function useGetPersoonDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPersoonDataQuery, GetPersoonDataQueryVariables>) {
+export function useGetPersoonV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPersoonV2Query, GetPersoonV2QueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetPersoonDataQuery, GetPersoonDataQueryVariables>(GetPersoonDataDocument, options);
+          return Apollo.useLazyQuery<GetPersoonV2Query, GetPersoonV2QueryVariables>(GetPersoonV2Document, options);
         }
-export function useGetPersoonDataSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetPersoonDataQuery, GetPersoonDataQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetPersoonDataQuery, GetPersoonDataQueryVariables>(GetPersoonDataDocument, options);
+export function useGetPersoonV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetPersoonV2Query, GetPersoonV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetPersoonV2Query, GetPersoonV2QueryVariables>(GetPersoonV2Document, options);
         }
-export type GetPersoonDataQueryHookResult = ReturnType<typeof useGetPersoonDataQuery>;
-export type GetPersoonDataLazyQueryHookResult = ReturnType<typeof useGetPersoonDataLazyQuery>;
-export type GetPersoonDataSuspenseQueryHookResult = ReturnType<typeof useGetPersoonDataSuspenseQuery>;
-export type GetPersoonDataQueryResult = Apollo.QueryResult<GetPersoonDataQuery, GetPersoonDataQueryVariables>;
-export const GetPersoonDocument = gql`
-    query GetPersoon {
-  getPersoon {
-    naam {
-      voornamen
-      officialLastName
-    }
-  }
-}
-    `;
-
-/**
- * __useGetPersoonQuery__
- *
- * To run a query within a React component, call `useGetPersoonQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPersoonQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetPersoonQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetPersoonQuery(baseOptions?: Apollo.QueryHookOptions<GetPersoonQuery, GetPersoonQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetPersoonQuery, GetPersoonQueryVariables>(GetPersoonDocument, options);
-      }
-export function useGetPersoonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPersoonQuery, GetPersoonQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetPersoonQuery, GetPersoonQueryVariables>(GetPersoonDocument, options);
-        }
-export function useGetPersoonSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetPersoonQuery, GetPersoonQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetPersoonQuery, GetPersoonQueryVariables>(GetPersoonDocument, options);
-        }
-export type GetPersoonQueryHookResult = ReturnType<typeof useGetPersoonQuery>;
-export type GetPersoonLazyQueryHookResult = ReturnType<typeof useGetPersoonLazyQuery>;
-export type GetPersoonSuspenseQueryHookResult = ReturnType<typeof useGetPersoonSuspenseQuery>;
-export type GetPersoonQueryResult = Apollo.QueryResult<GetPersoonQuery, GetPersoonQueryVariables>;
+export type GetPersoonV2QueryHookResult = ReturnType<typeof useGetPersoonV2Query>;
+export type GetPersoonV2LazyQueryHookResult = ReturnType<typeof useGetPersoonV2LazyQuery>;
+export type GetPersoonV2SuspenseQueryHookResult = ReturnType<typeof useGetPersoonV2SuspenseQuery>;
+export type GetPersoonV2QueryResult = Apollo.QueryResult<GetPersoonV2Query, GetPersoonV2QueryVariables>;
 export const GetProductTakenDocument = gql`
     query GetProductTaken($productName: String!, $pageSize: Int) {
   getProductTaken(productName: $productName, pageSize: $pageSize) {
@@ -3060,7 +4440,7 @@ export const GetProductTakenDocument = gql`
     soort
     koppeling {
       registratie
-      uuid
+      value
     }
     url {
       uri
@@ -3104,8 +4484,8 @@ export function useGetProductTakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductTakenQuery, GetProductTakenQueryVariables>(GetProductTakenDocument, options);
         }
-export function useGetProductTakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductTakenQuery, GetProductTakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductTakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductTakenQuery, GetProductTakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductTakenQuery, GetProductTakenQueryVariables>(GetProductTakenDocument, options);
         }
 export type GetProductTakenQueryHookResult = ReturnType<typeof useGetProductTakenQuery>;
@@ -3147,8 +4527,8 @@ export function useGetProductVerbruiksObjectenLazyQuery(baseOptions?: Apollo.Laz
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>(GetProductVerbruiksObjectenDocument, options);
         }
-export function useGetProductVerbruiksObjectenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductVerbruiksObjectenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductVerbruiksObjectenQuery, GetProductVerbruiksObjectenQueryVariables>(GetProductVerbruiksObjectenDocument, options);
         }
 export type GetProductVerbruiksObjectenQueryHookResult = ReturnType<typeof useGetProductVerbruiksObjectenQuery>;
@@ -3200,8 +4580,8 @@ export function useGetProductZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductZakenQuery, GetProductZakenQueryVariables>(GetProductZakenDocument, options);
         }
-export function useGetProductZakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductZakenQuery, GetProductZakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductZakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductZakenQuery, GetProductZakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductZakenQuery, GetProductZakenQueryVariables>(GetProductZakenDocument, options);
         }
 export type GetProductZakenQueryHookResult = ReturnType<typeof useGetProductZakenQuery>;
@@ -3244,7 +4624,7 @@ export const GetProductDocument = gql`
       soort
       koppeling {
         registratie
-        uuid
+        value
       }
       url {
         uri
@@ -3293,8 +4673,8 @@ export function useGetProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, options);
         }
-export function useGetProductSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, options);
         }
 export type GetProductQueryHookResult = ReturnType<typeof useGetProductQuery>;
@@ -3352,8 +4732,8 @@ export function useGetProductenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetProductenQuery, GetProductenQueryVariables>(GetProductenDocument, options);
         }
-export function useGetProductenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetProductenQuery, GetProductenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetProductenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProductenQuery, GetProductenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetProductenQuery, GetProductenQueryVariables>(GetProductenDocument, options);
         }
 export type GetProductenQueryHookResult = ReturnType<typeof useGetProductenQuery>;
@@ -3367,7 +4747,7 @@ export const GetTaakByIdV2Document = gql`
     soort
     koppeling {
       registratie
-      uuid
+      value
     }
     url {
       uri
@@ -3411,8 +4791,8 @@ export function useGetTaakByIdV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>(GetTaakByIdV2Document, options);
         }
-export function useGetTaakByIdV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTaakByIdV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>(GetTaakByIdV2Document, options);
         }
 export type GetTaakByIdV2QueryHookResult = ReturnType<typeof useGetTaakByIdV2Query>;
@@ -3458,8 +4838,8 @@ export function useGetTaakByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
         }
-export function useGetTaakByIdSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTaakByIdSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
         }
 export type GetTaakByIdQueryHookResult = ReturnType<typeof useGetTaakByIdQuery>;
@@ -3479,7 +4859,7 @@ export const GetTakenV2Document = gql`
       soort
       koppeling {
         registratie
-        uuid
+        value
       }
       url {
         uri
@@ -3533,8 +4913,8 @@ export function useGetTakenV2LazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTakenV2Query, GetTakenV2QueryVariables>(GetTakenV2Document, options);
         }
-export function useGetTakenV2SuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTakenV2Query, GetTakenV2QueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTakenV2SuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTakenV2Query, GetTakenV2QueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTakenV2Query, GetTakenV2QueryVariables>(GetTakenV2Document, options);
         }
 export type GetTakenV2QueryHookResult = ReturnType<typeof useGetTakenV2Query>;
@@ -3589,14 +4969,105 @@ export function useGetTakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
         }
-export function useGetTakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetTakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
         }
 export type GetTakenQueryHookResult = ReturnType<typeof useGetTakenQuery>;
 export type GetTakenLazyQueryHookResult = ReturnType<typeof useGetTakenLazyQuery>;
 export type GetTakenSuspenseQueryHookResult = ReturnType<typeof useGetTakenSuspenseQuery>;
 export type GetTakenQueryResult = Apollo.QueryResult<GetTakenQuery, GetTakenQueryVariables>;
+export const GetUserDigitaleAdressenDocument = gql`
+    query GetUserDigitaleAdressen {
+  getUserDigitaleAdresen {
+    uuid
+    waarde
+    type
+    omschrijving
+    referentie
+  }
+}
+    `;
+
+/**
+ * __useGetUserDigitaleAdressenQuery__
+ *
+ * To run a query within a React component, call `useGetUserDigitaleAdressenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserDigitaleAdressenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserDigitaleAdressenQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserDigitaleAdressenQuery(baseOptions?: Apollo.QueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+      }
+export function useGetUserDigitaleAdressenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+        }
+export function useGetUserDigitaleAdressenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>(GetUserDigitaleAdressenDocument, options);
+        }
+export type GetUserDigitaleAdressenQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenQuery>;
+export type GetUserDigitaleAdressenLazyQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenLazyQuery>;
+export type GetUserDigitaleAdressenSuspenseQueryHookResult = ReturnType<typeof useGetUserDigitaleAdressenSuspenseQuery>;
+export type GetUserDigitaleAdressenQueryResult = Apollo.QueryResult<GetUserDigitaleAdressenQuery, GetUserDigitaleAdressenQueryVariables>;
+export const GetUserKlantContactenDocument = gql`
+    query GetUserKlantContacten($identificatorType: OnderwerpObjectIndentificatorType!, $identificatorId: UUID!) {
+  getUserKlantContacten(
+    identificatorType: $identificatorType
+    identificatorId: $identificatorId
+  ) {
+    uuid
+    inhoud
+    kanaal
+    onderwerp
+    plaatsgevondenOp
+  }
+}
+    `;
+
+/**
+ * __useGetUserKlantContactenQuery__
+ *
+ * To run a query within a React component, call `useGetUserKlantContactenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserKlantContactenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserKlantContactenQuery({
+ *   variables: {
+ *      identificatorType: // value for 'identificatorType'
+ *      identificatorId: // value for 'identificatorId'
+ *   },
+ * });
+ */
+export function useGetUserKlantContactenQuery(baseOptions: Apollo.QueryHookOptions<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables> & ({ variables: GetUserKlantContactenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>(GetUserKlantContactenDocument, options);
+      }
+export function useGetUserKlantContactenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>(GetUserKlantContactenDocument, options);
+        }
+export function useGetUserKlantContactenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>(GetUserKlantContactenDocument, options);
+        }
+export type GetUserKlantContactenQueryHookResult = ReturnType<typeof useGetUserKlantContactenQuery>;
+export type GetUserKlantContactenLazyQueryHookResult = ReturnType<typeof useGetUserKlantContactenLazyQuery>;
+export type GetUserKlantContactenSuspenseQueryHookResult = ReturnType<typeof useGetUserKlantContactenSuspenseQuery>;
+export type GetUserKlantContactenQueryResult = Apollo.QueryResult<GetUserKlantContactenQuery, GetUserKlantContactenQueryVariables>;
 export const GetZaakDocument = gql`
     query GetZaak($id: UUID!) {
   getZaak(id: $id) {
@@ -3640,6 +5111,12 @@ export const GetZaakDocument = gql`
       data
       zaak
     }
+    resultaat {
+      toelichting
+      resultaattype {
+        omschrijvingGeneriek
+      }
+    }
   }
 }
     `;
@@ -3668,8 +5145,8 @@ export function useGetZaakLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ge
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetZaakQuery, GetZaakQueryVariables>(GetZaakDocument, options);
         }
-export function useGetZaakSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetZaakQuery, GetZaakQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetZaakSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetZaakQuery, GetZaakQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetZaakQuery, GetZaakQueryVariables>(GetZaakDocument, options);
         }
 export type GetZaakQueryHookResult = ReturnType<typeof useGetZaakQuery>;
@@ -3677,12 +5154,14 @@ export type GetZaakLazyQueryHookResult = ReturnType<typeof useGetZaakLazyQuery>;
 export type GetZaakSuspenseQueryHookResult = ReturnType<typeof useGetZaakSuspenseQuery>;
 export type GetZaakQueryResult = Apollo.QueryResult<GetZaakQuery, GetZaakQueryVariables>;
 export const GetZakenDocument = gql`
-    query GetZaken($page: Int, $zaakTypeUrl: String, $isOpen: Boolean, $identificatie: String) {
+    query GetZaken($page: Int, $pageSize: Int, $zaakTypeUrl: String, $isOpen: Boolean, $identificatie: String, $identificatieContains: String) {
   getZaken(
     page: $page
+    pageSize: $pageSize
     zaakTypeUrl: $zaakTypeUrl
     isOpen: $isOpen
     identificatie: $identificatie
+    identificatieContains: $identificatieContains
   ) {
     content {
       uuid
@@ -3717,9 +5196,11 @@ export const GetZakenDocument = gql`
  * const { data, loading, error } = useGetZakenQuery({
  *   variables: {
  *      page: // value for 'page'
+ *      pageSize: // value for 'pageSize'
  *      zaakTypeUrl: // value for 'zaakTypeUrl'
  *      isOpen: // value for 'isOpen'
  *      identificatie: // value for 'identificatie'
+ *      identificatieContains: // value for 'identificatieContains'
  *   },
  * });
  */
@@ -3731,8 +5212,8 @@ export function useGetZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
           const options = {...defaultOptions, ...baseOptions}
           return Apollo.useLazyQuery<GetZakenQuery, GetZakenQueryVariables>(GetZakenDocument, options);
         }
-export function useGetZakenSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetZakenQuery, GetZakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
+export function useGetZakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetZakenQuery, GetZakenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
           return Apollo.useSuspenseQuery<GetZakenQuery, GetZakenQueryVariables>(GetZakenDocument, options);
         }
 export type GetZakenQueryHookResult = ReturnType<typeof useGetZakenQuery>;

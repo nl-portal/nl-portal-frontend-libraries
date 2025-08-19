@@ -1,12 +1,9 @@
 import TestProvider, {
   testPaths as paths,
 } from "../../../providers/TestProvider";
-import {
-  mockRequestDefault,
-  mockRequestTwoTasks,
-  mockRequestsPagination,
-} from "../data/OverviewPageRequests.mock";
 import { OverviewPage } from "../../..";
+import { getZaken } from "../data/zaken.mock";
+import { getTaken } from "../data/taken.mock";
 
 const route = [
   {
@@ -32,50 +29,26 @@ const routeShowLessTasks = [
   },
 ];
 
-const routeShowLessCases = [
-  {
-    path: paths.overview,
-    children: [
-      {
-        index: true,
-        element: <OverviewPage showIntro={true} fetchCasesLength={1} />,
-      },
-    ],
-  },
-];
-
 export const MockOverviewPage = () => (
   <TestProvider
-    mocks={mockRequestDefault}
+    mocks={[getZaken({ pageSize: 4 }), getTaken({ pageSize: 5 })]}
     routes={route}
-    initialIndex={0}
-    initialEntries={[paths.overview]}
   ></TestProvider>
 );
 
 export const MockOverviewPageLessTasks = () => (
   <TestProvider
-    mocks={mockRequestTwoTasks}
+    mocks={[getZaken({ pageSize: 4 }), getTaken({ pageSize: 2 })]}
     routes={routeShowLessTasks}
-    initialIndex={0}
-    initialEntries={[paths.overview]}
-  ></TestProvider>
-);
-
-export const MockOverviewPageLessCases = () => (
-  <TestProvider
-    mocks={mockRequestDefault}
-    routes={routeShowLessCases}
-    initialIndex={0}
-    initialEntries={[paths.overview]}
   ></TestProvider>
 );
 
 export const MockOverviewPagePagination = () => (
   <TestProvider
-    mocks={mockRequestsPagination}
+    mocks={[
+      getZaken({ pageSize: 4, totalElements: 20 }),
+      getTaken({ pageSize: 5 }),
+    ]}
     routes={route}
-    initialIndex={0}
-    initialEntries={[paths.overview]}
   ></TestProvider>
 );

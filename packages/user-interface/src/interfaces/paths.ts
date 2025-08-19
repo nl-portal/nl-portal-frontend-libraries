@@ -7,11 +7,11 @@ export interface Paths {
   task: (id?: string | number) => string;
   messages: string;
   message: (id?: string | number) => string;
-  themeOverview: (type?: string) => string;
-  themeDetails: (type?: string, id?: string | number) => string;
-  themeSub: (type?: string, slug?: string) => string;
+  themeOverview: (slug?: string) => string;
+  themeDetails: (slug?: string, id?: string | number) => string;
   account: string;
-  editAccount: string;
+  changeContactInfo: string;
+  changeNotifications: string;
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: ((...args: any[]) => string) | string | undefined;
 }
