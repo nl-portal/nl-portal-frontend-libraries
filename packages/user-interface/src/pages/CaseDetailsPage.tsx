@@ -68,12 +68,16 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   useEffect(() => {
     if (!caseData?.getZaak?.resultaat?.resultaattype?.omschrijvingGeneriek)
       return;
+
     const slug = stringToSlug(
       caseData?.getZaak.resultaat?.resultaattype.omschrijvingGeneriek,
     );
+    const variant = caseResults[slug];
+
+    if (!variant) return;
 
     pushNotification("caseResult", {
-      variant: caseResults[slug as keyof typeof caseResults] ?? "info",
+      variant,
       title: <FormattedMessage id={`caseDetails.resultAlert.${slug}`} />,
       text: "",
       closable: false,
