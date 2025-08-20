@@ -65,7 +65,7 @@
     "@gemeente-denhaag/table": "4.0.0",
     "@gemeente-denhaag/text-input": "3.0.0",
     "@gemeente-denhaag/typography": "3.0.0",
-    "@utrecht/component-library-css": "7.4.2",
+    "@utrecht/component-library-css": "7.4.1",
     "@utrecht/document-css": "1.5.1",
     "classnames": "^2.5.1",
     "lodash-es": "4.17.21",
