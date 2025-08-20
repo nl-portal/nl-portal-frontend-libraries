@@ -83,17 +83,22 @@ const StatusHistory: FC<StatusHistoryProps> = ({
               }),
               status: getStepStatus(omschrijving),
               marker: index + 1,
-              steps: currentStatus?.substatussen.map((sub: ZaakSubStatus) => ({
-                id: `substatus-${sub.uuid}`,
-                title: sub.omschrijving,
-                date: formatDate({
-                  date: sub.tijdstip,
+              steps: currentStatus?.substatussen.map(
+                (sub: ZaakSubStatus, subIndex: number) => ({
+                  id: `substatus-${sub.uuid}`,
+                  title: sub.omschrijving,
+                  date: formatDate({
+                    date: sub.tijdstip,
+                  }),
+                  status:
+                    getStepStatus(omschrijving) === "checked"
+                      ? "checked"
+                      : getStepStatus(omschrijving) === "current" &&
+                          subIndex === currentStatus?.substatussen.length - 1
+                        ? "current"
+                        : "checked",
                 }),
-                status:
-                  getStepStatus(omschrijving) === "checked"
-                    ? "checked"
-                    : "not-checked",
-              })),
+              ),
             };
           })}
         />
