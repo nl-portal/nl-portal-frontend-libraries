@@ -1,5 +1,9 @@
-import { FC, Fragment } from "react";
-import { StatusType, ZaakStatus } from "@nl-portal/nl-portal-api";
+import { FC } from "react";
+import {
+  StatusType,
+  ZaakStatus,
+  ZaakSubStatus,
+} from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { Status } from "@gemeente-denhaag/process-steps";
 import Skeleton from "react-loading-skeleton";
@@ -10,6 +14,7 @@ import {
   statusHistoryCirleSize,
   statusHistoryTextWidth,
 } from "../constants/skeleton";
+import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 
 interface StatusHistoryProps {
   caseId?: string;
@@ -27,6 +32,7 @@ const StatusHistory: FC<StatusHistoryProps> = ({
   caseId,
 }) => {
   const intl = useIntl();
+  const { formatDate } = useDateFormatter();
 
   const getSkeletonStep = (key: number) => (
     <div
@@ -50,20 +56,10 @@ const StatusHistory: FC<StatusHistoryProps> = ({
   );
 
   const getStepStatus = (omschrijving?: string | null) => {
-    if (!omschrijving) {
-      return "not-checked";
-    }
-
-    if (status?.statustype?.omschrijving === omschrijving) {
-      return "current";
-    }
-
-    if (
-      statusHistory?.find((h) => h.statustype.omschrijving === omschrijving)
-    ) {
+    if (!omschrijving) return "not-checked";
+    if (status?.statustype?.omschrijving === omschrijving) return "current";
+    if (statusHistory?.find((h) => h.statustype.omschrijving === omschrijving))
       return "checked";
-    }
-
     return "not-checked";
   };
 
@@ -71,23 +67,41 @@ const StatusHistory: FC<StatusHistoryProps> = ({
     <div className={styles["status-history-container"]}>
       {!loading && statuses ? (
         <Status
+          collapsible
+          expandedSteps={[
+            `step-${statuses.findIndex((s) => s.omschrijving === status?.statustype?.omschrijving) + 1}`,
+          ]}
           steps={statuses.map(({ omschrijving }, index) => {
-            const omschrijvingLabel = intl.formatMessage({
-              id: `case.${caseId}.status.${stringToId(`${omschrijving}`)}`,
-            });
+            const currentStatus = [status, statusHistory]
+              .flat()
+              .find((s) => s?.statustype.omschrijving === omschrijving);
+
             return {
-              title: omschrijvingLabel,
               id: `step-${index + 1}`,
+              title: intl.formatMessage({
+                id: `case.${caseId}.status.${stringToId(`${omschrijving}`)}`,
+              }),
               status: getStepStatus(omschrijving),
               marker: index + 1,
+              steps: currentStatus?.substatussen.map((sub: ZaakSubStatus) => ({
+                id: `substatus-${sub.uuid}`,
+                title: sub.omschrijving,
+                date: formatDate({
+                  date: sub.tijdstip,
+                }),
+                status:
+                  getStepStatus(omschrijving) === "checked"
+                    ? "checked"
+                    : "not-checked",
+              })),
             };
           })}
         />
       ) : (
-        <Fragment>
+        <>
           {getSkeletonStep(0)}
           {getSkeletonStep(1)}
-        </Fragment>
+        </>
       )}
     </div>
   );

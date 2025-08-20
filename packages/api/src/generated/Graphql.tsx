@@ -22,6 +22,13 @@ export type Scalars = {
   ZonedDateTime: { input: any; output: any; }
 };
 
+export enum AanduidingNaamGebruik {
+  Eigen = 'EIGEN',
+  EigenPartner = 'EIGEN_PARTNER',
+  Partner = 'PARTNER',
+  PartnerEigen = 'PARTNER_EIGEN'
+}
+
 export type ActiesPage = {
   __typename?: 'ActiesPage';
   /** The elements on this page */
@@ -253,9 +260,9 @@ export type Brp2NationaliteitInOnderzoek = {
 
 export type BrpAdellijkeTitelPredicaat = {
   __typename?: 'BrpAdellijkeTitelPredicaat';
-  code: Scalars['String']['output'];
-  omschrijving: Scalars['String']['output'];
-  soort: Scalars['String']['output'];
+  code?: Maybe<Scalars['String']['output']>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
+  soort?: Maybe<Scalars['String']['output']>;
 };
 
 export type BrpAdressering = {
@@ -284,9 +291,9 @@ export type BrpCodeOmschrijving = {
 
 export type BrpDatum = {
   __typename?: 'BrpDatum';
-  datum: Scalars['Date']['output'];
-  langFormaat: Scalars['String']['output'];
-  type: Scalars['String']['output'];
+  datum?: Maybe<Scalars['Date']['output']>;
+  langFormaat?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type BrpDatumLandPlaats = {
@@ -424,7 +431,7 @@ export type BrpNationaliteit = {
   inOnderzoek?: Maybe<Brp2NationaliteitInOnderzoek>;
   nationaliteit?: Maybe<BrpCodeOmschrijving>;
   redenOpname?: Maybe<BrpCodeOmschrijving>;
-  type: Scalars['String']['output'];
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type BrpOuder = {
@@ -542,8 +549,8 @@ export type BrpPersoonVerificatie = {
 
 export type BrpUitsluitingKiesrecht = {
   __typename?: 'BrpUitsluitingKiesrecht';
-  einddatum: BrpDatum;
-  uitgeslotenVanKiesrecht: Scalars['Boolean']['output'];
+  einddatum?: Maybe<BrpDatum>;
+  uitgeslotenVanKiesrecht?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type BrpVerblijfplaats = {
@@ -757,6 +764,12 @@ export type Embedded = {
 export type FormDefinition = {
   __typename?: 'FormDefinition';
   formDefinition: Scalars['JSON']['output'];
+};
+
+export type Gemachtigde = {
+  __typename?: 'Gemachtigde';
+  bedrijf?: Maybe<MaatschappelijkeActiviteit>;
+  persoon?: Maybe<Persoon>;
 };
 
 export type GemachtigdeV2 = {
@@ -973,6 +986,14 @@ export type MutationUpdateUserDigitaleAdresArgs = {
 
 export type MutationUpdateUserPartijArgs = {
   partijRequest: PartijRequestInput;
+};
+
+export type Naam = {
+  __typename?: 'Naam';
+  geslachtsnaam?: Maybe<Scalars['String']['output']>;
+  lastName: Scalars['String']['output'];
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voorvoegsel?: Maybe<Scalars['String']['output']>;
 };
 
 export type OgoneBetaling = {
@@ -1823,6 +1844,117 @@ export type PaymentField = {
   value: Scalars['String']['output'];
 };
 
+export type Persoon = {
+  __typename?: 'Persoon';
+  bewonersAantal?: Maybe<Scalars['Int']['output']>;
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  geboorte?: Maybe<PersoonDatumLandPlaats>;
+  geheimhoudingPersoonsgegevens?: Maybe<Scalars['Boolean']['output']>;
+  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
+  kinderen?: Maybe<Array<PersoonKind>>;
+  naam: PersoonNaam;
+  nationaliteiten?: Maybe<Array<PersoonNationaliteiten>>;
+  opschortingBijhouding?: Maybe<PersoonOpschortingBijhouding>;
+  ouders?: Maybe<Array<PersoonOuder>>;
+  partners?: Maybe<Array<PersoonPartner>>;
+  reisdocumentnummers?: Maybe<Array<Scalars['String']['output']>>;
+  verblijfplaats?: Maybe<PersoonVerblijfplaats>;
+};
+
+export type PersoonCodeOmschrijving = {
+  __typename?: 'PersoonCodeOmschrijving';
+  code?: Maybe<Scalars['String']['output']>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
+};
+
+export type PersoonDatum = {
+  __typename?: 'PersoonDatum';
+  dag?: Maybe<Scalars['Int']['output']>;
+  datum?: Maybe<Scalars['String']['output']>;
+  jaar?: Maybe<Scalars['Int']['output']>;
+  maand?: Maybe<Scalars['Int']['output']>;
+};
+
+export type PersoonDatumLandPlaats = {
+  __typename?: 'PersoonDatumLandPlaats';
+  datum?: Maybe<PersoonDatum>;
+  land?: Maybe<PersoonCodeOmschrijving>;
+  plaats?: Maybe<PersoonCodeOmschrijving>;
+};
+
+export type PersoonKind = {
+  __typename?: 'PersoonKind';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  geboorte?: Maybe<PersoonDatumLandPlaats>;
+  leeftijd?: Maybe<Scalars['Int']['output']>;
+  naam?: Maybe<Naam>;
+};
+
+export type PersoonNaam = {
+  __typename?: 'PersoonNaam';
+  aanduidingNaamgebruik?: Maybe<AanduidingNaamGebruik>;
+  aanhef?: Maybe<Scalars['String']['output']>;
+  geslachtsnaam?: Maybe<Scalars['String']['output']>;
+  lastName: Scalars['String']['output'];
+  officialLastName?: Maybe<Scalars['String']['output']>;
+  voorletters?: Maybe<Scalars['String']['output']>;
+  voornamen?: Maybe<Scalars['String']['output']>;
+  voorvoegsel?: Maybe<Scalars['String']['output']>;
+};
+
+export type PersoonNationaliteit = {
+  __typename?: 'PersoonNationaliteit';
+  code?: Maybe<Scalars['String']['output']>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
+};
+
+export type PersoonNationaliteiten = {
+  __typename?: 'PersoonNationaliteiten';
+  nationaliteit?: Maybe<PersoonNationaliteit>;
+};
+
+export type PersoonOpschortingBijhouding = {
+  __typename?: 'PersoonOpschortingBijhouding';
+  datum?: Maybe<PersoonDatum>;
+  reden?: Maybe<Scalars['String']['output']>;
+};
+
+export type PersoonOuder = {
+  __typename?: 'PersoonOuder';
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  datumIngangFamilierechtelijkeBetrekking?: Maybe<PersoonDatum>;
+  geboorte?: Maybe<PersoonDatumLandPlaats>;
+  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<Naam>;
+  ouderAanduiding?: Maybe<Scalars['String']['output']>;
+};
+
+export type PersoonPartner = {
+  __typename?: 'PersoonPartner';
+  aangaanHuwelijkPartnerschap?: Maybe<PersoonDatumLandPlaats>;
+  burgerservicenummer?: Maybe<Scalars['String']['output']>;
+  datumIngangFamilierechtelijkeBetrekking?: Maybe<PersoonDatum>;
+  geboorte?: Maybe<PersoonDatumLandPlaats>;
+  geslachtsaanduiding?: Maybe<Scalars['String']['output']>;
+  naam?: Maybe<Naam>;
+  soortVerbintenis?: Maybe<Scalars['String']['output']>;
+};
+
+export type PersoonVerblijfplaats = {
+  __typename?: 'PersoonVerblijfplaats';
+  adresseerbaarObjectIdentificatie?: Maybe<Scalars['String']['output']>;
+  datumAanvangAdreshouding?: Maybe<PersoonDatum>;
+  datumIngangGeldigheid?: Maybe<PersoonDatum>;
+  datumInschrijvingInGemeente?: Maybe<PersoonDatum>;
+  datumVestigingInNederland?: Maybe<PersoonDatum>;
+  huisletter?: Maybe<Scalars['String']['output']>;
+  huisnummer?: Maybe<Scalars['String']['output']>;
+  huisnummertoevoeging?: Maybe<Scalars['String']['output']>;
+  postcode?: Maybe<Scalars['String']['output']>;
+  straat?: Maybe<Scalars['String']['output']>;
+  woonplaats?: Maybe<Scalars['String']['output']>;
+};
+
 export type PersoonsIdentificatie = {
   __typename?: 'PersoonsIdentificatie';
   contactnaam?: Maybe<Contactnaam>;
@@ -1986,6 +2118,8 @@ export type Query = {
   /** Get all besluiten */
   getBesluiten: BesluitPage;
   /** Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
+  getBewonersAantal?: Maybe<Scalars['Int']['output']>;
+  /** Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
   getBewonersAantalV2?: Maybe<Scalars['Int']['output']>;
   /** Gets the profile for the user */
   getBurgerProfiel?: Maybe<Klant>;
@@ -2007,6 +2141,8 @@ export type Query = {
   getFormDefinitionByName?: Maybe<FormDefinition>;
   /** find single form definition from the Objecten API */
   getFormDefinitionByObjectenApiUrl?: Maybe<FormDefinition>;
+  /** Gets the data of the gemachtigde */
+  getGemachtigde: Gemachtigde;
   /** Gets the data of the gemachtigde */
   getGemachtigdeV2: GemachtigdeV2;
   /** Gets the contactmomenten of a klant */
@@ -2081,6 +2217,8 @@ export type Query = {
   /** Get a Open producten type by thema id */
   getOpenProductenByThema: Array<OpenProductProduct>;
   /** Gets the persoon data */
+  getPersoon?: Maybe<Persoon>;
+  /** Gets the persoon data */
   getPersoonV2?: Maybe<BrpPersoon>;
   /** Get product by id */
   getProduct?: Maybe<Product>;
@@ -2129,8 +2267,13 @@ export type Query = {
   getTasks: TaakPage;
   /** Returns the total amount of unopened Berichten */
   getUnopenedBerichtenCount: Scalars['Int']['output'];
-  /** Get DigitaleAdressen of authenticated user. */
+  /**
+   * Get DigitaleAdresen of authenticated user.
+   * @deprecated Use getUserDigitaleAdressen instead
+   */
   getUserDigitaleAdresen?: Maybe<Array<DigitaleAdresResponse>>;
+  /** Get DigitaleAdressen of authenticated user. */
+  getUserDigitaleAdressen?: Maybe<Array<DigitaleAdresResponse>>;
   /** Get KlantContact by id of authenticated user. */
   getUserKlantContact?: Maybe<OpenKlant2Klantcontact>;
   /**
@@ -2210,6 +2353,11 @@ export type QueryGetBesluitenArgs = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   verantwoordelijkeOrganisatie?: InputMaybe<Scalars['String']['input']>;
   zaak?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGetBewonersAantalArgs = {
+  adresseerbaarObjectIdentificatie: Scalars['String']['input'];
 };
 
 
@@ -2762,7 +2910,10 @@ export type ZaakStatus = {
   __typename?: 'ZaakStatus';
   datumStatusGezet: Scalars['String']['output'];
   statustype: ZaakStatusType;
+  substatussen: Array<ZaakSubStatus>;
+  url: Scalars['String']['output'];
   uuid: Scalars['UUID']['output'];
+  zaak: Scalars['String']['output'];
 };
 
 export type ZaakStatusType = {
@@ -2770,6 +2921,16 @@ export type ZaakStatusType = {
   isEindstatus: Scalars['Boolean']['output'];
   omschrijving: Scalars['String']['output'];
   omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
+};
+
+export type ZaakSubStatus = {
+  __typename?: 'ZaakSubStatus';
+  doelgroep: Scalars['String']['output'];
+  omschrijving: Scalars['String']['output'];
+  status?: Maybe<Scalars['String']['output']>;
+  tijdstip: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+  zaak: Scalars['String']['output'];
 };
 
 export type ZaakType = {
@@ -2979,7 +3140,7 @@ export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __t
 export type GetPersoonV2QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonV2Query = { __typename?: 'Query', getPersoonV2?: { __typename?: 'BrpPersoon', burgerservicenummer: string, bewonersAantal?: number | null, geheimhoudingPersoonsgegevens?: boolean | null, geslacht?: { __typename?: 'BrpCodeOmschrijving', omschrijving?: string | null } | null, naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'BrpVerblijfplaats', verblijfadres?: { __typename?: 'Brp2Adres', officieleStraatnaam?: string | null, huisnummer?: number | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, datumVan?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null } | null, geboorte?: { __typename?: 'BrpDatumLandPlaats', datum?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null, land?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null, plaats?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten: Array<{ __typename?: 'BrpNationaliteit', nationaliteit?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null }> } | null };
+export type GetPersoonV2Query = { __typename?: 'Query', getPersoonV2?: { __typename?: 'BrpPersoon', burgerservicenummer: string, bewonersAantal?: number | null, geheimhoudingPersoonsgegevens?: boolean | null, geslacht?: { __typename?: 'BrpCodeOmschrijving', omschrijving?: string | null } | null, naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'BrpVerblijfplaats', verblijfadres?: { __typename?: 'Brp2Adres', officieleStraatnaam?: string | null, huisnummer?: number | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, datumVan?: { __typename?: 'BrpDatum', datum?: any | null, langFormaat?: string | null, type?: string | null } | null } | null, geboorte?: { __typename?: 'BrpDatumLandPlaats', datum?: { __typename?: 'BrpDatum', datum?: any | null, langFormaat?: string | null, type?: string | null } | null, land?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null, plaats?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten: Array<{ __typename?: 'BrpNationaliteit', nationaliteit?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null }> } | null };
 
 export type GetProductTakenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -3072,7 +3233,7 @@ export type GetZaakQueryVariables = Exact<{
 }>;
 
 
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving: string }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string }, resultaat?: { __typename?: 'ZaakResultaat', toelichting?: string | null, resultaattype: { __typename?: 'ResultaatType', omschrijvingGeneriek?: string | null } } | null } };
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean }, substatussen: Array<{ __typename?: 'ZaakSubStatus', uuid: any, omschrijving: string, tijdstip: string, status?: string | null }> } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean }, substatussen: Array<{ __typename?: 'ZaakSubStatus', uuid: any, omschrijving: string, tijdstip: string, status?: string | null }> }>, statussen: Array<{ __typename?: 'StatusType', omschrijving: string }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string }, resultaat?: { __typename?: 'ZaakResultaat', toelichting?: string | null, resultaattype: { __typename?: 'ResultaatType', omschrijvingGeneriek?: string | null } } | null } };
 
 export type GetZakenQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -5086,12 +5247,24 @@ export const GetZaakDocument = gql`
         omschrijving
         isEindstatus
       }
+      substatussen {
+        uuid
+        omschrijving
+        tijdstip
+        status
+      }
     }
     statusGeschiedenis {
       datumStatusGezet
       statustype {
         omschrijving
         isEindstatus
+      }
+      substatussen {
+        uuid
+        omschrijving
+        tijdstip
+        status
       }
     }
     statussen {
