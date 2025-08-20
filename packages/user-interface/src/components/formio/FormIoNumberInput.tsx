@@ -1,6 +1,5 @@
 import { Components } from "@formio/react";
 import { TextInput } from "@gemeente-denhaag/text-input";
-import { Formio } from "@formio/js";
 import { useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
@@ -40,13 +39,8 @@ const FormIoNumberInput = ({
 };
 
 export default class FormIoNumberInputWrapper extends BaseFormIoComponent {
-  static register: () => void = () => {
-    Formio.use({
-      components: {
-        number: FormIoNumberInputWrapper,
-      },
-    });
-  };
+  static register: () => void = () =>
+    super.register("number", FormIoNumberInputWrapper);
 
   static schema(sources: any = {}) {
     return Components.components.field.schema({

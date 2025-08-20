@@ -1,6 +1,5 @@
 import { Components } from "@formio/react";
 import { TextInput } from "@gemeente-denhaag/text-input";
-import { Formio } from "@formio/js";
 import { useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
@@ -41,13 +40,8 @@ const FormIoPasswordInput = ({
 };
 
 export default class FormIoPasswordInputWrapper extends BaseFormIoComponent {
-  static register: () => void = () => {
-    Formio.use({
-      components: {
-        password: FormIoPasswordInputWrapper,
-      },
-    });
-  };
+  static register: () => void = () =>
+    super.register("password", FormIoPasswordInputWrapper);
 
   static schema(sources: any = {}) {
     return Components.components.field.schema({

@@ -1,5 +1,4 @@
 import { Components } from "@formio/react";
-import { Formio } from "@formio/js";
 import { ChangeEvent, useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
@@ -70,13 +69,8 @@ const FormIoSelect = ({
 };
 
 export default class FormIoSelectWrapper extends BaseFormIoComponent {
-  static register: () => void = () => {
-    Formio.use({
-      components: {
-        select: FormIoSelectWrapper,
-      },
-    });
-  };
+  static register: () => void = () =>
+    super.register("select", FormIoSelectWrapper);
 
   static schema(sources: any = {}) {
     return Components.components.field.schema({

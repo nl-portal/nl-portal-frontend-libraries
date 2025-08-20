@@ -1,5 +1,4 @@
 import { Components } from "@formio/react";
-import { Formio } from "@formio/js";
 import { useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
@@ -39,13 +38,8 @@ const FormIoTextArea = ({
 };
 
 export default class FormIoTextAreaWrapper extends BaseFormIoComponent {
-  static register: () => void = () => {
-    Formio.use({
-      components: {
-        textarea: FormIoTextAreaWrapper,
-      },
-    });
-  };
+  static register: () => void = () =>
+    super.register("textarea", FormIoTextAreaWrapper);
 
   static schema(sources: any = {}) {
     return Components.components.field.schema({

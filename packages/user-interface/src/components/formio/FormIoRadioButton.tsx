@@ -1,5 +1,4 @@
 import { Components } from "@formio/react";
-import { Formio } from "@formio/js";
 import { useId } from "react";
 import { Container } from "react-dom/client";
 
@@ -89,13 +88,8 @@ const FormIoRadio = ({
 };
 
 export default class FormIoRadioWrapper extends BaseFormIoComponent {
-  static register: () => void = () => {
-    Formio.use({
-      components: {
-        radio: FormIoRadioWrapper,
-      },
-    });
-  };
+  static register: () => void = () =>
+    super.register("radio", FormIoRadioWrapper);
 
   static schema(sources: any = {}) {
     return Components.components.field.schema({

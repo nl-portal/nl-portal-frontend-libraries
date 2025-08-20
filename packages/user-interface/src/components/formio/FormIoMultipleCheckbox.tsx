@@ -1,5 +1,4 @@
 import { Components } from "@formio/react";
-import { Formio } from "@formio/js";
 import { useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
@@ -91,13 +90,8 @@ const FormIoMultipleCheckbox = ({
 };
 
 export default class FormIoMultipleCheckboxWrapper extends BaseFormIoComponent {
-  static register: () => void = () => {
-    Formio.use({
-      components: {
-        selectboxes: FormIoMultipleCheckboxWrapper,
-      },
-    });
-  };
+  static register: () => void = () =>
+    super.register("selectboxes", FormIoMultipleCheckboxWrapper);
 
   static schema(sources: any = {}) {
     return Components.components.field.schema({

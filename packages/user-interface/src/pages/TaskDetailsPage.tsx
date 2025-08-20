@@ -14,7 +14,7 @@ import {
 } from "@nl-portal/nl-portal-api";
 import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
-import styles from "./TaskPage.module.scss";
+import styles from "./TaskDetailsPage.module.scss";
 import { useParams } from "react-router";
 import { BackLink } from "../components/BackLink";
 import { Paragraph } from "@gemeente-denhaag/typography";

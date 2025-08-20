@@ -1,5 +1,4 @@
 import { Components } from "@formio/react";
-import { Formio } from "@formio/js";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import { FormIoRefProp, useFormIoStateProps } from "./useFormIoState";
@@ -24,13 +23,8 @@ const FormIoButton = ({ disabled, label, onClick }: FormIoButtonProps) => {
 };
 
 export default class FormIoButtonWrapper extends BaseFormIoComponent {
-  static register: () => void = () => {
-    Formio.use({
-      components: {
-        button: FormIoButtonWrapper,
-      },
-    });
-  };
+  static register: () => void = () =>
+    super.register("button", FormIoButtonWrapper);
 
   static schema(sources: any = {}) {
     return Components.components.field.schema({

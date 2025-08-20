@@ -46,7 +46,7 @@ const Layout = ({
   useEffect(() => {
     FormIoUploader.register();
     FormIoTextInputWrapper.register();
-    FormIoNumberInputWrapper.register;
+    FormIoNumberInputWrapper.register();
     FormIoPasswordInputWrapper.register();
     FormIoSingleCheckboxWrapper.register();
     FormIoMultipleCheckboxWrapper.register();

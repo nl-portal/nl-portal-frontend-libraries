@@ -2,6 +2,7 @@ import { ReactComponent } from "@formio/react";
 import { Container, createRoot, Root } from "react-dom/client";
 import { FormIoRefProp } from "./useFormIoState";
 import { ComponentType } from "react";
+import { Formio } from "@formio/js";
 
 export default class BaseFormIoComponent extends ReactComponent {
   protected component: any;
@@ -15,6 +16,15 @@ export default class BaseFormIoComponent extends ReactComponent {
     this.component.hideLabel = true;
   }
 
+  static register(name: string, component: any) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    Formio.use({
+      components: {
+        [name]: component,
+      },
+    });
+  }
+
   attachReact(
     element: Container,
     ref: FormIoRefProp,
@@ -23,7 +33,8 @@ export default class BaseFormIoComponent extends ReactComponent {
     super.attachReact(element, ref);
     this.root = createRoot(element);
     const { key, ...rest } = this.component;
-    ComponentType &&
+
+    if (ComponentType) {
       this.root.render(
         <ComponentType
           key={key}
@@ -33,6 +44,7 @@ export default class BaseFormIoComponent extends ReactComponent {
           {...rest}
         />,
       );
+    }
   }
 
   detachReact(element: Container) {

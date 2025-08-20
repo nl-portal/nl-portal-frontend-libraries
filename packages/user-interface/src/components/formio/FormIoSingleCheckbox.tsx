@@ -1,5 +1,4 @@
 import { Components } from "@formio/react";
-import { Formio } from "@formio/js";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import { FormField } from "@gemeente-denhaag/form-field";
@@ -42,13 +41,8 @@ const FormIoSingleCheckbox = ({
 };
 
 export default class FormIoSingleCheckboxWrapper extends BaseFormIoComponent {
-  static register: () => void = () => {
-    Formio.use({
-      components: {
-        checkbox: FormIoSingleCheckboxWrapper,
-      },
-    });
-  };
+  static register: () => void = () =>
+    super.register("checkbox", FormIoSingleCheckboxWrapper);
 
   static schema(sources: any = {}) {
     return Components.components.field.schema({

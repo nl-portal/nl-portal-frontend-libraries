@@ -1,6 +1,5 @@
 import { Components } from "@formio/react";
 import { TextInput } from "@gemeente-denhaag/text-input";
-import { Formio } from "@formio/js";
 import { useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
@@ -40,13 +39,8 @@ const FormIoTextInput = ({
 };
 
 export default class FormIoTextInputWrapper extends BaseFormIoComponent {
-  static register: () => void = () => {
-    Formio.use({
-      components: {
-        textfield: FormIoTextInputWrapper,
-      },
-    });
-  };
+  static register: () => void = () =>
+    super.register("textfield", FormIoTextInputWrapper);
 
   static schema(sources: any = {}) {
     return Components.components.field.schema({
