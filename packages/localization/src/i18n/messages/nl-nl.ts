@@ -14,7 +14,7 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.form": "Formulier",
     "pageTitles.account": "Mijn gegevens",
     "pageTitles.forms": "Formulieren",
-    "pageTitles.tasks": "Mijn Taken",
+    "pageTitles.tasks": "Mijn taken",
     "pageTitles.task": "Taak",
     "pageTitles.editContactInfo": "Contactgegevens",
     "pageTitles.editNotifications": "Meldingen",
