@@ -71,7 +71,7 @@ const StatusHistory: FC<StatusHistoryProps> = ({
           expandedSteps={[
             `step-${statuses.findIndex((s) => s.omschrijving === status?.statustype?.omschrijving) + 1}`,
           ]}
-          steps={statuses.map(({ omschrijving }, index) => {
+          steps={statuses?.map(({ omschrijving }, index) => {
             const currentStatus = [status, statusHistory]
               .flat()
               .find((s) => s?.statustype.omschrijving === omschrijving);
@@ -83,7 +83,7 @@ const StatusHistory: FC<StatusHistoryProps> = ({
               }),
               status: getStepStatus(omschrijving),
               marker: index + 1,
-              steps: currentStatus?.substatussen.map(
+              steps: currentStatus?.substatussen?.map(
                 (sub: ZaakSubStatus, subIndex: number) => ({
                   id: `substatus-${sub.uuid}`,
                   title: sub.omschrijving,

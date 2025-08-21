@@ -3075,7 +3075,7 @@ export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'Ta
 export type GetUserDigitaleAdressenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdresen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string }> | null };
+export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdressen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string }> | null };
 
 export type GetUserKlantContactenQueryVariables = Exact<{
   identificatorType: OnderwerpObjectIndentificatorType;
@@ -4997,7 +4997,7 @@ export type GetTakenSuspenseQueryHookResult = ReturnType<typeof useGetTakenSuspe
 export type GetTakenQueryResult = Apollo.QueryResult<GetTakenQuery, GetTakenQueryVariables>;
 export const GetUserDigitaleAdressenDocument = gql`
     query GetUserDigitaleAdressen {
-  getUserDigitaleAdresen {
+  getUserDigitaleAdressen {
     uuid
     waarde
     type

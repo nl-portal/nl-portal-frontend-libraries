@@ -119,8 +119,8 @@ export const useUserContactMutation = (() => {
                 cache.writeQuery({
                   query: GetUserDigitaleAdressenDocument,
                   data: {
-                    getUserDigitaleAdresen:
-                      existing?.getUserDigitaleAdresen?.filter(
+                    getUserDigitaleAdressen:
+                      existing?.getUserDigitaleAdressen?.filter(
                         (a) => a.uuid !== id,
                       ) ?? [],
                   },
@@ -149,8 +149,8 @@ export const useUserContactMutation = (() => {
                 cache.writeQuery({
                   query: GetUserDigitaleAdressenDocument,
                   data: {
-                    getUserDigitaleAdresen:
-                      existing?.getUserDigitaleAdresen?.map((a) =>
+                    getUserDigitaleAdressen:
+                      existing?.getUserDigitaleAdressen?.map((a) =>
                         a.uuid === updated.uuid ? updated : a,
                       ) ?? [],
                   },
@@ -177,8 +177,8 @@ export const useUserContactMutation = (() => {
                 cache.writeQuery({
                   query: GetUserDigitaleAdressenDocument,
                   data: {
-                    getUserDigitaleAdresen: [
-                      ...(existing?.getUserDigitaleAdresen ?? []),
+                    getUserDigitaleAdressen: [
+                      ...(existing?.getUserDigitaleAdressen ?? []),
                       created,
                     ],
                   },
