@@ -52,7 +52,6 @@ export default class FormIoButtonWrapper extends BaseFormIoComponent {
       ) => this.onClick(event),
     };
     super({ ...component, ...extraProps }, options, data);
-    console.log("action", this.component.action);
     this.onClick = this.onClick.bind(this);
   }
 
@@ -70,7 +69,6 @@ export default class FormIoButtonWrapper extends BaseFormIoComponent {
       | React.TouchEvent<HTMLButtonElement>,
   ) {
     event.preventDefault();
-    console.log("action2", this.component.action);
 
     // The default "action" can be "submit", "event", "reset", "cancel", etc.
     // The "action" property is stored in this.component.action
@@ -96,7 +94,6 @@ export default class FormIoButtonWrapper extends BaseFormIoComponent {
         break;
       default:
         // Custom actions or fallback
-        console.log("Unhandled button action:", this.component.action);
         (this as any).emit("submitButton"); // appearantly, the button in the Den Haag forms don't have an action (which should be mandatory)
         break;
     }
