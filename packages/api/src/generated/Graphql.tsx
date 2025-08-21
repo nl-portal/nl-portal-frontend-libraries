@@ -253,9 +253,9 @@ export type Brp2NationaliteitInOnderzoek = {
 
 export type BrpAdellijkeTitelPredicaat = {
   __typename?: 'BrpAdellijkeTitelPredicaat';
-  code: Scalars['String']['output'];
-  omschrijving: Scalars['String']['output'];
-  soort: Scalars['String']['output'];
+  code?: Maybe<Scalars['String']['output']>;
+  omschrijving?: Maybe<Scalars['String']['output']>;
+  soort?: Maybe<Scalars['String']['output']>;
 };
 
 export type BrpAdressering = {
@@ -284,9 +284,9 @@ export type BrpCodeOmschrijving = {
 
 export type BrpDatum = {
   __typename?: 'BrpDatum';
-  datum: Scalars['Date']['output'];
-  langFormaat: Scalars['String']['output'];
-  type: Scalars['String']['output'];
+  datum?: Maybe<Scalars['Date']['output']>;
+  langFormaat?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type BrpDatumLandPlaats = {
@@ -424,7 +424,7 @@ export type BrpNationaliteit = {
   inOnderzoek?: Maybe<Brp2NationaliteitInOnderzoek>;
   nationaliteit?: Maybe<BrpCodeOmschrijving>;
   redenOpname?: Maybe<BrpCodeOmschrijving>;
-  type: Scalars['String']['output'];
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type BrpOuder = {
@@ -542,8 +542,8 @@ export type BrpPersoonVerificatie = {
 
 export type BrpUitsluitingKiesrecht = {
   __typename?: 'BrpUitsluitingKiesrecht';
-  einddatum: BrpDatum;
-  uitgeslotenVanKiesrecht: Scalars['Boolean']['output'];
+  einddatum?: Maybe<BrpDatum>;
+  uitgeslotenVanKiesrecht?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type BrpVerblijfplaats = {
@@ -2129,8 +2129,13 @@ export type Query = {
   getTasks: TaakPage;
   /** Returns the total amount of unopened Berichten */
   getUnopenedBerichtenCount: Scalars['Int']['output'];
-  /** Get DigitaleAdressen of authenticated user. */
+  /**
+   * Get DigitaleAdresen of authenticated user.
+   * @deprecated Use getUserDigitaleAdressen instead
+   */
   getUserDigitaleAdresen?: Maybe<Array<DigitaleAdresResponse>>;
+  /** Get DigitaleAdressen of authenticated user. */
+  getUserDigitaleAdressen?: Maybe<Array<DigitaleAdresResponse>>;
   /** Get KlantContact by id of authenticated user. */
   getUserKlantContact?: Maybe<OpenKlant2Klantcontact>;
   /**
@@ -2762,7 +2767,10 @@ export type ZaakStatus = {
   __typename?: 'ZaakStatus';
   datumStatusGezet: Scalars['String']['output'];
   statustype: ZaakStatusType;
+  substatussen: Array<ZaakSubStatus>;
+  url: Scalars['String']['output'];
   uuid: Scalars['UUID']['output'];
+  zaak: Scalars['String']['output'];
 };
 
 export type ZaakStatusType = {
@@ -2770,6 +2778,16 @@ export type ZaakStatusType = {
   isEindstatus: Scalars['Boolean']['output'];
   omschrijving: Scalars['String']['output'];
   omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
+};
+
+export type ZaakSubStatus = {
+  __typename?: 'ZaakSubStatus';
+  doelgroep: Scalars['String']['output'];
+  omschrijving: Scalars['String']['output'];
+  status?: Maybe<Scalars['String']['output']>;
+  tijdstip: Scalars['String']['output'];
+  uuid: Scalars['UUID']['output'];
+  zaak: Scalars['String']['output'];
 };
 
 export type ZaakType = {
@@ -2979,7 +2997,7 @@ export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __t
 export type GetPersoonV2QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonV2Query = { __typename?: 'Query', getPersoonV2?: { __typename?: 'BrpPersoon', burgerservicenummer: string, bewonersAantal?: number | null, geheimhoudingPersoonsgegevens?: boolean | null, geslacht?: { __typename?: 'BrpCodeOmschrijving', omschrijving?: string | null } | null, naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'BrpVerblijfplaats', verblijfadres?: { __typename?: 'Brp2Adres', officieleStraatnaam?: string | null, huisnummer?: number | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, datumVan?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null } | null, geboorte?: { __typename?: 'BrpDatumLandPlaats', datum?: { __typename?: 'BrpDatum', datum: any, langFormaat: string, type: string } | null, land?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null, plaats?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten: Array<{ __typename?: 'BrpNationaliteit', nationaliteit?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null }> } | null };
+export type GetPersoonV2Query = { __typename?: 'Query', getPersoonV2?: { __typename?: 'BrpPersoon', burgerservicenummer: string, bewonersAantal?: number | null, geheimhoudingPersoonsgegevens?: boolean | null, geslacht?: { __typename?: 'BrpCodeOmschrijving', omschrijving?: string | null } | null, naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null }, verblijfplaats?: { __typename?: 'BrpVerblijfplaats', verblijfadres?: { __typename?: 'Brp2Adres', officieleStraatnaam?: string | null, huisnummer?: number | null, huisletter?: string | null, huisnummertoevoeging?: string | null, postcode?: string | null, woonplaats?: string | null } | null, datumVan?: { __typename?: 'BrpDatum', datum?: any | null, langFormaat?: string | null, type?: string | null } | null } | null, geboorte?: { __typename?: 'BrpDatumLandPlaats', datum?: { __typename?: 'BrpDatum', datum?: any | null, langFormaat?: string | null, type?: string | null } | null, land?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null, plaats?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null } | null, nationaliteiten: Array<{ __typename?: 'BrpNationaliteit', nationaliteit?: { __typename?: 'BrpCodeOmschrijving', code?: string | null, omschrijving?: string | null } | null }> } | null };
 
 export type GetProductTakenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -3057,7 +3075,7 @@ export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'Ta
 export type GetUserDigitaleAdressenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdresen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string }> | null };
+export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdressen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string }> | null };
 
 export type GetUserKlantContactenQueryVariables = Exact<{
   identificatorType: OnderwerpObjectIndentificatorType;
@@ -3072,7 +3090,7 @@ export type GetZaakQueryVariables = Exact<{
 }>;
 
 
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving: string }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string }, resultaat?: { __typename?: 'ZaakResultaat', toelichting?: string | null, resultaattype: { __typename?: 'ResultaatType', omschrijvingGeneriek?: string | null } } | null } };
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean }, substatussen: Array<{ __typename?: 'ZaakSubStatus', uuid: any, omschrijving: string, tijdstip: string }> } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean }, substatussen: Array<{ __typename?: 'ZaakSubStatus', uuid: any, omschrijving: string, tijdstip: string }> }>, statussen: Array<{ __typename?: 'StatusType', omschrijving: string }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string }, resultaat?: { __typename?: 'ZaakResultaat', toelichting?: string | null, resultaattype: { __typename?: 'ResultaatType', omschrijvingGeneriek?: string | null } } | null } };
 
 export type GetZakenQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -4979,7 +4997,7 @@ export type GetTakenSuspenseQueryHookResult = ReturnType<typeof useGetTakenSuspe
 export type GetTakenQueryResult = Apollo.QueryResult<GetTakenQuery, GetTakenQueryVariables>;
 export const GetUserDigitaleAdressenDocument = gql`
     query GetUserDigitaleAdressen {
-  getUserDigitaleAdresen {
+  getUserDigitaleAdressen {
     uuid
     waarde
     type
@@ -5086,12 +5104,22 @@ export const GetZaakDocument = gql`
         omschrijving
         isEindstatus
       }
+      substatussen {
+        uuid
+        omschrijving
+        tijdstip
+      }
     }
     statusGeschiedenis {
       datumStatusGezet
       statustype {
         omschrijving
         isEindstatus
+      }
+      substatussen {
+        uuid
+        omschrijving
+        tijdstip
       }
     }
     statussen {

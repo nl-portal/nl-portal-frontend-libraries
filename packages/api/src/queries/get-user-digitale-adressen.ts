@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const QUERY_GET_USER_DIGITALE_ADRESSEN = gql`
   query GetUserDigitaleAdressen {
-    getUserDigitaleAdresen {
+    getUserDigitaleAdressen {
       uuid
       waarde
       type

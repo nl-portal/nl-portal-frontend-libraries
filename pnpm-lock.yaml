@@ -328,8 +328,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(@babel/runtime@7.28.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/contact-timeline':
-        specifier: 4.0.1
-        version: 4.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 4.0.3
+        version: 4.0.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/data-badge':
         specifier: 2.0.1
         version: 2.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -382,8 +382,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/process-steps':
-        specifier: 4.0.0
-        version: 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 4.1.0
+        version: 4.1.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/responsive-content':
         specifier: 2.0.0
         version: 2.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1252,8 +1252,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/contact-timeline@4.0.1':
-    resolution: {integrity: sha512-RF+zy+jXHchEf2GyvoOzc31Nbn5GNvRNty7oJUl56lN9tOfeFJ2dGYV5XGJ+O8SAHUoNE3VhUnNZ8Ti//dtkQQ==}
+  '@gemeente-denhaag/contact-timeline@4.0.3':
+    resolution: {integrity: sha512-ruTIg0Q86rjswhLLUWNNmXK2QakOhPiCWmWqsJihWYLDn4XEpgs0seEW7tFnT29kONpg9HLToE7phw4Dl4wHkQ==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1423,8 +1423,14 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/process-steps@4.0.0':
-    resolution: {integrity: sha512-6hczwxYPyUrb62qH6W5GdDXi0UAOh4ZiNN5NbQaZKfL4wDqtOzU8WAiKDzrTaVRthTcFwShZBWC+uWa3YxBEhA==}
+  '@gemeente-denhaag/process-steps@4.1.0':
+    resolution: {integrity: sha512-XPBmBY0xoZqn5xhY6lORxETZ7smiPdkmZPOiViiL55YfH7a2Qj0N6yxluEIlpVDcz+MTmurbeTMPfn+HJX+8XQ==}
+    peerDependencies:
+      react: 18 || 19
+      react-dom: 18 || 19
+
+  '@gemeente-denhaag/process-steps@4.2.0':
+    resolution: {integrity: sha512-CM2bi7YB1SOQObND3pbJRmxeCeSfvlKMUrrcuFJHcdkTy86U4LhssB3MuV/7jfStmBstqEoO4qBteBw4NSVITA==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -7013,12 +7019,12 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/runtime'
 
-  '@gemeente-denhaag/contact-timeline@4.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@gemeente-denhaag/contact-timeline@4.0.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@gemeente-denhaag/file': 2.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/icons': 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/paragraph': 2.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@gemeente-denhaag/process-steps': 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@gemeente-denhaag/process-steps': 4.2.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/step-marker': 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/utils': 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       clsx: 2.1.1
@@ -7276,7 +7282,16 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
-  '@gemeente-denhaag/process-steps@4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@gemeente-denhaag/process-steps@4.1.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@gemeente-denhaag/button': 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@gemeente-denhaag/icons': 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@gemeente-denhaag/step-marker': 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      clsx: 2.1.1
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
+  '@gemeente-denhaag/process-steps@4.2.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@gemeente-denhaag/button': 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/icons': 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)

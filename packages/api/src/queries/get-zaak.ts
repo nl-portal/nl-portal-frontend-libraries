@@ -18,12 +18,22 @@ export const QUERY_GET_ZAAK = gql`
           omschrijving
           isEindstatus
         }
+        substatussen {
+          uuid
+          omschrijving
+          tijdstip
+        }
       }
       statusGeschiedenis {
         datumStatusGezet
         statustype {
           omschrijving
           isEindstatus
+        }
+        substatussen {
+          uuid
+          omschrijving
+          tijdstip
         }
       }
       statussen {
