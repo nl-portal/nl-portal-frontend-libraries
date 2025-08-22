@@ -28,6 +28,11 @@ type BasicFormIoComponentSchema = {
    * The key from FormIO, which should be used in for example the radio button group name, renamed to componentKey, so it doesn't cause conflicts with the React Key
    */
   componentKey?: string;
+
+  /**
+   * The attributes like aria-label
+   */
+  attributes?: Record<string, string>;
 };
 
 export default BasicFormIoComponentSchema;

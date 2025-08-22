@@ -30,7 +30,6 @@ export default class BaseFormIoComponent extends ReactComponent {
     ref: FormIoRefProp,
     ComponentType?: ComponentType<any>,
   ) {
-    super.attachReact(element, ref);
     this.root = createRoot(element);
     const { key, ...rest } = this.component;
 
@@ -47,12 +46,8 @@ export default class BaseFormIoComponent extends ReactComponent {
     }
   }
 
-  detachReact(element: Container) {
-    super.detachReact(element);
-  }
-
   /* eslint-disable @typescript-eslint/no-unused-vars */
   // @ts-expect-error: TS6133
-  triggerRootChange(...args: any) {}
+  detachReact(element: Container) {}
   /* eslint-enable @typescript-eslint/no-unused-vars */
 }
