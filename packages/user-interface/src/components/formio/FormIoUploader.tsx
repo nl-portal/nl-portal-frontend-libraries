@@ -8,6 +8,7 @@ import { FormLabel } from "@gemeente-denhaag/form-label";
 import { useEffect, useId, useState } from "react";
 import { get } from "lodash-es";
 import { TextInput } from "@gemeente-denhaag/text-input";
+import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 
 export interface UploadedFile {
   url: string;
@@ -15,14 +16,11 @@ export interface UploadedFile {
   size: number;
 }
 
-interface FileUploadProps {
+interface FileUploadProps extends BasicFormIoComponentSchema {
   context: object;
-  disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
-  attributes?: Record<string, string>;
   informatieobjecttype?: string;
-  label?: string;
 }
 
 const FileUpload = ({

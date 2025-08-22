@@ -135,13 +135,6 @@ const TaskDetailsPage = () => {
     setSubmission((prevSubmission) => ({ ...prevSubmission, data: payload }));
   };
 
-  const setFormSubmission = (formioSubmission: any) => {
-    setSubmission({
-      ...formioSubmission,
-      data: { ...formioSubmission.data, ...submission.data },
-    });
-  };
-
   const onFormSubmit = async (formioSubmission: any) => {
     if (formioSubmission?.state === "submitted") {
       await submitTaak({
@@ -212,12 +205,7 @@ const TaskDetailsPage = () => {
               ?.formDefinition ||
             formDefinitionId?.getFormDefinitionById?.formDefinition
           }
-          //eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onFormReady={(form: any) => {
-            form.triggerRedraw();
-          }} // TODO: here because customConditional don't work, update FormIO
           submission={submission}
-          onChange={setFormSubmission}
           onSubmit={onFormSubmit}
           options={{ noAlerts: true }}
         />

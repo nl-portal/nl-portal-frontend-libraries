@@ -26,6 +26,7 @@ const FormIoSelect = ({
   label,
   multiple,
   componentKey,
+  attributes,
 }: FormIoSelectProps) => {
   const [value, setValue] = useFormIoState<string | string[]>({
     formioRef,
@@ -54,6 +55,7 @@ const FormIoSelect = ({
         multiple={multiple}
         onChange={handleChange}
         value={value || ""}
+        {...attributes}
       >
         <SelectOption key={`${componentKey}-placeholder`}>
           {placeholder}

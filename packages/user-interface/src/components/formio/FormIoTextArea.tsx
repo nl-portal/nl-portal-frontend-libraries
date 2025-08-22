@@ -19,6 +19,7 @@ const FormIoTextArea = ({
   disabled,
   placeholder,
   label,
+  attributes,
 }: FormIoTextAreaProps) => {
   const [value, setValue] = useFormIoState({ formioRef, onChange });
   const id = useId();
@@ -32,6 +33,7 @@ const FormIoTextArea = ({
         disabled={disabled}
         placeholder={placeholder}
         onChange={(ev) => setValue(ev?.target?.value)}
+        {...attributes}
       />
     </FormField>
   );

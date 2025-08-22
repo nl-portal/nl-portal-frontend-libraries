@@ -7,6 +7,7 @@ import { getPersoon } from "../data/persoon.mock";
 import { cloneDeep } from "lodash-es";
 import { getProduct } from "../data/product.mock";
 import { getUnopenedBerichten } from "../data/unopened-berichten";
+import { getUserDigitaleAdressen } from "../data/userDigitaleAdressen.mock";
 
 const caseId = "82cb13cf-d2f9-4e3e-ac07-751373035ecb";
 
@@ -47,6 +48,7 @@ export const MockCaseDetailsPage = () => (
       getObjectContactMomenten,
       getTakenById,
       getPersoon,
+      getUserDigitaleAdressen,
     ]}
     routes={routes}
     initialIndex={2}

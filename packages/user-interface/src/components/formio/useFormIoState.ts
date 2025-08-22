@@ -27,7 +27,9 @@ export const useFormIoState = <T = any>({
 
   // on value change
   useEffect(() => {
-    onChange(state.value);
+    if (state.value !== undefined) {
+      onChange(state.value);
+    }
   }, [state.value]);
 
   const setValue = (value: T) => {

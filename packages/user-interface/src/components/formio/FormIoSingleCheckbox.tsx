@@ -19,6 +19,7 @@ const FormIoSingleCheckbox = ({
   onChange,
   disabled,
   label,
+  attributes,
 }: FormIoSingleCheckboxProps) => {
   const [value, setValue] = useFormIoState<boolean>({ formioRef, onChange });
 
@@ -32,6 +33,7 @@ const FormIoSingleCheckbox = ({
             checked={Boolean(value)}
             disabled={disabled}
             onChange={(ev) => setValue(ev?.target?.checked)}
+            {...attributes}
           />
           {label}
         </FormLabel>

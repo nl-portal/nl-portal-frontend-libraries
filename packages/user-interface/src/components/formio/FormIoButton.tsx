@@ -14,9 +14,14 @@ type FormIoButtonProps = BasicFormIoComponentSchema &
     ) => void;
   };
 
-const FormIoButton = ({ disabled, label, onClick }: FormIoButtonProps) => {
+const FormIoButton = ({
+  disabled,
+  label,
+  attributes,
+  onClick,
+}: FormIoButtonProps) => {
   return (
-    <Button disabled={disabled} onClick={onClick}>
+    <Button {...attributes} disabled={disabled} onClick={onClick}>
       {label}
     </Button>
   );

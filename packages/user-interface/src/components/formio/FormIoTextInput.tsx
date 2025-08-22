@@ -19,6 +19,7 @@ const FormIoTextInput = ({
   disabled,
   placeholder,
   label,
+  attributes,
 }: FormIoTextInputProps) => {
   const [value, setValue] = useFormIoState({ formioRef, onChange });
   const id = useId();
@@ -33,6 +34,7 @@ const FormIoTextInput = ({
         disabled={disabled}
         placeholder={placeholder}
         onChange={(ev) => setValue(ev?.target?.value)}
+        {...attributes}
       />
     </FormField>
   );

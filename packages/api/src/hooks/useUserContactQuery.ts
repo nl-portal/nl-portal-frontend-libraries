@@ -34,10 +34,10 @@ export const useUserContactQuery = (() => {
     v2: {
       hook: useGetUserDigitaleAdressenQuery,
       map: (d) => {
-        const email = d?.getUserDigitaleAdresen?.find(
+        const email = d?.getUserDigitaleAdressen?.find(
           (a) => a.type === DigitaleAdresType.Email,
         );
-        const phone = d?.getUserDigitaleAdresen?.find(
+        const phone = d?.getUserDigitaleAdressen?.find(
           (a) => a.type === DigitaleAdresType.Telefoonnummer,
         );
         return {

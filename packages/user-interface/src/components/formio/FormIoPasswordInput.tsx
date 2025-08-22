@@ -20,6 +20,7 @@ const FormIoPasswordInput = ({
   disabled,
   placeholder,
   label,
+  attributes,
 }: FormIoPasswordInputProps) => {
   const [value, setValue] = useFormIoState({ formioRef, onChange });
   const id = useId();
@@ -34,6 +35,7 @@ const FormIoPasswordInput = ({
         disabled={disabled}
         placeholder={placeholder}
         onChange={(ev) => setValue(ev?.target?.value)}
+        {...attributes}
       />
     </FormField>
   );
