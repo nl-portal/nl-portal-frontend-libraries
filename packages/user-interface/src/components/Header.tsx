@@ -13,11 +13,11 @@ type HeaderProps = {
   logo?: AnchorHTMLAttributes<HTMLAnchorElement>;
 };
 
-const Header = ({ logo }: HeaderProps) => {
+const Header = ({ logo: customLogo }: HeaderProps) => {
   const { logout } = useLogout();
   const { currentLocale, setCurrentLocale, supportedLocales } =
     useContext(LocaleContext);
-  const { messagesCount } = useContext(AppContext);
+  const { logo, messagesCount } = useContext(AppContext);
   const { navigationItems } = useContext(RouterContext);
   const { username, usernameVolmacht } = useContext(UserContext);
   const intl = useIntl();
@@ -151,7 +151,7 @@ const Header = ({ logo }: HeaderProps) => {
   return (
     <HeaderLogic
       {...headerProps}
-      logo={logo}
+      logo={logo || customLogo}
       languageSwitcherMenu={languageSwitcherMenu}
       breadcrumbs={breadcrumbs}
     />
