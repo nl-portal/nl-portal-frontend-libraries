@@ -131,7 +131,10 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
       });
     }
 
-    if (caseData?.getZaak.resultaat?.toelichting) {
+    if (
+      window.SHOW_CASE_RESULT_EXPLANATION === "true" &&
+      caseData?.getZaak.resultaat?.toelichting
+    ) {
       array.push({
         title: intl.formatMessage({ id: "caseDetails.resultaatToelichting" }),
         detail: caseData?.getZaak.resultaat.toelichting || "",
