@@ -52,6 +52,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   );
 
   useEffect(() => {
+    if (window.USE_CONFIG_API !== "true") return;
     startTransition(async () => {
       const response = await fetch(`${restUri}/public/theme/logo`);
       const base64 = await response.text();
@@ -61,6 +62,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   }, []);
 
   useEffect(() => {
+    if (window.USE_CONFIG_API !== "true") return;
     startTransition(async () => {
       const styleResponse = await fetch(`${restUri}/public/theme/style`);
       const style = await styleResponse.json();
