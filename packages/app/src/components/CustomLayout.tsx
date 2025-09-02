@@ -1,14 +1,20 @@
-import { Layout, PortalLink } from "@nl-portal/nl-portal-user-interface";
+import {
+  AppContext,
+  Layout,
+  PortalLink,
+} from "@nl-portal/nl-portal-user-interface";
 import { paths } from "../constants/paths";
 import { useIntl } from "react-intl";
 import { HeaderLogo } from "./HeaderLogo";
+import { useContext } from "react";
 
 const CustomLayout = () => {
   const intl = useIntl();
+  const { logoUrl } = useContext(AppContext);
 
   const logo = {
     href: paths.overview,
-    children: <HeaderLogo />,
+    children: logoUrl ? <img src={logoUrl} alt="logo" /> : <HeaderLogo />,
     "aria-label": "NL Portal",
     Link: PortalLink,
   };

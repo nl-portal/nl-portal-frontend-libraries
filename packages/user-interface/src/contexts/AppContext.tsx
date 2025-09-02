@@ -1,4 +1,3 @@
-import { LinkProps } from "@gemeente-denhaag/link";
 import {
   ApiContext,
   GetOpenProductHoofdThemasQuery,
@@ -18,13 +17,12 @@ import { useLocation, useNavigationType } from "react-router";
 import { stringToSlug } from "../utils/string-to-slug";
 import RouterContext from "./RouterContext";
 import UserContext from "./UserContext";
-import PortalLink from "../components/PortalLink";
 
 type Themes = GetOpenProductHoofdThemasQuery["getOpenProductHoofdThemas"];
 
 interface AppContextType {
   history: string[];
-  logo: LinkProps | undefined;
+  logoUrl: string | undefined;
   themes: Themes;
   messagesCount: number;
   refetchThemes: () => void;
@@ -42,7 +40,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   const navType = useNavigationType();
   const [firstLoad, setFirstLoad] = useState(true);
   const { restUri } = useContext(ApiContext);
-  const [logo, setLogo] = useState<LinkProps | undefined>(undefined);
+  const [logoUrl, setLogoUrl] = useState<string | undefined>(undefined);
   const [themes, setThemes] = useState<Themes>([]);
   const [messagesCount, setMessagesCount] = useState(0);
   const [loadingConfig, startTransition] = useTransition();
@@ -58,18 +56,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
       const response = await fetch(`${restUri}/public/theme/logo`);
       const base64 = await response.text();
       const logoUrl = `data:image;base64,${base64}`;
-      console.log("logoUrl", logoUrl);
-      setLogo({
-        href: "/",
-        children: (
-          <img
-            src={logoUrl}
-            alt="NL Portal"
-            onLoad={() => URL.revokeObjectURL(logoUrl)}
-          />
-        ),
-        Link: PortalLink,
-      });
+      setLogoUrl(logoUrl);
     });
   }, []);
 
@@ -143,7 +130,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     <AppContext.Provider
       value={{
         history,
-        logo,
+        logoUrl,
         themes,
         messagesCount,
         refetchThemes,
