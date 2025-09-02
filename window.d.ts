@@ -27,7 +27,7 @@ declare global {
     OPEN_KLANT_VERSION: string;
     OPEN_PRODUCTEN: string;
     USE_LEGACY_OGONE_PAYMENT: string;
-    USE_CONFIG_API: string;
+    USE_THEME_API: string;
   }
 }
 
