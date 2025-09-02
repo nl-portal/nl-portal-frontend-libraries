@@ -19,3 +19,4 @@ window.REQUEST_FOR_CHANGE_BRP_INFO_URL = "https://www.google.nl";
 window.REQUEST_CONFIDENTIALITY_OF_DATA_URL = "https://www.google.nl";
 window.USE_LEGACY_OGONE_PAYMENT = "false";
 window.USE_THEME_API = "true";
+window.SHOW_CASE_RESULT_EXPLANATION = "true";

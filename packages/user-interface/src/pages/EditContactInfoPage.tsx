@@ -99,6 +99,7 @@ const EditContactInfoPage = () => {
             onChange={handleEmailInputChange}
             onBlur={handleEmailInputBlur}
             className={styles["nl-portal-edit-contact__emailadres-field"]}
+            invalid={emailHasError}
           />
           {emailHasError && (
             <FormFieldErrorMessage>
@@ -118,6 +119,7 @@ const EditContactInfoPage = () => {
             onChange={handlePhoneInputChange}
             onBlur={handlePhoneInputBlur}
             className={styles["nl-portal-edit-contact__telefoonnummer-field"]}
+            invalid={phoneHasError}
           />
           {phoneHasError && (
             <FormFieldErrorMessage>
