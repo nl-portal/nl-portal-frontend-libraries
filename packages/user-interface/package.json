@@ -49,7 +49,7 @@
     "@gemeente-denhaag/form-field-error-message": "3.0.0",
     "@gemeente-denhaag/form-fieldset": "3.0.0",
     "@gemeente-denhaag/form-label": "3.0.0",
-    "@gemeente-denhaag/header": "^4.0.2",
+    "@gemeente-denhaag/header": "^4.0.3",
     "@gemeente-denhaag/icons": "4.0.0",
     "@gemeente-denhaag/link": "4.0.0",
     "@gemeente-denhaag/link-list": "^6.0.0",

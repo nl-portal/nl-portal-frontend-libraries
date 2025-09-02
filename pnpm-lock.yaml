@@ -358,8 +358,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0(@babel/runtime@7.28.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/header':
-        specifier: ^4.0.2
-        version: 4.0.2(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: ^4.0.3
+        version: 4.0.3(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/icons':
         specifier: 4.0.0
         version: 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1321,8 +1321,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/header@4.0.2':
-    resolution: {integrity: sha512-mrhzBb+s9JEqk60Q1xf+z8g0u6gJ5PsftKWggDPd+g1n689ZysZfof2PJEf+xhqA6AkLNKsWQo4FcbBKyUR0hQ==}
+  '@gemeente-denhaag/header@4.0.3':
+    resolution: {integrity: sha512-bJC5DDigQfMrb2vWEm33gO5KeKeM38xGksav0QONUJu52Ys+vMgLs8gpvXflBAUI2efursznqk0qB41cmotIMw==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -7113,7 +7113,7 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
-  '@gemeente-denhaag/header@4.0.2(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@gemeente-denhaag/header@4.0.3(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@gemeente-denhaag/breadcrumb': 5.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/button': 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
