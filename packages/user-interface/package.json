@@ -29,8 +29,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@formio/js": "5.2.1-rc.14",
-    "@formio/protected-eval": "2.0.0-rc.4",
+    "@formio/js": "5.2.1",
+    "@formio/protected-eval": "2.0.0",
     "@formio/react": "6.1.0",
     "@gemeente-denhaag/action": "4.0.0",
     "@gemeente-denhaag/alert": "4.0.3",
