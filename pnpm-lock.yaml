@@ -397,8 +397,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/table':
-        specifier: 4.0.1
-        version: 4.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 4.0.2
+        version: 4.0.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/text-input':
         specifier: 3.0.0
         version: 3.0.0(@babel/runtime@7.28.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1459,8 +1459,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/table@4.0.1':
-    resolution: {integrity: sha512-61CKqbOYhtxmRzFriIOau6JCt5Vx8h79uVKSS5xpl+C4k7RiBj0m0W/R4/wWF4/UzJylo85oR5zPoqLSmD+aEA==}
+  '@gemeente-denhaag/table@4.0.2':
+    resolution: {integrity: sha512-eq0TBkLllTAXWR2lgV0zFK0PVXWiwGkjVHqH4zyCCMgWHtlycOzNBGTq0yZvpzgqNxQ/NwQX9rg2oqB0FqUCbA==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -7332,7 +7332,7 @@ snapshots:
       react-dom: 19.1.1(react@19.1.1)
       uuid: 11.1.0
 
-  '@gemeente-denhaag/table@4.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@gemeente-denhaag/table@4.0.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@gemeente-denhaag/link': 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       clsx: 2.1.1
