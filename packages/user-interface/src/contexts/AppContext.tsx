@@ -55,8 +55,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     if (window.USE_THEME_API !== "true") return;
     startTransition(async () => {
       const response = await fetch(`${restUri}/public/theme/logo`);
-      const base64 = await response.text();
-      const logoUrl = `data:image;base64,${base64}`;
+      const logoUrl = await response.text();
       setLogoUrl(logoUrl);
     });
   }, []);
