@@ -54,21 +54,42 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   useEffect(() => {
     if (window.USE_THEME_API !== "true") return;
     startTransition(async () => {
-      const response = await fetch(`${restUri}/public/theme/logo`);
-      const logoUrl = await response.text();
-      setLogoUrl(logoUrl);
+      try {
+        const response = await fetch(`${restUri}/public/theme/logo`);
+        if (!response.ok) {
+          console.warn("Theme logo API failed:", response.status);
+          return;
+        }
+
+        const logoUrl = await response.text();
+        setLogoUrl(logoUrl);
+      } catch (err) {
+        console.error("Failed to load logo:", err);
+      }
     });
   }, []);
 
   useEffect(() => {
     if (window.USE_THEME_API !== "true") return;
     startTransition(async () => {
-      const styleResponse = await fetch(`${restUri}/public/theme/style`);
-      const style = await styleResponse.json();
+      try {
+        const styleResponse = await fetch(`${restUri}/public/theme/style`);
+        if (!styleResponse.ok) {
+          console.warn("Theme style API failed:", styleResponse.status);
+          return;
+        }
 
-      Object.entries(style).forEach(([key, value]) => {
-        document.documentElement.style.setProperty(key, value as string | null);
-      });
+        const style = await styleResponse.json();
+
+        Object.entries(style).forEach(([key, value]) => {
+          document.documentElement.style.setProperty(
+            key,
+            value as string | null,
+          );
+        });
+      } catch (err) {
+        console.error("Failed to load theme styling:", err);
+      }
     });
   }, []);
 
