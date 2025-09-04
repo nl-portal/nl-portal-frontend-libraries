@@ -56,6 +56,7 @@ export type Bericht = {
   berichtTekst: Scalars['String']['output'];
   berichtType: BerichtType;
   bijlages: Array<Scalars['String']['output']>;
+  documenten: Array<Document>;
   einddatumHandelingstermijn: Scalars['LocalDateTime']['output'];
   geopend: Scalars['Boolean']['output'];
   handelingsperspectief: BerichtHandelingsperspectief;
@@ -2782,13 +2783,19 @@ export type ZaakStatusType = {
 
 export type ZaakSubStatus = {
   __typename?: 'ZaakSubStatus';
-  doelgroep: Scalars['String']['output'];
+  doelgroep: ZaakSubStatusDoelgroep;
   omschrijving: Scalars['String']['output'];
   status?: Maybe<Scalars['String']['output']>;
   tijdstip: Scalars['String']['output'];
   uuid: Scalars['UUID']['output'];
   zaak: Scalars['String']['output'];
 };
+
+export enum ZaakSubStatusDoelgroep {
+  Betrokkenen = 'BETROKKENEN',
+  GeenDoelgroep = 'GEEN_DOELGROEP',
+  Intern = 'INTERN'
+}
 
 export type ZaakType = {
   __typename?: 'ZaakType';
@@ -2883,7 +2890,7 @@ export type GetBerichtQueryVariables = Exact<{
 }>;
 
 
-export type GetBerichtQuery = { __typename?: 'Query', getBericht?: { __typename?: 'Bericht', id?: any | null, berichtTekst: string, berichtType: BerichtType, bijlages: Array<string>, einddatumHandelingstermijn: any, geopend: boolean, handelingsperspectief: BerichtHandelingsperspectief, onderwerp: string, publicatiedatum: any, referentie: string, identificatie: { __typename?: 'BerichtIdentificatie', type: string, value: string } } | null };
+export type GetBerichtQuery = { __typename?: 'Query', getBericht?: { __typename?: 'Bericht', id?: any | null, berichtTekst: string, berichtType: BerichtType, bijlages: Array<string>, einddatumHandelingstermijn: any, geopend: boolean, handelingsperspectief: BerichtHandelingsperspectief, onderwerp: string, publicatiedatum: any, referentie: string, identificatie: { __typename?: 'BerichtIdentificatie', type: string, value: string }, documenten: Array<{ __typename?: 'Document', uuid: any, documentapi: string, identificatie?: string | null, creatiedatum?: string | null, titel?: string | null, formaat?: string | null, bestandsnaam?: string | null, bestandsomvang?: number | null }> } | null };
 
 export type GetBerichtenQueryVariables = Exact<{
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
@@ -3471,6 +3478,16 @@ export const GetBerichtDocument = gql`
     identificatie {
       type
       value
+    }
+    documenten {
+      uuid
+      documentapi
+      identificatie
+      creatiedatum
+      titel
+      formaat
+      bestandsnaam
+      bestandsomvang
     }
     onderwerp
     publicatiedatum

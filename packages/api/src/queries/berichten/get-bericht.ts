@@ -14,6 +14,16 @@ export const QUERY_GET_BERICHT = gql`
         type
         value
       }
+      documenten {
+        uuid
+        documentapi
+        identificatie
+        creatiedatum
+        titel
+        formaat
+        bestandsnaam
+        bestandsomvang
+      }
       onderwerp
       publicatiedatum
       referentie
