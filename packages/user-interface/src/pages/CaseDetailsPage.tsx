@@ -31,6 +31,7 @@ import { ExtraCaseDetails, Details } from "../components/ExtraCaseDetails";
 import NotificationContext from "../contexts/NotificationContext";
 import { stringToSlug } from "../utils/string-to-slug";
 import { caseResults } from "../constants/case-results";
+import Pre from "../components/Pre";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -137,7 +138,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     ) {
       array.push({
         title: intl.formatMessage({ id: "caseDetails.resultaatToelichting" }),
-        detail: caseData?.getZaak.resultaat.toelichting || "",
+        detail: <Pre>{caseData?.getZaak.resultaat.toelichting}</Pre>,
       });
     }
 
