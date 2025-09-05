@@ -45,7 +45,7 @@ const useOgonePayment = () => {
 
   const startPayment = (paymentRequestPayload: PaymentRequestPayload) => {
     setLoading(true);
-
+    returnUrl.searchParams.set("category", paymentRequestPayload.pspId); // TODO: check of dit werkt en of pspid niet anders terug komt voor nieuwe betaling
     if (window.USE_LEGACY_OGONE_PAYMENT !== "true") {
       mutateDirectFunction({
         variables: {
