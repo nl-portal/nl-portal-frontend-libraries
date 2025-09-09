@@ -82,7 +82,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
         const styleValue = await styleResponse.text();
         const styleNode = document.createElement("style");
         styleNode.appendChild(document.createTextNode(styleValue));
-        document.querySelector("head")?.append(styleNode);
+        document.head.appendChild(styleNode);
       } catch (err) {
         console.error("Failed to load theme styling:", err);
       }
