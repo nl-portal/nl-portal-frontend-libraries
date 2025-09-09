@@ -12,7 +12,7 @@ export enum PaymentStatus {
   FAILURE,
 }
 
-const useOgonePaymentRegistration = (usePostsale?: boolean) => {
+const useOgonePaymentRegistration = (useLegacyPostsale?: boolean) => {
   const [getPaymentStatus] = useGetDirectPaymentStatusLazyQuery();
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
   const [orderId, setOrderId] = useState<string | undefined>();
@@ -53,7 +53,7 @@ const useOgonePaymentRegistration = (usePostsale?: boolean) => {
           setSearchParams(newSearchParams);
         });
     } else {
-      if (usePostsale) {
+      if (useLegacyPostsale) {
         fetch(
           `${restUri}/public/payment/ogone/postsale?${searchParams.toString()}`,
         )
