@@ -79,14 +79,10 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
           return;
         }
 
-        const style = await styleResponse.json();
-
-        Object.entries(style).forEach(([key, value]) => {
-          document.documentElement.style.setProperty(
-            key,
-            value as string | null,
-          );
-        });
+        const styleValue = await styleResponse.text();
+        const styleNode = document.createElement("style");
+        styleNode.appendChild(document.createTextNode(styleValue));
+        document.querySelector("head")?.append(styleNode);
       } catch (err) {
         console.error("Failed to load theme styling:", err);
       }
