@@ -3116,7 +3116,7 @@ export type GetUserKlantContactenQueryVariables = Exact<{
 }>;
 
 
-export type GetUserKlantContactenQuery = { __typename?: 'Query', getUserKlantContacten: Array<{ __typename?: 'OpenKlant2Klantcontact', uuid: string, inhoud: string, kanaal: string, onderwerp: string, plaatsgevondenOp: string }> };
+export type GetUserKlantContactenQuery = { __typename?: 'Query', getUserKlantContacten: Array<{ __typename?: 'OpenKlant2Klantcontact', uuid: string, inhoud: string, kanaal: string, onderwerp: string, plaatsgevondenOp: string, hadBetrokkenActoren: Array<{ __typename?: 'HadBetrokkenActoren', indicatieActief: boolean, naam: string }> }> };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -5126,6 +5126,10 @@ export const GetUserKlantContactenDocument = gql`
     kanaal
     onderwerp
     plaatsgevondenOp
+    hadBetrokkenActoren {
+      indicatieActief
+      naam
+    }
   }
 }
     `;

@@ -151,8 +151,10 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     return momentsData.map((contact, index) => ({
       id: index,
       title: contact.onderwerp,
+      description: contact.inhoud && <Pre>{contact.inhoud}</Pre>,
       channel: contact.kanaal,
       isoDate: contact.registratiedatum,
+      sender: contact.actor,
     }));
   }, [momentsData]);
 
@@ -239,6 +241,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
           />
           <ContactTimeline
             items={contactItems}
+            collapsible={contactItems.some((item) => Boolean(item.description))}
             labels={contactLabels}
             locale={currentLocale}
           />

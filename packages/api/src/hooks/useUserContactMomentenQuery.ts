@@ -14,7 +14,9 @@ type Request =
 
 type Response = {
   onderwerp: string;
+  inhoud?: string;
   kanaal: string;
+  actor?: string;
   registratiedatum: string;
 };
 
@@ -78,10 +80,19 @@ export const useContactMomentsLazyQuery = (() => {
       hook: useContactMomentsLazyV2,
       map: (d) =>
         d?.getUserKlantContacten?.map(
-          ({ onderwerp, kanaal, plaatsgevondenOp }) => ({
+          ({
+            onderwerp,
+            inhoud,
+            kanaal,
+            plaatsgevondenOp,
+            hadBetrokkenActoren,
+          }) => ({
             onderwerp,
             kanaal,
+            inhoud,
             registratiedatum: plaatsgevondenOp,
+            actor: hadBetrokkenActoren.find((actor) => actor.indicatieActief)
+              ?.naam,
           }),
         ) as Response[],
     },
