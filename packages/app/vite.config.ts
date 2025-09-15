@@ -27,4 +27,7 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
   },
+  html: {
+    cspNonce: "##NL_PORTAL_NONCE##",
+  },
 });
