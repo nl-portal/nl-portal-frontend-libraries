@@ -6,7 +6,6 @@ export const QUERY_GET_BERICHT = gql`
       id
       berichtTekst
       berichtType
-      bijlages
       einddatumHandelingstermijn
       geopend
       handelingsperspectief

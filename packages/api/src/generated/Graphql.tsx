@@ -725,6 +725,17 @@ export type DirectPaymentResponse = {
   redirectUrl: Scalars['String']['output'];
 };
 
+export type DirectPaymentStatus = {
+  __typename?: 'DirectPaymentStatus';
+  status: DirectPaymentStatusCategory;
+};
+
+export enum DirectPaymentStatusCategory {
+  Rejected = 'REJECTED',
+  StatusUnknown = 'STATUS_UNKNOWN',
+  Successful = 'SUCCESSFUL'
+}
+
 export type Document = {
   __typename?: 'Document';
   bestandsnaam?: Maybe<Scalars['String']['output']>;
@@ -1997,6 +2008,7 @@ export type Query = {
    *
    */
   getDecision: Array<Scalars['JSON']['output']>;
+  getDirectPaymentStatus: DirectPaymentStatus;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
   /**
@@ -2230,6 +2242,12 @@ export type QueryGetDecisionArgs = {
   productName: Scalars['String']['input'];
   productTypeId?: InputMaybe<Scalars['UUID']['input']>;
   sources?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+
+export type QueryGetDirectPaymentStatusArgs = {
+  hostedCheckoutId: Scalars['String']['input'];
+  identifier: Scalars['String']['input'];
 };
 
 
@@ -2890,7 +2908,7 @@ export type GetBerichtQueryVariables = Exact<{
 }>;
 
 
-export type GetBerichtQuery = { __typename?: 'Query', getBericht?: { __typename?: 'Bericht', id?: any | null, berichtTekst: string, berichtType: BerichtType, bijlages: Array<string>, einddatumHandelingstermijn: any, geopend: boolean, handelingsperspectief: BerichtHandelingsperspectief, onderwerp: string, publicatiedatum: any, referentie: string, identificatie: { __typename?: 'BerichtIdentificatie', type: string, value: string }, documenten: Array<{ __typename?: 'Document', uuid: any, documentapi: string, identificatie?: string | null, creatiedatum?: string | null, titel?: string | null, formaat?: string | null, bestandsnaam?: string | null, bestandsomvang?: number | null }> } | null };
+export type GetBerichtQuery = { __typename?: 'Query', getBericht?: { __typename?: 'Bericht', id?: any | null, berichtTekst: string, berichtType: BerichtType, einddatumHandelingstermijn: any, geopend: boolean, handelingsperspectief: BerichtHandelingsperspectief, onderwerp: string, publicatiedatum: any, referentie: string, identificatie: { __typename?: 'BerichtIdentificatie', type: string, value: string }, documenten: Array<{ __typename?: 'Document', uuid: any, documentapi: string, identificatie?: string | null, creatiedatum?: string | null, titel?: string | null, formaat?: string | null, bestandsnaam?: string | null, bestandsomvang?: number | null }> } | null };
 
 export type GetBerichtenQueryVariables = Exact<{
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
@@ -3471,7 +3489,6 @@ export const GetBerichtDocument = gql`
     id
     berichtTekst
     berichtType
-    bijlages
     einddatumHandelingstermijn
     geopend
     handelingsperspectief
