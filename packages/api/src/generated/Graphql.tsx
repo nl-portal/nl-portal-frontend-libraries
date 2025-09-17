@@ -2934,6 +2934,14 @@ export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
 
+export type GetDirectPaymentStatusQueryVariables = Exact<{
+  identifier: Scalars['String']['input'];
+  hostedCheckoutId: Scalars['String']['input'];
+}>;
+
+
+export type GetDirectPaymentStatusQuery = { __typename?: 'Query', getDirectPaymentStatus: { __typename?: 'DirectPaymentStatus', status: DirectPaymentStatusCategory } };
+
 export type GetDocumentenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
 }>;
@@ -3730,6 +3738,50 @@ export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProf
 export type GetBurgerProfielLazyQueryHookResult = ReturnType<typeof useGetBurgerProfielLazyQuery>;
 export type GetBurgerProfielSuspenseQueryHookResult = ReturnType<typeof useGetBurgerProfielSuspenseQuery>;
 export type GetBurgerProfielQueryResult = Apollo.QueryResult<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>;
+export const GetDirectPaymentStatusDocument = gql`
+    query GetDirectPaymentStatus($identifier: String!, $hostedCheckoutId: String!) {
+  getDirectPaymentStatus(
+    identifier: $identifier
+    hostedCheckoutId: $hostedCheckoutId
+  ) {
+    status
+  }
+}
+    `;
+
+/**
+ * __useGetDirectPaymentStatusQuery__
+ *
+ * To run a query within a React component, call `useGetDirectPaymentStatusQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDirectPaymentStatusQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDirectPaymentStatusQuery({
+ *   variables: {
+ *      identifier: // value for 'identifier'
+ *      hostedCheckoutId: // value for 'hostedCheckoutId'
+ *   },
+ * });
+ */
+export function useGetDirectPaymentStatusQuery(baseOptions: Apollo.QueryHookOptions<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables> & ({ variables: GetDirectPaymentStatusQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>(GetDirectPaymentStatusDocument, options);
+      }
+export function useGetDirectPaymentStatusLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>(GetDirectPaymentStatusDocument, options);
+        }
+export function useGetDirectPaymentStatusSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>(GetDirectPaymentStatusDocument, options);
+        }
+export type GetDirectPaymentStatusQueryHookResult = ReturnType<typeof useGetDirectPaymentStatusQuery>;
+export type GetDirectPaymentStatusLazyQueryHookResult = ReturnType<typeof useGetDirectPaymentStatusLazyQuery>;
+export type GetDirectPaymentStatusSuspenseQueryHookResult = ReturnType<typeof useGetDirectPaymentStatusSuspenseQuery>;
+export type GetDirectPaymentStatusQueryResult = Apollo.QueryResult<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>;
 export const GetDocumentenDocument = gql`
     query GetDocumenten($id: UUID!) {
   getZaak(id: $id) {

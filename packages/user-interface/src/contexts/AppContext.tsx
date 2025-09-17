@@ -79,14 +79,13 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
           return;
         }
 
-        const style = await styleResponse.json();
-
-        Object.entries(style).forEach(([key, value]) => {
-          document.documentElement.style.setProperty(
-            key,
-            value as string | null,
-          );
-        });
+        const styleValue = await styleResponse.text();
+        const styleNode = document.createElement("style");
+        styleNode.nonce =
+          document.querySelector<HTMLMetaElement>("meta[name='csp-nonce']")
+            ?.content || "";
+        styleNode.textContent = styleValue;
+        document.head.appendChild(styleNode);
       } catch (err) {
         console.error("Failed to load theme styling:", err);
       }
