@@ -154,7 +154,6 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
       description: contact.inhoud && <Pre>{contact.inhoud}</Pre>,
       channel: contact.kanaal,
       isoDate: contact.registratiedatum,
-      sender: contact.actor,
     }));
   }, [momentsData]);
 

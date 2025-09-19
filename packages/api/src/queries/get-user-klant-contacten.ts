@@ -14,10 +14,6 @@ export const QUERY_GET_USER_KLANT_CONTACTEN = gql`
       kanaal
       onderwerp
       plaatsgevondenOp
-      hadBetrokkenActoren {
-        indicatieActief
-        naam
-      }
     }
   }
 `;
