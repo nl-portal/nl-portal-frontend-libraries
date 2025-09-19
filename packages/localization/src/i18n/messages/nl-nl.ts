@@ -140,6 +140,8 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.emailadres.error": "voer een geldig e-mailadres in",
     "account.detail.telefoonnummer": "Telefoonnummer",
     "account.detail.telefoonnummer.error": "Dit is geen geldig nummer",
+    "account.detail.telefoonnummer.error.invalidChars":
+      "Gebruik alleen 0-9 en eventueel een '+'",
     "account.detail.aanmaakkanaal": "E-mailmeldingen",
     "account.detail.aanmaakkanaal.description":
       "Staat je keuze op nee? Dan kunt u toch nog e-mails ontvangen. Dit komt omdat nog niet alle systemen van de gemeente zijn aangesloten op het klantportaal.",
