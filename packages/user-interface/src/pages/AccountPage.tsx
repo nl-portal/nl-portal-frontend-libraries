@@ -292,7 +292,7 @@ const AccountPage = ({
                 <DescriptionListDetail data-testid="persoonsgegevens-birthdate">
                   {persoon?.geboorte?.datum?.datum
                     ? formatDate({
-                        date: persoon?.geboorte?.datum.datum,
+                        date: persoon.geboorte.datum.datum,
                       })
                     : ""}
                 </DescriptionListDetail>
