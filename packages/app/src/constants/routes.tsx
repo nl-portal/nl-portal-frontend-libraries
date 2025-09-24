@@ -11,11 +11,14 @@ import {
   EditContactInfoPage,
   ThemeOverviewPage,
   ThemeDetailsPage,
+  currencyFormat,
+  capitalizeFirstLetter,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
 import { config } from "./config";
 import { Navigate, RouteObject as ReactRouteObject } from "react-router";
+import { useIntl } from "react-intl";
 
 export type RouteObject = ReactRouteObject & {
   handle: {
@@ -119,7 +122,30 @@ export const routes: RouteObject[] = [
       {
         path: paths.themeDetails("parkeren"),
         handle: { label: "breadcrumb.parkeren.details" },
-        element: <ThemeDetailsPage />,
+        element: (
+          <ThemeDetailsPage
+            productSettings={{
+              headerTranslationIds: [
+                "Naam",
+                "Startdatum",
+                "Einddatum",
+                "Status",
+                "Prijs",
+              ],
+              dataMapping: [
+                "naam",
+                "startDatum",
+                "eindDatum",
+                (product) =>
+                  capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
+                (product) => {
+                  const intl = useIntl();
+                  return intl.formatNumber(product?.prijs ?? 0, currencyFormat);
+                },
+              ],
+            }}
+          />
+        ),
       },
     ],
   },
