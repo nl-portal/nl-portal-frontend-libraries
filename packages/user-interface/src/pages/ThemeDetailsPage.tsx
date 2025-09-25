@@ -13,26 +13,36 @@ import CasesList from "../components/CasesList";
 import { useParams } from "react-router";
 import DescriptionList from "../components/DescriptionList";
 import DecisionsList from "../components/DecisionsList";
+import React from "react";
 
 interface ThemeDetailsPageProps {
+  children?:
+    | ((
+        openProduct: ReturnType<typeof useGetOpenProductQuery>,
+      ) => React.ReactNode)
+    | React.ReactNode;
   productSettings?: {
     headerTranslationIds: string[];
     dataMapping: (
-      | ((product: OpenProductProduct) => string)
+      | ((product: OpenProductProduct) => React.ReactNode)
       | keyof OpenProductProduct
     )[];
   };
 }
 
-const ThemeDetailsPage = ({ productSettings }: ThemeDetailsPageProps) => {
+const ThemeDetailsPage = ({
+  children,
+  productSettings,
+}: ThemeDetailsPageProps) => {
   const intl = useIntl();
-  const { id } = useParams();
-  const { data, loading, error } = useGetOpenProductQuery({
+  const { id } = useParams<{ id: string }>();
+  const openProduct = useGetOpenProductQuery({
     variables: { id },
   });
 
-  console.log("data", data);
+  console.log("data", openProduct);
 
+  const { data, loading, error } = openProduct;
   const product = data?.getOpenProduct as OpenProductProduct | undefined;
   const zaken = product?.zaken as Zaak[] | undefined;
   const taken = product?.taken as TaakV2[] | undefined;
@@ -71,6 +81,7 @@ const ThemeDetailsPage = ({ productSettings }: ThemeDetailsPageProps) => {
         cases={zaken}
       />
       <DescriptionList loading={loading} showEmpty={false} items={details} />
+      {children instanceof Function ? children(openProduct) : children}
       <TasksList
         loading={loading}
         showEmpty={false}

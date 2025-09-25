@@ -13,12 +13,23 @@ import {
   ThemeDetailsPage,
   currencyFormat,
   capitalizeFirstLetter,
+  TableList,
+  PortalLink,
+  ThemeMutatePage,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
 import { config } from "./config";
-import { Navigate, RouteObject as ReactRouteObject } from "react-router";
-import { useIntl } from "react-intl";
+import {
+  Navigate,
+  RouteObject as ReactRouteObject,
+  useSearchParams,
+} from "react-router";
+import { FormattedMessage, FormattedNumber } from "react-intl";
+import { Link } from "@gemeente-denhaag/link";
+import { OpenProductProduct } from "@nl-portal/nl-portal-api";
+import StatusBadge from "@gemeente-denhaag/status-badge";
+import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 
 export type RouteObject = ReactRouteObject & {
   handle: {
@@ -139,12 +150,96 @@ export const routes: RouteObject[] = [
                 (product) =>
                   capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
                 (product) => {
-                  const intl = useIntl();
-                  return intl.formatNumber(product?.prijs ?? 0, currencyFormat);
+                  return (
+                    <FormattedNumber
+                      value={product?.prijs ?? 0}
+                      {...currencyFormat}
+                    />
+                  );
                 },
               ],
             }}
-          />
+          >
+            {({ loading, data }) => {
+              const { formatDate } = useDateFormatter();
+              const product = data?.getOpenProduct as
+                | OpenProductProduct
+                | undefined;
+
+              return (
+                <>
+                  {Boolean(product?.verbruiksobject) && (
+                    <TableList
+                      loading={loading}
+                      titleTranslationId={"Voertuigen"}
+                      headers={[
+                        <FormattedMessage key="kenteken" id={`Kenteken`} />,
+                        "",
+                      ]}
+                      rows={product?.verbruiksobject?.data?.kentekens?.map(
+                        (kenteken: string) => [
+                          { children: kenteken },
+                          {
+                            children: (
+                              <Link
+                                href={`${paths.themeMutate(
+                                  "parkeren",
+                                  product?.uuid,
+                                )}?kenteken=${kenteken}`}
+                                Link={PortalLink}
+                              >
+                                <FormattedMessage id={`Aanmelden`} />
+                              </Link>
+                            ),
+                          },
+                        ],
+                      )}
+                    />
+                  )}
+                  {Boolean(product?.verbruiksobject) && (
+                    <TableList
+                      loading={loading}
+                      titleTranslationId={"Periodes"}
+                      headers={[
+                        <FormattedMessage key="datum" id={`Datum`} />,
+                        <FormattedMessage key="kenteken" id={`Kenteken`} />,
+                        <FormattedMessage key="status" id={`Status`} />,
+                      ]}
+                      rows={product?.verbruiksobject?.data?.periodes?.map(
+                        //eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        (periode: any) => [
+                          {
+                            children: formatDate({
+                              date: periode?.datetimeStart,
+                              namedDays: false,
+                            }),
+                          },
+                          { children: periode?.kenteken },
+                          {
+                            children: (
+                              <StatusBadge>{periode?.status}</StatusBadge>
+                            ),
+                          },
+                        ],
+                      )}
+                    />
+                  )}
+                </>
+              );
+            }}
+          </ThemeDetailsPage>
+        ),
+      },
+      {
+        path: paths.themeMutate("parkeren"),
+        handle: { label: "breadcrumb.parkeren.details" },
+        element: (
+          <ThemeMutatePage slug="parkeren">
+            {() => {
+              const [searchParams] = useSearchParams();
+              return <div>Mutate parkeren: {searchParams.get("kenteken")}</div>;
+            }}
+          </ThemeMutatePage>
         ),
       },
     ],
