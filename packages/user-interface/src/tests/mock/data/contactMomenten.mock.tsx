@@ -1,62 +1,44 @@
-import { QUERY_GET_OBJECT_CONTACT_MOMENTEN } from "@nl-portal/nl-portal-api";
+import { QUERY_GET_USER_KLANT_CONTACTEN } from "@nl-portal/nl-portal-api";
 
 export const getObjectContactMomenten = {
   request: {
-    query: QUERY_GET_OBJECT_CONTACT_MOMENTEN,
+    query: QUERY_GET_USER_KLANT_CONTACTEN,
     variables: {
-      objectUrl:
-        "https://openzaakurl/zaken/api/v1/zaken/82cb13cf-d2f9-4e3e-ac07-751373035ecb",
+      identificatorType: "ZAAK",
+      identificatorId: "82cb13cf-d2f9-4e3e-ac07-751373035ecb",
     },
   },
   result: {
     data: {
-      getObjectContactMomenten: {
-        content: [
-          {
-            tekst: "Gewoon een normaal bericht",
-            kanaal: "email",
-            registratiedatum: "2023-10-26T06:02:19Z",
-            __typename: "ContactMoment",
-          },
-          {
-            tekst: "Beste inwoner, Uw zaak is in behandeling genomen",
-            kanaal: "emailjgkhseafdgxytuerl6tnkgfy8dddfdfdfassafgiuahmh",
-            registratiedatum: "2023-10-05T12:54:24Z",
-            __typename: "ContactMoment",
-          },
-          {
-            tekst: "Beste inwoner; Er staat een taak voor U klaar",
-            kanaal: "sms",
-            registratiedatum: "2023-10-05T12:53:08Z",
-            __typename: "ContactMoment",
-          },
-          {
-            tekst: "Dit is een sms",
-            kanaal: "sms",
-            registratiedatum: "2023-10-05T12:48:18Z",
-            __typename: "ContactMoment",
-          },
-          {
-            tekst: "Hallo dit is een test",
-            kanaal: "email",
-            registratiedatum: "2023-10-05T12:27:32Z",
-            __typename: "ContactMoment",
-          },
-          {
-            tekst: "Dit is een test",
-            kanaal: "MAIL",
-            registratiedatum: "2023-10-05T08:56:17.320554Z",
-            __typename: "ContactMoment",
-          },
-          {
-            tekst: "Test tekst",
-            kanaal: "MAIL",
-            registratiedatum: "2023-04-03T09:34:28Z",
-            __typename: "ContactMoment",
-          },
-        ],
-        __typename: "ContactMomentPage",
-      },
+      getUserKlantContacten: [
+        {
+          uuid: "f6b89308-7c91-4ca3-a280-4dc08a69de7c",
+          inhoud:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut aliquam velit.",
+          kanaal: "Telefoon",
+          onderwerp: "Klacht",
+          plaatsgevondenOp: "2025-01-06T11:02:24Z",
+          __typename: "OpenKlant2Klantcontact",
+        },
+        {
+          uuid: "482a8529-0ebd-4424-83a9-b9f88335673d",
+          inhoud:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut aliquam velit.",
+          kanaal: "E-mail",
+          onderwerp: "Vraag over vergunningsaanvraag",
+          plaatsgevondenOp: "2025-03-06T11:02:24Z",
+          __typename: "OpenKlant2Klantcontact",
+        },
+        {
+          uuid: "482a8529-0ebd-4424-83a9-b9f88335673d",
+          inhoud:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\nDonec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.",
+          kanaal: "SMS",
+          onderwerp: "Dit is een sms",
+          plaatsgevondenOp: "2025-03-12T10:00:12Z",
+          __typename: "OpenKlant2Klantcontact",
+        },
+      ],
     },
   },
 };

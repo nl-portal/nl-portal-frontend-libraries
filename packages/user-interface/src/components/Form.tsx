@@ -1,9 +1,10 @@
 import { FormHTMLAttributes, useState, useEffect, RefAttributes } from "react";
 import styles from "./Form.module.scss";
-import Alert, { AlertProps } from "@gemeente-denhaag/alert";
+import { Alert, AlertProps } from "@gemeente-denhaag/alert";
 import { FormattedMessage } from "react-intl";
-import Button from "@gemeente-denhaag/button";
+import { Button } from "@gemeente-denhaag/button";
 import classNames from "classnames";
+import { Paragraph } from "@gemeente-denhaag/typography";
 
 type Props = FormHTMLAttributes<HTMLFormElement> &
   RefAttributes<HTMLFormElement> & {
@@ -39,7 +40,11 @@ export const Form = ({
       return setShowAlert({
         variant: "success",
         title: <FormattedMessage id="form.success.title" />,
-        text: <FormattedMessage id="form.success.text" />,
+        text: (
+          <Paragraph>
+            <FormattedMessage id="form.success.text" />
+          </Paragraph>
+        ),
       });
     setShowAlert(success);
   }, [success]);
@@ -51,7 +56,11 @@ export const Form = ({
       return setShowAlert({
         variant: "error",
         title: <FormattedMessage id="form.error.title" />,
-        text: <FormattedMessage id="form.error.text" />,
+        text: (
+          <Paragraph>
+            <FormattedMessage id="form.error.text" />
+          </Paragraph>
+        ),
       });
     setShowAlert(error);
   }, [error]);

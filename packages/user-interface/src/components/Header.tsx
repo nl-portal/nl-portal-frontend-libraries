@@ -1,234 +1,160 @@
-import * as React from "react";
-import { Fragment, ReactElement, useContext, useEffect, useState } from "react";
-import { useIntl } from "react-intl";
+import { AnchorHTMLAttributes, useContext, useMemo } from "react";
+import { HeaderLogic, HeaderLogicProps } from "@gemeente-denhaag/header";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { Link, useNavigate } from "react-router";
-import classNames from "classnames";
-import useSize from "@react-hook/size";
-import useScrollPosition from "@react-hook/window-scroll";
-import { IconButton } from "@gemeente-denhaag/iconbutton";
-import { CloseIcon } from "@gemeente-denhaag/icons";
-import ResponsiveContent from "@gemeente-denhaag/responsive-content";
-import Skeleton from "react-loading-skeleton";
-import styles from "./Header.module.scss";
-import LanguageSwitcher from "./LanguageSwitcher";
-import Logout from "./Logout";
-import UserName from "./UserName";
-import LayoutContext from "../contexts/LayoutContext";
-import useMediaQuery from "../hooks/useMediaQuery";
-import { BREAKPOINTS } from "../constants/breakpoints";
-import CurrentPageIndicator from "./CurrentPageIndicator";
-import MenuToggleButton from "./MenuToggleButton";
-import { NavigationItem } from "../interfaces/navigation-item";
-import Heading from "./Heading";
+import { useMatches } from "react-router";
+import { useIntl } from "react-intl";
+import { useLogout } from "@nl-portal/nl-portal-authentication";
+import AppContext from "../contexts/AppContext";
+import PortalLink from "./PortalLink";
+import RouterContext from "../contexts/RouterContext";
+import UserContext from "../contexts/UserContext";
 
-interface HeaderProps {
-  logo: ReactElement<HTMLImageElement>;
-  logoSmall: ReactElement<HTMLImageElement>;
-  navigationItems: NavigationItem[][];
-  facet?: ReactElement<HTMLImageElement>;
-  offline?: boolean;
-}
+type HeaderProps = {
+  logo?: AnchorHTMLAttributes<HTMLAnchorElement>;
+};
 
-const Header = ({
-  logo,
-  facet,
-  navigationItems,
-  offline,
-  logoSmall,
-}: HeaderProps) => {
-  const {
-    mobileMenuOpened,
-    menuOpened,
-    hideMobileMenu,
-    hideMenu,
-    headerHeight,
-    setHeaderHeight,
-    fullscreenForm,
-    currentFormTitle,
-  } = useContext(LayoutContext);
-  const { hrefLang } = useContext(LocaleContext);
-  const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
+const Header = ({ logo }: HeaderProps) => {
+  const { logout } = useLogout();
+  const { currentLocale, setCurrentLocale, supportedLocales } =
+    useContext(LocaleContext);
+  const { messagesCount } = useContext(AppContext);
+  const { navigationItems } = useContext(RouterContext);
+  const { username, usernameVolmacht } = useContext(UserContext);
   const intl = useIntl();
-  const navigate = useNavigate();
-  const [previousScrollY, setPreviousScrollY] = useState(0);
-  const [headerFixed, setHeaderFixed] = useState(false);
-  const [headerMarginTop, setHeaderMarginTop] = useState(0);
-  const headerContainerRef = React.useRef<HTMLDivElement>(null);
-  const [, height] = useSize(headerContainerRef.current);
-  const scrollY = useScrollPosition(15);
-  const MOBILE_HEADER_HEIGHT = facet ? 86 : 72;
-  const headerLogoElement = React.cloneElement(logo, {
-    className: styles["header__logo-image"],
-    alt: intl.formatMessage({ id: "app.appName" }),
+
+  type HandleObject = {
+    label: string;
+  };
+
+  const matches = useMatches();
+  const breadcrumbs = useMemo(() => {
+    const list = matches
+      .filter((item) => {
+        const array = item.id?.split("-");
+        return array?.length === 1 || array?.[array.length - 1] !== "0";
+      })
+      .map((item) => {
+        return {
+          href: item.pathname,
+          label: intl.formatMessage({
+            id: (item.handle as HandleObject).label,
+          }),
+        };
+      });
+    return { navigationPath: list, Link: PortalLink };
+  }, [matches, intl]);
+
+  const languages = useMemo(
+    () =>
+      supportedLocales.map((language) => {
+        const labelKey = `language-switcher.fullname.${language}`;
+        const label = intl.formatMessage({ id: labelKey });
+        const active = language === currentLocale;
+
+        return { id: language, label, active };
+      }),
+    [supportedLocales, currentLocale, intl],
+  );
+
+  const handleLanguageChange = (language: string) => {
+    setCurrentLocale(language);
+  };
+
+  const languageSwitcherMenu = useMemo(
+    () => ({
+      currentLanguageLabel: intl.formatMessage({
+        id: `language-switcher.shortname.${currentLocale}`,
+      }),
+      languageSwitcherProps: {
+        variant: "button" as "button" | "link",
+        label: intl.formatMessage({ id: "language-switcher.title" }),
+        languages,
+        onLanguageChange: handleLanguageChange,
+      },
+    }),
+    [currentLocale, languages, intl, setCurrentLocale],
+  );
+
+  const mijnDenHaagMenu = useMemo(
+    () => ({
+      label: intl.formatMessage({ id: "app.appName" }),
+      navigation: navigationItems.flat().map((item) => {
+        const navItem = {
+          label: intl.formatMessage({
+            id: `pageTitles.${item.titleTranslationKey}`,
+          }),
+          href: item.path,
+        };
+        if (item.hasMessagesCount) {
+          return { badgeCounter: messagesCount, ...navItem };
+        }
+        return navItem;
+      }),
+    }),
+    [navigationItems, intl],
+  );
+
+  const mijnDenHaagMobileMenu = useMemo(
+    () => ({
+      defaultExpanded: true,
+      navigation: navigationItems.flat().map((item) => {
+        const navItem = {
+          label: intl.formatMessage({
+            id: `pageTitles.${item.titleTranslationKey}`,
+          }),
+          href: item.path,
+        };
+        if (item.hasMessagesCount) {
+          return { badgeCounter: messagesCount, ...navItem };
+        }
+        return navItem;
+      }),
+    }),
+    [navigationItems, intl],
+  );
+
+  const welcomeLabel = intl.formatMessage({ id: "menu.welcome" });
+  const logoutLabel = intl.formatMessage({ id: "menu.logout" });
+  const menuOpenLabel = intl.formatMessage({ id: "menu.menu-open-button" });
+  const menuCloseLabel = intl.formatMessage({ id: "menu.menu-close-button" });
+  const authorisedLoginLabel = intl.formatMessage({
+    id: "menu.authorized-login-label",
   });
-  const headerLogoSmallElement = React.cloneElement(logoSmall, {
-    className: styles["header__logo-image"],
-    alt: intl.formatMessage({ id: "app.appName" }),
-  });
-  const headerLogoElementToUse =
-    !isTablet && fullscreenForm ? headerLogoSmallElement : headerLogoElement;
-  const online = !offline;
-  const homeNavigation = navigationItems[0][0];
 
-  useEffect(() => {
-    if (height !== headerHeight) {
-      setHeaderHeight(height);
-    }
-  }, [height, headerHeight]);
-
-  useEffect(() => {
-    const scrollDown = previousScrollY < scrollY;
-    const scrollUp = previousScrollY > scrollY;
-    const pastPositionCutoff = scrollY > MOBILE_HEADER_HEIGHT;
-
-    if (scrollDown) {
-      hideMobileMenu();
-    }
-
-    if (scrollUp) {
-      setHeaderMarginTop(0);
-    } else if (pastPositionCutoff) {
-      setHeaderMarginTop(MOBILE_HEADER_HEIGHT);
-    }
-
-    if (pastPositionCutoff && !headerFixed) {
-      setHeaderFixed(true);
-      setHeaderMarginTop(MOBILE_HEADER_HEIGHT);
-    } else if (
-      scrollY === 0 ||
-      (scrollY <= MOBILE_HEADER_HEIGHT &&
-        headerFixed &&
-        headerMarginTop === MOBILE_HEADER_HEIGHT)
-    ) {
-      setHeaderFixed(false);
-    }
-
-    setPreviousScrollY(scrollY);
-  }, [scrollY, headerFixed, headerMarginTop]);
-
-  useEffect(() => {
-    if (menuOpened || mobileMenuOpened) {
-      hideMenu();
-      hideMobileMenu();
-    }
-
-    if (headerFixed) {
-      setHeaderMarginTop(MOBILE_HEADER_HEIGHT);
-    }
-  }, [isTablet, headerFixed]);
+  const headerProps: HeaderLogicProps = {
+    userprofileMenu: {
+      label: (
+        <>
+          {welcomeLabel} <span translate="no">{username}</span>
+        </>
+      ),
+      authorisedLoginLabel: usernameVolmacht ? (
+        <>
+          {authorisedLoginLabel} <span translate="no">{usernameVolmacht}</span>
+        </>
+      ) : null,
+      CustomLink: PortalLink,
+      navigationGroups: [mijnDenHaagMenu],
+    },
+    logoutButton: {
+      label: logoutLabel,
+      onLogoutClick: () => logout(),
+    },
+    mobileMenu: {
+      openLabel: menuOpenLabel,
+      closeLabel: menuCloseLabel,
+      navigation: [mijnDenHaagMobileMenu],
+      Link: PortalLink,
+    },
+  };
 
   return (
-    <div
-      className={classNames(styles["header-container"], {
-        [styles["header-container--fixed"]]: !isTablet && headerFixed,
-      })}
-      ref={headerContainerRef}
-      style={{ marginBlockStart: !isTablet ? -headerMarginTop : 0 }}
-    >
-      {fullscreenForm && <div className={styles["header-bar"]} />}
-      <div
-        className={classNames(styles["header-wrapper"], {
-          [styles["header-wrapper--fullscreen"]]: fullscreenForm,
-        })}
-      >
-        <header
-          className={classNames(styles.header, {
-            [styles["header--fullscreen"]]: fullscreenForm,
-          })}
-        >
-          <ResponsiveContent className={styles.header__inner}>
-            <div
-              className={classNames(styles["header__logo-container"], {
-                [styles["header__logo-container--fullscreen"]]: fullscreenForm,
-              })}
-            >
-              {homeNavigation ? (
-                <Link
-                  to={homeNavigation.path}
-                  hrefLang={hrefLang}
-                  title={intl.formatMessage({
-                    id: `pageTitles.${homeNavigation.titleTranslationKey}`,
-                  })}
-                  className={styles["header__logo-link"]}
-                >
-                  {headerLogoElementToUse}
-                </Link>
-              ) : (
-                headerLogoElementToUse
-              )}
-            </div>
-            {!fullscreenForm && (
-              <div className={styles["header__elements-mobile"]}>
-                <MenuToggleButton />
-              </div>
-            )}
-            {!fullscreenForm && (
-              <div className={styles["header__elements-desktop"]}>
-                {online && (
-                  <Fragment>
-                    <div className={styles["header__element--large-spacing"]}>
-                      <UserName />
-                    </div>
-                    <div className={styles["header__element--medium-spacing"]}>
-                      <Logout />
-                    </div>
-                  </Fragment>
-                )}
-                <LanguageSwitcher />
-              </div>
-            )}
-            {fullscreenForm && (
-              <div className={styles["header__elements-fullscreen-form"]}>
-                {isTablet ? (
-                  <Heading as="h3">
-                    {currentFormTitle || <Skeleton width={250} />}
-                  </Heading>
-                ) : (
-                  <Heading as="h4">
-                    {currentFormTitle || <Skeleton width={150} />}
-                  </Heading>
-                )}
-                {React.cloneElement(
-                  <IconButton
-                    className={styles["header__close-button"]}
-                    onClick={() => navigate(homeNavigation?.path || "/")}
-                  >
-                    <CloseIcon />
-                  </IconButton>,
-                  { title: intl.formatMessage({ id: "menu.close" }) },
-                )}
-              </div>
-            )}
-          </ResponsiveContent>
-        </header>
-        {!fullscreenForm && (
-          <div
-            className={classNames(styles["header__mobile-menu"], {
-              [styles["header__mobile-menu--hidden"]]: !mobileMenuOpened,
-            })}
-          >
-            {online && (
-              <Fragment>
-                <UserName mobileMenu />
-                <Logout mobileMenu />
-              </Fragment>
-            )}
-            <LanguageSwitcher mobileMenu />
-          </div>
-        )}
-        {facet && !fullscreenForm && (
-          <div className={styles["header__facet-container"]}>
-            {React.cloneElement(facet, {
-              className: styles["header__facet-image"],
-            })}
-          </div>
-        )}
-      </div>
-      {online && !fullscreenForm && (
-        <CurrentPageIndicator navigationItems={navigationItems} />
-      )}
-    </div>
+    <HeaderLogic
+      {...headerProps}
+      logo={logo}
+      languageSwitcherMenu={languageSwitcherMenu}
+      breadcrumbs={breadcrumbs}
+    />
   );
 };
 

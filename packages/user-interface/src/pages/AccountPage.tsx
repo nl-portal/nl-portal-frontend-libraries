@@ -1,11 +1,4 @@
 import { FormattedMessage, useIntl } from "react-intl";
-import {
-  BrpPersoon,
-  MaatschappelijkeActiviteit,
-  useGetBedrijfQuery,
-  useGetPersoonV2Query,
-  useUserContactQuery,
-} from "@nl-portal/nl-portal-api";
 import styles from "./AccountPage.module.scss";
 import {
   getNationalitiesString,
@@ -15,10 +8,9 @@ import {
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
 import Heading from "../components/Heading";
-import useUserInfo from "../hooks/useUserInfo";
 import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 import { DescriptionList } from "@gemeente-denhaag/descriptionlist";
-import Link from "@gemeente-denhaag/link";
+import { Link } from "@gemeente-denhaag/link";
 import { EditIcon } from "@gemeente-denhaag/icons";
 import { PageIndex } from "@gemeente-denhaag/page-index";
 import { LeadParagraph } from "@gemeente-denhaag/typography";
@@ -27,8 +19,10 @@ import DescriptionListDetail from "../components/DescriptionListDetail";
 import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import PortalLink from "../components/PortalLink";
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
 import Notification from "../components/Notification";
-import LinkList from "@gemeente-denhaag/link-list";
+import { LinkList } from "@gemeente-denhaag/link-list";
 
 // Temporary props, this should be moved to the config portal in the future
 interface AccountPageProps {
@@ -55,29 +49,11 @@ const AccountPage = ({
   //showNotificationSubSection = true,
 }: AccountPageProps) => {
   const { formatDate } = useDateFormatter();
-  const { isPerson } = useUserInfo();
+  const { isPersoon, persoon, bedrijf, contact } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const intl = useIntl();
-  const { data: contactData, loading: contactLoading } = useUserContactQuery({
-    skip: !isPerson,
-  });
-  const { data: personData, loading: personLoading } = useGetPersoonV2Query({
-    skip: !isPerson,
-  });
-  const { data: companyData, loading: companyLoading } = useGetBedrijfQuery({
-    skip: isPerson,
-  });
 
-  const loading = contactLoading || personLoading || companyLoading;
-  const person = personData?.getPersoonV2 as BrpPersoon | undefined;
-  const company = companyData?.getBedrijf as
-    | MaatschappelijkeActiviteit
-    | undefined;
-
-  if (loading)
-    return <PageHeader title={<FormattedMessage id="pageTitles.account" />} />;
-
-  if ((isPerson && !person) || (!isPerson && !company)) {
+  if ((isPersoon && !persoon) || (!isPersoon && !bedrijf)) {
     return (
       <>
         <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
@@ -91,10 +67,43 @@ const AccountPage = ({
     );
   }
 
-  if (!isPerson)
+  if (!isPersoon)
     return (
       <PageGrid>
         <PageHeader title={<FormattedMessage id="pageTitles.account" />} />
+        <PageGrid variant="small">
+          <Heading as="h3" id="contact">
+            <FormattedMessage id="account.detail.contact" />
+          </Heading>
+          <Link
+            icon={<EditIcon />}
+            iconAlign="start"
+            href={paths.changeContactInfo}
+            Link={PortalLink}
+          >
+            <FormattedMessage id="account.edit" />
+          </Link>
+          <DescriptionList
+            items={[
+              {
+                title: <FormattedMessage id="account.detail.emailadres" />,
+                detail: (
+                  <DescriptionListDetail translate="no">
+                    {contact?.emailadres}
+                  </DescriptionListDetail>
+                ),
+              },
+              {
+                title: <FormattedMessage id="account.detail.telefoonnummer" />,
+                detail: (
+                  <DescriptionListDetail translate="no">
+                    {contact?.telefoonnummer}
+                  </DescriptionListDetail>
+                ),
+              },
+            ]}
+          />
+        </PageGrid>
         <PageGrid variant="small">
           <Heading as="h3">
             <FormattedMessage id="account.companyInfoHeader" />
@@ -104,30 +113,24 @@ const AccountPage = ({
               {
                 title: <FormattedMessage id="account.detail.kvkNumber" />,
                 detail: (
-                  <DescriptionListDetail
-                    translate="no"
-                    loading={companyLoading}
-                  >
-                    {company?.kvkNummer}
+                  <DescriptionListDetail translate="no">
+                    {bedrijf?.kvkNummer}
                   </DescriptionListDetail>
                 ),
               },
               {
                 title: <FormattedMessage id="account.detail.companyName" />,
                 detail: (
-                  <DescriptionListDetail
-                    translate="no"
-                    loading={companyLoading}
-                  >
-                    {company?.naam}
+                  <DescriptionListDetail translate="no">
+                    {bedrijf?.naam}
                   </DescriptionListDetail>
                 ),
               },
               {
                 title: <FormattedMessage id="account.detail.legalForm" />,
                 detail: (
-                  <DescriptionListDetail loading={companyLoading}>
-                    {company?.embedded?.eigenaar?.rechtsvorm}
+                  <DescriptionListDetail>
+                    {bedrijf?.embedded?.eigenaar?.rechtsvorm}
                   </DescriptionListDetail>
                 ),
               },
@@ -143,14 +146,11 @@ const AccountPage = ({
               {
                 title: <FormattedMessage id="account.detail.street" />,
                 detail: (
-                  <DescriptionListDetail
-                    translate="no"
-                    loading={companyLoading}
-                  >
+                  <DescriptionListDetail translate="no">
                     {getStreetString(
-                      company?.embedded?.hoofdvestiging?.adressen?.[0]
+                      bedrijf?.embedded?.hoofdvestiging?.adressen?.[0]
                         .straatnaam,
-                      company?.embedded?.hoofdvestiging?.adressen?.[0].huisnummer?.toString(),
+                      bedrijf?.embedded?.hoofdvestiging?.adressen?.[0].huisnummer?.toString(),
                       undefined,
                       undefined,
                     )}
@@ -162,13 +162,10 @@ const AccountPage = ({
                   <FormattedMessage id="account.detail.postalCodeAndCity" />
                 ),
                 detail: (
-                  <DescriptionListDetail
-                    translate="no"
-                    loading={companyLoading}
-                  >
+                  <DescriptionListDetail translate="no">
                     {getPostalCodeCityString(
-                      company?.embedded?.hoofdvestiging?.adressen?.[0].postcode,
-                      company?.embedded?.hoofdvestiging?.adressen?.[0].plaats,
+                      bedrijf?.embedded?.hoofdvestiging?.adressen?.[0].postcode,
+                      bedrijf?.embedded?.hoofdvestiging?.adressen?.[0].plaats,
                     )}
                   </DescriptionListDetail>
                 ),
@@ -227,16 +224,16 @@ const AccountPage = ({
             {
               title: <FormattedMessage id="account.detail.emailadres" />,
               detail: (
-                <DescriptionListDetail translate="no" loading={contactLoading}>
-                  {contactData?.emailadres}
+                <DescriptionListDetail translate="no">
+                  {contact?.emailadres}
                 </DescriptionListDetail>
               ),
             },
             {
               title: <FormattedMessage id="account.detail.telefoonnummer" />,
               detail: (
-                <DescriptionListDetail translate="no" loading={contactLoading}>
-                  {contactData?.telefoonnummer}
+                <DescriptionListDetail translate="no">
+                  {contact?.telefoonnummer}
                 </DescriptionListDetail>
               ),
             },
@@ -255,9 +252,8 @@ const AccountPage = ({
                 <DescriptionListDetail
                   translate="no"
                   data-testid="persoonsgegevens-firstname"
-                  loading={personLoading}
                 >
-                  {person?.naam.voornamen}
+                  {persoon?.naam.voornamen}
                 </DescriptionListDetail>
               ),
             },
@@ -267,20 +263,16 @@ const AccountPage = ({
                 <DescriptionListDetail
                   translate="no"
                   data-testid="persoonsgegevens-lastname"
-                  loading={personLoading}
                 >
-                  {person?.naam.officialLastName}
+                  {persoon?.naam.officialLastName}
                 </DescriptionListDetail>
               ),
             },
             {
               title: <FormattedMessage id="account.detail.gender" />,
               detail: (
-                <DescriptionListDetail
-                  data-testid="persoonsgegevens-gender"
-                  loading={personLoading}
-                >
-                  {person?.geslacht?.omschrijving}
+                <DescriptionListDetail data-testid="persoonsgegevens-gender">
+                  {persoon?.geslacht?.omschrijving}
                 </DescriptionListDetail>
               ),
             },
@@ -289,24 +281,18 @@ const AccountPage = ({
                 <FormattedMessage id="account.detail.citizenServiceNumber" />
               ),
               detail: (
-                <DescriptionListDetail
-                  data-testid="persoonsgegevens-bsn"
-                  loading={personLoading}
-                >
-                  {person?.burgerservicenummer}
+                <DescriptionListDetail data-testid="persoonsgegevens-bsn">
+                  {persoon?.burgerservicenummer}
                 </DescriptionListDetail>
               ),
             },
             {
               title: <FormattedMessage id="account.detail.dateOfBirth" />,
               detail: (
-                <DescriptionListDetail
-                  data-testid="persoonsgegevens-birthdate"
-                  loading={personLoading}
-                >
-                  {person?.geboorte?.datum
+                <DescriptionListDetail data-testid="persoonsgegevens-birthdate">
+                  {persoon?.geboorte?.datum?.datum
                     ? formatDate({
-                        date: person?.geboorte?.datum.datum,
+                        date: persoon.geboorte.datum.datum,
                       })
                     : ""}
                 </DescriptionListDetail>
@@ -315,22 +301,16 @@ const AccountPage = ({
             {
               title: <FormattedMessage id="account.detail.countryOfBirth" />,
               detail: (
-                <DescriptionListDetail
-                  data-testid="persoonsgegevens-country"
-                  loading={personLoading}
-                >
-                  {person?.geboorte?.land?.omschrijving}
+                <DescriptionListDetail data-testid="persoonsgegevens-country">
+                  {persoon?.geboorte?.land?.omschrijving}
                 </DescriptionListDetail>
               ),
             },
             {
               title: <FormattedMessage id="account.detail.nationality" />,
               detail: (
-                <DescriptionListDetail
-                  data-testid="persoonsgegevens-nationality"
-                  loading={personLoading}
-                >
-                  {getNationalitiesString(person?.nationaliteiten)}
+                <DescriptionListDetail data-testid="persoonsgegevens-nationality">
+                  {getNationalitiesString(persoon?.nationaliteiten)}
                 </DescriptionListDetail>
               ),
             },
@@ -342,7 +322,7 @@ const AccountPage = ({
                 <DescriptionListDetail data-testid="persoonsgegevens-confidentialityOfPersonalData">
                   {
                     <FormattedMessage
-                      id={`account.detail.confidentialityOfPersonalData.${person?.geheimhoudingPersoonsgegevens ?? false}`}
+                      id={`account.detail.confidentialityOfPersonalData.${persoon?.geheimhoudingPersoonsgegevens ?? false}`}
                     />
                   }
                 </DescriptionListDetail>
@@ -391,13 +371,13 @@ const AccountPage = ({
                 <DescriptionListDetail
                   translate="no"
                   data-testid="persoonsgegevens-street"
-                  loading={personLoading}
                 >
                   {getStreetString(
-                    person?.verblijfplaats?.verblijfadres?.officieleStraatnaam,
-                    person?.verblijfplaats?.verblijfadres?.huisnummer?.toString(),
-                    person?.verblijfplaats?.verblijfadres?.huisletter,
-                    person?.verblijfplaats?.verblijfadres?.huisnummertoevoeging,
+                    persoon?.verblijfplaats?.verblijfadres?.officieleStraatnaam,
+                    persoon?.verblijfplaats?.verblijfadres?.huisnummer?.toString(),
+                    persoon?.verblijfplaats?.verblijfadres?.huisletter,
+                    persoon?.verblijfplaats?.verblijfadres
+                      ?.huisnummertoevoeging,
                   )}
                 </DescriptionListDetail>
               ),
@@ -408,11 +388,10 @@ const AccountPage = ({
                 <DescriptionListDetail
                   translate="no"
                   data-testid="persoonsgegevens-postcode"
-                  loading={personLoading}
                 >
                   {getPostalCodeCityString(
-                    person?.verblijfplaats?.verblijfadres?.postcode,
-                    person?.verblijfplaats?.verblijfadres?.woonplaats,
+                    persoon?.verblijfplaats?.verblijfadres?.postcode,
+                    persoon?.verblijfplaats?.verblijfadres?.woonplaats,
                   )}
                 </DescriptionListDetail>
               ),
@@ -420,10 +399,10 @@ const AccountPage = ({
             {
               title: <FormattedMessage id="account.detail.aanvangsDatum" />,
               detail: (
-                <DescriptionListDetail loading={personLoading}>
-                  {person?.verblijfplaats?.datumVan?.datum
+                <DescriptionListDetail>
+                  {persoon?.verblijfplaats?.datumVan?.datum
                     ? formatDate({
-                        date: person?.verblijfplaats?.datumVan?.datum,
+                        date: persoon?.verblijfplaats?.datumVan?.datum,
                       })
                     : ""}
                 </DescriptionListDetail>
@@ -436,8 +415,8 @@ const AccountPage = ({
                       <FormattedMessage id="account.detail.inhabitantAmount" />
                     ),
                     detail: (
-                      <DescriptionListDetail loading={personLoading}>
-                        {person?.bewonersAantal?.toString()}
+                      <DescriptionListDetail>
+                        {persoon?.bewonersAantal?.toString()}
                       </DescriptionListDetail>
                     ),
                   },
@@ -474,53 +453,6 @@ const AccountPage = ({
           </div>
         )}
       </PageGrid>
-      {/* Disabled until OpenKlant supports notifications/meldingen
-      {showNotificationSubSection && (
-        <PageGrid variant="small">
-          <Heading id="meldingen" as="h3">
-            <FormattedMessage id="account.detail.meldingen" />
-          </Heading>
-          <Link
-            icon={<EditIcon />}
-            iconAlign="start"
-            href={paths.changeNotifications}
-            Link={PortalLink}
-          >
-            <FormattedMessage id="account.edit" />
-          </Link>
-          <DescriptionList
-            items={[
-              {
-                title: (
-                  <FormattedMessage id="account.detail.notification.form.post.title" />
-                ),
-                detail: (
-                  <DescriptionListDetail loading={contactLoading}>
-                    <FormattedMessage
-                      id={`account.detail.notification.form.post.true`}
-                    />
-                  </DescriptionListDetail>
-                ),
-              },
-              {
-                title: (
-                  <FormattedMessage id="account.detail.notification.form.email.title" />
-                ),
-                detail: (
-                  <DescriptionListDetail loading={contactLoading}>
-                    <FormattedMessage
-                      id={`account.detail.notification.form.email.${contactData?.aanmaakkanaal === "EMAIL"}`}
-                      values={{
-                        strong: (chunk) => <strong>{chunk}</strong>,
-                      }}
-                    />
-                  </DescriptionListDetail>
-                ),
-              },
-            ]}
-          />
-        </PageGrid>
-      )} */}
       <div>
         <Heading id="wijzigingen-en-aanvragen-brp" as="h3">
           <FormattedMessage id="account.detail.wijzigingenBrp" />

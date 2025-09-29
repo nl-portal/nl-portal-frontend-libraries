@@ -1,12 +1,12 @@
 import CasesPage from "../../../pages/CasesPage";
-import TestProvider, {
-  testPaths as paths,
-} from "../../../providers/TestProvider";
+import TestProvider, { testPaths } from "../../../providers/TestProvider";
+import { getProduct } from "../data/product.mock";
+import { getUnopenedBerichten } from "../data/unopened-berichten";
 import { getZaken } from "../data/zaken.mock";
 
 const routes = [
   {
-    path: paths.cases,
+    path: testPaths.cases,
     children: [
       {
         index: true,
@@ -19,6 +19,8 @@ const routes = [
 export const MockCasesPage = () => (
   <TestProvider
     mocks={[
+      getProduct,
+      getUnopenedBerichten,
       getZaken({ pageSize: 10, isOpen: true }),
       getZaken({ pageSize: 10, isOpen: false }),
       getZaken({ pageSize: 10, isOpen: false, page: 1 }),
@@ -26,6 +28,6 @@ export const MockCasesPage = () => (
     ]}
     routes={routes}
     initialIndex={0}
-    initialEntries={[paths.cases]}
+    initialEntries={[testPaths.cases]}
   ></TestProvider>
 );

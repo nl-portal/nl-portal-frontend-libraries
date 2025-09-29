@@ -2,10 +2,10 @@ import React, { useContext, useEffect } from "react";
 import {
   useGetZaakQuery,
   useGetTakenV2Query,
-  useGetObjectContactMomentenLazyQuery,
   TaakV2,
-  ContactMoment,
   ZaakStatus,
+  useContactMomentsLazyQuery,
+  OnderwerpObjectIndentificatorType,
 } from "@nl-portal/nl-portal-api";
 import {
   LocaleContext,
@@ -14,8 +14,8 @@ import {
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useParams } from "react-router";
-import ContactTimeline from "@gemeente-denhaag/contact-timeline";
 import "@utrecht/component-library-css";
+import { ContactTimeline } from "@gemeente-denhaag/contact-timeline";
 import DocumentsList from "../components/DocumentsList";
 import StatusHistory from "../components/StatusHistory";
 import BackLink from "../components/BackLink";
@@ -27,8 +27,11 @@ import useOgonePaymentRegistration, {
   PaymentStatus,
 } from "../hooks/useOgonePaymentRegistration";
 import DescriptionList from "../components/DescriptionList";
-import ExtraCaseDetails, { Details } from "../components/ExtraCaseDetails";
+import { ExtraCaseDetails, Details } from "../components/ExtraCaseDetails";
 import NotificationContext from "../contexts/NotificationContext";
+import { stringToSlug } from "../utils/string-to-slug";
+import { caseResults } from "../constants/case-results";
+import Pre from "../components/Pre";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -46,7 +49,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     variables: { id },
   });
   const [getMomenten, { data: momentsData, loading: momentsLoading }] =
-    useGetObjectContactMomentenLazyQuery();
+    useContactMomentsLazyQuery();
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
@@ -62,6 +65,25 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   ) as TaakV2[] | undefined;
 
   const { pushNotification } = useContext(NotificationContext);
+
+  useEffect(() => {
+    if (!caseData?.getZaak?.resultaat?.resultaattype?.omschrijvingGeneriek)
+      return;
+
+    const slug = stringToSlug(
+      caseData?.getZaak.resultaat?.resultaattype.omschrijvingGeneriek,
+    );
+    const variant = caseResults[slug];
+
+    if (!variant) return;
+
+    pushNotification("caseResult", {
+      variant,
+      title: <FormattedMessage id={`caseDetails.resultAlert.${slug}`} />,
+      text: "",
+      closable: false,
+    });
+  }, [caseData]);
 
   useEffect(() => {
     if (paymentStatus === PaymentStatus.SUCCESS) {
@@ -102,20 +124,37 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
         detail: caseData?.getZaak.omschrijving || "",
       });
 
+    if (caseData?.getZaak.resultaat?.resultaattype.omschrijvingGeneriek) {
+      array.push({
+        title: intl.formatMessage({ id: "caseDetails.resultaat" }),
+        detail:
+          caseData?.getZaak.resultaat?.resultaattype.omschrijvingGeneriek || "",
+      });
+    }
+
+    if (
+      window.SHOW_CASE_RESULT_EXPLANATION === "true" &&
+      caseData?.getZaak.resultaat?.toelichting
+    ) {
+      array.push({
+        title: intl.formatMessage({ id: "caseDetails.resultaatToelichting" }),
+        detail: <Pre>{caseData?.getZaak.resultaat.toelichting}</Pre>,
+      });
+    }
+
     return array;
   }, [caseData, currentLocale]);
 
   const contactItems = React.useMemo(() => {
-    if (!momentsData?.getObjectContactMomenten) return [];
+    if (!momentsData) return [];
 
-    return momentsData?.getObjectContactMomenten?.content.map(
-      (contact: ContactMoment, index: number) => ({
-        id: index,
-        title: contact.tekst,
-        channel: contact.kanaal,
-        isoDate: contact.registratiedatum,
-      }),
-    );
+    return momentsData.map((contact, index) => ({
+      id: index,
+      title: contact.onderwerp,
+      description: contact.inhoud && <Pre>{contact.inhoud}</Pre>,
+      channel: contact.kanaal,
+      isoDate: contact.registratiedatum,
+    }));
   }, [momentsData]);
 
   const contactLabels = {
@@ -127,7 +166,13 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
 
   React.useEffect(() => {
     if (!caseData) return;
-    getMomenten({ variables: { objectUrl: caseData.getZaak.url } });
+    getMomenten({
+      variables: {
+        objectUrl: caseData.getZaak.url,
+        identificatorType: OnderwerpObjectIndentificatorType.Zaak,
+        identificatorId: caseData.getZaak.uuid,
+      },
+    });
   }, [caseData]);
 
   if (!caseError) {
@@ -195,6 +240,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
           />
           <ContactTimeline
             items={contactItems}
+            collapsible={contactItems.some((item) => Boolean(item.description))}
             labels={contactLabels}
             locale={currentLocale}
           />

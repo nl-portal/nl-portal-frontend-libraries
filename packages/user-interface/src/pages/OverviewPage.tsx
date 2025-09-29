@@ -1,6 +1,5 @@
 import { Alert } from "@gemeente-denhaag/alert";
 import { FormattedMessage, useIntl } from "react-intl";
-import useUserInfo from "../hooks/useUserInfo";
 import CasesList from "../components/CasesList";
 import PageHeader from "../components/PageHeader";
 import {
@@ -12,11 +11,15 @@ import {
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
 import { Paragraph } from "@gemeente-denhaag/typography";
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
+import UserContext from "../contexts/UserContext";
+import { RouterOutletContext } from "../interfaces/router-outlet-context";
+import { useNavigate, useOutletContext } from "react-router";
 
 interface OverviewPageProps {
   showAlert?: boolean;
   alertType?: "error" | "info" | "success" | "warning";
+  showNoEmailAlert?: boolean;
   showIntro?: boolean;
   fetchTasksLength?: number;
   fetchCasesLength?: number;
@@ -25,6 +28,7 @@ interface OverviewPageProps {
 
 const OverviewPage = ({
   showAlert = false,
+  showNoEmailAlert = false,
   alertType = "warning",
   showIntro = false,
   fetchTasksLength = 5,
@@ -32,7 +36,8 @@ const OverviewPage = ({
   children,
 }: OverviewPageProps) => {
   const intl = useIntl();
-  const { userName, volmachtgever, isVolmachtLogin } = useUserInfo();
+  const { username, usernameVolmacht, isVolmacht, contact } =
+    useContext(UserContext);
   const {
     data: tasksData,
     loading: tasksLoading,
@@ -49,6 +54,9 @@ const OverviewPage = ({
     variables: { pageSize: fetchCasesLength },
     skip: !fetchCasesLength,
   });
+  const { paths } = useOutletContext<RouterOutletContext>();
+  const navigate = useNavigate();
+
   const loading = tasksLoading || casesLoading;
   const tasks = tasksData?.getTakenV2.content as TaakV2[] | undefined;
   const cases = casesData?.getZaken.content as Zaak[] | undefined;
@@ -59,7 +67,28 @@ const OverviewPage = ({
         <Alert
           variant={alertType}
           title={intl.formatMessage({ id: "overview.alertTitle" })}
-          text={intl.formatMessage({ id: "overview.alertText" })}
+          text={
+            <Paragraph>
+              {intl.formatMessage({ id: "overview.alertText" })}
+            </Paragraph>
+          }
+        />
+      )}
+      {showNoEmailAlert && !contact?.emailadres && (
+        <Alert
+          title={<FormattedMessage id="overviewpage.noEmail.title" />}
+          text={
+            <Paragraph>
+              <FormattedMessage id="overviewpage.noEmail.text" />
+            </Paragraph>
+          }
+          variant="warning"
+          action={{
+            buttonText: intl.formatMessage({
+              id: "overviewpage.noEmail.text.button",
+            }),
+            onClick: () => navigate(paths.changeContactInfo),
+          }}
         />
       )}
       {showIntro && (
@@ -67,14 +96,14 @@ const OverviewPage = ({
           title={
             <>
               <FormattedMessage id="overviewpage.title" />{" "}
-              <span translate="no">{userName}</span>
+              <span translate="no">{username}</span>
             </>
           }
           subTitle={
-            isVolmachtLogin && (
+            isVolmacht && (
               <>
                 <FormattedMessage id="overview.subTitle" />{" "}
-                <span translate="no">{volmachtgever}</span>
+                <span translate="no">{usernameVolmacht}</span>
               </>
             )
           }

@@ -5,7 +5,7 @@ import {
 } from "../generated/Graphql";
 import { createVersionedHook } from "../utils/createVersionedHook";
 
-type Response = {
+export type UseUserContactQueryResponse = {
   emailadresId?: string;
   emailadres?: string;
   telefoonnummerId?: string;
@@ -29,15 +29,15 @@ export const useUserContactQuery = (() => {
           emailadres: d?.getBurgerProfiel?.emailadres,
           telefoonnummer: d?.getBurgerProfiel?.telefoonnummer,
           aanmaakkanaal: d?.getBurgerProfiel?.aanmaakkanaal,
-        }) as Response,
+        }) as UseUserContactQueryResponse,
     },
     v2: {
       hook: useGetUserDigitaleAdressenQuery,
       map: (d) => {
-        const email = d?.getUserDigitaleAdresen?.find(
+        const email = d?.getUserDigitaleAdressen?.find(
           (a) => a.type === DigitaleAdresType.Email,
         );
-        const phone = d?.getUserDigitaleAdresen?.find(
+        const phone = d?.getUserDigitaleAdressen?.find(
           (a) => a.type === DigitaleAdresType.Telefoonnummer,
         );
         return {
@@ -45,7 +45,7 @@ export const useUserContactQuery = (() => {
           emailadres: email?.waarde,
           telefoonnummerId: phone?.uuid,
           telefoonnummer: phone?.waarde,
-        } as Response;
+        } as UseUserContactQueryResponse;
       },
     },
   });

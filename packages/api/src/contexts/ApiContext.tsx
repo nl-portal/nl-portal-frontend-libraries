@@ -39,7 +39,6 @@ export const ApiProvider = ({
   restUri,
   inMemoryCacheOptions = defaultInMemoryCacheOptions,
 }: Props) => {
-  const LOCAL_STORAGE_REST_URI_KEY = "REST_URI";
   const formattedGraphqlUri = formatUrlTrailingSlash(graphqlUri, false);
   const formattedRestUri = formatUrlTrailingSlash(restUri, false);
   const { oidcToken } = useContext(OidcContext);
@@ -70,7 +69,7 @@ export const ApiProvider = ({
     client.setLink(getLink(oidcToken));
   }, [oidcToken, client, getLink]);
 
-  sessionStorage.setItem(LOCAL_STORAGE_REST_URI_KEY, formattedRestUri);
+  sessionStorage.setItem("REST_URI", formattedRestUri);
 
   if (!oidcToken) return null;
 

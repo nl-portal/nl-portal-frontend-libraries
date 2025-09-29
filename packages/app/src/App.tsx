@@ -5,20 +5,14 @@ import { OidcProvider } from "@nl-portal/nl-portal-authentication";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 import { ApiProvider } from "@nl-portal/nl-portal-api";
 import {
-  Layout,
-  MessagesProvider,
+  AppProvider,
+  UserProvider,
   NotificationProvider,
-  useEnableMessagesCount,
 } from "@nl-portal/nl-portal-user-interface";
 import { CUSTOM_MESSAGES } from "./i18n/custom-messages/custom-messages";
-import HeaderLogo from "./assets/header-logo.svg";
-import HeaderLogoSmall from "./assets/header-logo-small.svg";
-import Facet from "./assets/facet.png";
-import { footerData } from "./constants/footer-data";
 import { config } from "./constants/config";
-import { menuItems } from "./constants/menu-items";
-import { paths } from "./constants/paths";
 import { ScrollRestoration } from "react-router";
+import CustomLayout from "./components/CustomLayout";
 
 const authenticationMethods = {
   person: ["digid", "machtigen"],
@@ -27,8 +21,6 @@ const authenticationMethods = {
 };
 
 const App = () => {
-  const enableMessagesCount = useEnableMessagesCount(menuItems);
-
   return (
     <div className={config.THEME_CLASS}>
       <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
@@ -45,18 +37,11 @@ const App = () => {
             restUri={config.REST_URI}
           >
             <NotificationProvider>
-              <MessagesProvider enableMessagesCount={enableMessagesCount}>
-                <Layout
-                  navigationItems={menuItems}
-                  paths={paths}
-                  headerLogo={<img src={HeaderLogo} alt="logo" />}
-                  headerLogoSmall={
-                    <img src={HeaderLogoSmall} alt="logo-small" />
-                  }
-                  facet={<img src={Facet} alt="facet" />}
-                  footer={footerData}
-                />
-              </MessagesProvider>
+              <UserProvider>
+                <AppProvider>
+                  <CustomLayout />
+                </AppProvider>
+              </UserProvider>
             </NotificationProvider>
           </ApiProvider>
         </OidcProvider>

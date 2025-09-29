@@ -1,4 +1,4 @@
-import Tabs from "@gemeente-denhaag/tab";
+import { Tabs } from "@gemeente-denhaag/tab";
 import { FormattedMessage, useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
@@ -41,9 +41,10 @@ const CasesPage = () => {
 
   const openCases = openData?.getZaken.content as Zaak[] | undefined;
   const closedCases = closedData?.getZaken.content as Zaak[] | undefined;
-  const searchParam = window.CASES_PARTIAL_SEARCH
-    ? "identificatieContains"
-    : "identificatie";
+  const searchParam =
+    window.CASES_PARTIAL_SEARCH === "true"
+      ? "identificatieContains"
+      : "identificatie";
 
   const handleFormSubmit = (searchValue: string) => {
     startTransition(async () => {

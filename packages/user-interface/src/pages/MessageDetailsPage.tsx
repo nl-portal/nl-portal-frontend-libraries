@@ -7,12 +7,13 @@ import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedDate, FormattedMessage, FormattedTime } from "react-intl";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { useContext } from "react";
-import MessagesContext from "../contexts/MessagesContext";
+import AppContext from "../contexts/AppContext";
 import MessageContent from "../components/MessageContent";
+import DocumentsList from "../components/DocumentsList";
 
 const MessageDetailsPage = () => {
   const { id } = useParams();
-  const { refetchMessages } = useContext(MessagesContext);
+  const { refetchMessages } = useContext(AppContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const {
     data: messageData,
@@ -59,6 +60,11 @@ const MessageDetailsPage = () => {
         loading={messageLoading}
         error={Boolean(messageError)}
         messageText={message?.berichtTekst}
+      />
+      <DocumentsList
+        loading={messageLoading}
+        error={Boolean(messageError)}
+        documents={message?.documenten}
       />
     </PageGrid>
   );
