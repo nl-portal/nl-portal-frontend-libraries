@@ -31,7 +31,8 @@ export const getObjectContactMomenten = {
         },
         {
           uuid: "482a8529-0ebd-4424-83a9-b9f88335673d",
-          inhoud: "Dit is een sms",
+          inhoud:
+            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.\nCum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\nDonec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.",
           kanaal: "SMS",
           onderwerp: "Dit is een sms",
           plaatsgevondenOp: "2025-03-12T10:00:12Z",
