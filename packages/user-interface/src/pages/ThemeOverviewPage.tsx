@@ -28,14 +28,14 @@ interface Props {
   slug: string;
   fetchTasksLength?: number;
   fetchCasesLength?: number;
-  productsSettings: ProductSettings[];
+  productenSettings: ProductSettings[];
 }
 
 const ThemeOverviewPage = ({
   slug,
   fetchTasksLength = 5,
   fetchCasesLength = 4,
-  productsSettings,
+  productenSettings,
 }: Props) => {
   const intl = useIntl();
   const { themes } = use(AppContext);
@@ -80,7 +80,7 @@ const ThemeOverviewPage = ({
           cases={zaken}
         />
       )}
-      {productsSettings.map((productSettings) => (
+      {productenSettings.map((productSettings) => (
         <ProductList
           key={productSettings.titleTranslationId}
           slug={slug}
