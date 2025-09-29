@@ -4,6 +4,7 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import {
   OpenProductProduct,
+  OpenProductThema,
   useGetOpenProductThemaTakenQuery,
   useGetOpenProductThemaZakenQuery,
 } from "@nl-portal/nl-portal-api";
@@ -29,6 +30,7 @@ interface Props {
   fetchTasksLength?: number;
   fetchCasesLength?: number;
   productenSettings: ProductSettings[];
+  children?: ((theme: OpenProductThema) => React.ReactNode) | React.ReactNode;
 }
 
 const ThemeOverviewPage = ({
@@ -36,12 +38,13 @@ const ThemeOverviewPage = ({
   fetchTasksLength = 5,
   fetchCasesLength = 4,
   productenSettings,
+  children,
 }: Props) => {
   const intl = useIntl();
   const { themes } = use(AppContext);
   const theme = themes.find(
     (theme) => stringToSlug(theme.naam) === stringToSlug(slug),
-  );
+  ) as OpenProductThema;
 
   const { data: takenData, loading: takenLoading } =
     useGetOpenProductThemaTakenQuery({
@@ -87,6 +90,7 @@ const ThemeOverviewPage = ({
           {...productSettings}
         />
       ))}
+      {children instanceof Function ? children(theme) : children}
     </PageGrid>
   );
 };
