@@ -2,65 +2,71 @@ import { useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
-import { useGetOpenProductenByThemaQuery } from "@nl-portal/nl-portal-api";
+import {
+  OpenProductProduct,
+  useGetOpenProductThemaTakenQuery,
+  useGetOpenProductThemaZakenQuery,
+} from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import AppContext from "../contexts/AppContext";
 import { use } from "react";
 import { stringToSlug } from "../utils/string-to-slug";
-import TableList from "../components/TableList";
-import { useOutletContext } from "react-router";
-import { RouterOutletContext } from "../interfaces/router-outlet-context";
+import { ProductList } from "../components/ProductList";
+
+export interface ProductSettings {
+  productTypeCodes: string[];
+  titleTranslationId: string;
+  headerTranslationIds: string[];
+  dataMapping: (
+    | ((product: OpenProductProduct) => React.ReactNode)
+    | keyof OpenProductProduct
+  )[];
+}
 
 interface Props {
   slug: string;
   fetchTasksLength?: number;
   fetchCasesLength?: number;
-  productSettings: {
-    titleTranslationId: string;
-    headerTranslationIds: string[];
-    dataMapping: string[];
-  };
+  productsSettings: ProductSettings[];
 }
 
 const ThemeOverviewPage = ({
   slug,
   fetchTasksLength = 5,
   fetchCasesLength = 4,
-  productSettings,
+  productsSettings,
 }: Props) => {
   const intl = useIntl();
   const { themes } = use(AppContext);
-  const { paths } = useOutletContext<RouterOutletContext>();
-  const id = themes.find(
+  const theme = themes.find(
     (theme) => stringToSlug(theme.naam) === stringToSlug(slug),
-  )?.uuid;
-  const {
-    data: productenData,
-    loading: productenLoading,
-    error: productenError,
-  } = useGetOpenProductenByThemaQuery({
-    variables: {
-      themaId: id,
-    },
-    skip: !id,
-  });
+  );
 
-  const loading = productenLoading;
-  const producten = productenData?.getOpenProductenByThema || [];
-  const taken = producten?.flatMap(
-    (product) => (product.taken as TaakV2[]) ?? [],
-  );
-  const zaken = producten?.flatMap(
-    (product) => (product.zaken as Zaak[]) ?? [],
-  );
+  const { data: takenData, loading: takenLoading } =
+    useGetOpenProductThemaTakenQuery({
+      variables: {
+        id: theme?.uuid,
+        pageSize: fetchTasksLength,
+      },
+    });
+  const { data: zakenData, loading: zakenLoading } =
+    useGetOpenProductThemaZakenQuery({
+      variables: {
+        id: theme?.uuid,
+        pageSize: fetchCasesLength,
+      },
+    });
+
+  const taken = (takenData?.getOpenProductThemaTaken as TaakV2[]) ?? [];
+  const zaken = (zakenData?.getOpenProductThemaZaken as Zaak[]) ?? [];
 
   return (
     <PageGrid>
       <PageHeader title={intl.formatMessage({ id: `pageTitles.${slug}` })} />
       {Boolean(fetchTasksLength) && (
         <TasksList
-          loading={loading}
+          loading={takenLoading}
           showEmpty={false}
           tasks={taken}
           openInContext={true}
@@ -68,28 +74,19 @@ const ThemeOverviewPage = ({
       )}
       {Boolean(fetchCasesLength) && (
         <CasesList
-          loading={loading}
+          loading={zakenLoading}
           showEmpty={false}
           listView={false}
           cases={zaken}
         />
       )}
-      <TableList
-        loading={loading}
-        error={Boolean(productenError)}
-        titleTranslationId={productSettings.titleTranslationId}
-        headers={productSettings.headerTranslationIds.map((id) =>
-          intl.formatMessage({ id }),
-        )}
-        rows={producten.map((product) =>
-          productSettings.dataMapping.map((map) => ({
-            href: paths.themeDetails(slug, product.uuid),
-            children: intl.formatMessage({
-              id: (product as unknown as Record<string, string>)[map] || "-",
-            }),
-          })),
-        )}
-      />
+      {productsSettings.map((productSettings) => (
+        <ProductList
+          key={productSettings.titleTranslationId}
+          slug={slug}
+          {...productSettings}
+        />
+      ))}
     </PageGrid>
   );
 };

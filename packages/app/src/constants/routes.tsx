@@ -102,11 +102,14 @@ export const routes: RouteObject[] = [
         element: (
           <ThemeOverviewPage
             slug="belastingzaken"
-            productSettings={{
-              titleTranslationId: "Producten",
-              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
-              dataMapping: ["naam", "startDatum", "eindDatum"],
-            }}
+            productsSettings={[
+              {
+                productTypeCodes: ["BELASTINGZAKEN"],
+                titleTranslationId: "Producten",
+                headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
+                dataMapping: ["naam", "startDatum", "eindDatum"],
+              },
+            ]}
           />
         ),
       },
@@ -122,11 +125,53 @@ export const routes: RouteObject[] = [
         element: (
           <ThemeOverviewPage
             slug="parkeren"
-            productSettings={{
-              titleTranslationId: "Vergunningen",
-              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
-              dataMapping: ["naam", "startDatum", "eindDatum"],
-            }}
+            productsSettings={[
+              {
+                productTypeCodes: ["PARKEERVERGUNNING"],
+                titleTranslationId: "Vergunningen",
+                headerTranslationIds: [
+                  "Naam",
+                  "Startdatum",
+                  "Einddatum",
+                  "Status",
+                  "Prijs",
+                ],
+                dataMapping: [
+                  "naam",
+                  "startDatum",
+                  "eindDatum",
+                  (product) =>
+                    capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
+                  (product) => {
+                    return (
+                      <FormattedNumber
+                        value={product?.prijs ?? 0}
+                        {...currencyFormat}
+                      />
+                    );
+                  },
+                ],
+              },
+              {
+                productTypeCodes: ["BEZOEKERSVERGUNNING"],
+                titleTranslationId: "Bezoekersvergunningen",
+                headerTranslationIds: ["Naam", "Startdatum", "Status", "Prijs"],
+                dataMapping: [
+                  "naam",
+                  "startDatum",
+                  (product) =>
+                    capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
+                  (product) => {
+                    return (
+                      <FormattedNumber
+                        value={product?.prijs ?? 0}
+                        {...currencyFormat}
+                      />
+                    );
+                  },
+                ],
+              },
+            ]}
           />
         ),
       },
@@ -254,11 +299,14 @@ export const routes: RouteObject[] = [
         element: (
           <ThemeOverviewPage
             slug="inkomensondersteuning"
-            productSettings={{
-              titleTranslationId: "Vergunningen",
-              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
-              dataMapping: ["naam", "startDatum", "eindDatum"],
-            }}
+            productsSettings={[
+              {
+                productTypeCodes: ["INKOMENSONDERSTEUNING"],
+                titleTranslationId: "Vergunningen",
+                headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
+                dataMapping: ["naam", "startDatum", "eindDatum"],
+              },
+            ]}
           />
         ),
       },
