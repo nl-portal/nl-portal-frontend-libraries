@@ -33,6 +33,7 @@ export const testPaths: Paths = {
   message: (id = ":id") => `/berichten/bericht/${id}`,
   themeOverview: (type = ":type") => `/${type}`,
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
+  themeMutate: (type = ":type", id = ":id") => `/${type}/${id}/wijzig`,
   account: "/account",
   changeContactInfo: "/account/wijzig/contact",
   changeNotifications: "/account/wijzig/notificaties",

@@ -23,6 +23,7 @@ export const QUERY_GET_OPEN_PRODUCT = gql`
       frequentie
       verbruiksobject
       dataobject
+      decisions
       zaken {
         uuid
         omschrijving
@@ -63,7 +64,6 @@ export const QUERY_GET_OPEN_PRODUCT = gql`
         verloopdatum
         version
       }
-      decisions
     }
   }
 `;
