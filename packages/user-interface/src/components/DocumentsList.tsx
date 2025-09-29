@@ -72,7 +72,7 @@ const DocumentsList = ({
           <Document
             key={document.uuid}
             document={document}
-            downloadLink={`${restUri}/zakenapi/zaakdocument/${document.identificatie}/content`}
+            downloadLink={`${restUri}/documentapi/openzaak/document/${document.uuid}/content`}
           />
         ))}
       </div>
