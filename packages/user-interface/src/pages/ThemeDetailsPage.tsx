@@ -40,8 +40,6 @@ const ThemeDetailsPage = ({
     variables: { id },
   });
 
-  console.log("data", openProduct);
-
   const { data, loading, error } = openProduct;
   const product = data?.getOpenProduct as OpenProductProduct | undefined;
   const zaken = product?.zaken as Zaak[] | undefined;
