@@ -102,7 +102,7 @@ export const routes: RouteObject[] = [
         element: (
           <ThemeOverviewPage
             slug="belastingzaken"
-            productsSettings={[
+            productenSettings={[
               {
                 productTypeCodes: ["BELASTINGZAKEN"],
                 titleTranslationId: "Producten",
@@ -125,7 +125,7 @@ export const routes: RouteObject[] = [
         element: (
           <ThemeOverviewPage
             slug="parkeren"
-            productsSettings={[
+            productenSettings={[
               {
                 productTypeCodes: ["PARKEERVERGUNNING"],
                 titleTranslationId: "Vergunningen",
@@ -299,7 +299,7 @@ export const routes: RouteObject[] = [
         element: (
           <ThemeOverviewPage
             slug="inkomensondersteuning"
-            productsSettings={[
+            productenSettings={[
               {
                 productTypeCodes: ["INKOMENSONDERSTEUNING"],
                 titleTranslationId: "Vergunningen",
