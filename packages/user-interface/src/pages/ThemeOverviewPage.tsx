@@ -61,6 +61,7 @@ const ThemeOverviewPage = ({
       },
     });
 
+  const loading = takenLoading || zakenLoading;
   const taken = (takenData?.getOpenProductThemaTaken as TaakV2[]) ?? [];
   const zaken = (zakenData?.getOpenProductThemaZaken as Zaak[]) ?? [];
 
@@ -69,7 +70,7 @@ const ThemeOverviewPage = ({
       <PageHeader title={intl.formatMessage({ id: `pageTitles.${slug}` })} />
       {Boolean(fetchTasksLength) && (
         <TasksList
-          loading={takenLoading}
+          loading={loading}
           showEmpty={false}
           tasks={taken}
           openInContext={true}
@@ -77,7 +78,7 @@ const ThemeOverviewPage = ({
       )}
       {Boolean(fetchCasesLength) && (
         <CasesList
-          loading={zakenLoading}
+          loading={loading}
           showEmpty={false}
           listView={false}
           cases={zaken}
