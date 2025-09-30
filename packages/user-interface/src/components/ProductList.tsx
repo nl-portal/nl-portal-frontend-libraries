@@ -9,7 +9,7 @@ import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 type ProductListProps = ProductSettings & {
-  slug: string; //TODO: check later of we hier wel een slug willen.
+  slug: string;
 };
 
 export const ProductList = ({
