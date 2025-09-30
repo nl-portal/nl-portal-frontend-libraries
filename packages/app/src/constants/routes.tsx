@@ -11,12 +11,7 @@ import {
   EditContactInfoPage,
   ThemeOverviewPage,
   ThemeDetailsPage,
-  currencyFormat,
-  capitalizeFirstLetter,
-  TableList,
-  PortalLink,
   ThemeMutatePage,
-  NotifyOnMount,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
@@ -26,12 +21,9 @@ import {
   RouteObject as ReactRouteObject,
   useSearchParams,
 } from "react-router";
-import { FormattedMessage, FormattedNumber } from "react-intl";
-import { Link } from "@gemeente-denhaag/link";
-import { OpenProductProduct } from "@nl-portal/nl-portal-api";
-import StatusBadge from "@gemeente-denhaag/status-badge";
-import { useDateFormatter } from "@nl-portal/nl-portal-localization";
 import { themes } from "./themes";
+import ParkerenOverview from "../pages/ParkerenOverview";
+import ParkerenDetails from "../pages/ParkerenDetails";
 
 export type RouteObject = ReactRouteObject & {
   handle: {
@@ -124,165 +116,12 @@ export const routes: RouteObject[] = [
       {
         index: true,
         handle: { label: `breadcrumb.${themes.parkeren.slug}` },
-        element: (
-          <ThemeOverviewPage
-            slug={themes.parkeren.slug}
-            productenSettings={[
-              {
-                productTypeCodes: ["PARKEERVERGUNNING"],
-                titleTranslationId: "Vergunningen",
-                headerTranslationIds: [
-                  "Naam",
-                  "Startdatum",
-                  "Einddatum",
-                  "Status",
-                  "Prijs",
-                ],
-                dataMapping: [
-                  "naam",
-                  "startDatum",
-                  "eindDatum",
-                  (product) =>
-                    capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
-                  (product) => {
-                    return (
-                      <FormattedNumber
-                        value={product?.prijs ?? 0}
-                        {...currencyFormat}
-                      />
-                    );
-                  },
-                ],
-              },
-              {
-                productTypeCodes: ["BEZOEKERSVERGUNNING"],
-                titleTranslationId: "Bezoekersvergunningen",
-                headerTranslationIds: ["Naam", "Startdatum", "Status", "Prijs"],
-                dataMapping: [
-                  "naam",
-                  "startDatum",
-                  (product) =>
-                    capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
-                  (product) => {
-                    return (
-                      <FormattedNumber
-                        value={product?.prijs ?? 0}
-                        {...currencyFormat}
-                      />
-                    );
-                  },
-                ],
-              },
-            ]}
-          >
-            <NotifyOnMount
-              id="showThemeInfo"
-              variant="info"
-              title={<FormattedMessage id="theme.sample.infoTitle" />}
-              text={<FormattedMessage id="theme.sample.infoTitle" />}
-            />
-          </ThemeOverviewPage>
-        ),
+        element: <ParkerenOverview />,
       },
       {
         path: paths.themeDetails(themes.parkeren.slug),
         handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
-        element: (
-          <ThemeDetailsPage
-            productSettings={{
-              headerTranslationIds: [
-                "Naam",
-                "Startdatum",
-                "Einddatum",
-                "Status",
-                "Prijs",
-              ],
-              dataMapping: [
-                "naam",
-                "startDatum",
-                "eindDatum",
-                (product) =>
-                  capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
-                (product) => {
-                  return (
-                    <FormattedNumber
-                      value={product?.prijs ?? 0}
-                      {...currencyFormat}
-                    />
-                  );
-                },
-              ],
-            }}
-          >
-            {({ loading, data }) => {
-              const { formatDate } = useDateFormatter();
-              const product = data?.getOpenProduct as
-                | OpenProductProduct
-                | undefined;
-
-              return (
-                <>
-                  {Boolean(product?.verbruiksobject) && (
-                    <TableList
-                      loading={loading}
-                      titleTranslationId={"Voertuigen"}
-                      headers={[
-                        <FormattedMessage key="kenteken" id={`Kenteken`} />,
-                        "",
-                      ]}
-                      rows={product?.verbruiksobject?.data?.kentekens?.map(
-                        (kenteken: string) => [
-                          { children: kenteken },
-                          {
-                            children: (
-                              <Link
-                                href={`${paths.themeMutate(
-                                  "parkeren",
-                                  product?.uuid,
-                                )}?kenteken=${kenteken}`}
-                                Link={PortalLink}
-                              >
-                                <FormattedMessage id={`Aanmelden`} />
-                              </Link>
-                            ),
-                          },
-                        ],
-                      )}
-                    />
-                  )}
-                  {Boolean(product?.verbruiksobject) && (
-                    <TableList
-                      loading={loading}
-                      titleTranslationId={"Periodes"}
-                      headers={[
-                        <FormattedMessage key="datum" id={`Datum`} />,
-                        <FormattedMessage key="kenteken" id={`Kenteken`} />,
-                        <FormattedMessage key="status" id={`Status`} />,
-                      ]}
-                      rows={product?.verbruiksobject?.data?.periodes?.map(
-                        //eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        (periode: any) => [
-                          {
-                            children: formatDate({
-                              date: periode?.datetimeStart,
-                              namedDays: false,
-                            }),
-                          },
-                          { children: periode?.kenteken },
-                          {
-                            children: (
-                              <StatusBadge>{periode?.status}</StatusBadge>
-                            ),
-                          },
-                        ],
-                      )}
-                    />
-                  )}
-                </>
-              );
-            }}
-          </ThemeDetailsPage>
-        ),
+        element: <ParkerenDetails />,
       },
       {
         path: paths.themeMutate(themes.parkeren.slug),

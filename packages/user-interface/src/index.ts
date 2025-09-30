@@ -17,7 +17,6 @@ export { default as LinkList } from "./components/LinkList";
 export * from "./components/LinkList";
 export { default as Notification } from "./components/Notification";
 export * from "./components/Notification";
-export * from "./components/NotifyOnMount";
 export { default as PageHeader } from "./components/PageHeader";
 export { default as PageGrid } from "./components/PageGrid";
 export { default as PortalLink } from "./components/PortalLink";
