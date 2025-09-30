@@ -6,6 +6,7 @@ import { DecodedToken } from "../interfaces/decoded-token";
 import ProtectedApp from "../components/ProtectedApp";
 import { decodeToken } from "../utils/decode-token";
 import generateRedirectUri from "../utils/generate-redirect-uri";
+import { filterEmptyParams } from "../utils/filter-empty-params.ts";
 
 export type AuthenticationMethods = {
   person?: string[];
@@ -30,6 +31,7 @@ export type OidcProviderProps = OidcConfig &
   SessionLengthManagementProps & {
     children: React.ReactNode;
     authenticationMethods?: AuthenticationMethods;
+    additionalParams?: Record<string, string>;
   };
 
 export interface OidcContextInterface {
@@ -53,6 +55,7 @@ export const OidcProvider = ({
   children,
   autoIdleSessionLogout,
   idleTimeoutMinutes,
+  additionalParams,
 }: OidcProviderProps) => {
   const [oidcToken, setOidcToken] = useState("");
   const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
@@ -72,6 +75,7 @@ export const OidcProvider = ({
     accessTokenExpiringNotificationTime: 15,
     post_logout_redirect_uri:
       postLogoutRedirectUri || generateRedirectUri(redirectUri, false),
+    AdditionalParams: filterEmptyParams(additionalParams),
   };
 
   const onSigninCallback = (user: User | undefined) => {
