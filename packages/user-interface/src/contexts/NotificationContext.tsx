@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useLayoutEffect,
-  useMemo,
-  useReducer,
-} from "react";
+import { createContext, ReactNode, useLayoutEffect, useReducer } from "react";
 import { NotificationProps } from "../components/Notification";
 import { useLocation } from "react-router";
 import { isEqual } from "lodash-es";
@@ -26,6 +20,7 @@ const reducer = (state: State, action: Action) => {
     }
     case "REMOVE": {
       if (!state[action.id]) return state;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { [action.id]: _, ...rest } = state;
       return rest;
     }

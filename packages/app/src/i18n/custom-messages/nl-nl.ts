@@ -37,5 +37,6 @@ export const NL_NL_MESSAGES: Messages = {
     "theme.sample.listContractnummer": "Contractnummer",
     "theme.sample.listViewAll": "Bekijk alle voorbeeldcontracten ({total})",
     "theme.sample.listPageHeader": "Voorbeeldcontracten",
+    "theme.sample.infoTitle": "Voorbeeld bericht",
   },
 };

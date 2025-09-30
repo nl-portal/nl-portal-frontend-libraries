@@ -16,6 +16,7 @@ import {
   TableList,
   PortalLink,
   ThemeMutatePage,
+  NotifyOnMount,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
@@ -172,7 +173,14 @@ export const routes: RouteObject[] = [
                 ],
               },
             ]}
-          />
+          >
+            <NotifyOnMount
+              id="showThemeInfo"
+              variant="info"
+              title={<FormattedMessage id="theme.sample.infoTitle" />}
+              text={<FormattedMessage id="theme.sample.infoTitle" />}
+            />
+          </ThemeOverviewPage>
         ),
       },
       {
