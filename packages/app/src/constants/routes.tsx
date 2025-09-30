@@ -16,6 +16,7 @@ import {
   TableList,
   PortalLink,
   ThemeMutatePage,
+  ThemeHistoryPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
@@ -30,6 +31,7 @@ import { Link } from "@gemeente-denhaag/link";
 import { OpenProductProduct } from "@nl-portal/nl-portal-api";
 import StatusBadge from "@gemeente-denhaag/status-badge";
 import { useDateFormatter } from "@nl-portal/nl-portal-localization";
+import { useState } from "react";
 
 export type RouteObject = ReactRouteObject & {
   handle: {
@@ -200,6 +202,14 @@ export const routes: RouteObject[] = [
                     <TableList
                       loading={loading}
                       titleTranslationId={"Periodes"}
+                      totalAmount={
+                        product?.verbruiksobject?.data?.periodes?.length
+                      }
+                      readMoreTranslationId={"Bekijk alles"}
+                      readMoreLink={paths.themeHistory(
+                        "parkeren",
+                        product?.uuid,
+                      )}
                       headers={[
                         <FormattedMessage key="datum" id={`Datum`} />,
                         <FormattedMessage key="kenteken" id={`Kenteken`} />,
@@ -228,6 +238,60 @@ export const routes: RouteObject[] = [
               );
             }}
           </ThemeDetailsPage>
+        ),
+      },
+      {
+        path: paths.themeHistory("parkeren"),
+        handle: { label: "breadcrumb.parkeren.details" },
+        element: (
+          <ThemeHistoryPage slug="parkeren">
+            {({ loading, data }) => {
+              const pageSize = 4;
+              const indexLimit = Math.floor(
+                ((data?.getOpenProduct as OpenProductProduct | undefined)
+                  ?.verbruiksobject?.data?.periodes?.length ?? 0) / pageSize,
+              );
+              const [index, setIndex] = useState<number>(0);
+              const { formatDate } = useDateFormatter();
+              const product = data?.getOpenProduct as
+                | OpenProductProduct
+                | undefined;
+
+              return (
+                <TableList
+                  loading={loading}
+                  titleTranslationId={null}
+                  index={index}
+                  indexLimit={indexLimit}
+                  onChange={setIndex}
+                  headers={[
+                    <FormattedMessage key="datum" id={`Datum`} />,
+                    <FormattedMessage key="kenteken" id={`Kenteken`} />,
+                    <FormattedMessage key="status" id={`Status`} />,
+                  ]}
+                  rows={product?.verbruiksobject?.data?.periodes
+                    ?.slice(index * pageSize, (index + 1) * pageSize)
+                    .map(
+                      //eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      (periode: any) => [
+                        {
+                          children: formatDate({
+                            date: periode?.datetimeStart,
+                            namedDays: false,
+                          }),
+                        },
+                        { children: periode?.kenteken },
+                        {
+                          children: (
+                            <StatusBadge>{periode?.status}</StatusBadge>
+                          ),
+                        },
+                      ],
+                    )}
+                />
+              );
+            }}
+          </ThemeHistoryPage>
         ),
       },
       {

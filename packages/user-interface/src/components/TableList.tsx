@@ -22,7 +22,7 @@ interface Props {
   rows?: CellObject[][];
   index?: number;
   indexLimit?: number;
-  onChange?: (index: number) => number;
+  onChange?: (index: number) => void;
   className?: string;
   children?: React.ReactNode;
 }
@@ -84,7 +84,6 @@ const TableList = ({
       : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
-
   const sectionClassNames = classNames(styles["table-list"], className);
 
   if (!loading) {

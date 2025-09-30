@@ -51,6 +51,7 @@ export { default as OverviewPage } from "./pages/OverviewPage";
 export { default as TasksPage } from "./pages/TasksPage";
 export { default as TaskDetailsPage } from "./pages/TaskDetailsPage";
 export { default as ThemeDetailsPage } from "./pages/ThemeDetailsPage";
+export { default as ThemeHistoryPage } from "./pages/ThemeHistoryPage";
 export { default as ThemeMutatePage } from "./pages/ThemeMutatePage";
 export { default as ThemeOverviewPage } from "./pages/ThemeOverviewPage";
 
