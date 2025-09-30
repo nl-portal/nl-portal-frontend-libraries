@@ -31,6 +31,7 @@ import { Link } from "@gemeente-denhaag/link";
 import { OpenProductProduct } from "@nl-portal/nl-portal-api";
 import StatusBadge from "@gemeente-denhaag/status-badge";
 import { useDateFormatter } from "@nl-portal/nl-portal-localization";
+import { themes } from "./themes";
 
 export type RouteObject = ReactRouteObject & {
   handle: {
@@ -94,15 +95,15 @@ export const routes: RouteObject[] = [
     ],
   },
   {
-    path: paths.themeOverview("belastingzaken"),
-    handle: { label: "breadcrumb.belastingzaken" },
+    path: paths.themeOverview(themes.belastingzaken.slug),
+    handle: { label: `breadcrumb.${themes.belastingzaken.slug}` },
     children: [
       {
         index: true,
-        handle: { label: "breadcrumb.belastingzaken" },
+        handle: { label: `breadcrumb.${themes.belastingzaken.slug}` },
         element: (
           <ThemeOverviewPage
-            slug="belastingzaken"
+            slug={themes.belastingzaken.slug}
             productenSettings={[
               {
                 productTypeCodes: ["BELASTINGZAKEN"],
@@ -117,15 +118,15 @@ export const routes: RouteObject[] = [
     ],
   },
   {
-    path: paths.themeOverview("parkeren"),
-    handle: { label: "breadcrumb.parkeren" },
+    path: paths.themeOverview(themes.parkeren.slug),
+    handle: { label: `breadcrumb.${themes.parkeren.slug}` },
     children: [
       {
         index: true,
-        handle: { label: "breadcrumb.parkeren" },
+        handle: { label: `breadcrumb.${themes.parkeren.slug}` },
         element: (
           <ThemeOverviewPage
-            slug="parkeren"
+            slug={themes.parkeren.slug}
             productenSettings={[
               {
                 productTypeCodes: ["PARKEERVERGUNNING"],
@@ -184,8 +185,8 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: paths.themeDetails("parkeren"),
-        handle: { label: "breadcrumb.parkeren.details" },
+        path: paths.themeDetails(themes.parkeren.slug),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
         element: (
           <ThemeDetailsPage
             productSettings={{
@@ -284,10 +285,10 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: paths.themeMutate("parkeren"),
-        handle: { label: "breadcrumb.parkeren.details" },
+        path: paths.themeMutate(themes.parkeren.slug),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
         element: (
-          <ThemeMutatePage slug="parkeren">
+          <ThemeMutatePage slug={themes.parkeren.slug}>
             {() => {
               const [searchParams] = useSearchParams();
               return <div>Mutate parkeren: {searchParams.get("kenteken")}</div>;
@@ -298,15 +299,15 @@ export const routes: RouteObject[] = [
     ],
   },
   {
-    path: paths.themeOverview("inkomensondersteuning"),
-    handle: { label: "breadcrumb.inkomensondersteuning" },
+    path: paths.themeOverview(themes.inkomensondersteuning.slug),
+    handle: { label: `breadcrumb.${themes.inkomensondersteuning.slug}` },
     children: [
       {
         index: true,
-        handle: { label: "breadcrumb.inkomensondersteuning" },
+        handle: { label: `breadcrumb.${themes.inkomensondersteuning.slug}` },
         element: (
           <ThemeOverviewPage
-            slug="inkomensondersteuning"
+            slug={themes.inkomensondersteuning.slug}
             productenSettings={[
               {
                 productTypeCodes: ["INKOMENSONDERSTEUNING"],
@@ -319,8 +320,10 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: paths.themeDetails("inkomensondersteuning"),
-        handle: { label: "breadcrumb.inkomensondersteuning.details" },
+        path: paths.themeDetails(themes.inkomensondersteuning.slug),
+        handle: {
+          label: `breadcrumb.${themes.inkomensondersteuning.slug}.details`,
+        },
         element: <ThemeDetailsPage />,
       },
     ],

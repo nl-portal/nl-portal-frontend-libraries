@@ -9,6 +9,7 @@ import {
   UserIcon,
 } from "@gemeente-denhaag/icons";
 import { paths } from "./paths";
+import { themes } from "./themes";
 
 export const navigationItems: NavigationItem[][] = [
   [
@@ -38,22 +39,22 @@ export const navigationItems: NavigationItem[][] = [
   ],
   [
     {
-      titleTranslationKey: "belastingzaken",
-      path: paths.themeOverview("belastingzaken"),
+      titleTranslationKey: themes.belastingzaken.slug,
+      path: paths.themeOverview(themes.belastingzaken.slug),
       icon: <EuroIcon />,
-      themeSlug: "belastingzaken",
+      themeSlug: themes.belastingzaken.slug,
     },
     {
-      titleTranslationKey: "parkeren",
-      path: paths.themeOverview("parkeren"),
+      titleTranslationKey: themes.parkeren.slug,
+      path: paths.themeOverview(themes.parkeren.slug),
       icon: <CarIcon />,
-      themeSlug: "parkeren",
+      themeSlug: themes.parkeren.slug,
     },
     {
-      titleTranslationKey: "inkomensondersteuning",
-      path: paths.themeOverview("inkomensondersteuning"),
+      titleTranslationKey: themes.inkomensondersteuning.slug,
+      path: paths.themeOverview(themes.inkomensondersteuning.slug),
       icon: <EuroIcon />,
-      themeSlug: "inkomensondersteuning",
+      themeSlug: themes.inkomensondersteuning.slug,
     },
   ],
   [
