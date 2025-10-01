@@ -11,6 +11,7 @@ export const paths: Paths = {
   message: (id = ":id") => `/berichten/bericht/${id}`,
   themeOverview: (slug = ":slug") => `/${slug}`,
   themeDetails: (slug = ":slug", id = ":id") => `/${slug}/${id}`,
+  themeHistory: (slug = ":slug", id = ":id") => `/${slug}/${id}/geschiedenis`,
   themeMutate: (slug = ":slug", id = ":id") => `/${slug}/${id}/wijzigen`,
   account: "/account",
   changeContactInfo: "/account/wijzig/contact",
