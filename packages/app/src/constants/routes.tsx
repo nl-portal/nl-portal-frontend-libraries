@@ -125,17 +125,13 @@ export const routes: RouteObject[] = [
         element: <ParkerenDetails />,
       },
       {
-        path: paths.themeMutate(themes.parkeren.slug),
+        path: paths.themeHistory(themes.parkeren.slug),
         handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
-      },
-      {
-        path: paths.themeHistory("parkeren"),
-        handle: { label: "breadcrumb.parkeren.details" },
         element: <ParkerenHistory />,
       },
       {
-        path: paths.themeMutate("parkeren"),
-        handle: { label: "breadcrumb.parkeren.details" },
+        path: paths.themeMutate(themes.parkeren.slug),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
         element: (
           <ThemeMutatePage slug={themes.parkeren.slug}>
             {() => {
