@@ -24,6 +24,7 @@ import {
 import { themes } from "./themes";
 import ParkerenOverview from "../pages/ParkerenOverview";
 import ParkerenDetails from "../pages/ParkerenDetails";
+import ParkerenHistory from "../pages/ParkerenHistory";
 
 export type RouteObject = ReactRouteObject & {
   handle: {
@@ -126,6 +127,15 @@ export const routes: RouteObject[] = [
       {
         path: paths.themeMutate(themes.parkeren.slug),
         handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
+      },
+      {
+        path: paths.themeHistory("parkeren"),
+        handle: { label: "breadcrumb.parkeren.details" },
+        element: <ParkerenHistory />,
+      },
+      {
+        path: paths.themeMutate("parkeren"),
+        handle: { label: "breadcrumb.parkeren.details" },
         element: (
           <ThemeMutatePage slug={themes.parkeren.slug}>
             {() => {

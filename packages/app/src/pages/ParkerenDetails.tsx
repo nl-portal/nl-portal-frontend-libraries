@@ -79,6 +79,9 @@ const ParkerenDetails = () => {
               <TableList
                 loading={loading}
                 titleTranslationId={"Periodes"}
+                totalAmount={product?.verbruiksobject?.data?.periodes?.length}
+                readMoreTranslationId={"Bekijk alles"}
+                readMoreLink={paths.themeHistory("parkeren", product?.uuid)}
                 headers={[
                   <FormattedMessage key="datum" id={`Datum`} />,
                   <FormattedMessage key="kenteken" id={`Kenteken`} />,
