@@ -64,7 +64,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
       : tasksResult?.getTakenV2.content
   ) as TaakV2[] | undefined;
 
-  const { pushNotification } = useContext(NotificationContext);
+  const { dispatch } = useContext(NotificationContext);
 
   useEffect(() => {
     if (!caseData?.getZaak?.resultaat?.resultaattype?.omschrijvingGeneriek)
@@ -77,27 +77,39 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
 
     if (!variant) return;
 
-    pushNotification("caseResult", {
-      variant,
-      title: <FormattedMessage id={`caseDetails.resultAlert.${slug}`} />,
-      text: "",
-      closable: false,
+    dispatch({
+      type: "CREATE",
+      id: "caseResult",
+      notification: {
+        variant,
+        title: <FormattedMessage id={`caseDetails.resultAlert.${slug}`} />,
+        text: "",
+        closable: false,
+      },
     });
   }, [caseData]);
 
   useEffect(() => {
     if (paymentStatus === PaymentStatus.SUCCESS) {
-      pushNotification("casePaymentSuccess", {
-        variant: "success",
-        title: <FormattedMessage id="task.paymentSuccessTitle" />,
-        text: <FormattedMessage id="task.paymentSuccessText" />,
+      dispatch({
+        type: "CREATE",
+        id: "casePaymentSuccess",
+        notification: {
+          variant: "success",
+          title: <FormattedMessage id="task.paymentSuccessTitle" />,
+          text: <FormattedMessage id="task.paymentSuccessText" />,
+        },
       });
     }
     if (paymentStatus === PaymentStatus.FAILURE) {
-      pushNotification("casePaymentFailure", {
-        variant: "error",
-        title: <FormattedMessage id="task.paymentFailureTitle" />,
-        text: <FormattedMessage id="task.paymentFailureText" />,
+      dispatch({
+        type: "CREATE",
+        id: "casePaymentFailure",
+        notification: {
+          variant: "error",
+          title: <FormattedMessage id="task.paymentFailureTitle" />,
+          text: <FormattedMessage id="task.paymentFailureText" />,
+        },
       });
     }
   }, [paymentStatus]);

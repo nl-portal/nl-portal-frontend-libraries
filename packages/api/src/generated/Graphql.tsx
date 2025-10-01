@@ -2388,6 +2388,7 @@ export type QueryGetOpenProductThemaHierarchyArgs = {
 export type QueryGetOpenProductThemaTakenArgs = {
   id: Scalars['UUID']['input'];
   language?: InputMaybe<Scalars['String']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -2395,6 +2396,7 @@ export type QueryGetOpenProductThemaZakenArgs = {
   id: Scalars['UUID']['input'];
   isOpen?: InputMaybe<Scalars['Boolean']['input']>;
   language?: InputMaybe<Scalars['String']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -2420,6 +2422,10 @@ export type QueryGetOpenProductTypesArgs = {
 export type QueryGetOpenProductenArgs = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  productTypeCode?: InputMaybe<Scalars['String']['input']>;
+  productTypeCodes?: InputMaybe<Array<Scalars['String']['input']>>;
+  productTypeId?: InputMaybe<Scalars['String']['input']>;
+  productTypeIds?: InputMaybe<Array<Scalars['String']['input']>>;
   status?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -3008,6 +3014,7 @@ export type GetOpenProductHoofdThemasQuery = { __typename?: 'Query', getOpenProd
 
 export type GetOpenProductThemaTakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
@@ -3015,6 +3022,8 @@ export type GetOpenProductThemaTakenQuery = { __typename?: 'Query', getOpenProdu
 
 export type GetOpenProductThemaZakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  isOpen?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
@@ -3026,6 +3035,19 @@ export type GetOpenProductQueryVariables = Exact<{
 
 
 export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> | null } | null };
+
+export type GetOpenProductenQueryVariables = Exact<{
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  productTypeCode?: InputMaybe<Scalars['String']['input']>;
+  productTypeId?: InputMaybe<Scalars['String']['input']>;
+  productTypeCodes?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
+  productTypeIds?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
+}>;
+
+
+export type GetOpenProductenQuery = { __typename?: 'Query', getOpenProducten: { __typename?: 'ProductenPage', number: number, size: number, totalElements: number, numberOfElements: number, content: Array<{ __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }> }> } };
 
 export type GetPersoonV2QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4245,8 +4267,8 @@ export type GetOpenProductHoofdThemasLazyQueryHookResult = ReturnType<typeof use
 export type GetOpenProductHoofdThemasSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasSuspenseQuery>;
 export type GetOpenProductHoofdThemasQueryResult = Apollo.QueryResult<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>;
 export const GetOpenProductThemaTakenDocument = gql`
-    query getOpenProductThemaTaken($id: UUID!) {
-  getOpenProductThemaTaken(id: $id) {
+    query getOpenProductThemaTaken($id: UUID!, $pageSize: Int) {
+  getOpenProductThemaTaken(id: $id, pageSize: $pageSize) {
     id
     soort
     koppeling {
@@ -4283,6 +4305,7 @@ export const GetOpenProductThemaTakenDocument = gql`
  * const { data, loading, error } = useGetOpenProductThemaTakenQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      pageSize: // value for 'pageSize'
  *   },
  * });
  */
@@ -4303,8 +4326,8 @@ export type GetOpenProductThemaTakenLazyQueryHookResult = ReturnType<typeof useG
 export type GetOpenProductThemaTakenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductThemaTakenSuspenseQuery>;
 export type GetOpenProductThemaTakenQueryResult = Apollo.QueryResult<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>;
 export const GetOpenProductThemaZakenDocument = gql`
-    query getOpenProductThemaZaken($id: UUID!) {
-  getOpenProductThemaZaken(id: $id) {
+    query getOpenProductThemaZaken($id: UUID!, $pageSize: Int, $isOpen: Boolean) {
+  getOpenProductThemaZaken(id: $id, pageSize: $pageSize, isOpen: $isOpen) {
     uuid
     omschrijving
     identificatie
@@ -4334,6 +4357,8 @@ export const GetOpenProductThemaZakenDocument = gql`
  * const { data, loading, error } = useGetOpenProductThemaZakenQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      pageSize: // value for 'pageSize'
+ *      isOpen: // value for 'isOpen'
  *   },
  * });
  */
@@ -4376,6 +4401,7 @@ export const GetOpenProductDocument = gql`
     frequentie
     verbruiksobject
     dataobject
+    decisions
     zaken {
       uuid
       omschrijving
@@ -4416,7 +4442,6 @@ export const GetOpenProductDocument = gql`
       verloopdatum
       version
     }
-    decisions
   }
 }
     `;
@@ -4453,6 +4478,85 @@ export type GetOpenProductQueryHookResult = ReturnType<typeof useGetOpenProductQ
 export type GetOpenProductLazyQueryHookResult = ReturnType<typeof useGetOpenProductLazyQuery>;
 export type GetOpenProductSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductSuspenseQuery>;
 export type GetOpenProductQueryResult = Apollo.QueryResult<GetOpenProductQuery, GetOpenProductQueryVariables>;
+export const GetOpenProductenDocument = gql`
+    query GetOpenProducten($pageNumber: Int, $pageSize: Int, $status: String, $productTypeCode: String, $productTypeId: String, $productTypeCodes: [String!], $productTypeIds: [String!]) {
+  getOpenProducten(
+    pageNumber: $pageNumber
+    pageSize: $pageSize
+    status: $status
+    productTypeCode: $productTypeCode
+    productTypeId: $productTypeId
+    productTypeCodes: $productTypeCodes
+    productTypeIds: $productTypeIds
+  ) {
+    number
+    size
+    totalElements
+    numberOfElements
+    content {
+      uuid
+      url
+      naam
+      startDatum
+      gepubliceerd
+      aanmaakDatum
+      producttype {
+        code
+        uniformeProductNaam
+        toegestaneStatussen
+      }
+      prijs
+      gepubliceerd
+      status
+      documenten {
+        url
+      }
+      frequentie
+      verbruiksobject
+      dataobject
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOpenProductenQuery__
+ *
+ * To run a query within a React component, call `useGetOpenProductenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOpenProductenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOpenProductenQuery({
+ *   variables: {
+ *      pageNumber: // value for 'pageNumber'
+ *      pageSize: // value for 'pageSize'
+ *      status: // value for 'status'
+ *      productTypeCode: // value for 'productTypeCode'
+ *      productTypeId: // value for 'productTypeId'
+ *      productTypeCodes: // value for 'productTypeCodes'
+ *      productTypeIds: // value for 'productTypeIds'
+ *   },
+ * });
+ */
+export function useGetOpenProductenQuery(baseOptions?: Apollo.QueryHookOptions<GetOpenProductenQuery, GetOpenProductenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOpenProductenQuery, GetOpenProductenQueryVariables>(GetOpenProductenDocument, options);
+      }
+export function useGetOpenProductenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductenQuery, GetOpenProductenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOpenProductenQuery, GetOpenProductenQueryVariables>(GetOpenProductenDocument, options);
+        }
+export function useGetOpenProductenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductenQuery, GetOpenProductenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOpenProductenQuery, GetOpenProductenQueryVariables>(GetOpenProductenDocument, options);
+        }
+export type GetOpenProductenQueryHookResult = ReturnType<typeof useGetOpenProductenQuery>;
+export type GetOpenProductenLazyQueryHookResult = ReturnType<typeof useGetOpenProductenLazyQuery>;
+export type GetOpenProductenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductenSuspenseQuery>;
+export type GetOpenProductenQueryResult = Apollo.QueryResult<GetOpenProductenQuery, GetOpenProductenQueryVariables>;
 export const GetPersoonV2Document = gql`
     query GetPersoonV2 {
   getPersoonV2 {

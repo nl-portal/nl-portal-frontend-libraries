@@ -11,12 +11,7 @@ import {
   EditContactInfoPage,
   ThemeOverviewPage,
   ThemeDetailsPage,
-  currencyFormat,
-  capitalizeFirstLetter,
-  TableList,
-  PortalLink,
   ThemeMutatePage,
-  ThemeHistoryPage,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
@@ -26,12 +21,10 @@ import {
   RouteObject as ReactRouteObject,
   useSearchParams,
 } from "react-router";
-import { FormattedMessage, FormattedNumber } from "react-intl";
-import { Link } from "@gemeente-denhaag/link";
-import { OpenProductProduct } from "@nl-portal/nl-portal-api";
-import StatusBadge from "@gemeente-denhaag/status-badge";
-import { useDateFormatter } from "@nl-portal/nl-portal-localization";
-import { useState } from "react";
+import { themes } from "./themes";
+import ParkerenOverview from "../pages/ParkerenOverview";
+import ParkerenDetails from "../pages/ParkerenDetails";
+import ParkerenHistory from "../pages/ParkerenHistory";
 
 export type RouteObject = ReactRouteObject & {
   handle: {
@@ -95,210 +88,52 @@ export const routes: RouteObject[] = [
     ],
   },
   {
-    path: paths.themeOverview("belastingzaken"),
-    handle: { label: "breadcrumb.belastingzaken" },
+    path: paths.themeOverview(themes.belastingzaken.slug),
+    handle: { label: `breadcrumb.${themes.belastingzaken.slug}` },
     children: [
       {
         index: true,
-        handle: { label: "breadcrumb.belastingzaken" },
+        handle: { label: `breadcrumb.${themes.belastingzaken.slug}` },
         element: (
           <ThemeOverviewPage
-            slug="belastingzaken"
-            productSettings={{
-              titleTranslationId: "Producten",
-              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
-              dataMapping: ["naam", "startDatum", "eindDatum"],
-            }}
+            slug={themes.belastingzaken.slug}
+            productenSettings={[
+              {
+                productTypeCodes: ["BELASTINGZAKEN"],
+                titleTranslationId: "Producten",
+                headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
+                dataMapping: ["naam", "startDatum", "eindDatum"],
+              },
+            ]}
           />
         ),
       },
     ],
   },
   {
-    path: paths.themeOverview("parkeren"),
-    handle: { label: "breadcrumb.parkeren" },
+    path: paths.themeOverview(themes.parkeren.slug),
+    handle: { label: `breadcrumb.${themes.parkeren.slug}` },
     children: [
       {
         index: true,
-        handle: { label: "breadcrumb.parkeren" },
-        element: (
-          <ThemeOverviewPage
-            slug="parkeren"
-            productSettings={{
-              titleTranslationId: "Vergunningen",
-              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
-              dataMapping: ["naam", "startDatum", "eindDatum"],
-            }}
-          />
-        ),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}` },
+        element: <ParkerenOverview />,
       },
       {
-        path: paths.themeDetails("parkeren"),
-        handle: { label: "breadcrumb.parkeren.details" },
-        element: (
-          <ThemeDetailsPage
-            productSettings={{
-              headerTranslationIds: [
-                "Naam",
-                "Startdatum",
-                "Einddatum",
-                "Status",
-                "Prijs",
-              ],
-              dataMapping: [
-                "naam",
-                "startDatum",
-                "eindDatum",
-                (product) =>
-                  capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
-                (product) => {
-                  return (
-                    <FormattedNumber
-                      value={product?.prijs ?? 0}
-                      {...currencyFormat}
-                    />
-                  );
-                },
-              ],
-            }}
-          >
-            {({ loading, data }) => {
-              const { formatDate } = useDateFormatter();
-              const product = data?.getOpenProduct as
-                | OpenProductProduct
-                | undefined;
-
-              return (
-                <>
-                  {Boolean(product?.verbruiksobject) && (
-                    <TableList
-                      loading={loading}
-                      titleTranslationId={"Voertuigen"}
-                      headers={[
-                        <FormattedMessage key="kenteken" id={`Kenteken`} />,
-                        "",
-                      ]}
-                      rows={product?.verbruiksobject?.data?.kentekens?.map(
-                        (kenteken: string) => [
-                          { children: kenteken },
-                          {
-                            children: (
-                              <Link
-                                href={`${paths.themeMutate(
-                                  "parkeren",
-                                  product?.uuid,
-                                )}?kenteken=${kenteken}`}
-                                Link={PortalLink}
-                              >
-                                <FormattedMessage id={`Aanmelden`} />
-                              </Link>
-                            ),
-                          },
-                        ],
-                      )}
-                    />
-                  )}
-                  {Boolean(product?.verbruiksobject) && (
-                    <TableList
-                      loading={loading}
-                      titleTranslationId={"Periodes"}
-                      totalAmount={
-                        product?.verbruiksobject?.data?.periodes?.length
-                      }
-                      readMoreTranslationId={"Bekijk alles"}
-                      readMoreLink={paths.themeHistory(
-                        "parkeren",
-                        product?.uuid,
-                      )}
-                      headers={[
-                        <FormattedMessage key="datum" id={`Datum`} />,
-                        <FormattedMessage key="kenteken" id={`Kenteken`} />,
-                        <FormattedMessage key="status" id={`Status`} />,
-                      ]}
-                      rows={product?.verbruiksobject?.data?.periodes?.map(
-                        //eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        (periode: any) => [
-                          {
-                            children: formatDate({
-                              date: periode?.datetimeStart,
-                              namedDays: false,
-                            }),
-                          },
-                          { children: periode?.kenteken },
-                          {
-                            children: (
-                              <StatusBadge>{periode?.status}</StatusBadge>
-                            ),
-                          },
-                        ],
-                      )}
-                    />
-                  )}
-                </>
-              );
-            }}
-          </ThemeDetailsPage>
-        ),
+        path: paths.themeDetails(themes.parkeren.slug),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
+        element: <ParkerenDetails />,
       },
       {
-        path: paths.themeHistory("parkeren"),
-        handle: { label: "breadcrumb.parkeren.details" },
-        element: (
-          <ThemeHistoryPage slug="parkeren">
-            {({ loading, data }) => {
-              const pageSize = 4;
-              const indexLimit = Math.floor(
-                ((data?.getOpenProduct as OpenProductProduct | undefined)
-                  ?.verbruiksobject?.data?.periodes?.length ?? 0) / pageSize,
-              );
-              const [index, setIndex] = useState<number>(0);
-              const { formatDate } = useDateFormatter();
-              const product = data?.getOpenProduct as
-                | OpenProductProduct
-                | undefined;
-
-              return (
-                <TableList
-                  loading={loading}
-                  titleTranslationId={null}
-                  index={index}
-                  indexLimit={indexLimit}
-                  onChange={setIndex}
-                  headers={[
-                    <FormattedMessage key="datum" id={`Datum`} />,
-                    <FormattedMessage key="kenteken" id={`Kenteken`} />,
-                    <FormattedMessage key="status" id={`Status`} />,
-                  ]}
-                  rows={product?.verbruiksobject?.data?.periodes
-                    ?.slice(index * pageSize, (index + 1) * pageSize)
-                    .map(
-                      //eslint-disable-next-line @typescript-eslint/no-explicit-any
-                      (periode: any) => [
-                        {
-                          children: formatDate({
-                            date: periode?.datetimeStart,
-                            namedDays: false,
-                          }),
-                        },
-                        { children: periode?.kenteken },
-                        {
-                          children: (
-                            <StatusBadge>{periode?.status}</StatusBadge>
-                          ),
-                        },
-                      ],
-                    )}
-                />
-              );
-            }}
-          </ThemeHistoryPage>
-        ),
+        path: paths.themeHistory(themes.parkeren.slug),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
+        element: <ParkerenHistory />,
       },
       {
-        path: paths.themeMutate("parkeren"),
-        handle: { label: "breadcrumb.parkeren.details" },
+        path: paths.themeMutate(themes.parkeren.slug),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
         element: (
-          <ThemeMutatePage slug="parkeren">
+          <ThemeMutatePage slug={themes.parkeren.slug}>
             {() => {
               const [searchParams] = useSearchParams();
               return <div>Mutate parkeren: {searchParams.get("kenteken")}</div>;
@@ -309,26 +144,31 @@ export const routes: RouteObject[] = [
     ],
   },
   {
-    path: paths.themeOverview("inkomensondersteuning"),
-    handle: { label: "breadcrumb.inkomensondersteuning" },
+    path: paths.themeOverview(themes.inkomensondersteuning.slug),
+    handle: { label: `breadcrumb.${themes.inkomensondersteuning.slug}` },
     children: [
       {
         index: true,
-        handle: { label: "breadcrumb.inkomensondersteuning" },
+        handle: { label: `breadcrumb.${themes.inkomensondersteuning.slug}` },
         element: (
           <ThemeOverviewPage
-            slug="inkomensondersteuning"
-            productSettings={{
-              titleTranslationId: "Vergunningen",
-              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
-              dataMapping: ["naam", "startDatum", "eindDatum"],
-            }}
+            slug={themes.inkomensondersteuning.slug}
+            productenSettings={[
+              {
+                productTypeCodes: ["INKOMENSONDERSTEUNING"],
+                titleTranslationId: "Vergunningen",
+                headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
+                dataMapping: ["naam", "startDatum", "eindDatum"],
+              },
+            ]}
           />
         ),
       },
       {
-        path: paths.themeDetails("inkomensondersteuning"),
-        handle: { label: "breadcrumb.inkomensondersteuning.details" },
+        path: paths.themeDetails(themes.inkomensondersteuning.slug),
+        handle: {
+          label: `breadcrumb.${themes.inkomensondersteuning.slug}.details`,
+        },
         element: <ThemeDetailsPage />,
       },
     ],

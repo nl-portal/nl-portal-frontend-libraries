@@ -36,5 +36,6 @@ export const EN_GB_MESSAGES: Messages = {
     "theme.sample.listContractnummer": "Contract number",
     "theme.sample.listViewAll": "View all sample contracts ({total})",
     "theme.sample.listPageHeader": "Sample contracts",
+    "theme.sample.infoTitle": "Sample message",
   },
 };
