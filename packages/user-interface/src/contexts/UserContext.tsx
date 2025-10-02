@@ -6,12 +6,12 @@ import {
   GetBedrijfQuery,
   GetGemachtigdeV2Query,
   GetPersoonV2Query,
+  GetUserDigitaleAdressenQuery,
   MaatschappelijkeActiviteit,
   useGetBedrijfLazyQuery,
   useGetGemachtigdeV2LazyQuery,
   useGetPersoonV2LazyQuery,
-  useUserContactQuery,
-  UseUserContactQueryResponse,
+  useGetUserDigitaleAdressenQuery,
 } from "@nl-portal/nl-portal-api";
 
 export interface UserContextInterface {
@@ -22,7 +22,7 @@ export interface UserContextInterface {
   usernameVolmacht: string;
   persoon?: BrpPersoon;
   bedrijf?: MaatschappelijkeActiviteit;
-  contact?: UseUserContactQueryResponse;
+  contact?: GetUserDigitaleAdressenQuery;
 }
 
 const UserContext = createContext<UserContextInterface>(
@@ -42,9 +42,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     useGetBedrijfLazyQuery();
   const [loadGemachtigde, { loading: gemachtigdeLoading }] =
     useGetGemachtigdeV2LazyQuery();
-  const { data: contactData, loading: contactLoading } = useUserContactQuery(
-    {},
-  );
+  const { data: contactData, loading: contactLoading } =
+    useGetUserDigitaleAdressenQuery();
 
   const isLoading =
     persoonLoading || bedrijfLoading || gemachtigdeLoading || contactLoading;
