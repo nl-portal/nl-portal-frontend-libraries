@@ -31,7 +31,6 @@ const EditContactInfoPage = () => {
       reset: mutationReset,
     },
   ] = useUserContactMutation();
-  console.log(mutateFunction);
   const telefoonnummer = contact?.getUserDigitaleAdressen?.find(
     (a) => a.type === DigitaleAdresType.Telefoonnummer,
   );

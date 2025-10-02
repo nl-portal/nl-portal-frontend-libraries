@@ -161,8 +161,6 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const contactItems = React.useMemo(() => {
     if (!momentsData) return [];
 
-    console.log("momentsData", momentsData);
-
     return momentsData.getUserKlantContacten.map((contact, index) => ({
       id: index,
       title: contact.onderwerp,
