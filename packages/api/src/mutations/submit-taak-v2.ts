@@ -1,12 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const MUTATION_SUBMIT_TAAK = gql`
-  mutation SubmitTaakV2(
-    $id: UUID!
-    $submission: JSON!
-    $version: TaakVersion!
-  ) {
-    submitTaakV2(id: $id, submission: $submission, version: $version) {
+  mutation SubmitTaakV2($id: UUID!, $submission: JSON!) {
+    submitTaakV2(id: $id, submission: $submission) {
       id
       portaalformulier {
         formulier {
@@ -18,7 +14,6 @@ export const MUTATION_SUBMIT_TAAK = gql`
       titel
       status
       verloopdatum
-      version
     }
   }
 `;

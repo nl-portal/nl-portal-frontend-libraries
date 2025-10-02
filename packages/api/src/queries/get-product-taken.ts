@@ -21,7 +21,6 @@ export const QUERY_GET_PRODUCT_TAKEN = gql`
       titel
       status
       verloopdatum
-      version
     }
   }
 `;

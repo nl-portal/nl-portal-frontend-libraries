@@ -37,7 +37,6 @@ export const QUERY_GET_TAKEN_V2 = gql`
         titel
         status
         verloopdatum
-        version
       }
       totalElements
       totalPages

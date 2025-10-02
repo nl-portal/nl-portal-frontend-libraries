@@ -21,7 +21,6 @@ export const QUERY_GET_OPEN_PRODUCT_THEMA_TAKEN = gql`
       titel
       status
       verloopdatum
-      version
     }
   }
 `;

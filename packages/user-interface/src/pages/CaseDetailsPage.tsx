@@ -4,8 +4,8 @@ import {
   useGetTakenV2Query,
   TaakV2,
   ZaakStatus,
-  useContactMomentsLazyQuery,
   OnderwerpObjectIndentificatorType,
+  useGetUserKlantContactenLazyQuery,
 } from "@nl-portal/nl-portal-api";
 import {
   LocaleContext,
@@ -49,7 +49,8 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     variables: { id },
   });
   const [getMomenten, { data: momentsData, loading: momentsLoading }] =
-    useContactMomentsLazyQuery();
+    useGetUserKlantContactenLazyQuery();
+
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
@@ -160,12 +161,12 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const contactItems = React.useMemo(() => {
     if (!momentsData) return [];
 
-    return momentsData.map((contact, index) => ({
+    return momentsData.getUserKlantContacten.map((contact, index) => ({
       id: index,
       title: contact.onderwerp,
       description: contact.inhoud && <Pre>{contact.inhoud}</Pre>,
       channel: contact.kanaal,
-      isoDate: contact.registratiedatum,
+      isoDate: contact.plaatsgevondenOp,
     }));
   }, [momentsData]);
 
@@ -180,7 +181,6 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     if (!caseData) return;
     getMomenten({
       variables: {
-        objectUrl: caseData.getZaak.url,
         identificatorType: OnderwerpObjectIndentificatorType.Zaak,
         identificatorId: caseData.getZaak.uuid,
       },

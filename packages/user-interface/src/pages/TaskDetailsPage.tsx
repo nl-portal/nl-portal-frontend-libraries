@@ -8,7 +8,6 @@ import {
   useGetFormDefinitionByObjectenApiUrlLazyQuery,
   TaakStatus,
   useGetFormDefinitionByIdLazyQuery,
-  TaakVersion,
   useGetPortaalFormulierByIdV2Query,
   GetPortaalFormulierByIdV2Document,
 } from "@nl-portal/nl-portal-api";
@@ -30,7 +29,6 @@ const TaskDetailsPage = () => {
   const [submission, setSubmission] = useState({
     data: {},
   });
-  const [taakVersion, setTaakVersion] = useState(TaakVersion.V2);
 
   const [submitTaak] = useSubmitTaakV2Mutation({
     update: (cache, { data }) => {
@@ -50,12 +48,7 @@ const TaskDetailsPage = () => {
   useGetPortaalFormulierByIdV2Query({
     variables: { id },
     onCompleted(task) {
-      if (
-        !task ||
-        !task.getTaakByIdV2 ||
-        !task.getTaakByIdV2.portaalformulier ||
-        !task.getTaakByIdV2.version
-      )
+      if (!task || !task.getTaakByIdV2 || !task.getTaakByIdV2.portaalformulier)
         return;
 
       if (task.getTaakByIdV2?.status !== TaakStatus.Open) {
@@ -63,8 +56,6 @@ const TaskDetailsPage = () => {
         setLoading(false);
         return;
       }
-
-      setTaakVersion(task.getTaakByIdV2.version);
 
       transformPrefilledDataToFormioSubmission(
         task.getTaakByIdV2.portaalformulier.data,
@@ -141,7 +132,6 @@ const TaskDetailsPage = () => {
         variables: {
           id,
           submission: formioSubmission.data,
-          version: taakVersion,
         },
       });
     }
