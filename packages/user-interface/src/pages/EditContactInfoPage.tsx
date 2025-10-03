@@ -38,13 +38,16 @@ const EditContactInfoPage = () => {
     (a) => a.type === DigitaleAdresType.Email,
   );
 
+  const initialTelefoonnummer = telefoonnummer?.waarde || "";
+  const initialEmailadres = emailadres?.waarde || "";
+
   const {
     value: phoneValue,
     handleInputChange: handlePhoneInputChange,
     handleInputBlur: handlePhoneInputBlur,
     hasError: phoneHasError,
     errorTranslationId: phoneErrorTranslationId,
-  } = useInput(telefoonnummer?.waarde || "", [
+  } = useInput(initialTelefoonnummer, [
     {
       validationFn: (value) =>
         value === "" || REGEX_PATTERNS.telefoonnummerInvalidChars.test(value),
@@ -62,7 +65,7 @@ const EditContactInfoPage = () => {
     handleInputBlur: handleEmailInputBlur,
     hasError: emailHasError,
     errorTranslationId: emailErrorTranslationId,
-  } = useInput(emailadres?.waarde || "", [
+  } = useInput(initialEmailadres, [
     {
       validationFn: (value) =>
         value === "" || REGEX_PATTERNS.emailadres.test(value),
@@ -71,15 +74,26 @@ const EditContactInfoPage = () => {
   ]);
 
   const onSubmit = () => {
-    mutateFunction(emailadres?.uuid, emailValue || "", DigitaleAdresType.Email);
-    mutateFunction(
-      telefoonnummer?.uuid,
-      phoneValue || "",
-      DigitaleAdresType.Telefoonnummer,
-    );
+    if (initialEmailadres !== emailValue)
+      mutateFunction(
+        emailadres?.uuid,
+        emailValue || "",
+        DigitaleAdresType.Email,
+      );
+    if (initialTelefoonnummer !== phoneValue)
+      mutateFunction(
+        telefoonnummer?.uuid,
+        phoneValue || "",
+        DigitaleAdresType.Telefoonnummer,
+      );
   };
 
-  const disableSubmit = emailHasError || phoneHasError || mutationLoading;
+  const disableSubmit =
+    (initialEmailadres === emailValue &&
+      initialTelefoonnummer === phoneValue) ||
+    emailHasError ||
+    phoneHasError ||
+    mutationLoading;
 
   return (
     <>
