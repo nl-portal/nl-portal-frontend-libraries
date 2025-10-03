@@ -16,6 +16,7 @@ import { stringToSlug } from "../utils/string-to-slug";
 import { ProductList } from "../components/ProductList";
 
 export interface ProductSettings {
+  productTypeSlug?: string;
   productTypeCodes: string[];
   titleTranslationId: string;
   headerTranslationIds: string[];
@@ -88,6 +89,9 @@ const ThemeOverviewPage = ({
         <ProductList
           key={productSettings.titleTranslationId}
           slug={slug}
+          productTypeSlug={productSettings.productTypeSlug}
+          productLength={5}
+          pagination={false}
           {...productSettings}
         />
       ))}

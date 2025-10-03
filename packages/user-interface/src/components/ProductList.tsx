@@ -10,20 +10,30 @@ import { RouterOutletContext } from "../interfaces/router-outlet-context";
 
 type ProductListProps = ProductSettings & {
   slug: string;
+  productLength: number;
+  pagination?: boolean;
 };
 
 export const ProductList = ({
   slug,
+  productTypeSlug,
   productTypeCodes,
   titleTranslationId,
   headerTranslationIds,
   dataMapping,
+  productLength,
+  pagination,
 }: ProductListProps) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
-  const { data, loading, error } = useGetOpenProductenQuery({
-    variables: { productTypeCodes: productTypeCodes },
+  const { data, loading, error, refetch } = useGetOpenProductenQuery({
+    variables: { productTypeCodes: productTypeCodes, pageSize: productLength },
   });
+
+  const onPageChange = (index: number) => {
+    refetch({ pageNumber: index + 1 });
+    return index;
+  };
 
   const producten = data?.getOpenProducten.content as
     | OpenProductProduct[]
@@ -36,6 +46,20 @@ export const ProductList = ({
       loading={loading}
       error={Boolean(error)}
       titleTranslationId={titleTranslationId}
+      indexLimit={
+        pagination
+          ? data?.getOpenProducten.totalPages &&
+            data.getOpenProducten.totalPages - 1
+          : undefined
+      }
+      totalAmount={
+        !pagination &&
+        data?.getOpenProducten.totalElements &&
+        data?.getOpenProducten.totalElements > productLength
+          ? data?.getOpenProducten.totalElements
+          : undefined
+      }
+      readMoreLink={paths.themeList(slug, productTypeSlug)}
       headers={headerTranslationIds.map((id) => intl.formatMessage({ id }))}
       rows={producten.map((product) =>
         dataMapping.map((map) => ({
@@ -43,6 +67,7 @@ export const ProductList = ({
           children: map instanceof Function ? map(product) : product?.[map],
         })),
       )}
+      onChange={onPageChange}
     />
   );
 };

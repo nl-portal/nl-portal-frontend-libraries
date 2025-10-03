@@ -54,6 +54,7 @@ export { default as ThemeDetailsPage } from "./pages/ThemeDetailsPage";
 export { default as ThemeHistoryPage } from "./pages/ThemeHistoryPage";
 export { default as ThemeMutatePage } from "./pages/ThemeMutatePage";
 export { default as ThemeOverviewPage } from "./pages/ThemeOverviewPage";
+export { default as ThemeListPage } from "./pages/ThemeListPage";
 
 export { default as AppContext } from "./contexts/AppContext";
 export * from "./contexts/AppContext";

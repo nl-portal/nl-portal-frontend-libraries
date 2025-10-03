@@ -3047,7 +3047,7 @@ export type GetOpenProductenQueryVariables = Exact<{
 }>;
 
 
-export type GetOpenProductenQuery = { __typename?: 'Query', getOpenProducten: { __typename?: 'ProductenPage', number: number, size: number, totalElements: number, numberOfElements: number, content: Array<{ __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }> }> } };
+export type GetOpenProductenQuery = { __typename?: 'Query', getOpenProducten: { __typename?: 'ProductenPage', number: number, size: number, totalElements: number, numberOfElements: number, totalPages: number, content: Array<{ __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }> }> } };
 
 export type GetPersoonV2QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4493,6 +4493,7 @@ export const GetOpenProductenDocument = gql`
     size
     totalElements
     numberOfElements
+    totalPages
     content {
       uuid
       url

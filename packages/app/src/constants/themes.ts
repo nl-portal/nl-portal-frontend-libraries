@@ -1,6 +1,10 @@
 export type ThemeSlug = "belastingzaken" | "parkeren" | "inkomensondersteuning";
+export type ProductTypeSlug = "vergunningen" | "bezoekersvergunningen";
 
-export type Themes = Record<ThemeSlug, { slug: ThemeSlug }>;
+export type Themes = Record<
+  ThemeSlug,
+  { slug: ThemeSlug; productTypeSlugs?: Record<string, ProductTypeSlug> }
+>;
 
 export const themes: Themes = {
   belastingzaken: {
@@ -8,6 +12,10 @@ export const themes: Themes = {
   },
   parkeren: {
     slug: "parkeren",
+    productTypeSlugs: {
+      vergunningen: "vergunningen",
+      bezoekersvergunningen: "bezoekersvergunningen",
+    },
   },
   inkomensondersteuning: {
     slug: "inkomensondersteuning",
