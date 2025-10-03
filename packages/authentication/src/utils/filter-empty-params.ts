@@ -1,6 +1,5 @@
 /**
  * Filters out undefined, null, and empty string values from a params object.
- * Safe to pass into oidc-client-ts extraQueryParams.
  */
 export function filterEmptyParams(
   params?: Record<string, string>,

@@ -31,7 +31,7 @@ export type OidcProviderProps = OidcConfig &
   SessionLengthManagementProps & {
     children: React.ReactNode;
     authenticationMethods?: AuthenticationMethods;
-    additionalParams?: Record<string, string>;
+    extraQueryParams?: Record<string, string>;
   };
 
 export interface OidcContextInterface {
@@ -55,7 +55,7 @@ export const OidcProvider = ({
   children,
   autoIdleSessionLogout,
   idleTimeoutMinutes,
-  additionalParams,
+  extraQueryParams,
 }: OidcProviderProps) => {
   const [oidcToken, setOidcToken] = useState("");
   const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
@@ -75,7 +75,7 @@ export const OidcProvider = ({
     accessTokenExpiringNotificationTime: 15,
     post_logout_redirect_uri:
       postLogoutRedirectUri || generateRedirectUri(redirectUri, false),
-    AdditionalParams: filterEmptyParams(additionalParams),
+    extraQueryParams: filterEmptyParams(extraQueryParams),
   };
 
   const onSigninCallback = (user: User | undefined) => {
