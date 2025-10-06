@@ -2943,7 +2943,7 @@ export type GetZakenQueryVariables = Exact<{
 }>;
 
 
-export type GetZakenQuery = { __typename?: 'Query', getZaken: { __typename?: 'ZaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> } };
+export type GetZakenQuery = { __typename?: 'Query', getZaken: { __typename?: 'ZaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> } };
 
 export const FormulierFieldsFragmentDoc = gql`
     fragment FormulierFields on TaakFormulierV2 {
@@ -4858,6 +4858,7 @@ export const GetZakenDocument = gql`
       identificatie
       zaaktype {
         identificatie
+        omschrijving
       }
       startdatum
       status {

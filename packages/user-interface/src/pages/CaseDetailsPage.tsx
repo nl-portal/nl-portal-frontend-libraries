@@ -207,9 +207,12 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
           loading={loading}
           title={
             !loading &&
-            intl.formatMessage({
-              id: `case.${caseData?.getZaak.zaaktype.identificatie}.title`,
-            })
+            intl.formatMessage(
+              {
+                id: `case.${caseData?.getZaak.zaaktype.identificatie}.title`,
+              },
+              { id: `case.${caseData?.getZaak.zaaktype.omschrijving}.title` },
+            )
           }
         />
       </div>

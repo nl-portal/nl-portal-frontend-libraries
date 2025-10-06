@@ -13,9 +13,12 @@ interface Props {
 const Case = ({ cs, listView }: Props) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
-  const title = intl.formatMessage({
-    id: `case.${cs.zaaktype.identificatie}.title`,
-  });
+  const title = intl.formatMessage(
+    {
+      id: `case.${cs.zaaktype.identificatie}.title`,
+    },
+    { id: `case.${cs.zaaktype.omschrijving}.title` },
+  );
   const appearance = listView
     ? "list"
     : cs.status?.statustype.isEindstatus
