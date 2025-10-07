@@ -69,19 +69,23 @@ const StatusHistory: FC<StatusHistoryProps> = ({
         <Status
           collapsible
           expandedSteps={[
-            `step-${statuses.findIndex((s) => s.omschrijving === status?.statustype?.omschrijving) + 1}`,
+            `step-${statuses.findIndex((s) => s.omschrijvingGeneriek === status?.statustype?.omschrijvingGeneriek) + 1}`,
           ]}
-          steps={statuses?.map(({ omschrijving }, index) => {
+          steps={statuses?.map(({ omschrijvingGeneriek }, index) => {
             const currentStatus = [status, statusHistory]
               .flat()
-              .find((s) => s?.statustype.omschrijving === omschrijving);
+              .find(
+                (s) =>
+                  s?.statustype.omschrijvingGeneriek === omschrijvingGeneriek,
+              );
 
             return {
               id: `step-${index + 1}`,
               title: intl.formatMessage({
-                id: `case.${caseId}.status.${stringToId(`${omschrijving}`)}`,
+                id: `case.${caseId}.status.${stringToId(`${omschrijvingGeneriek}`)}`,
+                defaultMessage: omschrijvingGeneriek || "",
               }),
-              status: getStepStatus(omschrijving),
+              status: getStepStatus(omschrijvingGeneriek),
               marker: index + 1,
               steps: currentStatus?.substatussen?.map(
                 (sub: ZaakSubStatus, subIndex: number) => ({
@@ -91,9 +95,9 @@ const StatusHistory: FC<StatusHistoryProps> = ({
                     date: sub.tijdstip,
                   }),
                   status:
-                    getStepStatus(omschrijving) === "checked"
+                    getStepStatus(omschrijvingGeneriek) === "checked"
                       ? "checked"
-                      : getStepStatus(omschrijving) === "current" &&
+                      : getStepStatus(omschrijvingGeneriek) === "current" &&
                           subIndex === currentStatus?.substatussen.length - 1
                         ? "current"
                         : "checked",
