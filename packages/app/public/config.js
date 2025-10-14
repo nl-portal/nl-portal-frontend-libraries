@@ -8,7 +8,6 @@ window.SHOW_INHABITANT_AMOUNT = "true";
 window.MESSAGE_COUNT_ENABLE = "true";
 window.MESSAGE_COUNT_POLLING_INTERVAL = 10000;
 window.CASES_PARTIAL_SEARCH = "true";
-window.OPEN_KLANT_VERSION = "v2";
 window.OPEN_PRODUCTEN = "true";
 window.ADDRESS_RESEARCH_URL = "https://www.google.nl";
 window.REPORT_CHANGE_OF_ADDRESS_URL = "https://www.google.nl";
