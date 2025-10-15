@@ -23,6 +23,7 @@ export const QUERY_GET_OPEN_PRODUCTEN = gql`
       size
       totalElements
       numberOfElements
+      totalPages
       content {
         uuid
         url

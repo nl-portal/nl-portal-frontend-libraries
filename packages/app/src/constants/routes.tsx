@@ -12,6 +12,9 @@ import {
   ThemeOverviewPage,
   ThemeDetailsPage,
   ThemeMutatePage,
+  ThemeListPage,
+  capitalizeFirstLetter,
+  currencyFormat,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
@@ -25,6 +28,7 @@ import { themes } from "./themes";
 import ParkerenOverview from "../pages/ParkerenOverview";
 import ParkerenDetails from "../pages/ParkerenDetails";
 import ParkerenHistory from "../pages/ParkerenHistory";
+import { FormattedNumber } from "react-intl";
 
 export type RouteObject = ReactRouteObject & {
   handle: {
@@ -99,7 +103,9 @@ export const routes: RouteObject[] = [
             slug={themes.belastingzaken.slug}
             productenSettings={[
               {
-                productTypeCodes: ["BELASTINGZAKEN"],
+                productTypeCodes: [
+                  themes.belastingzaken.productTypeCodes.belastingzaken,
+                ],
                 titleTranslationId: "Producten",
                 headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
                 dataMapping: ["naam", "startDatum", "eindDatum"],
@@ -118,6 +124,73 @@ export const routes: RouteObject[] = [
         index: true,
         handle: { label: `breadcrumb.${themes.parkeren.slug}` },
         element: <ParkerenOverview />,
+      },
+      {
+        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypeSlugs.parkeervergunningen)}`,
+        handle: { label: `breadcrumb.${themes.parkeren.slug}` },
+        element: (
+          <ThemeListPage
+            slug={themes.parkeren.slug}
+            productSettings={{
+              productTypeCodes: [
+                themes.parkeren.productTypeCodes.parkeervergunningen,
+              ],
+              titleTranslationId: "Vergunningen",
+              headerTranslationIds: [
+                "Naam",
+                "Startdatum",
+                "Einddatum",
+                "Status",
+                "Prijs",
+              ],
+              dataMapping: [
+                "naam",
+                "startDatum",
+                "eindDatum",
+                (product) =>
+                  capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
+                (product) => {
+                  return (
+                    <FormattedNumber
+                      value={product?.prijs ?? 0}
+                      {...currencyFormat}
+                    />
+                  );
+                },
+              ],
+            }}
+          />
+        ),
+      },
+      {
+        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypeSlugs.bezoekersvergunningen)}`,
+        handle: { label: `breadcrumb.${themes.parkeren.slug}` },
+        element: (
+          <ThemeListPage
+            slug={themes.parkeren.slug}
+            productSettings={{
+              productTypeCodes: [
+                themes.parkeren.productTypeCodes.bezoekersvergunningen,
+              ],
+              titleTranslationId: "Bezoekersvergunningen",
+              headerTranslationIds: ["Naam", "Startdatum", "Status", "Prijs"],
+              dataMapping: [
+                "naam",
+                "startDatum",
+                (product) =>
+                  capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
+                (product) => {
+                  return (
+                    <FormattedNumber
+                      value={product?.prijs ?? 0}
+                      {...currencyFormat}
+                    />
+                  );
+                },
+              ],
+            }}
+          />
+        ),
       },
       {
         path: paths.themeDetails(themes.parkeren.slug),
