@@ -2931,7 +2931,7 @@ export type GetZaakQueryVariables = Exact<{
 }>;
 
 
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean }, substatussen: Array<{ __typename?: 'ZaakSubStatus', uuid: any, omschrijving: string, tijdstip: string }> } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean }, substatussen: Array<{ __typename?: 'ZaakSubStatus', uuid: any, omschrijving: string, tijdstip: string }> }>, statussen: Array<{ __typename?: 'StatusType', omschrijving: string }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string }, resultaat?: { __typename?: 'ZaakResultaat', toelichting?: string | null, resultaattype: { __typename?: 'ResultaatType', omschrijvingGeneriek?: string | null } } | null } };
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, url: string, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijvingGeneriek?: string | null }, status?: { __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijvingGeneriek?: string | null, isEindstatus: boolean }, substatussen: Array<{ __typename?: 'ZaakSubStatus', uuid: any, omschrijving: string, tijdstip: string }> } | null, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijvingGeneriek?: string | null, isEindstatus: boolean }, substatussen: Array<{ __typename?: 'ZaakSubStatus', uuid: any, omschrijving: string, tijdstip: string }> }>, statussen: Array<{ __typename?: 'StatusType', omschrijvingGeneriek?: string | null, omschrijving: string }>, documenten: Array<{ __typename?: 'Document', documentapi: string, bestandsnaam?: string | null, bestandsomvang?: number | null, creatiedatum?: string | null, formaat?: string | null, identificatie?: string | null, titel?: string | null, uuid: any }>, zaakdetails: { __typename?: 'ZaakDetails', data: Array<any>, zaak: string }, resultaat?: { __typename?: 'ZaakResultaat', toelichting?: string | null, resultaattype: { __typename?: 'ResultaatType', omschrijvingGeneriek?: string | null } } | null } };
 
 export type GetZakenQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -2943,7 +2943,7 @@ export type GetZakenQueryVariables = Exact<{
 }>;
 
 
-export type GetZakenQuery = { __typename?: 'Query', getZaken: { __typename?: 'ZaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> } };
+export type GetZakenQuery = { __typename?: 'Query', getZaken: { __typename?: 'ZaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijvingGeneriek?: string | null }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean, omschrijvingGeneriek?: string | null } } | null }> } };
 
 export const FormulierFieldsFragmentDoc = gql`
     fragment FormulierFields on TaakFormulierV2 {
@@ -4757,13 +4757,13 @@ export const GetZaakDocument = gql`
     identificatie
     zaaktype {
       identificatie
-      omschrijving
+      omschrijvingGeneriek
     }
     startdatum
     status {
       datumStatusGezet
       statustype {
-        omschrijving
+        omschrijvingGeneriek
         isEindstatus
       }
       substatussen {
@@ -4775,7 +4775,7 @@ export const GetZaakDocument = gql`
     statusGeschiedenis {
       datumStatusGezet
       statustype {
-        omschrijving
+        omschrijvingGeneriek
         isEindstatus
       }
       substatussen {
@@ -4785,6 +4785,7 @@ export const GetZaakDocument = gql`
       }
     }
     statussen {
+      omschrijvingGeneriek
       omschrijving
     }
     documenten {
@@ -4859,11 +4860,13 @@ export const GetZakenDocument = gql`
       identificatie
       zaaktype {
         identificatie
+        omschrijvingGeneriek
       }
       startdatum
       status {
         statustype {
           isEindstatus
+          omschrijvingGeneriek
         }
       }
     }

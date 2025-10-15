@@ -187,12 +187,14 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     });
   }, [caseData]);
 
-  if (!caseError) {
-    <div>
-      <Paragraph>
-        <FormattedMessage id="caseDetails.fetchError" />
-      </Paragraph>
-    </div>;
+  if (caseError) {
+    return (
+      <div>
+        <Paragraph>
+          <FormattedMessage id="caseDetails.fetchError" />
+        </Paragraph>
+      </div>
+    );
   }
 
   const zaakDetails = caseData?.getZaak.zaakdetails.data as
@@ -209,6 +211,8 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
             !loading &&
             intl.formatMessage({
               id: `case.${caseData?.getZaak.zaaktype.identificatie}.title`,
+              defaultMessage:
+                caseData?.getZaak.zaaktype.omschrijvingGeneriek || "",
             })
           }
         />

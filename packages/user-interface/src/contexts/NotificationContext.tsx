@@ -2,6 +2,7 @@ import { createContext, ReactNode, useLayoutEffect, useReducer } from "react";
 import { NotificationProps } from "../components/Notification";
 import { useLocation } from "react-router";
 import { isEqual } from "lodash-es";
+import { FormattedMessage } from "react-intl";
 
 type State = Record<string, NotificationProps>;
 export type Action =
@@ -52,6 +53,20 @@ export const NotificationProvider = ({
 
   useLayoutEffect(() => {
     dispatch({ type: "CLEAR_ROUTE" });
+    // Check if there is an notification passed via state
+    const notificationState = location.state?.notification;
+    if (notificationState) {
+      const { id, titleMessage, textMessage, variant } = notificationState;
+      dispatch({
+        id,
+        type: "CREATE",
+        notification: {
+          variant,
+          title: <FormattedMessage {...titleMessage} />,
+          text: <FormattedMessage {...textMessage} />,
+        },
+      });
+    }
   }, [location.pathname]);
 
   return (
