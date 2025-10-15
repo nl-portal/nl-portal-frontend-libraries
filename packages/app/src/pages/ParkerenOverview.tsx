@@ -28,8 +28,8 @@ const ParkerenOverview = () => {
       slug={themes.parkeren.slug}
       productenSettings={[
         {
-          productTypeSlug: "parkeervergunningen",
-          productTypeCodes: ["PARKEERVERGUNNING"],
+          productTypeSlug: themes.parkeren.productTypeSlugs.vergunningen,
+          productTypeCodes: [themes.parkeren.productTypeCodes.vergunningen],
           titleTranslationId: "Vergunningen",
           headerTranslationIds: [
             "Naam",
@@ -55,8 +55,11 @@ const ParkerenOverview = () => {
           ],
         },
         {
-          productTypeSlug: "bezoekersvergunningen",
-          productTypeCodes: ["BEZOEKERSVERGUNNING"],
+          productTypeSlug:
+            themes.parkeren.productTypeSlugs.bezoekersvergunningen,
+          productTypeCodes: [
+            themes.parkeren.productTypeCodes.bezoekersvergunningen,
+          ],
           titleTranslationId: "Bezoekersvergunningen",
           headerTranslationIds: ["Naam", "Startdatum", "Status", "Prijs"],
           dataMapping: [

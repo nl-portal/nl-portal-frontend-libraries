@@ -103,7 +103,9 @@ export const routes: RouteObject[] = [
             slug={themes.belastingzaken.slug}
             productenSettings={[
               {
-                productTypeCodes: ["BELASTINGZAKEN"],
+                productTypeCodes: [
+                  themes.belastingzaken.productTypeCodes.belastingzaken,
+                ],
                 titleTranslationId: "Producten",
                 headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
                 dataMapping: ["naam", "startDatum", "eindDatum"],
@@ -124,13 +126,15 @@ export const routes: RouteObject[] = [
         element: <ParkerenOverview />,
       },
       {
-        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypeSlugs?.parkeervergunningen)}`,
+        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypeSlugs.parkeervergunningen)}`,
         handle: { label: `breadcrumb.${themes.parkeren.slug}` },
         element: (
           <ThemeListPage
             slug={themes.parkeren.slug}
             productSettings={{
-              productTypeCodes: ["PARKEERVERGUNNING"],
+              productTypeCodes: [
+                themes.parkeren.productTypeCodes.parkeervergunningen,
+              ],
               titleTranslationId: "Vergunningen",
               headerTranslationIds: [
                 "Naam",
@@ -159,13 +163,15 @@ export const routes: RouteObject[] = [
         ),
       },
       {
-        path: `${paths.themeList(themes.parkeren.slug, "bezoekersvergunningen")}`,
+        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypeSlugs.bezoekersvergunningen)}`,
         handle: { label: `breadcrumb.${themes.parkeren.slug}` },
         element: (
           <ThemeListPage
             slug={themes.parkeren.slug}
             productSettings={{
-              productTypeCodes: ["BEZOEKERSVERGUNNING"],
+              productTypeCodes: [
+                themes.parkeren.productTypeCodes.bezoekersvergunningen,
+              ],
               titleTranslationId: "Bezoekersvergunningen",
               headerTranslationIds: ["Naam", "Startdatum", "Status", "Prijs"],
               dataMapping: [
