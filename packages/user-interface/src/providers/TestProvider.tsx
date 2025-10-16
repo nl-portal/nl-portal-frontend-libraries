@@ -32,6 +32,8 @@ export const testPaths: Paths = {
   messages: "/berichten",
   message: (id = ":id") => `/berichten/bericht/${id}`,
   themeOverview: (type = ":type") => `/${type}`,
+  themeList: (type = ":type", productTypeSlug = ":productTypeSlug") =>
+    `/${type}/${productTypeSlug}`,
   themeDetails: (type = ":type", id = ":id") => `/${type}/${id}`,
   themeHistory: (type = ":type", id = ":id") => `/${type}/${id}/geschiedenis`,
   themeMutate: (type = ":type", id = ":id") => `/${type}/${id}/wijzig`,
