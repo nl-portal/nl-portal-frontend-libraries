@@ -23,13 +23,13 @@ export const QUERY_GET_ZAKEN = gql`
         identificatie
         zaaktype {
           identificatie
-          omschrijvingGeneriek
+          omschrijving
         }
         startdatum
         status {
           statustype {
             isEindstatus
-            omschrijvingGeneriek
+            omschrijving
           }
         }
       }

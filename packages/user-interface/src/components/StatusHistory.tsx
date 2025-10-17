@@ -69,23 +69,20 @@ const StatusHistory: FC<StatusHistoryProps> = ({
         <Status
           collapsible
           expandedSteps={[
-            `step-${statuses.findIndex((s) => s.omschrijvingGeneriek === status?.statustype?.omschrijvingGeneriek) + 1}`,
+            `step-${statuses.findIndex((s) => s.omschrijving === status?.statustype?.omschrijving) + 1}`,
           ]}
-          steps={statuses?.map(({ omschrijvingGeneriek }, index) => {
+          steps={statuses?.map(({ omschrijving }, index) => {
             const currentStatus = [status, statusHistory]
               .flat()
-              .find(
-                (s) =>
-                  s?.statustype.omschrijvingGeneriek === omschrijvingGeneriek,
-              );
+              .find((s) => s?.statustype.omschrijving === omschrijving);
 
             return {
               id: `step-${index + 1}`,
               title: intl.formatMessage({
-                id: `case.${caseId}.status.${stringToId(`${omschrijvingGeneriek}`)}`,
-                defaultMessage: omschrijvingGeneriek || "",
+                id: `case.${caseId}.status.${stringToId(`${omschrijving}`)}`,
+                defaultMessage: omschrijving || "",
               }),
-              status: getStepStatus(omschrijvingGeneriek),
+              status: getStepStatus(omschrijving),
               marker: index + 1,
               steps: currentStatus?.substatussen?.map(
                 (sub: ZaakSubStatus, subIndex: number) => ({
@@ -95,9 +92,9 @@ const StatusHistory: FC<StatusHistoryProps> = ({
                     date: sub.tijdstip,
                   }),
                   status:
-                    getStepStatus(omschrijvingGeneriek) === "checked"
+                    getStepStatus(omschrijving) === "checked"
                       ? "checked"
-                      : getStepStatus(omschrijvingGeneriek) === "current" &&
+                      : getStepStatus(omschrijving) === "current" &&
                           subIndex === currentStatus?.substatussen.length - 1
                         ? "current"
                         : "checked",

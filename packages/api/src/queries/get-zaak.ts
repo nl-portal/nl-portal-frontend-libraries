@@ -9,13 +9,13 @@ export const QUERY_GET_ZAAK = gql`
       identificatie
       zaaktype {
         identificatie
-        omschrijvingGeneriek
+        omschrijving
       }
       startdatum
       status {
         datumStatusGezet
         statustype {
-          omschrijvingGeneriek
+          omschrijving
           isEindstatus
         }
         substatussen {
@@ -27,7 +27,7 @@ export const QUERY_GET_ZAAK = gql`
       statusGeschiedenis {
         datumStatusGezet
         statustype {
-          omschrijvingGeneriek
+          omschrijving
           isEindstatus
         }
         substatussen {
@@ -37,7 +37,6 @@ export const QUERY_GET_ZAAK = gql`
         }
       }
       statussen {
-        omschrijvingGeneriek
         omschrijving
       }
       documenten {
