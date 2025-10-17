@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const MUTATION_DO_DIRECT_PAYMENT = gql`
   mutation DoDirectPayment(
-    $amount: Float!
+    $amount: PositiveFloat!
     $identifier: String!
     $langId: String
     $orderId: String!
