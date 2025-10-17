@@ -2,6 +2,6 @@
   "packages": [
     "packages/*"
   ],
-  "version": "3.0.0-next-major-202510151450-a7c915d6-SNAPSHOT",
+  "version": "3.0.0-next-major-202510171149-e3853928-SNAPSHOT",
   "npmClient": "pnpm"
 }
