@@ -156,7 +156,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     }
 
     return array;
-  }, [caseData, currentLocale]);
+  }, [caseData?.getZaak, intl, formatDate]);
 
   const contactItems = React.useMemo(() => {
     if (!momentsData) return [];
@@ -211,8 +211,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
             !loading &&
             intl.formatMessage({
               id: `case.${caseData?.getZaak.zaaktype.identificatie}.title`,
-              defaultMessage:
-                caseData?.getZaak.zaaktype.omschrijvingGeneriek || "",
+              defaultMessage: caseData?.getZaak.zaaktype.omschrijving || "",
             })
           }
         />

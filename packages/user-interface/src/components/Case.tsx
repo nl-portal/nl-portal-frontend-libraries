@@ -15,7 +15,7 @@ const Case = ({ cs, listView }: Props) => {
   const { paths } = useOutletContext<RouterOutletContext>();
   const title = intl.formatMessage({
     id: `case.${cs.zaaktype.identificatie}.title`,
-    defaultMessage: cs.zaaktype.omschrijvingGeneriek || "",
+    defaultMessage: cs.zaaktype.omschrijving || "",
   });
   const appearance = listView
     ? "list"
