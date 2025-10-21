@@ -94,7 +94,7 @@
     "wait-on": "^8.0.4"
   },
   "peerDependencies": {
-    "@apollo/client": "3.13.8",
+    "@apollo/client": "3.14.0",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
