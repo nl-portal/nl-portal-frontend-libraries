@@ -1,5 +1,4 @@
 import { FormattedMessage } from "react-intl";
-import { useUserContactMutation } from "@nl-portal/nl-portal-api";
 import PageHeader from "../components/PageHeader";
 import { REGEX_PATTERNS } from "../constants/regex-patterns";
 import { BackLink } from "../components/BackLink";
@@ -14,12 +13,15 @@ import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-messag
 import styles from "./EditContactInfoPage.module.scss";
 import UserContext from "../contexts/UserContext";
 import { useContext } from "react";
+import {
+  DigitaleAdresType,
+  useUserContactMutation,
+} from "@nl-portal/nl-portal-api";
 
 const EditContactInfoPage = () => {
   const { contact } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
-
   const [
     mutateFunction,
     {
@@ -29,6 +31,15 @@ const EditContactInfoPage = () => {
       reset: mutationReset,
     },
   ] = useUserContactMutation();
+  const telefoonnummer = contact?.getUserDigitaleAdressen?.find(
+    (a) => a.type === DigitaleAdresType.Telefoonnummer,
+  );
+  const emailadres = contact?.getUserDigitaleAdressen?.find(
+    (a) => a.type === DigitaleAdresType.Email,
+  );
+
+  const initialTelefoonnummer = telefoonnummer?.waarde || "";
+  const initialEmailadres = emailadres?.waarde || "";
 
   const {
     value: phoneValue,
@@ -36,7 +47,7 @@ const EditContactInfoPage = () => {
     handleInputBlur: handlePhoneInputBlur,
     hasError: phoneHasError,
     errorTranslationId: phoneErrorTranslationId,
-  } = useInput(contact?.telefoonnummer || "", [
+  } = useInput(initialTelefoonnummer, [
     {
       validationFn: (value) =>
         value === "" || REGEX_PATTERNS.telefoonnummerInvalidChars.test(value),
@@ -54,7 +65,7 @@ const EditContactInfoPage = () => {
     handleInputBlur: handleEmailInputBlur,
     hasError: emailHasError,
     errorTranslationId: emailErrorTranslationId,
-  } = useInput(contact?.emailadres || "", [
+  } = useInput(initialEmailadres, [
     {
       validationFn: (value) =>
         value === "" || REGEX_PATTERNS.emailadres.test(value),
@@ -63,15 +74,26 @@ const EditContactInfoPage = () => {
   ]);
 
   const onSubmit = () => {
-    mutateFunction({
-      emailadresId: contact?.emailadresId,
-      emailadres: emailValue || "",
-      telefoonnummerId: contact?.telefoonnummerId,
-      telefoonnummer: phoneValue || "",
-    });
+    if (initialEmailadres !== emailValue)
+      mutateFunction(
+        emailadres?.uuid,
+        emailValue || "",
+        DigitaleAdresType.Email,
+      );
+    if (initialTelefoonnummer !== phoneValue)
+      mutateFunction(
+        telefoonnummer?.uuid,
+        phoneValue || "",
+        DigitaleAdresType.Telefoonnummer,
+      );
   };
 
-  const disableSubmit = emailHasError || phoneHasError || mutationLoading;
+  const disableSubmit =
+    (initialEmailadres === emailValue &&
+      initialTelefoonnummer === phoneValue) ||
+    emailHasError ||
+    phoneHasError ||
+    mutationLoading;
 
   return (
     <>

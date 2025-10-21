@@ -17,7 +17,7 @@ export interface CellObject {
   head?: boolean;
 }
 
-export type CellSingle = React.ReactNode | string | undefined;
+export type CellSingle = React.ReactNode;
 
 export type Cell = CellSingle | CellObject;
 

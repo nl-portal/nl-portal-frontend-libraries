@@ -50,7 +50,6 @@ export const QUERY_GET_PRODUCTEN = gql`
         titel
         status
         verloopdatum
-        version
         ogonebetaling {
           bedrag
           betaalkenmerk

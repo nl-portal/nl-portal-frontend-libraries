@@ -10,6 +10,7 @@ interface Props {
   loading?: boolean;
   error?: boolean;
   errorTranslationId?: string;
+  showEmpty?: boolean;
   emptyTranslationId?: string;
   titleTranslationId?: string | null;
   items: {
@@ -24,6 +25,7 @@ const DescriptionList = ({
   loading,
   error,
   errorTranslationId = "descriptionList.fetchError",
+  showEmpty = true,
   emptyTranslationId = "descriptionList.empty",
   titleTranslationId = "descriptionList.title",
   items,
@@ -57,7 +59,8 @@ const DescriptionList = ({
       </section>
     );
 
-  if (!items || items.length === 0)
+  if (!items || items.length === 0) {
+    if (!showEmpty) return null;
     return (
       <section>
         <SectionHeader title={title} />
@@ -67,6 +70,7 @@ const DescriptionList = ({
         )}
       </section>
     );
+  }
 
   return (
     <section>

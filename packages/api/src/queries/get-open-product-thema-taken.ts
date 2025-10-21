@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_GET_OPEN_PRODUCT_THEMA_TAKEN = gql`
-  query getOpenProductThemaTaken($id: UUID!) {
-    getOpenProductThemaTaken(id: $id) {
+  query getOpenProductThemaTaken($id: UUID!, $pageSize: Int) {
+    getOpenProductThemaTaken(id: $id, pageSize: $pageSize) {
       id
       soort
       koppeling {
@@ -21,7 +21,6 @@ export const QUERY_GET_OPEN_PRODUCT_THEMA_TAKEN = gql`
       titel
       status
       verloopdatum
-      version
     }
   }
 `;

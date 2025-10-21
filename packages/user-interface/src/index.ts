@@ -28,6 +28,8 @@ export { default as SectionHeader } from "./components/SectionHeader";
 export { default as Skeleton } from "./components/Skeleton";
 export * from "./components/Skeleton";
 
+export * from "./constants/currency-format";
+
 export * from "./interfaces/navigation-item";
 export * from "./interfaces/paths";
 
@@ -49,8 +51,10 @@ export { default as OverviewPage } from "./pages/OverviewPage";
 export { default as TasksPage } from "./pages/TasksPage";
 export { default as TaskDetailsPage } from "./pages/TaskDetailsPage";
 export { default as ThemeDetailsPage } from "./pages/ThemeDetailsPage";
+export { default as ThemeHistoryPage } from "./pages/ThemeHistoryPage";
+export { default as ThemeMutatePage } from "./pages/ThemeMutatePage";
 export { default as ThemeOverviewPage } from "./pages/ThemeOverviewPage";
-export { default as ThemeSubPage } from "./pages/ThemeSubPage";
+export { default as ThemeListPage } from "./pages/ThemeListPage";
 
 export { default as AppContext } from "./contexts/AppContext";
 export * from "./contexts/AppContext";
@@ -60,3 +64,5 @@ export { default as RouterContext } from "./contexts/RouterContext";
 export * from "./contexts/RouterContext";
 export { default as NotificationContext } from "./contexts/NotificationContext";
 export * from "./contexts/NotificationContext";
+
+export * from "./utils/person-data";

@@ -1,4 +1,4 @@
-import { formatUrlTrailingSlash } from "./format-url-trailing-slash";
+import { formatUrlTrailingSlash } from "../../utils/format-url-trailing-slash.ts";
 
 describe("formatUrlTrailingSlash", () => {
   it("should remove trailing slash when slash is present but not wanted", () => {
