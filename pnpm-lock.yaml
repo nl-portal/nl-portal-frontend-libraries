@@ -393,9 +393,15 @@ importers:
       '@gemeente-denhaag/process-steps':
         specifier: 4.2.0
         version: 4.2.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@gemeente-denhaag/radio-button':
+        specifier: ^3.0.0
+        version: 3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/responsive-content':
         specifier: 2.0.0
         version: 2.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@gemeente-denhaag/select':
+        specifier: ^3.0.0
+        version: 3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/side-navigation':
         specifier: 4.0.1
         version: 4.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -411,6 +417,9 @@ importers:
       '@gemeente-denhaag/text-input':
         specifier: 3.0.0
         version: 3.0.0(@babel/runtime@7.28.2)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@gemeente-denhaag/textarea':
+        specifier: ^3.0.0
+        version: 3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/typography':
         specifier: 3.0.0
         version: 3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1438,8 +1447,20 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
+  '@gemeente-denhaag/radio-button@3.0.0':
+    resolution: {integrity: sha512-19d9suXdOXZYnVOBVnenG7DbjPr4bXlCFexPJVVpyzkPbblynJeidyuOX7tpOn17cv8flb24eFXl7NpOPWTMZg==}
+    peerDependencies:
+      react: 18 || 19
+      react-dom: 18 || 19
+
   '@gemeente-denhaag/responsive-content@2.0.0':
     resolution: {integrity: sha512-+Jy8srSb4sD4dKvWtjzQX+1sx+zq9Y/2TNMb1AhIpesYBI0XxSHBgeMx7vTzgEWVF7OAGQAIBb8KNS0jYucWdg==}
+    peerDependencies:
+      react: 18 || 19
+      react-dom: 18 || 19
+
+  '@gemeente-denhaag/select@3.0.0':
+    resolution: {integrity: sha512-dIv4rJiG5zpabpbClBepJy5UGaEWgTuRLRPKKBD9+DKp2TftbIjMu/RTVu4ZkVvdqr0AEBpHuh4TRFwheAYCHQ==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1488,6 +1509,12 @@ packages:
 
   '@gemeente-denhaag/text-input@3.0.0':
     resolution: {integrity: sha512-EFv1PZ/LMO3qmu6CZMDTSizbvaz1pyec7MRU4sBQrH7S0N6KLokgrktj36qZaAb7WyS2SgC5Pl3TCrGI0c7TZQ==}
+    peerDependencies:
+      react: 18 || 19
+      react-dom: 18 || 19
+
+  '@gemeente-denhaag/textarea@3.0.0':
+    resolution: {integrity: sha512-4gOBZZI30lkDD84bonIdiXvJOmjV+d319X9eR0svX7S+FCSc6RabZTTd5IghVUMaQdNMk/QwWj+3+08Nw6DVwA==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -7732,11 +7759,36 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
+  '@gemeente-denhaag/radio-button@3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@utrecht/component-library-react': 10.2.2(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@utrecht/radio-button-css': 1.6.1
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-vega
+      - vega
+
   '@gemeente-denhaag/responsive-content@2.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       clsx: 2.1.1
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
+
+  '@gemeente-denhaag/select@3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@utrecht/component-library-react': 10.2.2(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@utrecht/select-css': 1.8.1
+      clsx: 2.1.1
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-vega
+      - vega
 
   '@gemeente-denhaag/sheet@4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
@@ -7802,6 +7854,18 @@ snapshots:
       react-dom: 19.1.1(react@19.1.1)
     transitivePeerDependencies:
       - '@babel/runtime'
+
+  '@gemeente-denhaag/textarea@3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@utrecht/component-library-react': 10.2.2(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@utrecht/textarea-css': 2.3.2
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-vega
+      - vega
 
   '@gemeente-denhaag/typography@3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:

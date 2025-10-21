@@ -9,11 +9,20 @@ import { ResponsiveContent } from "@gemeente-denhaag/responsive-content";
 import Header from "./Header";
 import Menu from "./Menu";
 import { Footer, FooterProps } from "@gemeente-denhaag/footer";
-import FormIoUploader from "./FormIoUploader";
 import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router";
 import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
+import FormIoButtonWrapper from "./formio/FormIoButton";
+import FormIoMultipleCheckboxWrapper from "./formio/FormIoMultipleCheckbox";
+import FormIoNumberInputWrapper from "./formio/FormIoNumberInput";
+import FormIoPasswordInputWrapper from "./formio/FormIoPasswordInput";
+import FormIoRadioWrapper from "./formio/FormIoRadioButton";
+import FormIoSelectWrapper from "./formio/FormIoSelect";
+import FormIoSingleCheckboxWrapper from "./formio/FormIoSingleCheckbox";
+import FormIoTextAreaWrapper from "./formio/FormIoTextArea";
+import FormIoTextInputWrapper from "./formio/FormIoTextInput";
+import FormIoUploader from "./formio/FormIoUploader";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import "@utrecht/document-css";
 
@@ -36,6 +45,15 @@ const Layout = ({
 
   useEffect(() => {
     FormIoUploader.register();
+    FormIoTextInputWrapper.register();
+    FormIoNumberInputWrapper.register();
+    FormIoPasswordInputWrapper.register();
+    FormIoSingleCheckboxWrapper.register();
+    FormIoMultipleCheckboxWrapper.register();
+    FormIoTextAreaWrapper.register();
+    FormIoButtonWrapper.register();
+    FormIoRadioWrapper.register();
+    FormIoSelectWrapper.register();
   }, []);
 
   useEffect(() => {

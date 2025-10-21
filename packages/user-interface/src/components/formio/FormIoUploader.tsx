@@ -1,6 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { Components } from "@formio/react";
+import { formIoUploaderEditForm } from "../FormIoUploaderEditForm";
+import { Container } from "react-dom/client";
+import BaseFormIoComponent from "./BaseFormIoComponent";
+import { FormIoRefProp } from "./useFormIoState";
+import { FormField } from "@gemeente-denhaag/form-field";
+import { FormLabel } from "@gemeente-denhaag/form-label";
+import { useEffect, useId, useState } from "react";
 import { get } from "lodash-es";
-import FormIoUploader from "./FormIoUploader";
+import { TextInput } from "@gemeente-denhaag/text-input";
+import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 
 export interface UploadedFile {
   url: string;
@@ -8,28 +16,26 @@ export interface UploadedFile {
   size: number;
 }
 
-interface FileUploadProps {
-  id: string;
+interface FileUploadProps extends BasicFormIoComponentSchema {
   context: object;
-  disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
-  attributes?: Record<string, string>;
   informatieobjecttype?: string;
 }
 
 const FileUpload = ({
-  id,
   context,
   disabled,
   multiple,
   onChange,
   attributes,
   informatieobjecttype,
+  label,
 }: FileUploadProps) => {
   const [isLoading, setLoading] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>([]);
   const [dataContext, setDataContext] = useState(context);
+  const id = useId();
 
   const uploadFile = (file: File) => {
     const restUri = sessionStorage.getItem("REST_URI");
@@ -100,8 +106,9 @@ const FileUpload = ({
   }
 
   return (
-    <div>
-      <input
+    <FormField>
+      <FormLabel htmlFor={id}>{label}</FormLabel>
+      <TextInput
         id={id}
         type="file"
         name="file"
@@ -119,8 +126,68 @@ const FileUpload = ({
           ))}
       </>
       {!isLoading || <p>Loading</p>}
-    </div>
+    </FormField>
   );
 };
 
-export default FileUpload;
+export default class FormIoUploader extends BaseFormIoComponent {
+  static globalOidcToken: string = "";
+
+  constructor(component: any, options: any, data: any) {
+    super(component, options, data);
+
+    if (this.component.multipleFiles === undefined) {
+      this.component.multipleFiles = true;
+    }
+
+    this.component.multiple = true; // Must be true to force formio to accept arrays as valid input value for this field type
+    this.component.context = this.data;
+  }
+
+  static register: () => void = () =>
+    super.register("portalFileUpload", FormIoUploader);
+
+  static schema(sources: any = {}) {
+    return Components.components.field.schema({
+      type: "portalFileUpload",
+      hideLabel: true,
+      ...sources,
+    });
+  }
+
+  static get builderInfo() {
+    return {
+      title: "Portal File Upload",
+      group: "basic",
+      icon: "upload",
+      schema: FormIoUploader.schema(),
+    };
+  }
+
+  static editForm = formIoUploaderEditForm;
+
+  static emptyValue = []; // set empty value to force formio to accept arrays as valid input value for this field type
+
+  static setOidcToken = (oidcToken: string) => {
+    FormIoUploader.globalOidcToken = oidcToken;
+  };
+
+  static getOidcToken = () => {
+    return FormIoUploader.globalOidcToken;
+  };
+
+  onChangeHandler = (files: Array<UploadedFile>) => {
+    this.updateValue(
+      files.map((file) => file.url),
+      undefined,
+    );
+  };
+
+  attachReact(element: Container, ref: FormIoRefProp) {
+    super.attachReact(element, ref, FileUpload);
+  }
+
+  detachReact(element: Container) {
+    super.detachReact(element);
+  }
+}
