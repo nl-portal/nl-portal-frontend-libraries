@@ -1,7 +1,7 @@
 # nl-portal-libraries
 
-![Version 2.0.0](https://img.shields.io/badge/Version-2.0.0-blue)  
-![Node 20](https://img.shields.io/badge/Node-20-green)
+![Version 3.0.0](https://img.shields.io/badge/Version-3.0.0-blue)  
+![Node 22](https://img.shields.io/badge/Node-22-green)
 ![React 19.1.0](https://img.shields.io/badge/React-19.1.0-green)
 
 `nl-portal-libraries` is a collection of packages aimed at providing a configurable portal
