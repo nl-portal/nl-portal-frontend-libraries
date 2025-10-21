@@ -23,7 +23,7 @@ jobs:
                 with:
                     app-id: ${{ secrets.APP_ID }}
                     private-key: ${{ secrets.APP_PRIVATE_KEY }}
-            -   uses: actions/checkout@v4
+            -   uses: actions/checkout@v5
                 with:
                     token: ${{ steps.generate_token.outputs.token }}
             -   name: Set up Node.js ${{ env.NODE_VERSION }}
@@ -66,7 +66,7 @@ jobs:
             version: ${{ steps.generate-snapshot-version.outputs.VERSION }}
         steps:
             -   name: Checkout
-                uses: actions/checkout@v4
+                uses: actions/checkout@v5
             -   name: Get version from project
                 id: get-project-version
                 run: echo "PROJECT_VERSION=$(grep -P  "lerna version" package.json | grep -Po '\d+\.\d+\.\d+')" >> $GITHUB_OUTPUT
@@ -93,7 +93,7 @@ jobs:
                 with:
                     app-id: ${{ secrets.APP_ID }}
                     private-key: ${{ secrets.APP_PRIVATE_KEY }}
-            -   uses: actions/checkout@v4
+            -   uses: actions/checkout@v5
                 with:
                     token: ${{ steps.generate_token.outputs.token }}
             -   name: Set up Node.js ${{ env.NODE_VERSION }}
@@ -123,7 +123,7 @@ jobs:
         permissions:
             packages: write
         steps:
-            -   uses: actions/checkout@v4
+            -   uses: actions/checkout@v5
             -   name: Set up Node.js ${{ env.NODE_VERSION }}
                 uses: actions/setup-node@v4
                 with:
@@ -173,7 +173,7 @@ jobs:
         permissions:
             contents: read
         steps:
-            -   uses: actions/checkout@v4
+            -   uses: actions/checkout@v5
             -   name: Set up Node.js ${{ env.NODE_VERSION }}
                 uses: actions/setup-node@v4
                 with:
