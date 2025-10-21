@@ -6,13 +6,22 @@ export const QUERY_GET_BERICHT = gql`
       id
       berichtTekst
       berichtType
-      bijlages
       einddatumHandelingstermijn
       geopend
       handelingsperspectief
       identificatie {
         type
         value
+      }
+      documenten {
+        uuid
+        documentapi
+        identificatie
+        creatiedatum
+        titel
+        formaat
+        bestandsnaam
+        bestandsomvang
       }
       onderwerp
       publicatiedatum

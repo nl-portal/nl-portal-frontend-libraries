@@ -1,4 +1,5 @@
 import {
+  ApiContext,
   GetOpenProductHoofdThemasQuery,
   GetUnopenedBerichtenCountQuery,
   useGetOpenProductHoofdThemasQuery,
@@ -10,6 +11,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useTransition,
 } from "react";
 import { useLocation, useNavigationType } from "react-router";
 import { stringToSlug } from "../utils/string-to-slug";
@@ -20,6 +22,7 @@ type Themes = GetOpenProductHoofdThemasQuery["getOpenProductHoofdThemas"];
 
 interface AppContextType {
   history: string[];
+  logoUrl: string | undefined;
   themes: Themes;
   messagesCount: number;
   refetchThemes: () => void;
@@ -36,14 +39,58 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   const location = useLocation();
   const navType = useNavigationType();
   const [firstLoad, setFirstLoad] = useState(true);
+  const { restUri } = useContext(ApiContext);
+  const [logoUrl, setLogoUrl] = useState<string | undefined>(undefined);
   const [themes, setThemes] = useState<Themes>([]);
   const [messagesCount, setMessagesCount] = useState(0);
+  const [loadingConfig, startTransition] = useTransition();
   const { initNavigationItems, updateNavigationItems } =
     useContext(RouterContext);
   const { isLoading: loadingUser } = useContext(UserContext);
   const [history, setHistory] = useState<string[]>(
     JSON.parse(localStorage.getItem("history") || "[]"),
   );
+
+  useEffect(() => {
+    if (window.USE_THEME_API !== "true") return;
+    startTransition(async () => {
+      try {
+        const response = await fetch(`${restUri}/public/theme/logo`);
+        if (!response.ok) {
+          console.warn("Theme logo API failed:", response.status);
+          return;
+        }
+
+        const logoUrl = await response.text();
+        setLogoUrl(logoUrl);
+      } catch (err) {
+        console.error("Failed to load logo:", err);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    if (window.USE_THEME_API !== "true") return;
+    startTransition(async () => {
+      try {
+        const styleResponse = await fetch(`${restUri}/public/theme/style`);
+        if (!styleResponse.ok) {
+          console.warn("Theme style API failed:", styleResponse.status);
+          return;
+        }
+
+        const styleValue = await styleResponse.text();
+        const styleNode = document.createElement("style");
+        styleNode.nonce =
+          document.querySelector<HTMLMetaElement>("meta[name='csp-nonce']")
+            ?.content || "";
+        styleNode.textContent = styleValue;
+        document.head.appendChild(styleNode);
+      } catch (err) {
+        console.error("Failed to load theme styling:", err);
+      }
+    });
+  }, []);
 
   const { loading: loadingThemes, refetch: refetchThemes } =
     useGetOpenProductHoofdThemasQuery({
@@ -76,7 +123,8 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
       },
     });
 
-  const loading = loadingThemes || loadingMessages || loadingUser;
+  const loading =
+    loadingConfig || loadingThemes || loadingMessages || loadingUser;
 
   useEffect(() => {
     if (!firstLoad) return;
@@ -103,6 +151,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     <AppContext.Provider
       value={{
         history,
+        logoUrl,
         themes,
         messagesCount,
         refetchThemes,

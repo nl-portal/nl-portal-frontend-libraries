@@ -9,6 +9,7 @@ import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { useContext } from "react";
 import AppContext from "../contexts/AppContext";
 import MessageContent from "../components/MessageContent";
+import DocumentsList from "../components/DocumentsList";
 
 const MessageDetailsPage = () => {
   const { id } = useParams();
@@ -59,6 +60,11 @@ const MessageDetailsPage = () => {
         loading={messageLoading}
         error={Boolean(messageError)}
         messageText={message?.berichtTekst}
+      />
+      <DocumentsList
+        loading={messageLoading}
+        error={Boolean(messageError)}
+        documents={message?.documenten}
       />
     </PageGrid>
   );

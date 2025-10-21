@@ -56,6 +56,7 @@ export type Bericht = {
   berichtTekst: Scalars['String']['output'];
   berichtType: BerichtType;
   bijlages: Array<Scalars['String']['output']>;
+  documenten: Array<Document>;
   einddatumHandelingstermijn: Scalars['LocalDateTime']['output'];
   geopend: Scalars['Boolean']['output'];
   handelingsperspectief: BerichtHandelingsperspectief;
@@ -723,6 +724,17 @@ export type DirectPaymentResponse = {
   __typename?: 'DirectPaymentResponse';
   redirectUrl: Scalars['String']['output'];
 };
+
+export type DirectPaymentStatus = {
+  __typename?: 'DirectPaymentStatus';
+  status: DirectPaymentStatusCategory;
+};
+
+export enum DirectPaymentStatusCategory {
+  Rejected = 'REJECTED',
+  StatusUnknown = 'STATUS_UNKNOWN',
+  Successful = 'SUCCESSFUL'
+}
 
 export type Document = {
   __typename?: 'Document';
@@ -1996,6 +2008,7 @@ export type Query = {
    *
    */
   getDecision: Array<Scalars['JSON']['output']>;
+  getDirectPaymentStatus: DirectPaymentStatus;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
   /**
@@ -2229,6 +2242,12 @@ export type QueryGetDecisionArgs = {
   productName: Scalars['String']['input'];
   productTypeId?: InputMaybe<Scalars['UUID']['input']>;
   sources?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+
+export type QueryGetDirectPaymentStatusArgs = {
+  hostedCheckoutId: Scalars['String']['input'];
+  identifier: Scalars['String']['input'];
 };
 
 
@@ -2782,13 +2801,19 @@ export type ZaakStatusType = {
 
 export type ZaakSubStatus = {
   __typename?: 'ZaakSubStatus';
-  doelgroep: Scalars['String']['output'];
+  doelgroep: ZaakSubStatusDoelgroep;
   omschrijving: Scalars['String']['output'];
   status?: Maybe<Scalars['String']['output']>;
   tijdstip: Scalars['String']['output'];
   uuid: Scalars['UUID']['output'];
   zaak: Scalars['String']['output'];
 };
+
+export enum ZaakSubStatusDoelgroep {
+  Betrokkenen = 'BETROKKENEN',
+  GeenDoelgroep = 'GEEN_DOELGROEP',
+  Intern = 'INTERN'
+}
 
 export type ZaakType = {
   __typename?: 'ZaakType';
@@ -2883,7 +2908,7 @@ export type GetBerichtQueryVariables = Exact<{
 }>;
 
 
-export type GetBerichtQuery = { __typename?: 'Query', getBericht?: { __typename?: 'Bericht', id?: any | null, berichtTekst: string, berichtType: BerichtType, bijlages: Array<string>, einddatumHandelingstermijn: any, geopend: boolean, handelingsperspectief: BerichtHandelingsperspectief, onderwerp: string, publicatiedatum: any, referentie: string, identificatie: { __typename?: 'BerichtIdentificatie', type: string, value: string } } | null };
+export type GetBerichtQuery = { __typename?: 'Query', getBericht?: { __typename?: 'Bericht', id?: any | null, berichtTekst: string, berichtType: BerichtType, einddatumHandelingstermijn: any, geopend: boolean, handelingsperspectief: BerichtHandelingsperspectief, onderwerp: string, publicatiedatum: any, referentie: string, identificatie: { __typename?: 'BerichtIdentificatie', type: string, value: string }, documenten: Array<{ __typename?: 'Document', uuid: any, documentapi: string, identificatie?: string | null, creatiedatum?: string | null, titel?: string | null, formaat?: string | null, bestandsnaam?: string | null, bestandsomvang?: number | null }> } | null };
 
 export type GetBerichtenQueryVariables = Exact<{
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
@@ -2908,6 +2933,14 @@ export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
+
+export type GetDirectPaymentStatusQueryVariables = Exact<{
+  identifier: Scalars['String']['input'];
+  hostedCheckoutId: Scalars['String']['input'];
+}>;
+
+
+export type GetDirectPaymentStatusQuery = { __typename?: 'Query', getDirectPaymentStatus: { __typename?: 'DirectPaymentStatus', status: DirectPaymentStatusCategory } };
 
 export type GetDocumentenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -3464,13 +3497,22 @@ export const GetBerichtDocument = gql`
     id
     berichtTekst
     berichtType
-    bijlages
     einddatumHandelingstermijn
     geopend
     handelingsperspectief
     identificatie {
       type
       value
+    }
+    documenten {
+      uuid
+      documentapi
+      identificatie
+      creatiedatum
+      titel
+      formaat
+      bestandsnaam
+      bestandsomvang
     }
     onderwerp
     publicatiedatum
@@ -3696,6 +3738,50 @@ export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProf
 export type GetBurgerProfielLazyQueryHookResult = ReturnType<typeof useGetBurgerProfielLazyQuery>;
 export type GetBurgerProfielSuspenseQueryHookResult = ReturnType<typeof useGetBurgerProfielSuspenseQuery>;
 export type GetBurgerProfielQueryResult = Apollo.QueryResult<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>;
+export const GetDirectPaymentStatusDocument = gql`
+    query GetDirectPaymentStatus($identifier: String!, $hostedCheckoutId: String!) {
+  getDirectPaymentStatus(
+    identifier: $identifier
+    hostedCheckoutId: $hostedCheckoutId
+  ) {
+    status
+  }
+}
+    `;
+
+/**
+ * __useGetDirectPaymentStatusQuery__
+ *
+ * To run a query within a React component, call `useGetDirectPaymentStatusQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDirectPaymentStatusQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDirectPaymentStatusQuery({
+ *   variables: {
+ *      identifier: // value for 'identifier'
+ *      hostedCheckoutId: // value for 'hostedCheckoutId'
+ *   },
+ * });
+ */
+export function useGetDirectPaymentStatusQuery(baseOptions: Apollo.QueryHookOptions<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables> & ({ variables: GetDirectPaymentStatusQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>(GetDirectPaymentStatusDocument, options);
+      }
+export function useGetDirectPaymentStatusLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>(GetDirectPaymentStatusDocument, options);
+        }
+export function useGetDirectPaymentStatusSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>(GetDirectPaymentStatusDocument, options);
+        }
+export type GetDirectPaymentStatusQueryHookResult = ReturnType<typeof useGetDirectPaymentStatusQuery>;
+export type GetDirectPaymentStatusLazyQueryHookResult = ReturnType<typeof useGetDirectPaymentStatusLazyQuery>;
+export type GetDirectPaymentStatusSuspenseQueryHookResult = ReturnType<typeof useGetDirectPaymentStatusSuspenseQuery>;
+export type GetDirectPaymentStatusQueryResult = Apollo.QueryResult<GetDirectPaymentStatusQuery, GetDirectPaymentStatusQueryVariables>;
 export const GetDocumentenDocument = gql`
     query GetDocumenten($id: UUID!) {
   getZaak(id: $id) {

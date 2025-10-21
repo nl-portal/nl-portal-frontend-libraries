@@ -31,6 +31,7 @@ import { ExtraCaseDetails, Details } from "../components/ExtraCaseDetails";
 import NotificationContext from "../contexts/NotificationContext";
 import { stringToSlug } from "../utils/string-to-slug";
 import { caseResults } from "../constants/case-results";
+import Pre from "../components/Pre";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -131,10 +132,13 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
       });
     }
 
-    if (caseData?.getZaak.resultaat?.toelichting) {
+    if (
+      window.SHOW_CASE_RESULT_EXPLANATION === "true" &&
+      caseData?.getZaak.resultaat?.toelichting
+    ) {
       array.push({
         title: intl.formatMessage({ id: "caseDetails.resultaatToelichting" }),
-        detail: caseData?.getZaak.resultaat.toelichting || "",
+        detail: <Pre>{caseData?.getZaak.resultaat.toelichting}</Pre>,
       });
     }
 
@@ -147,6 +151,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     return momentsData.map((contact, index) => ({
       id: index,
       title: contact.onderwerp,
+      description: contact.inhoud && <Pre>{contact.inhoud}</Pre>,
       channel: contact.kanaal,
       isoDate: contact.registratiedatum,
     }));
@@ -235,6 +240,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
           />
           <ContactTimeline
             items={contactItems}
+            collapsible={contactItems.some((item) => Boolean(item.description))}
             labels={contactLabels}
             locale={currentLocale}
           />

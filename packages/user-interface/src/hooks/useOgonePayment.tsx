@@ -45,8 +45,8 @@ const useOgonePayment = () => {
 
   const startPayment = (paymentRequestPayload: PaymentRequestPayload) => {
     setLoading(true);
-
     if (window.USE_LEGACY_OGONE_PAYMENT !== "true") {
+      returnUrl.searchParams.set("category", paymentRequestPayload.pspId);
       mutateDirectFunction({
         variables: {
           amount: paymentRequestPayload.amount,

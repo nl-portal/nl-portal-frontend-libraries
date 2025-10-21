@@ -136,8 +136,9 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.emailadres": "Email address",
     "account.detail.emailadres.error": "enter a valid email address",
     "account.detail.telefoonnummer": "Telephone number",
-    "account.detail.telefoonnummer.error":
-      "a valid phone number consists of 10 digits",
+    "account.detail.telefoonnummer.error": "This is not a valid number",
+    "account.detail.telefoonnummer.error.invalidChars":
+      "Use only 0-9 and optionally a '+'",
     "account.detail.aanmaakkanaal": "Email notifications",
     "account.detail.aanmaakkanaal.description":
       "Is your choice set to no? Then you will still receive emails. This is because not all of the municipality's systems are connected yet to MijnDenHaag.",
