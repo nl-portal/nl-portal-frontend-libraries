@@ -1,6 +1,9 @@
-/// <reference types="vitest" />
+// apps/app/vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const formioJsPath = require.resolve("@formio/js");
 
 export default defineConfig({
   plugins: [react()],
@@ -16,18 +19,16 @@ export default defineConfig({
           if (id.includes("@formio/react")) return "formio-react";
           if (id.includes("@formio/js/lib")) return "formio-js-lib";
           if (id.includes("@formio/js")) return "formio-js";
-          if (id.includes("@formio/protected-eval"))
-            return "formio-protected-eval";
+          if (id.includes("@formio/protected-eval")) return "formio-protected-eval";
         },
       },
     },
     commonjsOptions: { transformMixedEsModules: true },
   },
-  test: {
-    globals: true,
-    environment: "jsdom",
-  },
-  html: {
-    cspNonce: "##NL_PORTAL_NONCE##",
+  resolve: {
+    dedupe: ["@formio/js", "@formio/react"],
+    alias: {
+      "@formio/js": formioJsPath, // ✅ only alias this one
+    },
   },
 });

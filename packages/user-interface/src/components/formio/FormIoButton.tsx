@@ -14,7 +14,7 @@ type FormIoButtonProps = BasicFormIoComponentSchema &
     ) => void;
   };
 
-const FormIoButton = ({
+export const FormIoButton = ({
   disabled,
   label,
   attributes,

@@ -25,6 +25,7 @@ import FormIoTextInputWrapper from "./formio/FormIoTextInput";
 import FormIoUploader from "./formio/FormIoUploader";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import "@utrecht/document-css";
+import { installDenHaagTemplates } from "./formio/FormIoDataGridTemplate";
 
 interface LayoutComponentProps {
   paths: Paths;
@@ -54,6 +55,7 @@ const Layout = ({
     FormIoButtonWrapper.register();
     FormIoRadioWrapper.register();
     FormIoSelectWrapper.register();
+    installDenHaagTemplates();
   }, []);
 
   useEffect(() => {

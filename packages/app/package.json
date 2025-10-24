@@ -17,6 +17,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@formio/js": "5.2.1",
+    "@formio/react": "6.1.0",
     "@gemeente-denhaag/design-tokens-components": "5.1.0",
     "@gemeente-denhaag/icons": "4.0.0",
     "@gemeente-denhaag/link": "4.0.0",
