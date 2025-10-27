@@ -19,25 +19,14 @@ import {
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
 import { config } from "./config";
-import {
-  Navigate,
-  RouteObject as ReactRouteObject,
-  useSearchParams,
-} from "react-router";
+import { Navigate, useSearchParams } from "react-router";
 import { themes } from "./themes";
 import ParkerenOverview from "../pages/ParkerenOverview";
 import ParkerenDetails from "../pages/ParkerenDetails";
 import ParkerenHistory from "../pages/ParkerenHistory";
 import { FormattedNumber } from "react-intl";
 
-export type RouteObject = ReactRouteObject & {
-  handle: {
-    label: string;
-  };
-  children?: RouteObject[];
-};
-
-export const routes: RouteObject[] = [
+export const routes = [
   {
     path: paths.overview,
     handle: { label: "breadcrumb.overview" },
@@ -277,7 +266,6 @@ export const routes: RouteObject[] = [
   },
   {
     path: new URL(window.OIDC_REDIRECT_URI).pathname,
-    handle: { label: "breadcrumb.oidc" },
     element: <OidcCallbackPage />,
   },
   {

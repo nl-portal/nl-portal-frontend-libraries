@@ -17,6 +17,7 @@ import { useLocation, useNavigationType } from "react-router";
 import { stringToSlug } from "../utils/string-to-slug";
 import RouterContext from "./RouterContext";
 import UserContext from "./UserContext";
+import FullscreenSkeleton from "../components/FullscreenSkeleton";
 
 type Themes = GetOpenProductHoofdThemasQuery["getOpenProductHoofdThemas"];
 
@@ -142,10 +143,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     setHistory(newHistory);
   }, [location]);
 
-  if (firstLoad && loading) {
-    // TODO: Add fullscreen loading component
-    return null;
-  }
+  if (firstLoad && loading) return <FullscreenSkeleton />;
 
   return (
     <AppContext.Provider
