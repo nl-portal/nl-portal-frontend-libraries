@@ -14,8 +14,62 @@ on:
 env:
     NODE_VERSION: ${{ inputs.nodeVersion }}
 jobs:
+    detect-variables:
+        runs-on: ubuntu-latest
+        outputs:
+            version: ${{ steps.generate-snapshot-version.outputs.VERSION }}
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v4
+            -   name: Get version from project
+                id: get-project-version
+                run: echo "PROJECT_VERSION=$(grep -P  "lerna version" package.json | grep -Po '\d+\.\d+\.\d+')" >> $GITHUB_OUTPUT
+            -   name: Generate snapshot version
+                id: generate-snapshot-version
+                run: |
+                    branch=${GITHUB_REF##*/}
+                    sha=${GITHUB_SHA::8}
+                    ts=$(date +'%Y%m%d%H%M')
+                    echo "VERSION=${{ steps.get-project-version.outputs.PROJECT_VERSION }}-${{ startsWith(github.ref_name, 'rc/') && 'RC' || '${branch}' }}-${ts}-${sha}-SNAPSHOT" >> "$GITHUB_OUTPUT"
+            -   name: Log version
+                run: echo "::notice::Using version - \"${{ steps.generate-snapshot-version.outputs.VERSION }}\"."
+    up-version:
+        runs-on: ubuntu-latest
+        needs:
+            - detect-variables
+        env:
+            ARTIFACT_VERSION: ${{ needs.detect-variables.outputs.version }}
+        steps:
+            -   name: Generate github app token
+                id: generate_token
+                uses: actions/create-github-app-token@v1
+                with:
+                    app-id: ${{ secrets.APP_ID }}
+                    private-key: ${{ secrets.APP_PRIVATE_KEY }}
+            -   uses: actions/checkout@v4
+                with:
+                    token: ${{ steps.generate_token.outputs.token }}
+            -   name: Set up Node.js ${{ env.NODE_VERSION }}
+                uses: actions/setup-node@v4
+                with:
+                    node-version: ${{ env.NODE_VERSION }}
+            -   name: Install
+                run: |
+                    npm install -g pnpm lerna@7.4.2
+            -   name: lerna version
+                env:
+                    GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+                    GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
+                    GIT_AUTHOR_NAME: "nl-portal"
+                    GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
+                    GIT_COMMITTER_NAME: "nl-portal"
+                run: |
+                    git push --set-upstream origin HEAD
+                    lerna version ${{ env.ARTIFACT_VERSION }} --no-changelog --no-private --no-commit-hooks --message 'chore: incremented package versions to %s [skip ci]' --yes
     build:
         runs-on: ubuntu-latest
+        needs:
+            - up-version
         steps:
             -   name: Generate github app token
                 id: generate_token
@@ -60,59 +114,6 @@ jobs:
                     name: nl-portal-user-interface
                     path: packages/user-interface/dist/
                     retention-days: 1
-    detect-variables:
-        runs-on: ubuntu-latest
-        outputs:
-            version: ${{ steps.generate-snapshot-version.outputs.VERSION }}
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v4
-            -   name: Get version from project
-                id: get-project-version
-                run: echo "PROJECT_VERSION=$(grep -P  "lerna version" package.json | grep -Po '\d+\.\d+\.\d+')" >> $GITHUB_OUTPUT
-            -   name: Generate snapshot version
-                id: generate-snapshot-version
-                run: |
-                    branch=${GITHUB_REF##*/}
-                    sha=${GITHUB_SHA::8}
-                    ts=$(date +'%Y%m%d%H%M')
-                    echo "VERSION=${{ steps.get-project-version.outputs.PROJECT_VERSION }}-${{ startsWith(github.ref_name, 'rc/') && 'RC' || '${branch}' }}-${ts}-${sha}-SNAPSHOT" >> "$GITHUB_OUTPUT"
-            -   name: Log version
-                run: echo "::notice::Using version - \"${{ steps.generate-snapshot-version.outputs.VERSION }}\"."
-    up-version:
-        runs-on: ubuntu-latest
-        needs:
-            - build
-            - detect-variables
-        env:
-            ARTIFACT_VERSION: ${{ needs.detect-variables.outputs.version }}
-        steps:
-            -   name: Generate github app token
-                id: generate_token
-                uses: actions/create-github-app-token@v1
-                with:
-                    app-id: ${{ secrets.APP_ID }}
-                    private-key: ${{ secrets.APP_PRIVATE_KEY }}
-            -   uses: actions/checkout@v4
-                with:
-                    token: ${{ steps.generate_token.outputs.token }}
-            -   name: Set up Node.js ${{ env.NODE_VERSION }}
-                uses: actions/setup-node@v4
-                with:
-                    node-version: ${{ env.NODE_VERSION }}
-            -   name: Install
-                run: |
-                    npm install -g pnpm lerna@7.4.2
-            -   name: lerna version
-                env:
-                    GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-                    GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
-                    GIT_AUTHOR_NAME: "nl-portal"
-                    GIT_COMMITTER_EMAIL: ${{ secrets.GIT_COMMITTER_EMAIL }}
-                    GIT_COMMITTER_NAME: "nl-portal"
-                run: |
-                    git push --set-upstream origin HEAD
-                    lerna version ${{ env.ARTIFACT_VERSION }} --no-changelog --no-private --no-commit-hooks --message 'chore: incremented package versions to %s [skip ci]' --yes
     publish-github:
         runs-on: ubuntu-latest
         needs:
