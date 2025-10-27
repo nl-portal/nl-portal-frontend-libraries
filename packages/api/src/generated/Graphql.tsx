@@ -16,25 +16,28 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   Date: { input: any; output: any; }
+  DateTime: { input: any; output: any; }
   JSON: { input: any; output: any; }
-  LocalDateTime: { input: any; output: any; }
+  LocalTime: { input: any; output: any; }
+  Locale: { input: any; output: any; }
+  PositiveFloat: { input: any; output: any; }
   UUID: { input: any; output: any; }
   ZonedDateTime: { input: any; output: any; }
 };
 
 export type ActiesPage = {
   __typename?: 'ActiesPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<OpenProductActie>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -57,13 +60,13 @@ export type Bericht = {
   berichtType: BerichtType;
   bijlages: Array<Scalars['String']['output']>;
   documenten: Array<Document>;
-  einddatumHandelingstermijn: Scalars['LocalDateTime']['output'];
+  einddatumHandelingstermijn: Scalars['ZonedDateTime']['output'];
   geopend: Scalars['Boolean']['output'];
   handelingsperspectief: BerichtHandelingsperspectief;
   id?: Maybe<Scalars['UUID']['output']>;
   identificatie: BerichtIdentificatie;
   onderwerp: Scalars['String']['output'];
-  publicatiedatum: Scalars['LocalDateTime']['output'];
+  publicatiedatum: Scalars['ZonedDateTime']['output'];
   referentie: Scalars['String']['output'];
 };
 
@@ -88,17 +91,17 @@ export enum BerichtType {
 
 export type BerichtenPage = {
   __typename?: 'BerichtenPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<Bericht>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -125,7 +128,7 @@ export type Besluit = {
 
 export type BesluitAuditTrail = {
   __typename?: 'BesluitAuditTrail';
-  aanmaakdatum?: Maybe<Scalars['LocalDateTime']['output']>;
+  aanmaakdatum?: Maybe<Scalars['ZonedDateTime']['output']>;
   actie: Scalars['String']['output'];
   actieWeergave?: Maybe<Scalars['String']['output']>;
   applicatieId?: Maybe<Scalars['String']['output']>;
@@ -158,17 +161,17 @@ export type BesluitDocument = {
 
 export type BesluitPage = {
   __typename?: 'BesluitPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<Besluit>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -188,17 +191,17 @@ export type BesluitType = {
 
 export type BestandenPage = {
   __typename?: 'BestandenPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<OpenProductBestand>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -613,49 +616,19 @@ export type CategorieRelatieForeignKey = {
   uuid: Scalars['String']['output'];
 };
 
-export type ContactMoment = {
-  __typename?: 'ContactMoment';
-  bronorganisatie?: Maybe<Scalars['String']['output']>;
-  initiatiefnemer?: Maybe<Scalars['String']['output']>;
-  kanaal: Scalars['String']['output'];
-  medewerker?: Maybe<Scalars['String']['output']>;
-  registratiedatum: Scalars['String']['output'];
-  tekst: Scalars['String']['output'];
-  volgendContactmoment?: Maybe<Scalars['String']['output']>;
-  voorkeurskanaal?: Maybe<Scalars['String']['output']>;
-  voorkeurstaal?: Maybe<Scalars['String']['output']>;
-  vorigContactmoment?: Maybe<Scalars['String']['output']>;
-};
-
-export type ContactMomentPage = {
-  __typename?: 'ContactMomentPage';
-  /** The elements on this page */
-  content: Array<ContactMoment>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
 export type ContactenPage = {
   __typename?: 'ContactenPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<OpenProductContact>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -712,7 +685,7 @@ export enum DigitaleAdresType {
 }
 
 export type DirectPaymentRequestInput = {
-  amount: Scalars['Float']['input'];
+  amount: Scalars['PositiveFloat']['input'];
   identifier: Scalars['String']['input'];
   langId?: InputMaybe<Scalars['String']['input']>;
   orderId: Scalars['String']['input'];
@@ -727,7 +700,7 @@ export type DirectPaymentResponse = {
 
 export type DirectPaymentStatus = {
   __typename?: 'DirectPaymentStatus';
-  status: DirectPaymentStatusCategory;
+  status?: Maybe<DirectPaymentStatusCategory>;
 };
 
 export enum DirectPaymentStatusCategory {
@@ -814,7 +787,7 @@ export type HandelsNaam = {
 
 export type Hoofdvestiging = {
   __typename?: 'Hoofdvestiging';
-  adressen?: Maybe<Array<Adres>>;
+  adressen?: Maybe<Array<Maybe<Adres>>>;
   eersteHandelsnaam: Scalars['String']['output'];
   indCommercieleVestiging: Scalars['String']['output'];
   indHoofdvestiging: Scalars['String']['output'];
@@ -823,48 +796,35 @@ export type Hoofdvestiging = {
   vestigingsnummer: Scalars['String']['output'];
 };
 
-export type Klant = {
-  __typename?: 'Klant';
-  aanmaakkanaal?: Maybe<Scalars['String']['output']>;
-  emailadres?: Maybe<Scalars['String']['output']>;
-  telefoonnummer?: Maybe<Scalars['String']['output']>;
-};
-
-export type KlantUpdateInput = {
-  aanmaakkanaal?: InputMaybe<Scalars['String']['input']>;
-  emailadres?: InputMaybe<Scalars['String']['input']>;
-  telefoonnummer?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type LinksPage = {
   __typename?: 'LinksPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<OpenProductLink>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
 export type LocatiesPage = {
   __typename?: 'LocatiesPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<OpenProductLocatie>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -872,13 +832,13 @@ export type MaatschappelijkeActiviteit = {
   __typename?: 'MaatschappelijkeActiviteit';
   embedded?: Maybe<Embedded>;
   formeleRegistratiedatum?: Maybe<Scalars['String']['output']>;
-  handelsnamen?: Maybe<Array<HandelsNaam>>;
+  handelsnamen?: Maybe<Array<Maybe<HandelsNaam>>>;
   indNonMailing?: Maybe<Scalars['String']['output']>;
   kvkNummer: Scalars['String']['output'];
   materieleRegistratie?: Maybe<MaterieleRegistratie>;
   naam: Scalars['String']['output'];
-  sbiActiviteiten?: Maybe<Array<SbiActiviteit>>;
-  statutaireNaam?: Maybe<Scalars['String']['output']>;
+  sbiActiviteiten?: Maybe<Array<Maybe<SbiActiviteit>>>;
+  statutaireNaam: Scalars['String']['output'];
   totaalWerkzamePersonen?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -889,31 +849,25 @@ export type MaterieleRegistratie = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  /** Create DigitaleAdres for User */
+  /**  Create DigitaleAdres for User */
   createUserDigitaleAdres?: Maybe<DigitaleAdresResponse>;
-  /** Create Partij for user */
+  /**  Create Partij for user */
   createUserPartij?: Maybe<PartijResponse>;
-  /** Delete DigitaleAdres of User by Id */
+  /**  Delete DigitaleAdres of User by Id */
   deleteUserDigitaleAdres?: Maybe<Scalars['Boolean']['output']>;
-  /** Do Worldline Direct payment */
+  /**  Do Worldline Direct payment */
   doDirectPayment: DirectPaymentResponse;
-  /** Create Ogone payment with hash and fields */
+  /**  Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
-  /** Submit a task */
-  submitTaak: Taak;
-  /** Submit a task */
+  /**  Submit a task */
   submitTaakV2: TaakV2;
-  /** Submit a task */
-  submitTask: Taak;
-  /** Updates the profile for the user */
-  updateBurgerProfiel?: Maybe<Klant>;
-  /** Update product */
+  /**  Update product */
   updateProduct?: Maybe<OpenProductProduct>;
-  /** Update product verbruiks object */
+  /**  Update product verbruiks object */
   updateProductVerbruiksObject: ProductVerbruiksObject;
-  /** Update DigitaleAdres of User */
+  /**  Update DigitaleAdres of User */
   updateUserDigitaleAdres?: Maybe<DigitaleAdresResponse>;
-  /** Update user Partij */
+  /**  Update user Partij */
   updateUserPartij?: Maybe<PartijResponse>;
 };
 
@@ -943,27 +897,9 @@ export type MutationGenerateOgonePaymentArgs = {
 };
 
 
-export type MutationSubmitTaakArgs = {
-  id: Scalars['UUID']['input'];
-  submission: Scalars['JSON']['input'];
-};
-
-
 export type MutationSubmitTaakV2Args = {
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
-  version: TaakVersion;
-};
-
-
-export type MutationSubmitTaskArgs = {
-  id: Scalars['UUID']['input'];
-  submission: Scalars['JSON']['input'];
-};
-
-
-export type MutationUpdateBurgerProfielArgs = {
-  klant: KlantUpdateInput;
 };
 
 
@@ -989,7 +925,7 @@ export type MutationUpdateUserPartijArgs = {
 
 export type OgoneBetaling = {
   __typename?: 'OgoneBetaling';
-  bedrag: Scalars['Float']['output'];
+  bedrag: Scalars['PositiveFloat']['output'];
   betaalkenmerk: Scalars['String']['output'];
   pspid: Scalars['String']['output'];
 };
@@ -1001,7 +937,7 @@ export type OgonePayment = {
 };
 
 export type OgonePaymentRequestInput = {
-  amount: Scalars['Float']['input'];
+  amount: Scalars['PositiveFloat']['input'];
   failureUrl?: InputMaybe<Scalars['String']['input']>;
   langId?: InputMaybe<Scalars['String']['input']>;
   orderId: Scalars['String']['input'];
@@ -1473,7 +1409,7 @@ export enum OpenKlant2Landcode {
   Zwitserland = 'ZWITSERLAND'
 }
 
-/** A Type that represents a Klantinteracties API Partij object */
+/**  A Type that represents a Klantinteracties API Partij object */
 export type OpenKlant2Partij = {
   __typename?: 'OpenKlant2Partij';
   betrokkenen?: Maybe<Array<OpenKlant2ForeignKey>>;
@@ -1595,7 +1531,7 @@ export type OpenProductPrijs = {
 
 export type OpenProductPrijsOptie = {
   __typename?: 'OpenProductPrijsOptie';
-  bedrag: Scalars['Float']['output'];
+  bedrag: Scalars['PositiveFloat']['output'];
   beschrijving: Scalars['String']['output'];
   uuid: Scalars['UUID']['output'];
 };
@@ -1723,7 +1659,7 @@ export type OpenProductThema = {
   aanmaakDatum: Scalars['ZonedDateTime']['output'];
   beschrijving?: Maybe<Scalars['String']['output']>;
   gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
-  /** UUID of the hoofdthema, which this thema is related to. */
+  /**  UUID of the hoofdthema, which this thema is related to. */
   hoofdThema?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
   producten?: Maybe<Array<OpenProductProduct>>;
@@ -1778,17 +1714,17 @@ export type OrganisatieIdentificatieInput = {
 
 export type OrganisatiesPage = {
   __typename?: 'OrganisatiesPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<OpenProductOrganisatie>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -1855,17 +1791,17 @@ export type PrefillResponse = {
 
 export type PrijzenPage = {
   __typename?: 'PrijzenPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<OpenProductPrijs>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -1873,8 +1809,8 @@ export type Product = {
   __typename?: 'Product';
   documenten: Array<Scalars['String']['output']>;
   eigenschappen?: Maybe<Scalars['JSON']['output']>;
-  geldigTot?: Maybe<Scalars['LocalDateTime']['output']>;
-  geldigVan: Scalars['LocalDateTime']['output'];
+  geldigTot?: Maybe<Scalars['DateTime']['output']>;
+  geldigVan: Scalars['DateTime']['output'];
   id?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
   parameters?: Maybe<Scalars['JSON']['output']>;
@@ -1896,30 +1832,30 @@ export type ProductDetails = {
 
 export type ProductPage = {
   __typename?: 'ProductPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<Product>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
 export type ProductType = {
   __typename?: 'ProductType';
-  /** Get list of available beslistabellen, with their object configurations */
+  /**  Get list of available beslistabellen, with their object configurations */
   beslistabelMappings?: Maybe<Array<Scalars['String']['output']>>;
   eigenschappen?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['UUID']['output']>;
   naam: Scalars['String']['output'];
   omschrijving?: Maybe<Scalars['String']['output']>;
   parameters?: Maybe<Scalars['JSON']['output']>;
-  /** Get list of available forms to prefill, with their object configurations */
+  /**  Get list of available forms to prefill, with their object configurations */
   prefillMappings?: Maybe<Scalars['JSON']['output']>;
   productSubType?: Maybe<Scalars['String']['output']>;
   zaaktypen: Array<Scalars['UUID']['output']>;
@@ -1927,17 +1863,17 @@ export type ProductType = {
 
 export type ProductTypesPage = {
   __typename?: 'ProductTypesPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<OpenProductProductType>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -1951,234 +1887,146 @@ export type ProductVerbruiksObject = {
 
 export type ProductenPage = {
   __typename?: 'ProductenPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<OpenProductProduct>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  /**
-   * find all form definitions from repository
-   * @deprecated This method is not used by the NL Portal frontend and is not being replaced.
-   */
-  allFormDefinitions: Array<FormDefinition>;
-  /** Find the Partij of the authenticated user. */
+  /**  Find the Partij of the authenticated user. */
   findUserPartij?: Maybe<OpenKlant2Partij>;
-  /** Gets the bedrijf data */
+  /**  Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
-  /** Gets a single Bericht by Id */
+  /**  Gets a single Bericht by Id */
   getBericht?: Maybe<Bericht>;
-  /**
-   *
-   *         Returns a paginated list of all Berichten
-   *         Could partial search on 'onderwerp'
-   *
-   */
   getBerichten: BerichtenPage;
-  /** Get all besluit by id */
+  /**  Get all besluit by id */
   getBesluit: Besluit;
-  /** Get all besluit audit trails by id */
+  /**  Get all besluit audit trails by id */
   getBesluitAuditTrail: BesluitAuditTrail;
-  /** Get all besluit audit trails */
+  /**  Get all besluit audit trails */
   getBesluitAuditTrails: Array<BesluitAuditTrail>;
-  /** Get all besluit document by id */
+  /**  Get all besluit document by id */
   getBesluitDocument: BesluitDocument;
-  /** Get all besluit documents */
+  /**  Get all besluit documents */
   getBesluitDocumenten: Array<BesluitDocument>;
-  /** Get all besluiten */
+  /**  Get all besluiten */
   getBesluiten: BesluitPage;
-  /** Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
+  /**  Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
   getBewonersAantalV2?: Maybe<Scalars['Int']['output']>;
-  /** Gets the profile for the user */
-  getBurgerProfiel?: Maybe<Klant>;
-  /**
-   *
-   *         Get Decision by key and json as source
-   *         Don't use it directly but via custom queries
-   *
-   */
   getDecision: Array<Scalars['JSON']['output']>;
   getDirectPaymentStatus: DirectPaymentStatus;
-  /** Gets a document content by id as base64 encoded */
+  /**  Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
   /**
-   * find single form definition from repository or Objecten API
-   * @deprecated Replaced by getFormDefinitionByName and getFormDefinitionByObjectenApiUrl, replace with getFormDefinitionByName or getFormDefinitionByObjectenApiUrl
+   *  find single form definition from repository or Objecten API
+   * deprecated(
+   *  reason: "Replaced by getFormDefinitionByName and getFormDefinitionByObjectenApiUrl, replace with getFormDefinitionByName or getFormDefinitionByObjectenApiUrl"
+   * )
    */
   getFormDefinitionById?: Maybe<FormDefinition>;
-  /** find single form definition from repository */
+  /**  find single form definition from repository */
   getFormDefinitionByName?: Maybe<FormDefinition>;
-  /** find single form definition from the Objecten API */
+  /**  find single form definition from the Objecten API */
   getFormDefinitionByObjectenApiUrl?: Maybe<FormDefinition>;
-  /** Gets the data of the gemachtigde */
-  getGemachtigdeV2: GemachtigdeV2;
-  /** Gets the contactmomenten of a klant */
-  getKlantContactMomenten?: Maybe<ContactMomentPage>;
-  /** Gets the contactmomenten of a object(zaak) */
-  getObjectContactMomenten?: Maybe<ContactMomentPage>;
-  /** Get a Open product type by id */
+  /**  Gets the data of the gemachtigde */
+  getGemachtigdeV2?: Maybe<GemachtigdeV2>;
+  /**  Get a Open product type by id */
   getOpenProduct?: Maybe<OpenProductProduct>;
-  /** Get a actie */
+  /**  Get a actie */
   getOpenProductActie?: Maybe<OpenProductActie>;
-  /** Get decision by actie naam */
+  /**  Get decision by actie naam */
   getOpenProductActieDecision: Array<Scalars['JSON']['output']>;
-  /** Get all acties */
+  /**  Get all acties */
   getOpenProductActies: ActiesPage;
-  /** Get a bestand */
+  /**  Get a bestand */
   getOpenProductBestand?: Maybe<OpenProductBestand>;
-  /** Get all bestanden */
+  /**  Get all bestanden */
   getOpenProductBestanden: BestandenPage;
-  /** Get a contact */
+  /**  Get a contact */
   getOpenProductContact?: Maybe<OpenProductContact>;
-  /** Get all contacten */
+  /**  Get all contacten */
   getOpenProductContacten: ContactenPage;
-  /** Get all hoofd themas */
+  /**  Get all hoofd themas */
   getOpenProductHoofdThemas: Array<OpenProductThema>;
-  /** Get all hoofd themas by producten */
+  /**  Get all hoofd themas by producten */
   getOpenProductHoofdThemasByProducten: Array<OpenProductThema>;
-  /** Get a link */
+  /**  Get a link */
   getOpenProductLink?: Maybe<OpenProductLink>;
-  /** Get all links */
+  /**  Get all links */
   getOpenProductLinks: LinksPage;
-  /** Get a locatie */
+  /**  Get a locatie */
   getOpenProductLocatie?: Maybe<OpenProductLocatie>;
-  /** Get all locaties */
+  /**  Get all locaties */
   getOpenProductLocaties: LocatiesPage;
-  /** Get a organisatie */
+  /**  Get a organisatie */
   getOpenProductOrganisatie?: Maybe<OpenProductOrganisatie>;
-  /** Get all organisaties */
+  /**  Get all organisaties */
   getOpenProductOrganisaties: OrganisatiesPage;
-  /** Get a prijs */
+  /**  Get a prijs */
   getOpenProductPrijs?: Maybe<OpenProductPrijs>;
-  /** Get all prijzen */
+  /**  Get all prijzen */
   getOpenProductPrijzen: PrijzenPage;
-  /** Get a thema */
+  /**  Get a thema */
   getOpenProductThema?: Maybe<OpenProductThema>;
-  /** Get thema hierarchy */
+  /**  Get thema hierarchy */
   getOpenProductThemaHierarchy: Array<OpenProductThemaHierarchy>;
-  /** Get taken of a thema, including their parent themas */
+  /**  Get taken of a thema, including their parent themas */
   getOpenProductThemaTaken: Array<TaakV2>;
-  /** Get zaken of a thema, including their parent themas */
+  /**  Get zaken of a thema, including their parent themas */
   getOpenProductThemaZaken: Array<Zaak>;
-  /** Get all themas */
+  /**  Get all themas */
   getOpenProductThemas: ThemasPage;
-  /** Get all themas hierarchy */
+  /**  Get all themas hierarchy */
   getOpenProductThemasHierarchy: Array<OpenProductThemaHierarchy>;
-  /** Get a Open product type by id */
+  /**  Get a Open product type by id */
   getOpenProductType?: Maybe<OpenProductProductType>;
-  /** Get all Open product types  */
+  /**  Get all Open product types */
   getOpenProductTypes: ProductTypesPage;
-  /**
-   *
-   *         Get all Open producten
-   *         The allowed statussen:
-   *         - initieel
-   *         - gereed
-   *         - actief
-   *         - ingetrokken
-   *         - geweigerd
-   *         - verlopen
-   *
-   */
   getOpenProducten: ProductenPage;
-  /** Get a Open producten type by thema id */
+  /**  Get a Open producten type by thema id */
   getOpenProductenByThema: Array<OpenProductProduct>;
-  /** Gets the persoon data */
+  /**  Gets the persoon data */
   getPersoonV2?: Maybe<BrpPersoon>;
-  /** Get product by id */
+  /**  Get product by id */
   getProduct?: Maybe<Product>;
-  /**
-   *
-   *         Get Product Decision by key. Don't use it till it is configured in ProductType
-   *
-   */
   getProductDecision: Array<Scalars['JSON']['output']>;
-  /** Get list of taken by product name  */
+  /**  Get list of taken by product name */
   getProductTaken: Array<TaakV2>;
-  /** Get productType by name */
+  /**  Get productType by name */
   getProductType?: Maybe<ProductType>;
-  /** Get productTypes where the user has products */
+  /**  Get productTypes where the user has products */
   getProductTypes: Array<ProductType>;
-  /** Get list of verbruiksobjecten of product */
+  /**  Get list of verbruiksobjecten of product */
   getProductVerbruiksObjecten: Array<ProductVerbruiksObject>;
-  /**
-   *
-   *         Get list of zaken by product name or productTypeId
-   *         isOpen is optional, when not available, all zaken will be returned
-   *         isOpen is true, only zaken without enddate will be returned
-   *         isOpen is false, only zaken with an enddate will be returned
-   *
-   */
   getProductZaken: Array<Zaak>;
-  /**
-   *
-   *         Get list of products by product name or productTypeId
-   *         subProductType, is optional. It search for the subProductType in the products
-   *
-   */
   getProducten: ProductPage;
-  /** Get task by id */
-  getTaakById: Taak;
-  /** Get task by id V2 */
+  /**  Get task by id V2 */
   getTaakByIdV2?: Maybe<TaakV2>;
-  /** Get a list of tasks. Optional filter for zaak */
-  getTaken: TaakPage;
-  /** Get a list of tasks. Optional filter for zaak V2 */
+  /**  Get a list of tasks. Optional filter for zaak V2 */
   getTakenV2: TaakPageV2;
-  /**
-   * Get a list of tasks
-   * @deprecated Replaced by getTaken
-   */
-  getTasks: TaakPage;
-  /** Returns the total amount of unopened Berichten */
+  /**  Returns the total amount of unopened Berichten */
   getUnopenedBerichtenCount: Scalars['Int']['output'];
-  /**
-   * Get DigitaleAdresen of authenticated user.
-   * @deprecated Use getUserDigitaleAdressen instead
-   */
-  getUserDigitaleAdresen?: Maybe<Array<DigitaleAdresResponse>>;
-  /** Get DigitaleAdressen of authenticated user. */
+  /**  Get DigitaleAdressen of authenticated user. */
   getUserDigitaleAdressen?: Maybe<Array<DigitaleAdresResponse>>;
-  /** Get KlantContact by id of authenticated user. */
+  /**  Get KlantContact by id of authenticated user. */
   getUserKlantContact?: Maybe<OpenKlant2Klantcontact>;
-  /**
-   *
-   *         Get KlantContacten of authenticated user and optional filter on .
-   *         identificatorType, like zaak or product
-   *         identificatorId, the uuid of the zaak or product
-   *
-   */
   getUserKlantContacten: Array<OpenKlant2Klantcontact>;
-  /** Get Partij by Id for authenticated user. */
+  /**  Get Partij by Id for authenticated user. */
   getUserPartij?: Maybe<OpenKlant2Partij>;
-  /** Gets a zaak by id */
+  /**  Gets a zaak by id */
   getZaak: Zaak;
-  /**
-   *
-   *         Gets all zaken for the user
-   *         isOpen is optional, when not available, all zaken will be returned
-   *         isOpen is true, only zaken without enddate will be returned
-   *         isOpen is false, only zaken with an enddate will be returned
-   *         omschrijving: partial search of this property. Since OpenZaak 1.18.0
-   *         identificatieContains: partial search of this property. Since OpenZaak 1.18.0
-   *
-   */
   getZaken: ZaakPage;
-  /**
-   *
-   *         Prefill data to start a form.
-   *
-   */
   productPrefill: PrefillResponse;
 };
 
@@ -2269,17 +2117,6 @@ export type QueryGetFormDefinitionByNameArgs = {
 
 export type QueryGetFormDefinitionByObjectenApiUrlArgs = {
   url: Scalars['String']['input'];
-};
-
-
-export type QueryGetKlantContactMomentenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetObjectContactMomentenArgs = {
-  objectUrl: Scalars['String']['input'];
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -2388,6 +2225,7 @@ export type QueryGetOpenProductThemaHierarchyArgs = {
 export type QueryGetOpenProductThemaTakenArgs = {
   id: Scalars['UUID']['input'];
   language?: InputMaybe<Scalars['String']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -2395,6 +2233,7 @@ export type QueryGetOpenProductThemaZakenArgs = {
   id: Scalars['UUID']['input'];
   isOpen?: InputMaybe<Scalars['Boolean']['input']>;
   language?: InputMaybe<Scalars['String']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -2420,6 +2259,10 @@ export type QueryGetOpenProductTypesArgs = {
 export type QueryGetOpenProductenArgs = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
+  productTypeCode?: InputMaybe<Scalars['String']['input']>;
+  productTypeCodes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  productTypeId?: InputMaybe<Scalars['String']['input']>;
+  productTypeIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -2479,22 +2322,8 @@ export type QueryGetProductenArgs = {
 };
 
 
-export type QueryGetTaakByIdArgs = {
-  id: Scalars['UUID']['input'];
-};
-
-
 export type QueryGetTaakByIdV2Args = {
   id: Scalars['UUID']['input'];
-};
-
-
-export type QueryGetTakenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-  status?: InputMaybe<TaakStatus>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  zaakUUID?: InputMaybe<Scalars['UUID']['input']>;
 };
 
 
@@ -2504,12 +2333,6 @@ export type QueryGetTakenV2Args = {
   status?: InputMaybe<TaakStatus>;
   title?: InputMaybe<Scalars['String']['input']>;
   zaakUUID?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-
-export type QueryGetTasksArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -2585,40 +2408,10 @@ export type StatusType = {
   omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
-export type Taak = {
-  __typename?: 'Taak';
-  data: Scalars['JSON']['output'];
-  date: Scalars['String']['output'];
-  /** @deprecated Use formulier type/value */
-  formId: Scalars['String']['output'];
-  formulier: TaakFormulier;
-  id: Scalars['UUID']['output'];
-  identificatie: TaakIdentificatie;
-  objectId: Scalars['UUID']['output'];
-  status: TaakStatus;
-  title: Scalars['String']['output'];
-  verloopdatum?: Maybe<Scalars['LocalDateTime']['output']>;
-  zaak?: Maybe<Scalars['String']['output']>;
-};
-
 export type TaakForm = {
   __typename?: 'TaakForm';
   data?: Maybe<Scalars['JSON']['output']>;
   formulier: TaakFormulierV2;
-};
-
-export type TaakFormulier = {
-  __typename?: 'TaakFormulier';
-  /** @deprecated To support old formulier types */
-  convertFormulierType: Scalars['String']['output'];
-  /** Will return only 'portalid', 'objecturl', 'externalurl' */
-  formuliertype: Scalars['String']['output'];
-  value: Scalars['String']['output'];
-};
-
-
-export type TaakFormulierConvertFormulierTypeArgs = {
-  formuliertype: Scalars['String']['input'];
 };
 
 export type TaakFormulierV2 = {
@@ -2639,35 +2432,19 @@ export type TaakKoppeling = {
   value?: Maybe<Scalars['String']['output']>;
 };
 
-export type TaakPage = {
-  __typename?: 'TaakPage';
-  /** The elements on this page */
-  content: Array<Taak>;
-  /** The requested page number */
-  number: Scalars['Int']['output'];
-  /** The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
-  size: Scalars['Int']['output'];
-  /** The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
 export type TaakPageV2 = {
   __typename?: 'TaakPageV2';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<TaakV2>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -2702,28 +2479,22 @@ export type TaakV2 = {
   status: TaakStatus;
   titel: Scalars['String']['output'];
   url?: Maybe<TaakUrl>;
-  verloopdatum?: Maybe<Scalars['LocalDateTime']['output']>;
-  version?: Maybe<TaakVersion>;
+  verloopdatum?: Maybe<Scalars['ZonedDateTime']['output']>;
 };
-
-export enum TaakVersion {
-  V1 = 'V1',
-  V2 = 'V2'
-}
 
 export type ThemasPage = {
   __typename?: 'ThemasPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<OpenProductThema>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -2759,17 +2530,17 @@ export type ZaakDetails = {
 
 export type ZaakPage = {
   __typename?: 'ZaakPage';
-  /** The elements on this page */
+  /**  The elements on this page */
   content: Array<Zaak>;
-  /** The requested page number */
+  /**  The requested page number */
   number: Scalars['Int']['output'];
-  /** The number of elements on this page */
+  /**  The number of elements on this page */
   numberOfElements: Scalars['Int']['output'];
-  /** The requested page size */
+  /**  The requested page size */
   size: Scalars['Int']['output'];
-  /** The total number of elements */
+  /**  The total number of elements */
   totalElements: Scalars['Int']['output'];
-  /** The total number of available pages */
+  /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
 };
 
@@ -2822,7 +2593,7 @@ export type ZaakType = {
   omschrijvingGeneriek?: Maybe<Scalars['String']['output']>;
 };
 
-export type FormulierFieldsFragment = { __typename?: 'TaakFormulier', formuliertype: string, value: string };
+export type FormulierFieldsFragment = { __typename?: 'TaakFormulierV2', value: string };
 
 export type CreateUserDigitaleAdresMutationVariables = Exact<{
   digitaleAdresRequest: DigitaleAdresRequestInput;
@@ -2839,7 +2610,7 @@ export type DeleteUserDigitaleAdresMutationVariables = Exact<{
 export type DeleteUserDigitaleAdresMutation = { __typename?: 'Mutation', deleteUserDigitaleAdres?: boolean | null };
 
 export type DoDirectPaymentMutationVariables = Exact<{
-  amount: Scalars['Float']['input'];
+  amount: Scalars['PositiveFloat']['input'];
   identifier: Scalars['String']['input'];
   langId?: InputMaybe<Scalars['String']['input']>;
   orderId: Scalars['String']['input'];
@@ -2851,7 +2622,7 @@ export type DoDirectPaymentMutationVariables = Exact<{
 export type DoDirectPaymentMutation = { __typename?: 'Mutation', doDirectPayment: { __typename?: 'DirectPaymentResponse', redirectUrl: string } };
 
 export type GenerateOgonePaymentMutationVariables = Exact<{
-  amount: Scalars['Float']['input'];
+  amount: Scalars['PositiveFloat']['input'];
   failureUrl?: InputMaybe<Scalars['String']['input']>;
   langId?: InputMaybe<Scalars['String']['input']>;
   orderId: Scalars['String']['input'];
@@ -2867,26 +2638,10 @@ export type GenerateOgonePaymentMutation = { __typename?: 'Mutation', generateOg
 export type SubmitTaakV2MutationVariables = Exact<{
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
-  version: TaakVersion;
 }>;
 
 
-export type SubmitTaakV2Mutation = { __typename?: 'Mutation', submitTaakV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
-
-export type SubmitTaskMutationVariables = Exact<{
-  id: Scalars['UUID']['input'];
-  submission: Scalars['JSON']['input'];
-}>;
-
-
-export type SubmitTaskMutation = { __typename?: 'Mutation', submitTask: { __typename?: 'Taak', id: any, objectId: any, formId: string, title: string, status: TaakStatus, date: string } };
-
-export type UpdateBurgerProfielMutationVariables = Exact<{
-  klant: KlantUpdateInput;
-}>;
-
-
-export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
+export type SubmitTaakV2Mutation = { __typename?: 'Mutation', submitTaakV2: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } };
 
 export type UpdateUserDigitaleAdresMutationVariables = Exact<{
   digitaleAdresRequest: DigitaleAdresRequestInput;
@@ -2927,12 +2682,7 @@ export type GetUnopenedBerichtenCountQuery = { __typename?: 'Query', getUnopened
 export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string, kvkNummer: string, embedded?: { __typename?: 'Embedded', eigenaar: { __typename?: 'Eigenaar', rechtsvorm: string }, hoofdvestiging: { __typename?: 'Hoofdvestiging', adressen?: Array<{ __typename?: 'Adres', straatnaam?: string | null, huisnummer?: number | null, postcode: string, plaats: string }> | null } } | null } | null };
-
-export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: { __typename?: 'Klant', emailadres?: string | null, telefoonnummer?: string | null, aanmaakkanaal?: string | null } | null };
+export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string, kvkNummer: string, embedded?: { __typename?: 'Embedded', eigenaar: { __typename?: 'Eigenaar', rechtsvorm: string }, hoofdvestiging: { __typename?: 'Hoofdvestiging', adressen?: Array<{ __typename?: 'Adres', straatnaam?: string | null, huisnummer?: number | null, postcode: string, plaats: string } | null> | null } } | null } | null };
 
 export type GetDirectPaymentStatusQueryVariables = Exact<{
   identifier: Scalars['String']['input'];
@@ -2940,7 +2690,7 @@ export type GetDirectPaymentStatusQueryVariables = Exact<{
 }>;
 
 
-export type GetDirectPaymentStatusQuery = { __typename?: 'Query', getDirectPaymentStatus: { __typename?: 'DirectPaymentStatus', status: DirectPaymentStatusCategory } };
+export type GetDirectPaymentStatusQuery = { __typename?: 'Query', getDirectPaymentStatus: { __typename?: 'DirectPaymentStatus', status?: DirectPaymentStatusCategory | null } };
 
 export type GetDocumentenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -2975,24 +2725,12 @@ export type GetPortaalFormulierByIdV2QueryVariables = Exact<{
 }>;
 
 
-export type GetPortaalFormulierByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
+export type GetPortaalFormulierByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, titel: string, status: TaakStatus, verloopdatum?: any | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
 export type GetGemachtigdeV2QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetGemachtigdeV2Query = { __typename?: 'Query', getGemachtigdeV2: { __typename?: 'GemachtigdeV2', persoon?: { __typename?: 'BrpPersoon', naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null } } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } };
-
-export type GetKlantContactMomentenQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetKlantContactMomentenQuery = { __typename?: 'Query', getKlantContactMomenten?: { __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> } | null };
-
-export type GetObjectContactMomentenQueryVariables = Exact<{
-  objectUrl: Scalars['String']['input'];
-}>;
-
-
-export type GetObjectContactMomentenQuery = { __typename?: 'Query', getObjectContactMomenten?: { __typename?: 'ContactMomentPage', content: Array<{ __typename?: 'ContactMoment', tekst: string, kanaal: string, registratiedatum: string }> } | null };
+export type GetGemachtigdeV2Query = { __typename?: 'Query', getGemachtigdeV2?: { __typename?: 'GemachtigdeV2', persoon?: { __typename?: 'BrpPersoon', naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null } } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } | null };
 
 export type GetOpenProductenByThemaQueryVariables = Exact<{
   themaId: Scalars['UUID']['input'];
@@ -3008,13 +2746,16 @@ export type GetOpenProductHoofdThemasQuery = { __typename?: 'Query', getOpenProd
 
 export type GetOpenProductThemaTakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetOpenProductThemaTakenQuery = { __typename?: 'Query', getOpenProductThemaTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
+export type GetOpenProductThemaTakenQuery = { __typename?: 'Query', getOpenProductThemaTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
 
 export type GetOpenProductThemaZakenQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  isOpen?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
@@ -3025,7 +2766,20 @@ export type GetOpenProductQueryVariables = Exact<{
 }>;
 
 
-export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> | null } | null };
+export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: any, betaalkenmerk: string, pspid: string } | null }> | null } | null };
+
+export type GetOpenProductenQueryVariables = Exact<{
+  pageNumber?: InputMaybe<Scalars['Int']['input']>;
+  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  productTypeCode?: InputMaybe<Scalars['String']['input']>;
+  productTypeId?: InputMaybe<Scalars['String']['input']>;
+  productTypeCodes?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
+  productTypeIds?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
+}>;
+
+
+export type GetOpenProductenQuery = { __typename?: 'Query', getOpenProducten: { __typename?: 'ProductenPage', number: number, size: number, totalElements: number, numberOfElements: number, totalPages: number, content: Array<{ __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }> }> } };
 
 export type GetPersoonV2QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3038,7 +2792,7 @@ export type GetProductTakenQueryVariables = Exact<{
 }>;
 
 
-export type GetProductTakenQuery = { __typename?: 'Query', getProductTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
+export type GetProductTakenQuery = { __typename?: 'Query', getProductTaken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null }> };
 
 export type GetProductVerbruiksObjectenQueryVariables = Exact<{
   productId: Scalars['UUID']['input'];
@@ -3061,7 +2815,7 @@ export type GetProductQueryVariables = Exact<{
 }>;
 
 
-export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } | null };
+export type GetProductQuery = { __typename?: 'Query', getProduct?: { __typename?: 'Product', id?: any | null, naam: string, status: string, geldigVan: any, geldigTot?: any | null, verbruiksobjecten: Array<{ __typename?: 'ProductVerbruiksObject', id?: any | null, soort?: string | null, data?: any | null }>, productDetails?: { __typename?: 'ProductDetails', id?: any | null, data: Array<any> } | null, zaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }>, taken: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: any, betaalkenmerk: string, pspid: string } | null }> } | null };
 
 export type GetProductenQueryVariables = Exact<{
   productName: Scalars['String']['input'];
@@ -3077,14 +2831,7 @@ export type GetTaakByIdV2QueryVariables = Exact<{
 }>;
 
 
-export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
-
-export type GetTaakByIdQueryVariables = Exact<{
-  id: Scalars['UUID']['input'];
-}>;
-
-
-export type GetTaakByIdQuery = { __typename?: 'Query', getTaakById: { __typename?: 'Taak', id: any, status: TaakStatus, date: string, data: any, zaak?: string | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } } };
+export type GetTaakByIdV2Query = { __typename?: 'Query', getTaakByIdV2?: { __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', data?: any | null, formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null } | null };
 
 export type GetTakenV2QueryVariables = Exact<{
   zaakId?: InputMaybe<Scalars['UUID']['input']>;
@@ -3094,16 +2841,7 @@ export type GetTakenV2QueryVariables = Exact<{
 }>;
 
 
-export type GetTakenV2Query = { __typename?: 'Query', getTakenV2: { __typename?: 'TaakPageV2', totalElements: number, totalPages: number, content: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, version?: TaakVersion | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: number, betaalkenmerk: string, pspid: string } | null }> } };
-
-export type GetTakenQueryVariables = Exact<{
-  zaakId?: InputMaybe<Scalars['UUID']['input']>;
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-}>;
-
-
-export type GetTakenQuery = { __typename?: 'Query', getTaken: { __typename?: 'TaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Taak', id: any, objectId: any, title: string, status: TaakStatus, date: string, verloopdatum?: any | null, data: any, zaak?: string | null, formulier: { __typename?: 'TaakFormulier', formuliertype: string, value: string } }> } };
+export type GetTakenV2Query = { __typename?: 'Query', getTakenV2: { __typename?: 'TaakPageV2', totalElements: number, totalPages: number, content: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: any, betaalkenmerk: string, pspid: string } | null }> } };
 
 export type GetUserDigitaleAdressenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3135,11 +2873,10 @@ export type GetZakenQueryVariables = Exact<{
 }>;
 
 
-export type GetZakenQuery = { __typename?: 'Query', getZaken: { __typename?: 'ZaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> } };
+export type GetZakenQuery = { __typename?: 'Query', getZaken: { __typename?: 'ZaakPage', totalElements: number, totalPages: number, content: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean, omschrijving: string } } | null }> } };
 
 export const FormulierFieldsFragmentDoc = gql`
-    fragment FormulierFields on TaakFormulier {
-  formuliertype
+    fragment FormulierFields on TaakFormulierV2 {
   value
 }
     `;
@@ -3212,7 +2949,7 @@ export type DeleteUserDigitaleAdresMutationHookResult = ReturnType<typeof useDel
 export type DeleteUserDigitaleAdresMutationResult = Apollo.MutationResult<DeleteUserDigitaleAdresMutation>;
 export type DeleteUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<DeleteUserDigitaleAdresMutation, DeleteUserDigitaleAdresMutationVariables>;
 export const DoDirectPaymentDocument = gql`
-    mutation DoDirectPayment($amount: Float!, $identifier: String!, $langId: String, $orderId: String!, $reference: String!, $returnUrl: String) {
+    mutation DoDirectPayment($amount: PositiveFloat!, $identifier: String!, $langId: String, $orderId: String!, $reference: String!, $returnUrl: String) {
   doDirectPayment(
     paymentRequest: {amount: $amount, identifier: $identifier, langId: $langId, orderId: $orderId, reference: $reference, returnUrl: $returnUrl}
   ) {
@@ -3252,7 +2989,7 @@ export type DoDirectPaymentMutationHookResult = ReturnType<typeof useDoDirectPay
 export type DoDirectPaymentMutationResult = Apollo.MutationResult<DoDirectPaymentMutation>;
 export type DoDirectPaymentMutationOptions = Apollo.BaseMutationOptions<DoDirectPaymentMutation, DoDirectPaymentMutationVariables>;
 export const GenerateOgonePaymentDocument = gql`
-    mutation GenerateOgonePayment($amount: Float!, $failureUrl: String, $langId: String, $orderId: String!, $pspId: String!, $reference: String!, $successUrl: String, $title: String) {
+    mutation GenerateOgonePayment($amount: PositiveFloat!, $failureUrl: String, $langId: String, $orderId: String!, $pspId: String!, $reference: String!, $successUrl: String, $title: String) {
   generateOgonePayment(
     paymentRequest: {amount: $amount, failureUrl: $failureUrl, langId: $langId, orderId: $orderId, pspId: $pspId, reference: $reference, successUrl: $successUrl, title: $title}
   ) {
@@ -3298,8 +3035,8 @@ export type GenerateOgonePaymentMutationHookResult = ReturnType<typeof useGenera
 export type GenerateOgonePaymentMutationResult = Apollo.MutationResult<GenerateOgonePaymentMutation>;
 export type GenerateOgonePaymentMutationOptions = Apollo.BaseMutationOptions<GenerateOgonePaymentMutation, GenerateOgonePaymentMutationVariables>;
 export const SubmitTaakV2Document = gql`
-    mutation SubmitTaakV2($id: UUID!, $submission: JSON!, $version: TaakVersion!) {
-  submitTaakV2(id: $id, submission: $submission, version: $version) {
+    mutation SubmitTaakV2($id: UUID!, $submission: JSON!) {
+  submitTaakV2(id: $id, submission: $submission) {
     id
     portaalformulier {
       formulier {
@@ -3311,7 +3048,6 @@ export const SubmitTaakV2Document = gql`
     titel
     status
     verloopdatum
-    version
   }
 }
     `;
@@ -3332,7 +3068,6 @@ export type SubmitTaakV2MutationFn = Apollo.MutationFunction<SubmitTaakV2Mutatio
  *   variables: {
  *      id: // value for 'id'
  *      submission: // value for 'submission'
- *      version: // value for 'version'
  *   },
  * });
  */
@@ -3343,80 +3078,6 @@ export function useSubmitTaakV2Mutation(baseOptions?: Apollo.MutationHookOptions
 export type SubmitTaakV2MutationHookResult = ReturnType<typeof useSubmitTaakV2Mutation>;
 export type SubmitTaakV2MutationResult = Apollo.MutationResult<SubmitTaakV2Mutation>;
 export type SubmitTaakV2MutationOptions = Apollo.BaseMutationOptions<SubmitTaakV2Mutation, SubmitTaakV2MutationVariables>;
-export const SubmitTaskDocument = gql`
-    mutation SubmitTask($id: UUID!, $submission: JSON!) {
-  submitTask(id: $id, submission: $submission) {
-    id
-    objectId
-    formId
-    title
-    status
-    date
-  }
-}
-    `;
-export type SubmitTaskMutationFn = Apollo.MutationFunction<SubmitTaskMutation, SubmitTaskMutationVariables>;
-
-/**
- * __useSubmitTaskMutation__
- *
- * To run a mutation, you first call `useSubmitTaskMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSubmitTaskMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [submitTaskMutation, { data, loading, error }] = useSubmitTaskMutation({
- *   variables: {
- *      id: // value for 'id'
- *      submission: // value for 'submission'
- *   },
- * });
- */
-export function useSubmitTaskMutation(baseOptions?: Apollo.MutationHookOptions<SubmitTaskMutation, SubmitTaskMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<SubmitTaskMutation, SubmitTaskMutationVariables>(SubmitTaskDocument, options);
-      }
-export type SubmitTaskMutationHookResult = ReturnType<typeof useSubmitTaskMutation>;
-export type SubmitTaskMutationResult = Apollo.MutationResult<SubmitTaskMutation>;
-export type SubmitTaskMutationOptions = Apollo.BaseMutationOptions<SubmitTaskMutation, SubmitTaskMutationVariables>;
-export const UpdateBurgerProfielDocument = gql`
-    mutation UpdateBurgerProfiel($klant: KlantUpdateInput!) {
-  updateBurgerProfiel(klant: $klant) {
-    emailadres
-    telefoonnummer
-    aanmaakkanaal
-  }
-}
-    `;
-export type UpdateBurgerProfielMutationFn = Apollo.MutationFunction<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>;
-
-/**
- * __useUpdateBurgerProfielMutation__
- *
- * To run a mutation, you first call `useUpdateBurgerProfielMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateBurgerProfielMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateBurgerProfielMutation, { data, loading, error }] = useUpdateBurgerProfielMutation({
- *   variables: {
- *      klant: // value for 'klant'
- *   },
- * });
- */
-export function useUpdateBurgerProfielMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>(UpdateBurgerProfielDocument, options);
-      }
-export type UpdateBurgerProfielMutationHookResult = ReturnType<typeof useUpdateBurgerProfielMutation>;
-export type UpdateBurgerProfielMutationResult = Apollo.MutationResult<UpdateBurgerProfielMutation>;
-export type UpdateBurgerProfielMutationOptions = Apollo.BaseMutationOptions<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>;
 export const UpdateUserDigitaleAdresDocument = gql`
     mutation UpdateUserDigitaleAdres($digitaleAdresRequest: DigitaleAdresRequestInput!) {
   updateUserDigitaleAdres(digitaleAdresRequest: $digitaleAdresRequest) {
@@ -3697,47 +3358,6 @@ export type GetBedrijfQueryHookResult = ReturnType<typeof useGetBedrijfQuery>;
 export type GetBedrijfLazyQueryHookResult = ReturnType<typeof useGetBedrijfLazyQuery>;
 export type GetBedrijfSuspenseQueryHookResult = ReturnType<typeof useGetBedrijfSuspenseQuery>;
 export type GetBedrijfQueryResult = Apollo.QueryResult<GetBedrijfQuery, GetBedrijfQueryVariables>;
-export const GetBurgerProfielDocument = gql`
-    query GetBurgerProfiel {
-  getBurgerProfiel {
-    emailadres
-    telefoonnummer
-    aanmaakkanaal
-  }
-}
-    `;
-
-/**
- * __useGetBurgerProfielQuery__
- *
- * To run a query within a React component, call `useGetBurgerProfielQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetBurgerProfielQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetBurgerProfielQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetBurgerProfielQuery(baseOptions?: Apollo.QueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
-      }
-export function useGetBurgerProfielLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
-        }
-export function useGetBurgerProfielSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
-        }
-export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProfielQuery>;
-export type GetBurgerProfielLazyQueryHookResult = ReturnType<typeof useGetBurgerProfielLazyQuery>;
-export type GetBurgerProfielSuspenseQueryHookResult = ReturnType<typeof useGetBurgerProfielSuspenseQuery>;
-export type GetBurgerProfielQueryResult = Apollo.QueryResult<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>;
 export const GetDirectPaymentStatusDocument = gql`
     query GetDirectPaymentStatus($identifier: String!, $hostedCheckoutId: String!) {
   getDirectPaymentStatus(
@@ -3968,7 +3588,6 @@ export const GetPortaalFormulierByIdV2Document = gql`
     titel
     status
     verloopdatum
-    version
   }
 }
     `;
@@ -4052,93 +3671,6 @@ export type GetGemachtigdeV2QueryHookResult = ReturnType<typeof useGetGemachtigd
 export type GetGemachtigdeV2LazyQueryHookResult = ReturnType<typeof useGetGemachtigdeV2LazyQuery>;
 export type GetGemachtigdeV2SuspenseQueryHookResult = ReturnType<typeof useGetGemachtigdeV2SuspenseQuery>;
 export type GetGemachtigdeV2QueryResult = Apollo.QueryResult<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>;
-export const GetKlantContactMomentenDocument = gql`
-    query GetKlantContactMomenten {
-  getKlantContactMomenten {
-    content {
-      tekst
-      kanaal
-      registratiedatum
-    }
-  }
-}
-    `;
-
-/**
- * __useGetKlantContactMomentenQuery__
- *
- * To run a query within a React component, call `useGetKlantContactMomentenQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetKlantContactMomentenQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetKlantContactMomentenQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetKlantContactMomentenQuery(baseOptions?: Apollo.QueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
-      }
-export function useGetKlantContactMomentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
-        }
-export function useGetKlantContactMomentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>(GetKlantContactMomentenDocument, options);
-        }
-export type GetKlantContactMomentenQueryHookResult = ReturnType<typeof useGetKlantContactMomentenQuery>;
-export type GetKlantContactMomentenLazyQueryHookResult = ReturnType<typeof useGetKlantContactMomentenLazyQuery>;
-export type GetKlantContactMomentenSuspenseQueryHookResult = ReturnType<typeof useGetKlantContactMomentenSuspenseQuery>;
-export type GetKlantContactMomentenQueryResult = Apollo.QueryResult<GetKlantContactMomentenQuery, GetKlantContactMomentenQueryVariables>;
-export const GetObjectContactMomentenDocument = gql`
-    query GetObjectContactMomenten($objectUrl: String!) {
-  getObjectContactMomenten(objectUrl: $objectUrl) {
-    content {
-      tekst
-      kanaal
-      registratiedatum
-    }
-  }
-}
-    `;
-
-/**
- * __useGetObjectContactMomentenQuery__
- *
- * To run a query within a React component, call `useGetObjectContactMomentenQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetObjectContactMomentenQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetObjectContactMomentenQuery({
- *   variables: {
- *      objectUrl: // value for 'objectUrl'
- *   },
- * });
- */
-export function useGetObjectContactMomentenQuery(baseOptions: Apollo.QueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables> & ({ variables: GetObjectContactMomentenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
-      }
-export function useGetObjectContactMomentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
-        }
-export function useGetObjectContactMomentenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>(GetObjectContactMomentenDocument, options);
-        }
-export type GetObjectContactMomentenQueryHookResult = ReturnType<typeof useGetObjectContactMomentenQuery>;
-export type GetObjectContactMomentenLazyQueryHookResult = ReturnType<typeof useGetObjectContactMomentenLazyQuery>;
-export type GetObjectContactMomentenSuspenseQueryHookResult = ReturnType<typeof useGetObjectContactMomentenSuspenseQuery>;
-export type GetObjectContactMomentenQueryResult = Apollo.QueryResult<GetObjectContactMomentenQuery, GetObjectContactMomentenQueryVariables>;
 export const GetOpenProductenByThemaDocument = gql`
     query getOpenProductenByThema($themaId: UUID!) {
   getOpenProductenByThema(themaId: $themaId) {
@@ -4245,8 +3777,8 @@ export type GetOpenProductHoofdThemasLazyQueryHookResult = ReturnType<typeof use
 export type GetOpenProductHoofdThemasSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductHoofdThemasSuspenseQuery>;
 export type GetOpenProductHoofdThemasQueryResult = Apollo.QueryResult<GetOpenProductHoofdThemasQuery, GetOpenProductHoofdThemasQueryVariables>;
 export const GetOpenProductThemaTakenDocument = gql`
-    query getOpenProductThemaTaken($id: UUID!) {
-  getOpenProductThemaTaken(id: $id) {
+    query getOpenProductThemaTaken($id: UUID!, $pageSize: Int) {
+  getOpenProductThemaTaken(id: $id, pageSize: $pageSize) {
     id
     soort
     koppeling {
@@ -4265,7 +3797,6 @@ export const GetOpenProductThemaTakenDocument = gql`
     titel
     status
     verloopdatum
-    version
   }
 }
     `;
@@ -4283,6 +3814,7 @@ export const GetOpenProductThemaTakenDocument = gql`
  * const { data, loading, error } = useGetOpenProductThemaTakenQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      pageSize: // value for 'pageSize'
  *   },
  * });
  */
@@ -4303,8 +3835,8 @@ export type GetOpenProductThemaTakenLazyQueryHookResult = ReturnType<typeof useG
 export type GetOpenProductThemaTakenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductThemaTakenSuspenseQuery>;
 export type GetOpenProductThemaTakenQueryResult = Apollo.QueryResult<GetOpenProductThemaTakenQuery, GetOpenProductThemaTakenQueryVariables>;
 export const GetOpenProductThemaZakenDocument = gql`
-    query getOpenProductThemaZaken($id: UUID!) {
-  getOpenProductThemaZaken(id: $id) {
+    query getOpenProductThemaZaken($id: UUID!, $pageSize: Int, $isOpen: Boolean) {
+  getOpenProductThemaZaken(id: $id, pageSize: $pageSize, isOpen: $isOpen) {
     uuid
     omschrijving
     identificatie
@@ -4334,6 +3866,8 @@ export const GetOpenProductThemaZakenDocument = gql`
  * const { data, loading, error } = useGetOpenProductThemaZakenQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      pageSize: // value for 'pageSize'
+ *      isOpen: // value for 'isOpen'
  *   },
  * });
  */
@@ -4376,6 +3910,7 @@ export const GetOpenProductDocument = gql`
     frequentie
     verbruiksobject
     dataobject
+    decisions
     zaken {
       uuid
       omschrijving
@@ -4414,9 +3949,7 @@ export const GetOpenProductDocument = gql`
       titel
       status
       verloopdatum
-      version
     }
-    decisions
   }
 }
     `;
@@ -4453,6 +3986,86 @@ export type GetOpenProductQueryHookResult = ReturnType<typeof useGetOpenProductQ
 export type GetOpenProductLazyQueryHookResult = ReturnType<typeof useGetOpenProductLazyQuery>;
 export type GetOpenProductSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductSuspenseQuery>;
 export type GetOpenProductQueryResult = Apollo.QueryResult<GetOpenProductQuery, GetOpenProductQueryVariables>;
+export const GetOpenProductenDocument = gql`
+    query GetOpenProducten($pageNumber: Int, $pageSize: Int, $status: String, $productTypeCode: String, $productTypeId: String, $productTypeCodes: [String!], $productTypeIds: [String!]) {
+  getOpenProducten(
+    pageNumber: $pageNumber
+    pageSize: $pageSize
+    status: $status
+    productTypeCode: $productTypeCode
+    productTypeId: $productTypeId
+    productTypeCodes: $productTypeCodes
+    productTypeIds: $productTypeIds
+  ) {
+    number
+    size
+    totalElements
+    numberOfElements
+    totalPages
+    content {
+      uuid
+      url
+      naam
+      startDatum
+      gepubliceerd
+      aanmaakDatum
+      producttype {
+        code
+        uniformeProductNaam
+        toegestaneStatussen
+      }
+      prijs
+      gepubliceerd
+      status
+      documenten {
+        url
+      }
+      frequentie
+      verbruiksobject
+      dataobject
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetOpenProductenQuery__
+ *
+ * To run a query within a React component, call `useGetOpenProductenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetOpenProductenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetOpenProductenQuery({
+ *   variables: {
+ *      pageNumber: // value for 'pageNumber'
+ *      pageSize: // value for 'pageSize'
+ *      status: // value for 'status'
+ *      productTypeCode: // value for 'productTypeCode'
+ *      productTypeId: // value for 'productTypeId'
+ *      productTypeCodes: // value for 'productTypeCodes'
+ *      productTypeIds: // value for 'productTypeIds'
+ *   },
+ * });
+ */
+export function useGetOpenProductenQuery(baseOptions?: Apollo.QueryHookOptions<GetOpenProductenQuery, GetOpenProductenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetOpenProductenQuery, GetOpenProductenQueryVariables>(GetOpenProductenDocument, options);
+      }
+export function useGetOpenProductenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductenQuery, GetOpenProductenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetOpenProductenQuery, GetOpenProductenQueryVariables>(GetOpenProductenDocument, options);
+        }
+export function useGetOpenProductenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductenQuery, GetOpenProductenQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetOpenProductenQuery, GetOpenProductenQueryVariables>(GetOpenProductenDocument, options);
+        }
+export type GetOpenProductenQueryHookResult = ReturnType<typeof useGetOpenProductenQuery>;
+export type GetOpenProductenLazyQueryHookResult = ReturnType<typeof useGetOpenProductenLazyQuery>;
+export type GetOpenProductenSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductenSuspenseQuery>;
+export type GetOpenProductenQueryResult = Apollo.QueryResult<GetOpenProductenQuery, GetOpenProductenQueryVariables>;
 export const GetPersoonV2Document = gql`
     query GetPersoonV2 {
   getPersoonV2 {
@@ -4558,7 +4171,6 @@ export const GetProductTakenDocument = gql`
     titel
     status
     verloopdatum
-    version
   }
 }
     `;
@@ -4742,7 +4354,6 @@ export const GetProductDocument = gql`
       titel
       status
       verloopdatum
-      version
       ogonebetaling {
         bedrag
         betaalkenmerk
@@ -4866,7 +4477,6 @@ export const GetTaakByIdV2Document = gql`
     titel
     status
     verloopdatum
-    version
   }
 }
     `;
@@ -4903,53 +4513,6 @@ export type GetTaakByIdV2QueryHookResult = ReturnType<typeof useGetTaakByIdV2Que
 export type GetTaakByIdV2LazyQueryHookResult = ReturnType<typeof useGetTaakByIdV2LazyQuery>;
 export type GetTaakByIdV2SuspenseQueryHookResult = ReturnType<typeof useGetTaakByIdV2SuspenseQuery>;
 export type GetTaakByIdV2QueryResult = Apollo.QueryResult<GetTaakByIdV2Query, GetTaakByIdV2QueryVariables>;
-export const GetTaakByIdDocument = gql`
-    query GetTaakById($id: UUID!) {
-  getTaakById(id: $id) {
-    id
-    formulier {
-      ...FormulierFields
-    }
-    status
-    date
-    data
-    zaak
-  }
-}
-    ${FormulierFieldsFragmentDoc}`;
-
-/**
- * __useGetTaakByIdQuery__
- *
- * To run a query within a React component, call `useGetTaakByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetTaakByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetTaakByIdQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useGetTaakByIdQuery(baseOptions: Apollo.QueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables> & ({ variables: GetTaakByIdQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
-      }
-export function useGetTaakByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
-        }
-export function useGetTaakByIdSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTaakByIdQuery, GetTaakByIdQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetTaakByIdQuery, GetTaakByIdQueryVariables>(GetTaakByIdDocument, options);
-        }
-export type GetTaakByIdQueryHookResult = ReturnType<typeof useGetTaakByIdQuery>;
-export type GetTaakByIdLazyQueryHookResult = ReturnType<typeof useGetTaakByIdLazyQuery>;
-export type GetTaakByIdSuspenseQueryHookResult = ReturnType<typeof useGetTaakByIdSuspenseQuery>;
-export type GetTaakByIdQueryResult = Apollo.QueryResult<GetTaakByIdQuery, GetTaakByIdQueryVariables>;
 export const GetTakenV2Document = gql`
     query GetTakenV2($zaakId: UUID, $title: String, $pageNumber: Int, $pageSize: Int) {
   getTakenV2(
@@ -4982,7 +4545,6 @@ export const GetTakenV2Document = gql`
       titel
       status
       verloopdatum
-      version
     }
     totalElements
     totalPages
@@ -5025,62 +4587,6 @@ export type GetTakenV2QueryHookResult = ReturnType<typeof useGetTakenV2Query>;
 export type GetTakenV2LazyQueryHookResult = ReturnType<typeof useGetTakenV2LazyQuery>;
 export type GetTakenV2SuspenseQueryHookResult = ReturnType<typeof useGetTakenV2SuspenseQuery>;
 export type GetTakenV2QueryResult = Apollo.QueryResult<GetTakenV2Query, GetTakenV2QueryVariables>;
-export const GetTakenDocument = gql`
-    query GetTaken($zaakId: UUID, $pageNumber: Int, $pageSize: Int) {
-  getTaken(zaakUUID: $zaakId, pageNumber: $pageNumber, pageSize: $pageSize) {
-    content {
-      id
-      objectId
-      formulier {
-        ...FormulierFields
-      }
-      title
-      status
-      date
-      verloopdatum
-      data
-      zaak
-    }
-    totalElements
-    totalPages
-  }
-}
-    ${FormulierFieldsFragmentDoc}`;
-
-/**
- * __useGetTakenQuery__
- *
- * To run a query within a React component, call `useGetTakenQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetTakenQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetTakenQuery({
- *   variables: {
- *      zaakId: // value for 'zaakId'
- *      pageNumber: // value for 'pageNumber'
- *      pageSize: // value for 'pageSize'
- *   },
- * });
- */
-export function useGetTakenQuery(baseOptions?: Apollo.QueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
-      }
-export function useGetTakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
-        }
-export function useGetTakenSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetTakenQuery, GetTakenQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetTakenQuery, GetTakenQueryVariables>(GetTakenDocument, options);
-        }
-export type GetTakenQueryHookResult = ReturnType<typeof useGetTakenQuery>;
-export type GetTakenLazyQueryHookResult = ReturnType<typeof useGetTakenLazyQuery>;
-export type GetTakenSuspenseQueryHookResult = ReturnType<typeof useGetTakenSuspenseQuery>;
-export type GetTakenQueryResult = Apollo.QueryResult<GetTakenQuery, GetTakenQueryVariables>;
 export const GetUserDigitaleAdressenDocument = gql`
     query GetUserDigitaleAdressen {
   getUserDigitaleAdressen {
@@ -5283,11 +4789,13 @@ export const GetZakenDocument = gql`
       identificatie
       zaaktype {
         identificatie
+        omschrijving
       }
       startdatum
       status {
         statustype {
           isEindstatus
+          omschrijving
         }
       }
     }

@@ -11,11 +11,24 @@ import {
   EditContactInfoPage,
   ThemeOverviewPage,
   ThemeDetailsPage,
+  ThemeMutatePage,
+  ThemeListPage,
+  capitalizeFirstLetter,
+  currencyFormat,
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
 import { config } from "./config";
-import { Navigate, RouteObject as ReactRouteObject } from "react-router";
+import {
+  Navigate,
+  RouteObject as ReactRouteObject,
+  useSearchParams,
+} from "react-router";
+import { themes } from "./themes";
+import ParkerenOverview from "../pages/ParkerenOverview";
+import ParkerenDetails from "../pages/ParkerenDetails";
+import ParkerenHistory from "../pages/ParkerenHistory";
+import { FormattedNumber } from "react-intl";
 
 export type RouteObject = ReactRouteObject & {
   handle: {
@@ -79,71 +92,156 @@ export const routes: RouteObject[] = [
     ],
   },
   {
-    path: paths.themeOverview("belastingzaken"),
-    handle: { label: "breadcrumb.belastingzaken" },
+    path: paths.themeOverview(themes.belastingzaken.slug),
+    handle: { label: `breadcrumb.${themes.belastingzaken.slug}` },
     children: [
       {
         index: true,
-        handle: { label: "breadcrumb.belastingzaken" },
+        handle: { label: `breadcrumb.${themes.belastingzaken.slug}` },
         element: (
           <ThemeOverviewPage
-            slug="belastingzaken"
-            productSettings={{
-              titleTranslationId: "Producten",
-              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
-              dataMapping: ["naam", "startDatum", "eindDatum"],
-            }}
+            slug={themes.belastingzaken.slug}
+            productenSettings={[
+              {
+                productTypeCodes: [
+                  themes.belastingzaken.productTypeCodes.belastingzaken,
+                ],
+                titleTranslationId: "Producten",
+                headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
+                dataMapping: ["naam", "startDatum", "eindDatum"],
+              },
+            ]}
           />
         ),
       },
     ],
   },
   {
-    path: paths.themeOverview("parkeren"),
-    handle: { label: "breadcrumb.parkeren" },
+    path: paths.themeOverview(themes.parkeren.slug),
+    handle: { label: `breadcrumb.${themes.parkeren.slug}` },
     children: [
       {
         index: true,
-        handle: { label: "breadcrumb.parkeren" },
+        handle: { label: `breadcrumb.${themes.parkeren.slug}` },
+        element: <ParkerenOverview />,
+      },
+      {
+        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypeSlugs.parkeervergunningen)}`,
+        handle: { label: `breadcrumb.${themes.parkeren.slug}` },
         element: (
-          <ThemeOverviewPage
-            slug="parkeren"
+          <ThemeListPage
+            slug={themes.parkeren.slug}
             productSettings={{
+              productTypeCodes: [
+                themes.parkeren.productTypeCodes.parkeervergunningen,
+              ],
               titleTranslationId: "Vergunningen",
-              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
-              dataMapping: ["naam", "startDatum", "eindDatum"],
+              headerTranslationIds: [
+                "Naam",
+                "Startdatum",
+                "Einddatum",
+                "Status",
+                "Prijs",
+              ],
+              dataMapping: [
+                "naam",
+                "startDatum",
+                "eindDatum",
+                (product) =>
+                  capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
+                (product) => {
+                  return (
+                    <FormattedNumber
+                      value={product?.prijs ?? 0}
+                      {...currencyFormat}
+                    />
+                  );
+                },
+              ],
             }}
           />
         ),
       },
       {
-        path: paths.themeDetails("parkeren"),
-        handle: { label: "breadcrumb.parkeren.details" },
-        element: <ThemeDetailsPage />,
+        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypeSlugs.bezoekersvergunningen)}`,
+        handle: { label: `breadcrumb.${themes.parkeren.slug}` },
+        element: (
+          <ThemeListPage
+            slug={themes.parkeren.slug}
+            productSettings={{
+              productTypeCodes: [
+                themes.parkeren.productTypeCodes.bezoekersvergunningen,
+              ],
+              titleTranslationId: "Bezoekersvergunningen",
+              headerTranslationIds: ["Naam", "Startdatum", "Status", "Prijs"],
+              dataMapping: [
+                "naam",
+                "startDatum",
+                (product) =>
+                  capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
+                (product) => {
+                  return (
+                    <FormattedNumber
+                      value={product?.prijs ?? 0}
+                      {...currencyFormat}
+                    />
+                  );
+                },
+              ],
+            }}
+          />
+        ),
+      },
+      {
+        path: paths.themeDetails(themes.parkeren.slug),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
+        element: <ParkerenDetails />,
+      },
+      {
+        path: paths.themeHistory(themes.parkeren.slug),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
+        element: <ParkerenHistory />,
+      },
+      {
+        path: paths.themeMutate(themes.parkeren.slug),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
+        element: (
+          <ThemeMutatePage slug={themes.parkeren.slug}>
+            {() => {
+              const [searchParams] = useSearchParams();
+              return <div>Mutate parkeren: {searchParams.get("kenteken")}</div>;
+            }}
+          </ThemeMutatePage>
+        ),
       },
     ],
   },
   {
-    path: paths.themeOverview("inkomensondersteuning"),
-    handle: { label: "breadcrumb.inkomensondersteuning" },
+    path: paths.themeOverview(themes.inkomensondersteuning.slug),
+    handle: { label: `breadcrumb.${themes.inkomensondersteuning.slug}` },
     children: [
       {
         index: true,
-        handle: { label: "breadcrumb.inkomensondersteuning" },
+        handle: { label: `breadcrumb.${themes.inkomensondersteuning.slug}` },
         element: (
           <ThemeOverviewPage
-            slug="inkomensondersteuning"
-            productSettings={{
-              titleTranslationId: "Vergunningen",
-              headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
-              dataMapping: ["naam", "startDatum", "eindDatum"],
-            }}
+            slug={themes.inkomensondersteuning.slug}
+            productenSettings={[
+              {
+                productTypeCodes: ["INKOMENSONDERSTEUNING"],
+                titleTranslationId: "Vergunningen",
+                headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
+                dataMapping: ["naam", "startDatum", "eindDatum"],
+              },
+            ]}
           />
         ),
       },
       {
-        path: paths.themeDetails("inkomensondersteuning"),
-        handle: { label: "breadcrumb.inkomensondersteuning.details" },
+        path: paths.themeDetails(themes.inkomensondersteuning.slug),
+        handle: {
+          label: `breadcrumb.${themes.inkomensondersteuning.slug}.details`,
+        },
         element: <ThemeDetailsPage />,
       },
     ],

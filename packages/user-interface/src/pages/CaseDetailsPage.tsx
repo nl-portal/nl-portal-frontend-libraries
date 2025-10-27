@@ -4,8 +4,8 @@ import {
   useGetTakenV2Query,
   TaakV2,
   ZaakStatus,
-  useContactMomentsLazyQuery,
   OnderwerpObjectIndentificatorType,
+  useGetUserKlantContactenLazyQuery,
 } from "@nl-portal/nl-portal-api";
 import {
   LocaleContext,
@@ -49,7 +49,8 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     variables: { id },
   });
   const [getMomenten, { data: momentsData, loading: momentsLoading }] =
-    useContactMomentsLazyQuery();
+    useGetUserKlantContactenLazyQuery();
+
   const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
     variables: { zaakId: id },
   });
@@ -64,7 +65,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
       : tasksResult?.getTakenV2.content
   ) as TaakV2[] | undefined;
 
-  const { pushNotification } = useContext(NotificationContext);
+  const { dispatch } = useContext(NotificationContext);
 
   useEffect(() => {
     if (!caseData?.getZaak?.resultaat?.resultaattype?.omschrijvingGeneriek)
@@ -77,27 +78,39 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
 
     if (!variant) return;
 
-    pushNotification("caseResult", {
-      variant,
-      title: <FormattedMessage id={`caseDetails.resultAlert.${slug}`} />,
-      text: "",
-      closable: false,
+    dispatch({
+      type: "CREATE",
+      id: "caseResult",
+      notification: {
+        variant,
+        title: <FormattedMessage id={`caseDetails.resultAlert.${slug}`} />,
+        text: "",
+        closable: false,
+      },
     });
   }, [caseData]);
 
   useEffect(() => {
     if (paymentStatus === PaymentStatus.SUCCESS) {
-      pushNotification("casePaymentSuccess", {
-        variant: "success",
-        title: <FormattedMessage id="task.paymentSuccessTitle" />,
-        text: <FormattedMessage id="task.paymentSuccessText" />,
+      dispatch({
+        type: "CREATE",
+        id: "casePaymentSuccess",
+        notification: {
+          variant: "success",
+          title: <FormattedMessage id="task.paymentSuccessTitle" />,
+          text: <FormattedMessage id="task.paymentSuccessText" />,
+        },
       });
     }
     if (paymentStatus === PaymentStatus.FAILURE) {
-      pushNotification("casePaymentFailure", {
-        variant: "error",
-        title: <FormattedMessage id="task.paymentFailureTitle" />,
-        text: <FormattedMessage id="task.paymentFailureText" />,
+      dispatch({
+        type: "CREATE",
+        id: "casePaymentFailure",
+        notification: {
+          variant: "error",
+          title: <FormattedMessage id="task.paymentFailureTitle" />,
+          text: <FormattedMessage id="task.paymentFailureText" />,
+        },
       });
     }
   }, [paymentStatus]);
@@ -143,17 +156,17 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     }
 
     return array;
-  }, [caseData, currentLocale]);
+  }, [caseData?.getZaak, intl, formatDate]);
 
   const contactItems = React.useMemo(() => {
     if (!momentsData) return [];
 
-    return momentsData.map((contact, index) => ({
+    return momentsData.getUserKlantContacten.map((contact, index) => ({
       id: index,
       title: contact.onderwerp,
       description: contact.inhoud && <Pre>{contact.inhoud}</Pre>,
       channel: contact.kanaal,
-      isoDate: contact.registratiedatum,
+      isoDate: contact.plaatsgevondenOp,
     }));
   }, [momentsData]);
 
@@ -168,19 +181,20 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     if (!caseData) return;
     getMomenten({
       variables: {
-        objectUrl: caseData.getZaak.url,
         identificatorType: OnderwerpObjectIndentificatorType.Zaak,
         identificatorId: caseData.getZaak.uuid,
       },
     });
   }, [caseData]);
 
-  if (!caseError) {
-    <div>
-      <Paragraph>
-        <FormattedMessage id="caseDetails.fetchError" />
-      </Paragraph>
-    </div>;
+  if (caseError) {
+    return (
+      <div>
+        <Paragraph>
+          <FormattedMessage id="caseDetails.fetchError" />
+        </Paragraph>
+      </div>
+    );
   }
 
   const zaakDetails = caseData?.getZaak.zaakdetails.data as
@@ -197,6 +211,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
             !loading &&
             intl.formatMessage({
               id: `case.${caseData?.getZaak.zaaktype.identificatie}.title`,
+              defaultMessage: caseData?.getZaak.zaaktype.omschrijving || "",
             })
           }
         />

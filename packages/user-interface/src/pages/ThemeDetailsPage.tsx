@@ -11,50 +11,57 @@ import {
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import { useParams } from "react-router";
-import { capitalizeFirstLetter } from "../utils/person-data";
 import DescriptionList from "../components/DescriptionList";
-import { currencyFormat } from "../constants/currency-format";
 import DecisionsList from "../components/DecisionsList";
+import React from "react";
 
-const ThemeDetailsPage = () => {
+interface ThemeDetailsPageProps {
+  children?:
+    | ((
+        openProduct: ReturnType<typeof useGetOpenProductQuery>,
+      ) => React.ReactNode)
+    | React.ReactNode;
+  productSettings?: {
+    headerTranslationIds: string[];
+    dataMapping: (
+      | ((product: OpenProductProduct) => React.ReactNode)
+      | keyof OpenProductProduct
+    )[];
+  };
+}
+
+const ThemeDetailsPage = ({
+  children,
+  productSettings,
+}: ThemeDetailsPageProps) => {
   const intl = useIntl();
-  const { id } = useParams();
-  const { data, loading, error } = useGetOpenProductQuery({
+  const { id } = useParams<{ id: string }>();
+  const openProduct = useGetOpenProductQuery({
     variables: { id },
   });
 
-  console.log("data", data);
-
-  const openProduct = data?.getOpenProduct as OpenProductProduct | undefined;
-  const zaken = openProduct?.zaken as Zaak[] | undefined;
-  const taken = openProduct?.taken as TaakV2[] | undefined;
-
-  const descriptionItems = [
-    { title: "Startdatum", detail: openProduct?.startDatum },
-    { title: "Einddatum", detail: openProduct?.eindDatum },
-    {
-      title: "Status",
-      detail: capitalizeFirstLetter(openProduct?.status?.toLowerCase() ?? ""),
-    },
-    {
-      title: "Prijs",
-      detail: capitalizeFirstLetter(
-        intl.formatNumber(openProduct?.prijs ?? 0, currencyFormat),
-      ),
-    },
-    ...(openProduct?.dataobject?.data?.details ?? []).map(
-      (item: { key: string; value: string }) => ({
-        title: item.key,
-        detail: item.value,
-      }),
-    ),
-  ].filter(({ detail }) => detail);
+  const { data, loading, error } = openProduct;
+  const product = data?.getOpenProduct as OpenProductProduct | undefined;
+  const zaken = product?.zaken as Zaak[] | undefined;
+  const taken = product?.taken as TaakV2[] | undefined;
+  const details =
+    product && productSettings
+      ? productSettings?.headerTranslationIds
+          ?.map((header, index) => ({
+            title: intl.formatMessage({ id: header }),
+            detail:
+              productSettings.dataMapping[index] instanceof Function
+                ? productSettings.dataMapping[index](product)
+                : product?.[productSettings.dataMapping[index]],
+          }))
+          .filter(({ detail }) => detail)
+      : [];
 
   return (
     <PageGrid>
       <div>
         <BackLink />
-        <PageHeader loading={loading} title={openProduct?.naam} />
+        <PageHeader loading={loading} title={product?.naam} />
       </div>
       <TasksList
         loading={loading}
@@ -63,7 +70,7 @@ const ThemeDetailsPage = () => {
         titleTranslationId={null}
         tasks={taken}
       />
-      <DecisionsList loading={loading} decisions={openProduct?.decisions} />
+      <DecisionsList loading={loading} decisions={product?.decisions} />
       <CasesList
         loading={loading}
         error={Boolean(error)}
@@ -71,7 +78,8 @@ const ThemeDetailsPage = () => {
         listView={false}
         cases={zaken}
       />
-      <DescriptionList titleTranslationId="Details" items={descriptionItems} />
+      <DescriptionList loading={loading} showEmpty={false} items={details} />
+      {children instanceof Function ? children(openProduct) : children}
       <TasksList
         loading={loading}
         showEmpty={false}

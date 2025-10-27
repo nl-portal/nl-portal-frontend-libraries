@@ -8,7 +8,10 @@ export interface Paths {
   messages: string;
   message: (id?: string | number) => string;
   themeOverview: (slug?: string) => string;
+  themeList: (slug?: string, productTypeSlug?: string) => string;
   themeDetails: (slug?: string, id?: string | number) => string;
+  themeHistory: (slug?: string, id?: string | number) => string;
+  themeMutate: (slug?: string, id?: string | number) => string;
   account: string;
   changeContactInfo: string;
   changeNotifications: string;

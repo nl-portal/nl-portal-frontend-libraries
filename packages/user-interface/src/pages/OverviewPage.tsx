@@ -60,6 +60,9 @@ const OverviewPage = ({
   const loading = tasksLoading || casesLoading;
   const tasks = tasksData?.getTakenV2.content as TaakV2[] | undefined;
   const cases = casesData?.getZaken.content as Zaak[] | undefined;
+  const emailadres = contact?.getUserDigitaleAdressen?.find(
+    (a) => a.type === "EMAIL",
+  );
 
   return (
     <PageGrid>
@@ -74,7 +77,7 @@ const OverviewPage = ({
           }
         />
       )}
-      {showNoEmailAlert && !contact?.emailadres && (
+      {showNoEmailAlert && !emailadres?.waarde && (
         <Alert
           title={<FormattedMessage id="overviewpage.noEmail.title" />}
           text={

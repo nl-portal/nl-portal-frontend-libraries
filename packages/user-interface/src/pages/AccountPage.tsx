@@ -23,6 +23,7 @@ import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import Notification from "../components/Notification";
 import { LinkList } from "@gemeente-denhaag/link-list";
+import { DigitaleAdresType } from "@nl-portal/nl-portal-api";
 
 // Temporary props, this should be moved to the config portal in the future
 interface AccountPageProps {
@@ -52,6 +53,12 @@ const AccountPage = ({
   const { isPersoon, persoon, bedrijf, contact } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const intl = useIntl();
+  const telefoonnummer = contact?.getUserDigitaleAdressen?.find(
+    (a) => a.type === DigitaleAdresType.Telefoonnummer,
+  );
+  const emailadres = contact?.getUserDigitaleAdressen?.find(
+    (a) => a.type === DigitaleAdresType.Email,
+  );
 
   if ((isPersoon && !persoon) || (!isPersoon && !bedrijf)) {
     return (
@@ -89,7 +96,7 @@ const AccountPage = ({
                 title: <FormattedMessage id="account.detail.emailadres" />,
                 detail: (
                   <DescriptionListDetail translate="no">
-                    {contact?.emailadres}
+                    {emailadres?.waarde}
                   </DescriptionListDetail>
                 ),
               },
@@ -97,7 +104,7 @@ const AccountPage = ({
                 title: <FormattedMessage id="account.detail.telefoonnummer" />,
                 detail: (
                   <DescriptionListDetail translate="no">
-                    {contact?.telefoonnummer}
+                    {telefoonnummer?.waarde}
                   </DescriptionListDetail>
                 ),
               },
@@ -149,8 +156,8 @@ const AccountPage = ({
                   <DescriptionListDetail translate="no">
                     {getStreetString(
                       bedrijf?.embedded?.hoofdvestiging?.adressen?.[0]
-                        .straatnaam,
-                      bedrijf?.embedded?.hoofdvestiging?.adressen?.[0].huisnummer?.toString(),
+                        ?.straatnaam,
+                      bedrijf?.embedded?.hoofdvestiging?.adressen?.[0]?.huisnummer?.toString(),
                       undefined,
                       undefined,
                     )}
@@ -164,8 +171,9 @@ const AccountPage = ({
                 detail: (
                   <DescriptionListDetail translate="no">
                     {getPostalCodeCityString(
-                      bedrijf?.embedded?.hoofdvestiging?.adressen?.[0].postcode,
-                      bedrijf?.embedded?.hoofdvestiging?.adressen?.[0].plaats,
+                      bedrijf?.embedded?.hoofdvestiging?.adressen?.[0]
+                        ?.postcode,
+                      bedrijf?.embedded?.hoofdvestiging?.adressen?.[0]?.plaats,
                     )}
                   </DescriptionListDetail>
                 ),
@@ -225,7 +233,7 @@ const AccountPage = ({
               title: <FormattedMessage id="account.detail.emailadres" />,
               detail: (
                 <DescriptionListDetail translate="no">
-                  {contact?.emailadres}
+                  {emailadres?.waarde}
                 </DescriptionListDetail>
               ),
             },
@@ -233,7 +241,7 @@ const AccountPage = ({
               title: <FormattedMessage id="account.detail.telefoonnummer" />,
               detail: (
                 <DescriptionListDetail translate="no">
-                  {contact?.telefoonnummer}
+                  {telefoonnummer?.waarde}
                 </DescriptionListDetail>
               ),
             },

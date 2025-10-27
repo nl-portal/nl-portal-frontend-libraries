@@ -80,6 +80,7 @@ const StatusHistory: FC<StatusHistoryProps> = ({
               id: `step-${index + 1}`,
               title: intl.formatMessage({
                 id: `case.${caseId}.status.${stringToId(`${omschrijving}`)}`,
+                defaultMessage: omschrijving || "",
               }),
               status: getStepStatus(omschrijving),
               marker: index + 1,

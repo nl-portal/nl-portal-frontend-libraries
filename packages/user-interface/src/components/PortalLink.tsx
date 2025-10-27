@@ -16,6 +16,7 @@ const PortalLink = ({
   const isExternalLink =
     href && (href.startsWith("https://") || href.startsWith("tel:"));
   const linkClassNames = classNames("nl-link", className);
+
   if (href && !isExternalLink) {
     return (
       <Link to={href} className={linkClassNames} {...props}>
@@ -23,6 +24,7 @@ const PortalLink = ({
       </Link>
     );
   }
+
   return (
     <DHLink href={href} className={className} {...props}>
       {props.children}
