@@ -1,6 +1,6 @@
 import { Components } from "@formio/react";
 import { TextInput } from "@gemeente-denhaag/text-input";
-import { useId } from "react";
+import { useEffect, useId } from "react";
 import { Container } from "react-dom/client";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 import { FormField } from "@gemeente-denhaag/form-field";
@@ -11,7 +11,10 @@ import useFormIoState, {
 } from "./useFormIoState";
 import BaseFormIoComponent from "./BaseFormIoComponent";
 
-type FormIoTextInputProps = BasicFormIoComponentSchema & useFormIoStateProps;
+type FormIoTextInputProps = BasicFormIoComponentSchema &
+  useFormIoStateProps & {
+    initialValue?: string; // ✅ accept injected value
+  };
 
 const FormIoTextInput = ({
   formioRef,
@@ -20,8 +23,13 @@ const FormIoTextInput = ({
   placeholder,
   label,
   attributes,
+  initialValue, // ✅ from BaseFormIoComponent
 }: FormIoTextInputProps) => {
-  const [value, setValue] = useFormIoState({ formioRef, onChange });
+  const [value, setValue] = useFormIoState({
+    formioRef,
+    onChange,
+    initialValue,
+  });
   const id = useId();
 
   return (
@@ -30,7 +38,7 @@ const FormIoTextInput = ({
       <TextInput
         id={id}
         type="text"
-        value={value || ""}
+        value={value ?? ""} // keep controlled; allow hydration
         disabled={disabled}
         placeholder={placeholder}
         onChange={(ev) => setValue(ev?.target?.value)}

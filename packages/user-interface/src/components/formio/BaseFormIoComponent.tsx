@@ -40,6 +40,7 @@ export default class BaseFormIoComponent extends ReactComponent {
           componentKey={key}
           formioRef={ref}
           onChange={this.updateValue}
+          initialValue={this.dataValue} // ✅ inject current value from Form.io
           {...rest}
         />,
       );

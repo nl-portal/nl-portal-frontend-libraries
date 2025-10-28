@@ -1,5 +1,5 @@
 import { Components } from "@formio/react";
-import { useId, useMemo } from "react";
+import { useId } from "react";
 import { Container } from "react-dom/client";
 
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
