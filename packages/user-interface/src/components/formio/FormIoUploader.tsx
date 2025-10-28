@@ -10,10 +10,8 @@ import { get } from "lodash-es";
 import { TextInput } from "@gemeente-denhaag/text-input";
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
 
-export interface UploadedFile {
+export interface UploadedFile extends File {
   url: string;
-  name: string;
-  size: number;
 }
 
 interface FileUploadProps extends BasicFormIoComponentSchema {
@@ -63,9 +61,8 @@ const FileUpload = ({
       } else {
         const jsonResponse = await response.json();
         const uploadedFile = {
+          ...file,
           url: jsonResponse?.url,
-          name: file.name,
-          size: file.size,
         };
         if (!multiple) {
           setFileList([uploadedFile]);
@@ -112,6 +109,7 @@ const FileUpload = ({
         id={id}
         type="file"
         name="file"
+        multiple={multiple}
         onChange={onChangeHandler}
         disabled={disabled || isLoading}
         {...attributes}
