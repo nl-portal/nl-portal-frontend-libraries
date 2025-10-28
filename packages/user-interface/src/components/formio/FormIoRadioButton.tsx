@@ -1,5 +1,5 @@
 import { Components } from "@formio/react";
-import { useId } from "react";
+import { useId, useMemo } from "react";
 import { Container } from "react-dom/client";
 
 import BasicFormIoComponentSchema from "./BasicFormIoComponentSchema";
@@ -26,17 +26,18 @@ type FormIoRadioProps = BasicFormIoComponentSchema &
   };
 
 type FormIoRadioOptionProps = {
-  componentKey: string;
+  name: string;
   option: RadioOption;
   checked: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 const FormIoRadioOption = ({
-  componentKey,
+  name,
   onChange,
   option,
 }: FormIoRadioOptionProps) => {
+  console.log(option);
   const id = useId();
   return (
     <FormField type="radio">
@@ -45,7 +46,7 @@ const FormIoRadioOption = ({
           <RadioButton
             className="utrecht-form-field__input"
             id={id}
-            name={componentKey}
+            name={name}
             value={option.value}
             onChange={onChange}
           />
@@ -59,7 +60,7 @@ const FormIoRadioOption = ({
 const FormIoRadio = ({
   formioRef,
   onChange,
-  componentKey,
+  name,
   values = [],
   label,
 }: FormIoRadioProps) => {
@@ -67,6 +68,8 @@ const FormIoRadio = ({
     formioRef,
     onChange,
   });
+
+  console.log("radio component name", name);
 
   return (
     <Fieldset>
@@ -77,7 +80,7 @@ const FormIoRadio = ({
       {values.map((option) => (
         <FormIoRadioOption
           key={option.value}
-          componentKey={componentKey || "radioButtonGroup"}
+          name={name || "radioButtonGroup"}
           option={option}
           checked={value === option.value}
           onChange={(ev) => setValue(ev.target.value)}
