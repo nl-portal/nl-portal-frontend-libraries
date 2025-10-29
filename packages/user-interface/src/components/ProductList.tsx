@@ -31,8 +31,11 @@ export const ProductList = ({
   });
 
   const onPageChange = (index: number) => {
-    refetch({ pageNumber: index + 1 });
-    return index;
+    try {
+      refetch({ pageNumber: index + 1 });
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
   };
 
   const producten = data?.getOpenProducten.content as

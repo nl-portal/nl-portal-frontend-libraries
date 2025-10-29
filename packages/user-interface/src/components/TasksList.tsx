@@ -24,7 +24,7 @@ interface Props {
   tasks?: TaakV2[];
   index?: number;
   indexLimit?: number;
-  onChange?: (index: number) => number;
+  onChange?: (index: number) => void;
 }
 
 const TasksList = ({
