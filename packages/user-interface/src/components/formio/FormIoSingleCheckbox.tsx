@@ -20,8 +20,13 @@ const FormIoSingleCheckbox = ({
   disabled,
   label,
   attributes,
+  initialValue,
 }: FormIoSingleCheckboxProps) => {
-  const [value, setValue] = useFormIoState<boolean>({ formioRef, onChange });
+  const [value, setValue] = useFormIoState<boolean>({
+    formioRef,
+    onChange,
+    initialValue,
+  });
 
   return (
     <FormField type="checkbox">

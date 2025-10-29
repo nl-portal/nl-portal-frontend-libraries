@@ -36,8 +36,8 @@ const FormIoRadioOption = ({
   name,
   onChange,
   option,
+  checked,
 }: FormIoRadioOptionProps) => {
-  console.log(option);
   const id = useId();
   return (
     <FormField type="radio">
@@ -47,6 +47,7 @@ const FormIoRadioOption = ({
             className="utrecht-form-field__input"
             id={id}
             name={name}
+            checked={checked}
             value={option.value}
             onChange={onChange}
           />
@@ -63,13 +64,13 @@ const FormIoRadio = ({
   name,
   values = [],
   label,
+  initialValue,
 }: FormIoRadioProps) => {
   const [value, setValue] = useFormIoState<string | number>({
     formioRef,
     onChange,
+    initialValue,
   });
-
-  console.log("radio component name", name);
 
   return (
     <Fieldset>

@@ -27,10 +27,12 @@ const FormIoSelect = ({
   multiple,
   componentKey,
   attributes,
+  initialValue,
 }: FormIoSelectProps) => {
   const [value, setValue] = useFormIoState<string | string[]>({
     formioRef,
     onChange,
+    initialValue,
   });
   const id = useId();
 

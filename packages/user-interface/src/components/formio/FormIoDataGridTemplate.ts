@@ -6,9 +6,9 @@ export function installDenHaagTemplates() {
   const base =
     (Templates as any).templates?.bootstrap || (Templates as any).current || {};
 
-  // Helper: safely coerce to array
-  const toArray = (v: any): any[] =>
-    Array.isArray(v) ? v : v && typeof v === "object" ? Object.values(v) : [];
+  // // Helper: safely coerce to array
+  // const toArray = (v: any): any[] =>
+  //   Array.isArray(v) ? v : v && typeof v === "object" ? Object.values(v) : [];
 
   // Helper: get a cell's HTML string (already rendered by Form.io)
   const cellToHtml = (cell: any): string => {
@@ -48,6 +48,7 @@ export function installDenHaagTemplates() {
         const cellsHtml = columns
           .map((col: any) => {
             const key = col?.key;
+            console.log("col", col);
             const cellHtml =
               key && rowObj && rowObj[key] != null
                 ? cellToHtml(rowObj[key])

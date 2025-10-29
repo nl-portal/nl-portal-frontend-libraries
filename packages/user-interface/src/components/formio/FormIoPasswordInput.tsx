@@ -21,8 +21,13 @@ const FormIoPasswordInput = ({
   placeholder,
   label,
   attributes,
+  initialValue,
 }: FormIoPasswordInputProps) => {
-  const [value, setValue] = useFormIoState({ formioRef, onChange });
+  const [value, setValue] = useFormIoState({
+    formioRef,
+    onChange,
+    initialValue,
+  });
   const id = useId();
 
   return (

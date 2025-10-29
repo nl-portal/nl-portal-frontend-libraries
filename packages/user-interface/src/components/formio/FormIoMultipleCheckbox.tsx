@@ -54,10 +54,12 @@ const FormIoMultipleCheckbox = ({
   onChange,
   values = [],
   label,
+  initialValue,
 }: FormIoMultipleCheckboxProps) => {
   const [value, setValue] = useFormIoState<Record<string, boolean>>({
     formioRef,
     onChange,
+    initialValue,
   });
 
   const handleCheckboxChange = (

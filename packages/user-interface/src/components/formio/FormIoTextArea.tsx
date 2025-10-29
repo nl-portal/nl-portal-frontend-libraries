@@ -20,8 +20,14 @@ const FormIoTextArea = ({
   placeholder,
   label,
   attributes,
+  initialValue,
 }: FormIoTextAreaProps) => {
-  const [value, setValue] = useFormIoState({ formioRef, onChange });
+  const [value, setValue] = useFormIoState({
+    formioRef,
+    onChange,
+    initialValue,
+  });
+
   const id = useId();
 
   return (

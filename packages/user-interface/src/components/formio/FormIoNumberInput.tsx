@@ -20,8 +20,13 @@ const FormIoNumberInput = ({
   placeholder,
   label,
   attributes,
+  initialValue,
 }: FormIoNumberInputProps) => {
-  const [value, setValue] = useFormIoState({ formioRef, onChange });
+  const [value, setValue] = useFormIoState({
+    formioRef,
+    onChange,
+    initialValue,
+  });
   const id = useId();
 
   return (
