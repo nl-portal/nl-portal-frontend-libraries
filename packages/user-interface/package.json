@@ -29,7 +29,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@formio/js": "5.2.1",
     "@formio/protected-eval": "2.0.0",
+    "@formio/react": "6.1.0",
     "@gemeente-denhaag/action": "4.0.0",
     "@gemeente-denhaag/alert": "4.0.3",
     "@gemeente-denhaag/button": "3.0.0",
@@ -93,8 +95,6 @@
   },
   "peerDependencies": {
     "@apollo/client": "3.13.8",
-    "@formio/js": "5.2.1",
-    "@formio/react": "6.1.0",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",

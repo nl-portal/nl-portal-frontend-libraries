@@ -29,7 +29,4 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
   },
-  resolve: {
-    dedupe: ["@formio/js", "@formio/react"],
-  },
 });

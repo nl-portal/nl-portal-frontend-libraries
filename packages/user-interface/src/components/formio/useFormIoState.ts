@@ -10,7 +10,7 @@ export type FormIoRefProp<T = any> = (element: FormIoRefState<T>) => void;
 export type useFormIoStateProps<T = any> = {
   formioRef: FormIoRefProp<T>;
   onChange: (value: T, flags?: any) => void;
-  initialValue?: T; // ✅ NEW
+  initialValue?: T;
 };
 
 export const useFormIoState = <T = any>({
