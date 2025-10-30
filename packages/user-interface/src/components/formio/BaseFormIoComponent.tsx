@@ -32,7 +32,7 @@ export default class BaseFormIoComponent extends ReactComponent {
   ) {
     this.root = createRoot(element);
     const { key, ...rest } = this.component;
-    const scopedName = `${(this as any).options?.name ?? 'data'}[${key}]`;
+    const scopedName = `${(this as any).options?.name ?? "data"}[${key}]`;
 
     if (ComponentType) {
       this.root.render(
@@ -40,8 +40,11 @@ export default class BaseFormIoComponent extends ReactComponent {
           key={key}
           componentKey={key}
           formioRef={ref}
-          onChange={this.updateValue}
-          initialValue={this.dataValue} // ✅ inject current value from Form.io
+          onChange={(val: any) => {
+            (this as any).updateValue(val);
+            (this as any).checkValidity(this.data, true);
+          }}
+          initialValue={this.dataValue}
           name={scopedName}
           {...rest}
         />,
