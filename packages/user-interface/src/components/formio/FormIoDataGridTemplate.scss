@@ -10,3 +10,23 @@
   justify-content: flex-end;
   align-items: center;
 }
+
+//TODO: move to separate file
+.formio-component-hidden,
+.formio-hidden {
+  display: none !important;
+}
+
+.formio-component-select > [ref="label"],
+.formio-component-selectboxes > [ref="label"],
+.formio-component-textarea > [ref="label"],
+.formio-component-textfield > [ref="label"],
+.formio-component-email > [ref="label"],
+.formio-component-password > [ref="label"],
+.formio-component-number > [ref="label"] {
+  display: none !important;
+}
+
+.denhaag-form-field--flex + .form-text.text-muted {
+  display: none !important;
+}
