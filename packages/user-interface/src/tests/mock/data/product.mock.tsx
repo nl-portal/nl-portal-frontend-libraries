@@ -1,8 +1,8 @@
-import { QUERY_GET_OPEN_PRODUCT_HOOFD_THEMAS } from "@nl-portal/nl-portal-api";
+import { QUERY_GET_OPEN_PRODUCT_HOOFD_THEMAS_BY_PRODUCTEN } from "@nl-portal/nl-portal-api";
 
 export const getProduct = {
   request: {
-    query: QUERY_GET_OPEN_PRODUCT_HOOFD_THEMAS,
+    query: QUERY_GET_OPEN_PRODUCT_HOOFD_THEMAS_BY_PRODUCTEN,
     variables: {},
   },
   result: {
