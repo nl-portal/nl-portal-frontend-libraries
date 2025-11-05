@@ -4,7 +4,7 @@ Templates.templates["denhaag"] = Templates.templates["denhaag"] || {};
 
 Templates.templates["denhaag"].radio = {
   form: (ctx: any) => {
-    const { component, input } = ctx;
+    const { component } = ctx;
     const id = ctx.instance?.id || component.key || "radio";
     const label = ctx.t(component.label || "");
     const description = ctx.t(component.description || "");
