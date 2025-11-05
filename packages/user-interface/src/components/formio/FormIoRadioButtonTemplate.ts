@@ -1,8 +1,4 @@
-import { Templates } from "@formio/js";
-
-Templates.templates["denhaag"] = Templates.templates["denhaag"] || {};
-
-Templates.templates["denhaag"].radio = {
+export const nlPortalRadioButton = {
   form: (ctx: any) => {
     const { component } = ctx;
     const id = ctx.instance?.id || component.key || "radio";

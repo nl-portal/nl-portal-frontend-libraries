@@ -16,13 +16,14 @@ import { Paths } from "../interfaces/paths";
 import FormIoUploader from "./formio/FormIoUploader";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import "@utrecht/document-css";
-import "./formio/FormIoDataGridTemplate";
-import "./formio/FormIoButtonTemplate";
-import "./formio/FormIoInputTemplate";
-import "./formio/FormIoRadioButtonTemplate";
-import "./formio/FormIoSingleCheckboxTemplate";
-import "./formio/FormIoMultipleCheckboxesTemplate";
-import "./formio/FormIoSelectTemplate";
+import { nlPortalInput } from "./formio/FormIoInputTemplate";
+import { Templates } from "@formio/js";
+import { nlPortalSelect } from "./formio/FormIoSelectTemplate";
+import { nlPortalRadioButton } from "./formio/FormIoRadioButtonTemplate";
+import { nlPortalSingleCheckbox } from "./formio/FormIoSingleCheckboxTemplate";
+import { nlPortalMultipleCheckboxes } from "./formio/FormIoMultipleCheckboxesTemplate";
+import { nlPortalButton } from "./formio/FormIoButtonTemplate";
+import { nlPortalDataGrid } from "./formio/FormIoDataGridTemplate";
 
 interface LayoutComponentProps {
   paths: Paths;
@@ -43,16 +44,14 @@ const Layout = ({
 
   useEffect(() => {
     FormIoUploader.register();
-    //FormIoTextInputWrapper.register();
-    // FormIoNumberInputWrapper.register();
-    // FormIoPasswordInputWrapper.register();
-    // FormIoSingleCheckboxWrapper.register();
-    // FormIoMultipleCheckboxWrapper.register();
-    // FormIoTextAreaWrapper.register();
-    //FormIoButtonWrapper.register();
-    // FormIoRadioWrapper.register();
-    // FormIoSelectWrapper.register();
-    // installDenHaagTemplates();
+    const t = (Templates.templates["denhaag"] ||= {});
+    t.input = nlPortalInput;
+    t.select = nlPortalSelect;
+    t.radio = nlPortalRadioButton;
+    t.checkbox = nlPortalSingleCheckbox;
+    t.checkboxes = nlPortalMultipleCheckboxes;
+    t.button = nlPortalButton;
+    t.datagrid = nlPortalDataGrid;
   }, []);
 
   useEffect(() => {

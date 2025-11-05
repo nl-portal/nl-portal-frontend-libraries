@@ -1,43 +1,6 @@
-import { Templates } from "@formio/js";
+import { serializeAttrs } from "./FormIoTemplateUtils";
 
-const escapeAttr = (v: any) =>
-  String(v)
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-
-function serializeAttrs(
-  attr: any,
-  extras: Record<string, any>,
-  omitKeys: string[] = [],
-) {
-  if (typeof attr === "string") {
-    const toAdd = Object.entries(extras)
-      .filter(
-        ([k, v]) =>
-          v !== false &&
-          v != null &&
-          !omitKeys.includes(k) &&
-          !attr.includes(`${k}=`) &&
-          !(k === "class" && attr.includes("class=")),
-      )
-      .map(([k, v]) => (v === true ? k : `${k}="${escapeAttr(v)}"`))
-      .join(" ");
-    return (attr + (toAdd ? " " + toAdd : "")).trim();
-  }
-  const merged = { ...(extras || {}), ...(attr || {}) };
-  omitKeys.forEach((k) => {
-    if (k in merged) delete (merged as any)[k];
-  });
-  return Object.entries(merged)
-    .filter(([_, v]) => v !== false && v != null)
-    .map(([k, v]) => (v === true ? k : `${k}="${escapeAttr(v)}"`))
-    .join(" ");
-}
-
-Templates.templates["denhaag"] = Templates.templates["denhaag"] || {};
-Templates.templates["denhaag"].select = {
+export const nlPortalSelect = {
   form: (ctx: any) => {
     const { component } = ctx;
     const selectId =

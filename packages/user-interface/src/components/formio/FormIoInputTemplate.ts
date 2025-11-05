@@ -1,46 +1,5 @@
-import { Templates } from "@formio/js";
+import { escapeHtml, serializeAttrs } from "./FormIoTemplateUtils";
 
-/* ---------------- helpers ---------------- */
-const escapeHtml = (v: any) =>
-  String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-const escapeAttr = (v: any) =>
-  String(v)
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-
-function serializeAttrs(
-  attr: any,
-  extras: Record<string, any>,
-  omitKeys: string[] = [],
-) {
-  if (typeof attr === "string") {
-    const toAdd = Object.entries(extras)
-      .filter(
-        ([k, v]) =>
-          v !== false &&
-          v != null &&
-          !omitKeys.includes(k) &&
-          !attr.includes(`${k}=`) &&
-          !(k === "class" && attr.includes("class=")),
-      )
-      .map(([k, v]) => (v === true ? k : `${k}="${escapeAttr(v)}"`))
-      .join(" ");
-    return (attr + (toAdd ? " " + toAdd : "")).trim();
-  }
-  const merged = { ...(extras || {}), ...(attr || {}) }; // Form.io wint
-  omitKeys.forEach((k) => {
-    if (k in merged) delete (merged as any)[k];
-  });
-  return Object.entries(merged)
-    .filter(([_, v]) => v !== false && v != null)
-    .map(([k, v]) => (v === true ? k : `${k}="${escapeAttr(v)}"`))
-    .join(" ");
-}
-
-/* -------------- gedeelde UI -------------- */
 function wrapperOpen(ctx: any, inputId: string, baseModifier = "text") {
   const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
   const wrapperClass = `utrecht-form-field utrecht-form-field--${baseModifier}${hasErrors ? " utrecht-form-field--invalid" : ""}`;
@@ -64,7 +23,6 @@ function errorsBlock(ctx: any, inputId: string) {
   `;
 }
 
-/* -------------- renderers -------------- */
 function renderInputElement(ctx: any) {
   const fallbackId = ctx.instance?.id || ctx.component.key || "textfield";
   const inputId = ctx.input?.id || fallbackId;
@@ -168,23 +126,9 @@ function renderTextareaElement(ctx: any) {
   `;
 }
 
-/* -------------- templateset -------------- */
-Templates.templates["denhaag"] = Templates.templates["denhaag"] || {};
-
-// Belangrijk: sommige builds roepen voor textarea tóch 'input' aan.
-// Daarom laten we 'input' conditioneel kiezen.
-Templates.templates["denhaag"].input = {
+export const nlPortalInput = {
   form: (ctx: any) =>
     ctx.component?.type === "textarea"
       ? renderTextareaElement(ctx)
       : renderInputElement(ctx),
 };
-
-// En voor builds die wél 'textarea' aanroepen, registreren we deze ook:
-Templates.templates["denhaag"].textarea = {
-  form: (ctx: any) => renderTextareaElement(ctx),
-};
-
-// (Je button-template laat je zoals die was)
-// Activeer bij voorkeur via een naam:
-Templates.current = "denhaag";

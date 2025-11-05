@@ -1,8 +1,4 @@
-import { Templates } from "@formio/js";
-
-Templates.templates["denhaag"] = Templates.templates["denhaag"] || {};
-
-Templates.templates["denhaag"].selectboxes = {
+export const nlPortalMultipleCheckboxes = {
   form: (ctx: any) => {
     const { component } = ctx;
     const idBase = ctx.instance?.id || component.key || "selectboxes";
