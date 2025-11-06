@@ -1,0 +1,97 @@
+@use "../styles/mixins";
+
+.fullscreen-skeleton {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  --header-height: var(--denhaag-header-height);
+  --breadcrumb-height: 50px;
+  --top-height: calc(
+    var(--denhaag-header-md-height) + var(--breadcrumb-height)
+  );
+
+  @include mixins.breakpoint(tablet) {
+    --header-height: var(--denhaag-header-sm-height);
+  }
+
+  @include mixins.breakpoint(desktop) {
+    --header-height: var(--denhaag-header-md-height);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: var(--top-height);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0%) 0%,
+      rgb(255 255 255 / 75%) 100%
+    );
+  }
+
+  .header {
+    height: var(--header-height);
+    flex-shrink: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #f1f1f1;
+
+    & > div {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .breadcrumb {
+    height: var(--breadcrumb-height);
+    flex-shrink: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #f1f1f1;
+  }
+
+  .page {
+    gap: 80px;
+  }
+
+  .sidebar {
+    display: none;
+    flex-direction: column;
+    gap: 56px;
+
+    @include mixins.breakpoint(desktop) {
+      display: flex;
+    }
+  }
+
+  .sidebar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sidebar-item {
+    display: flex;
+    gap: 12px;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}

@@ -7,7 +7,7 @@ export * from "./queries/get-persoon-v2";
 export * from "./queries/get-gemachtigde-v2";
 export * from "./queries/get-user-klant-contacten";
 export * from "./queries/get-zaak";
-export * from "./queries/get-open-product-hoofd-themas";
+export * from "./queries/get-open-product-hoofd-themas-by-producten";
 export * from "./queries/berichten/get-unopened-berichten-count";
 export * from "./queries/get-user-digitale-adressen";
 export * from "./hooks/useUserContactMutation";
