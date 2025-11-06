@@ -1,3 +1,5 @@
+import { errorsBlock } from "./FormIoTemplateUtils";
+
 export const nlPortalMultipleCheckboxes = {
   form: (ctx: any) => {
     const { component } = ctx;
@@ -6,7 +8,6 @@ export const nlPortalMultipleCheckboxes = {
     const description = ctx.t(component.description || "");
     const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
     const fieldsetClass = `utrecht-form-fieldset${hasErrors ? " utrecht-form-fieldset--invalid" : ""}`;
-    const errorId = `err-${idBase}`;
 
     // Helper: is deze optie aangevinkt in de huidige data?
     const isChecked = (value: any) => {
@@ -72,9 +73,7 @@ export const nlPortalMultipleCheckboxes = {
 
           ${optionsHtml}
 
-          <div class="utrecht-form-field-error-message" id="${errorId}" ref="messageContainer">
-            ${hasErrors ? ctx.errors.join("<br>") : ""}
-          </div>
+          ${errorsBlock(ctx, idBase)}
         </fieldset>
       </div>
     `;

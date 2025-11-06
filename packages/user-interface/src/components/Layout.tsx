@@ -16,14 +16,15 @@ import { Paths } from "../interfaces/paths";
 import FormIoUploader from "./formio/FormIoUploader";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import "@utrecht/document-css";
-import { nlPortalInput } from "./formio/FormIoInputTemplate";
 import { Templates } from "@formio/js";
+import { nlPortalInput } from "./formio/FormIoInputTemplate";
 import { nlPortalSelect } from "./formio/FormIoSelectTemplate";
 import { nlPortalRadioButton } from "./formio/FormIoRadioButtonTemplate";
 import { nlPortalSingleCheckbox } from "./formio/FormIoSingleCheckboxTemplate";
 import { nlPortalMultipleCheckboxes } from "./formio/FormIoMultipleCheckboxesTemplate";
 import { nlPortalButton } from "./formio/FormIoButtonTemplate";
 import { nlPortalDataGrid } from "./formio/FormIoDataGridTemplate";
+import "./formio/FormIoTemplates.scss";
 
 interface LayoutComponentProps {
   paths: Paths;

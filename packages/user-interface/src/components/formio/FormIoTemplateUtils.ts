@@ -1,20 +1,5 @@
-export const escapeHtml = (v: any) =>
-  String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+import { escape } from "lodash-es";
 
-/** HTML attribute escaper (for attributes) */
-export const escapeAttr = (v: any) =>
-  String(v)
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-
-/**
- * Merge Form.io-provided ctx.input.attr with your own extras.
- * - String or object attr supported
- * - extras win when not already present in string form
- * - omitKeys are removed (e.g. type/value on <select>)
- */
 export function serializeAttrs(
   attr: any,
   extras: Record<string, any>,
@@ -30,7 +15,7 @@ export function serializeAttrs(
           !attr.includes(`${k}=`) &&
           !(k === "class" && attr.includes("class=")),
       )
-      .map(([k, v]) => (v === true ? k : `${k}="${escapeAttr(v)}"`))
+      .map(([k, v]) => (v === true ? k : `${k}="${escape(String(v ?? ""))}"`))
       .join(" ");
     return (attr + (toAdd ? " " + toAdd : "")).trim();
   }
@@ -41,12 +26,11 @@ export function serializeAttrs(
   });
 
   return Object.entries(merged)
-    .filter(([_, v]) => v !== false && v != null)
-    .map(([k, v]) => (v === true ? k : `${k}="${escapeAttr(v)}"`))
+    .filter(([, v]) => v !== false && v != null)
+    .map(([k, v]) => (v === true ? k : `${k}="${escape(String(v ?? ""))}"`))
     .join(" ");
 }
 
-/** Optioneel gedeelde UI blokjes; gebruik alleen als je ze al in je templates had */
 export function wrapperOpen(ctx: any, inputId: string, baseModifier = "text") {
   const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
   const cls =

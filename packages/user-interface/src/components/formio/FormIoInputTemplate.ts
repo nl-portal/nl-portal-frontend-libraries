@@ -1,4 +1,5 @@
-import { escapeHtml, serializeAttrs } from "./FormIoTemplateUtils";
+import { escape } from "lodash-es";
+import { errorsBlock, serializeAttrs } from "./FormIoTemplateUtils";
 
 function wrapperOpen(ctx: any, inputId: string, baseModifier = "text") {
   const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
@@ -10,16 +11,6 @@ function wrapperOpen(ctx: any, inputId: string, baseModifier = "text") {
     <div class="${wrapperClass}" ref="element">
       ${ctx.component.label !== false ? `<label for="${inputId}" class="utrecht-form-label" ref="label">${labelText}</label>` : ""}
       ${description ? `<div class="utrecht-form-field-description">${description}</div>` : ""}
-  `;
-}
-
-function errorsBlock(ctx: any, inputId: string) {
-  const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
-  const errorId = `err-${inputId}`;
-  return `
-    <div class="utrecht-form-field-error-message" id="${errorId}" ref="messageContainer">
-      ${hasErrors ? ctx.errors.join("<br>") : ""}
-    </div>
   `;
 }
 
@@ -119,7 +110,7 @@ function renderTextareaElement(ctx: any) {
   return `
     ${wrapperOpen(ctx, inputId, "text")}
       <label class="pra-textbox" for="${inputId}">
-        <textarea ref="input" ${textareaAttributes}>${escapeHtml(valueFromAttr)}</textarea>
+        <textarea ref="input" ${textareaAttributes}>${escape(String(valueFromAttr ?? ""))}</textarea>
       </label>
       ${errorsBlock(ctx, inputId)}
     </div>

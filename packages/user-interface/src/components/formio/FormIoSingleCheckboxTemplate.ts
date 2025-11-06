@@ -1,4 +1,4 @@
-import { serializeAttrs } from "./FormIoTemplateUtils";
+import { errorsBlock, serializeAttrs } from "./FormIoTemplateUtils";
 
 export const nlPortalSingleCheckbox = {
   form: (ctx: any) => {
@@ -52,9 +52,7 @@ export const nlPortalSingleCheckbox = {
             ${labelText}
           </label>
         </p>
-        <div class="utrecht-form-field-error-message" id="${errorId}" ref="messageContainer">
-          ${hasErrors ? ctx.errors.join("<br>") : ""}
-        </div>
+        ${errorsBlock(ctx, inputId)}
       </div>
     `;
   },

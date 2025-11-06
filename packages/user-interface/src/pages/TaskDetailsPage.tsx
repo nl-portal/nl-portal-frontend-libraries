@@ -185,6 +185,7 @@ const TaskDetailsPage = () => {
     );
   }
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   // Replace FormIO choices.js select with html5 native select
   const applyNativeSelectsToForm = (form: any) => {
     const walk = (components: any[]) => {
@@ -205,6 +206,7 @@ const TaskDetailsPage = () => {
     walk(form.components || []);
     return form;
   };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   const rawForm =
     formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition ||

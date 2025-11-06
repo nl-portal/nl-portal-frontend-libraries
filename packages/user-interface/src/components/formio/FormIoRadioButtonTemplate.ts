@@ -1,3 +1,5 @@
+import { errorsBlock } from "./FormIoTemplateUtils";
+
 export const nlPortalRadioButton = {
   form: (ctx: any) => {
     const { component } = ctx;
@@ -5,7 +7,6 @@ export const nlPortalRadioButton = {
     const label = ctx.t(component.label || "");
     const description = ctx.t(component.description || "");
     const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
-    const errorId = `err-${id}`;
 
     // wrapper voor fieldset (invalid state)
     const fieldsetClass = `utrecht-form-fieldset${
@@ -67,9 +68,7 @@ export const nlPortalRadioButton = {
 
           ${options}
 
-          <div class="utrecht-form-field-error-message" id="${errorId}" ref="messageContainer">
-            ${hasErrors ? ctx.errors.join("<br>") : ""}
-          </div>
+          ${errorsBlock(ctx, id)}
         </fieldset>
       </div>
     `;
