@@ -8,12 +8,10 @@ export const nlPortalRadioButton = {
     const description = ctx.t(component.description || "");
     const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
 
-    // wrapper voor fieldset (invalid state)
     const fieldsetClass = `utrecht-form-fieldset${
       hasErrors ? " utrecht-form-fieldset--invalid" : ""
     }`;
 
-    // Radio-opties renderen
     const options = (component.values || [])
       .map((opt: any, index: number) => {
         const value = opt.value ?? opt.label ?? "";
