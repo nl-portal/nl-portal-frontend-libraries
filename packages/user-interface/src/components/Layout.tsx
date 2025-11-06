@@ -45,7 +45,7 @@ const Layout = ({
 
   useEffect(() => {
     FormIoUploader.register();
-    const t = (Templates.templates["denhaag"] ||= {});
+    const t = (Templates.templates["nl-portal"] ||= {});
     t.input = nlPortalInput;
     t.select = nlPortalSelect;
     t.radio = nlPortalRadioButton;

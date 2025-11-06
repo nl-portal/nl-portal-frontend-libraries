@@ -224,7 +224,7 @@ const TaskDetailsPage = () => {
           onSubmit={onFormSubmit}
           options={{
             noAlerts: true,
-            template: "denhaag",
+            template: "nl-portal",
           }}
         />
       </div>
