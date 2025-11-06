@@ -45,14 +45,14 @@ const Layout = ({
 
   useEffect(() => {
     FormIoUploader.register();
-    const t = (Templates.templates["nl-portal"] ||= {});
-    t.input = nlPortalInput;
-    t.select = nlPortalSelect;
-    t.radio = nlPortalRadioButton;
-    t.checkbox = nlPortalSingleCheckbox;
-    t.checkboxes = nlPortalMultipleCheckboxes;
-    t.button = nlPortalButton;
-    t.datagrid = nlPortalDataGrid;
+    const template = (Templates.templates["nl-portal"] ||= {});
+    template.input = nlPortalInput;
+    template.select = nlPortalSelect;
+    template.radio = nlPortalRadioButton;
+    template.checkbox = nlPortalSingleCheckbox;
+    template.checkboxes = nlPortalMultipleCheckboxes;
+    template.button = nlPortalButton;
+    template.datagrid = nlPortalDataGrid;
   }, []);
 
   useEffect(() => {

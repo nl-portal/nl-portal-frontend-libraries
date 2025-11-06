@@ -1,20 +1,11 @@
 import { escape } from "lodash-es";
-import { errorsBlock, serializeAttrs } from "./FormIoTemplateUtils";
+import {
+  errorsBlock,
+  serializeAttrs,
+  wrapperOpen,
+} from "./FormIoTemplateUtils";
 
-function wrapperOpen(ctx: any, inputId: string, baseModifier = "text") {
-  const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
-  const wrapperClass = `utrecht-form-field utrecht-form-field--${baseModifier}${hasErrors ? " utrecht-form-field--invalid" : ""}`;
-  const labelText = ctx.t(ctx.component.label || "");
-  const description = ctx.t(ctx.component.description || "");
-
-  return `
-    <div class="${wrapperClass}" ref="element">
-      ${ctx.component.label !== false ? `<label for="${inputId}" class="utrecht-form-label" ref="label">${labelText}</label>` : ""}
-      ${description ? `<div class="utrecht-form-field-description">${description}</div>` : ""}
-  `;
-}
-
-function renderInputElement(ctx: any) {
+const renderInputElement = (ctx: any) => {
   const fallbackId = ctx.instance?.id || ctx.component.key || "textfield";
   const inputId = ctx.input?.id || fallbackId;
 
@@ -59,9 +50,9 @@ function renderInputElement(ctx: any) {
       ${errorsBlock(ctx, inputId)}
     </div>
   `;
-}
+};
 
-function renderTextareaElement(ctx: any) {
+const renderTextareaElement = (ctx: any) => {
   const fallbackId = ctx.instance?.id || ctx.component.key || "textarea";
   const inputId = ctx.input?.id || fallbackId;
 
@@ -115,7 +106,7 @@ function renderTextareaElement(ctx: any) {
       ${errorsBlock(ctx, inputId)}
     </div>
   `;
-}
+};
 
 export const nlPortalInput = {
   form: (ctx: any) =>
