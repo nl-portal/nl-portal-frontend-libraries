@@ -21,7 +21,13 @@ const MessageDetailsPage = () => {
     error: messageError,
   } = useGetBerichtQuery({
     variables: { id: id },
-    onCompleted: () => refetchMessages(),
+    onCompleted: () => {
+      try {
+        refetchMessages();
+      } catch (error) {
+        console.error("Error refetching messages:", error);
+      }
+    },
   });
   const message = messageData?.getBericht as Bericht | undefined;
 

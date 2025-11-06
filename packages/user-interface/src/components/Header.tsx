@@ -1,7 +1,7 @@
 import { AnchorHTMLAttributes, useContext, useMemo } from "react";
 import { HeaderLogic, HeaderLogicProps } from "@gemeente-denhaag/header";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
-import { useMatches } from "react-router";
+import { UIMatch, useMatches } from "react-router";
 import { useIntl } from "react-intl";
 import { useLogout } from "@nl-portal/nl-portal-authentication";
 import AppContext from "../contexts/AppContext";
@@ -22,22 +22,21 @@ const Header = ({ logo }: HeaderProps) => {
   const { username, usernameVolmacht } = useContext(UserContext);
   const intl = useIntl();
 
-  type HandleObject = {
-    label: string;
-  };
-
-  const matches = useMatches();
+  const matches = useMatches() as UIMatch<unknown, { label?: string }>[];
   const breadcrumbs = useMemo(() => {
     const list = matches
       .filter((item) => {
         const array = item.id?.split("-");
-        return array?.length === 1 || array?.[array.length - 1] !== "0";
+        return (
+          (array?.length === 1 || array?.[array.length - 1] !== "0") &&
+          item.handle?.label
+        );
       })
       .map((item) => {
         return {
           href: item.pathname,
           label: intl.formatMessage({
-            id: (item.handle as HandleObject).label,
+            id: item.handle?.label,
           }),
         };
       });

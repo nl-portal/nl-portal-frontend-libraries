@@ -1,8 +1,8 @@
 import {
   ApiContext,
-  GetOpenProductHoofdThemasQuery,
+  GetOpenProductHoofdThemasByProductenQuery,
   GetUnopenedBerichtenCountQuery,
-  useGetOpenProductHoofdThemasQuery,
+  useGetOpenProductHoofdThemasByProductenQuery,
   useGetUnopenedBerichtenCountQuery,
 } from "@nl-portal/nl-portal-api";
 import {
@@ -17,8 +17,10 @@ import { useLocation, useNavigationType } from "react-router";
 import { stringToSlug } from "../utils/string-to-slug";
 import RouterContext from "./RouterContext";
 import UserContext from "./UserContext";
+import FullscreenSkeleton from "../components/FullscreenSkeleton";
 
-type Themes = GetOpenProductHoofdThemasQuery["getOpenProductHoofdThemas"];
+type Themes =
+  GetOpenProductHoofdThemasByProductenQuery["getOpenProductHoofdThemasByProducten"];
 
 interface AppContextType {
   history: string[];
@@ -93,12 +95,12 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   }, []);
 
   const { loading: loadingThemes, refetch: refetchThemes } =
-    useGetOpenProductHoofdThemasQuery({
+    useGetOpenProductHoofdThemasByProductenQuery({
       skip: window.OPEN_PRODUCTEN !== "true",
-      onCompleted: (data: GetOpenProductHoofdThemasQuery) => {
-        setThemes(data.getOpenProductHoofdThemas);
+      onCompleted: (data: GetOpenProductHoofdThemasByProductenQuery) => {
+        setThemes(data.getOpenProductHoofdThemasByProducten);
         const activeThemes =
-          data.getOpenProductHoofdThemas.map((theme) =>
+          data.getOpenProductHoofdThemasByProducten.map((theme) =>
             stringToSlug(theme.naam),
           ) || [];
         const newNavigationItems = initNavigationItems.map((group) =>
@@ -142,10 +144,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     setHistory(newHistory);
   }, [location]);
 
-  if (firstLoad && loading) {
-    // TODO: Add fullscreen loading component
-    return null;
-  }
+  if (firstLoad && loading) return <FullscreenSkeleton />;
 
   return (
     <AppContext.Provider

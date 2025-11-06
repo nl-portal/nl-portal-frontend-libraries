@@ -21,7 +21,7 @@ interface Props {
   messages?: Bericht[];
   index?: number;
   indexLimit?: number;
-  onChange?: (index: number) => number;
+  onChange?: (index: number) => void;
 }
 
 const MessagesList = ({
