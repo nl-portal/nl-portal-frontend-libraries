@@ -1,11 +1,12 @@
 import { errorsBlock, serializeAttrs } from "./FormIoTemplateUtils";
+import { escape } from "lodash-es";
 
 export const nlPortalSingleCheckbox = {
   form: (ctx: any) => {
     const { component } = ctx;
 
     const baseId = ctx.instance?.id || component.key || "checkbox";
-    const inputId = ctx.input?.id || `${baseId}-input`;
+    const inputId = escape(ctx.input?.id || `${baseId}-input`);
 
     const name = ctx.input?.name || `data[${component.key}]`;
 
@@ -37,12 +38,14 @@ export const nlPortalSingleCheckbox = {
       "aria-describedby": hasErrors ? errorId : undefined,
       checked: !attrHasChecked && !!ctx.dataValue ? true : undefined,
       value:
-        typeof component.value !== "undefined" ? component.value : undefined,
+        typeof component.value !== "undefined"
+          ? escape(String(component.value))
+          : undefined,
     };
 
     const inputAttributes = serializeAttrs(ctx.input?.attr, extras);
 
-    const labelText = ctx.t(component.label || "");
+    const labelText = escape(ctx.t(component.label || ""));
 
     return `
       <div class="${wrapperClass}" ref="element">

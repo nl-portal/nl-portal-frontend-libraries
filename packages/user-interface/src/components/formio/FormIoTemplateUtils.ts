@@ -36,12 +36,12 @@ export function wrapperOpen(ctx: any, inputId: string, baseModifier = "text") {
   const cls =
     `utrecht-form-field utrecht-form-field--${baseModifier}` +
     (hasErrors ? " utrecht-form-field--invalid" : "");
-  const labelText = ctx.t(ctx.component.label || "");
-  const description = ctx.t(ctx.component.description || "");
+  const labelText = escape(ctx.t(ctx.component.label || ""));
+  const description = escape(ctx.t(ctx.component.description || ""));
 
   return `
     <div class="${cls}" ref="element">
-      ${ctx.component.label !== false ? `<label for="${inputId}" class="utrecht-form-label" ref="label">${labelText}</label>` : ""}
+      ${ctx.component.label !== false ? `<label for="${escape(inputId)}" class="utrecht-form-label" ref="label">${labelText}</label>` : ""}
       ${description ? `<div class="utrecht-form-field-description">${description}</div>` : ""}
   `;
 }
@@ -49,9 +49,12 @@ export function wrapperOpen(ctx: any, inputId: string, baseModifier = "text") {
 export function errorsBlock(ctx: any, inputId: string) {
   const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
   const errorId = `err-${inputId}`;
+  const escapedErrors = hasErrors
+    ? ctx.errors.map((e: any) => escape(String(e))).join("<br>")
+    : "";
   return `
-    <div class="utrecht-form-field-error-message" id="${errorId}" ref="messageContainer">
-      ${hasErrors ? ctx.errors.join("<br>") : ""}
+    <div class="utrecht-form-field-error-message" id="${escape(errorId)}" ref="messageContainer">
+      ${escapedErrors}
     </div>
   `;
 }

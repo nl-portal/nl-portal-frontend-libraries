@@ -6,8 +6,9 @@ import {
 } from "./FormIoTemplateUtils";
 
 const renderInputElement = (ctx: any) => {
-  const fallbackId = ctx.instance?.id || ctx.component.key || "textfield";
-  const inputId = ctx.input?.id || fallbackId;
+  const key = escape(ctx.component.key || "textfield");
+  const fallbackId = ctx.instance?.id || key;
+  const inputId = escape(ctx.input?.id || fallbackId);
 
   const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
   const baseClass = `utrecht-textbox utrecht-textbox--html-input${hasErrors ? " utrecht-textbox--invalid" : ""}`;
@@ -30,7 +31,7 @@ const renderInputElement = (ctx: any) => {
 
   const extras = {
     id: inputId,
-    name: ctx.input?.name || `data[${ctx.component.key}]`,
+    name: ctx.input?.name || `data[${key}]`,
     type: ctx.input?.type || ctx.component.inputType || "text",
     dir: "auto",
     placeholder,
@@ -53,8 +54,9 @@ const renderInputElement = (ctx: any) => {
 };
 
 const renderTextareaElement = (ctx: any) => {
-  const fallbackId = ctx.instance?.id || ctx.component.key || "textarea";
-  const inputId = ctx.input?.id || fallbackId;
+  const key = escape(ctx.component.key || "textarea");
+  const fallbackId = ctx.instance?.id || key;
+  const inputId = escape(ctx.input?.id || fallbackId);
 
   const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
   const baseClass = `utrecht-textbox utrecht-textbox--html-textarea${hasErrors ? " utrecht-textbox--invalid" : ""}`;
@@ -85,7 +87,7 @@ const renderTextareaElement = (ctx: any) => {
 
   const extras = {
     id: inputId,
-    name: ctx.input?.name || `data[${ctx.component.key}]`,
+    name: ctx.input?.name || `data[${key}]`,
     dir: "auto",
     placeholder,
     required: !!ctx.component.validate?.required || undefined,

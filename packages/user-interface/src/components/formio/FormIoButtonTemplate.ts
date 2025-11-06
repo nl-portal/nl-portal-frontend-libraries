@@ -1,3 +1,5 @@
+import { escape } from "lodash-es";
+
 export const nlPortalButton = {
   form: (ctx: any) => `
       <button
@@ -7,7 +9,7 @@ export const nlPortalButton = {
         ${ctx.disabled ? "disabled" : ""}
       >
         <span class="denhaag-button__label">
-          ${ctx.t(ctx.component.label || "Button")}
+          ${escape(ctx.t(ctx.component.label || "Button"))}
         </span>
       </button>
     `,
