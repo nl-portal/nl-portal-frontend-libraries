@@ -4,19 +4,17 @@ export const nlPortalSingleCheckbox = {
   form: (ctx: any) => {
     const { component } = ctx;
 
-    // id / name die Form.io echt gebruikt
-    const fallbackId = ctx.instance?.id || component.key || "checkbox";
-    const inputId = ctx.input?.id || fallbackId;
+    const baseId = ctx.instance?.id || component.key || "checkbox";
+    const inputId = ctx.input?.id || `${baseId}-input`;
+
     const name = ctx.input?.name || `data[${component.key}]`;
 
     const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
     const errorId = `err-${inputId}`;
 
-    // Utrecht classes + invalid
     const wrapperClass = `utrecht-form-field utrecht-form-field--checkbox${hasErrors ? " utrecht-form-field--invalid" : ""}`;
     const baseInputClass = `utrecht-checkbox utrecht-checkbox--html-input utrecht-checkbox--custom utrecht-form-field__input${hasErrors ? " utrecht-checkbox--invalid" : ""}`;
 
-    // attr kan object of string zijn; combineer classes
     const attrObj =
       typeof ctx.input?.attr === "object" ? ctx.input.attr || {} : {};
     const combinedClass = [baseInputClass, attrObj.class]
@@ -24,7 +22,6 @@ export const nlPortalSingleCheckbox = {
       .join(" ");
     if (attrObj.class) delete attrObj.class;
 
-    // checked: als Form.io het al in attr zet, laten we dat zo; anders bepalen via dataValue
     const attrHasChecked =
       (typeof ctx.input?.attr === "string" &&
         /\bchecked(\s|=|>)/.test(ctx.input.attr)) ||
@@ -38,21 +35,19 @@ export const nlPortalSingleCheckbox = {
       disabled: !!ctx.disabled || undefined,
       class: combinedClass,
       "aria-describedby": hasErrors ? errorId : undefined,
-      // alleen toevoegen als niet al in attr aanwezig:
       checked: !attrHasChecked && !!ctx.dataValue ? true : undefined,
       value:
-        typeof component.value !== "undefined" ? component.value : undefined, // Form.io gebruikt vaak true/false
+        typeof component.value !== "undefined" ? component.value : undefined,
     };
 
     const inputAttributes = serializeAttrs(ctx.input?.attr, extras);
 
-    // Labeltekst; bij single checkbox staat deze naast het vakje
     const labelText = ctx.t(component.label || "");
 
     return `
       <div class="${wrapperClass}" ref="element">
         <p class="nl-paragraph utrecht-form-field__label utrecht-form-field__label--checkbox">
-          <label class="utrecht-form-label utrecht-form-label--checkbox" for="${inputId}" ref="label">
+          <label class="utrecht-form-label utrecht-form-label--checkbox" ref="label">
             <input ref="input" ${inputAttributes} />
             ${labelText}
           </label>
