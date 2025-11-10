@@ -9,7 +9,7 @@ export const nlPortalButton = {
         ${ctx.disabled ? "disabled" : ""}
       >
         <span class="denhaag-button__label">
-          ${escape(ctx.t(ctx.component.label || "Button"))}
+          ${escape(ctx.t(ctx.component.label || ""))}
         </span>
       </button>
     `,
