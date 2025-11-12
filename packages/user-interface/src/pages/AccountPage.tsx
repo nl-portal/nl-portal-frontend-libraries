@@ -193,8 +193,8 @@ const AccountPage = ({
         </LeadParagraph>
         <PageIndex
           heading={intl.formatMessage({ id: "account.pageIndex.title" })}
-          headingAs="h3"
-          headingSize="h3"
+          headingLevel={3}
+          headingAppearance="level-3"
           items={[
             {
               label: <FormattedMessage id="account.detail.contact" />,
