@@ -1,0 +1,12 @@
+.nl-portal-formio-datagrid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-block-end: 24px;
+}
+
+.nl-portal-formio-datagrid-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

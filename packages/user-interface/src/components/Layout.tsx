@@ -13,18 +13,18 @@ import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router";
 import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
-import FormIoButtonWrapper from "./formio/FormIoButton";
-import FormIoMultipleCheckboxWrapper from "./formio/FormIoMultipleCheckbox";
-import FormIoNumberInputWrapper from "./formio/FormIoNumberInput";
-import FormIoPasswordInputWrapper from "./formio/FormIoPasswordInput";
-import FormIoRadioWrapper from "./formio/FormIoRadioButton";
-import FormIoSelectWrapper from "./formio/FormIoSelect";
-import FormIoSingleCheckboxWrapper from "./formio/FormIoSingleCheckbox";
-import FormIoTextAreaWrapper from "./formio/FormIoTextArea";
-import FormIoTextInputWrapper from "./formio/FormIoTextInput";
 import FormIoUploader from "./formio/FormIoUploader";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import "@utrecht/document-css";
+import { Templates } from "@formio/js";
+import { nlPortalInput } from "./formio/FormIoInputTemplate";
+import { nlPortalSelect } from "./formio/FormIoSelectTemplate";
+import { nlPortalRadioButton } from "./formio/FormIoRadioButtonTemplate";
+import { nlPortalSingleCheckbox } from "./formio/FormIoSingleCheckboxTemplate";
+import { nlPortalMultipleCheckboxes } from "./formio/FormIoMultipleCheckboxesTemplate";
+import { nlPortalButton } from "./formio/FormIoButtonTemplate";
+import { nlPortalDataGrid } from "./formio/FormIoDataGridTemplate";
+import "./formio/FormIoTemplates.scss";
 
 interface LayoutComponentProps {
   paths: Paths;
@@ -45,15 +45,14 @@ const Layout = ({
 
   useEffect(() => {
     FormIoUploader.register();
-    FormIoTextInputWrapper.register();
-    FormIoNumberInputWrapper.register();
-    FormIoPasswordInputWrapper.register();
-    FormIoSingleCheckboxWrapper.register();
-    FormIoMultipleCheckboxWrapper.register();
-    FormIoTextAreaWrapper.register();
-    FormIoButtonWrapper.register();
-    FormIoRadioWrapper.register();
-    FormIoSelectWrapper.register();
+    const template = (Templates.templates["nl-portal"] ||= {});
+    template.input = nlPortalInput;
+    template.select = nlPortalSelect;
+    template.radio = nlPortalRadioButton;
+    template.checkbox = nlPortalSingleCheckbox;
+    template.checkboxes = nlPortalMultipleCheckboxes;
+    template.button = nlPortalButton;
+    template.datagrid = nlPortalDataGrid;
   }, []);
 
   useEffect(() => {
