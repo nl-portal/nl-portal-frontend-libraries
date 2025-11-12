@@ -185,19 +185,47 @@ const TaskDetailsPage = () => {
     );
   }
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  // Replace FormIO choices.js select with html5 native select
+  const applyNativeSelectsToForm = (form: any) => {
+    const walk = (components: any[]) => {
+      for (const c of components) {
+        if (c.type === "select") {
+          c.widget = "html5";
+        }
+        if (Array.isArray(c.components)) walk(c.components);
+        if (Array.isArray(c.columns))
+          c.columns.forEach((col: any) => walk(col.components));
+        if (Array.isArray(c.rows))
+          c.rows.forEach((row: any) =>
+            row.forEach((cell: any) => walk(cell.components || [])),
+          );
+      }
+    };
+
+    walk(form.components || []);
+    return form;
+  };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+
+  const rawForm =
+    formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition ||
+    formDefinitionId?.getFormDefinitionById?.formDefinition;
+
+  const adjustedForm = applyNativeSelectsToForm(structuredClone(rawForm));
+
   return (
     <>
       <BackLink />
       <div className={styles["task-details-page"]}>
         <Form
-          src={
-            formDefinitionUrl?.getFormDefinitionByObjectenApiUrl
-              ?.formDefinition ||
-            formDefinitionId?.getFormDefinitionById?.formDefinition
-          }
+          src={adjustedForm}
           submission={submission}
           onSubmit={onFormSubmit}
-          options={{ noAlerts: true }}
+          options={{
+            noAlerts: true,
+            template: "nl-portal",
+          }}
         />
       </div>
     </>
