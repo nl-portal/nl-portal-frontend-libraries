@@ -16,7 +16,7 @@ import { Paths } from "../interfaces/paths";
 import FormIoUploader from "./formio/FormIoUploader";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import "@utrecht/document-css";
-import { Templates } from "@formio/js";
+import { Templates } from "@formio/react";
 import { nlPortalInput } from "./formio/FormIoInputTemplate";
 import { nlPortalSelect } from "./formio/FormIoSelectTemplate";
 import { nlPortalRadioButton } from "./formio/FormIoRadioButtonTemplate";
@@ -45,14 +45,18 @@ const Layout = ({
 
   useEffect(() => {
     FormIoUploader.register();
-    const template = (Templates.templates["nl-portal"] ||= {});
-    template.input = nlPortalInput;
-    template.select = nlPortalSelect;
-    template.radio = nlPortalRadioButton;
-    template.checkbox = nlPortalSingleCheckbox;
-    template.checkboxes = nlPortalMultipleCheckboxes;
-    template.button = nlPortalButton;
-    template.datagrid = nlPortalDataGrid;
+
+    const base = Templates.templates.bootstrap || Templates.current || {};
+    Templates.templates["nl-portal"] = {
+      ...base,
+      input: nlPortalInput,
+      select: nlPortalSelect,
+      radio: nlPortalRadioButton,
+      checkbox: nlPortalSingleCheckbox,
+      checkboxes: nlPortalMultipleCheckboxes,
+      button: nlPortalButton,
+      datagrid: nlPortalDataGrid,
+    };
   }, []);
 
   useEffect(() => {
