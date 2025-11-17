@@ -40,8 +40,7 @@ export const nlPortalSelect = {
         /(?:^|\s)name=/.test(ctx.input.attr)) ||
       (typeof ctx.input?.attr === "object" && !!ctx.input.attr?.name);
 
-    const extras = {
-      id: selectId,
+    const extras: any = {
       class: cssClass,
       required: !!component.validate?.required || undefined,
       disabled: !!ctx.disabled || undefined,
@@ -51,15 +50,31 @@ export const nlPortalSelect = {
       name: hasNameInAttr ? undefined : `data[${component.key}]`,
     };
 
+    if (!attrObj.id) {
+      extras.id = selectId;
+    }
+
     const selectAttributes = serializeAttrs(ctx.input?.attr, extras, [
       "type",
       "value",
     ]);
 
+    const ref = ctx.input?.ref || "selectContainer";
+
+    if (component.type === "day") {
+      return `
+        <select ref="${ref}" ${selectAttributes}>
+          ${ctx.selectOptions || ""}
+        </select>
+      `;
+    }
+
     return `
       ${wrapperOpen(ctx, selectId, "text")}
         <div>
-          <select ref="selectContainer" ${selectAttributes}></select>
+          <select ref="${ref}" ${selectAttributes}>
+           ${ctx.selectOptions || ""}
+         </select>
         </div>
         ${errorsBlock(ctx, selectId)}
       </div>

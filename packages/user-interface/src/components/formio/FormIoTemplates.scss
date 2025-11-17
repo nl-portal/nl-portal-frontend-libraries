@@ -16,3 +16,21 @@
 .denhaag-form-field--flex + .form-text.text-muted {
   display: none !important;
 }
+
+// CSS for the day component
+.formio-component-day {
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  input,
+  select {
+    height: 53px;
+  }
+
+  select {
+    min-width: 140px;
+  }
+}
