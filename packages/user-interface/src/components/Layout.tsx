@@ -19,11 +19,10 @@ import "@utrecht/document-css";
 import { Templates } from "@formio/react";
 import { nlPortalInput } from "./formio/FormIoInputTemplate";
 import { nlPortalSelect } from "./formio/FormIoSelectTemplate";
-import { nlPortalRadioButton } from "./formio/FormIoRadioButtonTemplate";
 import { nlPortalSingleCheckbox } from "./formio/FormIoSingleCheckboxTemplate";
-import { nlPortalMultipleCheckboxes } from "./formio/FormIoMultipleCheckboxesTemplate";
 import { nlPortalButton } from "./formio/FormIoButtonTemplate";
 import { nlPortalDataGrid } from "./formio/FormIoDataGridTemplate";
+import { nlPortalRadioSelectBoxesWrapper } from "./formio/FormIoRadioSelectBoxesWrapper";
 import "./formio/FormIoTemplates.scss";
 
 interface LayoutComponentProps {
@@ -51,9 +50,8 @@ const Layout = ({
       ...base,
       input: nlPortalInput,
       select: nlPortalSelect,
-      radio: nlPortalRadioButton,
+      radio: nlPortalRadioSelectBoxesWrapper,
       checkbox: nlPortalSingleCheckbox,
-      checkboxes: nlPortalMultipleCheckboxes,
       button: nlPortalButton,
       datagrid: nlPortalDataGrid,
     };
