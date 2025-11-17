@@ -61,6 +61,14 @@ export const nlPortalSelect = {
 
     const ref = ctx.input?.ref || "selectContainer";
 
+    if (component.type === "day") {
+      return `
+        <select ref="${ref}" ${selectAttributes}>
+          ${ctx.selectOptions || ""}
+        </select>
+      `;
+    }
+
     return `
       ${wrapperOpen(ctx, selectId, "text")}
         <div>

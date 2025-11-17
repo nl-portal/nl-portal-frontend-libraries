@@ -42,11 +42,16 @@ const renderInputElement = (ctx: any) => {
   };
 
   const inputAttributes = serializeAttrs(ctx.input?.attr, extras);
+  const ref = ctx.input?.ref || "input";
+
+  if (ctx.component?.type === "day") {
+    return `<input ref="${ref}" ${inputAttributes} />`;
+  }
 
   return `
     ${wrapperOpen(ctx, inputId, "text")}
       <label class="pra-textbox" for="${inputId}">
-        <input ref="input" ${inputAttributes} />
+        <input ref="${ref}" ${inputAttributes} />
       </label>
       ${errorsBlock(ctx, inputId)}
     </div>
