@@ -3,7 +3,6 @@ import CasesList from "../components/CasesList";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import {
-  OpenProductProduct,
   OpenProductThema,
   useGetOpenProductThemaTakenQuery,
   useGetOpenProductThemaZakenQuery,
@@ -14,17 +13,7 @@ import AppContext from "../contexts/AppContext";
 import { use } from "react";
 import { stringToSlug } from "../utils/string-to-slug";
 import { ProductList } from "../components/ProductList";
-
-export interface ProductSettings {
-  productTypeSlug?: string;
-  productTypeCodes: string[];
-  titleTranslationId: string;
-  headerTranslationIds: string[];
-  dataMapping: (
-    | ((product: OpenProductProduct) => React.ReactNode)
-    | keyof OpenProductProduct
-  )[];
-}
+import { ProductSettings } from "../interfaces/product-types";
 
 interface Props {
   slug: string;

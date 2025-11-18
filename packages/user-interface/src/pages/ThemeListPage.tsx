@@ -1,7 +1,7 @@
 import { useIntl } from "react-intl";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
-import { OpenProductProduct, OpenProductThema } from "@nl-portal/nl-portal-api";
+import { OpenProductThema } from "@nl-portal/nl-portal-api";
 import { ProductList } from "../components/ProductList";
 import { stringToSlug } from "../utils/string-to-slug";
 import AppContext from "../contexts/AppContext";
@@ -9,16 +9,7 @@ import { use } from "react";
 import BackLink from "../components/BackLink";
 import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
-
-export interface ProductSettings {
-  productTypeCodes: string[];
-  titleTranslationId: string;
-  headerTranslationIds: string[];
-  dataMapping: (
-    | ((product: OpenProductProduct) => React.ReactNode)
-    | keyof OpenProductProduct
-  )[];
-}
+import { ProductSettings } from "../interfaces/product-types";
 
 interface Props {
   slug: string;
