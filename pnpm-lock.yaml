@@ -346,8 +346,8 @@ importers:
         specifier: 4.0.2
         version: 4.0.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/file':
-        specifier: 2.1.1
-        version: 2.1.1(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 2.1.2
+        version: 2.1.2(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/footer':
         specifier: ^4.1.3
         version: 4.1.3(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1305,6 +1305,12 @@ packages:
 
   '@gemeente-denhaag/file@2.1.1':
     resolution: {integrity: sha512-CUVlKoH29aZ+OqI4lMpe6fShonj9w84cSEYBEcuc722XAoVY2NxWJe01rbq3MSqQDMeeRrvdNkJwjfxkTkagCA==}
+    peerDependencies:
+      react: 18 || 19
+      react-dom: 18 || 19
+
+  '@gemeente-denhaag/file@2.1.2':
+    resolution: {integrity: sha512-2k6vSDNemS5ZXPPEWAX801GdEBOax1O74+12nE0Ab5U5dofuhZ+VGAoN0sJQ6vNTZVOCZJWYNQa/kM68Lx1Pmw==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -7587,6 +7593,19 @@ snapshots:
   '@gemeente-denhaag/design-tokens@1.0.2': {}
 
   '@gemeente-denhaag/file@2.1.1(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@gemeente-denhaag/icons': 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@utrecht/component-library-react': 10.3.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      clsx: 2.1.1
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - date-fns
+      - react-vega
+      - vega
+
+  '@gemeente-denhaag/file@2.1.2(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@gemeente-denhaag/icons': 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@utrecht/component-library-react': 10.3.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
