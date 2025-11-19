@@ -2,11 +2,12 @@ import {
   OpenProductProduct,
   useGetOpenProductenQuery,
 } from "@nl-portal/nl-portal-api";
-import { ProductSettings } from "../pages/ThemeOverviewPage";
 import TableList from "./TableList";
 import { useIntl } from "react-intl";
 import { useOutletContext } from "react-router";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
+import { ProductSettings } from "../interfaces/product-types";
+import { getProductValue } from "../utils/get-product-value";
 
 type ProductListProps = ProductSettings & {
   slug: string;
@@ -67,7 +68,7 @@ export const ProductList = ({
       rows={producten.map((product) =>
         dataMapping.map((map) => ({
           href: paths.themeDetails(slug, product.uuid),
-          children: map instanceof Function ? map(product) : product?.[map],
+          children: getProductValue(product, map),
         })),
       )}
       onChange={onPageChange}

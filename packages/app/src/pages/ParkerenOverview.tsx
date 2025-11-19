@@ -37,6 +37,7 @@ const ParkerenOverview = () => {
             "Einddatum",
             "Status",
             "Prijs",
+            "Test",
           ],
           dataMapping: [
             "naam",
@@ -52,6 +53,7 @@ const ParkerenOverview = () => {
                 />
               );
             },
+            "dataobject.test",
           ],
         },
         {
