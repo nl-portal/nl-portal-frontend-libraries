@@ -1,3 +1,6 @@
+@use "../../../node_modules/@gemeente-denhaag/alert/dist/index.css" as
+  denhaag-alert;
+
 .formio-component-hidden,
 .formio-hidden {
   display: none !important;
@@ -33,4 +36,26 @@
   select {
     min-width: 140px;
   }
+}
+
+// Backwards compatibility for alerts
+.alert {
+  @extend .denhaag-alert;
+}
+
+.alert-info {
+  @extend .denhaag-alert--info;
+}
+
+.alert-warning {
+  @extend .denhaag-alert--warning;
+}
+
+.alert-danger,
+.alert-error {
+  @extend .denhaag-alert--error;
+}
+
+.alert-success {
+  @extend .denhaag-alert--success;
 }
