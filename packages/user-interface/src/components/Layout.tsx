@@ -24,6 +24,7 @@ import { nlPortalButton } from "./formio/FormIoButtonTemplate";
 import { nlPortalDataGrid } from "./formio/FormIoDataGridTemplate";
 import { nlPortalRadioSelectBoxesWrapper } from "./formio/FormIoRadioSelectBoxesWrapper";
 import "./formio/FormIoTemplates.scss";
+import { nlPortalAddress } from "./formio/FormIoAddressTemplate";
 
 interface LayoutComponentProps {
   paths: Paths;
@@ -48,6 +49,7 @@ const Layout = ({
     const base = Templates.templates.bootstrap || Templates.current || {};
     Templates.templates["nl-portal"] = {
       ...base,
+      address: nlPortalAddress,
       input: nlPortalInput,
       select: nlPortalSelect,
       radio: nlPortalRadioSelectBoxesWrapper,
