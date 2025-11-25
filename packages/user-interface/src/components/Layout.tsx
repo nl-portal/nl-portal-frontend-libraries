@@ -25,6 +25,7 @@ import { nlPortalDataGrid } from "./formio/FormIoDataGridTemplate";
 import { nlPortalRadioSelectBoxesWrapper } from "./formio/FormIoRadioSelectBoxesWrapper";
 import "./formio/FormIoTemplates.scss";
 import { nlPortalAddress } from "./formio/FormIoAddressTemplate";
+import { nlPortalWell } from "./formio/FormioWellTemplate";
 
 interface LayoutComponentProps {
   paths: Paths;
@@ -51,6 +52,7 @@ const Layout = ({
       ...base,
       address: nlPortalAddress,
       input: nlPortalInput,
+      well: nlPortalWell,
       select: nlPortalSelect,
       radio: nlPortalRadioSelectBoxesWrapper,
       checkbox: nlPortalSingleCheckbox,

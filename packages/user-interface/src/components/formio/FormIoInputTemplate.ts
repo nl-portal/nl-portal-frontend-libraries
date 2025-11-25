@@ -36,7 +36,7 @@ const renderInputElement = (ctx: any) => {
     dir: "auto",
     placeholder,
     required: !!ctx.component.validate?.required || undefined,
-    disabled: !!ctx.disabled || undefined,
+    disabled: !!(ctx.disabled || ctx.component.disabled) || undefined,
     class: combinedClass,
     "aria-describedby": needsDescribedBy ? errorId : undefined,
   };
@@ -58,13 +58,13 @@ const renderInputElement = (ctx: any) => {
   `;
 };
 
-const renderTextareaElement = (ctx: any) => {
+export const renderTextareaElement = (ctx: any) => {
   const key = escape(ctx.component.key || "textarea");
   const fallbackId = ctx.instance?.id || key;
   const inputId = escape(ctx.input?.id || fallbackId);
-
   const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
-  const baseClass = `utrecht-textbox utrecht-textbox--html-textarea${hasErrors ? " utrecht-textbox--invalid" : ""}`;
+  const isDisabled = !!(ctx.disabled || ctx.component.disabled);
+  const baseClass = `utrecht-textarea utrecht-textarea--html-textarea${hasErrors ? " utrecht-textarea--invalid" : ""}${isDisabled ? " utrecht-textarea--disabled" : ""}`;
 
   const attrObj =
     typeof ctx.input?.attr === "object" ? ctx.input.attr || {} : {};
@@ -96,7 +96,7 @@ const renderTextareaElement = (ctx: any) => {
     dir: "auto",
     placeholder,
     required: !!ctx.component.validate?.required || undefined,
-    disabled: !!ctx.disabled || undefined,
+    disabled: isDisabled || undefined,
     class: combinedClass,
     "aria-describedby": needsDescribedBy ? errorId : undefined,
     rows: ctx.component.rows || undefined,
@@ -107,7 +107,7 @@ const renderTextareaElement = (ctx: any) => {
 
   return `
     ${wrapperOpen(ctx, inputId, "text")}
-      <label class="pra-textbox" for="${inputId}">
+      <label class="pra-textarea" for="${inputId}">
         <textarea ref="input" ${textareaAttributes}>${escape(String(valueFromAttr ?? ""))}</textarea>
       </label>
       ${errorsBlock(ctx, inputId)}
@@ -116,8 +116,9 @@ const renderTextareaElement = (ctx: any) => {
 };
 
 export const nlPortalInput = {
-  form: (ctx: any) =>
-    ctx.component?.type === "textarea"
+  form: (ctx: any) => {
+    return ctx.component?.type === "textarea"
       ? renderTextareaElement(ctx)
-      : renderInputElement(ctx),
+      : renderInputElement(ctx);
+  },
 };
