@@ -2,6 +2,9 @@ import { Components, ReactComponent } from "@formio/react";
 import { Root, createRoot } from "react-dom/client";
 import { useEffect, useState } from "react";
 import { get } from "lodash-es";
+import { FormField } from "@gemeente-denhaag/form-field";
+import { FormLabel } from "@gemeente-denhaag/form-label";
+import { TextInput } from "@gemeente-denhaag/text-input";
 
 export interface UploadedFile {
   url: string;
@@ -11,25 +14,29 @@ export interface UploadedFile {
 
 interface FileUploadProps {
   id: string;
+  label?: string;
   context: object;
   disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
   attributes?: Record<string, string>;
   informatieobjecttype?: string;
+  initialValue?: any;
 }
 
 const FileUpload = ({
   id,
+  label,
   context,
   disabled,
   multiple,
   onChange,
   attributes,
   informatieobjecttype,
+  initialValue = [],
 }: FileUploadProps) => {
   const [isLoading, setLoading] = useState(false);
-  const [fileList, setFileList] = useState<Array<UploadedFile>>([]);
+  const [fileList, setFileList] = useState<Array<UploadedFile>>(initialValue);
   const [dataContext, setDataContext] = useState(context);
 
   const uploadFile = (file: File) => {
@@ -101,8 +108,10 @@ const FileUpload = ({
   }
 
   return (
-    <div>
       <input
+    <FormField>
+      <FormLabel htmlFor={id}>{label}</FormLabel>
+      <TextInput
         id={id}
         type="file"
         name="file"
@@ -120,7 +129,7 @@ const FileUpload = ({
           ))}
       </>
       {!isLoading || <p>Loading</p>}
-    </div>
+    </FormField>
   );
 };
 
@@ -173,10 +182,7 @@ class FormIoUploader extends ReactComponent {
   };
 
   onChangeHandler = (files: Array<UploadedFile>) => {
-    this.updateValue(
-      files.map((file) => file.url),
-      undefined,
-    );
+    this.updateValue(files, undefined);
   };
 
   attachReact = (element: Element) => {
@@ -190,6 +196,7 @@ class FormIoUploader extends ReactComponent {
         onChange={this.onChangeHandler}
         attributes={this.component.attributes}
         informatieobjecttype={this.component.informatieobjecttype || ""}
+        initialValue={this.dataValue}
       />,
     );
   };
