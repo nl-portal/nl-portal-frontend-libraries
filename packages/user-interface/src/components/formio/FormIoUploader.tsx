@@ -108,7 +108,6 @@ const FileUpload = ({
   }
 
   return (
-      <input
     <FormField>
       <FormLabel htmlFor={id}>{label}</FormLabel>
       <TextInput
