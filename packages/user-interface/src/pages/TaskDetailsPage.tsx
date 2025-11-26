@@ -17,6 +17,8 @@ import styles from "./TaskDetailsPage.module.scss";
 import { useParams } from "react-router";
 import { BackLink } from "../components/BackLink";
 import { Paragraph } from "@gemeente-denhaag/typography";
+import PageHeader from "../components/PageHeader";
+import PageGrid from "../components/PageGrid";
 
 //eslint-disable-next-line react-hooks/rules-of-hooks
 Formio.use(ProtectedEval);
@@ -46,7 +48,8 @@ const TaskDetailsPage = () => {
       setSubmitted(true);
     },
   });
-  useGetPortaalFormulierByIdV2Query({
+
+  const { data: task } = useGetPortaalFormulierByIdV2Query({
     variables: { id },
     onCompleted(task) {
       if (!task || !task.getTaakByIdV2 || !task.getTaakByIdV2.portaalformulier)
@@ -215,8 +218,11 @@ const TaskDetailsPage = () => {
   const adjustedForm = applyNativeSelectsToForm(structuredClone(rawForm));
 
   return (
-    <>
-      <BackLink />
+    <PageGrid variant="medium">
+      <div>
+        <BackLink />
+        <PageHeader title={task?.getTaakByIdV2?.titel} />
+      </div>
       <div className={styles["task-details-page"]}>
         <Form
           src={adjustedForm}
@@ -228,7 +234,7 @@ const TaskDetailsPage = () => {
           }}
         />
       </div>
-    </>
+    </PageGrid>
   );
 };
 
