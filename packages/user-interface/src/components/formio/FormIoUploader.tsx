@@ -1,10 +1,13 @@
 import { Components, ReactComponent } from "@formio/react";
 import { Root, createRoot } from "react-dom/client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { FormattedMessage } from "react-intl";
 import { get } from "lodash-es";
 import { FormField } from "@gemeente-denhaag/form-field";
 import { FormLabel } from "@gemeente-denhaag/form-label";
 import { TextInput } from "@gemeente-denhaag/text-input";
+import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
+import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 
 export interface UploadedFile {
   url: string;
@@ -36,13 +39,24 @@ const FileUpload = ({
   initialValue = [],
 }: FileUploadProps) => {
   const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>(initialValue);
   const [dataContext, setDataContext] = useState(context);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleError = () => {
+    setError(true);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
 
   const uploadFile = (file: File) => {
     const restUri = sessionStorage.getItem("REST_URI");
     const uploadLink = `${restUri}/document/content`;
     setLoading(true);
+    setError(false);
     const formData = new FormData();
     formData.append("file", file);
 
@@ -59,26 +73,30 @@ const FileUpload = ({
         Authorization: `Bearer ${FormIoUploader.getOidcToken()}`,
       },
       body: formData,
-    }).then(async (response) => {
-      if (!response.ok) {
-        setFileList([]);
-      } else {
+    })
+      .then(async (response) => {
+        if (!response.ok) return handleError();
+
         const jsonResponse = await response.json();
-        const uploadedFile = {
+        const uploadedFile: UploadedFile = {
           url: jsonResponse?.url,
           name: file.name,
           size: file.size,
         };
-        if (!multiple) {
-          setFileList([uploadedFile]);
-        } else {
-          setFileList([uploadedFile, ...fileList]);
-        }
-      }
-      setLoading(false);
-    });
-  };
 
+        setError(false);
+
+        setFileList((prev) =>
+          multiple ? [uploadedFile, ...prev] : [uploadedFile],
+        );
+      })
+      .catch(() => {
+        handleError();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   useEffect(() => {
     setDataContext(context);
   }, [context]);
@@ -108,26 +126,31 @@ const FileUpload = ({
   }
 
   return (
-    <FormField>
+    <FormField invalid={error}>
       <FormLabel htmlFor={id}>{label}</FormLabel>
       <TextInput
+        ref={fileInputRef}
         id={id}
         type="file"
         name="file"
         onChange={onChangeHandler}
         disabled={disabled || isLoading}
         {...attributes}
+        invalid={error}
       />
-      <>
-        {isLoading ||
-          fileList.map((file) => (
-            <div key={file.url}>
-              <p>Filename: {file.name}</p>
-              <p>Filesize: {file.size}</p>
-            </div>
-          ))}
-      </>
-      {!isLoading || <p>Loading</p>}
+      {!isLoading && error && (
+        <FormFieldErrorMessage>
+          <FormattedMessage id="formio.fileUpload.error" />
+        </FormFieldErrorMessage>
+      )}
+      {!isLoading &&
+        fileList.map((file) => (
+          <div key={file.url}>
+            <p>Filename: {file.name}</p>
+            <p>Filesize: {file.size}</p>
+          </div>
+        ))}
+      {isLoading && <p>Loading</p>}
     </FormField>
   );
 };
@@ -187,16 +210,18 @@ class FormIoUploader extends ReactComponent {
   attachReact = (element: Element) => {
     this.element = createRoot(element);
     this.element.render(
-      <FileUpload
-        id={`${this.component.id}-${this.component.key}`}
-        context={this.data}
-        disabled={this.component.disabled}
-        multiple={this.component.multipleFiles}
-        onChange={this.onChangeHandler}
-        attributes={this.component.attributes}
-        informatieobjecttype={this.component.informatieobjecttype || ""}
-        initialValue={this.dataValue}
-      />,
+      <LocalizationProvider>
+        <FileUpload
+          id={`${this.component.id}-${this.component.key}`}
+          context={this.data}
+          disabled={this.component.disabled}
+          multiple={this.component.multipleFiles}
+          onChange={this.onChangeHandler}
+          attributes={this.component.attributes}
+          informatieobjecttype={this.component.informatieobjecttype || ""}
+          initialValue={this.dataValue}
+        />
+      </LocalizationProvider>,
     );
   };
 
