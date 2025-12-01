@@ -5,9 +5,11 @@ import { FormattedMessage } from "react-intl";
 import { get } from "lodash-es";
 import { FormField } from "@gemeente-denhaag/form-field";
 import { FormLabel } from "@gemeente-denhaag/form-label";
-import { TextInput } from "@gemeente-denhaag/text-input";
 import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
+import "./FormIoUploader.scss";
+import { Button } from "@gemeente-denhaag/button";
+import { File } from "@gemeente-denhaag/file";
 
 export interface UploadedFile {
   url: string;
@@ -128,15 +130,21 @@ const FileUpload = ({
   return (
     <FormField invalid={error}>
       <FormLabel htmlFor={id}>{label}</FormLabel>
-      <TextInput
+      <Button
+        variant="secondary-action"
+        onClick={() => fileInputRef.current?.click()}
+      >
+        Bestand kiezen
+      </Button>
+      <input
         ref={fileInputRef}
+        className="nl-portal-file-upload"
         id={id}
         type="file"
         name="file"
         onChange={onChangeHandler}
         disabled={disabled || isLoading}
         {...attributes}
-        invalid={error}
       />
       {!isLoading && error && (
         <FormFieldErrorMessage>
@@ -145,10 +153,15 @@ const FileUpload = ({
       )}
       {!isLoading &&
         fileList.map((file) => (
-          <div key={file.url}>
-            <p>Filename: {file.name}</p>
-            <p>Filesize: {file.size}</p>
-          </div>
+          <File
+            name={file.name}
+            size={String(file.size)}
+            key={file.url}
+            href=""
+            onClick={() =>
+              setFileList((prev) => prev.filter((f) => file.url !== f.url))
+            }
+          />
         ))}
       {isLoading && <p>Loading</p>}
     </FormField>
