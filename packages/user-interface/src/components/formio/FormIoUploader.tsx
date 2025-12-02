@@ -1,28 +1,27 @@
 import { Components, ReactComponent } from "@formio/react";
 import { Root, createRoot } from "react-dom/client";
 import { useEffect, useRef, useState } from "react";
-import { FormattedMessage } from "react-intl";
 import { get } from "lodash-es";
 import { FormField } from "@gemeente-denhaag/form-field";
 import { FormLabel } from "@gemeente-denhaag/form-label";
-import { TextInput } from "@gemeente-denhaag/text-input";
-import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
+import { FileUpload as FileUploadComponent } from "../tmp/FileUpload";
+import { File } from "../tmp/File";
 
 export interface UploadedFile {
-  url: string;
+  id?: string;
+  url?: string;
   name: string;
   size: number;
+  isUploaded?: boolean;
 }
 
 interface FileUploadProps {
   id: string;
   label?: string;
   context: object;
-  disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
-  attributes?: Record<string, string>;
   informatieobjecttype?: string;
   initialValue?: any;
 }
@@ -31,31 +30,30 @@ const FileUpload = ({
   id,
   label,
   context,
-  disabled,
   multiple,
   onChange,
-  attributes,
   informatieobjecttype,
   initialValue = [],
 }: FileUploadProps) => {
-  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>(initialValue);
   const [dataContext, setDataContext] = useState(context);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleError = () => {
+  const handleError = (tempId?: string) => {
     setError(true);
 
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
+    if (tempId) {
+      setFileList((prev) => prev.filter((item) => item.id !== tempId));
     }
-  };
 
+    // if (fileInputRef.current) {
+    //   fileInputRef.current.value = "";
+    // }
+  };
   const uploadFile = (file: File) => {
     const restUri = sessionStorage.getItem("REST_URI");
     const uploadLink = `${restUri}/document/content`;
-    setLoading(true);
     setError(false);
     const formData = new FormData();
     formData.append("file", file);
@@ -67,6 +65,16 @@ const FileUpload = ({
       );
     }
 
+    const tempId = `${file.name}-${file.size}-${Date.now()}`;
+    const tempItem: UploadedFile = {
+      id: tempId,
+      name: file.name,
+      size: file.size,
+      isUploaded: false,
+    };
+
+    setFileList((prev) => (multiple ? [tempItem, ...prev] : [tempItem]));
+
     fetch(uploadLink, {
       method: "POST",
       headers: {
@@ -75,7 +83,7 @@ const FileUpload = ({
       body: formData,
     })
       .then(async (response) => {
-        if (!response.ok) return handleError();
+        if (!response.ok) return handleError(tempId);
 
         const jsonResponse = await response.json();
         const uploadedFile: UploadedFile = {
@@ -87,14 +95,15 @@ const FileUpload = ({
         setError(false);
 
         setFileList((prev) =>
-          multiple ? [uploadedFile, ...prev] : [uploadedFile],
+          prev.map((item) =>
+            item.id === tempId
+              ? { ...item, ...uploadedFile, isUploaded: true }
+              : item,
+          ),
         );
       })
       .catch(() => {
-        handleError();
-      })
-      .finally(() => {
-        setLoading(false);
+        handleError(tempId);
       });
   };
   useEffect(() => {
@@ -104,12 +113,6 @@ const FileUpload = ({
   useEffect(() => {
     onChange(fileList);
   }, [fileList]);
-
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      Array.from(event.target.files).forEach((file) => uploadFile(file));
-    }
-  };
 
   function interpolateInformatieobjectUrl(url: string) {
     if (dataContext) {
@@ -128,30 +131,32 @@ const FileUpload = ({
   return (
     <FormField invalid={error}>
       <FormLabel htmlFor={id}>{label}</FormLabel>
-      <TextInput
-        ref={fileInputRef}
-        className="nl-portal-file-upload"
-        id={id}
-        type="file"
-        name="file"
-        onChange={onChangeHandler}
-        disabled={disabled || isLoading}
-        invalid={error}
-        {...attributes}
-      />
-      {!isLoading && error && (
-        <FormFieldErrorMessage>
-          <FormattedMessage id="formio.fileUpload.error" />
-        </FormFieldErrorMessage>
+
+      {error && (
+        <div role="alert" style={{ marginBottom: "0.5rem" }}>
+          Er is iets misgegaan bij het uploaden van het bestand. Probeer het
+          opnieuw.
+        </div>
       )}
-      {!isLoading &&
-        fileList.map((file) => (
-          <div key={file.url}>
-            <p>Filename: {file.name}</p>
-            <p>Filesize: {file.size}</p>
-          </div>
-        ))}
-      {isLoading && <p>Loading</p>}
+
+      <FileUploadComponent
+        onFilesSelected={(files) =>
+          Array.from(files || []).forEach((file) => uploadFile(file))
+        }
+      />
+
+      {fileList.map((file) => (
+        <File
+          name={file.name}
+          size={String(file.size)}
+          key={file.id}
+          onClick={() =>
+            setFileList((prev) => prev.filter((f) => f.id !== file.id))
+          }
+          removable
+          loading={!file.isUploaded}
+        />
+      ))}
     </FormField>
   );
 };
@@ -215,10 +220,8 @@ class FormIoUploader extends ReactComponent {
         <FileUpload
           id={`${this.component.id}-${this.component.key}`}
           context={this.data}
-          disabled={this.component.disabled}
           multiple={this.component.multipleFiles}
           onChange={this.onChangeHandler}
-          attributes={this.component.attributes}
           informatieobjecttype={this.component.informatieobjecttype || ""}
           initialValue={this.dataValue}
         />
