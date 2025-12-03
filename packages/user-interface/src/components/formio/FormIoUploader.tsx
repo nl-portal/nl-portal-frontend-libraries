@@ -130,7 +130,6 @@ const FileUpload = ({
       <FormLabel htmlFor={id}>{label}</FormLabel>
       <TextInput
         ref={fileInputRef}
-        className="nl-portal-file-upload"
         id={id}
         type="file"
         name="file"
