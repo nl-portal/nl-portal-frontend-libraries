@@ -19,6 +19,10 @@ import { BackLink } from "../components/BackLink";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
+import {
+  applyNativeSelectsToForm,
+  convertPortalFileUploadResult,
+} from "../components/formio/FormIoTemplateUtils";
 
 //eslint-disable-next-line react-hooks/rules-of-hooks
 Formio.use(ProtectedEval);
@@ -131,10 +135,14 @@ const TaskDetailsPage = () => {
 
   const onFormSubmit = async (formioSubmission: any) => {
     if (formioSubmission?.state === "submitted") {
+      const transformedData = convertPortalFileUploadResult(
+        formioSubmission.data,
+      );
+
       await submitTaak({
         variables: {
           id,
-          submission: formioSubmission.data,
+          submission: transformedData,
         },
       });
     }
@@ -187,29 +195,6 @@ const TaskDetailsPage = () => {
       </>
     );
   }
-
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  // Replace FormIO choices.js select with html5 native select
-  const applyNativeSelectsToForm = (form: any) => {
-    const walk = (components: any[]) => {
-      for (const c of components) {
-        if (c.type === "select") {
-          c.widget = "html5";
-        }
-        if (Array.isArray(c.components)) walk(c.components);
-        if (Array.isArray(c.columns))
-          c.columns.forEach((col: any) => walk(col.components));
-        if (Array.isArray(c.rows))
-          c.rows.forEach((row: any) =>
-            row.forEach((cell: any) => walk(cell.components || [])),
-          );
-      }
-    };
-
-    walk(form.components || []);
-    return form;
-  };
-  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   const rawForm =
     formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition ||

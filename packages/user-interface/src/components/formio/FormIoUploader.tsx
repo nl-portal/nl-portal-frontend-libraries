@@ -135,8 +135,8 @@ const FileUpload = ({
         name="file"
         onChange={onChangeHandler}
         disabled={disabled || isLoading}
-        {...attributes}
         invalid={error}
+        {...attributes}
       />
       {!isLoading && error && (
         <FormFieldErrorMessage>

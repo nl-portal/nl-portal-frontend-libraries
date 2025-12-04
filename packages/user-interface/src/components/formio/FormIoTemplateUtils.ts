@@ -58,3 +58,64 @@ export function errorsBlock(ctx: any, inputId: string) {
     </div>
   `;
 }
+
+// Replace FormIO choices.js select with html5 native select
+export const applyNativeSelectsToForm = (form: any) => {
+  const walk = (components: any[]) => {
+    for (const c of components) {
+      if (c.type === "select") {
+        c.widget = "html5";
+      }
+      if (Array.isArray(c.components)) walk(c.components);
+      if (Array.isArray(c.columns))
+        c.columns.forEach((col: any) => walk(col.components));
+      if (Array.isArray(c.rows))
+        c.rows.forEach((row: any) =>
+          row.forEach((cell: any) => walk(cell.components || [])),
+        );
+    }
+  };
+
+  walk(form.components || []);
+  return form;
+};
+
+// Do a recersive conversion of uploaded file objects to just their URLs
+export const convertPortalFileUploadResult = (value: any): any => {
+  if (Array.isArray(value)) {
+    if (value.length > 0 && isUploadObject(value[0])) {
+      return value
+        .map((v) => (isUploadObject(v) ? v.url : undefined))
+        .filter((v): v is string => Boolean(v));
+    }
+
+    return value.map((v) => convertPortalFileUploadResult(v));
+  }
+
+  if (value !== null && typeof value === "object") {
+    const result: { [key: string]: any } = {};
+    for (const key of Object.keys(value)) {
+      const nested = (value as any)[key];
+      result[key] = convertPortalFileUploadResult(nested);
+    }
+    return result;
+  }
+
+  return value;
+};
+
+type UploadObject = {
+  url: string;
+  name: string;
+  size: number;
+};
+
+const isUploadObject = (obj: any): obj is UploadObject => {
+  return (
+    obj &&
+    typeof obj === "object" &&
+    "url" in obj &&
+    "name" in obj &&
+    "size" in obj
+  );
+};
