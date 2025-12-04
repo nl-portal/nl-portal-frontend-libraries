@@ -24,6 +24,7 @@ interface FileUploadProps {
   id: string;
   label?: string;
   context: object;
+  multipleFiles?: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
   informatieobjecttype?: string;
@@ -34,6 +35,7 @@ const FileUpload = ({
   id,
   label,
   context,
+  multipleFiles,
   multiple,
   onChange,
   informatieobjecttype,
@@ -145,7 +147,7 @@ const FileUpload = ({
           variant="error"
         />
       )}
-      {(multiple || fileList.length === 0) && (
+      {(multipleFiles || fileList.length === 0) && (
         <FileUploadComponent
           id={id}
           buttonLabel={intl.formatMessage({
