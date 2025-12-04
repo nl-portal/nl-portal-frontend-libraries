@@ -22,6 +22,7 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.parkeren": "Parkeren",
     "pageTitles.inkomensondersteuning": "Inkomensondersteuning",
     "backlink.back": "Terug",
+    "layout.skip": "Ga naar de inhoud",
     "header.logout": "Uitloggen",
     "header.welcome": "Welkom",
     "header.proxyFor": "Gemachtigd voor",

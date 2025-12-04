@@ -22,6 +22,7 @@ export const EN_GB_MESSAGES: Messages = {
     "pageTitles.parkeren": "Parking",
     "pageTitles.inkomensondersteuning": "Income support",
     "backlink.back": "Back",
+    "layout.skip": "Go to content",
     "header.logout": "Log out",
     "header.welcome": "Welcome",
     "header.proxyFor": "Proxy for",

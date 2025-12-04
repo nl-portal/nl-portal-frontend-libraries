@@ -26,6 +26,9 @@ import { nlPortalRadioSelectBoxesWrapper } from "./formio/FormIoRadioSelectBoxes
 import "./formio/FormIoTemplates.scss";
 import { nlPortalAddress } from "./formio/FormIoAddressTemplate";
 import { nlPortalWell } from "./formio/FormioWellTemplate";
+import { SkipLink } from "@gemeente-denhaag/skip-link";
+import styles from "./Layout.module.scss";
+import { FormattedMessage } from "react-intl";
 
 interface LayoutComponentProps {
   paths: Paths;
@@ -66,7 +69,10 @@ const Layout = ({
   }, [oidcToken]);
 
   return (
-    <StylesProvider>
+    <StylesProvider className={styles.layout}>
+      <SkipLink className={styles.skiplink} href="#main-content">
+        <FormattedMessage id="layout.skip" />
+      </SkipLink>
       <HelmetProvider>
         <PageWrapper>
           <PageHeader>
@@ -74,7 +80,7 @@ const Layout = ({
           </PageHeader>
           <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
             <Menu />
-            <main className="denhaag-page-content__main">
+            <main id="main-content" className="denhaag-page-content__main">
               <PageMetaData />
               {<Outlet context={{ paths }} />}
             </main>
