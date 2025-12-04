@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-user-interface",
-  "version": "3.0.0-RC-202512010907-3e2d3719-SNAPSHOT",
+  "version": "3.0.0-RC-202512031324-d221d527-SNAPSHOT",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -62,7 +62,8 @@
     "@gemeente-denhaag/responsive-content": "2.0.0",
     "@gemeente-denhaag/select": "^3.0.0",
     "@gemeente-denhaag/side-navigation": "4.0.2",
-    "@gemeente-denhaag/stylesprovider": "3.0.2",
+    "@gemeente-denhaag/skip-link": "^1.0.0",
+    "@gemeente-denhaag/stylesprovider": "3.1.0",
     "@gemeente-denhaag/tab": "3.0.0",
     "@gemeente-denhaag/table": "4.0.3",
     "@gemeente-denhaag/text-input": "3.0.0",

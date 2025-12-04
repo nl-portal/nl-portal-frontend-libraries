@@ -130,8 +130,8 @@ importers:
   packages/app:
     dependencies:
       '@gemeente-denhaag/design-tokens':
-        specifier: 1.0.2
-        version: 1.0.2
+        specifier: 1.0.3
+        version: 1.0.3
       '@gemeente-denhaag/icons':
         specifier: 4.0.0
         version: 4.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -405,9 +405,12 @@ importers:
       '@gemeente-denhaag/side-navigation':
         specifier: 4.0.2
         version: 4.0.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@gemeente-denhaag/skip-link':
+        specifier: ^1.0.0
+        version: 1.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/stylesprovider':
-        specifier: 3.0.2
-        version: 3.0.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 3.1.0
+        version: 3.1.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/tab':
         specifier: 3.0.0
         version: 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1300,8 +1303,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/design-tokens@1.0.2':
-    resolution: {integrity: sha512-vZsTbOZ2NfJRR57GuTAIBMTs8TLqSeQQj40J6Iqtxw4zcELpjZcRN186etK7WgOQa4f3133UzOVY95KO1333Yw==}
+  '@gemeente-denhaag/design-tokens@1.0.3':
+    resolution: {integrity: sha512-4UlQINlArc/EW4XtVsy79Jgqg06IIji8x0FcgdwTQ1YtrJMnh9oKdEGtjGFI8pN4d4xGpeEbRss3tlESxmE4og==}
 
   '@gemeente-denhaag/file@2.1.1':
     resolution: {integrity: sha512-CUVlKoH29aZ+OqI4lMpe6fShonj9w84cSEYBEcuc722XAoVY2NxWJe01rbq3MSqQDMeeRrvdNkJwjfxkTkagCA==}
@@ -1489,8 +1492,15 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
+  '@gemeente-denhaag/skip-link@1.0.0':
+    resolution: {integrity: sha512-BOAb4FlBIfkKUBeccVDWONzmIcDgJ0X5bJ3KTLLUDiXHp4nmX8Nvg+V074Jgaw7S8w7BQJMfw9GX76IYdAhbfQ==}
+    peerDependencies:
+      react: 18 || 19
+      react-dom: 18 || 19
+
   '@gemeente-denhaag/status-badge@2.0.0':
     resolution: {integrity: sha512-5dJq5xzTqpTvxEMagDQHtTxajVxYbK7OBs7uxdhkVlJLPXVs8SvsbGc3DFE0+oS8u8UhE33wT9Ap6ro1hHlkrQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1501,8 +1511,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/stylesprovider@3.0.2':
-    resolution: {integrity: sha512-W4xzDaf3v3/7MTT1nbMmwzMw7LAEwAmU/W517Yfqswwvdj1EDttObtDCyX+r67FgF52GoqM1TlRRKFNS1qw6kw==}
+  '@gemeente-denhaag/stylesprovider@3.1.0':
+    resolution: {integrity: sha512-6ySbePh7jU/RF9xlEnmNiaL1a4neGoTg3iVdDqZEpbJZBcVyWr/EFkr+wkw6/pfBbqMhZ0jGTQFMV7kPE7+KLg==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1533,6 +1543,7 @@ packages:
 
   '@gemeente-denhaag/typography@3.0.0':
     resolution: {integrity: sha512-naYwyzGJoq2O+H9a0b8lj+S15WVC0uKG9Wh03XX6wsfkTXsWIqTV4aFn+NiBvCTJFs+IpiENAAx3h/4Mg4qRNw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -2652,7 +2663,7 @@ packages:
 
   '@utrecht/components@7.4.0':
     resolution: {integrity: sha512-LWFJjJ7TF0eaoWq5TGrg7rNYnG+G5yIEJhuiwFlbICwSx2n+gZVbAE1dAW8YG2mGqveXZk38hBC2FWNE1tj1BQ==}
-    deprecated: 'Deprecated. Replaced by a separate package for each component, following the pattern: @utrecht/*-css. For example: @utrecht/button-css.'
+    deprecated: 'The @utrecht/components package has been deprecated. To migrate: the SCSS files are now only available in the npm package for the specific component. For example: @utrecht/button-css/src/_mixin.scss. The entire component library is now available in @utrecht/component-library-css/dist/index.css.'
 
   '@utrecht/currency-data-css@1.3.0':
     resolution: {integrity: sha512-9PrVvMLIy1YBd+IK8XsnJHCshKvGHUQVbX53hnkVvR76vaIrSMMUqmzu/GK6SXVlA9hb/ZjKkKPMBPfsJ3YLvA==}
@@ -7590,7 +7601,7 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
-  '@gemeente-denhaag/design-tokens@1.0.2': {}
+  '@gemeente-denhaag/design-tokens@1.0.3': {}
 
   '@gemeente-denhaag/file@2.1.1(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
@@ -7898,6 +7909,11 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
+  '@gemeente-denhaag/skip-link@1.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
   '@gemeente-denhaag/status-badge@2.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@utrecht/component-library-react': 9.0.1(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -7917,9 +7933,10 @@ snapshots:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 
-  '@gemeente-denhaag/stylesprovider@3.0.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@gemeente-denhaag/stylesprovider@3.1.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@utrecht/document-css': 1.5.1
+      '@utrecht/focus-ring-css': 2.3.1
       clsx: 2.1.1
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
