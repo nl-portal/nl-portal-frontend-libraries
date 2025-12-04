@@ -28,16 +28,20 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@apollo/client": "3.13.9"
+    "@apollo/client": "3.13.9",
+    "graphql": "^16.11.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.7",
     "@graphql-codegen/typescript-operations": "4.6.1",
     "@graphql-codegen/typescript-react-apollo": "4.3.3",
+    "@nl-portal/nl-portal-authentication": "workspace:*",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^4.7.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
     "vite": "^7.0.6",
