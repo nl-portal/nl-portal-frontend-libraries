@@ -90,6 +90,8 @@
     "@vitejs/plugin-react": "^4.7.0",
     "@vitest/ui": "^3.2.4",
     "jsdom": "^26.1.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-intl": "^7.1.11",
     "react-router": "^7.7.1",
     "rimraf": "^6.0.1",
