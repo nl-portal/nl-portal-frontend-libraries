@@ -78,6 +78,10 @@
     "react-loading-skeleton": "^3.5.0"
   },
   "devDependencies": {
+    "@apollo/client": "3.13.8",
+    "@nl-portal/nl-portal-api": "workspace:*",
+    "@nl-portal/nl-portal-authentication": "workspace:*",
+    "@nl-portal/nl-portal-localization": "workspace:*",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
     "@types/lodash-es": "^4.17.12",
@@ -86,6 +90,8 @@
     "@vitejs/plugin-react": "^4.7.0",
     "@vitest/ui": "^3.2.4",
     "jsdom": "^26.1.0",
+    "react-intl": "^7.1.11",
+    "react-router": "^7.7.1",
     "rimraf": "^6.0.1",
     "sass": "^1.89.2",
     "typescript": "^5.8.3",
