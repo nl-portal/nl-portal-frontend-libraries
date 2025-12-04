@@ -1,4 +1,5 @@
 module.exports = {
+  cooldown: 1, // 1 day
   dep: ["dev", "prod", "peer"],
   install: "always",
   reject: [],
