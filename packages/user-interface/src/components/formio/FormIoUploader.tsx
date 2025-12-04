@@ -1,12 +1,16 @@
 import { Components, ReactComponent } from "@formio/react";
 import { Root, createRoot } from "react-dom/client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { get } from "lodash-es";
 import { FormField } from "@gemeente-denhaag/form-field";
 import { FormLabel } from "@gemeente-denhaag/form-label";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
-import { FileUpload as FileUploadComponent } from "../tmp/FileUpload";
-import { File } from "../tmp/File";
+import { FileUpload as FileUploadComponent } from "@gemeente-denhaag/file-upload";
+// import { FileUpload as FileUploadComponent } from "../tmp/index";
+import { File } from "@gemeente-denhaag/file";
+import { Alert } from "@gemeente-denhaag/alert";
+import { Paragraph } from "@gemeente-denhaag/typography";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export interface UploadedFile {
   id?: string;
@@ -38,7 +42,7 @@ const FileUpload = ({
   const [error, setError] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>(initialValue);
   const [dataContext, setDataContext] = useState(context);
-  // const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const intl = useIntl();
 
   const handleError = (tempId?: string) => {
     setError(true);
@@ -46,10 +50,6 @@ const FileUpload = ({
     if (tempId) {
       setFileList((prev) => prev.filter((item) => item.id !== tempId));
     }
-
-    // if (fileInputRef.current) {
-    //   fileInputRef.current.value = "";
-    // }
   };
   const uploadFile = (file: File) => {
     const restUri = sessionStorage.getItem("REST_URI");
@@ -131,20 +131,32 @@ const FileUpload = ({
   return (
     <FormField invalid={error}>
       <FormLabel htmlFor={id}>{label}</FormLabel>
-
       {error && (
-        <div role="alert" style={{ marginBottom: "0.5rem" }}>
-          Er is iets misgegaan bij het uploaden van het bestand. Probeer het
-          opnieuw.
-        </div>
+        <Alert
+          close={() => {
+            setError(false);
+          }}
+          text={
+            <Paragraph>
+              <FormattedMessage id="formio.fileUpload.error" />
+            </Paragraph>
+          }
+          title=""
+          variant="error"
+        />
       )}
-
-      <FileUploadComponent
-        onFilesSelected={(files) =>
-          Array.from(files || []).forEach((file) => uploadFile(file))
-        }
-      />
-
+      {(multiple || fileList.length === 0) && (
+        <FileUploadComponent
+          id={id}
+          buttonLabel={intl.formatMessage({
+            id: "formio.fileUpload.buttonLabel",
+          })}
+          text={intl.formatMessage({ id: "formio.fileUpload.text" })}
+          onFilesSelected={(files) =>
+            Array.from(files || []).forEach((file) => uploadFile(file))
+          }
+        />
+      )}
       {fileList.map((file) => (
         <File
           name={file.name}

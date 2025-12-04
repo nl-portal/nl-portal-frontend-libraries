@@ -303,5 +303,7 @@ export const EN_GB_MESSAGES: Messages = {
     "footer.contact.buttonlabel": "Contact page",
     "footer.contact.button.url": "#url",
     "formio.fileUpload.error": "An error occurred while uploading the file.",
+    "formio.fileUpload.text": "Drag your file here or",
+    "formio.fileUpload.buttonLabel": "Choose a file",
   },
 };

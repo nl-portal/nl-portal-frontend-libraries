@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@gemeente-denhaag/design-tokens": "1.0.2",
+    "@gemeente-denhaag/design-tokens": "1.0.4",
     "@gemeente-denhaag/icons": "4.0.0",
     "@gemeente-denhaag/link": "4.0.1",
     "@gemeente-denhaag/status-badge": "^2.0.0",

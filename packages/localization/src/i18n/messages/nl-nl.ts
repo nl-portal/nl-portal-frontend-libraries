@@ -312,5 +312,7 @@ export const NL_NL_MESSAGES: Messages = {
     "footer.contact.button.url": "#url",
     "formio.fileUpload.error":
       "Er is een fout opgetreden tijdens het uploaden van het bestand.",
+    "formio.fileUpload.text": "Sleep uw bestand hier of",
+    "formio.fileUpload.buttonLabel": "Kies een bestand",
   },
 };
