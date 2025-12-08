@@ -6,7 +6,6 @@ import { FormField } from "@gemeente-denhaag/form-field";
 import { FormLabel } from "@gemeente-denhaag/form-label";
 import { LocalizationProvider } from "@nl-portal/nl-portal-localization";
 import { FileUpload as FileUploadComponent } from "@gemeente-denhaag/file-upload";
-// import { FileUpload as FileUploadComponent } from "../tmp/index";
 import { File } from "@gemeente-denhaag/file";
 import { Alert } from "@gemeente-denhaag/alert";
 import { Paragraph } from "@gemeente-denhaag/typography";
