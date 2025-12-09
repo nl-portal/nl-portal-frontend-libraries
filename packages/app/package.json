@@ -34,12 +34,12 @@
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^5.1.2",
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3",
     "vite": "^7.2.7",
     "vite-bundle-visualizer": "^1.2.1",
-    "vitest": "^3.2.4",
-    "wait-on": "^8.0.5"
+    "vitest": "^4.0.15",
+    "wait-on": "^9.0.3"
   }
 }

@@ -25,27 +25,27 @@
     "postinstall": "husky"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.8.1",
-    "@commitlint/config-conventional": "19.8.1",
+    "@commitlint/cli": "20.2.0",
+    "@commitlint/config-conventional": "20.2.0",
     "@typescript-eslint/eslint-plugin": "^8.48.1",
     "@typescript-eslint/parser": "^8.48.1",
     "eslint": "^9.39.1",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^16.5.0",
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
-    "npm-check-updates": "^18.3.1",
+    "npm-check-updates": "^19.1.2",
     "prettier": "3.7.4",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "stylelint": "16.26.1",
-    "stylelint-config-standard-scss": "15.0.1",
+    "stylelint-config-standard-scss": "16.0.0",
     "stylelint-order": "7.0.0",
     "stylelint-selector-bem-pattern": "4.0.1",
     "typescript": "5.9.3",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.15"
   },
   "engines": {
     "node": "^22",

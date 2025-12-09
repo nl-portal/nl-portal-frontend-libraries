@@ -39,15 +39,15 @@
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^5.1.2",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3",
     "vite": "^7.2.7",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "^3.2.4",
-    "wait-on": "^8.0.5"
+    "vitest": "^4.0.15",
+    "wait-on": "^9.0.3"
   },
   "peerDependencies": {
     "@nl-portal/nl-portal-authentication": "workspace:*",
