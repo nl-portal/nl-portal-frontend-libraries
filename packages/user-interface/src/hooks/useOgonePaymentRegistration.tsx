@@ -1,7 +1,8 @@
 import {
   ApiContext,
   DirectPaymentStatusCategory,
-  useGetDirectPaymentStatusLazyQuery,
+  GetDirectPaymentStatusDocument,
+  useLazyQuery,
 } from "@nl-portal/nl-portal-api";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
@@ -13,7 +14,7 @@ export enum PaymentStatus {
 }
 
 const useOgonePaymentRegistration = (useLegacyPostsale?: boolean) => {
-  const [getPaymentStatus] = useGetDirectPaymentStatusLazyQuery();
+  const [getPaymentStatus] = useLazyQuery(GetDirectPaymentStatusDocument);
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
   const [orderId, setOrderId] = useState<string | undefined>();
   const { restUri } = useContext(ApiContext);

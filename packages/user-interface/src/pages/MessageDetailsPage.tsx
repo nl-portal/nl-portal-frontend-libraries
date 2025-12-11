@@ -1,4 +1,4 @@
-import { Bericht, useGetBerichtQuery } from "@nl-portal/nl-portal-api";
+import { Bericht, GetBerichtDocument, useQuery } from "@nl-portal/nl-portal-api";
 import { useOutletContext, useParams } from "react-router";
 import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
@@ -19,7 +19,7 @@ const MessageDetailsPage = () => {
     data: messageData,
     loading: messageLoading,
     error: messageError,
-  } = useGetBerichtQuery({
+  } = useQuery(GetBerichtDocument, {
     variables: { id: id },
     onCompleted: () => {
       try {

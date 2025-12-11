@@ -19,7 +19,7 @@
   "scripts": {
     "build": "pnpm wait && tsc && vite build",
     "clean": "rimraf dist",
-    "codegen": "graphql-codegen --config codegen.yml",
+    "codegen": "graphql-codegen --config codegen.ts",
     "dev": "pnpm wait && vite build --watch --mode development",
     "preinstall": "npx only-allow pnpm",
     "wait": "wait-on ../authentication/dist/index.js",
@@ -28,13 +28,15 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@apollo/client": "3.13.9",
-    "graphql": "^16.11.0"
+    "@apollo/client": "4.0.10",
+    "@graphql-codegen/typed-document-node": "^6.1.4",
+    "graphql": "^16.12.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^5.0.7",
-    "@graphql-codegen/typescript-operations": "4.6.1",
+    "@graphql-codegen/cli": "^6.1.0",
+    "@graphql-codegen/typescript-operations": "5.0.6",
     "@graphql-codegen/typescript-react-apollo": "4.3.3",
+    "@graphql-typed-document-node/core": "3.2.0",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.7",

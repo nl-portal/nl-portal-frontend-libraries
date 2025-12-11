@@ -1,6 +1,7 @@
 import {
+  GetOpenProductenDocument,
   OpenProductProduct,
-  useGetOpenProductenQuery,
+  useQuery,
 } from "@nl-portal/nl-portal-api";
 import TableList from "./TableList";
 import { useIntl } from "react-intl";
@@ -27,7 +28,7 @@ export const ProductList = ({
 }: ProductListProps) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
-  const { data, loading, error, refetch } = useGetOpenProductenQuery({
+  const { data, loading, error, refetch } = useQuery(GetOpenProductenDocument, {
     variables: { productTypeCodes: productTypeCodes, pageSize: productLength },
   });
 

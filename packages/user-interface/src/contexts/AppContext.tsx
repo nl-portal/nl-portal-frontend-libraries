@@ -1,9 +1,10 @@
 import {
   ApiContext,
+  GetOpenProductHoofdThemasByProductenDocument,
   GetOpenProductHoofdThemasByProductenQuery,
+  GetUnopenedBerichtenCountDocument,
   GetUnopenedBerichtenCountQuery,
-  useGetOpenProductHoofdThemasByProductenQuery,
-  useGetUnopenedBerichtenCountQuery,
+  useQuery,
 } from "@nl-portal/nl-portal-api";
 import {
   createContext,
@@ -95,7 +96,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   }, []);
 
   const { loading: loadingThemes, refetch: refetchThemes } =
-    useGetOpenProductHoofdThemasByProductenQuery({
+    useQuery(GetOpenProductHoofdThemasByProductenDocument,{
       skip: window.OPEN_PRODUCTEN !== "true",
       onCompleted: (data: GetOpenProductHoofdThemasByProductenQuery) => {
         setThemes(data.getOpenProductHoofdThemasByProducten);
@@ -112,8 +113,9 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
       },
     });
 
-  const { loading: loadingMessages, refetch: refetchMessages } =
-    useGetUnopenedBerichtenCountQuery({
+  const { loading: loadingMessages, refetch: refetchMessages } = useQuery(
+    GetUnopenedBerichtenCountDocument,
+    {
       onCompleted: (data: GetUnopenedBerichtenCountQuery) => {
         setMessagesCount(data?.getUnopenedBerichtenCount || 0);
       },
@@ -123,7 +125,8 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
       skipPollAttempt: () => {
         return !document.hasFocus();
       },
-    });
+    },
+  );
 
   const loading =
     loadingConfig || loadingThemes || loadingMessages || loadingUser;

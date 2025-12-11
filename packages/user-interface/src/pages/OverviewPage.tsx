@@ -5,8 +5,9 @@ import PageHeader from "../components/PageHeader";
 import {
   TaakV2,
   Zaak,
-  useGetTakenV2Query,
-  useGetZakenQuery,
+  GetTakenV2Document,
+  GetZakenDocument,
+  useQuery,
 } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
@@ -42,7 +43,7 @@ const OverviewPage = ({
     data: tasksData,
     loading: tasksLoading,
     error: tasksError,
-  } = useGetTakenV2Query({
+  } = useQuery(GetTakenV2Document, {
     variables: { pageSize: fetchTasksLength },
     skip: !fetchTasksLength,
   });
@@ -50,7 +51,7 @@ const OverviewPage = ({
     data: casesData,
     loading: casesLoading,
     error: casesError,
-  } = useGetZakenQuery({
+  } = useQuery(GetZakenDocument, {
     variables: { pageSize: fetchCasesLength },
     skip: !fetchCasesLength,
   });

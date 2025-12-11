@@ -4,12 +4,14 @@ import { Formio } from "@formio/js";
 import { Form } from "@formio/react";
 import { merge } from "lodash-es";
 import {
-  useSubmitTaakV2Mutation,
-  useGetFormDefinitionByObjectenApiUrlLazyQuery,
+  SubmitTaakV2Document,
+  GetFormDefinitionByObjectenApiUrlDocument,
   TaakStatus,
-  useGetFormDefinitionByIdLazyQuery,
-  useGetPortaalFormulierByIdV2Query,
+  GetFormDefinitionByIdDocument,
   GetPortaalFormulierByIdV2Document,
+  useMutation,
+  useLazyQuery,
+  useQuery,
 } from "@nl-portal/nl-portal-api";
 import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
@@ -37,7 +39,7 @@ const TaskDetailsPage = () => {
     data: {},
   });
 
-  const [submitTaak] = useSubmitTaakV2Mutation({
+  const [submitTaak] = useMutation(SubmitTaakV2Document, {
     update: (cache, { data }) => {
       cache.writeQuery({
         query: GetPortaalFormulierByIdV2Document,
@@ -53,7 +55,7 @@ const TaskDetailsPage = () => {
     },
   });
 
-  const { data: task } = useGetPortaalFormulierByIdV2Query({
+  const { data: task } = useQuery(GetPortaalFormulierByIdV2Document, {
     variables: { id },
     onCompleted(task) {
       if (!task || !task.getTaakByIdV2 || !task.getTaakByIdV2.portaalformulier)
@@ -97,12 +99,12 @@ const TaskDetailsPage = () => {
   });
 
   const [getFormByUrl, { data: formDefinitionUrl }] =
-    useGetFormDefinitionByObjectenApiUrlLazyQuery({
+    useLazyQuery(GetFormDefinitionByObjectenApiUrlDocument, {
       onCompleted: () => setLoading(false),
     });
 
   const [getFormById, { data: formDefinitionId }] =
-    useGetFormDefinitionByIdLazyQuery({
+    useLazyQuery(GetFormDefinitionByIdDocument, {
       onCompleted: () => setLoading(false),
     });
 

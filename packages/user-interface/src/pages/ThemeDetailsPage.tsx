@@ -5,8 +5,11 @@ import BackLink from "../components/BackLink";
 import {
   OpenProductProduct,
   TaakV2,
-  useGetOpenProductQuery,
+  GetOpenProductDocument,
+  useQuery,
   Zaak,
+  GetOpenProductQueryVariables,
+  GetOpenProductQuery,
 } from "@nl-portal/nl-portal-api";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
@@ -18,7 +21,7 @@ import React from "react";
 interface ThemeDetailsPageProps {
   children?:
     | ((
-        openProduct: ReturnType<typeof useGetOpenProductQuery>,
+        openProduct: ReturnType<typeof useQuery<GetOpenProductQuery, GetOpenProductQueryVariables>>,
       ) => React.ReactNode)
     | React.ReactNode;
   productSettings?: {
@@ -36,7 +39,7 @@ const ThemeDetailsPage = ({
 }: ThemeDetailsPageProps) => {
   const intl = useIntl();
   const { id } = useParams<{ id: string }>();
-  const openProduct = useGetOpenProductQuery({
+  const openProduct = useQuery(GetOpenProductDocument, {
     variables: { id },
   });
 

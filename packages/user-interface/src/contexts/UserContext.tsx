@@ -8,10 +8,12 @@ import {
   GetPersoonV2Query,
   GetUserDigitaleAdressenQuery,
   MaatschappelijkeActiviteit,
-  useGetBedrijfLazyQuery,
-  useGetGemachtigdeV2LazyQuery,
-  useGetPersoonV2LazyQuery,
-  useGetUserDigitaleAdressenQuery,
+  GetBedrijfDocument,
+  GetGemachtigdeV2Document,
+  GetPersoonV2Document,
+  GetUserDigitaleAdressenDocument,
+  useLazyQuery,
+  useQuery,
 } from "@nl-portal/nl-portal-api";
 
 export interface UserContextInterface {
@@ -37,13 +39,14 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [usernameVolmacht, setUsernameVolmacht] = useState("");
 
   const [loadPersoon, { loading: persoonLoading, data: persoonData }] =
-    useGetPersoonV2LazyQuery();
+    useLazyQuery(GetPersoonV2Document);
   const [loadBedrijf, { loading: bedrijfLoading, data: bedrijfData }] =
-    useGetBedrijfLazyQuery();
+    useLazyQuery(GetBedrijfDocument);
   const [loadGemachtigde, { loading: gemachtigdeLoading }] =
-    useGetGemachtigdeV2LazyQuery();
-  const { data: contactData, loading: contactLoading } =
-    useGetUserDigitaleAdressenQuery();
+    useLazyQuery(GetGemachtigdeV2Document);
+  const { data: contactData, loading: contactLoading } = useQuery(
+    GetUserDigitaleAdressenDocument,
+  );
 
   const isLoading =
     persoonLoading || bedrijfLoading || gemachtigdeLoading || contactLoading;
@@ -54,6 +57,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (authenticationMethods?.company?.includes(authenticationMethod)) {
       setIsPersoon(false);
       loadBedrijf({
+        variables: {},
         onCompleted: (data: GetBedrijfQuery) => {
           const name = data?.getBedrijf?.naam || "";
           if (authenticationMethods?.proxy?.includes(authenticationMethod))
@@ -64,6 +68,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     } else {
       setIsPersoon(true);
       loadPersoon({
+        variables: {},
         onCompleted: (data: GetPersoonV2Query) => {
           const name = getFullName(data?.getPersoonV2?.naam);
           if (authenticationMethods?.proxy?.includes(authenticationMethod))
@@ -76,6 +81,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
       setisVolmacht(true);
       loadGemachtigde({
+        variables: {},
         onCompleted: (data: GetGemachtigdeV2Query) => {
           const name =
             (data?.getGemachtigdeV2?.persoon

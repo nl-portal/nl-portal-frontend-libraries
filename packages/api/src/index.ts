@@ -1,6 +1,6 @@
 export { default as ApiContext, ApiProvider } from "./contexts/ApiContext";
 export * from "./constants/apollo-cache";
-export * from "./generated/Graphql";
+export * from "./generated/graphql";
 export * from "./queries/get-taken-v2";
 export * from "./queries/get-zaken";
 export * from "./queries/get-persoon-v2";
@@ -11,3 +11,4 @@ export * from "./queries/get-open-product-hoofd-themas-by-producten";
 export * from "./queries/berichten/get-unopened-berichten-count";
 export * from "./queries/get-user-digitale-adressen";
 export * from "./hooks/useUserContactMutation";
+export { useQuery, useLazyQuery, useMutation } from "@apollo/client/react";

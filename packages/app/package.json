@@ -19,7 +19,7 @@
   "dependencies": {
     "@gemeente-denhaag/design-tokens": "1.0.4",
     "@gemeente-denhaag/icons": "4.0.1",
-    "@gemeente-denhaag/link": "4.0.1",
+    "@gemeente-denhaag/link": "4.1.0",
     "@gemeente-denhaag/status-badge": "^2.0.0",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",

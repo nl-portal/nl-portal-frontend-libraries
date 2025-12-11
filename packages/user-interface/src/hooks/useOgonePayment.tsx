@@ -1,7 +1,8 @@
 import {
   OgonePayment,
-  useDoDirectPaymentMutation,
-  useGenerateOgonePaymentMutation,
+  DoDirectPaymentDocument,
+  GenerateOgonePaymentDocument,
+  useMutation,
 } from "@nl-portal/nl-portal-api";
 import { useContext, useState } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
@@ -37,8 +38,8 @@ interface PaymentRequestPayload {
 const useOgonePayment = () => {
   const [loading, setLoading] = useState(false);
   const [paymentData, setPaymentData] = useState<OgonePayment>();
-  const [mutateFunction] = useGenerateOgonePaymentMutation();
-  const [mutateDirectFunction] = useDoDirectPaymentMutation();
+  const [mutateFunction] = useMutation(GenerateOgonePaymentDocument);
+  const [mutateDirectFunction] = useMutation(DoDirectPaymentDocument);
   const { currentLocale } = useContext(LocaleContext);
   const returnUrl = new URL(window.location.href);
   returnUrl.searchParams.set("type", "ogone");
