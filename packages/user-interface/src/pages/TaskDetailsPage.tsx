@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProtectedEval from "@formio/protected-eval";
 import { Formio } from "@formio/js";
 import { Form } from "@formio/react";
@@ -32,7 +32,6 @@ Formio.use(ProtectedEval);
 const TaskDetailsPage = () => {
   const { id } = useParams();
   const intl = useIntl();
-  const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const [submission, setSubmission] = useState({
@@ -41,14 +40,16 @@ const TaskDetailsPage = () => {
 
   const [submitTaak] = useMutation(SubmitTaakV2Document, {
     update: (cache, { data }) => {
-      cache.writeQuery({
-        query: GetPortaalFormulierByIdV2Document,
-        data: {
-          getTaakByIdV2: {
-            ...data?.submitTaakV2,
+      if (data?.submitTaakV2) {
+        cache.writeQuery({
+          query: GetPortaalFormulierByIdV2Document,
+          data: {
+            getTaakByIdV2: {
+              ...data.submitTaakV2,
+            },
           },
-        },
-      });
+        });
+      }
     },
     onCompleted: () => {
       setSubmitted(true);
@@ -57,56 +58,52 @@ const TaskDetailsPage = () => {
 
   const { data: task } = useQuery(GetPortaalFormulierByIdV2Document, {
     variables: { id },
-    onCompleted(task) {
-      if (!task || !task.getTaakByIdV2 || !task.getTaakByIdV2.portaalformulier)
-        return;
-
-      if (task.getTaakByIdV2?.status !== TaakStatus.Open) {
-        setSubmitted(true);
-        setLoading(false);
-        return;
-      }
-
-      try {
-        transformPrefilledDataToFormioSubmission(
-          task.getTaakByIdV2.portaalformulier.data,
-        );
-      } catch (err) {
-        console.error(err);
-        setError(true);
-      }
-
-      if (task.getTaakByIdV2.portaalformulier.formulier.soort === "url") {
-        getFormByUrl({
-          variables: {
-            url: task.getTaakByIdV2.portaalformulier?.formulier.value,
-          },
-        });
-        return;
-      }
-
-      if (task.getTaakByIdV2.portaalformulier.formulier.soort === "id") {
-        getFormById({
-          variables: {
-            id: task.getTaakByIdV2.portaalformulier?.formulier.value,
-          },
-        });
-        return;
-      }
-
-      setLoading(false);
-    },
   });
 
-  const [getFormByUrl, { data: formDefinitionUrl }] =
-    useLazyQuery(GetFormDefinitionByObjectenApiUrlDocument, {
-      onCompleted: () => setLoading(false),
-    });
+  const [getFormByUrl, { data: formDefinitionUrl, loading: formByUrlLoading }] =
+    useLazyQuery(GetFormDefinitionByObjectenApiUrlDocument);
 
-  const [getFormById, { data: formDefinitionId }] =
-    useLazyQuery(GetFormDefinitionByIdDocument, {
-      onCompleted: () => setLoading(false),
-    });
+  const [getFormById, { data: formDefinitionId, loading: formByIdLoading }] =
+    useLazyQuery(GetFormDefinitionByIdDocument);
+
+  const loading = formByUrlLoading || formByIdLoading;
+
+  useEffect(() => {
+    if (!task || !task.getTaakByIdV2 || !task.getTaakByIdV2.portaalformulier)
+      return;
+
+    if (task.getTaakByIdV2?.status !== TaakStatus.Open) {
+      setSubmitted(true);
+      return;
+    }
+
+    try {
+      transformPrefilledDataToFormioSubmission(
+        task.getTaakByIdV2.portaalformulier.data,
+      );
+    } catch (err) {
+      console.error(err);
+      setError(true);
+    }
+
+    if (task.getTaakByIdV2.portaalformulier.formulier.soort === "url") {
+      getFormByUrl({
+        variables: {
+          url: task.getTaakByIdV2.portaalformulier?.formulier.value,
+        },
+      });
+      return;
+    }
+
+    if (task.getTaakByIdV2.portaalformulier.formulier.soort === "id") {
+      getFormById({
+        variables: {
+          id: task.getTaakByIdV2.portaalformulier?.formulier.value,
+        },
+      });
+      return;
+    }
+  }, [task, loading]);
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
@@ -185,7 +182,7 @@ const TaskDetailsPage = () => {
     );
   }
 
-  if (!formDefinitionUrl && !formDefinitionId) {
+  if (!loading && !formDefinitionUrl && !formDefinitionId) {
     return (
       <>
         <BackLink />

@@ -15,8 +15,7 @@ import UserContext from "../contexts/UserContext";
 import { useContext } from "react";
 import {
   DigitaleAdresType,
-  UserContactDocument,
-  useMutation,
+  useUserContactMutation,
 } from "@nl-portal/nl-portal-api";
 
 const EditContactInfoPage = () => {
@@ -31,7 +30,7 @@ const EditContactInfoPage = () => {
       called: mutationCalled,
       reset: mutationReset,
     },
-  ] = useMutation(UserContactDocument);
+  ] = useUserContactMutation();
   const telefoonnummer = contact?.getUserDigitaleAdressen?.find(
     (a) => a.type === DigitaleAdresType.Telefoonnummer,
   );

@@ -3,7 +3,6 @@ import {
   GetOpenProductHoofdThemasByProductenDocument,
   GetOpenProductHoofdThemasByProductenQuery,
   GetUnopenedBerichtenCountDocument,
-  GetUnopenedBerichtenCountQuery,
   useQuery,
 } from "@nl-portal/nl-portal-api";
 import {
@@ -95,38 +94,49 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     });
   }, []);
 
-  const { loading: loadingThemes, refetch: refetchThemes } =
-    useQuery(GetOpenProductHoofdThemasByProductenDocument,{
-      skip: window.OPEN_PRODUCTEN !== "true",
-      onCompleted: (data: GetOpenProductHoofdThemasByProductenQuery) => {
-        setThemes(data.getOpenProductHoofdThemasByProducten);
-        const activeThemes =
-          data.getOpenProductHoofdThemasByProducten.map((theme) =>
-            stringToSlug(theme.naam),
-          ) || [];
-        const newNavigationItems = initNavigationItems.map((group) =>
-          group.filter(
-            (item) => !item.themeSlug || activeThemes.includes(item.themeSlug),
-          ),
-        );
-        updateNavigationItems(newNavigationItems);
-      },
-    });
+  const {
+    loading: loadingThemes,
+    refetch: refetchThemes,
+    data: themesData,
+  } = useQuery(GetOpenProductHoofdThemasByProductenDocument, {
+    skip: window.OPEN_PRODUCTEN !== "true",
+  });
 
-  const { loading: loadingMessages, refetch: refetchMessages } = useQuery(
-    GetUnopenedBerichtenCountDocument,
-    {
-      onCompleted: (data: GetUnopenedBerichtenCountQuery) => {
-        setMessagesCount(data?.getUnopenedBerichtenCount || 0);
-      },
-      pollInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 30000,
-      fetchPolicy: "cache-and-network",
-      skip: window.MESSAGE_COUNT_ENABLE === "false",
-      skipPollAttempt: () => {
-        return !document.hasFocus();
-      },
+  useEffect(() => {
+    if (!themesData) return;
+
+    setThemes(themesData.getOpenProductHoofdThemasByProducten);
+
+    const activeThemes =
+      themesData.getOpenProductHoofdThemasByProducten.map((theme) =>
+        stringToSlug(theme.naam),
+      ) || [];
+
+    const newNavigationItems = initNavigationItems.map((group) =>
+      group.filter(
+        (item) => !item.themeSlug || activeThemes.includes(item.themeSlug),
+      ),
+    );
+
+    updateNavigationItems(newNavigationItems);
+  }, [themesData, initNavigationItems]);
+
+  const {
+    loading: loadingMessages,
+    refetch: refetchMessages,
+    data: messagesData,
+  } = useQuery(GetUnopenedBerichtenCountDocument, {
+    pollInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 30000,
+    fetchPolicy: "cache-and-network",
+    skip: window.MESSAGE_COUNT_ENABLE === "false",
+    skipPollAttempt: () => {
+      return !document.hasFocus();
     },
-  );
+  });
+
+  useEffect(() => {
+    setMessagesCount(messagesData?.getUnopenedBerichtenCount || 0);
+  }, [messagesData]);
 
   const loading =
     loadingConfig || loadingThemes || loadingMessages || loadingUser;

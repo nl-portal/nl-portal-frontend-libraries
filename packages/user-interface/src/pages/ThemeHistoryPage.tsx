@@ -3,14 +3,21 @@ import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import { useParams } from "react-router";
-import { GetOpenProductDocument, GetOpenProductQuery, GetOpenProductQueryVariables, useQuery } from "@nl-portal/nl-portal-api";
+import {
+  GetOpenProductDocument,
+  GetOpenProductQuery,
+  GetOpenProductQueryVariables,
+  useQuery,
+} from "@nl-portal/nl-portal-api";
 
 interface Props {
   slug: string;
   titleTranslationId?: string;
   children?:
     | ((
-        openProduct: ReturnType<typeof useQuery<GetOpenProductQuery, GetOpenProductQueryVariables>>,
+        openProduct: ReturnType<
+          typeof useQuery<GetOpenProductQuery, GetOpenProductQueryVariables>
+        >,
       ) => React.ReactNode)
     | React.ReactNode;
 }

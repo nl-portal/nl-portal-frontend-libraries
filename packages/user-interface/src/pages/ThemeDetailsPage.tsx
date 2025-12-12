@@ -21,7 +21,9 @@ import React from "react";
 interface ThemeDetailsPageProps {
   children?:
     | ((
-        openProduct: ReturnType<typeof useQuery<GetOpenProductQuery, GetOpenProductQueryVariables>>,
+        openProduct: ReturnType<
+          typeof useQuery<GetOpenProductQuery, GetOpenProductQueryVariables>
+        >,
       ) => React.ReactNode)
     | React.ReactNode;
   productSettings?: {

@@ -1,4 +1,8 @@
-import { Bericht, GetBerichtDocument, useQuery } from "@nl-portal/nl-portal-api";
+import {
+  Bericht,
+  GetBerichtDocument,
+  useQuery,
+} from "@nl-portal/nl-portal-api";
 import { useOutletContext, useParams } from "react-router";
 import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
@@ -6,7 +10,7 @@ import PageHeader from "../components/PageHeader";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { FormattedDate, FormattedMessage, FormattedTime } from "react-intl";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AppContext from "../contexts/AppContext";
 import MessageContent from "../components/MessageContent";
 import DocumentsList from "../components/DocumentsList";
@@ -21,14 +25,16 @@ const MessageDetailsPage = () => {
     error: messageError,
   } = useQuery(GetBerichtDocument, {
     variables: { id: id },
-    onCompleted: () => {
-      try {
-        refetchMessages();
-      } catch (error) {
-        console.error("Error refetching messages:", error);
-      }
-    },
   });
+
+  useEffect(() => {
+    try {
+      refetchMessages();
+    } catch (error) {
+      console.error("Error refetching messages:", error);
+    }
+  }, [messageData]);
+
   const message = messageData?.getBericht as Bericht | undefined;
 
   return (
