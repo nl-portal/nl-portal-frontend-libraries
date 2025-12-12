@@ -105,12 +105,11 @@
     "wait-on": "^9.0.3"
   },
   "peerDependencies": {
-    "@apollo/client": "3.13.8",
     "@nl-portal/nl-portal-api": "workspace:*",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@nl-portal/nl-portal-localization": "workspace:*",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-intl": "^7.1.14",
     "react-router": "^7.10.1"
   }

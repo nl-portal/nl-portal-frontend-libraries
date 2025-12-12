@@ -63,8 +63,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     persoonLoading || bedrijfLoading || gemachtigdeLoading || contactLoading;
 
   useEffect(() => {
-    if (!authenticationMethod) return;
-
     if (isCompany) {
       loadBedrijf({ variables: {} });
     } else {
@@ -74,14 +72,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (isProxy) {
       loadGemachtigde({ variables: {} });
     }
-  }, [
-    authenticationMethod,
-    isCompany,
-    isProxy,
-    loadBedrijf,
-    loadPersoon,
-    loadGemachtigde,
-  ]);
+  }, [isCompany, isProxy, loadBedrijf, loadPersoon, loadGemachtigde]);
 
   const persoonNaam = useMemo(() => {
     const p = persoonData?.getPersoonV2;
