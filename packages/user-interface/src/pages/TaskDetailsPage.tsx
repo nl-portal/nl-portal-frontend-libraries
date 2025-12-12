@@ -58,16 +58,17 @@ const TaskDetailsPage = () => {
 
   const [submitTaak] = useMutation(SubmitTaakV2Document, {
     update: (cache, { data }) => {
-      if (data?.submitTaakV2) {
-        cache.writeQuery({
-          query: GetPortaalFormulierByIdV2Document,
-          data: {
-            getTaakByIdV2: {
-              ...data.submitTaakV2,
-            },
+      const updated = data?.submitTaakV2;
+      if (!updated) return;
+
+      cache.modify({
+        id: cache.identify(updated),
+        fields: {
+          status() {
+            return updated.status;
           },
-        });
-      }
+        },
+      });
     },
   });
 

@@ -1,4 +1,4 @@
-import { Components, ReactComponent } from "@formio/react";
+import { Components } from "@formio/js";
 import { Root, createRoot } from "react-dom/client";
 import { useEffect, useState } from "react";
 import { get } from "lodash-es";
@@ -173,18 +173,15 @@ const FileUpload = ({
     </FormField>
   );
 };
+const FieldComponent = Components.components.field;
 
-class FormIoUploader extends ReactComponent {
-  private component: any;
-  private data: object;
-  private element: Root | null;
+class FormIoUploader extends FieldComponent {
+  private reactRoot: Root | null;
   static globalOidcToken: string = "";
 
   constructor(component: any, options: any, data: any) {
     super(component, options, data);
-    this.component = component;
-    this.data = data;
-    this.element = null;
+    this.reactRoot = null;
 
     if (this.component.multipleFiles === undefined) {
       this.component.multipleFiles = true;
@@ -203,7 +200,7 @@ class FormIoUploader extends ReactComponent {
   }
 
   static schema() {
-    return Components.components.field.schema({
+    return FieldComponent.schema({
       type: "portalFileUpload",
     });
   }
@@ -218,17 +215,28 @@ class FormIoUploader extends ReactComponent {
     FormIoUploader.globalOidcToken = oidcToken;
   };
 
-  static getOidcToken = () => {
-    return FormIoUploader.globalOidcToken;
-  };
+  static getOidcToken = () => FormIoUploader.globalOidcToken;
 
   onChangeHandler = (files: Array<UploadedFile>) => {
     this.updateValue(files, undefined);
   };
 
-  attachReact = (element: Element) => {
-    this.element = createRoot(element);
-    this.element.render(
+  render() {
+    return super.render(`<div ref="react"></div>`);
+  }
+
+  attach(element: Element) {
+    const baseAttachResult = super.attach(element);
+
+    this.loadRefs(element, { react: "single" });
+
+    const mountEl = (this.refs as any)?.react as Element | undefined;
+    if (!mountEl) return baseAttachResult;
+
+    this.reactRoot?.unmount();
+    this.reactRoot = createRoot(mountEl);
+
+    this.reactRoot.render(
       <LocalizationProvider>
         <FileUpload
           id={`${this.component.id}-${this.component.key}`}
@@ -240,11 +248,15 @@ class FormIoUploader extends ReactComponent {
         />
       </LocalizationProvider>,
     );
-  };
 
-  detachReact = () => {
-    this.element?.unmount();
-  };
+    return baseAttachResult;
+  }
+
+  detach() {
+    this.reactRoot?.unmount();
+    this.reactRoot = null;
+    return super.detach();
+  }
 }
 
 export default FormIoUploader;
