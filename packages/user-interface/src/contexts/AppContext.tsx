@@ -10,6 +10,7 @@ import {
   ReactNode,
   useContext,
   useEffect,
+  useMemo,
   useState,
   useTransition,
 } from "react";
@@ -40,18 +41,27 @@ interface MessagesProviderProps {
 export const AppProvider = ({ children }: MessagesProviderProps) => {
   const location = useLocation();
   const navType = useNavigationType();
-  const [firstLoad, setFirstLoad] = useState(true);
   const { restUri } = useContext(ApiContext);
   const [logoUrl, setLogoUrl] = useState<string | undefined>(undefined);
-  const [themes, setThemes] = useState<Themes>([]);
-  const [messagesCount, setMessagesCount] = useState(0);
   const [loadingConfig, startTransition] = useTransition();
   const { initNavigationItems, updateNavigationItems } =
     useContext(RouterContext);
   const { isLoading: loadingUser } = useContext(UserContext);
-  const [history, setHistory] = useState<string[]>(
-    JSON.parse(localStorage.getItem("history") || "[]"),
-  );
+
+  const history = useMemo<string[]>(() => {
+    const stored = JSON.parse(
+      localStorage.getItem("history") || "[]",
+    ) as string[];
+
+    if (navType === "POP" || location.key === "default") return stored;
+
+    const newHistory = stored
+      .filter((item) => item !== location.pathname)
+      .slice(0, 1);
+    newHistory.unshift(location.pathname);
+
+    return newHistory;
+  }, [location.pathname, location.key, navType]);
 
   useEffect(() => {
     if (window.USE_THEME_API !== "true") return;
@@ -69,7 +79,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
         console.error("Failed to load logo:", err);
       }
     });
-  }, []);
+  }, [restUri, startTransition]);
 
   useEffect(() => {
     if (window.USE_THEME_API !== "true") return;
@@ -102,15 +112,15 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     skip: window.OPEN_PRODUCTEN !== "true",
   });
 
+  const themes: Themes = useMemo(
+    () => themesData?.getOpenProductHoofdThemasByProducten ?? [],
+    [themesData],
+  );
+
   useEffect(() => {
     if (!themesData) return;
 
-    setThemes(themesData.getOpenProductHoofdThemasByProducten);
-
-    const activeThemes =
-      themesData.getOpenProductHoofdThemasByProducten.map((theme) =>
-        stringToSlug(theme.naam),
-      ) || [];
+    const activeThemes = themes.map((theme) => stringToSlug(theme.naam)) || [];
 
     const newNavigationItems = initNavigationItems.map((group) =>
       group.filter(
@@ -119,7 +129,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     );
 
     updateNavigationItems(newNavigationItems);
-  }, [themesData, initNavigationItems]);
+  }, [themesData, initNavigationItems, themes]);
 
   const {
     loading: loadingMessages,
@@ -134,30 +144,20 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     },
   });
 
-  useEffect(() => {
-    setMessagesCount(messagesData?.getUnopenedBerichtenCount || 0);
-  }, [messagesData]);
+  const messagesCount = useMemo(
+    () => messagesData?.getUnopenedBerichtenCount || 0,
+    [messagesData],
+  );
 
   const loading =
     loadingConfig || loadingThemes || loadingMessages || loadingUser;
 
   useEffect(() => {
-    if (!firstLoad) return;
-    if (loading) return;
-    setFirstLoad(false);
-  }, [loading]);
+    localStorage.setItem("history", JSON.stringify(history));
+  }, [history]);
 
-  useEffect(() => {
-    if (navType === "POP" || location.key === "default") return;
-    const newHistory = [...history]
-      .filter((item) => item !== location.pathname)
-      .splice(0, 1);
-    newHistory.unshift(location.pathname);
-    localStorage.setItem("history", JSON.stringify(newHistory));
-    setHistory(newHistory);
-  }, [location]);
-
-  if (firstLoad && loading) return <FullscreenSkeleton />;
+  const showInitialSkeleton = loading && !themesData && !messagesData;
+  if (showInitialSkeleton) return <FullscreenSkeleton />;
 
   return (
     <AppContext.Provider

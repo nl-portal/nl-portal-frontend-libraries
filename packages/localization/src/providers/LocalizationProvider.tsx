@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { IntlProvider } from "react-intl";
 import deepmerge from "deepmerge";
@@ -40,9 +40,10 @@ const LocalizationProvider = ({
 
   const hrefLang = currentLocale.toLocaleLowerCase().split("-")[0];
 
-  localStorage.setItem(LOCAL_STORAGE_LANG_KEY, currentLocale);
-
-  document.documentElement.lang = hrefLang;
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_LANG_KEY, currentLocale);
+    document.documentElement.lang = hrefLang;
+  }, [currentLocale, hrefLang]);
 
   return (
     <LocaleContext.Provider

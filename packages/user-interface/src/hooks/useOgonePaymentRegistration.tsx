@@ -24,6 +24,7 @@ const useOgonePaymentRegistration = (useLegacyPostsale?: boolean) => {
   useEffect(() => {
     if (type !== "ogone") return;
     if (paymentStatus !== undefined) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPaymentStatus(PaymentStatus.IN_PROGRESS);
 
     if (window.USE_LEGACY_OGONE_PAYMENT !== "true") {

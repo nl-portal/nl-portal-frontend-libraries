@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, useContext, useMemo } from "react";
+import { AnchorHTMLAttributes, useCallback, useContext, useMemo } from "react";
 import { HeaderLogic, HeaderLogicProps } from "@gemeente-denhaag/header";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import { UIMatch, useMatches } from "react-router";
@@ -55,9 +55,12 @@ const Header = ({ logo }: HeaderProps) => {
     [supportedLocales, currentLocale, intl],
   );
 
-  const handleLanguageChange = (language: string) => {
-    setCurrentLocale(language);
-  };
+  const handleLanguageChange = useCallback(
+    (language: string) => {
+      setCurrentLocale(language);
+    },
+    [setCurrentLocale],
+  );
 
   const languageSwitcherMenu = useMemo(
     () => ({
@@ -71,7 +74,7 @@ const Header = ({ logo }: HeaderProps) => {
         onLanguageChange: handleLanguageChange,
       },
     }),
-    [currentLocale, languages, intl, setCurrentLocale],
+    [currentLocale, languages, intl, handleLanguageChange],
   );
 
   const mijnDenHaagMenu = useMemo(
@@ -90,7 +93,7 @@ const Header = ({ logo }: HeaderProps) => {
         return navItem;
       }),
     }),
-    [navigationItems, intl],
+    [navigationItems, intl, messagesCount],
   );
 
   const mijnDenHaagMobileMenu = useMemo(
@@ -109,7 +112,7 @@ const Header = ({ logo }: HeaderProps) => {
         return navItem;
       }),
     }),
-    [navigationItems, intl],
+    [navigationItems, intl, messagesCount],
   );
 
   const welcomeLabel = intl.formatMessage({ id: "menu.welcome" });

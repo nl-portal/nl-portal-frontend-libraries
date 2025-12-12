@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export interface IdleTimerProps {
   idleTimeoutMinutes: number;
@@ -18,14 +18,14 @@ const BASIC_ACTIVITY_EVENTS: string[] = [
 const calculateTimeoutMilliseconds = (minutes: number) => 1000 * 60 * minutes;
 
 const IdleTimer = ({ idleTimeoutMinutes, onTimeOut }: IdleTimerProps) => {
-  let timeout: ReturnType<typeof setTimeout> | null = null;
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const resetTimer = () => {
-    if (timeout) {
-      clearTimeout(timeout);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
     }
 
-    timeout = setTimeout(
+    timeoutRef.current = setTimeout(
       onTimeOut,
       calculateTimeoutMilliseconds(idleTimeoutMinutes),
     ); // Should be 15 minutes to comply with DigiD requirements
@@ -42,8 +42,8 @@ const IdleTimer = ({ idleTimeoutMinutes, onTimeOut }: IdleTimerProps) => {
 
     // cleanup
     return () => {
-      if (timeout) {
-        clearTimeout(timeout);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
         BASIC_ACTIVITY_EVENTS.forEach((eventType) => {
           window.removeEventListener(eventType, resetTimer);
         });

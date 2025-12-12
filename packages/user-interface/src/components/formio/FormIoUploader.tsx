@@ -66,7 +66,7 @@ const FileUpload = ({
       );
     }
 
-    const tempId = `${file.name}-${file.size}-${Date.now()}`;
+    const tempId = crypto.randomUUID();
     const tempItem: UploadedFile = {
       id: tempId,
       name: file.name,

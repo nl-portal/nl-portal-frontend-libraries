@@ -1,5 +1,5 @@
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo } from "react";
 import { getFullName } from "../utils/person-data";
 import {
   BrpPersoon,
@@ -30,10 +30,21 @@ const UserContext = createContext<UserContextInterface>(
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { decodedToken, authenticationMethods } = useContext(OidcContext);
-  const [isPersoon, setIsPersoon] = useState(true);
-  const [isVolmacht, setisVolmacht] = useState(false);
-  const [username, setUserName] = useState("");
-  const [usernameVolmacht, setUsernameVolmacht] = useState("");
+
+  const authenticationMethod = decodedToken?.middel || "";
+
+  const isCompany = useMemo(() => {
+    if (!authenticationMethod) return false;
+    return !!authenticationMethods?.company?.includes(authenticationMethod);
+  }, [authenticationMethod, authenticationMethods]);
+
+  const isProxy = useMemo(() => {
+    if (!authenticationMethod) return false;
+    return !!authenticationMethods?.proxy?.includes(authenticationMethod);
+  }, [authenticationMethod, authenticationMethods]);
+
+  const isPersoon = !isCompany;
+  const isVolmacht = isProxy;
 
   const [loadPersoon, { loading: persoonLoading, data: persoonData }] =
     useLazyQuery(GetPersoonV2Document);
@@ -43,6 +54,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     loadGemachtigde,
     { loading: gemachtigdeLoading, data: gemachtigdeData },
   ] = useLazyQuery(GetGemachtigdeV2Document);
+
   const { data: contactData, loading: contactLoading } = useQuery(
     GetUserDigitaleAdressenDocument,
   );
@@ -51,78 +63,50 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     persoonLoading || bedrijfLoading || gemachtigdeLoading || contactLoading;
 
   useEffect(() => {
-    const authenticationMethod = decodedToken?.middel || "";
-
     if (!authenticationMethod) return;
 
-    const isCompany =
-      authenticationMethods?.company?.includes(authenticationMethod);
-    const isProxy =
-      authenticationMethods?.proxy?.includes(authenticationMethod);
-
     if (isCompany) {
-      setIsPersoon(false);
       loadBedrijf({ variables: {} });
     } else {
-      setIsPersoon(true);
       loadPersoon({ variables: {} });
     }
 
     if (isProxy) {
-      setisVolmacht(true);
       loadGemachtigde({ variables: {} });
-    } else {
-      setisVolmacht(false);
     }
   }, [
-    decodedToken,
-    authenticationMethods,
-    loadPersoon,
+    authenticationMethod,
+    isCompany,
+    isProxy,
     loadBedrijf,
+    loadPersoon,
     loadGemachtigde,
   ]);
 
-  useEffect(() => {
-    if (!bedrijfData?.getBedrijf) return;
+  const persoonNaam = useMemo(() => {
+    const p = persoonData?.getPersoonV2;
+    return p ? getFullName(p.naam) : "";
+  }, [persoonData]);
 
-    const authenticationMethod = decodedToken?.middel || "";
-    const isProxy =
-      authenticationMethods?.proxy?.includes(authenticationMethod);
+  const bedrijfNaam = useMemo(() => {
+    return bedrijfData?.getBedrijf?.naam || "";
+  }, [bedrijfData]);
 
-    const name = bedrijfData.getBedrijf.naam || "";
-
-    if (isProxy) {
-      setUsernameVolmacht(name);
-    } else {
-      setUserName(name);
-    }
-  }, [bedrijfData, decodedToken, authenticationMethods]);
-
-  useEffect(() => {
-    if (!persoonData?.getPersoonV2) return;
-
-    const authenticationMethod = decodedToken?.middel || "";
-    const isProxy =
-      authenticationMethods?.proxy?.includes(authenticationMethod);
-
-    const name = getFullName(persoonData.getPersoonV2.naam);
-
-    if (isProxy) {
-      setUsernameVolmacht(name);
-    } else {
-      setUserName(name);
-    }
-  }, [persoonData, decodedToken, authenticationMethods]);
-
-  useEffect(() => {
-    if (!gemachtigdeData?.getGemachtigdeV2) return;
-    const gemachtigde = gemachtigdeData.getGemachtigdeV2;
-    const name =
-      (gemachtigde.persoon
-        ? getFullName(gemachtigde.persoon.naam)
-        : gemachtigde.bedrijf?.naam) || "";
-    setUserName(name);
+  const gemachtigdeNaam = useMemo(() => {
+    const g = gemachtigdeData?.getGemachtigdeV2;
+    if (!g) return "";
+    return (g.persoon ? getFullName(g.persoon.naam) : g.bedrijf?.naam) || "";
   }, [gemachtigdeData]);
+
+  const username = useMemo(() => {
+    if (isVolmacht) return gemachtigdeNaam;
+    return isCompany ? bedrijfNaam : persoonNaam;
+  }, [isVolmacht, gemachtigdeNaam, isCompany, bedrijfNaam, persoonNaam]);
+
+  const usernameVolmacht = useMemo(() => {
+    if (!isVolmacht) return "";
+    return isCompany ? bedrijfNaam : persoonNaam;
+  }, [isVolmacht, isCompany, bedrijfNaam, persoonNaam]);
 
   return (
     <UserContext.Provider

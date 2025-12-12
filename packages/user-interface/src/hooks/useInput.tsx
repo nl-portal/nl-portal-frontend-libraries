@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useMemo, useState } from "react";
 
 export type Validation = {
   validationFn: (value: string) => boolean;
@@ -8,16 +8,13 @@ export type Validation = {
 const useInput = (defaultValue: string, validations: Validation[]) => {
   const [enteredValue, setEnteredValue] = useState(defaultValue);
   const [didEdit, setDidEdit] = useState(false);
-  const [errorTranslationId, setErrorTranslationId] = useState("");
 
-  useEffect(() => {
-    setErrorTranslationId(
+  const errorTranslationId = useMemo(() => {
+    return (
       validations.find((validation) => !validation.validationFn(enteredValue))
-        ?.errorTranslationId || "",
+        ?.errorTranslationId || ""
     );
   }, [enteredValue, validations]);
-
-  useEffect(() => setEnteredValue(defaultValue), [defaultValue]);
 
   const handleInputChange = (
     event: ChangeEvent<
@@ -37,7 +34,7 @@ const useInput = (defaultValue: string, validations: Validation[]) => {
     handleInputChange,
     handleInputBlur,
     hasError: didEdit && Boolean(errorTranslationId),
-    errorTranslationId: errorTranslationId,
+    errorTranslationId,
   };
 };
 
