@@ -77,7 +77,7 @@ const OverviewPage = ({
           }
         />
       )}
-      {showNoEmailAlert && !emailadres?.waarde && (
+      {showNoEmailAlert && contact && !emailadres?.waarde && (
         <Alert
           title={<FormattedMessage id="overviewpage.noEmail.title" />}
           text={
