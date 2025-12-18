@@ -29,6 +29,7 @@ import { nlPortalWell } from "./formio/FormioWellTemplate";
 import { SkipLink } from "@gemeente-denhaag/skip-link";
 import styles from "./Layout.module.scss";
 import { FormattedMessage } from "react-intl";
+import FormIoDatePicker from "./formio/FormIoDatePicker";
 
 interface LayoutComponentProps {
   paths: Paths;
@@ -48,8 +49,11 @@ const Layout = ({
   const { oidcToken } = use(OidcContext);
 
   useEffect(() => {
+    // Register FormIo custom components
     FormIoUploader.register();
+    FormIoDatePicker.register();
 
+    // Set FormIo custom templates
     const base = Templates.templates.bootstrap || Templates.current || {};
     Templates.templates["nl-portal"] = {
       ...base,
