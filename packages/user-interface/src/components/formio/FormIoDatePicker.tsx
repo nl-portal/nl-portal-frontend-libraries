@@ -16,20 +16,28 @@ const formatOffsetForDate = (d: Date) => {
   return `${sign}${hh}:${mm}`;
 };
 
-const toLocalDateTimeWithOffset = (datePart: string, timePart: string) => {
-  const [hh = "00", mi = "00", ss = "00"] = (timePart ?? "").split(":");
-  const local = new Date(`${datePart}T${hh}:${mi}:${ss}`);
+const toLocalDateTimeWithOffset = (date: string, time: string) => {
+  const [hh = "00", mi = "00", ss = "00"] = (time ?? "").split(":");
+  const local = new Date(`${date}T${hh}:${mi}:${ss}`);
 
   const outTime = `${toTwoDigits(local.getHours())}:${toTwoDigits(local.getMinutes())}:${toTwoDigits(local.getSeconds())}`;
   const offset = formatOffsetForDate(local);
 
-  return `${datePart}T${outTime}${offset}`;
+  return `${date}T${outTime}${offset}`;
 };
 
 const parseStoredValue = (value: string) => {
   if (!value || value.length < 16) return { date: "", timeHHmm: "" };
   return { date: value.slice(0, 10), timeHHmm: value.slice(11, 16) };
 };
+
+const Mode = {
+  Datetime: "datetime",
+  Date: "date",
+  Time: "time",
+} as const;
+
+type Mode = (typeof Mode)[keyof typeof Mode];
 
 const FieldComponent: any = (Formio as any).Components.components.field;
 export default class FormIoDatePicker extends FieldComponent {
@@ -65,11 +73,11 @@ export default class FormIoDatePicker extends FieldComponent {
   private get enableTime() {
     return this.component?.enableTime !== false;
   }
-  private get mode(): "datetime" | "date" | "time" {
-    if (this.enableDate && this.enableTime) return "datetime";
-    if (this.enableDate) return "date";
-    if (this.enableTime) return "time";
-    return "date";
+  private get mode(): Mode {
+    if (this.enableDate && this.enableTime) return Mode.Datetime;
+    if (this.enableDate) return Mode.Date;
+    if (this.enableTime) return Mode.Time;
+    return Mode.Date;
   }
 
   render(): string {
@@ -77,9 +85,9 @@ export default class FormIoDatePicker extends FieldComponent {
     const { date, timeHHmm } = parseStoredValue(stored);
 
     const inputType =
-      this.mode === "datetime"
+      this.mode === Mode.Datetime
         ? "datetime-local"
-        : this.mode === "time"
+        : this.mode === Mode.Time
           ? "time"
           : "date";
 
@@ -164,13 +172,13 @@ export default class FormIoDatePicker extends FieldComponent {
 
     if (!inputValue) return "";
 
-    if (this.mode === "datetime") {
+    if (this.mode === Mode.Datetime) {
       const date = inputValue.slice(0, 10);
       const time = inputValue.slice(11);
       return toLocalDateTimeWithOffset(date, time);
     }
 
-    if (this.mode === "date") {
+    if (this.mode === Mode.Date) {
       return toLocalDateTimeWithOffset(inputValue, "00:00:00");
     }
 
@@ -186,11 +194,11 @@ export default class FormIoDatePicker extends FieldComponent {
 
     if (input) {
       const desired =
-        this.mode === "datetime"
+        this.mode === Mode.Datetime
           ? date && timeHHmm
             ? `${date}T${timeHHmm}`
             : ""
-          : this.mode === "time"
+          : this.mode === Mode.Time
             ? timeHHmm || ""
             : date || "";
 
