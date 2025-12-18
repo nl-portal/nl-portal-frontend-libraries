@@ -37,21 +37,21 @@
     "@graphql-codegen/typescript-react-apollo": "4.3.3",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@types/jest": "^30.0.0",
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
-    "@vitejs/plugin-react": "^4.7.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "rimraf": "^6.0.1",
-    "typescript": "^5.8.3",
-    "vite": "^7.0.6",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "rimraf": "^6.1.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.0",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "^3.2.4",
-    "wait-on": "^8.0.4"
+    "vitest": "^4.0.15",
+    "wait-on": "^9.0.3"
   },
   "peerDependencies": {
     "@nl-portal/nl-portal-authentication": "workspace:*",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   }
 }
