@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@gemeente-denhaag/design-tokens": "1.0.4",
+    "@gemeente-denhaag/design-tokens": "1.1.0",
     "@gemeente-denhaag/icons": "4.0.1",
     "@gemeente-denhaag/link": "4.1.0",
     "@gemeente-denhaag/status-badge": "^2.0.0",
@@ -37,9 +37,9 @@
     "@vitejs/plugin-react": "^5.1.2",
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3",
-    "vite": "^7.2.7",
+    "vite": "^7.3.0",
     "vite-bundle-visualizer": "^1.2.1",
-    "vitest": "^4.0.15",
+    "vitest": "^4.0.16",
     "wait-on": "^9.0.3"
   }
 }
