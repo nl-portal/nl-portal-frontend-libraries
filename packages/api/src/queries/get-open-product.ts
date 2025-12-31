@@ -1,29 +1,10 @@
 import { gql } from "@apollo/client";
+import { OPEN_PRODUCT_FIELDS } from "../fragments/open-product";
 
 export const QUERY_GET_OPEN_PRODUCT = gql`
   query GetOpenProduct($id: UUID!) {
     getOpenProduct(id: $id) {
-      uuid
-      url
-      naam
-      startDatum
-      gepubliceerd
-      aanmaakDatum
-      producttype {
-        code
-        uniformeProductNaam
-        toegestaneStatussen
-      }
-      prijs
-      gepubliceerd
-      status
-      documenten {
-        url
-      }
-      frequentie
-      verbruiksobject
-      dataobject
-      decisions
+      ...openProductFields
       zaken {
         uuid
         omschrijving
@@ -65,4 +46,5 @@ export const QUERY_GET_OPEN_PRODUCT = gql`
       }
     }
   }
+  ${OPEN_PRODUCT_FIELDS}
 `;

@@ -1875,10 +1875,8 @@ export type OpenKlant2Uuid = {
 
 export type OpenProductActie = {
   __typename?: 'OpenProductActie';
-  mapping: Scalars['JSON']['output'];
   naam: Scalars['String']['output'];
   productTypeUuid?: Maybe<Scalars['UUID']['output']>;
-  url: Scalars['String']['output'];
   uuid: Scalars['UUID']['output'];
 };
 
@@ -2005,7 +2003,7 @@ export type OpenProductProductType = {
   code: Scalars['String']['output'];
   contacten: Array<OpenProductContact>;
   content?: Maybe<Array<OpenProductProductTypeContent>>;
-  dataObjectSchema: OpenProductSchema;
+  dataObjectSchema?: Maybe<OpenProductSchema>;
   externCodes: Array<OpenProductProductTypeExterneCode>;
   gepubliceerd?: Maybe<Scalars['Boolean']['output']>;
   interneOpmerking?: Maybe<Scalars['String']['output']>;
@@ -2024,7 +2022,7 @@ export type OpenProductProductType = {
   uniformeProductNaam: Scalars['String']['output'];
   updateDatum: Scalars['ZonedDateTime']['output'];
   uuid: Scalars['UUID']['output'];
-  verbruiksObjectSchema: OpenProductSchema;
+  verbruiksObjectSchema?: Maybe<OpenProductSchema>;
   verzoektypen: Array<OpenProductUrl>;
   zaaktypen: Array<OpenProductUrl>;
 };
@@ -3368,6 +3366,8 @@ export type ZaakType = {
 
 export type FormulierFieldsFragment = { __typename?: 'TaakFormulierV2', value: string };
 
+export type OpenProductFieldsFragment = { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, eindDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, updateDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, acties?: Array<{ __typename?: 'OpenProductActie', uuid: any, naam: string, productTypeUuid?: any | null }> | null };
+
 export type CreateUserDigitaleAdresMutationVariables = Exact<{
   digitaleAdresRequest: DigitaleAdresRequestInput;
 }>;
@@ -3505,13 +3505,6 @@ export type GetGemachtigdeV2QueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetGemachtigdeV2Query = { __typename?: 'Query', getGemachtigdeV2?: { __typename?: 'GemachtigdeV2', persoon?: { __typename?: 'BrpPersoon', naam: { __typename?: 'BrpNaam', voornamen?: string | null, officialLastName?: string | null } } | null, bedrijf?: { __typename?: 'MaatschappelijkeActiviteit', naam: string } | null } | null };
 
-export type GetOpenProductenByThemaQueryVariables = Exact<{
-  themaId: Scalars['UUID']['input'];
-}>;
-
-
-export type GetOpenProductenByThemaQuery = { __typename?: 'Query', getOpenProductenByThema: Array<{ __typename?: 'OpenProductProduct', uuid: any, naam: string, startDatum?: any | null, eindDatum?: any | null, taken?: Array<{ __typename?: 'TaakV2', id: any, titel: string, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null } }> | null, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null, zaaktype: { __typename?: 'ZaakType', identificatie: string } }> | null }> };
-
 export type GetOpenProductHoofdThemasByProductenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3539,7 +3532,7 @@ export type GetOpenProductQueryVariables = Exact<{
 }>;
 
 
-export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: any, betaalkenmerk: string, pspid: string } | null }> | null } | null };
+export type GetOpenProductQuery = { __typename?: 'Query', getOpenProduct?: { __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, eindDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, updateDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, zaken?: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: { __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } } | null }> | null, taken?: Array<{ __typename?: 'TaakV2', id: any, soort: TaakSoort, titel: string, status: TaakStatus, verloopdatum?: any | null, koppeling: { __typename?: 'TaakKoppeling', registratie: string, value?: string | null }, url?: { __typename?: 'TaakUrl', uri: string } | null, portaalformulier?: { __typename?: 'TaakForm', formulier: { __typename?: 'TaakFormulierV2', soort: string, value: string } } | null, ogonebetaling?: { __typename?: 'OgoneBetaling', bedrag: any, betaalkenmerk: string, pspid: string } | null }> | null, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, acties?: Array<{ __typename?: 'OpenProductActie', uuid: any, naam: string, productTypeUuid?: any | null }> | null } | null };
 
 export type GetOpenProductenQueryVariables = Exact<{
   pageNumber?: InputMaybe<Scalars['Int']['input']>;
@@ -3552,7 +3545,7 @@ export type GetOpenProductenQueryVariables = Exact<{
 }>;
 
 
-export type GetOpenProductenQuery = { __typename?: 'Query', getOpenProducten: { __typename?: 'ProductenPage', number: number, size: number, totalElements: number, numberOfElements: number, totalPages: number, content: Array<{ __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }> }> } };
+export type GetOpenProductenQuery = { __typename?: 'Query', getOpenProducten: { __typename?: 'ProductenPage', number: number, size: number, totalElements: number, numberOfElements: number, totalPages: number, content: Array<{ __typename?: 'OpenProductProduct', uuid: any, url?: string | null, naam: string, startDatum?: any | null, eindDatum?: any | null, gepubliceerd?: boolean | null, aanmaakDatum: any, updateDatum: any, prijs?: number | null, status: OpenProductToegestaneStatus, frequentie: OpenProductFrequentie, verbruiksobject?: any | null, dataobject?: any | null, decisions: Array<any>, producttype: { __typename?: 'OpenProductProductProductType', code: string, uniformeProductNaam: string, toegestaneStatussen: Array<OpenProductToegestaneStatus> }, documenten: Array<{ __typename?: 'OpenProductUrl', url: string }>, acties?: Array<{ __typename?: 'OpenProductActie', uuid: any, naam: string, productTypeUuid?: any | null }> | null }> } };
 
 export type GetPersoonV2QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3651,6 +3644,38 @@ export type GetZakenQuery = { __typename?: 'Query', getZaken: { __typename?: 'Za
 export const FormulierFieldsFragmentDoc = gql`
     fragment FormulierFields on TaakFormulierV2 {
   value
+}
+    `;
+export const OpenProductFieldsFragmentDoc = gql`
+    fragment openProductFields on OpenProductProduct {
+  uuid
+  url
+  naam
+  startDatum
+  eindDatum
+  gepubliceerd
+  aanmaakDatum
+  updateDatum
+  producttype {
+    code
+    uniformeProductNaam
+    toegestaneStatussen
+  }
+  prijs
+  gepubliceerd
+  status
+  documenten {
+    url
+  }
+  frequentie
+  verbruiksobject
+  dataobject
+  decisions
+  acties {
+    uuid
+    naam
+    productTypeUuid
+  }
 }
     `;
 export const CreateUserDigitaleAdresDocument = gql`
@@ -4444,71 +4469,6 @@ export type GetGemachtigdeV2QueryHookResult = ReturnType<typeof useGetGemachtigd
 export type GetGemachtigdeV2LazyQueryHookResult = ReturnType<typeof useGetGemachtigdeV2LazyQuery>;
 export type GetGemachtigdeV2SuspenseQueryHookResult = ReturnType<typeof useGetGemachtigdeV2SuspenseQuery>;
 export type GetGemachtigdeV2QueryResult = Apollo.QueryResult<GetGemachtigdeV2Query, GetGemachtigdeV2QueryVariables>;
-export const GetOpenProductenByThemaDocument = gql`
-    query getOpenProductenByThema($themaId: UUID!) {
-  getOpenProductenByThema(themaId: $themaId) {
-    uuid
-    naam
-    startDatum
-    eindDatum
-    taken {
-      id
-      titel
-      verloopdatum
-      koppeling {
-        registratie
-        value
-      }
-    }
-    zaken {
-      uuid
-      omschrijving
-      identificatie
-      status {
-        statustype {
-          isEindstatus
-        }
-      }
-      zaaktype {
-        identificatie
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useGetOpenProductenByThemaQuery__
- *
- * To run a query within a React component, call `useGetOpenProductenByThemaQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetOpenProductenByThemaQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetOpenProductenByThemaQuery({
- *   variables: {
- *      themaId: // value for 'themaId'
- *   },
- * });
- */
-export function useGetOpenProductenByThemaQuery(baseOptions: Apollo.QueryHookOptions<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables> & ({ variables: GetOpenProductenByThemaQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>(GetOpenProductenByThemaDocument, options);
-      }
-export function useGetOpenProductenByThemaLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>(GetOpenProductenByThemaDocument, options);
-        }
-export function useGetOpenProductenByThemaSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>) {
-          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>(GetOpenProductenByThemaDocument, options);
-        }
-export type GetOpenProductenByThemaQueryHookResult = ReturnType<typeof useGetOpenProductenByThemaQuery>;
-export type GetOpenProductenByThemaLazyQueryHookResult = ReturnType<typeof useGetOpenProductenByThemaLazyQuery>;
-export type GetOpenProductenByThemaSuspenseQueryHookResult = ReturnType<typeof useGetOpenProductenByThemaSuspenseQuery>;
-export type GetOpenProductenByThemaQueryResult = Apollo.QueryResult<GetOpenProductenByThemaQuery, GetOpenProductenByThemaQueryVariables>;
 export const GetOpenProductHoofdThemasByProductenDocument = gql`
     query getOpenProductHoofdThemasByProducten {
   getOpenProductHoofdThemasByProducten {
@@ -4663,27 +4623,7 @@ export type GetOpenProductThemaZakenQueryResult = Apollo.QueryResult<GetOpenProd
 export const GetOpenProductDocument = gql`
     query GetOpenProduct($id: UUID!) {
   getOpenProduct(id: $id) {
-    uuid
-    url
-    naam
-    startDatum
-    gepubliceerd
-    aanmaakDatum
-    producttype {
-      code
-      uniformeProductNaam
-      toegestaneStatussen
-    }
-    prijs
-    gepubliceerd
-    status
-    documenten {
-      url
-    }
-    frequentie
-    verbruiksobject
-    dataobject
-    decisions
+    ...openProductFields
     zaken {
       uuid
       omschrijving
@@ -4725,7 +4665,7 @@ export const GetOpenProductDocument = gql`
     }
   }
 }
-    `;
+    ${OpenProductFieldsFragmentDoc}`;
 
 /**
  * __useGetOpenProductQuery__
@@ -4776,30 +4716,11 @@ export const GetOpenProductenDocument = gql`
     numberOfElements
     totalPages
     content {
-      uuid
-      url
-      naam
-      startDatum
-      gepubliceerd
-      aanmaakDatum
-      producttype {
-        code
-        uniformeProductNaam
-        toegestaneStatussen
-      }
-      prijs
-      gepubliceerd
-      status
-      documenten {
-        url
-      }
-      frequentie
-      verbruiksobject
-      dataobject
+      ...openProductFields
     }
   }
 }
-    `;
+    ${OpenProductFieldsFragmentDoc}`;
 
 /**
  * __useGetOpenProductenQuery__

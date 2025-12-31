@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { OPEN_PRODUCT_FIELDS } from "../fragments/open-product";
 
 export const QUERY_GET_OPEN_PRODUCTEN = gql`
   query GetOpenProducten(
@@ -25,27 +26,9 @@ export const QUERY_GET_OPEN_PRODUCTEN = gql`
       numberOfElements
       totalPages
       content {
-        uuid
-        url
-        naam
-        startDatum
-        gepubliceerd
-        aanmaakDatum
-        producttype {
-          code
-          uniformeProductNaam
-          toegestaneStatussen
-        }
-        prijs
-        gepubliceerd
-        status
-        documenten {
-          url
-        }
-        frequentie
-        verbruiksobject
-        dataobject
+        ...openProductFields
       }
     }
   }
+  ${OPEN_PRODUCT_FIELDS}
 `;
