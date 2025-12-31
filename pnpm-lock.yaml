@@ -326,7 +326,7 @@ importers:
         version: 3.0.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@gemeente-denhaag/button-group':
         specifier: ^2.0.0
-        version: 2.0.0
+        version: 2.0.1
       '@gemeente-denhaag/button-link':
         specifier: 3.0.0
         version: 3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1243,6 +1243,9 @@ packages:
   '@gemeente-denhaag/button-group@2.0.0':
     resolution: {integrity: sha512-i7FXpRsOKUpJxEf4gVHNm6I0EjazztHyccPUKSgAT7cEJn2XmVydcULZ4qZlaQg3GnAyVSuQ7G8RJmew3bpkMA==}
 
+  '@gemeente-denhaag/button-group@2.0.1':
+    resolution: {integrity: sha512-Nic8/cT6g9HI9ZnxqelhyP1cxg+w0/8mcAOWkylJhmFNytoEA2dY8zGs+w0ladLuG55Y7BwTWV9c05XDvyJHZw==}
+
   '@gemeente-denhaag/button-link@3.0.0':
     resolution: {integrity: sha512-z5uPwfaEzfznCU4/aml1r+CN//mvgqt303O1sr6S+RekQH2wJYn11NvAIecegPM4bLexJcjykelVRobNLPFTMQ==}
     peerDependencies:
@@ -1287,6 +1290,7 @@ packages:
 
   '@gemeente-denhaag/design-tokens-components@5.1.0':
     resolution: {integrity: sha512-giww3ewSJ6/J4kW3ononfm8hzrH7yR4b5AyZGS6BOA2z4AmlgOvYrqP4wW7UTBDYq+crnp4lI+CWO3vQ/LVJHw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@gemeente-denhaag/file@2.0.0':
     resolution: {integrity: sha512-y4zM6cBhxCk38tYV5Hzu/HoMELoGIwccUGWwt6oKDjMAbQF1uG+pfiHAveSb68AqFqWxtGEQF3XCBHXqQWNUPQ==}
@@ -1458,6 +1462,7 @@ packages:
 
   '@gemeente-denhaag/status-badge@2.0.0':
     resolution: {integrity: sha512-5dJq5xzTqpTvxEMagDQHtTxajVxYbK7OBs7uxdhkVlJLPXVs8SvsbGc3DFE0+oS8u8UhE33wT9Ap6ro1hHlkrQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -1494,6 +1499,7 @@ packages:
 
   '@gemeente-denhaag/typography@3.0.0':
     resolution: {integrity: sha512-naYwyzGJoq2O+H9a0b8lj+S15WVC0uKG9Wh03XX6wsfkTXsWIqTV4aFn+NiBvCTJFs+IpiENAAx3h/4Mg4qRNw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -6406,6 +6412,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
@@ -7426,6 +7433,8 @@ snapshots:
       react-dom: 19.1.1(react@19.1.1)
 
   '@gemeente-denhaag/button-group@2.0.0': {}
+
+  '@gemeente-denhaag/button-group@2.0.1': {}
 
   '@gemeente-denhaag/button-link@3.0.0(@babel/runtime@7.28.2)(date-fns@2.30.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
