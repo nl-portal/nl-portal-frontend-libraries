@@ -1,4 +1,4 @@
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedDate, FormattedMessage, FormattedNumber } from "react-intl";
 import {
   capitalizeFirstLetter,
   currencyFormat,
@@ -27,8 +27,8 @@ const ParkerenDetails = () => {
         ],
         dataMapping: [
           "naam",
-          "startDatum",
-          "eindDatum",
+          (product) => <FormattedDate value={product?.startDatum} />,
+          (product) => <FormattedDate value={product?.eindDatum} />,
           (product) =>
             capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
           (product) => {
