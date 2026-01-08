@@ -38,8 +38,7 @@ export const testPaths: Paths = {
   themeHistory: (type = ":type", id = ":id") => `/${type}/${id}/geschiedenis`,
   themeMutate: (type = ":type", id = ":id") => `/${type}/${id}/wijzig`,
   account: "/account",
-  changeContactInfo: "/account/wijzig/contact",
-  changeNotifications: "/account/wijzig/notificaties",
+  changeContactInfo: (type = ":type") => `/account/wijzig/${type}`,
 };
 
 export const testNavigationItems: NavigationItem[][] = [

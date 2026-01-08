@@ -13,8 +13,7 @@ export interface Paths {
   themeHistory: (slug?: string, id?: string | number) => string;
   themeMutate: (slug?: string, id?: string | number) => string;
   account: string;
-  changeContactInfo: string;
-  changeNotifications: string;
+  changeContactInfo: (type?: string) => string;
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: ((...args: any[]) => string) | string | undefined;
 }

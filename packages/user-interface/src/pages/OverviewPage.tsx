@@ -90,7 +90,7 @@ const OverviewPage = ({
             buttonText: intl.formatMessage({
               id: "overviewpage.noEmail.text.button",
             }),
-            onClick: () => navigate(paths.changeContactInfo),
+            onClick: () => navigate(paths.changeContactInfo("email")),
           }}
         />
       )}

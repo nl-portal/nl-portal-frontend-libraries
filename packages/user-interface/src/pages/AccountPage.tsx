@@ -82,14 +82,6 @@ const AccountPage = ({
           <Heading as="h3" id="contact">
             <FormattedMessage id="account.detail.contact" />
           </Heading>
-          <Link
-            icon={<EditIcon />}
-            iconAlign="start"
-            href={paths.changeContactInfo}
-            Link={PortalLink}
-          >
-            <FormattedMessage id="account.edit" />
-          </Link>
           <DescriptionList
             items={[
               {
@@ -99,6 +91,16 @@ const AccountPage = ({
                     {emailadres?.waarde}
                   </DescriptionListDetail>
                 ),
+                action: (
+                  <Link
+                    icon={<EditIcon />}
+                    iconAlign="start"
+                    href={paths.changeContactInfo("email")}
+                    Link={PortalLink}
+                  >
+                    <FormattedMessage id="account.edit" />
+                  </Link>
+                ),
               },
               {
                 title: <FormattedMessage id="account.detail.telefoonnummer" />,
@@ -106,6 +108,16 @@ const AccountPage = ({
                   <DescriptionListDetail translate="no">
                     {telefoonnummer?.waarde}
                   </DescriptionListDetail>
+                ),
+                action: (
+                  <Link
+                    icon={<EditIcon />}
+                    iconAlign="start"
+                    href={paths.changeContactInfo("telefoon")}
+                    Link={PortalLink}
+                  >
+                    <FormattedMessage id="account.edit" />
+                  </Link>
                 ),
               },
             ]}
@@ -219,14 +231,6 @@ const AccountPage = ({
         <Heading as="h3" id="contact">
           <FormattedMessage id="account.detail.contact" />
         </Heading>
-        <Link
-          icon={<EditIcon />}
-          iconAlign="start"
-          href={paths.changeContactInfo}
-          Link={PortalLink}
-        >
-          <FormattedMessage id="account.edit" />
-        </Link>
         <DescriptionList
           items={[
             {
@@ -236,6 +240,16 @@ const AccountPage = ({
                   {emailadres?.waarde}
                 </DescriptionListDetail>
               ),
+              action: (
+                <Link
+                  icon={<EditIcon />}
+                  iconAlign="start"
+                  href={paths.changeContactInfo("email")}
+                  Link={PortalLink}
+                >
+                  <FormattedMessage id="account.edit" />
+                </Link>
+              ),
             },
             {
               title: <FormattedMessage id="account.detail.telefoonnummer" />,
@@ -243,6 +257,16 @@ const AccountPage = ({
                 <DescriptionListDetail translate="no">
                   {telefoonnummer?.waarde}
                 </DescriptionListDetail>
+              ),
+              action: (
+                <Link
+                  icon={<EditIcon />}
+                  iconAlign="start"
+                  href={paths.changeContactInfo("telefoon")}
+                  Link={PortalLink}
+                >
+                  <FormattedMessage id="account.edit" />
+                </Link>
               ),
             },
           ]}
