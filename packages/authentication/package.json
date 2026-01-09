@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-authentication",
-  "version": "3.0.0",
+  "version": "3.0.0-RC-202601091102-5b51874f-SNAPSHOT",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
