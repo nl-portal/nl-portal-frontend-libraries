@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-localization",
-  "version": "3.0.0-RC-202601090939-25f0d80b-SNAPSHOT",
+  "version": "3.0.0",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
