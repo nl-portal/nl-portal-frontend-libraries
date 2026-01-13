@@ -190,7 +190,7 @@ export const EN_GB_MESSAGES: Messages = {
       "Receive status changes by email",
     "account.detail.notification.form.save": "Save changes",
     "account.detail.contactform.email": "Email address",
-    "account.detail.contactform.telefoon": "Phone number",
+    "account.detail.contactform.telefoonnummer": "Phone number",
     "account.adres.links.addressResearchRequest": "Request investigation",
     "account.persoonsgegevens.links.changeInUseOfSurname":
       "Request a change in the use of your surname",

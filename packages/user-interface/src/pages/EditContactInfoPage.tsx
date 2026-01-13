@@ -144,38 +144,6 @@ const EditContactInfoPage = () => {
             </FormFieldErrorMessage>
           )}
         </FormField>
-        {/* <FormField invalid={emailHasError}>
-          <FormLabel htmlFor="contactform-phone">
-            <FormattedMessage id="account.detail.contactform.tel" />
-          </FormLabel>
-          <TextInput
-            id="contactform-phone"
-            type="text"
-            name="telefoonnummer"
-            value={phoneValue}
-            onChange={handlePhoneInputChange}
-            onBlur={handlePhoneInputBlur}
-            onKeyDown={(event) => {
-              const { key, ctrlKey, metaKey, altKey } = event;
-              if ((ctrlKey || metaKey) && !altKey) return; // Copy and pasting should be allowed
-
-              // Don't allow letters and special characters other than '+'
-              if (
-                key.length === 1 &&
-                !REGEX_PATTERNS.telefoonnummerInvalidChars.test(key)
-              ) {
-                event.preventDefault();
-              }
-            }}
-            className={styles["nl-portal-edit-contact__telefoonnummer-field"]}
-            invalid={phoneHasError}
-          />
-          {phoneHasError && (
-            <FormFieldErrorMessage>
-              <FormattedMessage id={phoneErrorTranslationId} />
-            </FormFieldErrorMessage>
-          )}
-        </FormField> */}
       </Form>
     </>
   );
