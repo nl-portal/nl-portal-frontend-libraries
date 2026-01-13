@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedDate, FormattedMessage, FormattedNumber } from "react-intl";
 import { themes } from "../constants/themes";
 import {
   capitalizeFirstLetter,
@@ -37,11 +37,12 @@ const ParkerenOverview = () => {
             "Einddatum",
             "Status",
             "Prijs",
+            "Test",
           ],
           dataMapping: [
             "naam",
-            "startDatum",
-            "eindDatum",
+            (product) => <FormattedDate value={product?.startDatum} />,
+            (product) => <FormattedDate value={product?.eindDatum} />,
             (product) =>
               capitalizeFirstLetter(product?.status.toLowerCase() ?? ""),
             (product) => {
@@ -52,6 +53,7 @@ const ParkerenOverview = () => {
                 />
               );
             },
+            "dataobject.test",
           ],
         },
         {

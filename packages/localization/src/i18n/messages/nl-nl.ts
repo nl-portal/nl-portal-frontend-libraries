@@ -14,7 +14,7 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.form": "Formulier",
     "pageTitles.account": "Mijn gegevens",
     "pageTitles.forms": "Formulieren",
-    "pageTitles.tasks": "Mijn Taken",
+    "pageTitles.tasks": "Mijn taken",
     "pageTitles.task": "Taak",
     "pageTitles.editContactInfo": "Contactgegevens",
     "pageTitles.editNotifications": "Meldingen",
@@ -22,6 +22,7 @@ export const NL_NL_MESSAGES: Messages = {
     "pageTitles.parkeren": "Parkeren",
     "pageTitles.inkomensondersteuning": "Inkomensondersteuning",
     "backlink.back": "Terug",
+    "layout.skip": "Ga naar de inhoud",
     "header.logout": "Uitloggen",
     "header.welcome": "Welkom",
     "header.proxyFor": "Gemachtigd voor",
@@ -310,5 +311,9 @@ export const NL_NL_MESSAGES: Messages = {
     "footer.contact.formulier.url": "#url",
     "footer.contact.buttonlabel": "Contactpagina",
     "footer.contact.button.url": "#url",
+    "formio.fileUpload.error":
+      "Er is een fout opgetreden tijdens het uploaden van het bestand.",
+    "formio.fileUpload.text": "Sleep uw bestand hier of",
+    "formio.fileUpload.buttonLabel": "Kies een bestand",
   },
 };

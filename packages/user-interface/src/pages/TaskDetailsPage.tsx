@@ -13,10 +13,16 @@ import {
 } from "@nl-portal/nl-portal-api";
 import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
-import styles from "./TaskPage.module.scss";
+import styles from "./TaskDetailsPage.module.scss";
 import { useParams } from "react-router";
 import { BackLink } from "../components/BackLink";
 import { Paragraph } from "@gemeente-denhaag/typography";
+import PageHeader from "../components/PageHeader";
+import PageGrid from "../components/PageGrid";
+import {
+  applyNativeSelectsToForm,
+  convertPortalFileUploadResult,
+} from "../components/formio/FormIoTemplateUtils";
 
 //eslint-disable-next-line react-hooks/rules-of-hooks
 Formio.use(ProtectedEval);
@@ -26,6 +32,7 @@ const TaskDetailsPage = () => {
   const intl = useIntl();
   const [loading, setLoading] = useState(true);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
   const [submission, setSubmission] = useState({
     data: {},
   });
@@ -45,7 +52,8 @@ const TaskDetailsPage = () => {
       setSubmitted(true);
     },
   });
-  useGetPortaalFormulierByIdV2Query({
+
+  const { data: task } = useGetPortaalFormulierByIdV2Query({
     variables: { id },
     onCompleted(task) {
       if (!task || !task.getTaakByIdV2 || !task.getTaakByIdV2.portaalformulier)
@@ -57,9 +65,14 @@ const TaskDetailsPage = () => {
         return;
       }
 
-      transformPrefilledDataToFormioSubmission(
-        task.getTaakByIdV2.portaalformulier.data,
-      );
+      try {
+        transformPrefilledDataToFormioSubmission(
+          task.getTaakByIdV2.portaalformulier.data,
+        );
+      } catch (err) {
+        console.error(err);
+        setError(true);
+      }
 
       if (task.getTaakByIdV2.portaalformulier.formulier.soort === "url") {
         getFormByUrl({
@@ -95,6 +108,7 @@ const TaskDetailsPage = () => {
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
+    if (submissionData === null) return null;
     const keys = Object.keys(submissionData);
     let prefillData: any = {};
     const arrayPrefilledData: any = [];
@@ -119,19 +133,16 @@ const TaskDetailsPage = () => {
     setSubmission((prevSubmission) => ({ ...prevSubmission, data: payload }));
   };
 
-  const setFormSubmission = (formioSubmission: any) => {
-    setSubmission({
-      ...formioSubmission,
-      data: { ...formioSubmission.data, ...submission.data },
-    });
-  };
-
   const onFormSubmit = async (formioSubmission: any) => {
     if (formioSubmission?.state === "submitted") {
+      const transformedData = convertPortalFileUploadResult(
+        formioSubmission.data,
+      );
+
       await submitTaak({
         variables: {
           id,
-          submission: formioSubmission.data,
+          submission: transformedData,
         },
       });
     }
@@ -140,6 +151,19 @@ const TaskDetailsPage = () => {
 
   if (loading) {
     return null;
+  }
+
+  if (error) {
+    return (
+      <>
+        <BackLink />
+        <Alert
+          variant="error"
+          title={intl.formatMessage({ id: "taskDetails.errorTitle" })}
+          text={intl.formatMessage({ id: "taskDetails.errorDescription" })}
+        />
+      </>
+    );
   }
 
   if (submitted) {
@@ -172,27 +196,30 @@ const TaskDetailsPage = () => {
     );
   }
 
+  const rawForm =
+    formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition ||
+    formDefinitionId?.getFormDefinitionById?.formDefinition;
+
+  const adjustedForm = applyNativeSelectsToForm(structuredClone(rawForm));
+
   return (
-    <>
-      <BackLink />
-      <div className={styles.bootstrap}>
+    <PageGrid variant="medium">
+      <div>
+        <BackLink />
+        <PageHeader title={task?.getTaakByIdV2?.titel} />
+      </div>
+      <div className={styles["task-details-page"]}>
         <Form
-          src={
-            formDefinitionUrl?.getFormDefinitionByObjectenApiUrl
-              ?.formDefinition ||
-            formDefinitionId?.getFormDefinitionById?.formDefinition
-          }
-          //eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onFormReady={(form: any) => {
-            form.triggerRedraw();
-          }} // TODO: here because customConditional don't work, update FormIO
+          src={adjustedForm}
           submission={submission}
-          onChange={setFormSubmission}
           onSubmit={onFormSubmit}
-          options={{ noAlerts: true }}
+          options={{
+            noAlerts: true,
+            template: "nl-portal",
+          }}
         />
       </div>
-    </>
+    </PageGrid>
   );
 };
 

@@ -10,12 +10,19 @@ const TasksPage = () => {
   const tasks = data?.getTakenV2.content as TaakV2[] | undefined;
 
   const handleFormSubmit = (searchValue: string) => {
-    refetch({ title: searchValue });
+    try {
+      refetch({ title: searchValue });
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
   };
 
   const onPageChange = (index: number) => {
-    refetch({ pageNumber: index + 1 });
-    return index;
+    try {
+      refetch({ pageNumber: index + 1 });
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
   };
 
   return (

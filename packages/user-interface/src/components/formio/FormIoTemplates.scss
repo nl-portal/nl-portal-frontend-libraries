@@ -1,0 +1,61 @@
+@use "../../../node_modules/@gemeente-denhaag/alert/dist/index.css" as
+  denhaag-alert;
+
+.formio-component-hidden,
+.formio-hidden {
+  display: none !important;
+}
+
+.formio-component-select > [ref="label"],
+.formio-component-selectboxes > [ref="label"],
+.formio-component-textarea > [ref="label"],
+.formio-component-textfield > [ref="label"],
+.formio-component-email > [ref="label"],
+.formio-component-password > [ref="label"],
+.formio-component-number > [ref="label"] {
+  display: none !important;
+}
+
+.denhaag-form-field--flex + .form-text.text-muted {
+  display: none !important;
+}
+
+// CSS for the day component
+.formio-component-day {
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  input,
+  select {
+    height: 53px;
+  }
+
+  select {
+    min-width: 140px;
+  }
+}
+
+// Backwards compatibility for alerts
+.alert {
+  @extend .denhaag-alert;
+}
+
+.alert-info {
+  @extend .denhaag-alert--info;
+}
+
+.alert-warning {
+  @extend .denhaag-alert--warning;
+}
+
+.alert-danger,
+.alert-error {
+  @extend .denhaag-alert--error;
+}
+
+.alert-success {
+  @extend .denhaag-alert--success;
+}

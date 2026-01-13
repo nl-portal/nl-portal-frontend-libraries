@@ -9,13 +9,27 @@ import { ResponsiveContent } from "@gemeente-denhaag/responsive-content";
 import Header from "./Header";
 import Menu from "./Menu";
 import { Footer, FooterProps } from "@gemeente-denhaag/footer";
-import FormIoUploader from "./FormIoUploader";
 import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router";
 import PageMetaData from "./PageMetaData";
 import { Paths } from "../interfaces/paths";
+import FormIoUploader from "./formio/FormIoUploader";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import "@utrecht/document-css";
+import { Templates } from "@formio/react";
+import { nlPortalInput } from "./formio/FormIoInputTemplate";
+import { nlPortalSelect } from "./formio/FormIoSelectTemplate";
+import { nlPortalSingleCheckbox } from "./formio/FormIoSingleCheckboxTemplate";
+import { nlPortalButton } from "./formio/FormIoButtonTemplate";
+import { nlPortalDataGrid } from "./formio/FormIoDataGridTemplate";
+import { nlPortalRadioSelectBoxesWrapper } from "./formio/FormIoRadioSelectBoxesWrapper";
+import "./formio/FormIoTemplates.scss";
+import { nlPortalAddress } from "./formio/FormIoAddressTemplate";
+import { nlPortalWell } from "./formio/FormioWellTemplate";
+import { SkipLink } from "@gemeente-denhaag/skip-link";
+import styles from "./Layout.module.scss";
+import { FormattedMessage } from "react-intl";
+import FormIoDatePicker from "./formio/FormIoDatePicker";
 
 interface LayoutComponentProps {
   paths: Paths;
@@ -35,7 +49,23 @@ const Layout = ({
   const { oidcToken } = use(OidcContext);
 
   useEffect(() => {
+    // Register FormIo custom components
     FormIoUploader.register();
+    FormIoDatePicker.register();
+
+    // Set FormIo custom templates
+    const base = Templates.templates.bootstrap || Templates.current || {};
+    Templates.templates["nl-portal"] = {
+      ...base,
+      address: nlPortalAddress,
+      input: nlPortalInput,
+      well: nlPortalWell,
+      select: nlPortalSelect,
+      radio: nlPortalRadioSelectBoxesWrapper,
+      checkbox: nlPortalSingleCheckbox,
+      button: nlPortalButton,
+      datagrid: nlPortalDataGrid,
+    };
   }, []);
 
   useEffect(() => {
@@ -43,7 +73,10 @@ const Layout = ({
   }, [oidcToken]);
 
   return (
-    <StylesProvider>
+    <StylesProvider className={styles.layout}>
+      <SkipLink className={styles.skiplink} href="#main-content">
+        <FormattedMessage id="layout.skip" />
+      </SkipLink>
       <HelmetProvider>
         <PageWrapper>
           <PageHeader>
@@ -51,7 +84,7 @@ const Layout = ({
           </PageHeader>
           <ResponsiveContent className="denhaag-page-content denhaag-responsive-content--sidebar">
             <Menu />
-            <main className="denhaag-page-content__main">
+            <main id="main-content" className="denhaag-page-content__main">
               <PageMetaData />
               {<Outlet context={{ paths }} />}
             </main>

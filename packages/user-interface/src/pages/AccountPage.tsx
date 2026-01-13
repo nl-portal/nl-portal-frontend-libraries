@@ -193,8 +193,8 @@ const AccountPage = ({
         </LeadParagraph>
         <PageIndex
           heading={intl.formatMessage({ id: "account.pageIndex.title" })}
-          headingAs="h3"
-          headingSize="h3"
+          headingLevel={3}
+          headingAppearance="level-3"
           items={[
             {
               label: <FormattedMessage id="account.detail.contact" />,
@@ -461,43 +461,47 @@ const AccountPage = ({
           </div>
         )}
       </PageGrid>
-      <div>
-        <Heading id="wijzigingen-en-aanvragen-brp" as="h3">
-          <FormattedMessage id="account.detail.wijzigingenBrp" />
-        </Heading>
-        {(addressResearchMoreInfoUrl ||
-          requestForChangeBrpInfoUrl ||
-          requestConfidentialityOfDataUrl) && (
-          <LinkList
-            className={styles["account__link-list"]}
-            items={[
-              {
-                label: (
-                  <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.addressResearchMoreInfo" />
-                ),
-                href: addressResearchMoreInfoUrl,
-                external: true,
-              },
-              {
-                label: (
-                  <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.requestForChangeBrpInfo" />
-                ),
-                href: requestForChangeBrpInfoUrl,
-                external: true,
-              },
-              {
-                label: (
-                  <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.requestConfidentialityOfDataInfo" />
-                ),
-                href: requestConfidentialityOfDataUrl,
-                external: true,
-              },
-            ].filter((item): item is typeof item & { href: string } =>
-              Boolean(item.href),
-            )}
-          />
-        )}
-      </div>
+      {(addressResearchMoreInfoUrl ||
+        requestForChangeBrpInfoUrl ||
+        requestConfidentialityOfDataUrl) && (
+        <div>
+          <Heading id="wijzigingen-en-aanvragen-brp" as="h3">
+            <FormattedMessage id="account.detail.wijzigingenBrp" />
+          </Heading>
+          {(addressResearchMoreInfoUrl ||
+            requestForChangeBrpInfoUrl ||
+            requestConfidentialityOfDataUrl) && (
+            <LinkList
+              className={styles["account__link-list"]}
+              items={[
+                {
+                  label: (
+                    <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.addressResearchMoreInfo" />
+                  ),
+                  href: addressResearchMoreInfoUrl,
+                  external: true,
+                },
+                {
+                  label: (
+                    <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.requestForChangeBrpInfo" />
+                  ),
+                  href: requestForChangeBrpInfoUrl,
+                  external: true,
+                },
+                {
+                  label: (
+                    <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.requestConfidentialityOfDataInfo" />
+                  ),
+                  href: requestConfidentialityOfDataUrl,
+                  external: true,
+                },
+              ].filter((item): item is typeof item & { href: string } =>
+                Boolean(item.href),
+              )}
+            />
+          )}
+        </div>
+      )}
     </PageGrid>
   );
 };

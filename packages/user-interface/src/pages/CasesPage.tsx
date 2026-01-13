@@ -48,34 +48,46 @@ const CasesPage = () => {
 
   const handleFormSubmit = (searchValue: string) => {
     startTransition(async () => {
-      const func = currentTab === 0 ? openRefetch : closedRefetch;
-      setOpenIndex(0);
-      setClosedIndex(0);
-      setSearchValue(searchValue);
-      await func({ [searchParam]: searchValue, page: undefined });
+      try {
+        const func = currentTab === 0 ? openRefetch : closedRefetch;
+        setOpenIndex(0);
+        setClosedIndex(0);
+        setSearchValue(searchValue);
+        await func({ [searchParam]: searchValue, page: undefined });
+      } catch (error) {
+        console.error("Error fetching cases:", error);
+      }
     });
   };
 
   const onTabChange = (index: number) => {
     startTransition(async () => {
-      const func = index === 0 ? openRefetch : closedRefetch;
-      const pageIndex = index === 0 ? openIndex : closedIndex;
-      setCurrentTab(index);
-      await func({
-        [searchParam]: searchValue,
-        page: pageIndex + 1,
-      });
+      try {
+        const func = index === 0 ? openRefetch : closedRefetch;
+        const pageIndex = index === 0 ? openIndex : closedIndex;
+        setCurrentTab(index);
+        await func({
+          [searchParam]: searchValue,
+          page: pageIndex + 1,
+        });
+      } catch (error) {
+        console.error("Error fetching cases:", error);
+      }
     });
   };
 
   const onPageChange = (index: number) => {
     startTransition(async () => {
-      const func = currentTab === 0 ? openRefetch : closedRefetch;
-      if (currentTab === 0) setOpenIndex(index);
-      if (currentTab === 1) setClosedIndex(index);
-      await func({
-        page: index + 1,
-      });
+      try {
+        const func = currentTab === 0 ? openRefetch : closedRefetch;
+        if (currentTab === 0) setOpenIndex(index);
+        if (currentTab === 1) setClosedIndex(index);
+        await func({
+          page: index + 1,
+        });
+      } catch (error) {
+        console.error("Error fetching cases:", error);
+      }
     });
   };
 

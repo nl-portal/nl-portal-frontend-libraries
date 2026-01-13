@@ -1,0 +1,78 @@
+import { errorsBlock } from "./FormIoTemplateUtils";
+import { escape } from "lodash-es";
+
+export const nlPortalRadioButton = {
+  form: (ctx: any) => {
+    const { component } = ctx;
+    const id = escape(ctx.instance?.id || component.key || "radio");
+    const label = escape(ctx.t(component.label || ""));
+    const description = escape(ctx.t(component.description || ""));
+    const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
+    const baseName = escape(ctx.input?.name || component.key || "radio");
+    const radioName = ctx.input?.name ? baseName : `${baseName}[${id}]`;
+
+    const fieldsetClass = `utrecht-form-fieldset${
+      hasErrors ? " utrecht-form-fieldset--invalid" : ""
+    }`;
+
+    const options = (component.values || [])
+      .map((opt: any, index: number) => {
+        const rawValue = opt.value ?? opt.label ?? "";
+        const value = escape(String(rawValue));
+        const text = escape(ctx.t(opt.label ?? opt.value));
+        const inputId = `${id}-${index}`;
+
+        const checked = ctx.dataValue === rawValue ? "checked" : "";
+        const disabled = ctx.disabled ? "disabled" : "";
+
+        return `
+        <div class="utrecht-form-field utrecht-form-field--radio">
+          <p class="nl-paragraph utrecht-form-field__label utrecht-form-field__label--radio">
+            <label for="${inputId}" class="utrecht-form-label utrecht-form-label--radio">
+              <input
+                ref="input"
+                class="utrecht-radio-button utrecht-radio-button--html-input utrecht-form-field__input"
+                id="${inputId}"
+                name="${radioName}"
+                type="radio"
+                value="${value}"
+                ${checked}
+                ${disabled}
+                aria-describedby="${description ? `${id}-description` : ""}"
+              >
+              ${text}
+            </label>
+          </p>
+        </div>
+      `;
+      })
+      .join("\n");
+
+    return `
+      <div class="${fieldsetClass}" ref="element">
+        <fieldset
+          ref="fieldset"
+          class="utrecht-form-fieldset__fieldset utrecht-form-fieldset--html-fieldset"
+          ${description ? `aria-describedby="${id}-description"` : ""}
+        >
+          ${
+            label
+              ? `<legend class="utrecht-form-fieldset__legend utrecht-form-fieldset__legend--html-legend">${label}</legend>`
+              : ""
+          }
+          ${
+            description
+              ? `<div id="${id}-description" class="utrecht-form-field-description utrecht-form-field-description--distanced">
+                  ${description}
+                </div>`
+              : ""
+          }
+
+          ${options}
+
+          ${errorsBlock(ctx, id)}
+        </fieldset>
+      </div>
+    `;
+  },
+};

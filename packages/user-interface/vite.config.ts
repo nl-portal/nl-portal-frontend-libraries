@@ -28,16 +28,5 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
-    server: {
-      deps: {
-        inline: [
-          "@gemeente-denhaag/button-link",
-          "@gemeente-denhaag/form-field-error-message",
-          "@gemeente-denhaag/form-field",
-          "@gemeente-denhaag/form-label",
-          "@gemeente-denhaag/text-input",
-        ],
-      },
-    },
   },
 });
