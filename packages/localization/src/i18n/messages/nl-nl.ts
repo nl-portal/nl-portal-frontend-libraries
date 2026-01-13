@@ -194,7 +194,7 @@ export const NL_NL_MESSAGES: Messages = {
       "Ontvang statuswijzigingen per email",
     "account.detail.notification.form.save": "Wijzigingen opslaan",
     "account.detail.contactform.email": "Emailadres",
-    "account.detail.contactform.tel": "Telefoonnummer",
+    "account.detail.contactform.telefoon": "Telefoonnummer",
     "account.adres.links.addressResearchRequest": "Vraag onderzoek aan",
     "account.persoonsgegevens.links.changeInUseOfSurname":
       "Verandering naamgebruik aanvragen",
