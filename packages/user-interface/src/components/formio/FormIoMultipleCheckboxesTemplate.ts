@@ -44,7 +44,7 @@ export const nlPortalMultipleCheckboxes = {
                 class="utrecht-checkbox utrecht-checkbox--html-input utrecht-checkbox--custom utrecht-form-field__input"
                 type="checkbox"
                 name="${name}"
-                value="true"
+                value="${escape(valueKey)}"
                 ${checked}
                 ${disabled}
                 aria-describedby="${description ? `${idBase}-description` : ""}"
