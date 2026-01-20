@@ -143,6 +143,12 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.telefoonnummer.error": "Dit is geen geldig nummer",
     "account.detail.telefoonnummer.error.invalidChars":
       "Gebruik alleen 0-9 en eventueel een '+'",
+    "account.detail.validationFormLabel": "Verificatiecode",
+    "account.detail.validationFormDescription": "De code verloopt over {time}",
+    "account.detail.validationForm.cancel": "Code opnieuw verzenden",
+    "account.detail.validation.error": "Voer een geldige waarde in",
+    "account.detail.validation.success.title":
+      "Gelukt. U heeft uw wijziging doorgegeven.",
     "account.detail.aanmaakkanaal": "E-mailmeldingen",
     "account.detail.aanmaakkanaal.description":
       "Staat je keuze op nee? Dan kunt u toch nog e-mails ontvangen. Dit komt omdat nog niet alle systemen van de gemeente zijn aangesloten op het klantportaal.",

@@ -140,6 +140,12 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.telefoonnummer.error": "This is not a valid number",
     "account.detail.telefoonnummer.error.invalidChars":
       "Use only 0-9 and optionally a '+'",
+    "account.detail.validationFormLabel": "Verification code",
+    "account.detail.validationFormDescription": "The code expires in {time}",
+    "account.detail.validationForm.cancel": "Resend code",
+    "account.detail.validation.error": "Enter a valid value",
+    "account.detail.validation.success.title":
+      "Success. You have submitted your change.",
     "account.detail.aanmaakkanaal": "Email notifications",
     "account.detail.aanmaakkanaal.description":
       "Is your choice set to no? Then you will still receive emails. This is because not all of the municipality's systems are connected yet to MijnDenHaag.",

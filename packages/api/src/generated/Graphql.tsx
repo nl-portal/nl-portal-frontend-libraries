@@ -29,128 +29,6 @@ export type Scalars = {
   ZonedDateTime: { input: any; output: any; }
 };
 
-export type Aanslag = {
-  __typename?: 'Aanslag';
-  aanslagbiljetsoort?: Maybe<Scalars['String']['output']>;
-  aanslagnummer?: Maybe<Scalars['Long']['output']>;
-  bedragaanslag?: Maybe<Scalars['Float']['output']>;
-  belastingjaar?: Maybe<Scalars['Date']['output']>;
-  dagtekening?: Maybe<Scalars['Date']['output']>;
-  openstaandeInvordering?: Maybe<Scalars['String']['output']>;
-  saldoAanslag?: Maybe<Scalars['Float']['output']>;
-  statusBezwaar?: Maybe<Scalars['String']['output']>;
-  vervolgactie?: Maybe<Scalars['String']['output']>;
-  vervolgactieOmschrijving?: Maybe<Scalars['String']['output']>;
-};
-
-export type AanslagBestand = {
-  __typename?: 'AanslagBestand';
-  aanslagbiljetsoort?: Maybe<Scalars['String']['output']>;
-  aanslagnummer?: Maybe<Scalars['Long']['output']>;
-  belastingjaar?: Maybe<Scalars['Int']['output']>;
-  dagtekening?: Maybe<Scalars['Date']['output']>;
-  laatsteOphaalDatum?: Maybe<Scalars['Date']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
-  publicatieDatum?: Maybe<Scalars['Date']['output']>;
-  volgNummerBijlage?: Maybe<Scalars['Int']['output']>;
-};
-
-export type AanslagBestandenPage = {
-  __typename?: 'AanslagBestandenPage';
-  /**  The elements on this page */
-  content: Array<AanslagBestand>;
-  /**  The requested page number */
-  number: Scalars['Int']['output'];
-  /**  The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /**  The requested page size */
-  size: Scalars['Int']['output'];
-  /**  The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /**  The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type AanslagBiljet = {
-  __typename?: 'AanslagBiljet';
-  aanslagBiljetOmschrijving?: Maybe<Scalars['String']['output']>;
-  aanslagNummer?: Maybe<Scalars['Long']['output']>;
-  aanslagRegel?: Maybe<Array<AanslagRegel>>;
-  /**  Get the aanslagregels grouped by objectAdres */
-  aanslagRegelsGrouped?: Maybe<Scalars['JSON']['output']>;
-  belastingjaar?: Maybe<Scalars['String']['output']>;
-  bijlageAanwezig?: Maybe<Scalars['String']['output']>;
-  dagtekening?: Maybe<Scalars['Date']['output']>;
-  eersteVervalDatum?: Maybe<Scalars['Date']['output']>;
-  geboorteDatum?: Maybe<Scalars['Date']['output']>;
-  geslacht?: Maybe<Scalars['String']['output']>;
-  huisLetter?: Maybe<Scalars['String']['output']>;
-  huisNummer?: Maybe<Scalars['Int']['output']>;
-  kwijtscheldingsVerzoek?: Maybe<Scalars['String']['output']>;
-  land?: Maybe<Scalars['String']['output']>;
-  locatie1?: Maybe<Scalars['String']['output']>;
-  locatie2?: Maybe<Scalars['String']['output']>;
-  muteerStatus?: Maybe<Scalars['String']['output']>;
-  naam?: Maybe<Scalars['String']['output']>;
-  postcode?: Maybe<Scalars['String']['output']>;
-  samengesteldAdres?: Maybe<Scalars['String']['output']>;
-  sofiNummer?: Maybe<Scalars['Int']['output']>;
-  straatNaam?: Maybe<Scalars['String']['output']>;
-  subjectNummer?: Maybe<Scalars['Int']['output']>;
-  tijdvakWOZ?: Maybe<Scalars['String']['output']>;
-  tweedeVervalDatum?: Maybe<Scalars['Date']['output']>;
-  volledigeNaam?: Maybe<Scalars['String']['output']>;
-  voorletters?: Maybe<Scalars['String']['output']>;
-  voorvoegsels?: Maybe<Scalars['String']['output']>;
-  waardePeilDatum?: Maybe<Scalars['Date']['output']>;
-  woonplaats?: Maybe<Scalars['String']['output']>;
-};
-
-export type AanslagDetails = {
-  __typename?: 'AanslagDetails';
-  aanslagBiljet: AanslagBiljet;
-  aanslagBiljetTotaal?: Maybe<Scalars['Float']['output']>;
-  automatischeIncasso?: Maybe<AutomatischeIncasso>;
-  betalingen?: Maybe<Array<Betaling>>;
-  invorderingsDetails?: Maybe<InvorderingsDetails>;
-  openstaandeInvordering?: Maybe<Scalars['String']['output']>;
-};
-
-export type AanslagRegel = {
-  __typename?: 'AanslagRegel';
-  aanslagRegelBedrag?: Maybe<Scalars['Float']['output']>;
-  aanslagRegelOmschrijving?: Maybe<Scalars['String']['output']>;
-  belastingJaar?: Maybe<Scalars['Int']['output']>;
-  bezwaarAanwezig?: Maybe<Scalars['String']['output']>;
-  categorie?: Maybe<Scalars['String']['output']>;
-  codeBezwaarOmschrijving?: Maybe<Scalars['String']['output']>;
-  grondslag?: Maybe<Scalars['Float']['output']>;
-  heffing?: Maybe<Scalars['String']['output']>;
-  heffingOmschrijving?: Maybe<Scalars['String']['output']>;
-  objectAdres?: Maybe<Scalars['String']['output']>;
-  objectNummer?: Maybe<Scalars['Int']['output']>;
-  tijdvak?: Maybe<Scalars['String']['output']>;
-  volgNummer?: Maybe<Scalars['Int']['output']>;
-};
-
-export type Aanslagen = {
-  __typename?: 'Aanslagen';
-  aanslagen?: Maybe<Array<Aanslag>>;
-  digitaleBestandenAanwezig?: Maybe<Scalars['Boolean']['output']>;
-  geboortedatum?: Maybe<Scalars['Date']['output']>;
-  naam?: Maybe<Scalars['String']['output']>;
-  number: Scalars['Int']['output'];
-  openstaandeInvordering?: Maybe<Scalars['String']['output']>;
-  size: Scalars['Int']['output'];
-  sofiNummer?: Maybe<Scalars['Int']['output']>;
-  subjectNummer?: Maybe<Scalars['Int']['output']>;
-  totaalsaldo?: Maybe<Scalars['Float']['output']>;
-  /**  The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /**  The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
 export type ActiesPage = {
   __typename?: 'ActiesPage';
   /**  The elements on this page */
@@ -178,17 +56,6 @@ export type Adres = {
   straatnaam?: Maybe<Scalars['String']['output']>;
   type: Scalars['String']['output'];
   volledigAdres: Scalars['String']['output'];
-};
-
-export type AutomatischeIncasso = {
-  __typename?: 'AutomatischeIncasso';
-  aantalStornos?: Maybe<Scalars['Int']['output']>;
-  aantalTermijnen?: Maybe<Scalars['Int']['output']>;
-  ingangsdatum?: Maybe<Scalars['Date']['output']>;
-  rekeningNummer?: Maybe<Scalars['String']['output']>;
-  stopzettingsCode?: Maybe<Scalars['String']['output']>;
-  termijnBedrag?: Maybe<Scalars['Float']['output']>;
-  verwerkteTermijnen?: Maybe<Scalars['Int']['output']>;
 };
 
 export type Bericht = {
@@ -340,15 +207,6 @@ export type BestandenPage = {
   totalElements: Scalars['Int']['output'];
   /**  The total number of available pages */
   totalPages: Scalars['Int']['output'];
-};
-
-export type Betaling = {
-  __typename?: 'Betaling';
-  bedrag?: Maybe<Scalars['Float']['output']>;
-  boekDatum?: Maybe<Scalars['Date']['output']>;
-  dagboek?: Maybe<Scalars['String']['output']>;
-  factuurDatum?: Maybe<Scalars['Date']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
 };
 
 export type Betrokkene = {
@@ -524,6 +382,11 @@ export type BrpInOnderzoek = {
   gemeenteVanInschrijving?: Maybe<Scalars['Boolean']['output']>;
   geslacht?: Maybe<Scalars['Boolean']['output']>;
   indicatieCurateleRegister?: Maybe<Scalars['Boolean']['output']>;
+  /**
+   * deprecated(
+   *  reason: "This value is deprecated and should be removed."
+   * )
+   */
   indicatieGezagMinderjarige?: Maybe<Scalars['Boolean']['output']>;
   leeftijd?: Maybe<Scalars['Boolean']['output']>;
 };
@@ -662,6 +525,11 @@ export type BrpPersoon = {
   imigratie?: Maybe<BrpImigratie>;
   inOnderzoek?: Maybe<BrpInOnderzoek>;
   indicatieCurateleRegister?: Maybe<Scalars['Boolean']['output']>;
+  /**
+   * deprecated(
+   *  reason: "This value is deprecated and should be removed."
+   * )
+   */
   indicatieGezagMinderjarige?: Maybe<BrpCodeOmschrijving>;
   kinderen?: Maybe<Array<BrpKind>>;
   leeftijd: Scalars['Int']['output'];
@@ -736,44 +604,6 @@ export type BrpVerblijfsTitelInOnderzoek = {
   datumIngangOnderzoek?: Maybe<BrpDatum>;
 };
 
-export type CancelEmandateRequestInput = {
-  categorie: Scalars['String']['input'];
-  customParameters?: InputMaybe<Scalars['JSON']['input']>;
-  failureUrl?: InputMaybe<Scalars['String']['input']>;
-  mandateId: Scalars['String']['input'];
-  reason?: InputMaybe<Scalars['String']['input']>;
-  successUrl?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type CaseCreated = {
-  __typename?: 'CaseCreated';
-  caseId?: Maybe<Scalars['UUID']['output']>;
-};
-
-export type CaseDefinition = {
-  __typename?: 'CaseDefinition';
-  id: Scalars['String']['output'];
-  schema: Scalars['JSON']['output'];
-  statusDefinition: Array<Maybe<Scalars['String']['output']>>;
-};
-
-export type CaseInstance = {
-  __typename?: 'CaseInstance';
-  caseDefinitionId: Scalars['String']['output'];
-  createdOn: Scalars['String']['output'];
-  externalId?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['UUID']['output']>;
-  status?: Maybe<Status>;
-  statusHistory?: Maybe<Array<Maybe<HistoricStatus>>>;
-  submission?: Maybe<Scalars['JSON']['output']>;
-  userId: Scalars['String']['output'];
-};
-
-export enum CaseInstanceOrdering {
-  Asc = 'ASC',
-  Desc = 'DESC'
-}
-
 export type Categorie = {
   __typename?: 'Categorie';
   naam: Scalars['String']['output'];
@@ -798,16 +628,6 @@ export type CategorieRelatieForeignKey = {
   eindDatum?: Maybe<Scalars['Date']['output']>;
   url: Scalars['String']['output'];
   uuid: Scalars['String']['output'];
-};
-
-export type CloResponse = {
-  __typename?: 'CloResponse';
-  actie: Scalars['String']['output'];
-  dagdeel?: Maybe<Scalars['String']['output']>;
-  error?: Maybe<Scalars['String']['output']>;
-  productVerbruik?: Maybe<Scalars['String']['output']>;
-  resultaat: Scalars['String']['output'];
-  toelichting?: Maybe<Scalars['String']['output']>;
 };
 
 export type ContactenPage = {
@@ -856,16 +676,6 @@ export type ContactpersoonIdentificatieInput = {
   werkteVoorPartij?: InputMaybe<OpenKlant2ForeignKeyInput>;
 };
 
-export type CreateEmandateRequestInput = {
-  categorie: Scalars['String']['input'];
-  customParameters?: InputMaybe<Scalars['JSON']['input']>;
-  failureUrl?: InputMaybe<Scalars['String']['input']>;
-  language?: InputMaybe<Scalars['String']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  sequenceType?: InputMaybe<Scalars['Int']['input']>;
-  successUrl?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type DigitaleAdresRequestInput = {
   omschrijving: Scalars['String']['input'];
   type: DigitaleAdresType;
@@ -875,10 +685,12 @@ export type DigitaleAdresRequestInput = {
 
 export type DigitaleAdresResponse = {
   __typename?: 'DigitaleAdresResponse';
+  isGeverifieerd: Scalars['Boolean']['output'];
   omschrijving: Scalars['String']['output'];
   referentie: Scalars['String']['output'];
   type: DigitaleAdresType;
   uuid: Scalars['UUID']['output'];
+  verificatieDatum?: Maybe<Scalars['Date']['output']>;
   waarde: Scalars['String']['output'];
 };
 
@@ -937,59 +749,6 @@ export type Eigenaar = {
   uitgebreideRechtsvorm: Scalars['String']['output'];
 };
 
-export type EmandateObject = {
-  __typename?: 'EmandateObject';
-  bankId?: Maybe<Scalars['String']['output']>;
-  bankName?: Maybe<Scalars['String']['output']>;
-  categorie: Scalars['String']['output'];
-  iban?: Maybe<Scalars['String']['output']>;
-  lastUpdate?: Maybe<Scalars['DateTime']['output']>;
-  mandateId?: Maybe<Scalars['String']['output']>;
-  reference: Scalars['String']['output'];
-  sequenceType?: Maybe<Scalars['Int']['output']>;
-  status: EmandateStatus;
-  subcategories?: Maybe<Array<EmandateSubCategorie>>;
-};
-
-export type EmandateResponse = {
-  __typename?: 'EmandateResponse';
-  mandateId?: Maybe<Scalars['String']['output']>;
-  message?: Maybe<Scalars['String']['output']>;
-  redirectUrl?: Maybe<Scalars['String']['output']>;
-};
-
-export enum EmandateStatus {
-  Active = 'ACTIVE',
-  Cancel = 'CANCEL',
-  Draft = 'DRAFT'
-}
-
-export type EmandateStatusResponse = {
-  __typename?: 'EmandateStatusResponse';
-  mandateId?: Maybe<Scalars['String']['output']>;
-  statusCode: EmandateStatusResponseCode;
-  statusSubCode: EmandateStatusResponseCode;
-};
-
-export type EmandateStatusResponseCode = {
-  __typename?: 'EmandateStatusResponseCode';
-  code: Scalars['String']['output'];
-  description: Scalars['String']['output'];
-};
-
-export type EmandateSubCategorie = {
-  __typename?: 'EmandateSubCategorie';
-  incasso: Scalars['Boolean']['output'];
-  key: Scalars['String']['output'];
-  naam?: Maybe<Scalars['String']['output']>;
-};
-
-export type EmandateSubCategorieInput = {
-  incasso: Scalars['Boolean']['input'];
-  key: Scalars['String']['input'];
-  naam?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type Embedded = {
   __typename?: 'Embedded';
   eigenaar: Eigenaar;
@@ -1042,12 +801,6 @@ export type HandelsNaam = {
   volgorde: Scalars['Int']['output'];
 };
 
-export type HistoricStatus = {
-  __typename?: 'HistoricStatus';
-  createdOn: Scalars['String']['output'];
-  status: Status;
-};
-
 export type Hoofdvestiging = {
   __typename?: 'Hoofdvestiging';
   adressen?: Maybe<Array<Maybe<Adres>>>;
@@ -1057,38 +810,6 @@ export type Hoofdvestiging = {
   kvkNummer: Scalars['String']['output'];
   totaalWerkzamePersonen: Scalars['Int']['output'];
   vestigingsnummer: Scalars['String']['output'];
-};
-
-export type InvorderingsDetails = {
-  __typename?: 'InvorderingsDetails';
-  aanslagBedrag?: Maybe<Scalars['Float']['output']>;
-  aanslagBetaald?: Maybe<Scalars['Float']['output']>;
-  adres?: Maybe<Scalars['String']['output']>;
-  datumAanmaning?: Maybe<Scalars['Date']['output']>;
-  datumDwangbevel?: Maybe<Scalars['Date']['output']>;
-  kostenBedrag?: Maybe<Scalars['Float']['output']>;
-  kostenBetaald?: Maybe<Scalars['Float']['output']>;
-  kwijtscheldingsBedrag?: Maybe<Scalars['Float']['output']>;
-  land?: Maybe<Scalars['String']['output']>;
-  omschrijving?: Maybe<Scalars['String']['output']>;
-  oninbaarBedrag?: Maybe<Scalars['Float']['output']>;
-  opdrachtgever?: Maybe<Scalars['String']['output']>;
-  openStaandeInvordering?: Maybe<Scalars['String']['output']>;
-  openstaandSaldo?: Maybe<Scalars['Float']['output']>;
-  postcode?: Maybe<Scalars['String']['output']>;
-  renteBedrag?: Maybe<Scalars['Float']['output']>;
-  renteBetaald?: Maybe<Scalars['Float']['output']>;
-  saldoBedrag?: Maybe<Scalars['Float']['output']>;
-  saldoTextLabel?: Maybe<Scalars['String']['output']>;
-  schuldenaarStatus?: Maybe<Scalars['String']['output']>;
-  totaalBedrag?: Maybe<Scalars['Float']['output']>;
-  totaalBetaald?: Maybe<Scalars['Float']['output']>;
-  uitstelBedrag?: Maybe<Scalars['Float']['output']>;
-  verminderingsBedrag?: Maybe<Scalars['Float']['output']>;
-  vervolgActie?: Maybe<Scalars['String']['output']>;
-  vervolgActieCode?: Maybe<Scalars['String']['output']>;
-  vervolgOpmerking?: Maybe<Scalars['String']['output']>;
-  woonplaats?: Maybe<Scalars['String']['output']>;
 };
 
 export type LinksPage = {
@@ -1142,40 +863,21 @@ export type MaterieleRegistratie = {
   datumAanvang: Scalars['String']['output'];
 };
 
-export type ModifyEmandateRequestInput = {
-  categorie: Scalars['String']['input'];
-  customParameters?: InputMaybe<Scalars['JSON']['input']>;
-  failureUrl?: InputMaybe<Scalars['String']['input']>;
-  mandateId: Scalars['String']['input'];
-  successUrl?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  /**  Cancel an eMandate */
-  cancelEmandate: EmandateResponse;
-  createCloDagdeelMilieuzone: CloResponse;
-  createCloDagdeelToeristischeVerhuur: CloResponse;
-  /**  Create an eMandate */
-  createEmandate: EmandateResponse;
   /**  Create DigitaleAdres for User */
   createUserDigitaleAdres?: Maybe<DigitaleAdresResponse>;
   /**  Create Partij for user */
   createUserPartij?: Maybe<PartijResponse>;
-  deleteCloVergunningDagdeel: CloResponse;
+  createVerificatie?: Maybe<VerificatieCreateResponse>;
   /**  Delete DigitaleAdres of User by Id */
   deleteUserDigitaleAdres?: Maybe<Scalars['Boolean']['output']>;
   /**  Do Worldline Direct payment */
   doDirectPayment: DirectPaymentResponse;
   /**  Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
-  /**  Modify an eMandate */
-  modifyEmandate: EmandateResponse;
-  processSubmission?: Maybe<CaseCreated>;
   /**  Submit a task */
   submitTaakV2: TaakV2;
-  /**  Update subcategories of eMandate */
-  updateEmandateSubCategories?: Maybe<EmandateObject>;
   /**  Update product */
   updateProduct?: Maybe<OpenProductProduct>;
   /**  Update product verbruiks object */
@@ -1184,36 +886,7 @@ export type Mutation = {
   updateUserDigitaleAdres?: Maybe<DigitaleAdresResponse>;
   /**  Update user Partij */
   updateUserPartij?: Maybe<PartijResponse>;
-  /**  Pincode wijzigen van vergunning */
-  wijzigVergunningPincode: WijzigVergunningResponse;
-};
-
-
-export type MutationCancelEmandateArgs = {
-  emandate: CancelEmandateRequestInput;
-};
-
-
-export type MutationCreateCloDagdeelMilieuzoneArgs = {
-  end: Scalars['LocalDateTime']['input'];
-  kenteken: Scalars['String']['input'];
-  productId: Scalars['UUID']['input'];
-  productVerbruikId: Scalars['UUID']['input'];
-  start: Scalars['LocalDateTime']['input'];
-};
-
-
-export type MutationCreateCloDagdeelToeristischeVerhuurArgs = {
-  aantalPersonen: Scalars['String']['input'];
-  end: Scalars['LocalDateTime']['input'];
-  productId: Scalars['UUID']['input'];
-  productVerbruikId: Scalars['UUID']['input'];
-  start: Scalars['LocalDateTime']['input'];
-};
-
-
-export type MutationCreateEmandateArgs = {
-  emandate: CreateEmandateRequestInput;
+  verifyVerificatie?: Maybe<VerificatieVerifyResponse>;
 };
 
 
@@ -1227,9 +900,8 @@ export type MutationCreateUserPartijArgs = {
 };
 
 
-export type MutationDeleteCloVergunningDagdeelArgs = {
-  dagdeelId: Scalars['UUID']['input'];
-  productVerbruikId: Scalars['UUID']['input'];
+export type MutationCreateVerificatieArgs = {
+  verificatieCreateInput: VerificatieCreateInput;
 };
 
 
@@ -1248,26 +920,9 @@ export type MutationGenerateOgonePaymentArgs = {
 };
 
 
-export type MutationModifyEmandateArgs = {
-  emandate: ModifyEmandateRequestInput;
-};
-
-
-export type MutationProcessSubmissionArgs = {
-  caseDefinitionId: Scalars['String']['input'];
-  initialStatus?: InputMaybe<Scalars['String']['input']>;
-  submission?: InputMaybe<Scalars['JSON']['input']>;
-};
-
-
 export type MutationSubmitTaakV2Args = {
   id: Scalars['UUID']['input'];
   submission: Scalars['JSON']['input'];
-};
-
-
-export type MutationUpdateEmandateSubCategoriesArgs = {
-  updatedSubCategories: UpdateEmandateSubCategoriesInput;
 };
 
 
@@ -1292,54 +947,8 @@ export type MutationUpdateUserPartijArgs = {
 };
 
 
-export type MutationWijzigVergunningPincodeArgs = {
-  pincode: Scalars['Int']['input'];
-  vergunningnummer: Scalars['Int']['input'];
-};
-
-export type Naheffing = {
-  __typename?: 'Naheffing';
-  aanslagNummer: Scalars['Long']['output'];
-  bedragNaheffing: Scalars['Float']['output'];
-  datumConstatering: Scalars['Date']['output'];
-  datumDagtekening: Scalars['Date']['output'];
-  kenteken: Scalars['String']['output'];
-  kleur: Scalars['String']['output'];
-  latitude?: Maybe<Scalars['String']['output']>;
-  longitude?: Maybe<Scalars['String']['output']>;
-  merk: Scalars['String']['output'];
-  nadereAanduiding: Scalars['String']['output'];
-  straatconstatering: Scalars['String']['output'];
-  ticketnummer?: Maybe<Scalars['String']['output']>;
-  tijdConstatering: Scalars['String']['output'];
-};
-
-export type Naheffingen = {
-  __typename?: 'Naheffingen';
-  aanslagNummer: Scalars['Long']['output'];
-  bedragNaheffing: Scalars['Float']['output'];
-  bonNummer?: Maybe<Scalars['String']['output']>;
-  datumConstatering: Scalars['Date']['output'];
-  kenteken: Scalars['String']['output'];
-  landcode: Scalars['String']['output'];
-  openstaandSaldo: Scalars['Float']['output'];
-  tijdConstatering: Scalars['String']['output'];
-};
-
-export type NaheffingenPage = {
-  __typename?: 'NaheffingenPage';
-  /**  The elements on this page */
-  content: Array<Naheffingen>;
-  /**  The requested page number */
-  number: Scalars['Int']['output'];
-  /**  The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /**  The requested page size */
-  size: Scalars['Int']['output'];
-  /**  The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /**  The total number of available pages */
-  totalPages: Scalars['Int']['output'];
+export type MutationVerifyVerificatieArgs = {
+  verificatieVerifyInput: VerificatieVerifyInput;
 };
 
 export type OgoneBetaling = {
@@ -2320,22 +1929,10 @@ export type ProductenPage = {
 
 export type Query = {
   __typename?: 'Query';
-  allCaseDefinitions: Array<Maybe<CaseDefinition>>;
-  allCaseInstances?: Maybe<Array<Maybe<CaseInstance>>>;
-  /**  Do prefill for belasting aanslag */
-  belastingAanslagPrefill: PrefillResponse;
   /**  Find the Partij of the authenticated user. */
   findUserPartij?: Maybe<OpenKlant2Partij>;
   /**  Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
-  /**  Gets belasting aanslag bestanden */
-  getBelastingAanslagBestanden: AanslagBestandenPage;
-  /**  Gets Dmn decision for belasting aanslag */
-  getBelastingAanslagDecision: Array<Scalars['JSON']['output']>;
-  /**  Gets belasting aanslag details */
-  getBelastingAanslagDetails: AanslagDetails;
-  /**  Gets belasting aanslagen of user */
-  getBelastingAanslagen: Aanslagen;
   /**  Gets a single Bericht by Id */
   getBericht?: Maybe<Bericht>;
   getBerichten: BerichtenPage;
@@ -2353,17 +1950,10 @@ export type Query = {
   getBesluiten: BesluitPage;
   /**  Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
   getBewonersAantalV2?: Maybe<Scalars['Int']['output']>;
-  getCaseInstance?: Maybe<CaseInstance>;
   getDecision: Array<Scalars['JSON']['output']>;
   getDirectPaymentStatus: DirectPaymentStatus;
   /**  Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
-  /**  Gets active emandate by category, can be used to display all the subcategories */
-  getEmandateByCategory?: Maybe<EmandateObject>;
-  /**  Gets status of mandateId */
-  getEmandateStatus: EmandateStatusResponse;
-  /**  Gets list of active emandates */
-  getEmandates: Array<EmandateObject>;
   /**
    *  find single form definition from repository or Objecten API
    * deprecated(
@@ -2377,12 +1967,6 @@ export type Query = {
   getFormDefinitionByObjectenApiUrl?: Maybe<FormDefinition>;
   /**  Gets the data of the gemachtigde */
   getGemachtigdeV2?: Maybe<GemachtigdeV2>;
-  /**  Gets naheffing */
-  getNaheffing: Naheffing;
-  /**  Gets Dmn decision for naheffing */
-  getNaheffingDecision: Array<Scalars['JSON']['output']>;
-  /**  Gets naheffingen of user */
-  getNaheffingen: NaheffingenPage;
   /**  Get a Open product type by id */
   getOpenProduct?: Maybe<OpenProductProduct>;
   /**  Get a actie */
@@ -2466,67 +2050,11 @@ export type Query = {
   getUserKlantContacten: Array<OpenKlant2Klantcontact>;
   /**  Get Partij by Id for authenticated user. */
   getUserPartij?: Maybe<OpenKlant2Partij>;
-  getVergunning: VergunningDetail;
-  /**  Gets Dmn decision for vergunning */
-  getVergunningDecision: Array<Scalars['JSON']['output']>;
-  /**  Gets vergunningen of user */
-  getVergunningen: VergunningenPage;
-  /**  Get WOZ hertaxatie years */
-  getWozHertaxatieJaren: WozHertaxatieJaren;
-  /**  Gets Dmn decision for WOZ taxatie */
-  getWozTaxatieDecision: Array<Scalars['JSON']['output']>;
-  /**  Gets woz taxaties of user and jaar */
-  getWozTaxaties: WozObjectPage;
   /**  Gets a zaak by id */
   getZaak: Zaak;
   getZaken: ZaakPage;
-  /**  Do prefill for naheffing */
-  naheffingPrefill: PrefillResponse;
   productPrefill: PrefillResponse;
-  /**  Do prefill for vergunning */
-  vergunningPrefill: PrefillResponse;
-  /**  Do prefill for WOZ taxatie */
-  wozTaxatiePrefill: PrefillResponse;
-};
-
-
-export type QueryAllCaseInstancesArgs = {
-  orderBy: CaseInstanceOrdering;
-};
-
-
-export type QueryBelastingAanslagPrefillArgs = {
-  aanslagnummer: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  staticData?: InputMaybe<Scalars['JSON']['input']>;
-};
-
-
-export type QueryGetBelastingAanslagBestandenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetBelastingAanslagDecisionArgs = {
-  aanslagnummer: Scalars['String']['input'];
-  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-
-export type QueryGetBelastingAanslagDetailsArgs = {
-  aanslagnummer: Scalars['String']['input'];
-};
-
-
-export type QueryGetBelastingAanslagenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
+  verificatieEnabled?: Maybe<Scalars['Boolean']['output']>;
 };
 
 
@@ -2583,11 +2111,6 @@ export type QueryGetBewonersAantalV2Args = {
 };
 
 
-export type QueryGetCaseInstanceArgs = {
-  id?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-
 export type QueryGetDecisionArgs = {
   dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
   key: Scalars['String']['input'];
@@ -2609,17 +2132,6 @@ export type QueryGetDocumentContentArgs = {
 };
 
 
-export type QueryGetEmandateByCategoryArgs = {
-  categorie: Scalars['String']['input'];
-};
-
-
-export type QueryGetEmandateStatusArgs = {
-  category: Scalars['String']['input'];
-  mandateId: Scalars['String']['input'];
-};
-
-
 export type QueryGetFormDefinitionByIdArgs = {
   id: Scalars['String']['input'];
 };
@@ -2632,28 +2144,6 @@ export type QueryGetFormDefinitionByNameArgs = {
 
 export type QueryGetFormDefinitionByObjectenApiUrlArgs = {
   url: Scalars['String']['input'];
-};
-
-
-export type QueryGetNaheffingArgs = {
-  aanslagnummer: Scalars['String']['input'];
-  kenteken: Scalars['String']['input'];
-};
-
-
-export type QueryGetNaheffingDecisionArgs = {
-  aanslagnummer: Scalars['String']['input'];
-  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
-  kenteken: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-
-export type QueryGetNaheffingenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -2889,42 +2379,6 @@ export type QueryGetUserPartijArgs = {
 };
 
 
-export type QueryGetVergunningArgs = {
-  vergunningnummer: Scalars['Int']['input'];
-};
-
-
-export type QueryGetVergunningDecisionArgs = {
-  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  vergunningnummer: Scalars['Int']['input'];
-};
-
-
-export type QueryGetVergunningenArgs = {
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type QueryGetWozTaxatieDecisionArgs = {
-  dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
-  jaar: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  objectNummer: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-};
-
-
-export type QueryGetWozTaxatiesArgs = {
-  jaar?: InputMaybe<Scalars['String']['input']>;
-  pageNumber?: InputMaybe<Scalars['Int']['input']>;
-  pageSize?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
 export type QueryGetZaakArgs = {
   id: Scalars['UUID']['input'];
 };
@@ -2941,40 +2395,11 @@ export type QueryGetZakenArgs = {
 };
 
 
-export type QueryNaheffingPrefillArgs = {
-  aanslagnummer: Scalars['String']['input'];
-  kenteken: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  staticData?: InputMaybe<Scalars['JSON']['input']>;
-};
-
-
 export type QueryProductPrefillArgs = {
   key: Scalars['String']['input'];
   productName: Scalars['String']['input'];
   productTypeId?: InputMaybe<Scalars['UUID']['input']>;
   sources?: InputMaybe<Scalars['JSON']['input']>;
-  staticData?: InputMaybe<Scalars['JSON']['input']>;
-};
-
-
-export type QueryVergunningPrefillArgs = {
-  key: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
-  staticData?: InputMaybe<Scalars['JSON']['input']>;
-  vergunningnummer: Scalars['Int']['input'];
-};
-
-
-export type QueryWozTaxatiePrefillArgs = {
-  jaar: Scalars['String']['input'];
-  key: Scalars['String']['input'];
-  objectNummer: Scalars['String']['input'];
-  productName: Scalars['String']['input'];
-  productTypeId?: InputMaybe<Scalars['UUID']['input']>;
   staticData?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -3002,17 +2427,6 @@ export enum SoortPartij {
   Organisatie = 'ORGANISATIE',
   Persoon = 'PERSOON'
 }
-
-export enum Sort {
-  Asc = 'ASC',
-  Desc = 'DESC'
-}
-
-export type Status = {
-  __typename?: 'Status';
-  createdOn: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-};
 
 export type StatusType = {
   __typename?: 'StatusType';
@@ -3111,168 +2525,44 @@ export type ThemasPage = {
   totalPages: Scalars['Int']['output'];
 };
 
-export type UpdateEmandateSubCategoriesInput = {
-  category: Scalars['String']['input'];
-  subcategories: Array<EmandateSubCategorieInput>;
-};
-
 export type UpdateProductRequestInput = {
   dataobject?: InputMaybe<Scalars['JSON']['input']>;
   uuid: Scalars['UUID']['input'];
   verbruiksobject?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type Vergunning = {
-  __typename?: 'Vergunning';
-  betaalMethodeToekomst?: Maybe<Scalars['String']['output']>;
-  betaaldExtraTegoed: Scalars['Float']['output'];
-  betaalkenmerk?: Maybe<Scalars['String']['output']>;
-  codeGebied?: Maybe<Scalars['Int']['output']>;
-  codeSubGebied?: Maybe<Scalars['String']['output']>;
-  geldigTot?: Maybe<Scalars['Date']['output']>;
-  iban18?: Maybe<Scalars['String']['output']>;
-  kenteken?: Maybe<Scalars['String']['output']>;
-  kostenExtraTegoed: Scalars['Float']['output'];
-  machtigingAutomatischeIncasso?: Maybe<Scalars['Boolean']['output']>;
-  mandaatId?: Maybe<Scalars['String']['output']>;
-  meldnummer?: Maybe<Scalars['Int']['output']>;
-  naamSubGebied?: Maybe<Scalars['String']['output']>;
-  nogTeBetalen: Scalars['Float']['output'];
-  omschrijvingVergunning?: Maybe<Scalars['String']['output']>;
-  pin?: Maybe<Scalars['Int']['output']>;
-  taalCode?: Maybe<Scalars['String']['output']>;
-  tegoedActueel: Scalars['Int']['output'];
-  tegoedExtra: Scalars['Int']['output'];
-  tegoedInitieel: Scalars['Int']['output'];
-  toelichting?: Maybe<Scalars['String']['output']>;
-  vergunningNummer?: Maybe<Scalars['Int']['output']>;
-  vergunningenSoort?: Maybe<Scalars['String']['output']>;
-  verschuldigBedrag: Scalars['Float']['output'];
-  werkingtijdTm?: Maybe<Scalars['Int']['output']>;
-  werkingtijdVanaf?: Maybe<Scalars['Int']['output']>;
+export type VerificatieCreateInput = {
+  type: VerificatieType;
+  uuid?: InputMaybe<Scalars['UUID']['input']>;
+  waarde: Scalars['String']['input'];
 };
 
-export type VergunningDetail = {
-  __typename?: 'VergunningDetail';
-  betaaldbedrag: Scalars['Float']['output'];
-  betaalkenmerk?: Maybe<Scalars['String']['output']>;
-  burgerservicenummer?: Maybe<Scalars['Int']['output']>;
-  codeBIC?: Maybe<Scalars['String']['output']>;
-  codeGebied?: Maybe<Scalars['Int']['output']>;
-  codeIBAN?: Maybe<Scalars['String']['output']>;
-  codeSubGebied?: Maybe<Scalars['String']['output']>;
-  einddatumPeriode?: Maybe<Scalars['Date']['output']>;
-  geboorteDatum?: Maybe<Scalars['Date']['output']>;
-  geslacht?: Maybe<Scalars['String']['output']>;
-  huisletter?: Maybe<Scalars['String']['output']>;
-  huisnummer: Scalars['Int']['output'];
-  ingangsdatumPeriode?: Maybe<Scalars['Date']['output']>;
-  kentekenVergunning?: Maybe<Scalars['String']['output']>;
-  kostenStraatParkeren: Scalars['Float']['output'];
-  kostenperiode: Scalars['Float']['output'];
-  machtigingAutomatischeIncasso?: Maybe<Scalars['Boolean']['output']>;
-  naam: Scalars['String']['output'];
-  naamSubGebied?: Maybe<Scalars['String']['output']>;
-  nogtebetalen: Scalars['Float']['output'];
-  parkeerTegoed: Scalars['Int']['output'];
-  pasnummer: Scalars['Int']['output'];
-  pincode?: Maybe<Scalars['Int']['output']>;
-  plaats?: Maybe<Scalars['String']['output']>;
-  postcode: Scalars['String']['output'];
-  referenceBijkopen: Scalars['String']['output'];
-  referenceVerlengen: Scalars['String']['output'];
-  restitutieBedrag: Scalars['Float']['output'];
-  soortVergunning?: Maybe<Scalars['String']['output']>;
-  straatnaam?: Maybe<Scalars['String']['output']>;
-  /**  Get subject of vergunning. */
-  subject: VergunningSubject;
-  subjectnummer?: Maybe<Scalars['Int']['output']>;
-  tegoed: Scalars['Int']['output'];
-  tegoedextra: Scalars['Int']['output'];
-  tegoedinitieel: Scalars['Int']['output'];
-  telefoonnummer?: Maybe<Scalars['String']['output']>;
-  titleBijkopen: Scalars['String']['output'];
-  titleVerlengen: Scalars['String']['output'];
-  vergunningNummer: Scalars['Int']['output'];
-  vergunningomschrijving?: Maybe<Scalars['String']['output']>;
-  vestigingsnummer?: Maybe<Scalars['Int']['output']>;
+export type VerificatieCreateResponse = {
+  __typename?: 'VerificatieCreateResponse';
+  errorMessage?: Maybe<Scalars['String']['output']>;
+  success: Scalars['Boolean']['output'];
+  uuid?: Maybe<Scalars['UUID']['output']>;
 };
 
-export type VergunningSubject = {
-  __typename?: 'VergunningSubject';
-  codeGebied: Scalars['Int']['output'];
-  codeSubGebied: Scalars['String']['output'];
-  eigenPlaatsen: Scalars['Int']['output'];
-  emailadres?: Maybe<Scalars['String']['output']>;
-  geboortedatum?: Maybe<Scalars['Date']['output']>;
-  geslacht?: Maybe<Scalars['String']['output']>;
-  huisletter?: Maybe<Scalars['String']['output']>;
-  huisnummer: Scalars['Int']['output'];
-  naam: Scalars['String']['output'];
-  naamSubGebied: Scalars['String']['output'];
-  plaats?: Maybe<Scalars['String']['output']>;
-  postcode: Scalars['String']['output'];
-  straatnaam: Scalars['String']['output'];
-  subjectnummer: Scalars['Int']['output'];
-  telefoonnummer?: Maybe<Scalars['String']['output']>;
-  uitgegevenBedrijven: Scalars['Int']['output'];
-  uitgegevenBewoners: Scalars['Int']['output'];
-  uitgegevenBezoekers: Scalars['Int']['output'];
+export enum VerificatieType {
+  Email = 'EMAIL',
+  Overig = 'OVERIG',
+  Telefoonnummer = 'TELEFOONNUMMER'
+}
+
+export type VerificatieVerifyInput = {
+  code: Scalars['String']['input'];
+  type: VerificatieType;
+  uuid?: InputMaybe<Scalars['UUID']['input']>;
+  waarde: Scalars['String']['input'];
 };
 
-export type VergunningenPage = {
-  __typename?: 'VergunningenPage';
-  /**  The elements on this page */
-  content: Array<Vergunning>;
-  /**  The requested page number */
-  number: Scalars['Int']['output'];
-  /**  The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /**  The requested page size */
-  size: Scalars['Int']['output'];
-  /**  The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /**  The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type WijzigVergunningResponse = {
-  __typename?: 'WijzigVergunningResponse';
-  indicatieVerwerkt: Scalars['Boolean']['output'];
-};
-
-export type WozHertaxatieJaar = {
-  __typename?: 'WozHertaxatieJaar';
-  hertaxatieJaar: Scalars['Int']['output'];
-  hertaxatieJaarIndicatieDefault: Scalars['Boolean']['output'];
-};
-
-export type WozHertaxatieJaren = {
-  __typename?: 'WozHertaxatieJaren';
-  hertaxatieJaren: Array<WozHertaxatieJaar>;
-};
-
-export type WozObjectPage = {
-  __typename?: 'WozObjectPage';
-  /**  The elements on this page */
-  content: Array<WozObjectSub>;
-  /**  The requested page number */
-  number: Scalars['Int']['output'];
-  /**  The number of elements on this page */
-  numberOfElements: Scalars['Int']['output'];
-  /**  The requested page size */
-  size: Scalars['Int']['output'];
-  /**  The total number of elements */
-  totalElements: Scalars['Int']['output'];
-  /**  The total number of available pages */
-  totalPages: Scalars['Int']['output'];
-};
-
-export type WozObjectSub = {
-  __typename?: 'WozObjectSub';
-  objectAdres: Scalars['String']['output'];
-  objectNummer: Scalars['String']['output'];
-  objectSoortOmschrijving: Scalars['String']['output'];
+export type VerificatieVerifyResponse = {
+  __typename?: 'VerificatieVerifyResponse';
+  errorMessage?: Maybe<Scalars['String']['output']>;
+  uuid?: Maybe<Scalars['UUID']['output']>;
+  verified: Scalars['Boolean']['output'];
+  verifiedOp: Scalars['ZonedDateTime']['output'];
 };
 
 export type Zaak = {
@@ -3375,6 +2665,13 @@ export type CreateUserDigitaleAdresMutationVariables = Exact<{
 
 export type CreateUserDigitaleAdresMutation = { __typename?: 'Mutation', createUserDigitaleAdres?: { __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string } | null };
 
+export type CreateVerificatieMutationVariables = Exact<{
+  verificatieCreateInput: VerificatieCreateInput;
+}>;
+
+
+export type CreateVerificatieMutation = { __typename?: 'Mutation', createVerificatie?: { __typename?: 'VerificatieCreateResponse', success: boolean, errorMessage?: string | null } | null };
+
 export type DeleteUserDigitaleAdresMutationVariables = Exact<{
   digitaleAdresId: Scalars['UUID']['input'];
 }>;
@@ -3430,6 +2727,13 @@ export type UpdateProductVerbruiksObjectMutationVariables = Exact<{
 
 
 export type UpdateProductVerbruiksObjectMutation = { __typename?: 'Mutation', updateProductVerbruiksObject: { __typename?: 'ProductVerbruiksObject', id?: any | null, data?: any | null, productInstantie: string, soort?: string | null } };
+
+export type VerifyVerificatieMutationVariables = Exact<{
+  verificatieVerifyInput: VerificatieVerifyInput;
+}>;
+
+
+export type VerifyVerificatieMutation = { __typename?: 'Mutation', verifyVerificatie?: { __typename?: 'VerificatieVerifyResponse', verified: boolean, errorMessage?: string | null } | null };
 
 export type GetBerichtQueryVariables = Exact<{
   id: Scalars['UUID']['input'];
@@ -3715,6 +3019,40 @@ export function useCreateUserDigitaleAdresMutation(baseOptions?: Apollo.Mutation
 export type CreateUserDigitaleAdresMutationHookResult = ReturnType<typeof useCreateUserDigitaleAdresMutation>;
 export type CreateUserDigitaleAdresMutationResult = Apollo.MutationResult<CreateUserDigitaleAdresMutation>;
 export type CreateUserDigitaleAdresMutationOptions = Apollo.BaseMutationOptions<CreateUserDigitaleAdresMutation, CreateUserDigitaleAdresMutationVariables>;
+export const CreateVerificatieDocument = gql`
+    mutation CreateVerificatie($verificatieCreateInput: VerificatieCreateInput!) {
+  createVerificatie(verificatieCreateInput: $verificatieCreateInput) {
+    success
+    errorMessage
+  }
+}
+    `;
+export type CreateVerificatieMutationFn = Apollo.MutationFunction<CreateVerificatieMutation, CreateVerificatieMutationVariables>;
+
+/**
+ * __useCreateVerificatieMutation__
+ *
+ * To run a mutation, you first call `useCreateVerificatieMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateVerificatieMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createVerificatieMutation, { data, loading, error }] = useCreateVerificatieMutation({
+ *   variables: {
+ *      verificatieCreateInput: // value for 'verificatieCreateInput'
+ *   },
+ * });
+ */
+export function useCreateVerificatieMutation(baseOptions?: Apollo.MutationHookOptions<CreateVerificatieMutation, CreateVerificatieMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateVerificatieMutation, CreateVerificatieMutationVariables>(CreateVerificatieDocument, options);
+      }
+export type CreateVerificatieMutationHookResult = ReturnType<typeof useCreateVerificatieMutation>;
+export type CreateVerificatieMutationResult = Apollo.MutationResult<CreateVerificatieMutation>;
+export type CreateVerificatieMutationOptions = Apollo.BaseMutationOptions<CreateVerificatieMutation, CreateVerificatieMutationVariables>;
 export const DeleteUserDigitaleAdresDocument = gql`
     mutation DeleteUserDigitaleAdres($digitaleAdresId: UUID!) {
   deleteUserDigitaleAdres(digitaleAdresId: $digitaleAdresId)
@@ -3950,6 +3288,40 @@ export function useUpdateProductVerbruiksObjectMutation(baseOptions?: Apollo.Mut
 export type UpdateProductVerbruiksObjectMutationHookResult = ReturnType<typeof useUpdateProductVerbruiksObjectMutation>;
 export type UpdateProductVerbruiksObjectMutationResult = Apollo.MutationResult<UpdateProductVerbruiksObjectMutation>;
 export type UpdateProductVerbruiksObjectMutationOptions = Apollo.BaseMutationOptions<UpdateProductVerbruiksObjectMutation, UpdateProductVerbruiksObjectMutationVariables>;
+export const VerifyVerificatieDocument = gql`
+    mutation VerifyVerificatie($verificatieVerifyInput: VerificatieVerifyInput!) {
+  verifyVerificatie(verificatieVerifyInput: $verificatieVerifyInput) {
+    verified
+    errorMessage
+  }
+}
+    `;
+export type VerifyVerificatieMutationFn = Apollo.MutationFunction<VerifyVerificatieMutation, VerifyVerificatieMutationVariables>;
+
+/**
+ * __useVerifyVerificatieMutation__
+ *
+ * To run a mutation, you first call `useVerifyVerificatieMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVerifyVerificatieMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [verifyVerificatieMutation, { data, loading, error }] = useVerifyVerificatieMutation({
+ *   variables: {
+ *      verificatieVerifyInput: // value for 'verificatieVerifyInput'
+ *   },
+ * });
+ */
+export function useVerifyVerificatieMutation(baseOptions?: Apollo.MutationHookOptions<VerifyVerificatieMutation, VerifyVerificatieMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<VerifyVerificatieMutation, VerifyVerificatieMutationVariables>(VerifyVerificatieDocument, options);
+      }
+export type VerifyVerificatieMutationHookResult = ReturnType<typeof useVerifyVerificatieMutation>;
+export type VerifyVerificatieMutationResult = Apollo.MutationResult<VerifyVerificatieMutation>;
+export type VerifyVerificatieMutationOptions = Apollo.BaseMutationOptions<VerifyVerificatieMutation, VerifyVerificatieMutationVariables>;
 export const GetBerichtDocument = gql`
     query GetBericht($id: UUID!) {
   getBericht(id: $id) {

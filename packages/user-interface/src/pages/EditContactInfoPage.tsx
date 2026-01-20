@@ -12,12 +12,17 @@ import { TextInput } from "@gemeente-denhaag/text-input";
 import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 import styles from "./EditContactInfoPage.module.scss";
 import UserContext from "../contexts/UserContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   DigitaleAdresType,
   useUserContactMutation,
+  VerificatieType,
 } from "@nl-portal/nl-portal-api";
 import { capitalizeFirstLetter } from "../utils/person-data";
+import ValidationForm from "../components/ValidationForm";
+
+const ENABLE_EMAIL_VALIDATION = true;
+const ENABLE_PHONE_VALIDATION = false;
 
 const typeParams = ["email", "telefoonnummer"] as const;
 type TypeParams = (typeof typeParams)[number];
@@ -45,13 +50,19 @@ const TELEFOON_VALIDATION = [
 
 const EditContactInfoPage = () => {
   const { type } = useParams<{ type: TypeParams }>();
-  const adresType = capitalizeFirstLetter(
-    type || "",
-  ) as keyof typeof DigitaleAdresType;
+  const adresType = capitalizeFirstLetter(type || "") as
+    | keyof typeof DigitaleAdresType
+    | keyof typeof VerificatieType;
   const digitaleAdresType = DigitaleAdresType[adresType];
   const navigate = useNavigate();
   const { contact } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
+  const [needValidation, setNeedValidation] = useState(false);
+  const contactValue = contact?.getUserDigitaleAdressen?.find(
+    (a) => a.type === digitaleAdresType,
+  );
+  const initialValue = contactValue?.waarde || "";
+
   const [
     mutateFunction,
     {
@@ -61,10 +72,6 @@ const EditContactInfoPage = () => {
       reset: mutationReset,
     },
   ] = useUserContactMutation();
-  const contactValue = contact?.getUserDigitaleAdressen?.find(
-    (a) => a.type === digitaleAdresType,
-  );
-  const initialValue = contactValue?.waarde || "";
 
   const {
     value,
@@ -92,15 +99,35 @@ const EditContactInfoPage = () => {
     }
   };
 
-  const onSubmit = () => {
-    if (initialValue === value) return;
+  const handleMutate = async () => {
     mutateFunction(contactValue?.uuid, value || "", digitaleAdresType);
   };
 
-  const disableSubmit = initialValue === value || hasError || mutationLoading;
+  const onSubmit = () => {
+    if (initialValue === value) return;
+    if (type === "email" && ENABLE_EMAIL_VALIDATION)
+      return setNeedValidation(true);
+    if (type === "telefoonnummer" && ENABLE_PHONE_VALIDATION)
+      return setNeedValidation(true);
+    handleMutate();
+  };
 
   if (!type || !typeParams.includes(type)) {
     navigate(paths.account);
+    return null;
+  }
+
+  if (!mutationLoading && mutationCalled && !mutationError) {
+    console.log("Navigating to account page with success notification");
+    navigate(paths.account, {
+      state: {
+        notification: {
+          id: "edit-contact-info-success",
+          variant: "success",
+          titleMessage: { id: "account.detail.validation.success.title" },
+        },
+      },
+    });
     return null;
   }
 
@@ -110,41 +137,50 @@ const EditContactInfoPage = () => {
       <PageHeader
         title={<FormattedMessage id="pageTitles.editContactInfo" />}
       />
-      <Form
-        id="edit-contact-info-form"
-        submitTranslationId="account.save"
-        loading={disableSubmit}
-        success={Boolean(!mutationLoading && mutationCalled && !mutationError)}
-        error={Boolean(!mutationLoading && mutationCalled && mutationError)}
-        onSubmit={(event) => {
-          event.preventDefault();
-          onSubmit();
-        }}
-        onCancel={() => navigate(paths.account)}
-        onChange={mutationReset}
-      >
-        <FormField invalid={hasError}>
-          <FormLabel htmlFor="contactform">
-            <FormattedMessage id={`account.detail.contactform.${type}`} />
-          </FormLabel>
-          <TextInput
-            id="contactform"
-            type="text"
-            name="value"
-            value={value}
-            onChange={handleInputChange}
-            onBlur={handleInputBlur}
-            onKeyDown={handleKeyDown}
-            className={styles["nl-portal-edit-contact__field"]}
-            invalid={hasError}
-          />
-          {hasError && (
-            <FormFieldErrorMessage>
-              <FormattedMessage id={errorTranslationId} />
-            </FormFieldErrorMessage>
-          )}
-        </FormField>
-      </Form>
+      {needValidation ? (
+        <ValidationForm
+          type={adresType}
+          value={value}
+          loading={mutationLoading}
+          onSuccess={handleMutate}
+          error={Boolean(!mutationLoading && mutationCalled && mutationError)}
+        />
+      ) : (
+        <Form
+          id="edit-contact-info-form"
+          submitTranslationId="account.save"
+          loading={initialValue === value || hasError || mutationLoading}
+          error={Boolean(!mutationLoading && mutationCalled && mutationError)}
+          onSubmit={(event) => {
+            event.preventDefault();
+            onSubmit();
+          }}
+          onCancel={() => navigate(paths.account)}
+          onChange={mutationReset}
+        >
+          <FormField invalid={hasError}>
+            <FormLabel htmlFor="contactform">
+              <FormattedMessage id={`account.detail.contactform.${type}`} />
+            </FormLabel>
+            <TextInput
+              id="contactform"
+              type="text"
+              name="value"
+              value={value}
+              onChange={handleInputChange}
+              onBlur={handleInputBlur}
+              onKeyDown={handleKeyDown}
+              className={styles["nl-portal-edit-contact__field"]}
+              invalid={hasError}
+            />
+            {hasError && (
+              <FormFieldErrorMessage>
+                <FormattedMessage id={errorTranslationId} />
+              </FormFieldErrorMessage>
+            )}
+          </FormField>
+        </Form>
+      )}
     </>
   );
 };

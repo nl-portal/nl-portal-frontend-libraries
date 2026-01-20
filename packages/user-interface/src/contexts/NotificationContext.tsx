@@ -62,8 +62,8 @@ export const NotificationProvider = ({
         type: "CREATE",
         notification: {
           variant,
-          title: <FormattedMessage {...titleMessage} />,
-          text: <FormattedMessage {...textMessage} />,
+          title: titleMessage && <FormattedMessage {...titleMessage} />,
+          text: textMessage && <FormattedMessage {...textMessage} />,
         },
       });
     }
