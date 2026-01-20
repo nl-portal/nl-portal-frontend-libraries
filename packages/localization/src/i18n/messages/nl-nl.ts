@@ -146,6 +146,8 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.validationFormLabel": "Verificatiecode",
     "account.detail.validationFormDescription": "De code verloopt over {time}",
     "account.detail.validationForm.cancel": "Code opnieuw verzenden",
+    "account.detail.validation.description":
+      "Wij hebben u een code gestuurd op {email}. Voer de code hieronder in om uw nieuwe e-mailadres te bevestigen. Let op! De code kan in uw spambox terecht zijn gekomen.",
     "account.detail.validation.error": "Voer een geldige waarde in",
     "account.detail.validation.success.title":
       "Gelukt. U heeft uw wijziging doorgegeven.",

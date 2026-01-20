@@ -143,6 +143,8 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.validationFormLabel": "Verification code",
     "account.detail.validationFormDescription": "The code expires in {time}",
     "account.detail.validationForm.cancel": "Resend code",
+    "account.detail.validation.description":
+      "We have sent a code to {email}. Enter the code below to confirm your new email address. Note! The code may have ended up in your spam box.",
     "account.detail.validation.error": "Enter a valid value",
     "account.detail.validation.success.title":
       "Success. You have submitted your change.",

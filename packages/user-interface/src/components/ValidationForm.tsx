@@ -116,7 +116,13 @@ const ValidationForm = ({
 
   return (
     <Form
-      loading={!value || loading || createLoading || verifyLoading}
+      loading={
+        !value ||
+        loading ||
+        createLoading ||
+        verifyLoading ||
+        timeRemaining <= 0
+      }
       error={error || verifyErrorPresent}
       onChange={verifyReset}
       onSubmit={handleSubmit}

@@ -20,6 +20,7 @@ import {
 } from "@nl-portal/nl-portal-api";
 import { capitalizeFirstLetter } from "../utils/person-data";
 import ValidationForm from "../components/ValidationForm";
+import { Paragraph } from "@gemeente-denhaag/typography";
 
 const ENABLE_EMAIL_VALIDATION = true;
 const ENABLE_PHONE_VALIDATION = false;
@@ -118,7 +119,6 @@ const EditContactInfoPage = () => {
   }
 
   if (!mutationLoading && mutationCalled && !mutationError) {
-    console.log("Navigating to account page with success notification");
     navigate(paths.account, {
       state: {
         notification: {
@@ -134,9 +134,16 @@ const EditContactInfoPage = () => {
   return (
     <>
       <BackLink href={paths.account} />
-      <PageHeader
-        title={<FormattedMessage id="pageTitles.editContactInfo" />}
-      />
+      <PageHeader title={<FormattedMessage id="pageTitles.editContactInfo" />}>
+        {needValidation && (
+          <Paragraph>
+            <FormattedMessage
+              id={`account.detail.validation.description`}
+              values={{ email: value }}
+            />
+          </Paragraph>
+        )}
+      </PageHeader>
       {needValidation ? (
         <ValidationForm
           type={adresType}
