@@ -21,6 +21,7 @@ import {
 import { capitalizeFirstLetter } from "../utils/person-data";
 import ValidationForm from "../components/ValidationForm";
 import { Paragraph } from "@gemeente-denhaag/typography";
+import PageGrid from "../components/PageGrid";
 
 const ENABLE_EMAIL_VALIDATION = true;
 const ENABLE_PHONE_VALIDATION = false;
@@ -132,18 +133,13 @@ const EditContactInfoPage = () => {
   }
 
   return (
-    <>
-      <BackLink href={paths.account} />
-      <PageHeader title={<FormattedMessage id="pageTitles.editContactInfo" />}>
-        {needValidation && (
-          <Paragraph>
-            <FormattedMessage
-              id={`account.detail.validation.description`}
-              values={{ email: value }}
-            />
-          </Paragraph>
-        )}
-      </PageHeader>
+    <PageGrid variant="small">
+      <div>
+        <BackLink href={paths.account} />
+        <PageHeader
+          title={<FormattedMessage id="pageTitles.editContactInfo" />}
+        ></PageHeader>
+      </div>
       {needValidation ? (
         <ValidationForm
           type={adresType}
@@ -151,6 +147,14 @@ const EditContactInfoPage = () => {
           loading={mutationLoading}
           onSuccess={handleMutate}
           error={Boolean(!mutationLoading && mutationCalled && mutationError)}
+          description={
+            <Paragraph>
+              <FormattedMessage
+                id={`validationForm.description`}
+                values={{ email: value }}
+              />
+            </Paragraph>
+          }
         />
       ) : (
         <Form
@@ -188,7 +192,7 @@ const EditContactInfoPage = () => {
           </FormField>
         </Form>
       )}
-    </>
+    </PageGrid>
   );
 };
 

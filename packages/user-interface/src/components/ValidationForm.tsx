@@ -12,6 +12,7 @@ import { FormattedMessage, FormattedTime } from "react-intl";
 import { TextInput } from "@gemeente-denhaag/text-input";
 import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 import { useEffect, useState } from "react";
+import { Alert, AlertProps } from "@gemeente-denhaag/alert";
 
 interface ValidationFormProps {
   type: keyof typeof VerificatieType;
@@ -19,7 +20,8 @@ interface ValidationFormProps {
   loading?: boolean;
   onSuccess?: () => void;
   onCancel?: () => void;
-  error?: boolean;
+  error?: AlertProps | boolean;
+  description?: React.ReactNode;
 }
 
 const ValidationForm = ({
@@ -28,34 +30,53 @@ const ValidationForm = ({
   loading,
   onSuccess,
   onCancel,
-  error,
+  error = false,
+  description,
 }: ValidationFormProps) => {
   const timerLength = (10 * 60 - 1) * 1000;
-  const [timeRemaining, setTimeRemaining] = useState(timerLength);
+  const [timeRemaining, setTimeRemaining] = useState<number | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
+    if (timeRemaining === undefined) return;
     if (timeRemaining <= 0) return;
 
     const interval = setInterval(() => {
-      setTimeRemaining((prev) => Math.max(0, prev - 1000));
+      setTimeRemaining((prev) => Math.max(0, (prev ?? 0) - 1000));
     }, 1000);
 
     return () => clearInterval(interval);
   }, [timeRemaining]);
 
-  const [createFunction, { loading: createLoading }] =
-    useCreateVerificatieMutation();
+  const [
+    createFunction,
+    {
+      data: createData,
+      loading: createLoading,
+      called: createCalled,
+      error: createError,
+    },
+  ] = useCreateVerificatieMutation();
+  const createErrorState =
+    !createLoading &&
+    createCalled &&
+    (Boolean(createError) || createData?.createVerificatie?.success === false);
 
   const [
     verifyFunction,
     {
+      data: verifyData,
       loading: verifyLoading,
-      error: verifyError,
       called: verifyCalled,
+      error: verifyError,
       reset: verifyReset,
     },
   ] = useVerifyVerificatieMutation();
-  const verifyErrorPresent = Boolean(!loading && verifyCalled && verifyError);
+  const verifyErrorState =
+    !verifyLoading &&
+    verifyCalled &&
+    (Boolean(verifyError) || verifyData?.verifyVerificatie?.verified === false);
 
   useEffect(() => {
     createFunction({
@@ -64,6 +85,10 @@ const ValidationForm = ({
           type: VerificatieType[type],
           waarde: verifyValue,
         },
+      },
+      onCompleted: (data) => {
+        if (data.createVerificatie?.success)
+          return setTimeRemaining(timerLength);
       },
     });
   }, []);
@@ -74,30 +99,30 @@ const ValidationForm = ({
     handleInputBlur,
     hasError,
     errorTranslationId,
+    resetValue,
   } = useInput("", [
     {
       validationFn: (value: string) => value !== "",
-      errorTranslationId: "account.detail.validation.error",
+      errorTranslationId: "validationForm.error",
     },
   ]);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    try {
-      verifyFunction({
-        variables: {
-          verificatieVerifyInput: {
-            type: VerificatieType[type],
-            waarde: verifyValue,
-            code: value,
-          },
+    const results = await verifyFunction({
+      variables: {
+        verificatieVerifyInput: {
+          type: VerificatieType[type],
+          waarde: verifyValue,
+          code: value,
         },
-      });
-      onSuccess?.();
-    } catch {
-      // Handle error if needed
-    }
+      },
+    });
+
+    if (results.data?.verifyVerificatie?.verified === false) return;
+
+    onSuccess?.();
   };
 
   const handleCancel = () => {
@@ -108,61 +133,95 @@ const ValidationForm = ({
           waarde: verifyValue,
         },
       },
+      onCompleted: (data) => {
+        if (data.createVerificatie?.success)
+          return setTimeRemaining(timerLength);
+      },
     });
+    resetValue();
     verifyReset();
-    setTimeRemaining(timerLength);
+    setTimeRemaining(undefined);
     onCancel?.();
   };
 
   return (
-    <Form
-      loading={
-        !value ||
-        loading ||
-        createLoading ||
-        verifyLoading ||
-        timeRemaining <= 0
-      }
-      error={error || verifyErrorPresent}
-      onChange={verifyReset}
-      onSubmit={handleSubmit}
-      cancelTranslationId="account.detail.validationForm.cancel"
-      onCancel={handleCancel}
-    >
-      <FormField invalid={hasError}>
-        <FormLabel htmlFor="validationForm">
-          <FormattedMessage id={`account.detail.validationFormLabel`} />
-        </FormLabel>
-        <FormFieldDescription>
-          <FormattedMessage
-            id={`account.detail.validationFormDescription`}
-            values={{
-              time: (
-                <FormattedTime
-                  value={timeRemaining}
-                  minute="2-digit"
-                  second="2-digit"
-                />
-              ),
-            }}
-          />
-        </FormFieldDescription>
-        <TextInput
-          id="validationForm"
-          type="text"
-          name="value"
-          value={value}
-          onChange={handleInputChange}
-          onBlur={handleInputBlur}
-          invalid={hasError}
+    <>
+      {!createErrorState && description}
+      {createErrorState && (
+        <Alert
+          variant="warning"
+          title={<FormattedMessage id="validationForm.createError.Title" />}
+          text={<FormattedMessage id="validationForm.createError.Text" />}
         />
-        {hasError && (
-          <FormFieldErrorMessage>
-            <FormattedMessage id={errorTranslationId} />
-          </FormFieldErrorMessage>
-        )}
-      </FormField>
-    </Form>
+      )}
+      {timeRemaining === 0 && (
+        <Alert
+          variant="warning"
+          title={<FormattedMessage id="validationForm.timeError.Title" />}
+          text={<FormattedMessage id="validationForm.timeError.Text" />}
+        />
+      )}
+      <Form
+        loading={
+          !value ||
+          loading ||
+          createLoading ||
+          verifyLoading ||
+          createErrorState ||
+          verifyErrorState ||
+          timeRemaining === 0
+        }
+        error={
+          error ||
+          (verifyErrorState && {
+            variant: "error",
+            title: <FormattedMessage id="validationForm.verifyError.title" />,
+            text: <FormattedMessage id="validationForm.verifyError.text" />,
+          })
+        }
+        onChange={verifyReset}
+        onSubmit={handleSubmit}
+        cancelTranslationId="validationForm.cancel"
+        onCancel={handleCancel}
+      >
+        <FormField invalid={hasError}>
+          <FormLabel htmlFor="validationForm">
+            <FormattedMessage id={`validationForm.label`} />
+          </FormLabel>
+          {timeRemaining !== undefined && timeRemaining >= 0 && (
+            <FormFieldDescription>
+              <FormattedMessage
+                id={`validationForm.labelDescription`}
+                values={{
+                  time: (
+                    <FormattedTime
+                      value={timeRemaining}
+                      minute="2-digit"
+                      second="2-digit"
+                    />
+                  ),
+                }}
+              />
+            </FormFieldDescription>
+          )}
+          <TextInput
+            id="validationForm"
+            type="text"
+            name="value"
+            value={value}
+            onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            invalid={hasError}
+            disabled={createLoading || createErrorState || timeRemaining === 0}
+          />
+          {hasError && (
+            <FormFieldErrorMessage>
+              <FormattedMessage id={errorTranslationId} />
+            </FormFieldErrorMessage>
+          )}
+        </FormField>
+      </Form>
+    </>
   );
 };
 

@@ -32,12 +32,18 @@ const useInput = (defaultValue: string, validations: Validation[]) => {
     setDidEdit(true);
   };
 
+  const resetValue = () => {
+    setEnteredValue(defaultValue);
+    setDidEdit(false);
+  };
+
   return {
     value: enteredValue,
     handleInputChange,
     handleInputBlur,
     hasError: didEdit && Boolean(errorTranslationId),
     errorTranslationId: errorTranslationId,
+    resetValue,
   };
 };
 

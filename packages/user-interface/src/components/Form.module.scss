@@ -2,8 +2,4 @@
   display: flex;
   flex-direction: column;
   gap: var(--nlportal-form-gap, var(--nlportal-space-inline-xl, 1.5rem));
-  margin-block-start: var(
-    --nlportal-form-margin-block-start,
-    var(--nlportal-space-inline-xl, 1.5rem)
-  );
 }
