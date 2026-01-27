@@ -2916,7 +2916,7 @@ export type GetTakenV2Query = { __typename?: 'Query', getTakenV2: { __typename?:
 export type GetUserDigitaleAdressenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdressen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string }> | null };
+export type GetUserDigitaleAdressenQuery = { __typename?: 'Query', getUserDigitaleAdressen?: Array<{ __typename?: 'DigitaleAdresResponse', uuid: any, waarde: string, type: DigitaleAdresType, omschrijving: string, referentie: string, isGeverifieerd: boolean }> | null };
 
 export type GetUserKlantContactenQueryVariables = Exact<{
   identificatorType: OnderwerpObjectIndentificatorType;
@@ -4661,6 +4661,7 @@ export const GetUserDigitaleAdressenDocument = gql`
     type
     omschrijving
     referentie
+    isGeverifieerd
   }
 }
     `;

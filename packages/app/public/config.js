@@ -19,3 +19,5 @@ window.REQUEST_CONFIDENTIALITY_OF_DATA_URL = "https://www.google.nl";
 window.USE_LEGACY_OGONE_PAYMENT = "false";
 window.USE_THEME_API = "false";
 window.SHOW_CASE_RESULT_EXPLANATION = "true";
+window.ENABLE_EMAIL_VALIDATION = "true";
+window.ENABLE_PHONE_VALIDATION = "false";

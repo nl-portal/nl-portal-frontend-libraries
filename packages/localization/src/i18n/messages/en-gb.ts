@@ -247,6 +247,10 @@ export const EN_GB_MESSAGES: Messages = {
     "overviewpage.noEmail.text":
       "Enter your email address. The municipality will then be able to send you important messages. For example, about your application or other current procedures.",
     "overviewpage.noEmail.text.button": "Enter email address",
+    "overviewpage.noEmailVerified.title": "Confirm your email address",
+    "overviewpage.noEmailVerified.text":
+      "Your email address has not yet been confirmed. This is necessary to be able to contact you.",
+    "overviewpage.noEmailVerified.text.button": "Confirm email address",
     "actionLabels.today": "today",
     "actionLabels.yesterday": "yesterday",
     "actionLabels.before": "before",

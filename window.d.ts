@@ -23,6 +23,8 @@ declare global {
     USE_LEGACY_OGONE_PAYMENT: string;
     USE_THEME_API: string;
     SHOW_CASE_RESULT_EXPLANATION: string;
+    ENABLE_EMAIL_VALIDATION: string;
+    ENABLE_PHONE_VALIDATION: string;
   }
 }
 

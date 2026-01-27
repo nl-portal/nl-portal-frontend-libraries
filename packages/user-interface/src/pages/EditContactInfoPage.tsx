@@ -23,9 +23,6 @@ import ValidationForm from "../components/ValidationForm";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import PageGrid from "../components/PageGrid";
 
-const ENABLE_EMAIL_VALIDATION = true;
-const ENABLE_PHONE_VALIDATION = false;
-
 const typeParams = ["email", "telefoonnummer"] as const;
 type TypeParams = (typeof typeParams)[number];
 
@@ -50,7 +47,15 @@ const TELEFOON_VALIDATION = [
   },
 ];
 
-const EditContactInfoPage = () => {
+interface EditContactInfoPageProps {
+  emailVerification?: boolean;
+  phoneVerification?: boolean;
+}
+
+const EditContactInfoPage = ({
+  emailVerification,
+  phoneVerification,
+}: EditContactInfoPageProps) => {
   const { type } = useParams<{ type: TypeParams }>();
   const adresType = capitalizeFirstLetter(type || "") as
     | keyof typeof DigitaleAdresType
@@ -107,9 +112,8 @@ const EditContactInfoPage = () => {
 
   const onSubmit = () => {
     if (initialValue === value) return;
-    if (type === "email" && ENABLE_EMAIL_VALIDATION)
-      return setNeedValidation(true);
-    if (type === "telefoonnummer" && ENABLE_PHONE_VALIDATION)
+    if (type === "email" && emailVerification) return setNeedValidation(true);
+    if (type === "telefoonnummer" && phoneVerification)
       return setNeedValidation(true);
     handleMutate();
   };

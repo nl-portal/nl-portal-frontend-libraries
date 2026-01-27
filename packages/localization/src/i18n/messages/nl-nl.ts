@@ -252,6 +252,10 @@ export const NL_NL_MESSAGES: Messages = {
     "overviewpage.noEmail.text":
       "Vul uw e-mailadres in. De gemeente kan u dan belangrijke meldingen sturen. Bijvoorbeeld over uw aanvraag of andere lopende zaken.",
     "overviewpage.noEmail.text.button": "E-mailadres invullen",
+    "overviewpage.noEmailVerified.title": "Bevestig uw e-mailadres",
+    "overviewpage.noEmailVerified.text":
+      "Uw e-mailadres is nog niet bevestigd. Dit is nodig om contact met u op te kunnen nemen.",
+    "overviewpage.noEmailVerified.text.button": "E-mailadres bevestigen",
     "actionLabels.today": "vandaag",
     "actionLabels.yesterday": "gisteren",
     "actionLabels.before": "vóór",

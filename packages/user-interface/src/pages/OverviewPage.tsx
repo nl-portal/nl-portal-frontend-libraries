@@ -20,6 +20,7 @@ interface OverviewPageProps {
   showAlert?: boolean;
   alertType?: "error" | "info" | "success" | "warning";
   showNoEmailAlert?: boolean;
+  showNoEmailVerifiedAlert?: boolean;
   showIntro?: boolean;
   fetchTasksLength?: number;
   fetchCasesLength?: number;
@@ -29,6 +30,7 @@ interface OverviewPageProps {
 const OverviewPage = ({
   showAlert = false,
   showNoEmailAlert = false,
+  showNoEmailVerifiedAlert = false,
   alertType = "warning",
   showIntro = false,
   fetchTasksLength = 5,
@@ -94,6 +96,26 @@ const OverviewPage = ({
           }}
         />
       )}
+      {showNoEmailVerifiedAlert &&
+        contact &&
+        emailadres?.waarde &&
+        !emailadres?.isGeverifieerd && (
+          <Alert
+            title={<FormattedMessage id="overviewpage.noEmailVerified.title" />}
+            text={
+              <Paragraph>
+                <FormattedMessage id="overviewpage.noEmailVerified.text" />
+              </Paragraph>
+            }
+            variant="warning"
+            action={{
+              buttonText: intl.formatMessage({
+                id: "overviewpage.noEmailVerified.text.button",
+              }),
+              onClick: () => navigate(paths.changeContactInfo("email")),
+            }}
+          />
+        )}
       {showIntro && (
         <PageHeader
           title={
