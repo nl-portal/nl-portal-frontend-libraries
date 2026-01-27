@@ -8,6 +8,8 @@ export const nlPortalRadioButton = {
     const label = escape(ctx.t(component.label || ""));
     const description = escape(ctx.t(component.description || ""));
     const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
+    const baseName = escape(ctx.input?.name || component.key || "radio");
+    const radioName = ctx.input?.name ? baseName : `${baseName}[${id}]`;
 
     const fieldsetClass = `utrecht-form-fieldset${
       hasErrors ? " utrecht-form-fieldset--invalid" : ""
@@ -31,7 +33,7 @@ export const nlPortalRadioButton = {
                 ref="input"
                 class="utrecht-radio-button utrecht-radio-button--html-input utrecht-form-field__input"
                 id="${inputId}"
-                name="${escape(ctx.input?.name || component.key)}"
+                name="${radioName}"
                 type="radio"
                 value="${value}"
                 ${checked}
