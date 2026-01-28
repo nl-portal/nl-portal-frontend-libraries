@@ -8,11 +8,12 @@ import { FormField } from "@gemeente-denhaag/form-field";
 import useInput from "../hooks/useInput";
 import { FormLabel } from "@gemeente-denhaag/form-label";
 import { FormFieldDescription } from "@gemeente-denhaag/form-field-description";
-import { FormattedMessage, FormattedTime } from "react-intl";
+import { FormattedMessage } from "react-intl";
 import { TextInput } from "@gemeente-denhaag/text-input";
 import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
 import { useEffect, useState } from "react";
 import { Alert, AlertProps } from "@gemeente-denhaag/alert";
+import ValidationFormCountdown from "./ValidationFormCountdown";
 
 interface ValidationFormProps {
   type: keyof typeof VerificatieType;
@@ -33,22 +34,8 @@ const ValidationForm = ({
   error = false,
   description,
 }: ValidationFormProps) => {
-  const timerLength = (10 * 60 - 1) * 1000;
-  const [timeRemaining, setTimeRemaining] = useState<number | undefined>(
-    undefined,
-  );
-
-  useEffect(() => {
-    if (timeRemaining === undefined) return;
-    if (timeRemaining <= 0) return;
-
-    const interval = setInterval(() => {
-      setTimeRemaining((prev) => Math.max(0, (prev ?? 0) - 1000));
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [timeRemaining]);
-
+  const [showTimer, setShowTimer] = useState(false);
+  const [timerComplete, setTimerComplete] = useState(false);
   const [
     createFunction,
     {
@@ -87,8 +74,7 @@ const ValidationForm = ({
         },
       },
       onCompleted: (data) => {
-        if (data.createVerificatie?.success)
-          return setTimeRemaining(timerLength);
+        if (data.createVerificatie?.success) return setShowTimer(true);
       },
     });
   }, []);
@@ -126,6 +112,8 @@ const ValidationForm = ({
   };
 
   const handleCancel = () => {
+    setShowTimer(false);
+    setTimerComplete(false);
     createFunction({
       variables: {
         verificatieCreateInput: {
@@ -134,13 +122,11 @@ const ValidationForm = ({
         },
       },
       onCompleted: (data) => {
-        if (data.createVerificatie?.success)
-          return setTimeRemaining(timerLength);
+        if (data.createVerificatie?.success) return setShowTimer(true);
       },
     });
     resetValue();
     verifyReset();
-    setTimeRemaining(undefined);
     onCancel?.();
   };
 
@@ -154,7 +140,7 @@ const ValidationForm = ({
           text={<FormattedMessage id="validationForm.createError.Text" />}
         />
       )}
-      {timeRemaining === 0 && (
+      {timerComplete && (
         <Alert
           variant="warning"
           title={<FormattedMessage id="validationForm.timeError.Title" />}
@@ -169,7 +155,7 @@ const ValidationForm = ({
           verifyLoading ||
           createErrorState ||
           verifyErrorState ||
-          timeRemaining === 0
+          timerComplete
         }
         error={
           error ||
@@ -188,22 +174,13 @@ const ValidationForm = ({
           <FormLabel htmlFor="validationForm">
             <FormattedMessage id={`validationForm.label`} />
           </FormLabel>
-          {timeRemaining !== undefined && timeRemaining >= 0 && (
-            <FormFieldDescription>
-              <FormattedMessage
-                id={`validationForm.labelDescription`}
-                values={{
-                  time: (
-                    <FormattedTime
-                      value={timeRemaining}
-                      minute="2-digit"
-                      second="2-digit"
-                    />
-                  ),
-                }}
+          <FormFieldDescription>
+            {showTimer && (
+              <ValidationFormCountdown
+                onComplete={() => setTimerComplete(true)}
               />
-            </FormFieldDescription>
-          )}
+            )}
+          </FormFieldDescription>
           <TextInput
             id="validationForm"
             type="text"
@@ -212,7 +189,7 @@ const ValidationForm = ({
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             invalid={hasError}
-            disabled={createLoading || createErrorState || timeRemaining === 0}
+            disabled={createLoading || createErrorState || timerComplete}
           />
           {hasError && (
             <FormFieldErrorMessage>
