@@ -32,7 +32,7 @@ const UserContext = createContext<UserContextInterface>(
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { decodedToken, authenticationMethods } = useContext(OidcContext);
   const [isPersoon, setIsPersoon] = useState(true);
-  const [isVolmacht, setisVolmacht] = useState(false);
+  const [isVolmacht, setIsVolmacht] = useState(false);
   const [username, setUserName] = useState("");
   const [usernameVolmacht, setUsernameVolmacht] = useState("");
 
@@ -74,7 +74,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
-      setisVolmacht(true);
+      setIsVolmacht(true);
       loadGemachtigde({
         onCompleted: (data: GetGemachtigdeV2Query) => {
           const name =

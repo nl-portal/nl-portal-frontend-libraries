@@ -110,7 +110,7 @@ export const NL_NL_MESSAGES: Messages = {
     "element.loading": "Aan het laden",
     "element.download": "Download",
     "account.noDataAvailable":
-      "Het is helaas niet gelukt om uw gegevens op te halen. Ververs de pagina of probeer het later nog eens.",
+      "Het is niet gelukt om alle gegevens op te halen. Ververs de pagina of probeer het later opnieuw.",
     "account.leadParagraph":
       "Op deze pagina ziet u uw persoonlijke gegevens en hoe wij die gebruiken om contact met u te houden.",
     "account.contactHeader": "Contact",
