@@ -4,7 +4,7 @@ export type ProductTypeSlug =
   | "bezoekersvergunningen"
   | "belastingzaken";
 export type ProductTypeCodes =
-  | "PARKEERVERGUNNING"
+  | "PARKEREN"
   | "BEZOEKERSVERGUNNING"
   | "BELASTINGZAKEN";
 
@@ -30,7 +30,7 @@ export const themes: Themes = {
       bezoekersvergunningen: "bezoekersvergunningen",
     },
     productTypeCodes: {
-      vergunningen: "PARKEERVERGUNNING",
+      vergunningen: "PARKEREN",
       bezoekersvergunningen: "BEZOEKERSVERGUNNING",
     },
   },
