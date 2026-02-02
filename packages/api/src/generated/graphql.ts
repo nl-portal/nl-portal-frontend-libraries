@@ -1,7 +1,6 @@
-/* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
-export type InputMaybe<T> = T | null | undefined;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -14,29 +13,17 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  /** An arbitrary precision signed decimal */
   BigDecimal: { input: any; output: any; }
-  /** An arbitrary precision signed integer */
   BigInteger: { input: any; output: any; }
-  /** An RFC-3339 compliant Full Date Scalar */
   Date: { input: any; output: any; }
-  /** A slightly refined version of RFC-3339 compliant DateTime Scalar */
   DateTime: { input: any; output: any; }
-  /** A JSON scalar */
   JSON: { input: any; output: any; }
-  /** A local date time */
   LocalDateTime: { input: any; output: any; }
-  /** 24-hour clock time value string in the format `hh:mm:ss` or `hh:mm:ss.sss`. */
   LocalTime: { input: any; output: any; }
-  /** A IETF BCP 47 language tag */
   Locale: { input: any; output: any; }
-  /** A 64-bit signed integer */
   Long: { input: any; output: any; }
-  /** An Float scalar that must be a positive value */
   PositiveFloat: { input: any; output: any; }
-  /** A universally unique identifier compliant UUID Scalar */
   UUID: { input: any; output: any; }
-  /** A zoned date time */
   ZonedDateTime: { input: any; output: any; }
 };
 

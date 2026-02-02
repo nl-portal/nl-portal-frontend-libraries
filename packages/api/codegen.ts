@@ -6,11 +6,8 @@ const config: CodegenConfig = {
   schema: "http://localhost:8080/graphql",
   documents: "./src/{fragments,mutations,queries}/**/*.{ts,tsx}",
   generates: {
-    "src/generated/": {
-      preset: "client",
-      presetConfig: {
-        fragmentMasking: false,
-      },
+    "src/generated/graphql.ts": {
+      plugins: ["typescript", "typescript-operations", "typed-document-node"],
     },
   },
 };
