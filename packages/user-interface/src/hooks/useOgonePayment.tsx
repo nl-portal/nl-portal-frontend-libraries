@@ -2,8 +2,8 @@ import {
   OgonePayment,
   DoDirectPaymentDocument,
   GenerateOgonePaymentDocument,
-  useMutation,
 } from "@nl-portal/nl-portal-api";
+import { useMutation } from "@apollo/client/react";
 import { useContext, useState } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import OgonePaymentForm from "../components/OgonePaymentForm";

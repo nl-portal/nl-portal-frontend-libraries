@@ -9,9 +9,8 @@ import {
   GetGemachtigdeV2Document,
   GetPersoonV2Document,
   GetUserDigitaleAdressenDocument,
-  useLazyQuery,
-  useQuery,
 } from "@nl-portal/nl-portal-api";
+import { useLazyQuery, useQuery } from "@apollo/client/react";
 
 export interface UserContextInterface {
   isLoading: boolean;

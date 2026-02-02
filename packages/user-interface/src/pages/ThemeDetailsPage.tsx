@@ -6,11 +6,11 @@ import {
   OpenProductProduct,
   TaakV2,
   GetOpenProductDocument,
-  useQuery,
   Zaak,
   GetOpenProductQueryVariables,
   GetOpenProductQuery,
 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import TasksList from "../components/TasksList";
 import CasesList from "../components/CasesList";
 import { useParams } from "react-router";

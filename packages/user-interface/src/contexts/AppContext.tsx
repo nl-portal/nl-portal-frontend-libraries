@@ -3,8 +3,8 @@ import {
   GetOpenProductHoofdThemasByProductenDocument,
   GetOpenProductHoofdThemasByProductenQuery,
   GetUnopenedBerichtenCountDocument,
-  useQuery,
 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import {
   createContext,
   ReactNode,

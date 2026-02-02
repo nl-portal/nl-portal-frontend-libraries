@@ -7,8 +7,8 @@ import {
   GetOpenProductDocument,
   GetOpenProductQuery,
   GetOpenProductQueryVariables,
-  useQuery,
 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 
 interface Props {
   slug: string;

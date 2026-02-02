@@ -9,10 +9,8 @@ import {
   TaakStatus,
   GetFormDefinitionByIdDocument,
   GetPortaalFormulierByIdV2Document,
-  useMutation,
-  useLazyQuery,
-  useQuery,
 } from "@nl-portal/nl-portal-api";
+import { useMutation, useLazyQuery, useQuery } from "@apollo/client/react";
 import { Alert } from "@gemeente-denhaag/alert";
 import { useIntl } from "react-intl";
 import styles from "./TaskDetailsPage.module.scss";

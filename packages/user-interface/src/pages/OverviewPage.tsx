@@ -7,8 +7,8 @@ import {
   Zaak,
   GetTakenV2Document,
   GetZakenDocument,
-  useQuery,
 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import TasksList from "../components/TasksList";
 import PageGrid from "../components/PageGrid";
 import { Paragraph } from "@gemeente-denhaag/typography";

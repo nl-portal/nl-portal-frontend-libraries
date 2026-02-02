@@ -6,8 +6,8 @@ import {
   OpenProductThema,
   GetOpenProductThemaTakenDocument,
   GetOpenProductThemaZakenDocument,
-  useQuery,
 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import TasksList from "../components/TasksList";
 import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import AppContext from "../contexts/AppContext";

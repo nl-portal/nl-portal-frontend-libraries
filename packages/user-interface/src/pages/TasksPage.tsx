@@ -1,5 +1,6 @@
 import { FormattedMessage } from "react-intl";
-import { GetTakenV2Document, TaakV2, useQuery } from "@nl-portal/nl-portal-api";
+import { GetTakenV2Document, TaakV2 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import TasksList from "../components/TasksList";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";

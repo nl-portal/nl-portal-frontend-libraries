@@ -6,9 +6,8 @@ import {
   TaakV2,
   ZaakStatus,
   OnderwerpObjectIndentificatorType,
-  useQuery,
-  useLazyQuery,
 } from "@nl-portal/nl-portal-api";
+import { useQuery, useLazyQuery } from "@apollo/client/react";
 import {
   LocaleContext,
   useDateFormatter,

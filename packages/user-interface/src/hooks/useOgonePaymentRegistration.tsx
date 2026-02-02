@@ -2,8 +2,8 @@ import {
   ApiContext,
   DirectPaymentStatusCategory,
   GetDirectPaymentStatusDocument,
-  useLazyQuery,
 } from "@nl-portal/nl-portal-api";
+import { useLazyQuery } from "@apollo/client/react";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 

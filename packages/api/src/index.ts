@@ -11,4 +11,3 @@ export * from "./queries/get-open-product-hoofd-themas-by-producten";
 export * from "./queries/berichten/get-unopened-berichten-count";
 export * from "./queries/get-user-digitale-adressen";
 export * from "./hooks/useUserContactMutation";
-export { useQuery, useLazyQuery, useMutation } from "@apollo/client/react";

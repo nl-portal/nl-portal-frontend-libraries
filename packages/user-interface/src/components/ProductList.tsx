@@ -1,8 +1,8 @@
 import {
   GetOpenProductenDocument,
   OpenProductProduct,
-  useQuery,
 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import TableList from "./TableList";
 import { useIntl } from "react-intl";
 import { useOutletContext } from "react-router";
