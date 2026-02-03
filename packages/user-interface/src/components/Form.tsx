@@ -33,6 +33,7 @@ export const Form = ({
   const [showAlert, setShowAlert] = useState<AlertProps | undefined>();
   const formClassName = classNames(styles["form"], className);
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (typeof success === "undefined") return;
     if (success === false) return setShowAlert(undefined);
@@ -69,6 +70,7 @@ export const Form = ({
     setShowAlert(undefined);
     onChange?.(e);
   };
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   return (
     <form onChange={onChangeHandler} className={formClassName} {...props}>

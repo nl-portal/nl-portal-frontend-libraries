@@ -4,7 +4,7 @@ build
 coverage
 .idea
 .git
-graphql.tsx
+generated/
 .github
 lerna.json
 pnpm-lock.yaml

@@ -1,11 +1,12 @@
+import { useMutation } from "@apollo/client/react";
 import {
-  useUpdateUserDigitaleAdresMutation,
   DigitaleAdresType,
-  useCreateUserDigitaleAdresMutation,
-  useDeleteUserDigitaleAdresMutation,
   GetUserDigitaleAdressenDocument,
   GetUserDigitaleAdressenQuery,
-} from "../generated/Graphql";
+  CreateUserDigitaleAdresDocument,
+  UpdateUserDigitaleAdresDocument,
+  DeleteUserDigitaleAdresDocument,
+} from "../generated/graphql";
 
 type ReturnValue = [
   (
@@ -22,9 +23,15 @@ type ReturnValue = [
 ];
 
 export const useUserContactMutation = (): ReturnValue => {
-  const [createMutate, createResult] = useCreateUserDigitaleAdresMutation();
-  const [updateMutate, updateResult] = useUpdateUserDigitaleAdresMutation();
-  const [deleteMutate, deleteResult] = useDeleteUserDigitaleAdresMutation();
+  const [createMutate, createResult] = useMutation(
+    CreateUserDigitaleAdresDocument,
+  );
+  const [updateMutate, updateResult] = useMutation(
+    UpdateUserDigitaleAdresDocument,
+  );
+  const [deleteMutate, deleteResult] = useMutation(
+    DeleteUserDigitaleAdresDocument,
+  );
 
   const mutateFunction = (
     id: string | null | undefined,

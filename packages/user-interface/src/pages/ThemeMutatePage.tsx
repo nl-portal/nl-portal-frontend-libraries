@@ -3,14 +3,21 @@ import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import { useParams } from "react-router";
-import { useGetOpenProductQuery } from "@nl-portal/nl-portal-api";
+import {
+  GetOpenProductDocument,
+  GetOpenProductQuery,
+  GetOpenProductQueryVariables,
+} from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 
 interface Props {
   slug: string;
   titleTranslationId?: string;
   children?:
     | ((
-        openProduct: ReturnType<typeof useGetOpenProductQuery>,
+        openProduct: ReturnType<
+          typeof useQuery<GetOpenProductQuery, GetOpenProductQueryVariables>
+        >,
       ) => React.ReactNode)
     | React.ReactNode;
 }
@@ -22,7 +29,7 @@ const ThemeMutatePage = ({
 }: Props) => {
   const intl = useIntl();
   const params = useParams<{ id: string }>();
-  const openProduct = useGetOpenProductQuery({
+  const openProduct = useQuery(GetOpenProductDocument, {
     variables: { id: params.id },
   });
 

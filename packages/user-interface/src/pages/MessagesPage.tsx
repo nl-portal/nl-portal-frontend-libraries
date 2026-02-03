@@ -2,12 +2,13 @@ import { useIntl } from "react-intl";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import MessagesList from "../components/MessagesList";
-import { Bericht, useGetBerichtenQuery } from "@nl-portal/nl-portal-api";
+import { Bericht, GetBerichtenDocument } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import SearchForm from "../components/SearchForm";
 
 const MessagesPage = () => {
   const intl = useIntl();
-  const { data, loading, error, refetch } = useGetBerichtenQuery({
+  const { data, loading, error, refetch } = useQuery(GetBerichtenDocument, {
     variables: { pageSize: 10 },
     fetchPolicy: "cache-and-network",
   });

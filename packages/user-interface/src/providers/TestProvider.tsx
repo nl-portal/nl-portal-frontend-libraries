@@ -3,7 +3,8 @@ import {
   LocalizationProvider,
   MockWrapper,
 } from "@nl-portal/nl-portal-localization";
-import { MockedProvider, MockedResponse } from "@apollo/client/testing";
+import { MockedResponse } from "@apollo/client/testing";
+import { MockedProvider } from "@apollo/client/testing/react";
 import { Outlet, RouteObject } from "react-router";
 import { Paths } from "../interfaces/paths";
 import { NotificationProvider } from "../contexts/NotificationContext";
@@ -107,7 +108,7 @@ const TestContent = ({
 }) => {
   return (
     <MockWrapper>
-      <MockedProvider mocks={mocks} addTypename={false}>
+      <MockedProvider mocks={mocks}>
         <LocalizationProvider>
           <NotificationProvider>
             <UserProvider>

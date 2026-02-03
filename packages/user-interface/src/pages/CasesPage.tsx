@@ -3,7 +3,8 @@ import { FormattedMessage, useIntl } from "react-intl";
 import CasesList from "../components/CasesList";
 import styles from "./CasesPage.module.scss";
 import PageHeader from "../components/PageHeader";
-import { Zaak, useGetZakenQuery } from "@nl-portal/nl-portal-api";
+import { Zaak, GetZakenDocument } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import PageGrid from "../components/PageGrid";
 import SearchForm from "../components/SearchForm";
 import { useState, useTransition } from "react";
@@ -21,7 +22,7 @@ const CasesPage = () => {
     loading: openLoading,
     error: openError,
     refetch: openRefetch,
-  } = useGetZakenQuery({
+  } = useQuery(GetZakenDocument, {
     variables: {
       isOpen: true,
       pageSize: fetchCasesLength,
@@ -32,7 +33,7 @@ const CasesPage = () => {
     loading: closedLoading,
     error: closedError,
     refetch: closedRefetch,
-  } = useGetZakenQuery({
+  } = useQuery(GetZakenDocument, {
     variables: {
       isOpen: false,
       pageSize: fetchCasesLength,

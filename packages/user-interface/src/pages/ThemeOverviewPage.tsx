@@ -4,9 +4,10 @@ import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import {
   OpenProductThema,
-  useGetOpenProductThemaTakenQuery,
-  useGetOpenProductThemaZakenQuery,
+  GetOpenProductThemaTakenDocument,
+  GetOpenProductThemaZakenDocument,
 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import TasksList from "../components/TasksList";
 import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import AppContext from "../contexts/AppContext";
@@ -36,20 +37,24 @@ const ThemeOverviewPage = ({
     (theme) => stringToSlug(theme.naam) === stringToSlug(slug),
   ) as OpenProductThema;
 
-  const { data: takenData, loading: takenLoading } =
-    useGetOpenProductThemaTakenQuery({
+  const { data: takenData, loading: takenLoading } = useQuery(
+    GetOpenProductThemaTakenDocument,
+    {
       variables: {
         id: theme?.uuid,
         pageSize: fetchTasksLength,
       },
-    });
-  const { data: zakenData, loading: zakenLoading } =
-    useGetOpenProductThemaZakenQuery({
+    },
+  );
+  const { data: zakenData, loading: zakenLoading } = useQuery(
+    GetOpenProductThemaZakenDocument,
+    {
       variables: {
         id: theme?.uuid,
         pageSize: fetchCasesLength,
       },
-    });
+    },
+  );
 
   const loading = takenLoading || zakenLoading;
   const taken = (takenData?.getOpenProductThemaTaken as TaakV2[]) ?? [];

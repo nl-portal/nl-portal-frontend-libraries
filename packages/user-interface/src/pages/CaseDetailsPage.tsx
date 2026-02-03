@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import {
-  useGetZaakQuery,
-  useGetTakenV2Query,
+  GetZaakDocument,
+  GetTakenV2Document,
+  GetUserKlantContactenDocument,
   TaakV2,
   ZaakStatus,
   OnderwerpObjectIndentificatorType,
-  useGetUserKlantContactenLazyQuery,
 } from "@nl-portal/nl-portal-api";
+import { useQuery, useLazyQuery } from "@apollo/client/react";
 import {
   LocaleContext,
   useDateFormatter,
@@ -45,15 +46,18 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     data: caseData,
     loading: caseLoading,
     error: caseError,
-  } = useGetZaakQuery({
+  } = useQuery(GetZaakDocument, {
     variables: { id },
   });
   const [getMomenten, { data: momentsData, loading: momentsLoading }] =
-    useGetUserKlantContactenLazyQuery();
+    useLazyQuery(GetUserKlantContactenDocument);
 
-  const { data: tasksResult, loading: taskLoading } = useGetTakenV2Query({
-    variables: { zaakId: id },
-  });
+  const { data: tasksResult, loading: taskLoading } = useQuery(
+    GetTakenV2Document,
+    {
+      variables: { zaakId: id },
+    },
+  );
   const { formatDate } = useDateFormatter();
   const { paymentStatus, orderId } = useOgonePaymentRegistration(true);
   const loading = caseLoading || taskLoading || momentsLoading;
