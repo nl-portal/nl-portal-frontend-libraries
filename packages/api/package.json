@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-api",
-  "version": "3.1.0-next-minor-202602020804-dee0ff22-SNAPSHOT",
+  "version": "3.1.0-next-minor-202602030806-512086a4-SNAPSHOT",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -33,8 +33,8 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^6.1.0",
-    "@graphql-typed-document-node/core": "3.2.0",
     "@graphql-codegen/client-preset": "^5.2.1",
+    "@graphql-typed-document-node/core": "3.2.0",
     "@nl-portal/nl-portal-authentication": "workspace:*",
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.7",
