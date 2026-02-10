@@ -415,8 +415,8 @@ importers:
         specifier: 3.2.0
         version: 3.2.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@gemeente-denhaag/tab':
-        specifier: 3.1.1
-        version: 3.1.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: 3.1.0
+        version: 3.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@gemeente-denhaag/table':
         specifier: 4.0.4
         version: 4.0.4(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1326,8 +1326,8 @@ packages:
       react: 18 || 19
       react-dom: 18 || 19
 
-  '@gemeente-denhaag/tab@3.1.1':
-    resolution: {integrity: sha512-mQh9fUDxYdSusTXs4LYkaOI4EmJvA2gcM4DiEyPaw1akq7ZNRk0hXPf1J6wKQgthvemyzAUPUA7yNZxIgjPpKA==}
+  '@gemeente-denhaag/tab@3.1.0':
+    resolution: {integrity: sha512-SICtkQXv2dalPsJom8yEKxBA7GW0IpuI/GPbQ4Kg7YCQW71Bh1G5HghO+ihjRNnMLfDPwv5PtQnYuSliI6wjUQ==}
     peerDependencies:
       react: 18 || 19
       react-dom: 18 || 19
@@ -7776,7 +7776,7 @@ snapshots:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
 
-  '@gemeente-denhaag/tab@3.1.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+  '@gemeente-denhaag/tab@3.1.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
       clsx: 2.1.1
       react: 19.2.3
