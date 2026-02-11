@@ -1,12 +1,13 @@
 import { FormattedMessage } from "react-intl";
-import { TaakV2, useGetTakenV2Query } from "@nl-portal/nl-portal-api";
+import { GetTakenV2Document, TaakV2 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import TasksList from "../components/TasksList";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
 import SearchForm from "../components/SearchForm";
 
 const TasksPage = () => {
-  const { data, loading, error, refetch } = useGetTakenV2Query();
+  const { data, loading, error, refetch } = useQuery(GetTakenV2Document);
   const tasks = data?.getTakenV2.content as TaakV2[] | undefined;
 
   const handleFormSubmit = (searchValue: string) => {

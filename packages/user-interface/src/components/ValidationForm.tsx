@@ -1,7 +1,7 @@
 import {
-  useCreateVerificatieMutation,
-  useVerifyVerificatieMutation,
   VerificatieType,
+  CreateVerificatieDocument,
+  VerifyVerificatieDocument,
 } from "@nl-portal/nl-portal-api";
 import { Form } from "./Form";
 import { FormField } from "@gemeente-denhaag/form-field";
@@ -14,6 +14,7 @@ import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-messag
 import { useEffect, useState } from "react";
 import { Alert, AlertProps } from "@gemeente-denhaag/alert";
 import ValidationFormCountdown from "./ValidationFormCountdown";
+import { useMutation } from "@apollo/client/react";
 
 interface ValidationFormProps {
   type: keyof typeof VerificatieType;
@@ -44,7 +45,7 @@ const ValidationForm = ({
       called: createCalled,
       error: createError,
     },
-  ] = useCreateVerificatieMutation();
+  ] = useMutation(CreateVerificatieDocument);
   const createErrorState =
     !createLoading &&
     createCalled &&
@@ -59,7 +60,7 @@ const ValidationForm = ({
       error: verifyError,
       reset: verifyReset,
     },
-  ] = useVerifyVerificatieMutation();
+  ] = useMutation(VerifyVerificatieDocument);
   const verifyErrorState =
     !verifyLoading &&
     verifyCalled &&

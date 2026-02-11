@@ -1,6 +1,12 @@
 export { default as ApiContext, ApiProvider } from "./contexts/ApiContext";
 export * from "./constants/apollo-cache";
-export * from "./generated/Graphql";
+export * from "./generated/graphql";
+
+export * from "./hooks/useUserContactMutation";
+
+export * from "./mutations/create-verificatie";
+export * from "./mutations/verify-verificatie";
+
 export * from "./queries/get-taken-v2";
 export * from "./queries/get-zaken";
 export * from "./queries/get-persoon-v2";
@@ -10,4 +16,3 @@ export * from "./queries/get-zaak";
 export * from "./queries/get-open-product-hoofd-themas-by-producten";
 export * from "./queries/berichten/get-unopened-berichten-count";
 export * from "./queries/get-user-digitale-adressen";
-export * from "./hooks/useUserContactMutation";

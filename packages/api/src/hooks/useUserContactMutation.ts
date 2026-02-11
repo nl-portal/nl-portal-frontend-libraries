@@ -1,11 +1,12 @@
+import { useMutation } from "@apollo/client/react";
 import {
-  useUpdateUserDigitaleAdresMutation,
   DigitaleAdresType,
-  useCreateUserDigitaleAdresMutation,
-  useDeleteUserDigitaleAdresMutation,
   GetUserDigitaleAdressenDocument,
   GetUserDigitaleAdressenQuery,
-} from "../generated/Graphql";
+  CreateUserDigitaleAdresDocument,
+  UpdateUserDigitaleAdresDocument,
+  DeleteUserDigitaleAdresDocument,
+} from "../generated/graphql";
 
 type ReturnValue = [
   (
@@ -15,6 +16,7 @@ type ReturnValue = [
   ) => void,
   {
     loading: boolean;
+    data?: unknown;
     error?: Error | null;
     called: boolean;
     reset: () => void;
@@ -22,9 +24,15 @@ type ReturnValue = [
 ];
 
 export const useUserContactMutation = (): ReturnValue => {
-  const [createMutate, createResult] = useCreateUserDigitaleAdresMutation();
-  const [updateMutate, updateResult] = useUpdateUserDigitaleAdresMutation();
-  const [deleteMutate, deleteResult] = useDeleteUserDigitaleAdresMutation();
+  const [createMutate, createResult] = useMutation(
+    CreateUserDigitaleAdresDocument,
+  );
+  const [updateMutate, updateResult] = useMutation(
+    UpdateUserDigitaleAdresDocument,
+  );
+  const [deleteMutate, deleteResult] = useMutation(
+    DeleteUserDigitaleAdresDocument,
+  );
 
   const mutateFunction = (
     id: string | null | undefined,
@@ -114,6 +122,7 @@ export const useUserContactMutation = (): ReturnValue => {
     {
       loading:
         createResult.loading || updateResult.loading || deleteResult.loading,
+      data: createResult.data || updateResult.data || deleteResult.data,
       error: createResult.error || updateResult.error || deleteResult.error,
       called: createResult.called || updateResult.called || deleteResult.called,
       reset: createResult.reset || updateResult.reset || deleteResult.reset,

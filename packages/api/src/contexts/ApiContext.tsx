@@ -8,11 +8,11 @@ import {
 import {
   ApolloClient,
   ApolloLink,
-  ApolloProvider,
   HttpLink,
   InMemoryCache,
   InMemoryCacheConfig,
 } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client/react";
 import {
   formatUrlTrailingSlash,
   OidcContext,
@@ -59,7 +59,6 @@ export const ApiProvider = ({
   const [client] = useState(
     () =>
       new ApolloClient({
-        uri: formattedGraphqlUri,
         cache: new InMemoryCache(inMemoryCacheOptions),
         link: getLink(oidcToken),
       }),

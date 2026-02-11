@@ -1,7 +1,8 @@
 import {
+  GetOpenProductenDocument,
   OpenProductProduct,
-  useGetOpenProductenQuery,
 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import TableList from "./TableList";
 import { useIntl } from "react-intl";
 import { useOutletContext } from "react-router";
@@ -27,7 +28,7 @@ export const ProductList = ({
 }: ProductListProps) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
-  const { data, loading, error, refetch } = useGetOpenProductenQuery({
+  const { data, loading, error, refetch } = useQuery(GetOpenProductenDocument, {
     variables: { productTypeCodes: productTypeCodes, pageSize: productLength },
   });
 

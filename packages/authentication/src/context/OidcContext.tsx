@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useMemo } from "react";
 import { AuthProvider } from "react-oidc-context";
 import { User } from "oidc-client-ts";
 import { useState } from "react";
@@ -58,15 +58,10 @@ export const OidcProvider = ({
   extraQueryParams,
 }: OidcProviderProps) => {
   const [oidcToken, setOidcToken] = useState("");
-  const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(
-    undefined,
+  const decodedToken = useMemo(
+    () => (oidcToken ? decodeToken(oidcToken) : undefined),
+    [oidcToken],
   );
-
-  useEffect(() => {
-    if (oidcToken) {
-      setDecodedToken(decodeToken(oidcToken));
-    }
-  }, [oidcToken]);
 
   const oidcConfig = {
     authority: `${url}/realms/${realm}`,

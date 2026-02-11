@@ -1,15 +1,16 @@
 import {
   ApiContext,
+  GetOpenProductHoofdThemasByProductenDocument,
   GetOpenProductHoofdThemasByProductenQuery,
-  GetUnopenedBerichtenCountQuery,
-  useGetOpenProductHoofdThemasByProductenQuery,
-  useGetUnopenedBerichtenCountQuery,
+  GetUnopenedBerichtenCountDocument,
 } from "@nl-portal/nl-portal-api";
+import { useQuery } from "@apollo/client/react";
 import {
   createContext,
   ReactNode,
   useContext,
   useEffect,
+  useMemo,
   useState,
   useTransition,
 } from "react";
@@ -40,18 +41,27 @@ interface MessagesProviderProps {
 export const AppProvider = ({ children }: MessagesProviderProps) => {
   const location = useLocation();
   const navType = useNavigationType();
-  const [firstLoad, setFirstLoad] = useState(true);
   const { restUri } = useContext(ApiContext);
   const [logoUrl, setLogoUrl] = useState<string | undefined>(undefined);
-  const [themes, setThemes] = useState<Themes>([]);
-  const [messagesCount, setMessagesCount] = useState(0);
   const [loadingConfig, startTransition] = useTransition();
   const { initNavigationItems, updateNavigationItems } =
     useContext(RouterContext);
   const { isLoading: loadingUser } = useContext(UserContext);
-  const [history, setHistory] = useState<string[]>(
-    JSON.parse(localStorage.getItem("history") || "[]"),
-  );
+
+  const history = useMemo<string[]>(() => {
+    const stored = JSON.parse(
+      localStorage.getItem("history") || "[]",
+    ) as string[];
+
+    if (navType === "POP" || location.key === "default") return stored;
+
+    const newHistory = stored
+      .filter((item) => item !== location.pathname)
+      .slice(0, 1);
+    newHistory.unshift(location.pathname);
+
+    return newHistory;
+  }, [location.pathname, location.key, navType]);
 
   useEffect(() => {
     if (window.USE_THEME_API !== "true") return;
@@ -69,7 +79,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
         console.error("Failed to load logo:", err);
       }
     });
-  }, []);
+  }, [restUri, startTransition]);
 
   useEffect(() => {
     if (window.USE_THEME_API !== "true") return;
@@ -94,57 +104,60 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     });
   }, []);
 
-  const { loading: loadingThemes, refetch: refetchThemes } =
-    useGetOpenProductHoofdThemasByProductenQuery({
-      skip: window.OPEN_PRODUCTEN !== "true",
-      onCompleted: (data: GetOpenProductHoofdThemasByProductenQuery) => {
-        setThemes(data.getOpenProductHoofdThemasByProducten);
-        const activeThemes =
-          data.getOpenProductHoofdThemasByProducten.map((theme) =>
-            stringToSlug(theme.naam),
-          ) || [];
-        const newNavigationItems = initNavigationItems.map((group) =>
-          group.filter(
-            (item) => !item.themeSlug || activeThemes.includes(item.themeSlug),
-          ),
-        );
-        updateNavigationItems(newNavigationItems);
-      },
-    });
+  const {
+    loading: loadingThemes,
+    refetch: refetchThemes,
+    data: themesData,
+  } = useQuery(GetOpenProductHoofdThemasByProductenDocument, {
+    skip: window.OPEN_PRODUCTEN !== "true",
+  });
 
-  const { loading: loadingMessages, refetch: refetchMessages } =
-    useGetUnopenedBerichtenCountQuery({
-      onCompleted: (data: GetUnopenedBerichtenCountQuery) => {
-        setMessagesCount(data?.getUnopenedBerichtenCount || 0);
-      },
-      pollInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 30000,
-      fetchPolicy: "cache-and-network",
-      skip: window.MESSAGE_COUNT_ENABLE === "false",
-      skipPollAttempt: () => {
-        return !document.hasFocus();
-      },
-    });
+  const themes: Themes = useMemo(
+    () => themesData?.getOpenProductHoofdThemasByProducten ?? [],
+    [themesData],
+  );
+
+  useEffect(() => {
+    if (!themesData) return;
+
+    const activeThemes = themes.map((theme) => stringToSlug(theme.naam)) || [];
+
+    const newNavigationItems = initNavigationItems.map((group) =>
+      group.filter(
+        (item) => !item.themeSlug || activeThemes.includes(item.themeSlug),
+      ),
+    );
+
+    updateNavigationItems(newNavigationItems);
+  }, [themesData, initNavigationItems, themes]);
+
+  const {
+    loading: loadingMessages,
+    refetch: refetchMessages,
+    data: messagesData,
+  } = useQuery(GetUnopenedBerichtenCountDocument, {
+    pollInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 30000,
+    fetchPolicy: "cache-and-network",
+    skip: window.MESSAGE_COUNT_ENABLE === "false",
+    skipPollAttempt: () => {
+      return !document.hasFocus();
+    },
+  });
+
+  const messagesCount = useMemo(
+    () => messagesData?.getUnopenedBerichtenCount || 0,
+    [messagesData],
+  );
 
   const loading =
     loadingConfig || loadingThemes || loadingMessages || loadingUser;
 
   useEffect(() => {
-    if (!firstLoad) return;
-    if (loading) return;
-    setFirstLoad(false);
-  }, [loading]);
+    localStorage.setItem("history", JSON.stringify(history));
+  }, [history]);
 
-  useEffect(() => {
-    if (navType === "POP" || location.key === "default") return;
-    const newHistory = [...history]
-      .filter((item) => item !== location.pathname)
-      .splice(0, 1);
-    newHistory.unshift(location.pathname);
-    localStorage.setItem("history", JSON.stringify(newHistory));
-    setHistory(newHistory);
-  }, [location]);
-
-  if (firstLoad && loading) return <FullscreenSkeleton />;
+  const showInitialSkeleton = loading && !themesData && !messagesData;
+  if (showInitialSkeleton) return <FullscreenSkeleton />;
 
   return (
     <AppContext.Provider

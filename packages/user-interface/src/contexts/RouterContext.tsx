@@ -49,7 +49,7 @@ export const RouterProvider = ({
 
     if (test) return createMemoryRouter([route], test);
     return createBrowserRouter([route]);
-  }, [routes]);
+  }, [routes, element, test]);
 
   const updateRoutes = (newRoutes: RouteObject[]) => {
     setRoutes(newRoutes);

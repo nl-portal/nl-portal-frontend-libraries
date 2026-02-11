@@ -8,7 +8,8 @@ export const QUERY_GET_USER_DIGITALE_ADRESSEN = gql`
       type
       omschrijving
       referentie
-      isGeverifieerd
+      verificatieDatum
+      verificatieNeeded
     }
   }
 `;

@@ -107,7 +107,7 @@ export const EN_GB_MESSAGES: Messages = {
     "element.loading": "Loading",
     "element.download": "Download",
     "account.noDataAvailable":
-      "The system was unfortunately not able to retrieve your data. Please refresh the page or try again later.",
+      "Failed to retrieve all data. Please refresh the page or try again later.",
     "account.leadParagraph":
       "On this page, you can see your personal information and how we use it to stay in touch with you.",
     "account.contactHeader": "Contact",

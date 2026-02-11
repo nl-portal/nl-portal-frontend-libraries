@@ -1,8 +1,9 @@
 import {
   ApiContext,
   DirectPaymentStatusCategory,
-  useGetDirectPaymentStatusLazyQuery,
+  GetDirectPaymentStatusDocument,
 } from "@nl-portal/nl-portal-api";
+import { useLazyQuery } from "@apollo/client/react";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
@@ -13,7 +14,7 @@ export enum PaymentStatus {
 }
 
 const useOgonePaymentRegistration = (useLegacyPostsale?: boolean) => {
-  const [getPaymentStatus] = useGetDirectPaymentStatusLazyQuery();
+  const [getPaymentStatus] = useLazyQuery(GetDirectPaymentStatusDocument);
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
   const [orderId, setOrderId] = useState<string | undefined>();
   const { restUri } = useContext(ApiContext);
@@ -23,6 +24,7 @@ const useOgonePaymentRegistration = (useLegacyPostsale?: boolean) => {
   useEffect(() => {
     if (type !== "ogone") return;
     if (paymentStatus !== undefined) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPaymentStatus(PaymentStatus.IN_PROGRESS);
 
     if (window.USE_LEGACY_OGONE_PAYMENT !== "true") {

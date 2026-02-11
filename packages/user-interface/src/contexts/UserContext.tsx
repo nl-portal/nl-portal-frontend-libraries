@@ -1,18 +1,16 @@
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo } from "react";
 import { getFullName } from "../utils/person-data";
 import {
   BrpPersoon,
-  GetBedrijfQuery,
-  GetGemachtigdeV2Query,
-  GetPersoonV2Query,
   GetUserDigitaleAdressenQuery,
   MaatschappelijkeActiviteit,
-  useGetBedrijfLazyQuery,
-  useGetGemachtigdeV2LazyQuery,
-  useGetPersoonV2LazyQuery,
-  useGetUserDigitaleAdressenQuery,
+  GetBedrijfDocument,
+  GetGemachtigdeV2Document,
+  GetPersoonV2Document,
+  GetUserDigitaleAdressenDocument,
 } from "@nl-portal/nl-portal-api";
+import { useLazyQuery, useQuery } from "@apollo/client/react";
 
 export interface UserContextInterface {
   isLoading: boolean;
@@ -31,63 +29,74 @@ const UserContext = createContext<UserContextInterface>(
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { decodedToken, authenticationMethods } = useContext(OidcContext);
-  const [isPersoon, setIsPersoon] = useState(true);
-  const [isVolmacht, setisVolmacht] = useState(false);
-  const [username, setUserName] = useState("");
-  const [usernameVolmacht, setUsernameVolmacht] = useState("");
+
+  const authenticationMethod = decodedToken?.middel || "";
+
+  const isCompany = useMemo(() => {
+    if (!authenticationMethod) return false;
+    return !!authenticationMethods?.company?.includes(authenticationMethod);
+  }, [authenticationMethod, authenticationMethods]);
+
+  const isProxy = useMemo(() => {
+    if (!authenticationMethod) return false;
+    return !!authenticationMethods?.proxy?.includes(authenticationMethod);
+  }, [authenticationMethod, authenticationMethods]);
+
+  const isPersoon = !isCompany;
+  const isVolmacht = isProxy;
 
   const [loadPersoon, { loading: persoonLoading, data: persoonData }] =
-    useGetPersoonV2LazyQuery();
+    useLazyQuery(GetPersoonV2Document);
   const [loadBedrijf, { loading: bedrijfLoading, data: bedrijfData }] =
-    useGetBedrijfLazyQuery();
-  const [loadGemachtigde, { loading: gemachtigdeLoading }] =
-    useGetGemachtigdeV2LazyQuery();
-  const { data: contactData, loading: contactLoading } =
-    useGetUserDigitaleAdressenQuery();
+    useLazyQuery(GetBedrijfDocument);
+  const [
+    loadGemachtigde,
+    { loading: gemachtigdeLoading, data: gemachtigdeData },
+  ] = useLazyQuery(GetGemachtigdeV2Document);
+
+  const { data: contactData, loading: contactLoading } = useQuery(
+    GetUserDigitaleAdressenDocument,
+  );
 
   const isLoading =
     persoonLoading || bedrijfLoading || gemachtigdeLoading || contactLoading;
 
   useEffect(() => {
-    const authenticationMethod = decodedToken?.middel || "";
-
-    if (authenticationMethods?.company?.includes(authenticationMethod)) {
-      setIsPersoon(false);
-      loadBedrijf({
-        onCompleted: (data: GetBedrijfQuery) => {
-          const name = data?.getBedrijf?.naam || "";
-          if (authenticationMethods?.proxy?.includes(authenticationMethod))
-            return setUsernameVolmacht(name);
-          setUserName(name);
-        },
-      });
+    if (isCompany) {
+      loadBedrijf({ variables: {} });
     } else {
-      setIsPersoon(true);
-      loadPersoon({
-        onCompleted: (data: GetPersoonV2Query) => {
-          const name = getFullName(data?.getPersoonV2?.naam);
-          if (authenticationMethods?.proxy?.includes(authenticationMethod))
-            return setUsernameVolmacht(name);
-          setUserName(name);
-        },
-      });
+      loadPersoon({ variables: {} });
     }
 
-    if (authenticationMethods?.proxy?.includes(authenticationMethod)) {
-      setisVolmacht(true);
-      loadGemachtigde({
-        onCompleted: (data: GetGemachtigdeV2Query) => {
-          const name =
-            (data?.getGemachtigdeV2?.persoon
-              ? getFullName(data?.getGemachtigdeV2?.persoon.naam)
-              : data?.getGemachtigdeV2?.bedrijf?.naam) || "";
-
-          if (data?.getGemachtigdeV2?.persoon) return setUserName(name);
-          setUserName(name);
-        },
-      });
+    if (isProxy) {
+      loadGemachtigde({ variables: {} });
     }
-  }, [decodedToken]);
+  }, [isCompany, isProxy, loadBedrijf, loadPersoon, loadGemachtigde]);
+
+  const persoonNaam = useMemo(() => {
+    const p = persoonData?.getPersoonV2;
+    return p ? getFullName(p.naam) : "";
+  }, [persoonData]);
+
+  const bedrijfNaam = useMemo(() => {
+    return bedrijfData?.getBedrijf?.naam || "";
+  }, [bedrijfData]);
+
+  const gemachtigdeNaam = useMemo(() => {
+    const g = gemachtigdeData?.getGemachtigdeV2;
+    if (!g) return "";
+    return (g.persoon ? getFullName(g.persoon.naam) : g.bedrijf?.naam) || "";
+  }, [gemachtigdeData]);
+
+  const username = useMemo(() => {
+    if (isVolmacht) return gemachtigdeNaam;
+    return isCompany ? bedrijfNaam : persoonNaam;
+  }, [isVolmacht, gemachtigdeNaam, isCompany, bedrijfNaam, persoonNaam]);
+
+  const usernameVolmacht = useMemo(() => {
+    if (!isVolmacht) return "";
+    return isCompany ? bedrijfNaam : persoonNaam;
+  }, [isVolmacht, isCompany, bedrijfNaam, persoonNaam]);
 
   return (
     <UserContext.Provider
