@@ -156,8 +156,12 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     localStorage.setItem("history", JSON.stringify(history));
   }, [history]);
 
-  const showInitialSkeleton = loading && !themesData && !messagesData;
-  if (showInitialSkeleton) return <FullscreenSkeleton />;
+  const firstLoad = useMemo(() => {
+    if (loading) return true;
+    return false;
+  }, [loading]);
+
+  if (loading && firstLoad) return <FullscreenSkeleton />;
 
   return (
     <AppContext.Provider
