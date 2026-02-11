@@ -16,7 +16,6 @@ type ReturnValue = [
   ) => void,
   {
     loading: boolean;
-    data?: unknown;
     error?: Error | null;
     called: boolean;
     reset: () => void;
@@ -122,7 +121,6 @@ export const useUserContactMutation = (): ReturnValue => {
     {
       loading:
         createResult.loading || updateResult.loading || deleteResult.loading,
-      data: createResult.data || updateResult.data || deleteResult.data,
       error: createResult.error || updateResult.error || deleteResult.error,
       called: createResult.called || updateResult.called || deleteResult.called,
       reset: createResult.reset || updateResult.reset || deleteResult.reset,
