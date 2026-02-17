@@ -142,7 +142,7 @@ const AccountPage = ({
                     <Link
                       icon={<EditIcon />}
                       iconAlign="start"
-                      href={paths.changeContactInfo("telefoon")}
+                      href={paths.changeContactInfo("telefoonnummer")}
                       Link={PortalLink}
                     >
                       <FormattedMessage id="account.edit" />
@@ -292,7 +292,7 @@ const AccountPage = ({
                   <Link
                     icon={<EditIcon />}
                     iconAlign="start"
-                    href={paths.changeContactInfo("telefoon")}
+                    href={paths.changeContactInfo("telefoonnummer")}
                     Link={PortalLink}
                   >
                     <FormattedMessage id="account.edit" />

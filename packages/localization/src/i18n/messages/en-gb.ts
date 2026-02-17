@@ -140,20 +140,17 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.telefoonnummer.error": "This is not a valid number",
     "account.detail.telefoonnummer.error.invalidChars":
       "Use only 0-9 and optionally a '+'",
+    "account.detail.validation.success.title":
+      "Success. You have submitted your change.",
     "validationForm.description":
       "We have sent you a code to {email}. Enter the code below to confirm your new email address. Note! The code may have ended up in your spam folder.",
     "validationForm.label": "Verification code",
     "validationForm.labelDescription": "The code expires in {time}",
+    "validationForm.error": "Please enter the verification code.",
     "validationForm.cancel": "Resend code",
-    "validationForm.createError.Title": "Error creating code",
-    "validationForm.createError.Text":
-      "Something went wrong while creating the verification code. Please try again later.",
     "validationForm.timeError.Title": "Verification code expired",
     "validationForm.timeError.Text":
       "The verification code has expired. Request a new code to continue.",
-    "validationForm.verifyError.title": "Error verifying code",
-    "validationForm.verifyError.text":
-      "The code you entered is incorrect. Check the code and try again.",
     "account.detail.aanmaakkanaal": "Email notifications",
     "account.detail.aanmaakkanaal.description":
       "Is your choice set to no? Then you will still receive emails. This is because not all of the municipality's systems are connected yet to MijnDenHaag.",

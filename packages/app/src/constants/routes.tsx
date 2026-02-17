@@ -30,13 +30,7 @@ export const routes = [
   {
     path: paths.overview,
     handle: { label: "breadcrumb.overview" },
-    element: (
-      <OverviewPage
-        showIntro
-        showNoEmailAlert
-        showNoEmailVerifiedAlert={config.ENABLE_EMAIL_VALIDATION === "true"}
-      />
-    ),
+    element: <OverviewPage showIntro showNoEmailAlert />,
   },
   {
     path: paths.cases,
@@ -266,12 +260,7 @@ export const routes = [
       {
         path: paths.changeContactInfo(),
         handle: { label: "breadcrumb.account.editContactInfo" },
-        element: (
-          <EditContactInfoPage
-            emailVerification={config.ENABLE_EMAIL_VALIDATION === "true"}
-            phoneVerification={config.ENABLE_PHONE_VALIDATION === "true"}
-          />
-        ),
+        element: <EditContactInfoPage />,
       },
     ],
   },

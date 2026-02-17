@@ -47,15 +47,7 @@ const TELEFOON_VALIDATION = [
   },
 ];
 
-interface EditContactInfoPageProps {
-  emailVerification?: boolean;
-  phoneVerification?: boolean;
-}
-
-const EditContactInfoPage = ({
-  emailVerification,
-  phoneVerification,
-}: EditContactInfoPageProps) => {
+const EditContactInfoPage = () => {
   const { type } = useParams<{ type: TypeParams }>();
   const adresType = capitalizeFirstLetter(type || "") as
     | keyof typeof DigitaleAdresType
@@ -69,6 +61,8 @@ const EditContactInfoPage = ({
     (a) => a.type === digitaleAdresType,
   );
   const initialValue = contactValue?.waarde || "";
+
+  console.log("contactValue", contactValue);
 
   const [
     mutateFunction,
@@ -106,24 +100,23 @@ const EditContactInfoPage = ({
     }
   };
 
-  const handleMutate = async () => {
-    mutateFunction(contactValue?.uuid, value || "", digitaleAdresType);
-  };
+  const onSubmit = async (verificationCode?: string) => {
+    if (!verificationCode && initialValue === value) return;
 
-  const onSubmit = () => {
-    if (initialValue === value) return;
-    if (type === "email" && emailVerification) return setNeedValidation(true);
-    if (type === "telefoonnummer" && phoneVerification)
-      return setNeedValidation(true);
-    handleMutate();
-  };
+    console.log("Submitting with value:", contactValue?.uuid);
 
-  if (!type || !typeParams.includes(type)) {
-    navigate(paths.account);
-    return null;
-  }
+    const response = await mutateFunction(
+      contactValue?.uuid,
+      value || "",
+      digitaleAdresType,
+      verificationCode,
+    );
 
-  if (!mutationLoading && mutationCalled && !mutationError) {
+    if (response?.verificatieNeeded) {
+      setNeedValidation(true);
+      return;
+    }
+
     navigate(paths.account, {
       state: {
         notification: {
@@ -133,6 +126,14 @@ const EditContactInfoPage = ({
         },
       },
     });
+  };
+
+  const onRefresh = async () => {
+    await mutateFunction(contactValue?.uuid, value || "", digitaleAdresType);
+  };
+
+  if (!type || !typeParams.includes(type)) {
+    navigate(paths.account);
     return null;
   }
 
@@ -145,21 +146,21 @@ const EditContactInfoPage = ({
         ></PageHeader>
       </div>
       {needValidation ? (
-        <ValidationForm
-          type={adresType}
-          value={value}
-          loading={mutationLoading}
-          onSuccess={handleMutate}
-          error={Boolean(!mutationLoading && mutationCalled && mutationError)}
-          description={
-            <Paragraph>
-              <FormattedMessage
-                id={`validationForm.description`}
-                values={{ email: value }}
-              />
-            </Paragraph>
-          }
-        />
+        <>
+          <Paragraph>
+            <FormattedMessage
+              id={`validationForm.description`}
+              values={{ email: value }}
+            />
+          </Paragraph>
+          <ValidationForm
+            value={value}
+            loading={mutationLoading}
+            onSubmit={onSubmit}
+            onRefresh={onRefresh}
+            error={Boolean(!mutationLoading && mutationCalled && mutationError)}
+          />
+        </>
       ) : (
         <Form
           id="edit-contact-info-form"

@@ -143,20 +143,17 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.telefoonnummer.error": "Dit is geen geldig nummer",
     "account.detail.telefoonnummer.error.invalidChars":
       "Gebruik alleen 0-9 en eventueel een '+'",
+    "account.detail.validation.success.title":
+      "Gelukt. U heeft uw wijziging doorgegeven.",
     "validationForm.description":
       "Wij hebben u een code gestuurd op {email}. Voer de code hieronder in om uw nieuwe e-mailadres te bevestigen. Let op! De code kan in uw spambox terecht zijn gekomen.",
     "validationForm.label": "Verificatiecode",
     "validationForm.labelDescription": "De code verloopt over {time}",
+    "validationForm.error": "Vul de verificatiecode in.",
     "validationForm.cancel": "Code opnieuw verzenden",
-    "validationForm.createError.Title": "Fout bij aanmaken code",
-    "validationForm.createError.Text":
-      "Er is iets misgegaan bij het aanmaken van de verificatiecode. Probeer het later opnieuw.",
     "validationForm.timeError.Title": "Verificatiecode verlopen",
     "validationForm.timeError.Text":
       "De verificatiecode is verlopen. Vraag een nieuwe code aan om verder te gaan.",
-    "validationForm.verifyError.title": "Fout bij verifiëren code",
-    "validationForm.verifyError.text":
-      "De ingevoerde code is onjuist. Controleer de code en probeer het opnieuw.",
     "account.detail.aanmaakkanaal": "E-mailmeldingen",
     "account.detail.aanmaakkanaal.description":
       "Staat je keuze op nee? Dan kunt u toch nog e-mails ontvangen. Dit komt omdat nog niet alle systemen van de gemeente zijn aangesloten op het klantportaal.",

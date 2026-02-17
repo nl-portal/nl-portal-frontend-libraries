@@ -4,9 +4,6 @@ export * from "./generated/graphql";
 
 export * from "./hooks/useUserContactMutation";
 
-export * from "./mutations/create-verificatie";
-export * from "./mutations/verify-verificatie";
-
 export * from "./queries/get-taken-v2";
 export * from "./queries/get-zaken";
 export * from "./queries/get-persoon-v2";

@@ -1,8 +1,3 @@
-import {
-  VerificatieType,
-  CreateVerificatieDocument,
-  VerifyVerificatieDocument,
-} from "@nl-portal/nl-portal-api";
 import { Form } from "./Form";
 import { FormField } from "@gemeente-denhaag/form-field";
 import useInput from "../hooks/useInput";
@@ -11,74 +6,26 @@ import { FormFieldDescription } from "@gemeente-denhaag/form-field-description";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "@gemeente-denhaag/text-input";
 import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Alert, AlertProps } from "@gemeente-denhaag/alert";
 import ValidationFormCountdown from "./ValidationFormCountdown";
-import { useMutation } from "@apollo/client/react";
 
 interface ValidationFormProps {
-  type: keyof typeof VerificatieType;
   value: string;
   loading?: boolean;
-  onSuccess?: () => void;
-  onCancel?: () => void;
+  onSubmit?: (verificationCode: string) => void;
+  onRefresh?: () => Promise<void>;
   error?: AlertProps | boolean;
-  description?: React.ReactNode;
 }
 
 const ValidationForm = ({
-  type,
-  value: verifyValue,
   loading,
-  onSuccess,
-  onCancel,
+  onSubmit,
+  onRefresh,
   error = false,
-  description,
 }: ValidationFormProps) => {
-  const [showTimer, setShowTimer] = useState(false);
+  const [showTimer, setShowTimer] = useState(true);
   const [timerComplete, setTimerComplete] = useState(false);
-  const [
-    createFunction,
-    {
-      data: createData,
-      loading: createLoading,
-      called: createCalled,
-      error: createError,
-    },
-  ] = useMutation(CreateVerificatieDocument);
-  const createErrorState =
-    !createLoading &&
-    createCalled &&
-    (Boolean(createError) || createData?.createVerificatie?.success === false);
-
-  const [
-    verifyFunction,
-    {
-      data: verifyData,
-      loading: verifyLoading,
-      called: verifyCalled,
-      error: verifyError,
-      reset: verifyReset,
-    },
-  ] = useMutation(VerifyVerificatieDocument);
-  const verifyErrorState =
-    !verifyLoading &&
-    verifyCalled &&
-    (Boolean(verifyError) || verifyData?.verifyVerificatie?.verified === false);
-
-  useEffect(() => {
-    createFunction({
-      variables: {
-        verificatieCreateInput: {
-          type: VerificatieType[type],
-          waarde: verifyValue,
-        },
-      },
-      onCompleted: (data) => {
-        if (data.createVerificatie?.success) return setShowTimer(true);
-      },
-    });
-  }, []);
 
   const {
     value,
@@ -96,51 +43,19 @@ const ValidationForm = ({
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
-    const results = await verifyFunction({
-      variables: {
-        verificatieVerifyInput: {
-          type: VerificatieType[type],
-          waarde: verifyValue,
-          code: value,
-        },
-      },
-    });
-
-    if (results.data?.verifyVerificatie?.verified === false) return;
-
-    onSuccess?.();
+    onSubmit?.(value);
   };
 
-  const handleCancel = () => {
+  const handleCancel = async () => {
     setShowTimer(false);
     setTimerComplete(false);
-    createFunction({
-      variables: {
-        verificatieCreateInput: {
-          type: VerificatieType[type],
-          waarde: verifyValue,
-        },
-      },
-      onCompleted: (data) => {
-        if (data.createVerificatie?.success) return setShowTimer(true);
-      },
-    });
+    await onRefresh?.();
+    setShowTimer(true);
     resetValue();
-    verifyReset();
-    onCancel?.();
   };
 
   return (
     <>
-      {!createErrorState && description}
-      {createErrorState && (
-        <Alert
-          variant="warning"
-          title={<FormattedMessage id="validationForm.createError.Title" />}
-          text={<FormattedMessage id="validationForm.createError.Text" />}
-        />
-      )}
       {timerComplete && (
         <Alert
           variant="warning"
@@ -149,27 +64,11 @@ const ValidationForm = ({
         />
       )}
       <Form
-        loading={
-          !value ||
-          loading ||
-          createLoading ||
-          verifyLoading ||
-          createErrorState ||
-          verifyErrorState ||
-          timerComplete
-        }
-        error={
-          error ||
-          (verifyErrorState && {
-            variant: "error",
-            title: <FormattedMessage id="validationForm.verifyError.title" />,
-            text: <FormattedMessage id="validationForm.verifyError.text" />,
-          })
-        }
-        onChange={verifyReset}
+        loading={!value || loading || timerComplete}
         onSubmit={handleSubmit}
         cancelTranslationId="validationForm.cancel"
         onCancel={handleCancel}
+        error={error}
       >
         <FormField invalid={hasError}>
           <FormLabel htmlFor="validationForm">
@@ -190,7 +89,7 @@ const ValidationForm = ({
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             invalid={hasError}
-            disabled={createLoading || createErrorState || timerComplete}
+            disabled={timerComplete}
           />
           {hasError && (
             <FormFieldErrorMessage>
