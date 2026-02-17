@@ -62,8 +62,6 @@ const EditContactInfoPage = () => {
   );
   const initialValue = contactValue?.waarde || "";
 
-  console.log("contactValue", contactValue);
-
   const [
     mutateFunction,
     {
@@ -102,8 +100,6 @@ const EditContactInfoPage = () => {
 
   const onSubmit = async (verificationCode?: string) => {
     if (!verificationCode && initialValue === value) return;
-
-    console.log("Submitting with value:", contactValue?.uuid);
 
     const response = await mutateFunction(
       contactValue?.uuid,
