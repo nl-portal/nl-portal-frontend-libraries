@@ -143,6 +143,17 @@ export const NL_NL_MESSAGES: Messages = {
     "account.detail.telefoonnummer.error": "Dit is geen geldig nummer",
     "account.detail.telefoonnummer.error.invalidChars":
       "Gebruik alleen 0-9 en eventueel een '+'",
+    "account.detail.validation.success.title":
+      "Gelukt. U heeft uw wijziging doorgegeven.",
+    "validationForm.description":
+      "Wij hebben u een code gestuurd op {email}. Voer de code hieronder in om uw nieuwe e-mailadres te bevestigen. Let op! De code kan in uw spambox terecht zijn gekomen.",
+    "validationForm.label": "Verificatiecode",
+    "validationForm.labelDescription": "De code verloopt over {time}",
+    "validationForm.error": "Vul de verificatiecode in.",
+    "validationForm.cancel": "Code opnieuw verzenden",
+    "validationForm.timeError.Title": "Verificatiecode verlopen",
+    "validationForm.timeError.Text":
+      "De verificatiecode is verlopen. Vraag een nieuwe code aan om verder te gaan.",
     "account.detail.aanmaakkanaal": "E-mailmeldingen",
     "account.detail.aanmaakkanaal.description":
       "Staat je keuze op nee? Dan kunt u toch nog e-mails ontvangen. Dit komt omdat nog niet alle systemen van de gemeente zijn aangesloten op het klantportaal.",
@@ -194,7 +205,7 @@ export const NL_NL_MESSAGES: Messages = {
       "Ontvang statuswijzigingen per email",
     "account.detail.notification.form.save": "Wijzigingen opslaan",
     "account.detail.contactform.email": "Emailadres",
-    "account.detail.contactform.tel": "Telefoonnummer",
+    "account.detail.contactform.telefoonnummer": "Telefoonnummer",
     "account.adres.links.addressResearchRequest": "Vraag onderzoek aan",
     "account.persoonsgegevens.links.changeInUseOfSurname":
       "Verandering naamgebruik aanvragen",
@@ -238,6 +249,10 @@ export const NL_NL_MESSAGES: Messages = {
     "overviewpage.noEmail.text":
       "Vul uw e-mailadres in. De gemeente kan u dan belangrijke meldingen sturen. Bijvoorbeeld over uw aanvraag of andere lopende zaken.",
     "overviewpage.noEmail.text.button": "E-mailadres invullen",
+    "overviewpage.noEmailVerified.title": "Bevestig uw e-mailadres",
+    "overviewpage.noEmailVerified.text":
+      "Uw e-mailadres is nog niet bevestigd. Dit is nodig om contact met u op te kunnen nemen.",
+    "overviewpage.noEmailVerified.text.button": "E-mailadres bevestigen",
     "actionLabels.today": "vandaag",
     "actionLabels.yesterday": "gisteren",
     "actionLabels.before": "vóór",

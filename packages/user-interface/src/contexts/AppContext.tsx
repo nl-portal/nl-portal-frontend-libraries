@@ -41,6 +41,7 @@ interface MessagesProviderProps {
 export const AppProvider = ({ children }: MessagesProviderProps) => {
   const location = useLocation();
   const navType = useNavigationType();
+  const [firstLoad, setFirstLoad] = useState(true);
   const { restUri } = useContext(ApiContext);
   const [logoUrl, setLogoUrl] = useState<string | undefined>(undefined);
   const [loadingConfig, startTransition] = useTransition();
@@ -131,33 +132,36 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     updateNavigationItems(newNavigationItems);
   }, [themesData, initNavigationItems, themes]);
 
-  const {
-    loading: loadingMessages,
-    refetch: refetchMessages,
-    data: messagesData,
-  } = useQuery(GetUnopenedBerichtenCountDocument, {
-    pollInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 30000,
-    fetchPolicy: "cache-and-network",
-    skip: window.MESSAGE_COUNT_ENABLE === "false",
-    skipPollAttempt: () => {
-      return !document.hasFocus();
+  const { refetch: refetchMessages, data: messagesData } = useQuery(
+    GetUnopenedBerichtenCountDocument,
+    {
+      pollInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 30000,
+      fetchPolicy: "cache-and-network",
+      skip: window.MESSAGE_COUNT_ENABLE === "false",
+      skipPollAttempt: () => {
+        return !document.hasFocus();
+      },
     },
-  });
+  );
 
   const messagesCount = useMemo(
     () => messagesData?.getUnopenedBerichtenCount || 0,
     [messagesData],
   );
 
-  const loading =
-    loadingConfig || loadingThemes || loadingMessages || loadingUser;
+  const loading = loadingConfig || loadingThemes || loadingUser;
 
   useEffect(() => {
     localStorage.setItem("history", JSON.stringify(history));
   }, [history]);
 
-  const showInitialSkeleton = loading && !themesData && !messagesData;
-  if (showInitialSkeleton) return <FullscreenSkeleton />;
+  useEffect(() => {
+    if (loading || !firstLoad) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setFirstLoad(false);
+  }, [loading]);
+
+  if (loading || firstLoad) return <FullscreenSkeleton />;
 
   return (
     <AppContext.Provider

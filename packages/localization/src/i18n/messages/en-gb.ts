@@ -140,6 +140,17 @@ export const EN_GB_MESSAGES: Messages = {
     "account.detail.telefoonnummer.error": "This is not a valid number",
     "account.detail.telefoonnummer.error.invalidChars":
       "Use only 0-9 and optionally a '+'",
+    "account.detail.validation.success.title":
+      "Success. You have submitted your change.",
+    "validationForm.description":
+      "We have sent you a code to {email}. Enter the code below to confirm your new email address. Note! The code may have ended up in your spam folder.",
+    "validationForm.label": "Verification code",
+    "validationForm.labelDescription": "The code expires in {time}",
+    "validationForm.error": "Please enter the verification code.",
+    "validationForm.cancel": "Resend code",
+    "validationForm.timeError.Title": "Verification code expired",
+    "validationForm.timeError.Text":
+      "The verification code has expired. Request a new code to continue.",
     "account.detail.aanmaakkanaal": "Email notifications",
     "account.detail.aanmaakkanaal.description":
       "Is your choice set to no? Then you will still receive emails. This is because not all of the municipality's systems are connected yet to MijnDenHaag.",
@@ -190,7 +201,7 @@ export const EN_GB_MESSAGES: Messages = {
       "Receive status changes by email",
     "account.detail.notification.form.save": "Save changes",
     "account.detail.contactform.email": "Email address",
-    "account.detail.contactform.tel": "Phone number",
+    "account.detail.contactform.telefoonnummer": "Phone number",
     "account.adres.links.addressResearchRequest": "Request investigation",
     "account.persoonsgegevens.links.changeInUseOfSurname":
       "Request a change in the use of your surname",
@@ -233,6 +244,10 @@ export const EN_GB_MESSAGES: Messages = {
     "overviewpage.noEmail.text":
       "Enter your email address. The municipality will then be able to send you important messages. For example, about your application or other current procedures.",
     "overviewpage.noEmail.text.button": "Enter email address",
+    "overviewpage.noEmailVerified.title": "Confirm your email address",
+    "overviewpage.noEmailVerified.text":
+      "Your email address has not yet been confirmed. This is necessary to be able to contact you.",
+    "overviewpage.noEmailVerified.text.button": "Confirm email address",
     "actionLabels.today": "today",
     "actionLabels.yesterday": "yesterday",
     "actionLabels.before": "before",

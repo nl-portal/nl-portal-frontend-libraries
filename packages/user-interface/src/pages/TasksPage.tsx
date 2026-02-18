@@ -27,14 +27,15 @@ const TasksPage = () => {
   };
 
   return (
-    <PageGrid>
-      <PageHeader title={<FormattedMessage id="pageTitles.tasks" />}>
-        <SearchForm
-          translationId="tasks"
-          totalElements={data?.getTakenV2.totalElements ?? 0}
-          onSubmit={handleFormSubmit}
-        />
-      </PageHeader>
+    <PageGrid variant="medium">
+      <PageHeader
+        title={<FormattedMessage id="pageTitles.tasks" />}
+      ></PageHeader>
+      <SearchForm
+        translationId="tasks"
+        totalElements={data?.getTakenV2.totalElements ?? 0}
+        onSubmit={handleFormSubmit}
+      />
       <TasksList
         loading={loading}
         error={Boolean(error)}

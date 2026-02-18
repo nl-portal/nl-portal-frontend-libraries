@@ -94,13 +94,14 @@ const CasesPage = () => {
 
   return (
     <PageGrid className={styles.cases} variant="medium">
-      <PageHeader title={<FormattedMessage id="pageTitles.cases" />}>
-        <SearchForm
-          translationId="cases"
-          totalElements={null}
-          onSubmit={handleFormSubmit}
-        />
-      </PageHeader>
+      <PageHeader
+        title={<FormattedMessage id="pageTitles.cases" />}
+      ></PageHeader>
+      <SearchForm
+        translationId="cases"
+        totalElements={null}
+        onSubmit={handleFormSubmit}
+      />
       <div>
         <Tabs
           onChange={onTabChange}

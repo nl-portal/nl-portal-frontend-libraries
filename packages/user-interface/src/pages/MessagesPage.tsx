@@ -31,14 +31,15 @@ const MessagesPage = () => {
   };
 
   return (
-    <PageGrid>
-      <PageHeader title={intl.formatMessage({ id: "pageTitles.messages" })}>
-        <SearchForm
-          translationId="messages"
-          totalElements={data?.getBerichten.totalElements ?? 0}
-          onSubmit={handleFormSubmit}
-        />
-      </PageHeader>
+    <PageGrid variant="medium">
+      <PageHeader
+        title={intl.formatMessage({ id: "pageTitles.messages" })}
+      ></PageHeader>
+      <SearchForm
+        translationId="messages"
+        totalElements={data?.getBerichten.totalElements ?? 0}
+        onSubmit={handleFormSubmit}
+      />
       <MessagesList
         loading={loading}
         error={Boolean(error)}

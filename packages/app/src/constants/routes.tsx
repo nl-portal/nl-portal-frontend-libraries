@@ -258,7 +258,7 @@ export const routes = [
         ),
       },
       {
-        path: paths.changeContactInfo,
+        path: paths.changeContactInfo(),
         handle: { label: "breadcrumb.account.editContactInfo" },
         element: <EditContactInfoPage />,
       },

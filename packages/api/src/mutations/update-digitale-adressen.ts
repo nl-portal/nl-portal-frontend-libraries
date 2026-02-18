@@ -10,6 +10,8 @@ export const MUTATION_UPDATE_DIGITALE_ADRESSEN = gql`
       type
       omschrijving
       referentie
+      verificatieDatum
+      verificatieNeeded
     }
   }
 `;

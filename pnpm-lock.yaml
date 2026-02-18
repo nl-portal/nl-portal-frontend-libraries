@@ -439,8 +439,8 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       lodash-es:
-        specifier: 4.17.22
-        version: 4.17.22
+        specifier: 4.17.23
+        version: 4.17.23
       pretty-bytes:
         specifier: ^7.1.0
         version: 7.1.0
@@ -5317,8 +5317,8 @@ packages:
   lodash-es@4.17.21:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
 
-  lodash-es@4.17.22:
-    resolution: {integrity: sha512-XEawp1t0gxSi9x01glktRZ5HDy0HXqrM0x5pXQM98EaI0NxO6jVM7omDOxsuEo5UIASAnm2bRp1Jt/e0a2XU8Q==}
+  lodash-es@4.17.23:
+    resolution: {integrity: sha512-kVI48u3PZr38HdYz98UmfPnXl2DXrpdctLrFLCd3kOx1xUkOmpFPx7gCWWM5MPkL/fD8zb+Ph0QzjGFs4+hHWg==}
 
   lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
@@ -12417,7 +12417,7 @@ snapshots:
 
   lodash-es@4.17.21: {}
 
-  lodash-es@4.17.22: {}
+  lodash-es@4.17.23: {}
 
   lodash.camelcase@4.3.0: {}
 
@@ -12877,7 +12877,7 @@ snapshots:
   quill@2.0.3:
     dependencies:
       eventemitter3: 5.0.1
-      lodash-es: 4.17.22
+      lodash-es: 4.17.23
       parchment: 3.0.0
       quill-delta: 5.1.0
 
