@@ -151,6 +151,9 @@ export const EN_GB_MESSAGES: Messages = {
     "validationForm.timeError.Title": "Verification code expired",
     "validationForm.timeError.Text":
       "The verification code has expired. Request a new code to continue.",
+    "validationForm.validationError.Title": "Invalid verification code",
+    "validationForm.validationError.Text":
+      "The verification code is invalid. Request a new code to continue.",
     "account.detail.aanmaakkanaal": "Email notifications",
     "account.detail.aanmaakkanaal.description":
       "Is your choice set to no? Then you will still receive emails. This is because not all of the municipality's systems are connected yet to MijnDenHaag.",

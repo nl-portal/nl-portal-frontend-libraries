@@ -6,7 +6,7 @@ import { FormFieldDescription } from "@gemeente-denhaag/form-field-description";
 import { FormattedMessage } from "react-intl";
 import { TextInput } from "@gemeente-denhaag/text-input";
 import { FormFieldErrorMessage } from "@gemeente-denhaag/form-field-error-message";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, AlertProps } from "@gemeente-denhaag/alert";
 import ValidationFormCountdown from "./ValidationFormCountdown";
 
@@ -16,6 +16,7 @@ interface ValidationFormProps {
   onSubmit?: (verificationCode: string) => void;
   onRefresh?: () => Promise<void>;
   error?: AlertProps | boolean;
+  validationError?: boolean;
 }
 
 const ValidationForm = ({
@@ -23,9 +24,17 @@ const ValidationForm = ({
   onSubmit,
   onRefresh,
   error = false,
+  validationError = false,
 }: ValidationFormProps) => {
   const [showTimer, setShowTimer] = useState(true);
   const [timerComplete, setTimerComplete] = useState(false);
+
+  useEffect(() => {
+    if (!validationError) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setShowTimer(false);
+    setTimerComplete(false);
+  }, [validationError]);
 
   const {
     value,
@@ -63,8 +72,15 @@ const ValidationForm = ({
           text={<FormattedMessage id="validationForm.timeError.Text" />}
         />
       )}
+      {validationError && (
+        <Alert
+          variant="warning"
+          title={<FormattedMessage id="validationForm.validationError.Title" />}
+          text={<FormattedMessage id="validationForm.validationError.Text" />}
+        />
+      )}
       <Form
-        loading={!value || loading || timerComplete}
+        loading={!value || loading || timerComplete || validationError}
         onSubmit={handleSubmit}
         cancelTranslationId="validationForm.cancel"
         onCancel={handleCancel}
@@ -89,7 +105,7 @@ const ValidationForm = ({
             onChange={handleInputChange}
             onBlur={handleInputBlur}
             invalid={hasError}
-            disabled={timerComplete}
+            disabled={timerComplete || validationError}
           />
           {hasError && (
             <FormFieldErrorMessage>

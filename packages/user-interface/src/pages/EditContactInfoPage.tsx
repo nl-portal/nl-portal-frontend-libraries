@@ -57,6 +57,7 @@ const EditContactInfoPage = () => {
   const { contact } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const [needValidation, setNeedValidation] = useState(false);
+  const [validationError, setValidationError] = useState(false);
   const contactValue = contact?.getUserDigitaleAdressen?.find(
     (a) => a.type === digitaleAdresType,
   );
@@ -101,12 +102,19 @@ const EditContactInfoPage = () => {
   const onSubmit = async (verificationCode?: string) => {
     if (!verificationCode && initialValue === value) return;
 
+    setValidationError(false);
+
     const response = await mutateFunction(
       contactValue?.uuid,
       value || "",
       digitaleAdresType,
       verificationCode,
     );
+
+    if (response?.verificatieCodeVerified === false) {
+      setValidationError(true);
+      return;
+    }
 
     if (response?.verificatieNeeded) {
       setNeedValidation(true);
@@ -125,6 +133,7 @@ const EditContactInfoPage = () => {
   };
 
   const onRefresh = async () => {
+    setValidationError(false);
     await mutateFunction(contactValue?.uuid, value || "", digitaleAdresType);
   };
 
@@ -155,6 +164,7 @@ const EditContactInfoPage = () => {
             onSubmit={onSubmit}
             onRefresh={onRefresh}
             error={Boolean(!mutationLoading && mutationCalled && mutationError)}
+            validationError={validationError}
           />
         </>
       ) : (

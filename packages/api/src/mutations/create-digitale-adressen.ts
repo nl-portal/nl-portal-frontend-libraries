@@ -12,6 +12,7 @@ export const MUTATION_CREATE_DIGITALE_ADRESSEN = gql`
       referentie
       verificatieDatum
       verificatieNeeded
+      verificatieCodeVerified
     }
   }
 `;
