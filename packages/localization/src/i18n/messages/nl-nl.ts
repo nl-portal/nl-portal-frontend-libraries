@@ -154,6 +154,9 @@ export const NL_NL_MESSAGES: Messages = {
     "validationForm.timeError.Title": "Verificatiecode verlopen",
     "validationForm.timeError.Text":
       "De verificatiecode is verlopen. Vraag een nieuwe code aan om verder te gaan.",
+    "validationForm.validationError.Title": "Verificatiecode ongeldig",
+    "validationForm.validationError.Text":
+      "De verificatiecode is ongeldig. Vraag een nieuwe code aan om verder te gaan.",
     "account.detail.aanmaakkanaal": "E-mailmeldingen",
     "account.detail.aanmaakkanaal.description":
       "Staat je keuze op nee? Dan kunt u toch nog e-mails ontvangen. Dit komt omdat nog niet alle systemen van de gemeente zijn aangesloten op het klantportaal.",
