@@ -35,11 +35,7 @@ import { caseResults } from "../constants/case-results";
 import Pre from "../components/Pre";
 import AppContext from "../contexts/AppContext";
 
-interface CasePageProps {
-  showContactTimeline?: boolean;
-}
-
-const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
+const CaseDetailsPage = () => {
   const intl = useIntl();
   const { id } = useParams();
   const { currentLocale } = useContext(LocaleContext);
@@ -254,7 +250,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
         error={Boolean(caseError)}
         documents={caseData?.getZaak.documenten}
       />
-      {showContactTimeline && contactItems.length > 0 && (
+      {contactItems.length > 0 && (
         <section>
           <SectionHeader
             title={intl.formatMessage({ id: "caseDetails.contactHeader" })}

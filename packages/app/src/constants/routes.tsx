@@ -43,7 +43,7 @@ export const routes = [
       {
         path: paths.case(),
         handle: { label: "breadcrumb.cases.details" },
-        element: <CaseDetailsPage showContactTimeline />,
+        element: <CaseDetailsPage />,
       },
     ],
   },

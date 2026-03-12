@@ -35,10 +35,8 @@ interface Features {
     overviewMaintenanceAlertTextNl: string;
     overviewMaintenanceAlertTitleEn: string;
     overviewMaintenanceAlertTitleNl: string;
-    themeClass: string;
   };
   toggles: {
-    casesContactMomentsEnabled: boolean;
     casesPartialSearchEnabled: boolean;
     casesResultExplanationEnabled: boolean;
     legacyPaymentEnabled: boolean;

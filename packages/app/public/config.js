@@ -9,26 +9,3 @@ window.OIDC_POST_LOGOUT_REDIRECT_URI = "";
 
 window.GRAPHQL_URI = "http://localhost:8080/graphql";
 window.REST_URI = "http://localhost:8080/api";
-
-// window.SHOW_INHABITANT_AMOUNT = "true";
-// window.MESSAGE_COUNT_ENABLE = "true";
-// window.MESSAGE_COUNT_POLLING_INTERVAL = 10000;
-// window.CASES_PARTIAL_SEARCH = "true";
-// window.OPEN_PRODUCTEN = "true";
-// window.ADDRESS_RESEARCH_URL = "https://www.google.nl";
-// window.REPORT_CHANGE_OF_ADDRESS_URL = "https://www.google.nl";
-// window.CHANGE_IN_USE_OF_SURNAME_URL = "https://www.google.nl";
-// window.CHANGE_REGISTERED_GENDER_URL = "https://www.google.nl";
-// window.ADDRESS_RESEARCH_MORE_INFO_URL = "https://www.google.nl";
-// window.REQUEST_FOR_CHANGE_BRP_INFO_URL = "https://www.google.nl";
-// window.REQUEST_CONFIDENTIALITY_OF_DATA_URL = "https://www.google.nl";
-// window.USE_LEGACY_OGONE_PAYMENT = "false";
-// window.USE_THEME_API = "false";
-// window.SHOW_CASE_RESULT_EXPLANATION = "true";
-
-// OVERVIEW_SHOW_INTRO: "true"
-// OVERVIEW_SHOW_MAINTENANCE_ALERT: "false"
-// OVERVIEW_MAINTENANCE_ALERT_TITLE_NL: ""
-// OVERVIEW_MAINTENANCE_ALERT_TITLE_EN: ""
-// OVERVIEW_MAINTENANCE_ALERT_TEXT_NL: ""
-// OVERVIEW_MAINTENANCE_ALERT_TEXT_EN
