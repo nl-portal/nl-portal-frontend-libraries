@@ -33,6 +33,7 @@ import NotificationContext from "../contexts/NotificationContext";
 import { stringToSlug } from "../utils/string-to-slug";
 import { caseResults } from "../constants/case-results";
 import Pre from "../components/Pre";
+import AppContext from "../contexts/AppContext";
 
 interface CasePageProps {
   showContactTimeline?: boolean;
@@ -42,6 +43,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const intl = useIntl();
   const { id } = useParams();
   const { currentLocale } = useContext(LocaleContext);
+  const { features } = useContext(AppContext);
   const {
     data: caseData,
     loading: caseLoading,
@@ -150,7 +152,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     }
 
     if (
-      window.SHOW_CASE_RESULT_EXPLANATION === "true" &&
+      features?.toggles.casesResultExplanationEnabled &&
       caseData?.getZaak.resultaat?.toelichting
     ) {
       array.push({
@@ -160,7 +162,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
     }
 
     return array;
-  }, [caseData?.getZaak, intl, formatDate]);
+  }, [caseData?.getZaak, intl, formatDate, features]);
 
   const contactItems = React.useMemo(() => {
     if (!momentsData) return [];

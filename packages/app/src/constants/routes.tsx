@@ -18,7 +18,6 @@ import {
 } from "@nl-portal/nl-portal-user-interface";
 import { OidcCallbackPage } from "@nl-portal/nl-portal-authentication";
 import { paths } from "./paths";
-import { config } from "./config";
 import { Navigate, useSearchParams } from "react-router";
 import { themes } from "./themes";
 import ParkerenOverview from "../pages/ParkerenOverview";
@@ -30,7 +29,7 @@ export const routes = [
   {
     path: paths.overview,
     handle: { label: "breadcrumb.overview" },
-    element: <OverviewPage showIntro showNoEmailAlert />,
+    element: <OverviewPage showNoEmailAlert />,
   },
   {
     path: paths.cases,
@@ -242,20 +241,7 @@ export const routes = [
       {
         index: true,
         handle: { label: "breadcrumb.account" },
-        element: (
-          <AccountPage
-            showInhabitantAmount={config.SHOW_INHABITANT_AMOUNT}
-            addressResearchUrl={config.ADDRESS_RESEARCH_URL}
-            reportChangeOfAddressUrl={config.REPORT_CHANGE_OF_ADDRESS_URL}
-            changeInUseOfSurnameUrl={config.CHANGE_IN_USE_OF_SURNAME_URL}
-            changeRegisteredGenderUrl={config.CHANGE_REGISTERED_GENDER_URL}
-            addressResearchMoreInfoUrl={config.ADDRESS_RESEARCH_MORE_INFO_URL}
-            requestForChangeBrpInfoUrl={config.REQUEST_FOR_CHANGE_BRP_INFO_URL}
-            requestConfidentialityOfDataUrl={
-              config.REQUEST_CONFIDENTIALITY_OF_DATA_URL
-            }
-          />
-        ),
+        element: <AccountPage />,
       },
       {
         path: paths.changeContactInfo(),

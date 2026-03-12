@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/client/react";
 import { useContext, useState } from "react";
 import { LocaleContext } from "@nl-portal/nl-portal-localization";
 import OgonePaymentForm from "../components/OgonePaymentForm";
+import AppContext from "../contexts/AppContext";
 
 // -- Variables for the Ogone direct payment request:
 // amount, required, The amount to be paid (float).
@@ -36,6 +37,7 @@ interface PaymentRequestPayload {
 }
 
 const useOgonePayment = () => {
+  const { features } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [paymentData, setPaymentData] = useState<OgonePayment>();
   const [mutateFunction] = useMutation(GenerateOgonePaymentDocument);
@@ -46,7 +48,7 @@ const useOgonePayment = () => {
 
   const startPayment = (paymentRequestPayload: PaymentRequestPayload) => {
     setLoading(true);
-    if (window.USE_LEGACY_OGONE_PAYMENT !== "true") {
+    if (!features?.toggles.legacyPaymentEnabled) {
       returnUrl.searchParams.set("category", paymentRequestPayload.pspId);
       mutateDirectFunction({
         variables: {

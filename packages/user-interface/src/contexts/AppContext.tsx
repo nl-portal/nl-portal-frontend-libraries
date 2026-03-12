@@ -20,11 +20,43 @@ import RouterContext from "./RouterContext";
 import UserContext from "./UserContext";
 import FullscreenSkeleton from "../components/FullscreenSkeleton";
 
+interface Features {
+  properties: {
+    custom: Record<string, unknown>;
+    messageCountPollingInterval: number;
+    myAddressChangeUrl: string;
+    myAddressResearchMoreInfoUrl: string;
+    myAddressResearchUrl: string;
+    myBrpChangeUrl: string;
+    myBrpConfidentiallyChangeUrl: string;
+    myGenderChangeUrl: string;
+    myNameChangeUrl: string;
+    overviewMaintenanceAlertTextEn: string;
+    overviewMaintenanceAlertTextNl: string;
+    overviewMaintenanceAlertTitleEn: string;
+    overviewMaintenanceAlertTitleNl: string;
+    themeClass: string;
+  };
+  toggles: {
+    casesContactMomentsEnabled: boolean;
+    casesPartialSearchEnabled: boolean;
+    casesResultExplanationEnabled: boolean;
+    legacyPaymentEnabled: boolean;
+    messageCountEnabled: boolean;
+    myInhabitantCountEnabled: boolean;
+    openProductEnabled: boolean;
+    overviewIntroEnabled: boolean;
+    overviewMaintenanceAlertEnabled: boolean;
+    themeApiEnabled: boolean;
+  };
+}
+
 type Themes =
   GetOpenProductHoofdThemasByProductenQuery["getOpenProductHoofdThemasByProducten"];
 
 interface AppContextType {
   history: string[];
+  features: Features | undefined;
   logoUrl: string | undefined;
   themes: Themes;
   messagesCount: number;
@@ -43,6 +75,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   const navType = useNavigationType();
   const [firstLoad, setFirstLoad] = useState(true);
   const { restUri } = useContext(ApiContext);
+  const [features, setFeatures] = useState<Features | undefined>(undefined);
   const [logoUrl, setLogoUrl] = useState<string | undefined>(undefined);
   const [loadingConfig, startTransition] = useTransition();
   const { initNavigationItems, updateNavigationItems } =
@@ -65,7 +98,28 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   }, [location.pathname, location.key, navType]);
 
   useEffect(() => {
-    if (window.USE_THEME_API !== "true") return;
+    if (features) return;
+    startTransition(async () => {
+      try {
+        const response = await fetch(`${restUri}/public/features`);
+
+        if (!response.ok) {
+          console.warn("Theme features API failed:", response.status);
+          return;
+        }
+
+        const json = await response.json();
+        json.properties.custom = JSON.parse(json.properties.custom || "{}");
+
+        setFeatures(json);
+      } catch (err) {
+        console.error("Failed to load features:", err);
+      }
+    });
+  }, [restUri, startTransition]);
+
+  useEffect(() => {
+    if (!features?.toggles.themeApiEnabled) return;
     startTransition(async () => {
       try {
         const response = await fetch(`${restUri}/public/theme/logo`);
@@ -80,10 +134,10 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
         console.error("Failed to load logo:", err);
       }
     });
-  }, [restUri, startTransition]);
+  }, [restUri, startTransition, features]);
 
   useEffect(() => {
-    if (window.USE_THEME_API !== "true") return;
+    if (!features?.toggles.themeApiEnabled) return;
     startTransition(async () => {
       try {
         const styleResponse = await fetch(`${restUri}/public/theme/style`);
@@ -103,14 +157,14 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
         console.error("Failed to load theme styling:", err);
       }
     });
-  }, []);
+  }, [restUri, startTransition, features]);
 
   const {
     loading: loadingThemes,
     refetch: refetchThemes,
     data: themesData,
   } = useQuery(GetOpenProductHoofdThemasByProductenDocument, {
-    skip: window.OPEN_PRODUCTEN !== "true",
+    skip: !features?.toggles.openProductEnabled,
   });
 
   const themes: Themes = useMemo(
@@ -135,9 +189,9 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
   const { refetch: refetchMessages, data: messagesData } = useQuery(
     GetUnopenedBerichtenCountDocument,
     {
-      pollInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 30000,
+      pollInterval: features?.properties?.messageCountPollingInterval || 30000,
       fetchPolicy: "cache-and-network",
-      skip: window.MESSAGE_COUNT_ENABLE === "false",
+      skip: !features?.toggles.messageCountEnabled,
       skipPollAttempt: () => {
         return !document.hasFocus();
       },
@@ -167,6 +221,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
     <AppContext.Provider
       value={{
         history,
+        features,
         logoUrl,
         themes,
         messagesCount,
