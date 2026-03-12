@@ -110,7 +110,7 @@ jobs:
                     pnpm run release --yes
             -   name: Read bumped version
                 id: read-version
-                run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+                run: echo "VERSION=$(node -p "require('./packages/api/package.json').version")" >> $GITHUB_OUTPUT
             -   name: lerna publish
                 env:
                     NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
@@ -132,64 +132,30 @@ jobs:
                 uses: actions/setup-node@v4
                 with:
                     node-version: ${{ env.NODE_VERSION }}
-            -   name: Create sbom output directory
-                run: mkdir -p sbom
-            -   name: Generate SBOM — api
+            -   name: Install pnpm
+                run: npm install -g pnpm
+            -   name: Install dependencies
+                run: pnpm install
+            -   name: Generate SBOM
                 uses: anchore/sbom-action@v0
                 with:
-                    path: packages/api/
-                    output-file: sbom/nl-portal-nl-portal-api-${{ env.ARTIFACT_VERSION }}.cdx.json
-                    artifact-name: nl-portal-nl-portal-api-${{ env.ARTIFACT_VERSION }}.cdx.json
+                    path: .
+                    output-file: frontend.cdx.json
+                    artifact-name: frontend-${{ env.ARTIFACT_VERSION }}.cdx.json
                     format: cyclonedx-json
                     upload-artifact: true
                     upload-artifact-retention: 90
                     upload-release-assets: false
                     dependency-snapshot: true
                     github-token: ${{ secrets.GITHUB_TOKEN }}
-            -   name: Generate SBOM — authentication
-                uses: anchore/sbom-action@v0
-                with:
-                    path: packages/authentication/
-                    output-file: sbom/nl-portal-nl-portal-authentication-${{ env.ARTIFACT_VERSION }}.cdx.json
-                    artifact-name: nl-portal-nl-portal-authentication-${{ env.ARTIFACT_VERSION }}.cdx.json
-                    format: cyclonedx-json
-                    upload-artifact: true
-                    upload-artifact-retention: 90
-                    upload-release-assets: false
-                    dependency-snapshot: true
-                    github-token: ${{ secrets.GITHUB_TOKEN }}
-            -   name: Generate SBOM — localization
-                uses: anchore/sbom-action@v0
-                with:
-                    path: packages/localization/
-                    output-file: sbom/nl-portal-nl-portal-localization-${{ env.ARTIFACT_VERSION }}.cdx.json
-                    artifact-name: nl-portal-nl-portal-localization-${{ env.ARTIFACT_VERSION }}.cdx.json
-                    format: cyclonedx-json
-                    upload-artifact: true
-                    upload-artifact-retention: 90
-                    upload-release-assets: false
-                    dependency-snapshot: true
-                    github-token: ${{ secrets.GITHUB_TOKEN }}
-            -   name: Generate SBOM — user-interface
-                uses: anchore/sbom-action@v0
-                with:
-                    path: packages/user-interface/
-                    output-file: sbom/nl-portal-nl-portal-user-interface-${{ env.ARTIFACT_VERSION }}.cdx.json
-                    artifact-name: nl-portal-nl-portal-user-interface-${{ env.ARTIFACT_VERSION }}.cdx.json
-                    format: cyclonedx-json
-                    upload-artifact: true
-                    upload-artifact-retention: 90
-                    upload-release-assets: false
-                    dependency-snapshot: true
-                    github-token: ${{ secrets.GITHUB_TOKEN }}
-            -   name: Push SBOMs to S3
+            -   name: Push SBOM to S3
                 env:
                     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
                     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                     AWS_DEFAULT_REGION: 'eu-central-1'
                 run: |
-                    aws s3 cp --recursive --exclude "*" --include "*.cdx.json" sbom/ s3://nl-portal-dependency-reports/sbom/${{ env.ARTIFACT_VERSION }}/frontend/
-                    aws s3 rm --recursive s3://nl-portal-dependency-reports/sbom/latest/frontend/ || true
-                    aws s3 cp --recursive --exclude "*" --include "*.cdx.json" sbom/ s3://nl-portal-dependency-reports/sbom/latest/frontend/
+                    aws s3 cp frontend.cdx.json s3://nl-portal-dependency-reports/sbom/${{ env.ARTIFACT_VERSION }}/frontend.cdx.json
+                    aws s3 rm s3://nl-portal-dependency-reports/sbom/latest/frontend.cdx.json || true
+                    aws s3 cp frontend.cdx.json s3://nl-portal-dependency-reports/sbom/latest/frontend.cdx.json
             -   name: Log link to bucket
-                run: echo "::notice::Uploaded SBOMs to - https://nl-portal-dependency-reports.s3.eu-central-1.amazonaws.com/index.html?prefix=sbom/${{ env.ARTIFACT_VERSION }}/frontend/"
+                run: echo "::notice::Uploaded SBOM to - https://nl-portal-dependency-reports.s3.eu-central-1.amazonaws.com/index.html?prefix=sbom/${{ env.ARTIFACT_VERSION }}/"
