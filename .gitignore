@@ -14,4 +14,4 @@ yarn-error.log*
 /lerna-debug.log
 
 # Testing
-/coverage
+coverage/
