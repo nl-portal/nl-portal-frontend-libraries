@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-user-interface",
-  "version": "3.1.0-next-minor-202603121106-1871ce3c-SNAPSHOT",
+  "version": "3.1.0-next-minor-202603160847-806939f4-SNAPSHOT",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -91,6 +91,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/coverage-v8": "^4.0.16",
     "@vitest/ui": "^4.0.16",
     "jsdom": "^27.3.0",
     "react": "^19.2.3",
@@ -102,7 +103,6 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
     "vite-plugin-dts": "^4.5.4",
-    "@vitest/coverage-v8": "^4.0.16",
     "vitest": "^4.0.16",
     "wait-on": "^9.0.3"
   },
