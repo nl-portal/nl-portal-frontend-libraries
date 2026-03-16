@@ -29,34 +29,7 @@ const useOgonePaymentRegistration = (useLegacyPostsale?: boolean) => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setPaymentStatus(PaymentStatus.IN_PROGRESS);
 
-    if (!features?.toggles.legacyPaymentEnabled) {
-      const hostedCheckoutId = searchParams.get("hostedCheckoutId");
-      const category = searchParams.get("category");
-
-      if (!hostedCheckoutId || !category) {
-        setPaymentStatus(PaymentStatus.FAILURE);
-        return;
-      }
-
-      getPaymentStatus({
-        variables: { identifier: category, hostedCheckoutId: hostedCheckoutId },
-      })
-        .then(({ data: paymentStatusData }) => {
-          if (
-            paymentStatusData?.getDirectPaymentStatus.status ===
-            DirectPaymentStatusCategory.Successful
-          ) {
-            setPaymentStatus(PaymentStatus.SUCCESS);
-          } else {
-            setPaymentStatus(PaymentStatus.FAILURE);
-          }
-        })
-        .catch(() => setPaymentStatus(PaymentStatus.FAILURE))
-        .finally(() => {
-          const newSearchParams = new URLSearchParams();
-          setSearchParams(newSearchParams);
-        });
-    } else {
+    if (features?.toggles.legacyPaymentEnabled) {
       if (useLegacyPostsale) {
         fetch(
           `${restUri}/public/payment/ogone/postsale?${searchParams.toString()}`,
@@ -92,6 +65,33 @@ const useOgonePaymentRegistration = (useLegacyPostsale?: boolean) => {
         const newSearchParams = new URLSearchParams();
         setSearchParams(newSearchParams);
       }
+    } else {
+      const hostedCheckoutId = searchParams.get("hostedCheckoutId");
+      const category = searchParams.get("category");
+
+      if (!hostedCheckoutId || !category) {
+        setPaymentStatus(PaymentStatus.FAILURE);
+        return;
+      }
+
+      getPaymentStatus({
+        variables: { identifier: category, hostedCheckoutId: hostedCheckoutId },
+      })
+        .then(({ data: paymentStatusData }) => {
+          if (
+            paymentStatusData?.getDirectPaymentStatus.status ===
+            DirectPaymentStatusCategory.Successful
+          ) {
+            setPaymentStatus(PaymentStatus.SUCCESS);
+          } else {
+            setPaymentStatus(PaymentStatus.FAILURE);
+          }
+        })
+        .catch(() => setPaymentStatus(PaymentStatus.FAILURE))
+        .finally(() => {
+          const newSearchParams = new URLSearchParams();
+          setSearchParams(newSearchParams);
+        });
     }
   }, [type, paymentStatus]);
 

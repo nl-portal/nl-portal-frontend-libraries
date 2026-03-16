@@ -48,25 +48,7 @@ const useOgonePayment = () => {
 
   const startPayment = (paymentRequestPayload: PaymentRequestPayload) => {
     setLoading(true);
-    if (!features?.toggles.legacyPaymentEnabled) {
-      returnUrl.searchParams.set("category", paymentRequestPayload.pspId);
-      mutateDirectFunction({
-        variables: {
-          amount: paymentRequestPayload.amount,
-          identifier: paymentRequestPayload.pspId,
-          orderId: paymentRequestPayload.orderId,
-          reference: paymentRequestPayload.reference,
-          langId: currentLocale.replace("-", "_"),
-          returnUrl: paymentRequestPayload.returnUrl || returnUrl.href,
-        },
-        onCompleted: (data) => {
-          window.location.href = data.doDirectPayment.redirectUrl;
-        },
-        onError: () => {
-          setLoading(false);
-        },
-      });
-    } else {
+    if (features?.toggles.legacyPaymentEnabled) {
       mutateFunction({
         variables: {
           amount: paymentRequestPayload.amount,
@@ -80,6 +62,24 @@ const useOgonePayment = () => {
         },
         onCompleted: (data) => {
           setPaymentData(data.generateOgonePayment);
+        },
+        onError: () => {
+          setLoading(false);
+        },
+      });
+    } else {
+      returnUrl.searchParams.set("category", paymentRequestPayload.pspId);
+      mutateDirectFunction({
+        variables: {
+          amount: paymentRequestPayload.amount,
+          identifier: paymentRequestPayload.pspId,
+          orderId: paymentRequestPayload.orderId,
+          reference: paymentRequestPayload.reference,
+          langId: currentLocale.replace("-", "_"),
+          returnUrl: paymentRequestPayload.returnUrl || returnUrl.href,
+        },
+        onCompleted: (data) => {
+          window.location.href = data.doDirectPayment.redirectUrl;
         },
         onError: () => {
           setLoading(false);
