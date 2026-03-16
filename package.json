@@ -18,6 +18,7 @@
     "publish": "lerna publish from-package",
     "release": "lerna version 3.1.0 --no-changelog --no-private --no-commit-hooks --message 'chore: released %s [skip ci]'",
     "test": "pnpm run --recursive --parallel test",
+    "test:coverage": "pnpm run --recursive --parallel --filter '!./packages/app' test:coverage",
     "typecheck": "pnpm run --recursive --parallel typecheck",
     "update-patch": "npm-check-updates --configFilePath .ncurc.patch.js",
     "update-minor": "npm-check-updates --configFilePath .ncurc.minor.js",
