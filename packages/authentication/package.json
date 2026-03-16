@@ -23,6 +23,7 @@
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest --watch",
     "typecheck": "tsc --noEmit"
   },
@@ -46,6 +47,7 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
     "vite-plugin-dts": "^4.5.4",
+    "@vitest/coverage-v8": "^4.0.16",
     "vitest": "^4.0.16"
   },
   "peerDependencies": {
