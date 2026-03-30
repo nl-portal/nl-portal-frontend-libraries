@@ -251,7 +251,7 @@ export const routes = [
     ],
   },
   {
-    path: new URL(globalThis.OIDC_REDIRECT_URI).pathname,
+    path: new URL(window.OIDC_REDIRECT_URI).pathname,
     element: <OidcCallbackPage />,
   },
   {
