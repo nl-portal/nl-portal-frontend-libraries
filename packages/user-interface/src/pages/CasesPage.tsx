@@ -7,10 +7,12 @@ import { Zaak, GetZakenDocument } from "@nl-portal/nl-portal-api";
 import { useQuery } from "@apollo/client/react";
 import PageGrid from "../components/PageGrid";
 import SearchForm from "../components/SearchForm";
-import { useState, useTransition } from "react";
+import { useContext, useState, useTransition } from "react";
+import AppContext from "../contexts/AppContext";
 
 const CasesPage = () => {
   const intl = useIntl();
+  const { features } = useContext(AppContext);
   const fetchCasesLength = 10;
   const [currentTab, setCurrentTab] = useState(0);
   const [searchValue, setSearchValue] = useState("");
@@ -42,10 +44,9 @@ const CasesPage = () => {
 
   const openCases = openData?.getZaken.content as Zaak[] | undefined;
   const closedCases = closedData?.getZaken.content as Zaak[] | undefined;
-  const searchParam =
-    window.CASES_PARTIAL_SEARCH === "true"
-      ? "identificatieContains"
-      : "identificatie";
+  const searchParam = features?.toggles.casesPartialSearchEnabled
+    ? "identificatieContains"
+    : "identificatie";
 
   const handleFormSubmit = (searchValue: string) => {
     startTransition(async () => {

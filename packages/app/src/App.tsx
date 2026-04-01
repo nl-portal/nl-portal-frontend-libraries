@@ -10,7 +10,6 @@ import {
   NotificationProvider,
 } from "@nl-portal/nl-portal-user-interface";
 import { CUSTOM_MESSAGES } from "./i18n/custom-messages/custom-messages";
-import { config } from "./constants/config";
 import { ScrollRestoration } from "react-router";
 import CustomLayout from "./components/CustomLayout";
 
@@ -22,19 +21,19 @@ const authenticationMethods = {
 
 const App = () => {
   return (
-    <div className={config.THEME_CLASS}>
+    <div className={window.THEME_CLASS}>
       <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
         <OidcProvider
-          clientId={config.OIDC_CLIENT_ID}
-          realm={config.OIDC_REALM}
-          url={config.OIDC_URL}
-          redirectUri={config.OIDC_REDIRECT_URI}
-          postLogoutRedirectUri={config.OIDC_POST_LOGOUT_REDIRECT_URI}
+          clientId={window.OIDC_CLIENT_ID}
+          realm={window.OIDC_REALM}
+          url={window.OIDC_URL}
+          redirectUri={window.OIDC_REDIRECT_URI}
+          postLogoutRedirectUri={window.OIDC_POST_LOGOUT_REDIRECT_URI}
           authenticationMethods={authenticationMethods}
         >
           <ApiProvider
-            graphqlUri={config.GRAPHQL_URI}
-            restUri={config.REST_URI}
+            graphqlUri={window.GRAPHQL_URI}
+            restUri={window.REST_URI}
           >
             <NotificationProvider>
               <UserProvider>
