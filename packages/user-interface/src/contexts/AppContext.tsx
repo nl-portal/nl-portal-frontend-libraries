@@ -49,6 +49,43 @@ interface Features {
   };
 }
 
+// Deprecated: remove window variables below in next major version
+const deprecatedFeatures: Features = {
+  properties: {
+    custom: {},
+    messageCountPollingInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 30000,
+    myAddressChangeUrl: window.REPORT_CHANGE_OF_ADDRESS_URL || "",
+    myAddressResearchMoreInfoUrl: window.ADDRESS_RESEARCH_MORE_INFO_URL || "",
+    myAddressResearchUrl: window.ADDRESS_RESEARCH_URL || "",
+    myBrpChangeUrl: window.REQUEST_FOR_CHANGE_BRP_INFO_URL || "",
+    myBrpConfidentiallyChangeUrl:
+      window.REQUEST_CONFIDENTIALITY_OF_DATA_URL || "",
+    myGenderChangeUrl: window.CHANGE_REGISTERED_GENDER_URL || "",
+    myNameChangeUrl: window.CHANGE_IN_USE_OF_SURNAME_URL || "",
+    overviewMaintenanceAlertTextEn:
+      window.OVERVIEW_MAINTENANCE_ALERT_TEXT_EN || "",
+    overviewMaintenanceAlertTextNl:
+      window.OVERVIEW_MAINTENANCE_ALERT_TEXT_NL || "",
+    overviewMaintenanceAlertTitleEn:
+      window.OVERVIEW_MAINTENANCE_ALERT_TITLE_EN || "",
+    overviewMaintenanceAlertTitleNl:
+      window.OVERVIEW_MAINTENANCE_ALERT_TITLE_NL || "",
+  },
+  toggles: {
+    casesPartialSearchEnabled: window.CASES_PARTIAL_SEARCH === "true",
+    casesResultExplanationEnabled:
+      window.SHOW_CASE_RESULT_EXPLANATION === "true",
+    legacyPaymentEnabled: window.USE_LEGACY_OGONE_PAYMENT === "true",
+    messageCountEnabled: window.MESSAGE_COUNT_ENABLE === "true",
+    myInhabitantCountEnabled: window.SHOW_INHABITANT_AMOUNT === "true",
+    openProductEnabled: window.OPEN_PRODUCTEN === "true",
+    overviewIntroEnabled: window.OVERVIEW_INTRO_ENABLED === "true",
+    overviewMaintenanceAlertEnabled:
+      window.OVERVIEW_MAINTENANCE_ALERT_ENABLED === "true",
+    themeApiEnabled: window.USE_THEME_API === "true",
+  },
+};
+
 type Themes =
   GetOpenProductHoofdThemasByProductenQuery["getOpenProductHoofdThemasByProducten"];
 
@@ -109,7 +146,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
         const json = await response.json();
         json.properties.custom = JSON.parse(json.properties.custom || "{}");
 
-        setFeatures(json);
+        setFeatures({ ...deprecatedFeatures, ...json });
       } catch (err) {
         console.error("Failed to load features:", err);
       }
