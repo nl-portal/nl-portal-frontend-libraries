@@ -37,6 +37,7 @@ interface Features {
     overviewMaintenanceAlertTitleNl: string;
   };
   toggles: {
+    custom: Record<string, boolean>;
     casesPartialSearchEnabled: boolean;
     casesResultExplanationEnabled: boolean;
     legacyPaymentEnabled: boolean;
@@ -72,6 +73,7 @@ const deprecatedFeatures: Features = {
       window.OVERVIEW_MAINTENANCE_ALERT_TITLE_NL || "",
   },
   toggles: {
+    custom: {},
     casesPartialSearchEnabled: window.CASES_PARTIAL_SEARCH === "true",
     casesResultExplanationEnabled:
       window.SHOW_CASE_RESULT_EXPLANATION === "true",
