@@ -145,7 +145,7 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
           return;
         }
 
-        const json = await response.json();
+        const json = (await response.json()) as Features;
         json.properties.custom = JSON.parse(json.properties.custom || "{}");
         json.toggles.custom = JSON.parse(json.toggles.custom || "{}");
 
