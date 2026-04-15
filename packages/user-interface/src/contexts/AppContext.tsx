@@ -22,7 +22,7 @@ import FullscreenSkeleton from "../components/FullscreenSkeleton";
 
 interface Features {
   properties: {
-    custom: Record<string, unknown>;
+    custom: string;
     messageCountPollingInterval: number;
     myAddressChangeUrl: string;
     myAddressResearchMoreInfoUrl: string;
@@ -37,6 +37,7 @@ interface Features {
     overviewMaintenanceAlertTitleNl: string;
   };
   toggles: {
+    custom: string;
     casesPartialSearchEnabled: boolean;
     casesResultExplanationEnabled: boolean;
     legacyPaymentEnabled: boolean;
@@ -52,7 +53,7 @@ interface Features {
 // Deprecated: remove window variables below in next major version
 const deprecatedFeatures: Features = {
   properties: {
-    custom: {},
+    custom: "{}",
     messageCountPollingInterval: window.MESSAGE_COUNT_POLLING_INTERVAL || 30000,
     myAddressChangeUrl: window.REPORT_CHANGE_OF_ADDRESS_URL || "",
     myAddressResearchMoreInfoUrl: window.ADDRESS_RESEARCH_MORE_INFO_URL || "",
@@ -72,6 +73,7 @@ const deprecatedFeatures: Features = {
       window.OVERVIEW_MAINTENANCE_ALERT_TITLE_NL || "",
   },
   toggles: {
+    custom: "{}",
     casesPartialSearchEnabled: window.CASES_PARTIAL_SEARCH === "true",
     casesResultExplanationEnabled:
       window.SHOW_CASE_RESULT_EXPLANATION === "true",
@@ -143,8 +145,9 @@ export const AppProvider = ({ children }: MessagesProviderProps) => {
           return;
         }
 
-        const json = await response.json();
+        const json = (await response.json()) as Features;
         json.properties.custom = JSON.parse(json.properties.custom || "{}");
+        json.toggles.custom = JSON.parse(json.toggles.custom || "{}");
 
         setFeatures({ ...deprecatedFeatures, ...json });
       } catch (err) {
