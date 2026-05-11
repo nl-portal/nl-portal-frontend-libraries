@@ -84,6 +84,10 @@ const EditContactInfoPage = () => {
     type === "email" ? EMAIL_VALIDATION : TELEFOON_VALIDATION,
   );
 
+  const disabled = contactValue?.verificatieNeeded
+    ? contactValue?.verificatieDatum && initialValue === value
+    : initialValue === value;
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { key, ctrlKey, metaKey, altKey } = event;
 
@@ -100,7 +104,7 @@ const EditContactInfoPage = () => {
   };
 
   const onSubmit = async (verificationCode?: string) => {
-    if (!verificationCode && initialValue === value) return;
+    if (!verificationCode && disabled) return;
 
     setValidationError(false);
 
@@ -171,7 +175,7 @@ const EditContactInfoPage = () => {
         <Form
           id="edit-contact-info-form"
           submitTranslationId="account.save"
-          loading={initialValue === value || hasError || mutationLoading}
+          loading={disabled || hasError || mutationLoading}
           error={Boolean(!mutationLoading && mutationCalled && mutationError)}
           onSubmit={(event) => {
             event.preventDefault();

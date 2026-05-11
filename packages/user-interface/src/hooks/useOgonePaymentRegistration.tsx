@@ -6,6 +6,7 @@ import {
 import { useLazyQuery } from "@apollo/client/react";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
+import AppContext from "../contexts/AppContext";
 
 export enum PaymentStatus {
   IN_PROGRESS,
@@ -14,6 +15,7 @@ export enum PaymentStatus {
 }
 
 const useOgonePaymentRegistration = (useLegacyPostsale?: boolean) => {
+  const { features } = useContext(AppContext);
   const [getPaymentStatus] = useLazyQuery(GetDirectPaymentStatusDocument);
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>();
   const [orderId, setOrderId] = useState<string | undefined>();
@@ -27,34 +29,7 @@ const useOgonePaymentRegistration = (useLegacyPostsale?: boolean) => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setPaymentStatus(PaymentStatus.IN_PROGRESS);
 
-    if (window.USE_LEGACY_OGONE_PAYMENT !== "true") {
-      const hostedCheckoutId = searchParams.get("hostedCheckoutId");
-      const category = searchParams.get("category");
-
-      if (!hostedCheckoutId || !category) {
-        setPaymentStatus(PaymentStatus.FAILURE);
-        return;
-      }
-
-      getPaymentStatus({
-        variables: { identifier: category, hostedCheckoutId: hostedCheckoutId },
-      })
-        .then(({ data: paymentStatusData }) => {
-          if (
-            paymentStatusData?.getDirectPaymentStatus.status ===
-            DirectPaymentStatusCategory.Successful
-          ) {
-            setPaymentStatus(PaymentStatus.SUCCESS);
-          } else {
-            setPaymentStatus(PaymentStatus.FAILURE);
-          }
-        })
-        .catch(() => setPaymentStatus(PaymentStatus.FAILURE))
-        .finally(() => {
-          const newSearchParams = new URLSearchParams();
-          setSearchParams(newSearchParams);
-        });
-    } else {
+    if (features?.toggles.legacyPaymentEnabled) {
       if (useLegacyPostsale) {
         fetch(
           `${restUri}/public/payment/ogone/postsale?${searchParams.toString()}`,
@@ -90,6 +65,33 @@ const useOgonePaymentRegistration = (useLegacyPostsale?: boolean) => {
         const newSearchParams = new URLSearchParams();
         setSearchParams(newSearchParams);
       }
+    } else {
+      const hostedCheckoutId = searchParams.get("hostedCheckoutId");
+      const category = searchParams.get("category");
+
+      if (!hostedCheckoutId || !category) {
+        setPaymentStatus(PaymentStatus.FAILURE);
+        return;
+      }
+
+      getPaymentStatus({
+        variables: { identifier: category, hostedCheckoutId: hostedCheckoutId },
+      })
+        .then(({ data: paymentStatusData }) => {
+          if (
+            paymentStatusData?.getDirectPaymentStatus.status ===
+            DirectPaymentStatusCategory.Successful
+          ) {
+            setPaymentStatus(PaymentStatus.SUCCESS);
+          } else {
+            setPaymentStatus(PaymentStatus.FAILURE);
+          }
+        })
+        .catch(() => setPaymentStatus(PaymentStatus.FAILURE))
+        .finally(() => {
+          const newSearchParams = new URLSearchParams();
+          setSearchParams(newSearchParams);
+        });
     }
   }, [type, paymentStatus]);
 

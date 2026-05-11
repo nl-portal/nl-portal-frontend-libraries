@@ -33,7 +33,7 @@ const routes = [
     children: [
       {
         path: testPaths.case(),
-        element: <CaseDetailsPage showContactTimeline />,
+        element: <CaseDetailsPage />,
       },
     ],
   },
