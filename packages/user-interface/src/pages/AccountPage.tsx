@@ -24,32 +24,11 @@ import UserContext from "../contexts/UserContext";
 import Notification from "../components/Notification";
 import { LinkList } from "@gemeente-denhaag/link-list";
 import { DigitaleAdresType } from "@nl-portal/nl-portal-api";
+import AppContext from "../contexts/AppContext";
 
-// Temporary props, this should be moved to the config portal in the future
-interface AccountPageProps {
-  showInhabitantAmount?: string;
-  addressResearchUrl?: string;
-  reportChangeOfAddressUrl?: string;
-  changeInUseOfSurnameUrl?: string;
-  changeRegisteredGenderUrl?: string;
-  addressResearchMoreInfoUrl?: string;
-  requestForChangeBrpInfoUrl?: string;
-  requestConfidentialityOfDataUrl?: string;
-  showNotificationSubSection?: boolean;
-}
-
-const AccountPage = ({
-  showInhabitantAmount,
-  addressResearchUrl,
-  reportChangeOfAddressUrl,
-  changeInUseOfSurnameUrl,
-  changeRegisteredGenderUrl,
-  addressResearchMoreInfoUrl,
-  requestForChangeBrpInfoUrl,
-  requestConfidentialityOfDataUrl,
-  //showNotificationSubSection = true,
-}: AccountPageProps) => {
+const AccountPage = () => {
   const { formatDate } = useDateFormatter();
+  const { features } = useContext(AppContext);
   const { isPersoon, persoon, bedrijf, contact } = useContext(UserContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const intl = useIntl();
@@ -394,7 +373,8 @@ const AccountPage = ({
               },
             ]}
           />
-          {(changeInUseOfSurnameUrl || changeRegisteredGenderUrl) && (
+          {(features?.properties.myNameChangeUrl ||
+            features?.properties.myGenderChangeUrl) && (
             <div>
               <Heading as="h4">
                 <FormattedMessage id="linkList.title" />
@@ -406,14 +386,14 @@ const AccountPage = ({
                     label: (
                       <FormattedMessage id="account.persoonsgegevens.links.changeInUseOfSurname" />
                     ),
-                    href: changeInUseOfSurnameUrl,
+                    href: features?.properties.myNameChangeUrl,
                     external: true,
                   },
                   {
                     label: (
                       <FormattedMessage id="account.adres.links.changeRegisteredGender" />
                     ),
-                    href: changeRegisteredGenderUrl,
+                    href: features?.properties.myGenderChangeUrl,
                     external: true,
                   },
                 ].filter((item): item is typeof item & { href: string } =>
@@ -477,7 +457,7 @@ const AccountPage = ({
                   </DescriptionListDetail>
                 ),
               },
-              ...(showInhabitantAmount === "true"
+              ...(features?.toggles.myInhabitantCountEnabled
                 ? [
                     {
                       title: (
@@ -493,7 +473,8 @@ const AccountPage = ({
                 : []),
             ]}
           />
-          {(reportChangeOfAddressUrl || addressResearchUrl) && (
+          {(features?.properties.myAddressChangeUrl ||
+            features?.properties.myAddressResearchUrl) && (
             <div>
               <Heading as="h4">
                 <FormattedMessage id="linkList.title" />
@@ -505,14 +486,14 @@ const AccountPage = ({
                     label: (
                       <FormattedMessage id="account.adres.links.reportChangeOfAddress" />
                     ),
-                    href: reportChangeOfAddressUrl,
+                    href: features?.properties.myAddressChangeUrl,
                     external: true,
                   },
                   {
                     label: (
                       <FormattedMessage id="account.adres.links.addressResearchRequest" />
                     ),
-                    href: addressResearchUrl,
+                    href: features?.properties.myAddressResearchUrl,
                     external: true,
                   },
                 ].filter((item): item is typeof item & { href: string } =>
@@ -523,45 +504,41 @@ const AccountPage = ({
           )}
         </PageGrid>
       )}
-      {(addressResearchMoreInfoUrl ||
-        requestForChangeBrpInfoUrl ||
-        requestConfidentialityOfDataUrl) && (
+      {(features?.properties.myAddressResearchMoreInfoUrl ||
+        features?.properties.myBrpChangeUrl ||
+        features?.properties.myBrpConfidentiallyChangeUrl) && (
         <div>
           <Heading id="wijzigingen-en-aanvragen-brp" as="h3">
             <FormattedMessage id="account.detail.wijzigingenBrp" />
           </Heading>
-          {(addressResearchMoreInfoUrl ||
-            requestForChangeBrpInfoUrl ||
-            requestConfidentialityOfDataUrl) && (
-            <LinkList
-              className={styles["account__link-list"]}
-              items={[
-                {
-                  label: (
-                    <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.addressResearchMoreInfo" />
-                  ),
-                  href: addressResearchMoreInfoUrl,
-                  external: true,
-                },
-                {
-                  label: (
-                    <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.requestForChangeBrpInfo" />
-                  ),
-                  href: requestForChangeBrpInfoUrl,
-                  external: true,
-                },
-                {
-                  label: (
-                    <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.requestConfidentialityOfDataInfo" />
-                  ),
-                  href: requestConfidentialityOfDataUrl,
-                  external: true,
-                },
-              ].filter((item): item is typeof item & { href: string } =>
-                Boolean(item.href),
-              )}
-            />
-          )}
+          <LinkList
+            className={styles["account__link-list"]}
+            items={[
+              {
+                label: (
+                  <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.addressResearchMoreInfo" />
+                ),
+                href: features?.properties.myAddressResearchMoreInfoUrl,
+                external: true,
+              },
+              {
+                label: (
+                  <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.requestForChangeBrpInfo" />
+                ),
+                href: features?.properties.myBrpChangeUrl,
+                external: true,
+              },
+              {
+                label: (
+                  <FormattedMessage id="account.wijzigingEnAanvragenBRP.links.requestConfidentialityOfDataInfo" />
+                ),
+                href: features?.properties.myBrpConfidentiallyChangeUrl,
+                external: true,
+              },
+            ].filter((item): item is typeof item & { href: string } =>
+              Boolean(item.href),
+            )}
+          />
         </div>
       )}
     </PageGrid>

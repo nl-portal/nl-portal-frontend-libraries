@@ -11,7 +11,7 @@ const route = [
     children: [
       {
         index: true,
-        element: <OverviewPage showIntro={true} />,
+        element: <OverviewPage />,
       },
     ],
   },
@@ -23,7 +23,7 @@ const routeShowLessTasks = [
     children: [
       {
         index: true,
-        element: <OverviewPage showIntro={true} fetchTasksLength={2} />,
+        element: <OverviewPage fetchTasksLength={2} />,
       },
     ],
   },

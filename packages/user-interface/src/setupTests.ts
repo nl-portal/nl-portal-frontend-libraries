@@ -52,7 +52,7 @@ const ensureStorage = (name: "localStorage" | "sessionStorage") => {
 ensureStorage("localStorage");
 ensureStorage("sessionStorage");
 
-if (typeof globalThis.ResizeObserver === "undefined") {
+if (typeof window.ResizeObserver === "undefined") {
   class ResizeObserverMock {
     observe() {}
     unobserve() {}

@@ -16,28 +16,23 @@ import { ReactNode, useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { useNavigate, useOutletContext } from "react-router";
+import AppContext from "../contexts/AppContext";
 
 interface OverviewPageProps {
-  showAlert?: boolean;
-  alertType?: "error" | "info" | "success" | "warning";
   showNoEmailAlert?: boolean;
-  showNoEmailVerifiedAlert?: boolean;
-  showIntro?: boolean;
   fetchTasksLength?: number;
   fetchCasesLength?: number;
   children?: ReactNode;
 }
 
 const OverviewPage = ({
-  showAlert = false,
   showNoEmailAlert = false,
-  alertType = "warning",
-  showIntro = false,
   fetchTasksLength = 5,
   fetchCasesLength = 4,
   children,
 }: OverviewPageProps) => {
   const intl = useIntl();
+  const { features } = useContext(AppContext);
   const { username, usernameVolmacht, isVolmacht, contact } =
     useContext(UserContext);
   const {
@@ -68,13 +63,19 @@ const OverviewPage = ({
 
   return (
     <PageGrid>
-      {showAlert && (
+      {features?.toggles.overviewMaintenanceAlertEnabled && (
         <Alert
-          variant={alertType}
-          title={intl.formatMessage({ id: "overview.alertTitle" })}
+          variant="warning"
+          title={
+            intl.locale === "nl"
+              ? features.properties.overviewMaintenanceAlertTitleNl
+              : features.properties.overviewMaintenanceAlertTitleEn
+          }
           text={
             <Paragraph>
-              {intl.formatMessage({ id: "overview.alertText" })}
+              {intl.locale === "nl"
+                ? features.properties.overviewMaintenanceAlertTextNl
+                : features.properties.overviewMaintenanceAlertTextEn}
             </Paragraph>
           }
         />
@@ -116,7 +117,7 @@ const OverviewPage = ({
             }}
           />
         )}
-      {showIntro && (
+      {features?.toggles.overviewIntroEnabled && (
         <PageHeader
           title={
             <>
