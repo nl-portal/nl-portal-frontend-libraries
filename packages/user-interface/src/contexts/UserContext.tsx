@@ -75,7 +75,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const persoonNaam = useMemo(() => {
     const p = persoonData?.getPersoonV2;
-    return p ? getFullName(p.naam) : "";
+    return p?.naam ? getFullName(p.naam) : "";
   }, [persoonData]);
 
   const bedrijfNaam = useMemo(() => {
@@ -85,7 +85,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const gemachtigdeNaam = useMemo(() => {
     const g = gemachtigdeData?.getGemachtigdeV2;
     if (!g) return "";
-    return (g.persoon ? getFullName(g.persoon.naam) : g.bedrijf?.naam) || "";
+    return (
+      (g.persoon?.naam ? getFullName(g.persoon.naam) : g.bedrijf?.naam) || ""
+    );
   }, [gemachtigdeData]);
 
   const username = useMemo(() => {

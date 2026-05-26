@@ -1,6 +1,8 @@
 import { BrpNaam, BrpNationaliteit } from "@nl-portal/nl-portal-api";
 
-const getNationalitiesString = (nationalities?: BrpNationaliteit[]): string => {
+const getNationalitiesString = (
+  nationalities?: BrpNationaliteit[] | null,
+): string => {
   if (Array.isArray(nationalities)) {
     return nationalities
       .map((nationality) => nationality?.nationaliteit?.omschrijving)
