@@ -11,6 +11,7 @@ export const QUERY_GET_OPEN_PRODUCT = gql`
         identificatie
         zaaktype {
           identificatie
+          omschrijving
         }
         startdatum
         status {

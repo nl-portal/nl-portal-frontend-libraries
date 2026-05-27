@@ -8,6 +8,7 @@ export const QUERY_GET_OPEN_PRODUCT_THEMA_ZAKEN = gql`
       identificatie
       zaaktype {
         identificatie
+        omschrijving
       }
       startdatum
       status {

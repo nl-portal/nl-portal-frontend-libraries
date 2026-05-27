@@ -296,7 +296,7 @@ const AccountPage = () => {
                     translate="no"
                     data-testid="persoonsgegevens-firstname"
                   >
-                    {persoon?.naam.voornamen}
+                    {persoon?.naam?.voornamen}
                   </DescriptionListDetail>
                 ),
               },
@@ -307,7 +307,7 @@ const AccountPage = () => {
                     translate="no"
                     data-testid="persoonsgegevens-lastname"
                   >
-                    {persoon?.naam.officialLastName}
+                    {persoon?.naam?.officialLastName}
                   </DescriptionListDetail>
                 ),
               },

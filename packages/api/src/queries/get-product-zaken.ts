@@ -16,6 +16,7 @@ export const QUERY_GET_PRODUCT_ZAKEN = gql`
       identificatie
       zaaktype {
         identificatie
+        omschrijving
       }
       startdatum
       status {
