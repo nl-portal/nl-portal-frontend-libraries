@@ -216,7 +216,9 @@ export const routes = [
             slug={themes.inkomensondersteuning.slug}
             productenSettings={[
               {
-                productTypeCodes: ["INKOMENSONDERSTEUNING"],
+                productTypeCodes: [
+                  themes.inkomensondersteuning.productTypeCodes.stadspas,
+                ],
                 titleTranslationId: "Vergunningen",
                 headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
                 dataMapping: ["naam", "startDatum", "eindDatum"],

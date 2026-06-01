@@ -2,11 +2,13 @@ export type ThemeSlug = "belastingzaken" | "parkeren" | "inkomensondersteuning";
 export type ProductTypeSlug =
   | "vergunningen"
   | "bezoekersvergunningen"
-  | "belastingzaken";
+  | "belastingzaken"
+  | "stadspas";
 export type ProductTypeCodes =
   | "PARKEREN"
   | "BEZOEKERSVERGUNNING"
-  | "BELASTINGZAKEN";
+  | "BELASTINGZAKEN"
+  | "STADSPAS";
 
 export type Themes = Record<
   ThemeSlug,
@@ -16,6 +18,12 @@ export type Themes = Record<
     productTypeCodes: Record<string, ProductTypeCodes>;
   }
 >;
+
+/**
+ * Slug: for URL paths and translation keys
+ * ProductTypeSlug: for url paths and for translation keys
+ * ProductTypeCodes: for mapping to product types in the API responses
+ */
 
 export const themes: Themes = {
   belastingzaken: {
@@ -36,7 +44,7 @@ export const themes: Themes = {
   },
   inkomensondersteuning: {
     slug: "inkomensondersteuning",
-    productTypeSlugs: {},
-    productTypeCodes: {},
+    productTypeSlugs: { stadspas: "stadspas" },
+    productTypeCodes: { stadspas: "STADSPAS" },
   },
 };
