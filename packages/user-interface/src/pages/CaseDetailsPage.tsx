@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import {
   useGetZaakQuery,
   useGetTakenV2Query,
+  ApiContext,
   TaakV2,
   ZaakStatus,
   OnderwerpObjectIndentificatorType,
@@ -41,6 +42,7 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
   const intl = useIntl();
   const { id } = useParams();
   const { currentLocale } = useContext(LocaleContext);
+  const { restUri } = useContext(ApiContext);
   const {
     data: caseData,
     loading: caseLoading,
@@ -247,6 +249,9 @@ const CaseDetailsPage = ({ showContactTimeline = false }: CasePageProps) => {
         loading={loading}
         error={Boolean(caseError)}
         documents={caseData?.getZaak.documenten}
+        getDownloadLink={(doc) =>
+          `${restUri}/zakenapi/zaakdocument/${doc.identificatie}/content`
+        }
       />
       {showContactTimeline && contactItems.length > 0 && (
         <section>
