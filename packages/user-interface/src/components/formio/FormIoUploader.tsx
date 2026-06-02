@@ -28,6 +28,7 @@ interface FileUploadProps {
   onChange: (fileList: Array<UploadedFile>) => void;
   informatieobjecttype?: string;
   initialValue?: any;
+  taakId?: string;
 }
 
 const FileUpload = ({
@@ -39,6 +40,7 @@ const FileUpload = ({
   onChange,
   informatieobjecttype,
   initialValue = [],
+  taakId,
 }: FileUploadProps) => {
   const [error, setError] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>(initialValue);
@@ -54,7 +56,7 @@ const FileUpload = ({
   };
   const uploadFile = (file: File) => {
     const restUri = sessionStorage.getItem("REST_URI");
-    const uploadLink = `${restUri}/document/content`;
+    const uploadLink = `${restUri}/taak/${taakId}/document/content`;
     setError(false);
     const formData = new FormData();
     formData.append("file", file);
@@ -176,6 +178,7 @@ const FileUpload = ({
 
 class FormIoUploader extends ReactComponent {
   private component: any;
+  private options: any;
   private data: object;
   private element: Root | null;
   static globalOidcToken: string = "";
@@ -183,6 +186,7 @@ class FormIoUploader extends ReactComponent {
   constructor(component: any, options: any, data: any) {
     super(component, options, data);
     this.component = component;
+    this.options = options;
     this.data = data;
     this.element = null;
 
@@ -237,6 +241,7 @@ class FormIoUploader extends ReactComponent {
           onChange={this.onChangeHandler}
           informatieobjecttype={this.component.informatieobjecttype || ""}
           initialValue={this.dataValue}
+          taakId={this.options.taakId}
         />
       </LocalizationProvider>,
     );

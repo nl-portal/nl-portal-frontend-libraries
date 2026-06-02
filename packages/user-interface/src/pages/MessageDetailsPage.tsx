@@ -1,4 +1,8 @@
-import { Bericht, useGetBerichtQuery } from "@nl-portal/nl-portal-api";
+import {
+  ApiContext,
+  Bericht,
+  useGetBerichtQuery,
+} from "@nl-portal/nl-portal-api";
 import { useOutletContext, useParams } from "react-router";
 import BackLink from "../components/BackLink";
 import PageGrid from "../components/PageGrid";
@@ -14,6 +18,7 @@ import DocumentsList from "../components/DocumentsList";
 const MessageDetailsPage = () => {
   const { id } = useParams();
   const { refetchMessages } = useContext(AppContext);
+  const { restUri } = useContext(ApiContext);
   const { paths } = useOutletContext<RouterOutletContext>();
   const {
     data: messageData,
@@ -71,6 +76,9 @@ const MessageDetailsPage = () => {
         loading={messageLoading}
         error={Boolean(messageError)}
         documents={message?.documenten}
+        getDownloadLink={(doc) =>
+          `${restUri}/berichten/${id}/document/${doc.uuid}/content`
+        }
       />
     </PageGrid>
   );
