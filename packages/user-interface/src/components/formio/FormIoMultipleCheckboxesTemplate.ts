@@ -4,15 +4,23 @@ import { errorsBlock } from "./FormIoTemplateUtils";
 export const nlPortalMultipleCheckboxes = {
   form: (ctx: any) => {
     const { component } = ctx;
+
     const idBase = escape(ctx.instance?.id || component.key || "selectboxes");
     const legend = escape(ctx.t(component.label || ""));
     const description = escape(ctx.t(component.description || ""));
     const hasErrors = Array.isArray(ctx.errors) && ctx.errors.length > 0;
     const fieldsetClass = `utrecht-form-fieldset${hasErrors ? " utrecht-form-fieldset--invalid" : ""}`;
 
-    const isChecked = (value: any) => {
-      const v = ctx.dataValue ? ctx.dataValue[value] : undefined;
-      return v === true || v === "true";
+    const valueMap =
+      (ctx.instance && (ctx.instance.dataValue || ctx.instance._dataValue)) ||
+      ctx.dataValue ||
+      {};
+
+    const baseName = ctx.inputInfo?.attr?.name || ctx.name || component.key;
+
+    const isChecked = (valueKey: string) => {
+      const v = valueMap?.[valueKey];
+      return v === true || v === "true" || v === 1 || v === "1";
     };
 
     const optionsHtml = (component.values || [])
@@ -21,8 +29,7 @@ export const nlPortalMultipleCheckboxes = {
         const text = escape(ctx.t(opt.label ?? opt.value ?? ""));
         const inputId = `${idBase}-${i}`;
 
-        // name-conventie van Form.io selectboxes: key[value]
-        const name = escape(`${component.key}[${valueKey}]`);
+        const name = escape(`${baseName}[${valueKey}]`);
 
         const checked = isChecked(valueKey) ? "checked" : "";
         const disabled = ctx.disabled ? "disabled" : "";
@@ -37,7 +44,7 @@ export const nlPortalMultipleCheckboxes = {
                 class="utrecht-checkbox utrecht-checkbox--html-input utrecht-checkbox--custom utrecht-form-field__input"
                 type="checkbox"
                 name="${name}"
-                value="true"
+                value="${escape(valueKey)}"
                 ${checked}
                 ${disabled}
                 aria-describedby="${description ? `${idBase}-description` : ""}"
