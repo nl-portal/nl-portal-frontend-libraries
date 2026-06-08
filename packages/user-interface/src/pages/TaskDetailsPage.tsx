@@ -1,6 +1,4 @@
 import { useEffect, useMemo } from "react";
-import ProtectedEval from "@formio/protected-eval";
-import { Formio } from "@formio/js";
 import { Form } from "@formio/react";
 import { merge } from "lodash-es";
 import {
@@ -23,9 +21,6 @@ import {
   applyNativeSelectsToForm,
   convertPortalFileUploadResult,
 } from "../components/formio/FormIoTemplateUtils";
-
-//eslint-disable-next-line react-hooks/rules-of-hooks
-Formio.use(ProtectedEval);
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const buildPrefillPayload = (submissionData: any) => {
