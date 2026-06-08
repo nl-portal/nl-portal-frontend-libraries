@@ -65,9 +65,12 @@ const TaskDetailsPage = () => {
     },
   });
 
-  const { data: task } = useQuery(GetPortaalFormulierByIdV2Document, {
-    variables: { id },
-  });
+  const { data: task, loading: taskLoading } = useQuery(
+    GetPortaalFormulierByIdV2Document,
+    {
+      variables: { id },
+    },
+  );
 
   const [getFormByUrl, { data: formDefinitionUrl, loading: formByUrlLoading }] =
     useLazyQuery(GetFormDefinitionByObjectenApiUrlDocument);
@@ -75,8 +78,8 @@ const TaskDetailsPage = () => {
   const [getFormById, { data: formDefinitionId, loading: formByIdLoading }] =
     useLazyQuery(GetFormDefinitionByIdDocument);
 
-  const loading = formByUrlLoading || formByIdLoading;
-  const submitted = task?.getTaakByIdV2?.status !== TaakStatus.Open;
+  const loading = taskLoading || formByUrlLoading || formByIdLoading;
+  const submitted = !loading && task?.getTaakByIdV2?.status !== TaakStatus.Open;
 
   const { submission, prefillError } = useMemo(() => {
     try {
