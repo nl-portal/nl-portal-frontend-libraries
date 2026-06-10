@@ -191,10 +191,13 @@ const TaskDetailsPage = () => {
           src={adjustedForm}
           submission={submission}
           onSubmit={onFormSubmit}
-          options={{
-            noAlerts: true,
-            template: "nl-portal",
-          }}
+          options={
+            {
+              noAlerts: true,
+              template: "nl-portal",
+              taakId: id,
+            } as Record<string, unknown>
+          }
         />
       </div>
     </PageGrid>
