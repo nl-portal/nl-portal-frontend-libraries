@@ -1,5 +1,8 @@
 import {
-  ApiContext, Bericht, GetBerichtDocument } from "@nl-portal/nl-portal-api";
+  ApiContext,
+  Bericht,
+  GetBerichtDocument,
+} from "@nl-portal/nl-portal-api";
 import { useQuery } from "@apollo/client/react";
 import { useOutletContext, useParams } from "react-router";
 import BackLink from "../components/BackLink";
