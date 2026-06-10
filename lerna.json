@@ -2,6 +2,6 @@
   "packages": [
     "packages/*"
   ],
-  "version": "3.0.2-RC-202606081032-4881a117-SNAPSHOT",
+  "version": "3.0.2-RC-202606101146-fbb78852-SNAPSHOT",
   "npmClient": "pnpm"
 }
