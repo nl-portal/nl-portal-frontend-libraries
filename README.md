@@ -1,6 +1,6 @@
 # nl-portal-libraries
 
-![Version 3.0.2](https://img.shields.io/badge/Version-3.0.2-blue)  
+![Version 3.1.0](https://img.shields.io/badge/Version-3.1.0-blue)  
 ![Node 22](https://img.shields.io/badge/Node-22-green)
 ![React 19.2.3](https://img.shields.io/badge/React-19.2.3-green)
 
