@@ -5,6 +5,7 @@ import {
   MessageDetailsPage,
   NoMatchPage,
   OverviewPage,
+  ProductsPage,
   TasksPage,
   TaskDetailsPage,
   MessagesPage,
@@ -80,6 +81,17 @@ export const routes = [
     ],
   },
   {
+    path: paths.products,
+    handle: { label: "breadcrumb.products" },
+    children: [
+      {
+        index: true,
+        handle: { label: "breadcrumb.products" },
+        element: <ProductsPage />,
+      },
+    ],
+  },
+  {
     path: paths.themeOverview(themes.belastingzaken.slug),
     handle: { label: `breadcrumb.${themes.belastingzaken.slug}` },
     children: [
@@ -92,7 +104,7 @@ export const routes = [
             productenSettings={[
               {
                 productTypeCodes: [
-                  themes.belastingzaken.productTypeCodes.belastingzaken,
+                  themes.belastingzaken.productTypes.belastingzaken?.code,
                 ],
                 titleTranslationId: "Producten",
                 headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
@@ -114,14 +126,14 @@ export const routes = [
         element: <ParkerenOverview />,
       },
       {
-        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypeSlugs.parkeervergunningen)}`,
+        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypes.vergunningen?.slug)}`,
         handle: { label: `breadcrumb.${themes.parkeren.slug}` },
         element: (
           <ThemeListPage
             slug={themes.parkeren.slug}
             productSettings={{
               productTypeCodes: [
-                themes.parkeren.productTypeCodes.parkeervergunningen,
+                themes.parkeren.productTypes.vergunningen?.code,
               ],
               titleTranslationId: "Vergunningen",
               headerTranslationIds: [
@@ -151,14 +163,14 @@ export const routes = [
         ),
       },
       {
-        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypeSlugs.bezoekersvergunningen)}`,
+        path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypes.bezoekersvergunningen?.slug)}`,
         handle: { label: `breadcrumb.${themes.parkeren.slug}` },
         element: (
           <ThemeListPage
             slug={themes.parkeren.slug}
             productSettings={{
               productTypeCodes: [
-                themes.parkeren.productTypeCodes.bezoekersvergunningen,
+                themes.parkeren.productTypes.bezoekersvergunningen?.code,
               ],
               titleTranslationId: "Bezoekersvergunningen",
               headerTranslationIds: ["Naam", "Startdatum", "Status", "Prijs"],
@@ -181,17 +193,26 @@ export const routes = [
         ),
       },
       {
-        path: paths.themeDetails(themes.parkeren.slug),
+        path: paths.themeDetails(
+          themes.parkeren.slug,
+          themes.parkeren.productTypes.bezoekersvergunningen?.slug,
+        ),
         handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
         element: <ParkerenDetails />,
       },
       {
-        path: paths.themeHistory(themes.parkeren.slug),
+        path: paths.themeHistory(
+          themes.parkeren.slug,
+          themes.parkeren.productTypes.bezoekersvergunningen?.slug,
+        ),
         handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
         element: <ParkerenHistory />,
       },
       {
-        path: paths.themeMutate(themes.parkeren.slug),
+        path: paths.themeMutate(
+          themes.parkeren.slug,
+          themes.parkeren.productTypes.bezoekersvergunningen?.slug,
+        ),
         handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
         element: (
           <ThemeMutatePage slug={themes.parkeren.slug}>
@@ -217,7 +238,7 @@ export const routes = [
             productenSettings={[
               {
                 productTypeCodes: [
-                  themes.inkomensondersteuning.productTypeCodes.stadspas,
+                  themes.inkomensondersteuning.productTypes.stadspas?.code,
                 ],
                 titleTranslationId: "Vergunningen",
                 headerTranslationIds: ["Naam", "Startdatum", "Einddatum"],
@@ -228,7 +249,10 @@ export const routes = [
         ),
       },
       {
-        path: paths.themeDetails(themes.inkomensondersteuning.slug),
+        path: paths.themeDetails(
+          themes.inkomensondersteuning.slug,
+          themes.inkomensondersteuning.productTypes.stadspas?.slug,
+        ),
         handle: {
           label: `breadcrumb.${themes.inkomensondersteuning.slug}.details`,
         },

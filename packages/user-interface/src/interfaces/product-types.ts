@@ -11,7 +11,7 @@ export type DataMappingItem =
 
 export interface ProductSettings {
   productTypeSlug?: string;
-  productTypeCodes: string[];
+  productTypeCodes: (string | undefined)[];
   titleTranslationId: string;
   headerTranslationIds: string[];
   dataMapping: DataMappingItem[];

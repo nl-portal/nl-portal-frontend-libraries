@@ -2,7 +2,7 @@ import { useIntl } from "react-intl";
 import PageGrid from "../components/PageGrid";
 import PageHeader from "../components/PageHeader";
 import { OpenProductThema } from "@nl-portal/nl-portal-api";
-import { ProductList } from "../components/ProductList";
+import { ProductFetchList } from "../components/ProductFetchList";
 import { stringToSlug } from "../utils/string-to-slug";
 import AppContext from "../contexts/AppContext";
 import { use } from "react";
@@ -32,7 +32,7 @@ const ThemeListPage = ({ slug, productSettings, children }: Props) => {
         <PageHeader title={intl.formatMessage({ id: `pageTitles.${slug}` })} />
       </div>
       {
-        <ProductList
+        <ProductFetchList
           key={productSettings.titleTranslationId}
           slug={slug}
           productLength={10}

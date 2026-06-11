@@ -1,0 +1,7 @@
+@use "../styles/mixins";
+
+.products-list {
+  &__pagination {
+    margin-block-start: var(--nlportal-space-block-2xl, 2rem);
+  }
+}

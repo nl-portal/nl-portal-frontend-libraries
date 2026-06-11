@@ -4,12 +4,14 @@ import {
   CarIcon,
   CheckCircleIcon,
   EuroIcon,
+  FileTextIcon,
   GridIcon,
   InboxIcon,
   UserIcon,
 } from "@gemeente-denhaag/icons";
 import { paths } from "./paths";
 import { themes } from "./themes";
+import {} from "@gemeente-denhaag/icons";
 
 export const navigationItems: NavigationItem[][] = [
   [
@@ -35,6 +37,11 @@ export const navigationItems: NavigationItem[][] = [
       path: paths.messages,
       icon: <InboxIcon />,
       hasMessagesCount: true,
+    },
+    {
+      titleTranslationKey: "products",
+      path: paths.products,
+      icon: <FileTextIcon />,
     },
   ],
   [

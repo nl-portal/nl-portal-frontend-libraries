@@ -30,9 +30,11 @@ import { SkipLink } from "@gemeente-denhaag/skip-link";
 import styles from "./Layout.module.scss";
 import { FormattedMessage } from "react-intl";
 import FormIoDatePicker from "./formio/FormIoDatePicker";
+import { Themes } from "../interfaces/themes";
 
 interface LayoutComponentProps {
   paths: Paths;
+  themes?: Themes;
   headerLogo?: AnchorHTMLAttributes<HTMLAnchorElement>;
   customHeader?: ReactNode;
   customFooter?: ReactNode;
@@ -41,6 +43,7 @@ interface LayoutComponentProps {
 
 const Layout = ({
   paths,
+  themes,
   headerLogo,
   customHeader,
   customFooter,
@@ -86,7 +89,7 @@ const Layout = ({
             <Menu />
             <main id="main-content" className="denhaag-page-content__main">
               <PageMetaData />
-              {<Outlet context={{ paths }} />}
+              {<Outlet context={{ paths, themes }} />}
             </main>
           </ResponsiveContent>
           {(footerData || customFooter) && (

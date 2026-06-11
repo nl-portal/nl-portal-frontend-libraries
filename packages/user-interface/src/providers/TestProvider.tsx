@@ -22,6 +22,7 @@ import {
 } from "@gemeente-denhaag/icons";
 import PageMetaData from "../components/PageMetaData";
 import { UserProvider } from "../contexts/UserContext";
+import { Themes } from "../interfaces/themes";
 
 export const testPaths: Paths = {
   noMatch: "/404",
@@ -100,10 +101,12 @@ export const testNavigationItems: NavigationItem[][] = [
 const TestContent = ({
   mocks,
   paths,
+  themes,
 }: {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   mocks: MockedResponse<Record<string, any>>[];
   paths: Paths;
+  themes?: Themes;
 }) => {
   return (
     <MockWrapper>
@@ -113,7 +116,7 @@ const TestContent = ({
             <UserProvider>
               <AppProvider>
                 <PageMetaData />
-                <Outlet context={{ paths }} />
+                <Outlet context={{ paths, themes }} />
               </AppProvider>
             </UserProvider>
           </NotificationProvider>
