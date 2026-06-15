@@ -7,6 +7,7 @@ export interface Paths {
   task: (id?: string | number) => string;
   messages: string;
   message: (id?: string | number) => string;
+  products: string;
   themeOverview: (themeSlug: string) => string;
   themeList: (themeSlug: string, productTypeSlug?: string) => string;
   themeDetails: (

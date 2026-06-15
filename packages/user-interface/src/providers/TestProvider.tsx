@@ -33,6 +33,7 @@ export const testPaths: Paths = {
   task: (id = ":id") => `/taken/taak/${id}`,
   messages: "/berichten",
   message: (id = ":id") => `/berichten/bericht/${id}`,
+  products: "/producten",
   themeOverview: (type = ":type") => `/${type}`,
   themeList: (type = ":type", productTypeSlug = ":productTypeSlug") =>
     `/${type}/${productTypeSlug}`,
