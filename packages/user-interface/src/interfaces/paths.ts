@@ -11,17 +11,17 @@ export interface Paths {
   themeList: (themeSlug: string, productTypeSlug?: string) => string;
   themeDetails: (
     themeSlug: string,
-    productSlug: string,
+    productSlug?: string,
     id?: string | number,
   ) => string;
   themeHistory: (
     themeSlug: string,
-    productSlug: string,
+    productSlug?: string,
     id?: string | number,
   ) => string;
   themeMutate: (
     themeSlug: string,
-    productSlug: string,
+    productSlug?: string,
     id?: string | number,
   ) => string;
   account: string;

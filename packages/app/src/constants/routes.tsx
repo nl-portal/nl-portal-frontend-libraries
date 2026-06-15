@@ -32,6 +32,7 @@ export const routes = [
     handle: { label: "breadcrumb.overview" },
     element: <OverviewPage showNoEmailAlert />,
   },
+  // Zaken
   {
     path: paths.cases,
     handle: { label: "breadcrumb.cases" },
@@ -48,6 +49,7 @@ export const routes = [
       },
     ],
   },
+  // Taken
   {
     path: paths.tasks,
     handle: { label: "breadcrumb.tasks" },
@@ -64,6 +66,7 @@ export const routes = [
       },
     ],
   },
+  // Berichten
   {
     path: paths.messages,
     handle: { label: "breadcrumb.messages" },
@@ -80,6 +83,7 @@ export const routes = [
       },
     ],
   },
+  // Producten
   {
     path: paths.products,
     handle: { label: "breadcrumb.products" },
@@ -91,6 +95,7 @@ export const routes = [
       },
     ],
   },
+  // Belastingzaken
   {
     path: paths.themeOverview(themes.belastingzaken.slug),
     handle: { label: `breadcrumb.${themes.belastingzaken.slug}` },
@@ -116,6 +121,7 @@ export const routes = [
       },
     ],
   },
+  // Parkeren
   {
     path: paths.themeOverview(themes.parkeren.slug),
     handle: { label: `breadcrumb.${themes.parkeren.slug}` },
@@ -225,6 +231,7 @@ export const routes = [
       },
     ],
   },
+  // Inkomenondersteuning
   {
     path: paths.themeOverview(themes.inkomensondersteuning.slug),
     handle: { label: `breadcrumb.${themes.inkomensondersteuning.slug}` },
@@ -260,6 +267,7 @@ export const routes = [
       },
     ],
   },
+  // Account
   {
     path: paths.account,
     handle: { label: "breadcrumb.account" },
@@ -276,15 +284,18 @@ export const routes = [
       },
     ],
   },
+  // OIDC Callback
   {
     path: new URL(window.OIDC_REDIRECT_URI).pathname,
     element: <OidcCallbackPage />,
   },
+  // No Match
   {
     path: paths.noMatch,
     handle: { label: "breadcrumb.noMatch" },
     element: <NoMatchPage contactLink={{ target: "_blank" }} />,
   },
+  // Catch All
   {
     path: "*",
     handle: { label: "breadcrumb.noMatch" },
