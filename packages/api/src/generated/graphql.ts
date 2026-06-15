@@ -602,6 +602,35 @@ export type BrpVerblijfsTitelInOnderzoek = {
   datumIngangOnderzoek?: Maybe<BrpDatum>;
 };
 
+export type CaseCreated = {
+  __typename?: 'CaseCreated';
+  caseId?: Maybe<Scalars['UUID']['output']>;
+};
+
+export type CaseDefinition = {
+  __typename?: 'CaseDefinition';
+  id: Scalars['String']['output'];
+  schema: Scalars['JSON']['output'];
+  statusDefinition: Array<Maybe<Scalars['String']['output']>>;
+};
+
+export type CaseInstance = {
+  __typename?: 'CaseInstance';
+  caseDefinitionId: Scalars['String']['output'];
+  createdOn: Scalars['String']['output'];
+  externalId?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['UUID']['output']>;
+  status?: Maybe<Status>;
+  statusHistory?: Maybe<Array<Maybe<HistoricStatus>>>;
+  submission?: Maybe<Scalars['JSON']['output']>;
+  userId: Scalars['String']['output'];
+};
+
+export enum CaseInstanceOrdering {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
 export type Categorie = {
   __typename?: 'Categorie';
   naam: Scalars['String']['output'];
@@ -738,11 +767,6 @@ export type Document = {
   uuid: Scalars['UUID']['output'];
 };
 
-export type DocumentContent = {
-  __typename?: 'DocumentContent';
-  content: Scalars['String']['output'];
-};
-
 export type Eigenaar = {
   __typename?: 'Eigenaar';
   rechtsvorm: Scalars['String']['output'];
@@ -800,6 +824,12 @@ export type HandelsNaam = {
   __typename?: 'HandelsNaam';
   naam: Scalars['String']['output'];
   volgorde: Scalars['Int']['output'];
+};
+
+export type HistoricStatus = {
+  __typename?: 'HistoricStatus';
+  createdOn: Scalars['String']['output'];
+  status: Status;
 };
 
 export type Hoofdvestiging = {
@@ -877,6 +907,7 @@ export type Mutation = {
   doDirectPayment: DirectPaymentResponse;
   /**  Create Ogone payment with hash and fields */
   generateOgonePayment: OgonePayment;
+  processSubmission?: Maybe<CaseCreated>;
   /**  Submit a task */
   submitTaakV2: TaakV2;
   /**  Update product */
@@ -918,6 +949,13 @@ export type MutationDoDirectPaymentArgs = {
 
 export type MutationGenerateOgonePaymentArgs = {
   paymentRequest: OgonePaymentRequestInput;
+};
+
+
+export type MutationProcessSubmissionArgs = {
+  caseDefinitionId: Scalars['String']['input'];
+  initialStatus?: InputMaybe<Scalars['String']['input']>;
+  submission?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 
@@ -1959,6 +1997,8 @@ export type ProductenPage = {
 
 export type Query = {
   __typename?: 'Query';
+  allCaseDefinitions: Array<Maybe<CaseDefinition>>;
+  allCaseInstances?: Maybe<Array<Maybe<CaseInstance>>>;
   /**  Find the Partij of the authenticated user. */
   findUserPartij?: Maybe<OpenKlant2Partij>;
   /**  Gets the bedrijf data */
@@ -1980,10 +2020,9 @@ export type Query = {
   getBesluiten: BesluitPage;
   /**  Gets the number of people living in the same house of the adresseerbaarObjectIdentificatie */
   getBewonersAantalV2?: Maybe<Scalars['Int']['output']>;
+  getCaseInstance?: Maybe<CaseInstance>;
   getDecision: Array<Scalars['JSON']['output']>;
   getDirectPaymentStatus: DirectPaymentStatus;
-  /**  Gets a document content by id as base64 encoded */
-  getDocumentContent: DocumentContent;
   /**
    *  find single form definition from repository or Objecten API
    * deprecated(
@@ -2088,6 +2127,11 @@ export type Query = {
 };
 
 
+export type QueryAllCaseInstancesArgs = {
+  orderBy: CaseInstanceOrdering;
+};
+
+
 export type QueryGetBerichtArgs = {
   id: Scalars['UUID']['input'];
 };
@@ -2141,6 +2185,11 @@ export type QueryGetBewonersAantalV2Args = {
 };
 
 
+export type QueryGetCaseInstanceArgs = {
+  id?: InputMaybe<Scalars['UUID']['input']>;
+};
+
+
 export type QueryGetDecisionArgs = {
   dmnVariables?: InputMaybe<Scalars['JSON']['input']>;
   key: Scalars['String']['input'];
@@ -2153,12 +2202,6 @@ export type QueryGetDecisionArgs = {
 export type QueryGetDirectPaymentStatusArgs = {
   hostedCheckoutId: Scalars['String']['input'];
   identifier: Scalars['String']['input'];
-};
-
-
-export type QueryGetDocumentContentArgs = {
-  documentApi: Scalars['String']['input'];
-  id: Scalars['UUID']['input'];
 };
 
 
@@ -2457,6 +2500,17 @@ export enum SoortPartij {
   Organisatie = 'ORGANISATIE',
   Persoon = 'PERSOON'
 }
+
+export enum Sort {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
+export type Status = {
+  __typename?: 'Status';
+  createdOn: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
 
 export type StatusType = {
   __typename?: 'StatusType';
