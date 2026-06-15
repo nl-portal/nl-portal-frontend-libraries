@@ -3,6 +3,7 @@ import {
   GetZaakDocument,
   GetTakenV2Document,
   GetUserKlantContactenDocument,
+  ApiContext,
   TaakV2,
   ZaakStatus,
   OnderwerpObjectIndentificatorType,
@@ -40,6 +41,7 @@ const CaseDetailsPage = () => {
   const { id } = useParams();
   const { currentLocale } = useContext(LocaleContext);
   const { features } = useContext(AppContext);
+  const { restUri } = useContext(ApiContext);
   const {
     data: caseData,
     loading: caseLoading,
@@ -249,6 +251,9 @@ const CaseDetailsPage = () => {
         loading={loading}
         error={Boolean(caseError)}
         documents={caseData?.getZaak.documenten}
+        getDownloadLink={(doc) =>
+          `${restUri}/zakenapi/zaakdocument/${doc.identificatie}/content`
+        }
       />
       {contactItems.length > 0 && (
         <section>

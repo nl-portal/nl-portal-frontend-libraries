@@ -1,7 +1,4 @@
-import {
-  ApiContext,
-  Document as PortalDocument,
-} from "@nl-portal/nl-portal-api";
+import { Document as PortalDocument } from "@nl-portal/nl-portal-api";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import { useIntl } from "react-intl";
 import styles from "./DocumentsList.module.scss";
@@ -9,7 +6,6 @@ import Document from "./Document";
 import SectionHeader from "./SectionHeader";
 import Skeleton from "./Skeleton";
 import classnames from "classnames";
-import { useContext } from "react";
 import { listViewHeight } from "../constants/skeleton";
 
 interface Props {
@@ -19,6 +15,7 @@ interface Props {
   emptyTranslationId?: string;
   titleTranslationId?: string | null;
   documents?: Array<PortalDocument>;
+  getDownloadLink: (document: PortalDocument) => string;
 }
 
 const DocumentsList = ({
@@ -28,6 +25,7 @@ const DocumentsList = ({
   emptyTranslationId = "documentsList.empty",
   titleTranslationId = "documentsList.title",
   documents,
+  getDownloadLink,
 }: Props) => {
   const intl = useIntl();
   const title = titleTranslationId
@@ -35,7 +33,6 @@ const DocumentsList = ({
     : undefined;
   const errorMessage = intl.formatMessage({ id: errorTranslationId });
   const emptyMessage = intl.formatMessage({ id: emptyTranslationId });
-  const { restUri } = useContext(ApiContext);
 
   if (loading) {
     return (
@@ -72,7 +69,7 @@ const DocumentsList = ({
           <Document
             key={document.uuid}
             document={document}
-            downloadLink={`${restUri}/documentapi/openzaak/document/${document.uuid}/content`}
+            downloadLink={getDownloadLink(document)}
           />
         ))}
       </div>
