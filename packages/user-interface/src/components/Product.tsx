@@ -10,6 +10,8 @@ interface Props {
 const Product = ({ product }: Props) => {
   const productLink = useProductUrl(product) ?? "";
 
+  if (!productLink) return null;
+
   return (
     <ActionSingle link={productLink} Link={PortalLink}>
       {product.naam}
