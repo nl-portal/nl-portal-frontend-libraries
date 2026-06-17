@@ -5,9 +5,8 @@ import { Form } from "@formio/react";
 import { merge } from "lodash-es";
 import {
   useSubmitTaakV2Mutation,
-  useGetFormDefinitionByObjectenApiUrlLazyQuery,
+  useGetFormDefinitionByTaskIdLazyQuery,
   TaakStatus,
-  useGetFormDefinitionByIdLazyQuery,
   useGetPortaalFormulierByIdV2Query,
   GetPortaalFormulierByIdV2Document,
 } from "@nl-portal/nl-portal-api";
@@ -19,6 +18,7 @@ import { BackLink } from "../components/BackLink";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
+import Skeleton from "../components/Skeleton";
 import {
   applyNativeSelectsToForm,
   convertPortalFileUploadResult,
@@ -74,35 +74,12 @@ const TaskDetailsPage = () => {
         setError(true);
       }
 
-      if (task.getTaakByIdV2.portaalformulier.formulier.soort === "url") {
-        getFormByUrl({
-          variables: {
-            url: task.getTaakByIdV2.portaalformulier?.formulier.value,
-          },
-        });
-        return;
-      }
-
-      if (task.getTaakByIdV2.portaalformulier.formulier.soort === "id") {
-        getFormById({
-          variables: {
-            id: task.getTaakByIdV2.portaalformulier?.formulier.value,
-          },
-        });
-        return;
-      }
-
-      setLoading(false);
+      getFormByTaskId({ variables: { taskId: id } });
     },
   });
 
-  const [getFormByUrl, { data: formDefinitionUrl }] =
-    useGetFormDefinitionByObjectenApiUrlLazyQuery({
-      onCompleted: () => setLoading(false),
-    });
-
-  const [getFormById, { data: formDefinitionId }] =
-    useGetFormDefinitionByIdLazyQuery({
+  const [getFormByTaskId, { data: formDefinition }] =
+    useGetFormDefinitionByTaskIdLazyQuery({
       onCompleted: () => setLoading(false),
     });
 
@@ -150,7 +127,14 @@ const TaskDetailsPage = () => {
   /* eslint-enable @typescript-eslint/no-explicit-any */
 
   if (loading) {
-    return null;
+    return (
+      <PageGrid variant="medium">
+        <PageHeader loading title={task?.getTaakByIdV2?.titel} />
+        <div className={styles["task-details-page"]}>
+          <Skeleton width="100%" height={56} count={4} />
+        </div>
+      </PageGrid>
+    );
   }
 
   if (error) {
@@ -183,7 +167,7 @@ const TaskDetailsPage = () => {
     );
   }
 
-  if (!formDefinitionUrl && !formDefinitionId) {
+  if (!formDefinition) {
     return (
       <>
         <BackLink />
@@ -196,9 +180,7 @@ const TaskDetailsPage = () => {
     );
   }
 
-  const rawForm =
-    formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition ||
-    formDefinitionId?.getFormDefinitionById?.formDefinition;
+  const rawForm = formDefinition?.getFormDefinitionByTaskId?.formDefinition;
 
   const adjustedForm = applyNativeSelectsToForm(structuredClone(rawForm));
 
