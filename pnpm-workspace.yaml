@@ -4,7 +4,7 @@ packages:
 
 allowBuilds:
   '@parcel/watcher': true
-  core-js: true
+  core-js: false
   esbuild: true
 
 # Configure pnpm so peer dependencies must be explicitly added instead of being automatically installed.
