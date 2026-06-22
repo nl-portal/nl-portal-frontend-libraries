@@ -5,9 +5,8 @@ import { Form } from "@formio/react";
 import { merge } from "lodash-es";
 import {
   SubmitTaakV2Document,
-  GetFormDefinitionByObjectenApiUrlDocument,
+  GetFormDefinitionByTaskIdDocument,
   TaakStatus,
-  GetFormDefinitionByIdDocument,
   GetPortaalFormulierByIdV2Document,
 } from "@nl-portal/nl-portal-api";
 import { useMutation, useLazyQuery, useQuery } from "@apollo/client/react";
@@ -19,6 +18,7 @@ import { BackLink } from "../components/BackLink";
 import { Paragraph } from "@gemeente-denhaag/typography";
 import PageHeader from "../components/PageHeader";
 import PageGrid from "../components/PageGrid";
+import Skeleton from "../components/Skeleton";
 import {
   applyNativeSelectsToForm,
   convertPortalFileUploadResult,
@@ -74,13 +74,9 @@ const TaskDetailsPage = () => {
     variables: { id },
   });
 
-  const [getFormByUrl, { data: formDefinitionUrl, loading: formByUrlLoading }] =
-    useLazyQuery(GetFormDefinitionByObjectenApiUrlDocument);
-
-  const [getFormById, { data: formDefinitionId, loading: formByIdLoading }] =
-    useLazyQuery(GetFormDefinitionByIdDocument);
-
-  const loading = formByUrlLoading || formByIdLoading;
+  const [getFormByTaskId, { data: formDefinition, loading }] = useLazyQuery(
+    GetFormDefinitionByTaskIdDocument,
+  );
   const submitted = task?.getTaakByIdV2?.status !== TaakStatus.Open;
 
   const { submission, prefillError } = useMemo(() => {
@@ -96,19 +92,11 @@ const TaskDetailsPage = () => {
   }, [task]);
 
   useEffect(() => {
-    const pf = task?.getTaakByIdV2?.portaalformulier;
-    if (!pf) return;
+    if (!task?.getTaakByIdV2?.portaalformulier) return;
     if (task?.getTaakByIdV2?.status !== TaakStatus.Open) return;
 
-    if (pf.formulier.soort === "url") {
-      getFormByUrl({ variables: { url: pf.formulier.value } });
-      return;
-    }
-
-    if (pf.formulier.soort === "id") {
-      getFormById({ variables: { id: pf.formulier.value } });
-    }
-  }, [task, getFormByUrl, getFormById]);
+    getFormByTaskId({ variables: { taskId: id } });
+  }, [task, getFormByTaskId, id]);
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const onFormSubmit = async (formioSubmission: any) => {
@@ -128,7 +116,14 @@ const TaskDetailsPage = () => {
   /* eslint-enable @typescript-eslint/no-explicit-any */
 
   if (loading) {
-    return null;
+    return (
+      <PageGrid variant="medium">
+        <PageHeader loading title={task?.getTaakByIdV2?.titel} />
+        <div className={styles["task-details-page"]}>
+          <Skeleton width="100%" height={56} />
+        </div>
+      </PageGrid>
+    );
   }
 
   if (prefillError) {
@@ -161,9 +156,7 @@ const TaskDetailsPage = () => {
     );
   }
 
-  const rawForm =
-    formDefinitionUrl?.getFormDefinitionByObjectenApiUrl?.formDefinition ||
-    formDefinitionId?.getFormDefinitionById?.formDefinition;
+  const rawForm = formDefinition?.getFormDefinitionByTaskId?.formDefinition;
 
   if (!rawForm) {
     return (
