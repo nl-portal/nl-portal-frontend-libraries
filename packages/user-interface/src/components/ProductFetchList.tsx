@@ -71,7 +71,7 @@ export const ProductFetchList = ({
       headers={headerTranslationIds.map((id) => intl.formatMessage({ id }))}
       rows={producten.map((product) =>
         dataMapping.map((map) => ({
-          href: paths.themeDetails(slug, product.uuid),
+          href: paths.themeDetails(slug, productTypeSlug, product.uuid),
           children: getProductValue(product, map),
         })),
       )}

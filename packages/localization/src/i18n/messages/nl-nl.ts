@@ -78,6 +78,12 @@ export const NL_NL_MESSAGES: Messages = {
     "casesList.noClosedCases": "Er zijn geen zaken.",
     "casesList.fetchError":
       "Er ging iets niet goed, probeer het later opnieuw.",
+    "productsList.title": "Mijn producten",
+    "productsList.viewAll": "Bekijk alle producten ({total})",
+    "productsList.empty": "Er zijn geen producten.",
+    "productsList.noClosedCases": "Er zijn geen producten.",
+    "productsList.fetchError":
+      "Er ging iets niet goed, probeer het later opnieuw.",
     "caseDetails.resultAlert.verwerkt": "De aanvraag is behandeld",
     "caseDetails.resultAlert.toegekend": "De aanvraag is goedgekeurd",
     "caseDetails.resultAlert.verleend": "De aanvraag is goedgekeurd",

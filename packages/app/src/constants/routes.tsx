@@ -169,6 +169,37 @@ export const routes = [
         ),
       },
       {
+        path: paths.themeDetails(
+          themes.parkeren.slug,
+          themes.parkeren.productTypes.vergunningen?.slug,
+        ),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
+        element: <ParkerenDetails />,
+      },
+      {
+        path: paths.themeHistory(
+          themes.parkeren.slug,
+          themes.parkeren.productTypes.vergunningen?.slug,
+        ),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
+        element: <ParkerenHistory />,
+      },
+      {
+        path: paths.themeMutate(
+          themes.parkeren.slug,
+          themes.parkeren.productTypes.vergunningen?.slug,
+        ),
+        handle: { label: `breadcrumb.${themes.parkeren.slug}.details` },
+        element: (
+          <ThemeMutatePage slug={themes.parkeren.slug}>
+            {() => {
+              const [searchParams] = useSearchParams();
+              return <div>Mutate parkeren: {searchParams.get("kenteken")}</div>;
+            }}
+          </ThemeMutatePage>
+        ),
+      },
+      {
         path: `${paths.themeList(themes.parkeren.slug, themes.parkeren.productTypes.bezoekersvergunningen?.slug)}`,
         handle: { label: `breadcrumb.${themes.parkeren.slug}` },
         element: (
