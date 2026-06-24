@@ -17,7 +17,7 @@ import { useParams } from "react-router";
 import DescriptionList from "../components/DescriptionList";
 import DecisionsList from "../components/DecisionsList";
 import React from "react";
-import { ProductSettings } from "../interfaces/product-types";
+import { DataMappingItem } from "../interfaces/product-types";
 import { getProductValue } from "../utils/get-product-value";
 
 interface ThemeDetailsPageProps {
@@ -28,7 +28,10 @@ interface ThemeDetailsPageProps {
         >,
       ) => React.ReactNode)
     | React.ReactNode;
-  productSettings?: ProductSettings;
+  productSettings?: {
+    headerTranslationIds: string[];
+    dataMapping: DataMappingItem[];
+  };
 }
 
 const ThemeDetailsPage = ({
