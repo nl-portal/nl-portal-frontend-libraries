@@ -26,7 +26,7 @@ jobs:
                 with:
                     node-version: ${{ env.NODE_VERSION }}
             -   name: Install
-                run: npm install -g pnpm@10 lerna@9.0.3 && pnpm install
+                run: npm install -g pnpm@11 lerna@9.0.3 && pnpm install
             -   name: Build
                 run: pnpm build
             -   name: Test
@@ -76,7 +76,7 @@ jobs:
                     node-version: ${{ env.NODE_VERSION }}
             -   name: Install
                 run: |
-                    npm install -g pnpm@10
+                    npm install -g pnpm@11
                     npm install -g lerna@9.0.3
             -   name: "Restore build artifact: api"
                 uses: actions/download-artifact@v4

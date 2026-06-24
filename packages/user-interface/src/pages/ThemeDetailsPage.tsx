@@ -17,6 +17,8 @@ import { useParams } from "react-router";
 import DescriptionList from "../components/DescriptionList";
 import DecisionsList from "../components/DecisionsList";
 import React from "react";
+import { ProductSettings } from "../interfaces/product-types";
+import { getProductValue } from "../utils/get-product-value";
 
 interface ThemeDetailsPageProps {
   children?:
@@ -26,13 +28,7 @@ interface ThemeDetailsPageProps {
         >,
       ) => React.ReactNode)
     | React.ReactNode;
-  productSettings?: {
-    headerTranslationIds: string[];
-    dataMapping: (
-      | ((product: OpenProductProduct) => React.ReactNode)
-      | keyof OpenProductProduct
-    )[];
-  };
+  productSettings?: ProductSettings;
 }
 
 const ThemeDetailsPage = ({
@@ -54,10 +50,10 @@ const ThemeDetailsPage = ({
       ? productSettings?.headerTranslationIds
           ?.map((header, index) => ({
             title: intl.formatMessage({ id: header }),
-            detail:
-              productSettings.dataMapping[index] instanceof Function
-                ? productSettings.dataMapping[index](product)
-                : product?.[productSettings.dataMapping[index]],
+            detail: getProductValue(
+              product,
+              productSettings.dataMapping[index],
+            ),
           }))
           .filter(({ detail }) => detail)
       : [];
