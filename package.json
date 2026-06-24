@@ -6,6 +6,7 @@
   ],
   "scripts": {
     "build": "pnpm clean && pnpm run --recursive --parallel build",
+    "build:watch": "pnpm clean && pnpm run --recursive --parallel build:watch",
     "clean": "pnpm run --recursive clean",
     "codegen": "pnpm run --recursive --parallel codegen",
     "dev": "pnpm clean && pnpm run --recursive --parallel dev",
@@ -23,7 +24,8 @@
     "update-patch": "npm-check-updates --configFilePath .ncurc.patch.js",
     "update-minor": "npm-check-updates --configFilePath .ncurc.minor.js",
     "update-major": "npm-check-updates --configFilePath .ncurc.major.js",
-    "postinstall": "husky"
+    "postinstall": "husky",
+    "preview": "pnpm run --recursive preview"
   },
   "devDependencies": {
     "@commitlint/cli": "20.2.0",
