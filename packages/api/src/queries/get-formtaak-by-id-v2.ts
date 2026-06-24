@@ -5,10 +5,6 @@ export const QUERY_GET_PORTAALFORMULIER_BY_ID_V2 = gql`
     getTaakByIdV2(id: $id) {
       id
       portaalformulier {
-        formulier {
-          soort
-          value
-        }
         data
       }
       titel
