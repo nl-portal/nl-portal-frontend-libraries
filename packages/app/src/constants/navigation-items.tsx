@@ -4,6 +4,7 @@ import {
   CarIcon,
   CheckCircleIcon,
   EuroIcon,
+  FileTextIcon,
   GridIcon,
   InboxIcon,
   UserIcon,
@@ -35,6 +36,11 @@ export const navigationItems: NavigationItem[][] = [
       path: paths.messages,
       icon: <InboxIcon />,
       hasMessagesCount: true,
+    },
+    {
+      titleTranslationKey: "products",
+      path: paths.products,
+      icon: <FileTextIcon />,
     },
   ],
   [

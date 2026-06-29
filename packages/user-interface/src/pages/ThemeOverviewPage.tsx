@@ -13,7 +13,7 @@ import { TaakV2, Zaak } from "@nl-portal/nl-portal-api";
 import AppContext from "../contexts/AppContext";
 import { use } from "react";
 import { stringToSlug } from "../utils/string-to-slug";
-import { ProductList } from "../components/ProductList";
+import { ProductFetchList } from "../components/ProductFetchList";
 import { ProductSettings } from "../interfaces/product-types";
 
 interface Props {
@@ -80,7 +80,7 @@ const ThemeOverviewPage = ({
         />
       )}
       {productenSettings.map((productSettings) => (
-        <ProductList
+        <ProductFetchList
           key={productSettings.titleTranslationId}
           slug={slug}
           productTypeSlug={productSettings.productTypeSlug}

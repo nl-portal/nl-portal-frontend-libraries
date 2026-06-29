@@ -10,13 +10,13 @@ import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { ProductSettings } from "../interfaces/product-types";
 import { getProductValue } from "../utils/get-product-value";
 
-type ProductListProps = ProductSettings & {
+type ProductFetchListProps = ProductSettings & {
   slug: string;
   productLength: number;
   pagination?: boolean;
 };
 
-export const ProductList = ({
+export const ProductFetchList = ({
   slug,
   productTypeSlug,
   productTypeCodes,
@@ -25,11 +25,14 @@ export const ProductList = ({
   dataMapping,
   productLength,
   pagination,
-}: ProductListProps) => {
+}: ProductFetchListProps) => {
   const intl = useIntl();
   const { paths } = useOutletContext<RouterOutletContext>();
   const { data, loading, error, refetch } = useQuery(GetOpenProductenDocument, {
-    variables: { productTypeCodes: productTypeCodes, pageSize: productLength },
+    variables: {
+      productTypeCodes: productTypeCodes.filter((code) => code !== undefined),
+      pageSize: productLength,
+    },
   });
 
   const onPageChange = (index: number) => {
@@ -68,7 +71,7 @@ export const ProductList = ({
       headers={headerTranslationIds.map((id) => intl.formatMessage({ id }))}
       rows={producten.map((product) =>
         dataMapping.map((map) => ({
-          href: paths.themeDetails(slug, product.uuid),
+          href: paths.themeDetails(slug, productTypeSlug, product.uuid),
           children: getProductValue(product, map),
         })),
       )}

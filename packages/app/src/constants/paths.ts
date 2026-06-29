@@ -9,12 +9,25 @@ export const paths: Paths = {
   task: (id = ":id") => `/taken/taak/${id}`,
   messages: "/berichten",
   message: (id = ":id") => `/berichten/bericht/${id}`,
-  themeOverview: (slug = ":slug") => `/${slug}`,
-  themeList: (slug = ":slug", productTypeSlug = ":productTypeSlug") =>
-    `/${slug}/${productTypeSlug}/lijst`,
-  themeDetails: (slug = ":slug", id = ":id") => `/${slug}/${id}`,
-  themeHistory: (slug = ":slug", id = ":id") => `/${slug}/${id}/geschiedenis`,
-  themeMutate: (slug = ":slug", id = ":id") => `/${slug}/${id}/wijzigen`,
+  products: "/producten",
+  themeOverview: (themeSlug: string) => `/${themeSlug}`,
+  themeList: (themeSlug: string, productTypeSlug = ":productTypeSlug") =>
+    `/${themeSlug}/${productTypeSlug}/lijst`,
+  themeDetails: (
+    themeSlug: string,
+    productTypeSlug = ":productTypeSlug",
+    id = ":id",
+  ) => `/${themeSlug}/${productTypeSlug}/${id}`,
+  themeHistory: (
+    themeSlug: string,
+    productTypeSlug = ":productTypeSlug",
+    id = ":id",
+  ) => `/${themeSlug}/${productTypeSlug}/${id}/geschiedenis`,
+  themeMutate: (
+    themeSlug: string,
+    productTypeSlug = ":productTypeSlug",
+    id = ":id",
+  ) => `/${themeSlug}/${productTypeSlug}/${id}/wijzigen`,
   account: "/account",
   changeContactInfo: (type = ":type") => `/account/wijzig/${type}`,
 };

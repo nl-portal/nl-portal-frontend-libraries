@@ -32,6 +32,7 @@ export * from "./constants/currency-format";
 
 export * from "./interfaces/navigation-item";
 export * from "./interfaces/paths";
+export * from "./interfaces/themes";
 
 export { default as useDownload } from "./hooks/useDownload";
 export { default as useOgonePayment } from "./hooks/useOgonePayment";
@@ -48,6 +49,7 @@ export { default as MessagesPage } from "./pages/MessagesPage";
 export { default as MessageDetailsPage } from "./pages/MessageDetailsPage";
 export { default as NoMatchPage } from "./pages/NoMatchPage";
 export { default as OverviewPage } from "./pages/OverviewPage";
+export { default as ProductsPage } from "./pages/ProductsPage";
 export { default as TasksPage } from "./pages/TasksPage";
 export { default as TaskDetailsPage } from "./pages/TaskDetailsPage";
 export { default as ThemeDetailsPage } from "./pages/ThemeDetailsPage";

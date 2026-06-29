@@ -1,3 +1,5 @@
+import { Themes } from "@nl-portal/nl-portal-user-interface";
+
 export type ThemeSlug = "belastingzaken" | "parkeren" | "inkomensondersteuning";
 export type ProductTypeSlug =
   | "vergunningen"
@@ -10,41 +12,42 @@ export type ProductTypeCodes =
   | "BELASTINGZAKEN"
   | "STADSPAS";
 
-export type Themes = Record<
-  ThemeSlug,
-  {
-    slug: ThemeSlug;
-    productTypeSlugs: Record<string, ProductTypeSlug>;
-    productTypeCodes: Record<string, ProductTypeCodes>;
-  }
->;
-
 /**
  * Slug: for URL paths and translation keys
- * ProductTypeSlug: for url paths and for translation keys
- * ProductTypeCodes: for mapping to product types in the API responses
+ * ProductType -> slug: for url paths and for translation keys
+ * ProductType -> code: for mapping to product types in the API responses
  */
 
-export const themes: Themes = {
+export const themes: Themes<ThemeSlug, ProductTypeSlug, ProductTypeCodes> = {
   belastingzaken: {
     slug: "belastingzaken",
-    productTypeSlugs: { belastingzaken: "belastingzaken" },
-    productTypeCodes: { belastingzaken: "BELASTINGZAKEN" },
+    productTypes: {
+      belastingzaken: {
+        slug: "belastingzaken",
+        code: "BELASTINGZAKEN",
+      },
+    },
   },
   parkeren: {
     slug: "parkeren",
-    productTypeSlugs: {
-      vergunningen: "vergunningen",
-      bezoekersvergunningen: "bezoekersvergunningen",
-    },
-    productTypeCodes: {
-      vergunningen: "PARKEREN",
-      bezoekersvergunningen: "BEZOEKERSVERGUNNING",
+    productTypes: {
+      vergunningen: {
+        slug: "vergunningen",
+        code: "PARKEREN",
+      },
+      bezoekersvergunningen: {
+        slug: "bezoekersvergunningen",
+        code: "BEZOEKERSVERGUNNING",
+      },
     },
   },
   inkomensondersteuning: {
     slug: "inkomensondersteuning",
-    productTypeSlugs: { stadspas: "stadspas" },
-    productTypeCodes: { stadspas: "STADSPAS" },
+    productTypes: {
+      stadspas: {
+        slug: "stadspas",
+        code: "STADSPAS",
+      },
+    },
   },
 };

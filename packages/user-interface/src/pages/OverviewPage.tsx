@@ -7,6 +7,8 @@ import {
   Zaak,
   GetTakenV2Document,
   GetZakenDocument,
+  GetOpenProductenDocument,
+  OpenProductProduct,
 } from "@nl-portal/nl-portal-api";
 import { useQuery } from "@apollo/client/react";
 import TasksList from "../components/TasksList";
@@ -17,11 +19,13 @@ import UserContext from "../contexts/UserContext";
 import { RouterOutletContext } from "../interfaces/router-outlet-context";
 import { useNavigate, useOutletContext } from "react-router";
 import AppContext from "../contexts/AppContext";
+import ProductsList from "../components/ProductsList";
 
 interface OverviewPageProps {
   showNoEmailAlert?: boolean;
   fetchTasksLength?: number;
   fetchCasesLength?: number;
+  fetchProductsLength?: number;
   children?: ReactNode;
 }
 
@@ -29,6 +33,7 @@ const OverviewPage = ({
   showNoEmailAlert = false,
   fetchTasksLength = 5,
   fetchCasesLength = 4,
+  fetchProductsLength = 5,
   children,
 }: OverviewPageProps) => {
   const intl = useIntl();
@@ -51,12 +56,23 @@ const OverviewPage = ({
     variables: { pageSize: fetchCasesLength },
     skip: !fetchCasesLength,
   });
+  const {
+    data: productsData,
+    loading: productsLoading,
+    error: productsError,
+  } = useQuery(GetOpenProductenDocument, {
+    variables: { pageSize: fetchProductsLength },
+    skip: !fetchProductsLength,
+  });
   const { paths } = useOutletContext<RouterOutletContext>();
   const navigate = useNavigate();
 
-  const loading = tasksLoading || casesLoading;
+  const loading = tasksLoading || casesLoading || productsLoading;
   const tasks = tasksData?.getTakenV2.content as TaakV2[] | undefined;
   const cases = casesData?.getZaken.content as Zaak[] | undefined;
+  const products = productsData?.getOpenProducten?.content as
+    | OpenProductProduct[]
+    | undefined;
   const emailadres = contact?.getUserDigitaleAdressen?.find(
     (a) => a.type === "EMAIL",
   );
@@ -165,6 +181,19 @@ const OverviewPage = ({
             casesData?.getZaken.totalElements &&
             casesData?.getZaken.totalElements > fetchCasesLength
               ? casesData?.getZaken.totalElements
+              : undefined
+          }
+        />
+      )}
+      {Boolean(fetchProductsLength) && (
+        <ProductsList
+          loading={loading}
+          error={Boolean(productsError)}
+          products={products}
+          totalAmount={
+            productsData?.getOpenProducten.totalElements &&
+            productsData?.getOpenProducten.totalElements > fetchProductsLength
+              ? productsData?.getOpenProducten.totalElements
               : undefined
           }
         />

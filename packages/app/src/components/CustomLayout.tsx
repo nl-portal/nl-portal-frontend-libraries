@@ -7,6 +7,7 @@ import { paths } from "../constants/paths";
 import { useIntl } from "react-intl";
 import { HeaderLogo } from "./HeaderLogo";
 import { useContext } from "react";
+import { themes } from "../constants/themes";
 
 const CustomLayout = () => {
   const intl = useIntl();
@@ -69,6 +70,7 @@ const CustomLayout = () => {
   return (
     <Layout
       paths={paths}
+      themes={themes}
       footerData={{ legalData, contactData }}
       headerLogo={logo}
     />
