@@ -16,6 +16,8 @@ import { Paths } from "../interfaces/paths";
 import FormIoUploader from "./formio/FormIoUploader";
 import { OidcContext } from "@nl-portal/nl-portal-authentication";
 import "@utrecht/document-css";
+import { Formio } from "@formio/js";
+import ProtectedEval from "@formio/protected-eval";
 import { Templates } from "@formio/react";
 import { nlPortalInput } from "./formio/FormIoInputTemplate";
 import { nlPortalSelect } from "./formio/FormIoSelectTemplate";
@@ -31,6 +33,11 @@ import styles from "./Layout.module.scss";
 import { FormattedMessage } from "react-intl";
 import FormIoDatePicker from "./formio/FormIoDatePicker";
 import { Themes } from "../interfaces/themes";
+
+type FormioPlugin = {
+  evaluator?: unknown;
+  default?: FormioPlugin;
+};
 
 interface LayoutComponentProps {
   paths: Paths;
@@ -52,6 +59,14 @@ const Layout = ({
   const { oidcToken } = use(OidcContext);
 
   useEffect(() => {
+    // Register FormIo protected eval plugin
+    const protectedEval = ProtectedEval as FormioPlugin;
+    const protectedEvalPlugin = protectedEval.evaluator
+      ? protectedEval
+      : protectedEval.default;
+    const registerFormioPlugin = Formio.use.bind(Formio);
+    registerFormioPlugin(protectedEvalPlugin);
+
     // Register FormIo custom components
     FormIoUploader.register();
     FormIoDatePicker.register();

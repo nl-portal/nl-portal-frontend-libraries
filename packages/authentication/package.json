@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-authentication",
-  "version": "3.1.0-next-minor-202606101357-f4a537fc-SNAPSHOT",
+  "version": "3.1.0-next-minor-202606241452-cddcd4bc-SNAPSHOT",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -18,9 +18,9 @@
   ],
   "scripts": {
     "build": "tsc && vite build",
+    "build:watch": "tsc && vite build --watch --mode development",
     "clean": "rimraf dist",
     "dev": "vite build --watch --mode development",
-    "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -38,7 +38,7 @@
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.2",
+    "@vitejs/plugin-react": "^6.0.2",
     "@vitest/coverage-v8": "^4.0.16",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
@@ -46,7 +46,7 @@
     "react-router": "^7.10.1",
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3",
-    "vite": "^7.3.0",
+    "vite": "^8.0.16",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.0.16"
   },

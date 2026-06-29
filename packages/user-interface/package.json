@@ -1,6 +1,6 @@
 {
   "name": "@nl-portal/nl-portal-user-interface",
-  "version": "3.1.0-next-minor-202606101357-f4a537fc-SNAPSHOT",
+  "version": "3.1.0-next-minor-202606241452-cddcd4bc-SNAPSHOT",
   "author": "Ritense",
   "license": "EUPL-1.2",
   "type": "module",
@@ -19,9 +19,9 @@
   ],
   "scripts": {
     "build": "pnpm wait && tsc && vite build",
+    "build:watch": "pnpm wait && tsc && vite build --watch --mode development",
     "clean": "rimraf dist",
     "dev": "pnpm wait && vite build --watch --mode development",
-    "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
     "wait": "wait-on ../api/dist/index.js && wait-on ../authentication/dist/index.js && wait-on ../localization/dist/index.js",
     "test": "vitest run",
@@ -90,7 +90,7 @@
     "@types/lodash-es": "^4.17.12",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.2",
+    "@vitejs/plugin-react": "^6.0.2",
     "@vitest/coverage-v8": "^4.0.16",
     "@vitest/ui": "^4.0.16",
     "jsdom": "^27.3.0",
@@ -101,7 +101,7 @@
     "rimraf": "^6.1.2",
     "sass": "^1.97.0",
     "typescript": "^5.9.3",
-    "vite": "^7.3.0",
+    "vite": "^8.0.16",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.0.16",
     "wait-on": "^9.0.3"

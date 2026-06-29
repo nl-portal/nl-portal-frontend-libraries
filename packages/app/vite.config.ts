@@ -2,8 +2,47 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+// Local dev/preview CSP used to reproduce deployment CSP issues before the
+// portal is served by the platform that normally sets these headers.
+const enableStrictCsp = false;
+const strictCsp = [
+  "default-src 'self'",
+  "frame-ancestors 'self'",
+  "frame-src 'self'",
+  "object-src 'none'",
+  "script-src 'self'",
+  "style-src 'self' 'unsafe-inline'",
+  "connect-src 'self' http://localhost:* https://localhost:* ws://localhost:* wss://localhost:* https:",
+  "font-src 'self' data:",
+  "img-src 'self' data: blob: https:",
+  "worker-src 'self' blob:",
+  "base-uri 'self'",
+  "manifest-src 'self'",
+].join("; ");
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    ...(enableStrictCsp
+      ? [
+          {
+            name: "strict-csp",
+            configureServer(server) {
+              server.middlewares.use((_, res, next) => {
+                res.setHeader("Content-Security-Policy", strictCsp);
+                next();
+              });
+            },
+            configurePreviewServer(server) {
+              server.middlewares.use((_, res, next) => {
+                res.setHeader("Content-Security-Policy", strictCsp);
+                next();
+              });
+            },
+          },
+        ]
+      : []),
+  ],
   build: {
     rollupOptions: {
       output: {
@@ -28,6 +67,6 @@ export default defineConfig({
     environment: "jsdom",
   },
   html: {
-    cspNonce: "##NL_PORTAL_NONCE##",
+    cspNonce: "##NL_PORTAL_CSP_NONCE##",
   },
 });

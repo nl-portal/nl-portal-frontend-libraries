@@ -11,7 +11,6 @@ import {
 } from "@gemeente-denhaag/icons";
 import { paths } from "./paths";
 import { themes } from "./themes";
-import {} from "@gemeente-denhaag/icons";
 
 export const navigationItems: NavigationItem[][] = [
   [
