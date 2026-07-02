@@ -19,7 +19,14 @@ export const OPEN_PRODUCT_FIELDS = gql`
     gepubliceerd
     status
     documenten {
-      url
+      documentapi
+      bestandsnaam
+      bestandsomvang
+      creatiedatum
+      formaat
+      identificatie
+      titel
+      uuid
     }
     frequentie
     verbruiksobject
