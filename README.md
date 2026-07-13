@@ -1,3 +1,17 @@
+# Repository archived / gearchiveerd
+
+**NL Portal has moved to a single repository at https://github.com/nl-portal/nl-portal.**
+All future development and contributions happen there. Please file all issues at
+https://github.com/nl-portal/nl-portal-issues. This repository is archived and remains
+available in read-only mode for reference.
+
+**NL Portal is verplaatst naar één repository op https://github.com/nl-portal/nl-portal.**
+Alle toekomstige ontwikkeling en bijdragen vinden daar plaats. Meld alle issues in
+https://github.com/nl-portal/nl-portal-issues. Deze repository is gearchiveerd en blijft
+beschikbaar in alleen-lezen modus ter referentie.
+
+---
+
 # nl-portal-libraries
 
 ![Version 3.1.0](https://img.shields.io/badge/Version-3.1.0-blue)  
